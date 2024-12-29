@@ -24,7 +24,7 @@ Without further ado, let's get to the first phase, the enumeration phase!
 We start by running the typical nmap scan to see which ports are open:
 
 ```bash
-nmap -p- 10.10.10.85 --open --min-rate 5000 -sS -T5 -vvv -Pn -n -oG allPorts
+> nmap -p- 10.10.10.85 --open --min-rate 5000 -sS -T5 -vvv -Pn -n -oG allPorts
 Host discovery disabled (-Pn). All addresses will be marked 'up' and scan times may be slower.
 Starting Nmap 7.94SVN ( https://nmap.org ) at 2024-12-29 19:21 CET
 Initiating SYN Stealth Scan at 19:21
