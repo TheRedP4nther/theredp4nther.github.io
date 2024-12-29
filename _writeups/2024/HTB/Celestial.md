@@ -9,7 +9,7 @@ comments: true
 tags: test crypto
 ---
 
-![Machine-Icon](../../assets/images/Celestial/Celestial.png)
+![Machine-Icon](../../../assets/images/Celestial/Celestial.png)
 
 This is a Test Writeup for Test CTF.
 
