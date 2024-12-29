@@ -6,7 +6,7 @@ layout: default
 
 ## About Me:
 
-I'm TheRedP4nther, new to the world of cybersecurity but deeply passionate about learning and growing in this field. I spend my time solving challenges on platforms like HackTheBox and building my programming skills in Bash, Python, and JavaScript. This blog is my way of sharing what I learn, documenting my progress, and connecting with others in the cybersecurity community.
+I'm TheRedP4nther, new to the world of cybersecurity but deeply passionate about learning and growing in this field. I spend my time solving challenges on platforms like HackTheBox and building my programming skills in Bash, Python, and JavaScript.
 
 
 ## Purpose Of The Page:
