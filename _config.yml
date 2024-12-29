@@ -1,25 +1,25 @@
-title: Hacker Plus
-author: CaptainIRS
+title: TheRedP4nther´s Cave
+author: TheRedP4nther
 description: The Hacker Plus Theme
 google_analytics:
 google_site_verification_content: 
-disqus_forum_shortname: captainirs-github-io
+disqus_forum_shortname: theredp4nther-github-io
 
 #Usernames and badges
 htb_badge_no:
 thm_badge_no:
 show_thm_htb_badges_in_nav: false
-github_username: CaptainIRS
+github_username: TheRedP4nther
 gitlab:
 medium:
 stackoverflow:
 hacker_news:
-linkedin: rinish-sam
+linkedin: # Añadir
 twitch:
 youtube:
-twitter: CaptainIRS
+twitter: TheRedP4nther
 facebook:
-instagram:
+instagram: TheRedP4nther
 reddit:
 pinterest:
 telegram:
