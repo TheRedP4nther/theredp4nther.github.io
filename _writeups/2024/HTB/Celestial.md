@@ -73,7 +73,7 @@ We have been able! The server has interpreted the serialized data that we have s
 
 To probe our theory, we are going to craft a payload to receive a curl from the victim machine in a localhost server hosted in our port 8082.
 
-To do this we will use a data serializer that we have taken from the following website -> https://opsecx.com/index.php/2017/02/08/exploiting-node-js-deserialization-bug-for-remote-code-execution/
+To do this we will use a data serializer that we have taken from the following website -> [https://opsecx.com/index.php/2017/02/08/exploiting-node-js-deserialization-bug-for-remote-code-execution/](https://opsecx.com/index.php/2017/02/08/exploiting-node-js-deserialization-bug-for-remote-code-execution/)
 
 ```js
 var y = {
