@@ -11,4 +11,5 @@ I'm TheRedP4nther, new to the world of cybersecurity but deeply passionate about
 
 ## Purpose Of The Page:
 
-This page was created to share my experiences and insights as I explore the fascinating world of cybersecurity. It’s a platform where I document the machines I work on, the challenges I encounter, and the solutions I discover. My goal is to contribute to the community by providing valuable resources and sharing my progress, all while connecting with others who are equally passionate about this ever-evolving field.
+My goal in creating this page is to contribute to the community by providing valuable resources and sharing my progress, all while connecting with others who are passionate about this ever-evolving field.
+
