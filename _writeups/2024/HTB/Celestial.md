@@ -47,5 +47,5 @@ As we can see, nmap has only detected Port 3000 open, node.js default port, so w
 
 At first glance, it doesn't seem interesting at all, but when intercepting the request with Burp Suite we find the following:
 
-
+![2](../../../assets/images/Celestial/2.png)
 
