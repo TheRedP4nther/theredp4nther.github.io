@@ -1,11 +1,8 @@
 ---
 layout: writeup
 category: HTB
-chall_description: https://i.imgur.com/AVkxBbO.png
-points: 123
-solves: 1234
-date: 2024-07-24
-comments: true
+date: 2024-12-29
+comments: false
 tags: test crypto
 ---
 
