@@ -2,7 +2,7 @@
 layout: default
 ---
 
-# Hi everyone, and welcome to TheRedP4nther’s Cave!
+# Welcome to TheRedP4nther´s Cave!
 
 ## About Me:
 
