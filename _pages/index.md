@@ -6,7 +6,8 @@ layout: default
 
 ## About Me:
 
-My name is TheRedP4nther, and I’m passionate about cybersecurity. Over the years, I’ve developed a deep interest in understanding how systems work and finding ways to make them more secure. This blog is my space to document the challenges I take on, the machines I solve, and the lessons I learn along the way. It’s a reflection of my journey and a place where I can share knowledge with others who share the same enthusiasm for this field.
+I'm TheRedP4nther, new to the world of cybersecurity but deeply passionate about learning and growing in this field. I spend my time solving challenges on platforms like HackTheBox and building my programming skills in Bash, Python, and JavaScript. This blog is my way of sharing what I learn, documenting my progress, and connecting with others in the cybersecurity community.
+
 
 ## Purpose Of The Page:
 
