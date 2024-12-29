@@ -49,3 +49,11 @@ At first glance, it doesn't seem interesting at all, but when intercepting the r
 
 ![2](../../../assets/images/Celestial/2.png)
 
+# Node JS -> Deserilization 
+
+The cookie appears to be in base64, so let's apply a decode:
+
+```bash
+❯ echo -n 'eyJ1c2VybmFtZSI6IkR1bW15IiwiY291bnRyeSI6IklkayBQcm9iYWJseSBTb21ld2hlcmUgRHVtYiIsImNpdHkiOiJMYW1ldG93biIsIm51bSI6IjIifQ==' | base64 -d
+{"username":"Dummy","country":"Idk Probably Somewhere Dumb","city":"Lametown","num":"2"}
+```
