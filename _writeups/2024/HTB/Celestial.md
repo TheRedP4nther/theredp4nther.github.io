@@ -38,7 +38,12 @@ Service detection performed. Please report any incorrect results at https://nmap
 Nmap done: 1 IP address (1 host up) scanned in 47.04 seconds
 ```
 
+
 As we can see, nmap has only detected Port 3000 open, node.js default port, so we proceed to list it and find the following:
 
+
 ![1](../../../assets/images/Celestial/1.png)
+
+
+At first glance, it doesn't seem interesting at all, but when intercepting the request with Burp Suite we find the following:
 
