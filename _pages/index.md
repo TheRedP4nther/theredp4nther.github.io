@@ -12,4 +12,4 @@ I'm TheRedP4nther, new to the world of cybersecurity but deeply passionate about
 
 My goal in creating this page is to contribute to the community by providing valuable resources and sharing my progress, all while connecting with others who are passionate about this ever-evolving field.
 
-![banner_image](../assets/images/banner_blog,png)
+![banner_image](../assets/images/banner_blog.png)
