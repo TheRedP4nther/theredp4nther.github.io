@@ -11,6 +11,7 @@ tags: test crypto
 
 ![Machine-Icon](../../../assets/images/Celestial/Celestial.png)
 
+
 ### OS -> Linux
 ### Difficulty -> Medium
 
