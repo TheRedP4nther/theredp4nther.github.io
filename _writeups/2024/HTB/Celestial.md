@@ -9,6 +9,7 @@ tags: test crypto
 ![Machine-Icon](../../../assets/images/Celestial/Celestial.png)
 
 
-OS -> Linux\nDifficulty -> Medium
+OS -> Linux
+Difficulty -> Medium
 
 # Introduction:
