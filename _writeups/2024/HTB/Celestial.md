@@ -49,7 +49,7 @@ At first glance, it doesn't seem interesting at all, but when intercepting the r
 
 ![2](../../../assets/images/Celestial/2.png)
 
-# Node JS -> Deserilization 
+# Node JS Deserilization 
 
 The cookie appears to be in base64, so let's apply a decode:
 
@@ -57,3 +57,14 @@ The cookie appears to be in base64, so let's apply a decode:
 ❯ echo -n 'eyJ1c2VybmFtZSI6IkR1bW15IiwiY291bnRyeSI6IklkayBQcm9iYWJseSBTb21ld2hlcmUgRHVtYiIsImNpdHkiOiJMYW1ldG93biIsIm51bSI6IjIifQ==' | base64 -d
 {"username":"Dummy","country":"Idk Probably Somewhere Dumb","city":"Lametown","num":"2"}
 ```
+
+Let's try to control the output of the page manipulating the cookie vault and resending it with Burp Suite:
+
+```bash
+❯ echo -n '{"username":"Clever","country":"TheBest","city":"Barcelona","num":"10000"}' | base64 -w 0
+eyJ1c2VybmFtZSI6IkNsZXZlciIsImNvdW50cnkiOiJUaGVCZXN0IiwiY2l0eSI6IkJhcmNlbG9uYSIsIm51bSI6IjEwMDAwIn0=
+```
+
+![3](../../../assets/images/Celestial/3.png) 
+
+
