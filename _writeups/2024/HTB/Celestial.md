@@ -122,4 +122,4 @@ Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
 
 As we have already verified the remote execution of commands, we proceed to create a index.html to be able to establish a reverse shell and gain access once and for all to the Victim Machine by repeating the previous process but listening with nc through port 443 of our Machine:
 
-
+![6](../.,/../assets/images/Celestial/6.png)
