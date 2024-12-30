@@ -426,4 +426,10 @@ We have found a hash for the user we want to pivot to, so we crack it in [cracks
 
 <br />
 
+![20](../../../assets/images/IClean/20.png)
+
+<br />
+
+## Pivoting to User Consuela with the found Credentials:
+
 
