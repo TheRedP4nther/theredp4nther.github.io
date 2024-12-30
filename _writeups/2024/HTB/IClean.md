@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: deserializationattack scripting bash python node.js cronjob reverseshell
+tags: serversidetemplateinjection ssti xss crosssitescripting reverseshell mysql cracking hash sha-256 sudoers
 ---
 
 <br />
@@ -460,7 +460,7 @@ eba486700e25313333bb89fe31xxxxxx
 
 <br />
 
-Once we became consuela, proceed to list her sudoer privileges and list this:
+Once we became consuela, proceed to list her sudoers privileges and list this:
 
 <br />
 
@@ -476,5 +476,37 @@ User consuela may run the following commands on iclean:
 
 <br />
 
-We can run the binary qpdf as root
+The user consuela can run the binary qpdf as the user that we want, including the superuser root. To do it we need the password, but we have it :D.
+
+So we proceed to list the use of this binary to try to take advantage of the privilege:
+
+<br />
+
+```bash
+consuela@iclean:~$ qpdf --help=usage
+Read a PDF file, apply transformations or modifications, and write
+a new PDF file.
+
+Usage: qpdf [infile] [options] [outfile]
+   OR  qpdf --help[={topic|--option}]
+
+- infile, options, and outfile may be in any order as long as infile
+  precedes outfile.
+- Use --empty in place of an input file for a zero-page, empty input
+- Use --replace-input in place of an output file to overwrite the
+  input file with the output
+- outfile may be - to write to stdout; reading from stdin is not supported
+- @filename is an argument file; each line is treated as a separate
+  command-line argument
+- @- may be used to read arguments from stdin
+- Later options may override earlier options if contradictory
+
+Related options:
+  --empty: use empty file as input
+  --job-json-file: job JSON file
+  --replace-input: overwrite input with output
+
+For detailed help, visit the qpdf manual: https://qpdf.readthedocs.io
+```
+
 
