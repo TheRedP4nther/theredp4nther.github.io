@@ -178,7 +178,7 @@ The panel we have accessed consists of 4 different pages, so we will investigate
 
 <br />
 
-## Generating An Invoice:
+## Generate An Invoice:
 
 <br />
 
