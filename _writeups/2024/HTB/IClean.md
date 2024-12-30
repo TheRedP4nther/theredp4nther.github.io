@@ -53,8 +53,6 @@ Nmap done: 1 IP address (1 host up) scanned in 26.03 seconds
 
 Ports 22 and 80 open, nothing out of the ordinary.
 
-<br />
-
 We proceed to list the website, but doing so redirects us to the next domain -> capiclean.htb. So we added it to the /etc/hosts to be able to access:
 
 <br />
@@ -66,9 +64,11 @@ We proceed to list the website, but doing so redirects us to the next domain -> 
 
 <br />
 
-We relist the website and find a fairly straightforward page and another with a login where we try default credentials like admin:admin but nothing. So we added it to the /etc/hosts to be able to access:
+We relist the website and find a fairly straightforward page and another with a login where we try default credentials like admin:admin but nothing: 
 
 <br />
 
 ![2](../../../assets/images/IClean/2.png)
 ![3](../../../assets/images/IClean/3.png)
+
+<br />
