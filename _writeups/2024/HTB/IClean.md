@@ -582,6 +582,45 @@ But if we expand the sidebar and access the attachments we can see the id_rsa of
 
 We connect to the machine with the id_rsa we just got and that's it! Machine ready!!
 
+<br />
+
+```bash
+❯ ssh -i id_rsa root@10.10.11.12
+Welcome to Ubuntu 22.04.4 LTS (GNU/Linux 5.15.0-101-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+  System information as of Mon Dec 30 07:18:36 PM UTC 2024
+
+
+
+
+Expanded Security Maintenance for Applications is not enabled.
+
+3 updates can be applied immediately.
+To see these additional updates run: apt list --upgradable
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+
+The list of available updates is more than a week old.
+To check for new updates run: sudo apt update
+Failed to connect to https://changelogs.ubuntu.com/meta-release-lts. Check your Internet connection or proxy settings
+
+
+Last login: Mon Dec 30 19:18:36 2024 from 10.10.14.13
+root@iclean:~# id
+uid=0(root) gid=0(root) groups=0(root)
+root@iclean:~# cat /root/root.txt
+5ae03cc0384769387cfe1a319exxxxxx
+root@iclean:~# 
+```
+
+<br />
+
 I hope you enjoyed the machine and above all you understood the concepts! Keep hacking!!❤️
 
 <br />
