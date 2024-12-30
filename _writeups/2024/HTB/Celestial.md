@@ -12,9 +12,9 @@ tags: deserializationattack scripting bash python node.js cronjob reverseshell
 OS -> Linux.
 
 Difficulty -> Medium.
-
+<br />
 # Introduction:
-
+<br />
 Hello hackers! Today we will be solving the Celestial Machine. An easy difficulty Machine in which we will have to exploit a deserialization attack in node.js that will allow us to gain access to the System. Once inside, we will carry out the privilege escalation by exploiting a Python script executed by root at time intervals in the system.
 
 Without further ado, let's get to the first phase, the enumeration phase!
@@ -163,4 +163,4 @@ bash-4.3# id
 uid=1000(sun) gid=1000(sun) euid=0(root) groups=1000(sun),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),113(lpadmin),128(sambashare)
 ```
 
-Celestial Machine ready! I hope you enjoyed it as much as I did, greetings and keep hacking!!❤️❤️
+Celestial Machine ready! I hope you enjoyed it as much as I did, keep hacking!!❤️❤️
