@@ -313,3 +313,48 @@ www-data@iclean:/opt/app$
 ```
 
 <br />
+
+Intrusion ready! Let's go with the escalation of privileges!
+
+<br />
+
+# Privilege Escalation: www-data -> consuela
+
+<br />
+
+Once inside the system, we realize that there is a user named Consuela, but when we try to enter their directory it tells us that permission denied:
+
+<br />
+
+```bash
+www-data@iclean:/opt/app$ cd /home
+cd /home
+www-data@iclean:/home$ ls
+ls
+consuela
+www-data@iclean:/home$ cd consuela
+cd consuela
+bash: cd: consuela: Permission denied
+www-data@iclean:/home$
+```
+
+<br />
+
+We continue to list the system and find credentials to log into a database:
+
+<br />
+
+```bash
+www-data@iclean:/opt/app$ cat app.py | grep -i password -B 5
+cat app.py | grep -i password -B 5
+app.secret_key = secret_key
+# Database Configuration
+db_config = {
+    'host': '127.0.0.1',
+    'user': 'iclean',
+    'password': 'pxCsmnGLckUb',
+```
+
+<br />
+
+
