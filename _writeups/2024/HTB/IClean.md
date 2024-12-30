@@ -166,3 +166,11 @@ Once we have discovered this path, we set the cookies and access it, managing to
 ![8](../../../assets/images/IClean/8.png)
 
 <br />
+
+Access the /InvoiceGenerator path and fill in the data:
+
+<br />
+
+![9](../../../assets/images/IClean/9.png)
+
+<br />
