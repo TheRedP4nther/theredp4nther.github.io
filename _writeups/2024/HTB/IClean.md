@@ -568,4 +568,12 @@ The document does not contain any pages:
 
 <br />
 
+![21](../../../assets/images/IClean/21.png)
+
+<br />
+
+But if we expand the sidebar and access the attachments we can see the id_rsa of the root user:
+
+<br />
+
 
