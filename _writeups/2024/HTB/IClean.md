@@ -223,10 +223,21 @@ We copy the url link and insert it in the section where it tells us to enter it:
 
 <br />
 
-By doing so, we access a url with the invoice we have generated:
+Click on submit and we access a url with the invoice we have generated:
 
 <br />
 
 ![14](../../../assets/images/IClean/14.png)
 
 <br />
+
+# Server Side Template Injection (SSTI):
+
+<br />
+
+Now that we have seen in detail how the website works, we proceed to intercept with Burp Suite the request of the /QRGenerator and when we send it we see in the response the raw
+base64 encoded image:
+
+<br />
+
+
