@@ -240,4 +240,12 @@ base64 encoded image:
 
 <br />
 
+![15](../../../assets/images/IClean/15.png)
+
+<br />
+
+We try to manipulate the qr link field and we see it reflected in the response:
+
+<br />
+
 
