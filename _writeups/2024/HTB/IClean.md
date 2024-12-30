@@ -103,7 +103,8 @@ As always when we have an input, we intercept the request with Burp Suite and st
 
 After several tests we are able to receive a request by GET from the server exploiting an XSS:
 
-Payload -> <img src="http://10.10.14.13/testing.png"></img>
+Payload -> \<img src="http://10.10.14.13"\>\</img\>
+
 
 <br />
 
