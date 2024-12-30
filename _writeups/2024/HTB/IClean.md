@@ -211,6 +211,5 @@ Click on generate and it returns the QR Code Link:
 
 <br />
 
-
-
+![11](../../../assets/images/IClean/11.png)
 
