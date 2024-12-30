@@ -320,12 +320,12 @@ Properly sanitize the tty so that it is fully functional:
 
 ```bash
 www-data@iclean:/opt/app$ python3 -c 'import pty;pty.spawn("bash")'
+python3 -c 'import pty;pty.spawn("bash")'
 www-data@iclean:/opt/app$ ^Z
-[1]+  Stopped                 nc -lnvp 443
-stty raw -echo; fg
-nc -nlvp 443
-                reset xterm
-www-data@iclean:/opt/app$
+zsh: suspended  nc -nlvp 443
+❯ stty raw -echo; fg
+[1]  + continued  nc -nlvp 443
+                              reset xterm
 ```
 
 <br />
