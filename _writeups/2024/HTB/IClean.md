@@ -322,7 +322,7 @@ Properly sanitize the tty so that it is fully functional:
 www-data@iclean:/opt/app$ python3 -c 'import pty;pty.spawn("bash")'
 www-data@iclean:/opt/app$ ^Z
 [1]+  Stopped                 nc -lnvp 443
-oxdf@hacky$ stty raw -echo; fg
+stty raw -echo; fg
 nc -nlvp 443
                 reset xterm
 www-data@iclean:/opt/app$
@@ -431,5 +431,22 @@ We have found a hash for the user we want to pivot to, so we crack it in [cracks
 <br />
 
 ## Pivoting to User Consuela with the found Credentials:
+
+<br />
+
+```bash
+www-data@iclean:/opt/app$ su consuela
+Password: 
+consuela@iclean:/opt/app$ id
+uid=1000(consuela) gid=1000(consuela) groups=1000(consuela)
+consuela@iclean:/opt/app$ cat /home/consuela/user.txt 
+eba486700e25313333bb89fe31xxxxxx
+```
+
+<br />
+
+# Privilege Escalation: consuela -> root
+
+<br />
 
 
