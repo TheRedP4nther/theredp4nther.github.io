@@ -73,10 +73,16 @@ We relist the website and find a fairly straightforward page and another with a 
 
 <br />
 
-We kept looking and found another page a little more interesting in the /quote path:
+We kept looking and found another page a little more interesting with an user input in the /quote path:
 
 <br />
 
 ![4](../../../assets/images/IClean/4.png)
 
 <br />
+
+As always when we have an input, we intercept the request with Burp Suite and start testing different types of vulnerabilities such as SQL Injection, XSS...
+
+<br />
+
+
