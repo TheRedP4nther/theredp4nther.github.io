@@ -222,3 +222,11 @@ We copy the url link and insert it in the section where it tells us to enter it:
 ![13](../../../assets/images/IClean/13.png)
 
 <br />
+
+By doing so, we access a url with the invoice we have generated:
+
+<br />
+
+![14](../../../assets/images/IClean/14.png)
+
+<br />
