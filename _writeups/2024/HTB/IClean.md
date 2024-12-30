@@ -93,4 +93,16 @@ As always when we have an input, we intercept the request with Burp Suite and st
 
 ![5](../../../assets/images/IClean/5.png)
 
+<br />
+
+# Exploiting XXS:
+
+<br />
+
+After several tests we are able to receive a request by GET from the server exploiting an XSS:
+
+Payload -> <img src="http://10.10.14.13/testing.png"></img>
+
+<br />
+
 
