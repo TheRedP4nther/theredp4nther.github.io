@@ -142,3 +142,21 @@ Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
 10.10.11.12 - - [30/Dec/2024 16:25:06] code 404, message File not found
 10.10.11.12 - - [30/Dec/2024 16:25:06] "GET /testing.pngsession=eyJyb2xlIjoiMjEyMzJmMjk3YTU3YTVhNzQzODk0YTBlNGE4MDFmYzMifQ.Z3KL3Q.0csXF3KeXH5L4JLYhYqvjWLgfX8 HTTP/1.1" 404 -
 ```
+
+<br />
+
+Aplicamos un poco de fuzzing a la web para ver si encontramos una ruta en la que podamos usar nuestras nuevas cookies y descubrimos  la ruta /dashboard.
+
+<br />
+
+```bash
+000002927:   302        5 L      22 W       189 Ch      "dashboard"
+```
+
+<br />
+
+Once we have discovered this path, we set the cookies and access it, managing to enter what appears to be the website's administration panel:
+
+<br />
+
+
