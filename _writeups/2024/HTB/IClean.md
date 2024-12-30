@@ -621,6 +621,6 @@ root@iclean:~#
 
 <br />
 
-I hope you enjoyed the machine and above all you understood the concepts! Keep hacking!!❤️
+I hope you enjoyed the machine and above all understood the concepts! Keep hacking!!❤️
 
 <br />
