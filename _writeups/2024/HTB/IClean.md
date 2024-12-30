@@ -253,4 +253,10 @@ We try to manipulate the qr link field and we see it reflected in the response:
 <br />
 
 
+We're being able to see our output reflected, so the first vulnerability that comes to mind is an SSTI, let's test it with a simple operation like {{7*7}}:
 
+<br />
+
+
+
+<br />
