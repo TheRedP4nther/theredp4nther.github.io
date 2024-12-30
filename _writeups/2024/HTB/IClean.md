@@ -13,6 +13,7 @@ tags: deserializationattack scripting bash python node.js cronjob reverseshell
 <br />
 
 OS -> Linux.
+
 Difficulty -> Medium.
 
 <br />
