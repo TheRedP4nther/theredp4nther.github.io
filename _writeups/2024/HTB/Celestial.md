@@ -187,7 +187,17 @@ We did some research on the system and upon launching pspy we found that root is
 
 <br />
 
-![7](../../../assets/images/Celestial/7.png)
+```bash
+2024/12/30 06:37:57 CMD: UID=0     PID=1      | /sbin/init splash 
+2024/12/30 06:40:01 CMD: UID=0     PID=7380   | python /home/sun/Documents/script.py 
+2024/12/30 06:40:01 CMD: UID=0     PID=7379   | /bin/sh -c python /home/sun/Documents/script.py > /home/sun/output.txt; cp /root/script.py /home/sun/Documents/script.py; chown sun:sun /home/sun/Documents/script.py; chattr -i /home/sun/Documents/script.py; touch -d "$(date -R -r /home/sun/Documents/user.txt)" /home/sun/Documents/script.py 
+2024/12/30 06:40:01 CMD: UID=0     PID=7378   | /usr/sbin/CRON -f 
+2024/12/30 06:40:01 CMD: UID=0     PID=7381   | 
+2024/12/30 06:40:01 CMD: UID=0     PID=7382   | chown sun:sun /home/sun/Documents/script.py 
+2024/12/30 06:40:01 CMD: UID=0     PID=7383   | /bin/sh -c python /home/sun/Documents/script.py > /home/sun/output.txt; cp /root/script.py /home/sun/Documents/script.py; chown sun:sun /home/sun/Documents/script.py; chattr -i /home/sun/Documents/script.py; touch -d "$(date -R -r /home/sun/Documents/user.txt)" /home/sun/Documents/script.py 
+2024/12/30 06:40:01 CMD: UID=0     PID=7384   | date -R -r /home/sun/Documents/user.txt 
+2024/12/30 06:40:01 CMD: UID=0     PID=7385   | touch -d Mon, 30 Dec 2024 06:18:36 -0500 /home/sun/Documents/script.py
+```
 
 <br />
 
