@@ -191,5 +191,6 @@ Click on generate and it returns the ID of the generated invoice:
 
 <br />
 
+![10](../../../assets/images/IClean/10.png)
 
 
