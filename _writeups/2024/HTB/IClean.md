@@ -193,4 +193,14 @@ Click on generate and it returns the ID of the generated invoice:
 
 ![10](../../../assets/images/IClean/10.png)
 
+<br />
+
+## Generate A QR:
+
+<br />
+
+We access the /QRGenerator and with the invoice ID we generate a QR Code:
+
+<br />
+
 
