@@ -160,5 +160,4 @@ Once we have discovered this path, we set the cookies and access it, managing to
 <br />
 
 ![7](../../../assets/images/IClean/7.png)
-
-
+![8](../../../assets/images/IClean/8.png)
