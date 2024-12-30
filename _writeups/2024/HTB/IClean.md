@@ -72,3 +72,9 @@ We relist the website and find a fairly straightforward page and another with a 
 ![3](../../../assets/images/IClean/3.png)
 
 <br />
+
+We kept looking and found another page a little more interesting in the /quote path:
+
+<br />
+
+
