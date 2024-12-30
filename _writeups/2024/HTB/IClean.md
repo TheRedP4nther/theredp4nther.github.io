@@ -211,5 +211,14 @@ Click on generate and it returns the QR Code Link:
 
 <br />
 
-![11](../../../assets/images/IClean/11.png)
+![12](../../../assets/images/IClean/11.png)
 
+<br />
+
+We copy the url link and insert it in the section where it tells us to enter it:
+
+<br />
+
+![13](../../../assets/images/IClean/13.png)
+
+<br />
