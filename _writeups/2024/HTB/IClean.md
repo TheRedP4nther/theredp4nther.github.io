@@ -145,7 +145,7 @@ Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
 
 <br />
 
-Aplicamos un poco de fuzzing a la web para ver si encontramos una ruta en la que podamos usar nuestras nuevas cookies y descubrimos  la ruta /dashboard.
+We fuzzed the web a bit to see if we could find a path where we could use our new cookies and discovered the /dashboard path.
 
 <br />
 
