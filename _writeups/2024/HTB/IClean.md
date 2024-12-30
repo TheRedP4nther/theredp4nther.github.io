@@ -203,4 +203,14 @@ We access the /QRGenerator and with the invoice ID we generate a QR Code:
 
 <br />
 
+![11](../../../assets/images/IClean/11.png)
+
+<br />
+
+Click on generate and it returns the QR Code Link:
+
+<br />
+
+
+
 
