@@ -104,7 +104,7 @@ As always when we have an input, we intercept the request with Burp Suite and st
 
 <br />
 
-# Exploiting XXS:
+# Exploiting XXS (Cross-Site Scripting):
 
 <br />
 
@@ -238,7 +238,7 @@ Click on submit and we access a url with the invoice we have generated:
 
 <br />
 
-# Server Side Template Injection (SSTI):
+# Exploiting SSTI (Server Side Template Injection):
 
 <br />
 
