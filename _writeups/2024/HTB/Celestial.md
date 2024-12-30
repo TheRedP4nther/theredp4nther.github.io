@@ -246,6 +246,6 @@ uid=1000(sun) gid=1000(sun) euid=0(root) groups=1000(sun),4(adm),24(cdrom),27(su
 
 <br />
 
-Celestial Machine ready! I hope you enjoyed it as much as I did, keep hacking!!❤️❤️
+Celestial Machine ready! I hope you enjoyed it as much as I did, keep hacking!!❤️
 
 <br />
