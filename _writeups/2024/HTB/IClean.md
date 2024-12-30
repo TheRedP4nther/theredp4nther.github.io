@@ -167,6 +167,18 @@ Once we have discovered this path, we set the cookies and access it, managing to
 
 <br />
 
+# Dashboard Enumeration:
+
+<br />
+
+The panel we have accessed consists of 4 different pages, so we will investigate them 1 by 1 to better understand how the website works and identify any vulnerabilities:
+
+<br />
+
+## Generating An Invoice:
+
+<br />
+
 Access the /InvoiceGenerator path and fill in the data:
 
 <br />
@@ -174,3 +186,10 @@ Access the /InvoiceGenerator path and fill in the data:
 ![9](../../../assets/images/IClean/9.png)
 
 <br />
+
+Click on generate and it returns the ID of the generated invoice:
+
+<br />
+
+
+
