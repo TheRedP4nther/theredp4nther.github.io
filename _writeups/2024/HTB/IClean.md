@@ -222,6 +222,10 @@ Click on generate and it returns the QR Code Link:
 
 <br />
 
+# Insert The URL Link:
+
+<br />
+
 We copy the url link and insert it in the section where it tells us to enter it:
 
 <br />
