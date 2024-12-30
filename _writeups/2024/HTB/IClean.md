@@ -211,7 +211,7 @@ Click on generate and it returns the QR Code Link:
 
 <br />
 
-![12](../../../assets/images/IClean/11.png)
+![12](../../../assets/images/IClean/12.png)
 
 <br />
 
