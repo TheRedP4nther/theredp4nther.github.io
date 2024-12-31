@@ -22,7 +22,7 @@ Difficulty -> Medium.
 
 <br />
 
-Hello hackers! Today we are going to do the IClean Machine. A machine of Medium difficulty in which we will have to exploit an xss to steal some cookies that will give us accessto an Administration Panel, where we will exploit an ssti that will grant us the RCE necessary to gain access to the Victim Machine. Once inside, we will have to list a mysql database where we will find a crackable hash that will allow us to get a password and change to another user. Finally we will have to abuse a SUDOERS permission that will allow usto escalate to the root superuser.
+Hello hackers! Today we’re diving into the IClean Machine, a medium-difficulty challenge. The journey begins by exploiting an XSS vulnerability to steal cookies, which will give us access to an Administration Panel. There, we’ll take advantage of an SSTI to gain RCE and access the victim machine. Once inside, we’ll explore a MySQL database to uncover a crackable hash that leads us to a password for switching users. Finally, we’ll exploit a SUDOERS permission to escalate privileges and achieve root access.
 
 <br />
 
