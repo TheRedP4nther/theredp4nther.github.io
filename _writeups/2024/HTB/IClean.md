@@ -67,7 +67,9 @@ Ports 22 and 80 open, nothing out of the ordinary.
 
 <br />
 
-Proceed to list the website, but doing so redirects us to the next domain -> capiclean.htb. 
+Proceed to list the website, but doing so redirects us to the next domain:
+
+-> capiclean.htb. 
 
 So we added it to the /etc/hosts to be able to access:
 
