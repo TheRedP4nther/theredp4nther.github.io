@@ -381,7 +381,7 @@ www-data@iclean:/home$
 
 <br />
 
-We continue to list the system and find credentials to log into a database:
+We continue to list the system and find a file "app.py" with credentials to log into a database:
 
 <br />
 
@@ -474,7 +474,7 @@ eba486700e25313333bb89fe31xxxxxx
 
 <br />
 
-Once we became consuela, proceed to list her sudoers privileges and list this:
+Once we became consuela, proceed to list her SUDOERS privileges:
 
 <br />
 
@@ -490,9 +490,9 @@ User consuela may run the following commands on iclean:
 
 <br />
 
-The user consuela can run the binary qpdf as the user that we want, including the superuser root. To do it we need the password, but we have it :D.
+The user consuela can run the binary qpdf as any user on the system, including the superuser root. To do it we need the password of consuela, but we have it :D.
 
-So we proceed to list the use of this binary to try to take advantage of the privilege:
+So proceed to list the use of this binary to try to take advantage of the privilege:
 
 <br />
 
@@ -522,6 +522,9 @@ Related options:
 
 For detailed help, visit the qpdf manual: https://qpdf.readthedocs.io
 ```
+
+<br />
+
 ## File Read:
 
 <br />
