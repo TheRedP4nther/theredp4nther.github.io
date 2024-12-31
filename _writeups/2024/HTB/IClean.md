@@ -597,7 +597,7 @@ But if we expand the sidebar and access the attachments we can see the id_rsa of
 
 <br />
 
-We connect to the machine with the id_rsa we just got and that's it! Machine ready!!
+Try to connect to the machine with the id_rsa we just got and that's it! Machine ready!!
 
 <br />
 
