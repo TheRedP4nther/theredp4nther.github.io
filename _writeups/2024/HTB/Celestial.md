@@ -66,7 +66,7 @@ At first glance, it doesn't seem interesting at all, but when intercepting the r
 
 <br />
 
-# Node JS Deserilization 
+# Deserialization Attack (Node.js): 
 
 <br />
 
@@ -130,7 +130,7 @@ Serialized:
 ```
 <br />
 
-# IIFE (Inmediately Invoked Function Expression):
+## IIFE (Inmediately Invoked Function Expression):
 <br />
 
 Well, we already have the Payload ready, but it's not all there yet. In order for the server to execute our command, we will have to enter the IIFE in our payload, otherwise, no command will be executed when the server deserializes our serialized data. 
