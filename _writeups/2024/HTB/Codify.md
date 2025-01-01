@@ -73,3 +73,12 @@ We continue to list the website and discover a /about path where we see that the
 <br />
 
 ![4](../../../assets/images/Codify/4.png)
+
+<br />
+
+Immediately performed a google search and discovered that this library has a vulnerability which allows an attacker to bypass sandbox limitations and execute arbitrary code on the Victim Machine:
+
+<br />
+
+
+
