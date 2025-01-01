@@ -68,4 +68,8 @@ Once in the path we test the console a bit and we see that we can really execute
 
 <br />
 
+We continue to list the website and discover a /about path where we see that the website uses the vm2 sandboxing library:
 
+<br />
+
+![4](../../../assets/images/Codify/4.png)
