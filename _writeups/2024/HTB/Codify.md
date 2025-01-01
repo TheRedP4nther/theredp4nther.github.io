@@ -52,13 +52,11 @@ Nmap done: 1 IP address (1 host up) scanned in 11.08 seconds
 
 Only ports 22 and 80 are open, so we obviously proceed to list the website:
 
+As soon as we enter we see a text that tells us that the website has a sandbox that will allow us to execute javascript code in real time with some limitations, so access the sandbox path and list the following:
+
 <br />
 
 ![1](../../../assets/images/Codify/2.png)
-
-<br />
-
-As soon as we enter we see a text that tells us that the website has a sandbox that will allow us to execute javascript code in real time, so we access the sandbox path and list the following:
 
 <br />
 
@@ -66,5 +64,8 @@ Once in the path we test the console a bit and we see that we can really execute
 
 <br />
 
+![3](../../../assets/images/Codify/3.png)
+
+<br />
 
 
