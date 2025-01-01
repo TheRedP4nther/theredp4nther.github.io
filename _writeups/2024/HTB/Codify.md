@@ -8,7 +8,7 @@ tags: deserializationattack scripting bash python node.js cronjob reverseshell
 
 <br />
 
-
+![Icon-Image](../../../assets/images/Codify/1.png)
 
 <br />
 
