@@ -20,6 +20,10 @@ As always we start with a nmap scan:
 
 <br />
 
+# Enumeration:
+
+<br />
+
 ```bash
 ❯ nmap -sCV -p22,80 10.10.11.239 -oN targeted
 Starting Nmap 7.94SVN ( https://nmap.org ) at 2025-01-01 18:38 CET
@@ -39,3 +43,15 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 11.08 seconds
 ```
+
+<br />
+
+# Web Enumeration:
+
+<br />
+
+![1](../../../assets/images/Codify/2.png)
+
+<br />
+
+
