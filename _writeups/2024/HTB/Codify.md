@@ -298,5 +298,14 @@ done
 
 <br />
 
-Taking a quick look at the script, we see that it appears to make a copy of the mysql database and store it in the backup directory.
+# Vulnerabilities:
+
+<br />
+
+There are two potential vulnerabilities in the script due to poor programming practices.
+
+1.- The first error occurs when comparing two values without using quotes, as this can cause some bash characters to be misinterpreted and we can bypass authentication by entering a * as the password::
+
+<br />
+
 
