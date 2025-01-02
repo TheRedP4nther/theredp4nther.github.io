@@ -264,8 +264,7 @@ Taking a quick look at the script, we see that it appears to make a copy of the 
 
 <br />
 
-```
-bash
+```bash
 #!/bin/bash
 DB_USER="root"
 DB_PASS=$(/usr/bin/cat /root/.creds)
@@ -295,7 +294,6 @@ done
 /usr/bin/chown root:sys-adm "$BACKUP_DIR"
 /usr/bin/chmod 774 -R "$BACKUP_DIR"
 /usr/bin/echo 'Done!'
-
 ```
 
 <br />
