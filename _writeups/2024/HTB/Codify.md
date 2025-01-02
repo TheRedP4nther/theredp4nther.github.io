@@ -90,3 +90,10 @@ Immediately performed a google search and discovered that this library has a vul
 
 <br />
 
+We continue to search for this vulnerability until we find a payload to exploit it:
+
+<br />
+
+
+
+<br />
