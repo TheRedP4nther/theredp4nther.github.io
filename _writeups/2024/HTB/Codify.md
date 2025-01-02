@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: deserializationattack scripting bash python node.js cronjob reverseshell
+tags: sandbox library scripting bash hash cracking bruteforce sqlite3 sudoers reverseshell bcrypt blowfish 
 ---
 
 <br />
