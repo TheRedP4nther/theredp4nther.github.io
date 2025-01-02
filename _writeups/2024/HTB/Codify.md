@@ -407,7 +407,7 @@ Once transferred, we run pspy in one window and in the other we run the script c
 
 <br />
 
-We tried to root it with the new password and.... Come on! We have the root.txt flag!
+We make a su root with the new password and.... Come on! We have the root.txt flag!
 
 <br />
 
