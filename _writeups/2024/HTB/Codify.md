@@ -82,6 +82,10 @@ We continue to list the website and discover a /about path where we see that the
 
 <br />
 
+# Find Vulnerability:
+
+<br />
+
 Immediately performed a google search and discovered that this library has a vulnerability which allows an attacker to bypass sandbox limitations and execute arbitrary code on the Victim Machine:
 
 <br />
@@ -94,6 +98,12 @@ We continue to search for this vulnerability until we find a payload to exploit 
 
 <br />
 
-
+![6](../../../assets/images/Codify/6.png)
 
 <br />
+
+We copy the payload, paste it into the console and successfully execute a command as the "svc" user:
+
+<br />
+
+
