@@ -254,7 +254,9 @@ User joshua may run the following commands on codify:
     (root) /opt/scripts/mysql-backup.sh
 ```
 
- ## mysql-backup.sh:
+<br />
+
+## mysql-backup.sh:
 
 <br />
 
