@@ -371,6 +371,10 @@ Done!
 
 <br />
 
+## Password Capture With pspy64:
+
+<br />
+
 Now that we can run the entire program, we download [pspy](https://github.com/DominicBreuker/pspy?tab=readme-ov-file) and transfer it to the victim machine:
 
 <br />
