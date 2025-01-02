@@ -16,11 +16,15 @@ tags: deserializationattack scripting bash python node.js cronjob reverseshell
 
 <br />
 
-As always we start with a nmap scan:
 
+ 
 <br />
 
 # Enumeration:
+
+<br />
+
+As always we start with a nmap scan:
 
 <br />
 
@@ -46,11 +50,13 @@ Nmap done: 1 IP address (1 host up) scanned in 11.08 seconds
 
 <br />
 
-# Web Enumeration:
+Only ports 22 and 80 are open, so we obviously proceed to list the website:
 
 <br />
 
-Only ports 22 and 80 are open, so we obviously proceed to list the website:
+# Web Enumeration:
+
+<br />
 
 As soon as we enter we see a text that tells us that the website has a sandbox that will allow us to execute javascript code in real time with some limitations, so access the sandbox path and list the following:
 
