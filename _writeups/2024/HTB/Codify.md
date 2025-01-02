@@ -118,3 +118,9 @@ uid=1001(svc) gid=1001(svc) groups=1001(svc)
 ```
 
 <br />
+
+Once the remote execution of commands has been verified, we proceed to establish an R.Shell to gain access to the Victim Machine as the svc user:
+
+<br />
+
+
