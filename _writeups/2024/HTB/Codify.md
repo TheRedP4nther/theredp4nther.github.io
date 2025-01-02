@@ -308,4 +308,10 @@ There are two potential vulnerabilities in the script due to poor programming pr
 
 <br />
 
+![9](../../../assets/images/Codify/9.png)
 
+<br />
+
+2.- And the second has to do with what is executing the script, since as we can see every time we execute it, the password that is in the /root/.creds file is being leaked, so if we listen with a program like pspy, we can surely capture it.
+
+<br />
