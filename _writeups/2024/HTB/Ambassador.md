@@ -501,7 +501,7 @@ MySQL [(none)]> show databases;
 
 <br />
 
-Looking in whacky widget there’s only one table:
+Looking in whackywidget there’s only one table:
 
 <br />
 
