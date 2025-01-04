@@ -191,7 +191,7 @@ We tried default credentials like admin:admin as always, but nothing, it doesn't
 
 <br />
 
-The version in use of Grafana is 8.20, so we do some research and find an article where it tells us that it is most likely vulnerable to a Path Traversal:
+The version in use of Grafana is 8.2.0, so we do some research and find an article where it tells us that Grafana versions 8.0.0-beta1 through 8.3.0 are vulnerable to a Path Traversal:
 
 <br />
 
