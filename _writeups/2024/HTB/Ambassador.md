@@ -8,7 +8,7 @@ tags: deserializationattack scripting bash python node.js cronjob reverseshell
 
 <br />
 
-![Machine-Icon](../../../assets/images/Celestial/Celestial.png)
+![Machine-Icon](../../../assets/images/Ambassador/1.png)
 
 <br />
 
