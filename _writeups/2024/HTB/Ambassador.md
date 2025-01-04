@@ -164,3 +164,7 @@ But on the other hand we have port 3000 which could be hosting some website and 
 We proceed to list the website that runs through port 80, which in this case, is a fairly simple website with nothing interesting:
 
 <br />
+
+![2](../../../assets/images/Ambassador/2.png)
+
+<br />
