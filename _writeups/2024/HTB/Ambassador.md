@@ -199,7 +199,7 @@ The version in use of Grafana is 8.2.0, so we do some research and find an artic
 
 <br />
 
-We continued searching and found a Python exploit for the Grafana's version 8.3.0 that seems to be the Path Traversal from the previous article we have read, so we bring it to analyze the code and try to exploit the vulnerability manually, as a real pro.
+We found a Python exploit for Grafana 8.3.0 with a Path Traversal vulnerability and analyzed it to exploit it manually, as a real pro.
 
 <br />
 
