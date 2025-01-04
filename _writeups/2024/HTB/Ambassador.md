@@ -30,6 +30,8 @@ Hello hackers! Today, we’ll tackle the Ambassador Machine, a medium-difficulty
 
 As always we are going to start with a nmap scan to enumerate de open ports and services running on the victim machine:
 
+<br />
+
 ```bash
 ❯ nmap -p- 10.10.11.183 --open --min-rate 5000 -sS -T5 -Pn -n -sCV
 Starting Nmap 7.94SVN ( https://nmap.org ) at 2025-01-04 14:30 CET
@@ -173,10 +175,20 @@ We proceed to list the website that runs through port 80, which in this case, is
 
 <br />
 
-As I said before, port 3000 could also be running a web service. Well, when we list it, we see that indeed, as soon as we enter, we find a Grafana login panel:
+As I said before, port 3000 could also be running a web service. Well, when we list it, we see that indeed, as soon as we enter, we find a Grafana 8.2.0 login panel:
 
 <br />
 
 ![3](../../../assets/images/Ambassador/3.png)
 
 <br />
+
+We tried default credentials like admin:admin as always, but nothing, it doesn't work.
+
+<br />
+
+# Grafana Vulnerale Vearsion:
+
+<br />
+
+
