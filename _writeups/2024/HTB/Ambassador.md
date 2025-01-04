@@ -471,7 +471,7 @@ We have another password!! It seems to be mysql's.
 
 <br />
 
-Log in with the new password into the database remotely:
+Log in with the new password into the database remotely and we list the databases:
 
 <br />
 
