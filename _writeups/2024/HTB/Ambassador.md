@@ -729,10 +729,6 @@ Once we have the token, we proceed to analyze the exploit to see what it is doin
 
 <br />
 
-Once we have the token, we proceed to analyze the exploit to see what it is doing and can exploit everything manually.
-
-<br />
-
 What this exploit is basically doing is a request by curl to a consul endpoint using PUT method and the consul token to load a file in json where the command we want will be executed.
 
 <br />
