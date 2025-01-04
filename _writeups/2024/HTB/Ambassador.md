@@ -432,7 +432,7 @@ admin_password = messageInABottle685427
 
 <br />
 
-We log in to Grafana with the credential but we don't see anything interesting so we keep listing files.
+Log into Grafana with the credentials but we don't see anything interesting so we keep listing files.
 
 <br />
 
