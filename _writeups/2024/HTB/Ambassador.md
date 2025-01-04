@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: lfi database sqlite3 localfileinclusion consul reverseshell rce  
+tags: lfi database sqlite3 localfileinclusion consul remotecodeexecution reverseshell rce  
 ---
 
 <br />
@@ -187,8 +187,10 @@ We tried default credentials like admin:admin as always, but nothing, it doesn't
 
 <br />
 
-# Grafana Vulnerale Vearsion:
+# Grafana Vulnerable Version (Path Traversal):
 
 <br />
+
+
 
 
