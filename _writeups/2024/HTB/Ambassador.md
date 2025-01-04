@@ -803,6 +803,17 @@ if __name__ == "__main__":
 
 <br />
 
+## JSON file:
 
+<br />
 
+We copy the structure of the json data into the exploit and create our own json file with the command that we want to execute, in my case, a reverse shell to gain a console as root:
+
+<br />
+
+```json
+
+```
+
+<br />
 
