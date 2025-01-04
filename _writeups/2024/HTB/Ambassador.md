@@ -594,6 +594,25 @@ We're in!! Intrusion ready, let's go for the Privilege Escalation!!
 
 <br />
 
+## /opt:
+
+We go into de /opt directory and find the following:
+
+<br />
+
+```bash
+developer@ambassador:/$ ls
+bin  boot  dev  development-machine-documentation  etc  home  lib  lib32  lib64  libx32  lost+found  media  mnt  opt  proc  root  run  sbin  snap  srv  sys  tmp  usr  var
+developer@ambassador:/$ cd /opt
+developer@ambassador:/opt$ ls
+consul  my-app
+```
+
+<br />
+
+The consul folder:
+
+<br />
 
 
 
