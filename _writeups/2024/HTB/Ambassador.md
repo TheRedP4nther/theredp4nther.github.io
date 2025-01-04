@@ -618,3 +618,44 @@ The consul folder:
 
 <br />
 
+The my_app folder contains a couple of directories and a.git repository, very interesting:
+
+<br />
+
+```bash
+developer@ambassador:/opt$ cd my-app/
+developer@ambassador:/opt/my-app$ ls -la
+total 24
+drwxrwxr-x 5 root root 4096 Mar 13  2022 .
+drwxr-xr-x 4 root root 4096 Sep  1  2022 ..
+drwxrwxr-x 8 root root 4096 Mar 14  2022 .git
+-rw-rw-r-- 1 root root 1838 Mar 13  2022 .gitignore
+drwxrwxr-x 4 root root 4096 Mar 13  2022 env
+drwxrwxr-x 3 root root 4096 Mar 13  2022 whackywidget
+```
+
+<br />
+
+After doing a "ps -faux", see that the root user is running consul:
+
+<br />
+
+```bash
+root        1098  0.2  3.7 794548 75664 ?        Ssl  11:11   0:20 /usr/bin/consul agent -config-dir=/etc/consul.d/config.d -config-file=/etc/consul.d/consul.hcl
+```
+
+<br />
+
+This is very interesting, because if we discover any vulnerabilities for this software, we can most likely become the root superuser.
+
+<br />
+
+# Consul Vulnerability (RCE):
+
+<br />
+
+Searching we found this:
+
+<br />
+
+
