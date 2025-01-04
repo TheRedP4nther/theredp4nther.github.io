@@ -721,11 +721,15 @@ index 0000000..35c08f6
 
 <br />
 
+Once we have the token, we proceed to analyze the exploit to see what it is doing and can exploit everything manually.
+
+<br />
+
 ## Exploit Analysis:
 
 <br />
 
-Once we have the token, we proceed to analyze the exploit to see what it is doing and can exploit everything manually:
+Once we have the token, we proceed to analyze the exploit to see what it is doing and can exploit everything manually.
 
 <br />
 
