@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: lfi database sqlite3 localfileinclusion consul remotecodeexecution reverseshell rce  
+tags: lfi database mysql sqlite3 localfileinclusion consul remotecodeexecution reverseshell rce 
 ---
 
 <br />
