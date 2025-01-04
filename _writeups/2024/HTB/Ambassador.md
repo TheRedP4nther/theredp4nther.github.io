@@ -168,3 +168,13 @@ We proceed to list the website that runs through port 80, which in this case, is
 ![2](../../../assets/images/Ambassador/2.png)
 
 <br />
+
+# Http Enumeration -> Port 3000:
+
+<br />
+
+As I said before, port 3000 could also be running a web service. Well, when we list it, we see that indeed, as soon as we enter, we find a Grafana login panel:
+
+<br />
+
+
