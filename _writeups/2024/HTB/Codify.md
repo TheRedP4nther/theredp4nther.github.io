@@ -50,7 +50,7 @@ Nmap done: 1 IP address (1 host up) scanned in 11.08 seconds
 
 <br />
 
-Only ports 22 and 80 are open, so we obviously proceed to list the website.
+Only ports `22` and `80` are open, so we obviously proceed to list the website.
 
 <br />
 
@@ -58,7 +58,7 @@ Only ports 22 and 80 are open, so we obviously proceed to list the website.
 
 <br />
 
-As soon as we enter we see a text that tells us that the website has a sandbox that will allow us to execute javascript code in real time with some limitations:
+As soon as we enter we see a text that tells us that the `website has a sandbox` that will allow us to `execute javascript` code in real time with some `limitations`:
 
 <br />
 
@@ -66,7 +66,7 @@ As soon as we enter we see a text that tells us that the website has a sandbox t
 
 <br />
 
-Click in "Try it now" to access to the sandbox and once in the path we test the console a bit and we see that we can really execute javascript code:
+Click in `"Try it now"` to access to the sandbox and once in the path we `test the console` a bit and we see that we can really execute javascript code:
 
 <br />
 
@@ -74,7 +74,7 @@ Click in "Try it now" to access to the sandbox and once in the path we test the 
 
 <br />
 
-We continue to list the website and discover a /about path where we see that the website uses the vm2 sandboxing library:
+We continue to list the website and discover a `/about` path where we see that the website uses the `vm2 sandboxing library`:
 
 <br />
 
@@ -86,7 +86,7 @@ We continue to list the website and discover a /about path where we see that the
 
 <br />
 
-Immediately performed a google search and discovered that this library has a vulnerability which allows an attacker to bypass sandbox limitations and execute arbitrary code on the Victim Machine:
+Immediately performed a `google search` and discovered that this library has a `vulnerability` which allows an attacker to `bypass sandbox limitations` and execute arbitrary code on the Victim Machine:
 
 <br />
 
@@ -94,7 +94,7 @@ Immediately performed a google search and discovered that this library has a vul
 
 <br />
 
-We continue to search for this vulnerability until we find a payload to exploit it:
+We continue to `search` for this vulnerability until we `find a payload` to exploit it:
 
 <br />
 
@@ -102,7 +102,7 @@ We continue to search for this vulnerability until we find a payload to exploit 
 
 <br />
 
-We copy the payload, paste it into the console and successfully execute a command as the "svc" user:
+We copy the payload, paste it into the console and successfully `execute` a command as the `"svc"` user:
 
 <br />
 
@@ -119,7 +119,7 @@ uid=1001(svc) gid=1001(svc) groups=1001(svc)
 
 <br />
 
-Once the remote execution of commands has been verified, we proceed to establish an R.Shell to gain access to the Victim Machine as the svc user:
+Once the remote execution of commands has been verified, we proceed to establish an `R.Shell` to gain access to the Victim Machine as the `svc` user:
 
 <br />
 
@@ -138,7 +138,7 @@ svc@codify:~$
 
 <br />
 
-Once inside we sanitize the tty as always so that it is completely interactive and intrusion ready!!!
+Once inside we `sanitize the tty` as always so that it is completely interactive and intrusion ready!!!
 
 <br />
 
@@ -146,7 +146,7 @@ Once inside we sanitize the tty as always so that it is completely interactive a
 
 <br />
 
-After some searching we found a sqlite3 database that seems quite interesting:
+After some searching we found a `sqlite3 database` that seems quite interesting:
 
 <br />
 
@@ -159,7 +159,7 @@ tickets.db: SQLite 3.x database, last written using SQLite version 3037002, file
 
 <br />
 
-Obviously we opened it with sqlite3 to inspect it and we discovered the following:
+Obviously we `opened it with sqlite3` to inspect it and we discovered the following:
 
 <br />
 
@@ -175,7 +175,7 @@ sqlite> select * from users;
 
 <br />
 
-Surprise! We have what appears to be a bcrypt Blowfish hash, so we copy it and put it in a file to brute force it with hashcat using the mode 3200, that is the bcrypt Blowfish one:
+Surprise! We have what appears to be a `bcrypt Blowfish hash`, so we copy it and put it in a file to `brute force it` with hashcat using the mode `3200`, that is the bcrypt Blowfish one:
 
 <br />
 
@@ -212,7 +212,7 @@ Initializing backend runtime for device #1. Please be patient...
 
 <br />
 
-After a timeout hashcat is able to crack the hash and we get the password for user joshua:
+After a timeout hashcat is able to crack the hash and we get the password for user `joshua`:
 
 <br />
 
@@ -222,7 +222,7 @@ $2a$12$SOn8Pf6z8fO/nVsNbAAequ/P6vLRJJl7gCUEiYBU2iLHn4G/p/Zw2:spongebob1
 
 <br />
 
-Become user joshua with su and get the user.txt flag:
+Become user `joshua` with su and get the user.txt flag:
 
 <br />
 
@@ -240,7 +240,7 @@ e7d945e7588d952e81fe138f88xxxxxx
 
 <br />
 
-We enumerate the SUDOERS privileges for this user and discover that it can run a bash script as root:
+We enumerate the `SUDOERS privileges` for this user and discover that it can run a `bash script as root`:
 
 <br />
 
@@ -260,7 +260,7 @@ User joshua may run the following commands on codify:
 
 <br />
 
-Taking a quick look at the script, we see that it appears to make a copy of the mysql database and store it in the backup directory.
+Taking a quick look at the script, we see that it appears to make a `copy of the mysql` database and store it in the `backup directory`.
 
 <br />
 
@@ -302,9 +302,9 @@ done
 
 <br />
 
-There are two potential vulnerabilities in the script due to poor programming practices.
+There are `two potential vulnerabilities` in the script due to `poor programming practices`.
 
-1.- The first error occurs when comparing two values without using quotes, as this can cause some bash characters to be misinterpreted and we can bypass authentication by entering a * as the password:
+1.- The first error occurs when `comparing` two values `without using quotes`, as this can cause some bash characters to be misinterpreted and we can `bypass authentication` by entering a `"*"` as the password:
 
 <br />
 
@@ -312,7 +312,7 @@ There are two potential vulnerabilities in the script due to poor programming pr
 
 <br />
 
-2.- And the second has to do with what is executing the script, since as we can see every time we execute it the password that is in the /root/.creds file is being leaked, so if we listen with a program like pspy, we can surely capture it.
+2.- And the second has to do with what is executing the script, since as we can see `every time we execute` it the `password` that is in the `/root/.creds` file is `being leaked`, so if we listen with a program like `pspy`, we can surely `capture it`.
 
 <br />
 
@@ -324,7 +324,7 @@ There are two potential vulnerabilities in the script due to poor programming pr
 
 <br />
 
-When we run the script it asks us for a password:
+When we run the script it asks us for a `password`:
 
 <br />
 
@@ -335,7 +335,7 @@ Enter MySQL password for root:
 
 <br />
 
-And if we enter an incorrect password it does not let us run the program:
+And if we enter an `incorrect password` it does `not let us run the program`:
 
 <br />
 
@@ -347,7 +347,7 @@ Password confirmation failed!
 
 <br />
 
-However, as we have seen before, quotation marks are not used for comparison, so if we enter a *, the program misinterprets our input and considers the password correct, allowing us to run it without any problem:
+However, as we have seen before, `quotation marks` are not used for comparison, so if we enter a `"*"`, the program `misinterprets our input` and considers the `password correct`, allowing us to `run it without any problem`:
 
 <br />
 
@@ -397,7 +397,7 @@ joshua@codify:/tmp/Privesc$ ls -l pspy64
 
 <br />
 
-Once transferred, we run pspy in one window and in the other we run the script capturing the credentials in this way:
+Once transferred, we `run pspy` in one window and in the other we run the script `capturing the credentials` in this way:
 
 <br />
 
@@ -407,7 +407,7 @@ Once transferred, we run pspy in one window and in the other we run the script c
 
 <br />
 
-We make a su root with the new password and.... Come on! We have the root.txt flag!
+We make a `su root` with the new password and.... Come on! We have the `root.txt` flag!
 
 <br />
 
