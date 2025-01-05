@@ -55,8 +55,8 @@ Nmap done: 1 IP address (1 host up) scanned in 27.62 seconds
 
 As we can see there are only two open ports:
 
-- Port 22 -> ssh
-- Port 80 -> http
+- `Port 22` -> ssh
+- `Port 80` -> http
 
 <br />
 
@@ -67,5 +67,15 @@ As we can see there are only two open ports:
 When loading the website we find a login in which we only have input to put a password, so we try default credentials but nothing:
 
 <br />
+
+![2](../../../assets/images/Ransom/2.png)
+
+<br />
+
+After trying the simplest things like default credentials or some unsuccessful sql injection, we proceed to intercept the request with Burp Suite and send it to the repeater to test more interesting things:
+
+<br />
+
+
 
 
