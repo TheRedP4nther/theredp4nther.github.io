@@ -72,7 +72,9 @@ When loading the website we find a login in which we only have input to put a pa
 
 <br />
 
-After trying the simplest things like default credentials or some unsuccessful sql injection, we proceed to intercept the request with Burp Suite and send it to the repeater to test more interesting things:
+After trying the simplest things like default credentials or some unsuccessful sql injection, we proceed to intercept the request with Burp Suite and send it to the repeater to test more interesting things.
+
+As we can see, it looks like laravel is behind us, as we have a cookie telling us so:
 
 <br />
 
@@ -80,6 +82,15 @@ After trying the simplest things like default credentials or some unsuccessful s
 
 <br />
 
+The first thing we try is to change the request method by right-clicking and indicating "Change Request Method".
+
+When we do so, we get a status code 405 -> "Method Not Allowed":
+
+<br />
+
+
+
+<br />
 
 
 
