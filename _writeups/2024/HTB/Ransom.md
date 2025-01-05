@@ -88,7 +88,7 @@ When we do so, we get a status code 405 -> "Method Not Allowed":
 
 <br />
 
-
+![4](../../../assets/images/Ransom/4.png)
 
 <br />
 
