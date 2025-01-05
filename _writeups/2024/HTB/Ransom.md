@@ -74,11 +74,15 @@ When loading the website we find a login in which we only have input to put a pa
 
 After trying the simplest things like default credentials or some unsuccessful sql injection, we proceed to intercept the request with Burp Suite and send it to the repeater to test more interesting things.
 
-As we can see, it looks like laravel is behind us, as we have a cookie telling us so:
+As we can see, it looks like laravel is behind, as we have a cookie telling us so:
 
 <br />
 
 ![3](../../../assets/images/Ransom/3.png)
+
+<br />
+
+# Bypass Login:
 
 <br />
 
