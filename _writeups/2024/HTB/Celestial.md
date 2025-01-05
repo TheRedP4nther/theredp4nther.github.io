@@ -58,7 +58,7 @@ As we can see, nmap has only detected Port `3000` open, node.js default port, so
 
 <br />
 
-At first glance, it doesn't seem interesting at all, but when intercepting the request with Burp Suite we find the following:
+At first glance, it doesn't seem interesting at all, but when `intercepting the request with Burp Suite` we find the following:
 
 <br />
 
@@ -70,7 +70,7 @@ At first glance, it doesn't seem interesting at all, but when intercepting the r
 
 <br />
 
-The cookie appears to be in base64, so let's apply a decode:
+The `cookie` appears to be in `base64`, so let's apply a decode:
 
 <br />
 
@@ -80,7 +80,7 @@ The cookie appears to be in base64, so let's apply a decode:
 ```
 <br />
 
-Let's try to control the output of the page manipulating the cookie vault and resending it with Burp Suite:
+Let's `try to control the output` of the page `manipulating` the `cookie` vault and `resending it with Burp Suite`:
 
 <br />
 
@@ -94,7 +94,7 @@ eyJ1c2VybmFtZSI6IkNsZXZlciIsImNvdW50cnkiOiJUaGVCZXN0IiwiY2l0eSI6IkJhcmNlbG9uYSIs
 
 <br />
 
-We have been able! The server has interpreted the serialized data that we have sent it without any control. So if we build a malicious payload we can try to execute commands on the system.
+We have been able! The server has interpreted the serialized data that we have sent it without any control. So if we build a malicious payload we can `try to execute commands` on the system.
 
 <br />
 
@@ -102,7 +102,7 @@ We have been able! The server has interpreted the serialized data that we have s
 
 <br />
 
-To probe our theory, we are going to craft a payload to receive a curl from the victim machine in a localhost server hosted in our port 8082.
+To probe our theory, we are going to `craft a payload` to receive a curl from the victim machine in a localhost server hosted in our port 8082.
 
 To do this we will use a data serializer that we have taken from the following website -> [https://opsecx.com/index.php/2017/02/08/exploiting-node-js-deserialization-bug-for-remote-code-execution/](https://opsecx.com/index.php/2017/02/08/exploiting-node-js-deserialization-bug-for-remote-code-execution/)
 
@@ -133,7 +133,7 @@ Serialized:
 ## IIFE (Inmediately Invoked Function Expression):
 <br />
 
-Well, we already have the Payload ready, but it's not all there yet. In order for the server to execute our command, we will have to enter the IIFE in our payload, otherwise, no command will be executed when the server deserializes our serialized data. 
+Well, we already have the Payload ready, but it's not all there yet. In order for the server to execute our command, we will have to `enter the IIFE in our payload`, otherwise, no command will be executed when the `server deserializes our serialized data`. 
 
 For people who do not know what the IIFE is, here is a resource that will come in handy -> [https://www.geeksforgeeks.org/immediately-invoked-function-expressions-iife-in-javascript/](https://www.geeksforgeeks.org/immediately-invoked-function-expressions-iife-in-javascript/)
 <br />
@@ -142,7 +142,7 @@ For people who do not know what the IIFE is, here is a resource that will come i
 
 <br />
 
-Once the IIFE has been entered, we store the data in a file and apply a base64 decode:
+Once the IIFE has been entered, we store the data in a file and `apply a base64 decode`:
 
 <br />
 
@@ -153,7 +153,7 @@ eyJyY2UiOiJfJCRORF9GVU5DJCRfZnVuY3Rpb24oKXtcbiByZXF1aXJlKCdjaGlsZF9wcm9jZXNzJyku
 
 <br />
 
-Now that we have the data, we go back to Burp Suite and replace the cookie, we set up a server with Python on port 8082, click on resend and... surprise!! We have received the curl from the Victim Machine!!
+Now that we have the data, we go back to Burp Suite and `replace the cookie`, we set up a `server with Python` on port 8082, click on resend and... surprise!! We have `received the curl` from the Victim Machine!!
 
 <br />
 
@@ -168,7 +168,7 @@ Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
 ```
 <br />
 
-As we have already verified the remote execution of commands, we proceed to create a index.html to be able to establish a reverse shell and gain access once and for all to the Victim Machine by repeating the previous process but listening with nc through port 443 of our Machine:
+As we have `already verified the remote execution` of commands, we proceed to create a index.html to be able to establish a reverse shell and gain access once and for all to the Victim Machine by repeating the previous process but `listening with nc` through `port 443` of our Machine:
 
 <br />
 
@@ -184,7 +184,7 @@ Intrusion ready. Let's go for privilege escalation!
 
 <br />
 
-We did some research on the system and upon launching pspy we found that root is running a cron task on the system:
+We did some research on the system and upon launching `pspy` we found that `root` is running a `cron task` on the system:
 
 <br />
 
@@ -202,7 +202,7 @@ We did some research on the system and upon launching pspy we found that root is
 
 <br />
 
-We list the permissions of the script.py that is running root:
+We `list the permissions` of the `script.py` that is running root:
 
 <br />
 
@@ -215,7 +215,7 @@ lrwxrwxrwx 1 root root 18 Sep 15  2022 user.txt -> /home/sun/user.txt
 
 <br />
 
-As we can see, we own the script, so we proceed to delete it to create a malicious script so that when the cron task runs we can atribute SUID privilege to the /bin/bash.
+As we can see, we own the script, so we proceed to `delete it` to create a `malicious script` so that when the cron task runs we can atribute `SUID privilege` to the `/bin/bash`.
 
 <br />
 
@@ -233,7 +233,7 @@ os.system("chmod 4755 /bin/bash")
 
 <br />
 
-Once we create the script, we wait a bit and when we list the /bin/bash we see that the SUID privilege was successfully attributed, so we can now become root!!
+Once we create the script, we wait a bit and when we list the `/bin/bash` we see that the `SUID privilege` was successfully `attributed`, so we can now `become root`!!
 
 <br />
 
