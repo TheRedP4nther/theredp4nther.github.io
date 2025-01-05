@@ -218,7 +218,7 @@ Grafana 8.3.0 - Directory Traversal and Arbitrary File Read                     
 
 <br />
 
-The exploit essentially enters a while-true loop, repeatedly substituting a random plugin from the list in each GET request until it receives a status code of 200, indicating the file has been successfully retrieved.
+The exploit essentially enters a `while-true loop`, repeatedly substituting a `random plugin from the list` in each GET request until it receives a status code of `200`, indicating the `file` has been `successfully retrieved`.
 
 <br />
 
@@ -331,7 +331,7 @@ if __name__ == '__main__':
 
 <br />
 
-Instead of using the script, I will randomly select a plugin from the list and attempt to access the URL on Ambassador using curl. I will use the path-as-is option to prevent curl from correcting paths like ../. This successfully retrieves /etc/passwd, confirming file access.
+Instead of using the script, I will `randomly select a plugin` from the list and attempt to `access the URL` on Ambassador using curl. I will use the `path-as-is option` to prevent curl from correcting paths like ../. This successfully retrieves `/etc/passwd`, confirming file access.
 
 <br />
 
@@ -382,7 +382,7 @@ consul:x:997:997::/home/consul:/bin/false
 
 <br />
 
-Now that we have an LFI, we proceed to list the paths of the most interesting files of this software to try to get credentials or something interesting:
+Now that we have an `LFI`, we proceed to list the paths of the `most interesting files` of this software to try to get `credentials` or something interesting:
 
 <br />
 
@@ -390,7 +390,7 @@ Now that we have an LFI, we proceed to list the paths of the most interesting fi
 
 <br />
 
-Grafana stores its configuration in the grafana.ini file, so we proceed to list this file:
+`Grafana` stores its `configuration` in the `grafana.ini` file, so we proceed to list this file:
 
 <br />
 
@@ -412,7 +412,7 @@ Grafana stores its configuration in the grafana.ini file, so we proceed to list 
 
 <br />
 
-Once we have checked that the file exists, we proceed to list it again but by the word "password" and.... Surprise!! We have the password to the Grafana login panel!
+Once we have checked that the `file exists`, we proceed to list it again but by the word `"password"` and.... Surprise!! We have the `password` to the `Grafana login panel`!
 
 <br />
 
@@ -432,7 +432,7 @@ admin_password = messageInABottle685427
 
 <br />
 
-Log into Grafana with the credentials but we don't see anything interesting so we keep listing files.
+Log into `Grafana` with the credentials but we `don't see anything interesting` so we keep listing files.
 
 <br />
 
@@ -440,7 +440,7 @@ Log into Grafana with the credentials but we don't see anything interesting so w
 
 <br />
 
-Another interesting file is mysql.yaml, since in this type of file we can find credentials for a database.
+Another interesting file is `mysql.yaml`, since in this type of file we can find `credentials for a database`.
 
 We list the file:
 
@@ -463,7 +463,7 @@ datasources:
 
 <br />
 
-We have another password!! It seems to be mysql's.
+We have another `password`!! It seems to be `mysql's`.
 
 <br />
 
@@ -471,7 +471,7 @@ We have another password!! It seems to be mysql's.
 
 <br />
 
-Log in with the new password into the database remotely and we list the databases:
+`Log in` with the new password into the `database remotely` and we list the databases:
 
 <br />
 
@@ -501,7 +501,7 @@ MySQL [(none)]> show databases;
 
 <br />
 
-Looking in whackywidget there’s only one table:
+Looking in `whackywidget` there’s only one table:
 
 <br />
 
@@ -522,7 +522,7 @@ MySQL [whackywidget]> show tables;
 
 <br />
 
-We list the contents of the table and boom! We have a base64 credential for the user developer:
+We list the contents of the table and boom! We have a `base64 credential` for the user `developer`:
 
 <br />
 
@@ -538,7 +538,7 @@ MySQL [whackywidget]> select * from users;
 
 <br />
 
-Apply a decode and try to log in via ssh to the Victim Machine as this user:
+Apply a `decode` and try to `log` in via `ssh` to the Victim Machine as this user:
 
 <br />
 
@@ -596,7 +596,7 @@ We're in!! Intrusion ready, let's go for the Privilege Escalation!!
 
 ## /opt:
 
-We go into de /opt directory and find the following:
+We go into de `/opt directory` and find the following:
 
 <br />
 
@@ -610,7 +610,7 @@ consul  my-app
 
 <br />
 
-The consul folder:
+The `consul` folder:
 
 <br />
 
@@ -618,7 +618,7 @@ The consul folder:
 
 <br />
 
-The my_app folder contains a couple of directories and a.git repository, very interesting:
+The `my_app` folder contains a couple of directories and a `.git repository`, very interesting:
 
 <br />
 
@@ -636,7 +636,7 @@ drwxrwxr-x 3 root root 4096 Mar 13  2022 whackywidget
 
 <br />
 
-After doing a "ps -faux", see that the root user is running consul:
+After doing a `"ps -faux"`, see that the `root` user is `running consul`:
 
 <br />
 
@@ -646,7 +646,7 @@ root        1098  0.2  3.7 794548 75664 ?        Ssl  11:11   0:20 /usr/bin/cons
 
 <br />
 
-This is very interesting, because if we discover any vulnerabilities for this software, we can most likely become the root superuser.
+This is very interesting, because if we `discover any vulnerabilities` for this software, we can most likely `become the root superuser`.
 
 <br />
 
@@ -662,7 +662,7 @@ Searching we found this:
 
 <br />
 
-As we can see, it is a vulnerability that allows us to exploit the consul API, but in order to do so we need to get a token.
+As we can see, it is a `vulnerability` that allows us to exploit the `consul API`, but in order to do so we need to `get a token`.
 
 
 <br />
@@ -671,7 +671,7 @@ As we can see, it is a vulnerability that allows us to exploit the consul API, b
 
 <br />
 
-To get the token we will simply have to enumerate the .git repository that we had seen before in the my_app route:
+To get the `token` we will simply have to enumerate the `.git repository` that we had seen before in the `my_app` route:
 
 <br />
 
@@ -721,7 +721,7 @@ index 0000000..35c08f6
 
 <br />
 
-Once we have the token, we proceed to analyze the exploit to see what it is doing and can exploit everything manually.
+Once we have the `token`, we proceed to analyze the exploit to see what it is doing and can `exploit everything manually`.
 
 <br />
 
@@ -729,7 +729,7 @@ Once we have the token, we proceed to analyze the exploit to see what it is doin
 
 <br />
 
-What this exploit is basically doing is a request by curl to a consul endpoint using PUT method and the consul token to load a file in json where the command we want will be executed.
+What this exploit is basically doing is a request by `curl to a consul endpoint` using `PUT method` and the consul token to `load a file in json` where the `command` we want will be `executed`.
 
 <br />
 
@@ -807,7 +807,7 @@ if __name__ == "__main__":
 
 <br />
 
-We copy the structure of the json data into the exploit and create our own json file with the command that we want to execute, in my case, a reverse shell to gain a console as root:
+We `copy` the structure of the `json data` into the exploit and `create our own json file` with the command that we want to execute, in my case, a `reverse shell` to gain a console as `root`:
 
 <br />
 
@@ -828,7 +828,7 @@ We copy the structure of the json data into the exploit and create our own json 
 
 <br />
 
-Once we have the json file in the /tmp path of the Victim Machine, we proceed to execute the following command to see if we are able to carry out the rce and at the same time we listen with nc on port 443 on our Machine to see if we receive the Reverse Shell:
+Once we have the `json file` in the `/tmp` path of the `Victim Machine`, we proceed to `execute the following command` to see if we are able to carry out the `rce` and at the same time we listen with `nc on port 443` on our Machine to see if we receive the `Reverse Shell`:
 
 <br />
 
