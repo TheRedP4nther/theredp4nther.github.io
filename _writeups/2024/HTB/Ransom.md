@@ -8,6 +8,6 @@ tags: typejugglingattack cracking zip bkcrack zipcrypt leakeage idrsa privatekey
 
 <br />
 
-![Icon-Image](../../../assets/images/Codify/1.png)
+![Icon-Image](../../../assets/images/Ransom/1.png)
 
 <br />
