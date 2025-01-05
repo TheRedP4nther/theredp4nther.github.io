@@ -64,3 +64,8 @@ As we can see there are only two open ports:
 
 <br />
 
+When loading the website we find a login in which we only have input to put a password, so we try default credentials but nothing:
+
+<br />
+
+
