@@ -76,6 +76,10 @@ After trying the simplest things like default credentials or some unsuccessful s
 
 <br />
 
+![3](../../../assets/images/Ransom/3.png)
+
+<br />
+
 
 
 
