@@ -59,7 +59,7 @@ Nmap done: 1 IP address (1 host up) scanned in 26.03 seconds
 
 <br />
 
-Ports 22 and 80 open, nothing out of the ordinary.
+Ports `22` and `80` open, nothing out of the ordinary.
 
 <br />
 

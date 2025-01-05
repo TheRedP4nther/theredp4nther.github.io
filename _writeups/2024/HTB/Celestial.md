@@ -50,7 +50,7 @@ Nmap done: 1 IP address (1 host up) scanned in 47.04 seconds
 
 <br />
 
-As we can see, nmap has only detected Port 3000 open, node.js default port, so we proceed to list it and find the following:
+As we can see, nmap has only detected Port `3000` open, node.js default port, so we proceed to list it and find the following:
 
 <br />
 
