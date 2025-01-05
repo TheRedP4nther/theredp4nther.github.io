@@ -153,9 +153,9 @@ Nmap done: 1 IP address (1 host up) scanned in 132.35 seconds
 
 <br />
 
-On the one hand we have the 22 and 80 ports open as usual.
+On the one hand we have the `22` and `80` ports open as usual.
 
-But on the other hand we have port 3000 which could be hosting some website and 3306, which as we know is the default port of mysql, so maybe in the future, we can gain access to some database if we get valid credentials.
+But on the other hand we have port `3000` which could be hosting some website and `3306`, which as we know is the default port of mysql, so maybe in the future, we can gain access to some database if we get valid credentials.
 
 <br />
 
@@ -163,7 +163,7 @@ But on the other hand we have port 3000 which could be hosting some website and 
 
 <br />
 
-We proceed to list the website that runs through port 80, which in this case, is a fairly simple website with nothing interesting:
+We proceed to list the website that runs through port `80`, which in this case, is a fairly simple website with nothing interesting:
 
 <br />
 
@@ -175,7 +175,7 @@ We proceed to list the website that runs through port 80, which in this case, is
 
 <br />
 
-As I said before, port 3000 could also be running a web service. Well, when we list it, we see that indeed, as soon as we enter, we find a Grafana 8.2.0 login panel:
+As I said before, port `3000` could also be running a web service. Well, when we list it, we see that indeed, as soon as we enter, we find a `Grafana 8.2.0` login panel:
 
 <br />
 
@@ -191,7 +191,7 @@ We tried default credentials like admin:admin as always, but nothing, it doesn't
 
 <br />
 
-The version in use of Grafana is 8.2.0, so we do some research and find an article where it tells us that Grafana versions 8.0.0-beta1 through 8.3.0 are vulnerable to a Path Traversal:
+The version in use of Grafana is 8.2.0, so we do some research and find an article where it tells us that `Grafana versions 8.0.0-beta1 through 8.3.0` are vulnerable to a Path Traversal:
 
 <br />
 
@@ -199,7 +199,7 @@ The version in use of Grafana is 8.2.0, so we do some research and find an artic
 
 <br />
 
-We found a Python exploit for Grafana 8.3.0 with a Path Traversal vulnerability and analyzed it to exploit it manually, as a real pro.
+We found a Python exploit for `Grafana 8.3.0` with a `Path Traversal vulnerability` and analyzed it to exploit it manually, as a real pro.
 
 <br />
 
