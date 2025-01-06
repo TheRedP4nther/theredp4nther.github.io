@@ -602,8 +602,7 @@ class AuthController extends Controller
 
 }
 ```
-:> [!WARNING]
-> 
+
 <br />
 
 Try logging in as root using the new password:
