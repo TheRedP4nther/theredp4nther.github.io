@@ -60,7 +60,7 @@ As we can see there are only two open ports:
 
 <br />
 
-# Http Enumeration -> Port 80:
+# Http Enumeration: -> Port 80
 
 <br />
 

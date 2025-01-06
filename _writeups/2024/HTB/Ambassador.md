@@ -159,7 +159,7 @@ But on the other hand we have port `3000` which could be hosting some website an
 
 <br />
 
-# Http Enumeration -> Port 80:
+# Http Enumeration: -> Port 80
 
 <br />
 
@@ -171,7 +171,7 @@ We proceed to list the website that runs through port `80`, which in this case, 
 
 <br />
 
-# Http Enumeration -> Port 3000:
+# Http Enumeration: -> Port 3000
 
 <br />
 
