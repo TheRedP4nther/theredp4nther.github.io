@@ -114,6 +114,15 @@ So when I see this, it occurs to me to change the Content-Type of our request to
 
 <br />
 
+As we can see, it seems that he did like this and the answer is a 200 OK.
+
+When I see this, the light bulb lights up and I remember a vulnerability that applies a lot in these cases, the famous Type Juggling Attack.
+
+This vulnerability is caused by an error when comparing the data that allows us to deceive the server. So we tried changing the password to true and...
+
+<br />
+
+
 
 
 
