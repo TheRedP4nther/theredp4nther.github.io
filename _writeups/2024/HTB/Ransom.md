@@ -188,7 +188,7 @@ password incorrect--reenter:
 
 <br />
 
-7zip has a parameter (-slt), with which we can see the type of encryption under which a compressed file is, so we apply it and discover the following:
+7zip has a parameter (-slt), with which we can see the type of encryption under which a compressed file is, so we apply it and we discover that the file is under "Zipcrypt Deflate" cipher:
 
 <br />
 
