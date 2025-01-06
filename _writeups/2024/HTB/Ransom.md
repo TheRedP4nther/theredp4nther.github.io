@@ -345,8 +345,11 @@ Once we have the file ready, we need a tool called bkcrack, which has the follow
 <br />
 
 `-> -C:` The encrypted file.
+
 `-> -c:` The known file of the encrypted zip.
+
 `-> -P:` A unencrypted file with the known file in.
+
 `-> -p:` The name of the file in the unencrypted zip. 
 
 <br />
@@ -387,8 +390,11 @@ Once we have the private keys, we have a bkcrack option, which allows us to gene
 To do it we are going to need to run bkcrack with the following parameters:
 
 `-> -C:` The encrypted file.
+
 `-> -k:` Generated private keys.
+
 `-> -U:` Output archive name.
+
 `-> password:` The password that we want.
 
 <br />
@@ -430,4 +436,10 @@ Archive:  plaintext.zip
 
 <br />
 
+Perfect!! Let's access the .ssh directory to see if there is any private key with which we can access the Victim Machine:
 
+<br />
+
+```bash
+
+```
