@@ -138,6 +138,54 @@ Once we have the file locally, we inspect it and it seems to have the contents o
 
 <br />
 
+```bash
+❯ 7z l ransom.zip
 
+7-Zip [64] 16.02 : Copyright (c) 1999-2016 Igor Pavlov : 2016-05-21
+p7zip Version 16.02 (locale=es_ES.UTF-8,Utf16=on,HugeFiles=on,64 bits,128 CPUs AMD Ryzen 7 5825U with Radeon Graphics          (A50F00),ASM,AES-NI)
+
+Scanning the drive for archives:
+1 file, 7735 bytes (8 KiB)
+
+Listing archive: ransom.zip
+
+--
+Path = ransom.zip
+Type = zip
+Physical Size = 7735
+
+   Date      Time    Attr         Size   Compressed  Name
+------------------- ----- ------------ ------------  ------------------------
+2020-02-25 13:03:22 .....          220          170  .bash_logout
+2020-02-25 13:03:22 .....         3771         1752  .bashrc
+2020-02-25 13:03:22 .....          807          404  .profile
+2021-07-02 19:58:14 D....            0            0  .cache
+2021-07-02 19:58:14 .....            0           12  .cache/motd.legal-displayed
+2021-07-02 19:58:19 .....            0           12  .sudo_as_admin_successful
+2022-03-07 13:32:54 D....            0            0  .ssh
+2022-03-07 13:32:25 .....         2610         1990  .ssh/id_rsa
+2022-03-07 13:32:46 .....          564          475  .ssh/authorized_keys
+2022-03-07 13:32:54 .....          564          475  .ssh/id_rsa.pub
+2022-03-07 13:32:54 .....         2009          581  .viminfo
+------------------- ----- ------------ ------------  ------------------------
+2022-03-07 13:32:54              10545         5871  9 files, 2 folders
+```
+
+<br />
+
+We unzipped it to extract the contents but SURPRISE! It is password protected:
+
+<br />
+
+```bash
+❯ unzip ransom.zip
+Archive:  ransom.zip
+[ransom.zip] .bash_logout password: 
+password incorrect--reenter: 
+password incorrect--reenter: 
+   skipping: .bash_logout            incorrect password
+```
+
+<br />
 
 
