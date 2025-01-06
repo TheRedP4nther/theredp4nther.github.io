@@ -261,4 +261,75 @@ Volume Index = 0
 
 <br />
 
+# Decrypt Compressed File:
 
+<br />
+
+There is a well-known attack to decrypt files under this type of encryption "Zipcrypt Deflate".
+
+The attack consists of obtaining a plaintext file that is identical to any of those inside the compressed file and abusing it in order to obtain the rest of the file's content.
+
+## .bash_logout:
+
+<br />
+
+Of all the files inside our compressed file, there is only one that is identical in absolutely all Linux OS, which is .bash_logout.
+
+So we copy one from our system and bring it to the current path:
+
+<br />
+
+```bash
+❯ cat .bash_logout
+───────┬───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+       │ File: .bash_logout
+───────┼───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+   1   │ # ~/.bash_logout: executed by bash(1) when login shell exits.
+   2   │ 
+   3   │ # when leaving the console clear the screen to increase privacy
+   4   │ 
+   5   │ if [ "$SHLVL" = 1 ]; then
+   6   │     [ -x /usr/bin/clear_console ] && /usr/bin/clear_console -q
+   7   │ fi
+```
+
+<br />
+
+To make sure that our .bash_logout is identical to the compressed one, we list the characters in both and see that indeed, they both have 220 characters.
+
+<br />
+
+`Compressed File .bash_logout:`
+
+<br />
+
+```bash
+Path = .bash_logout
+Folder = -
+Size = 220
+Packed Size = 170
+Modified = 2020-02-25 13:03:22
+Created = 
+Accessed = 
+Attributes = _ -rw-r--r--
+Encrypted = +
+Comment = 
+CRC = 6CE3189B
+Method = ZipCrypto Deflate
+Host OS = Unix
+Version = 20
+Volume Index = 0
+```
+
+<br />
+
+`Our .bash_logout:`
+
+<br />
+
+```bash
+❯ cat .bash_logout | wc -c
+220
+```
+
+<br />
