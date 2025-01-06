@@ -550,7 +550,7 @@ Http/Controllers/TasksController.php:use Illuminate\Support\Facades\Auth;
 
 <br />
 
-We apply a cat and let's go! We have a credential.
+Apply a cat and let's go! We have a credential.
 
 <br />
 
@@ -602,10 +602,11 @@ class AuthController extends Controller
 
 }
 ```
-
+:> [!WARNING]
+> 
 <br />
 
-We try logging in as root using the new password:
+Try logging in as root using the new password:
 
 <br />
 
@@ -623,6 +624,8 @@ root@ransom:~# cat root.txt
 
 Perfect!! We have it!!
 
-I hope that you learn and have fun with this machine. Keep hacking!❤️
+I really liked this machine because it touches on some really cool concepts and gives us the opportunity to use amazing tools like bkcrack.
+
+I hope you learned and had fun with this machine. Keep hacking!❤️
 
 <br />
