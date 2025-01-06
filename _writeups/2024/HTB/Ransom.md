@@ -104,5 +104,11 @@ But there is something we can try, which is to manually change the POST to GET a
 
 <br />
 
+It's throwing us a 422 "Unprocessable Content" error and we see below that it's representing an error message in json.
+
+So when I see this, it occurs to me to change the Content-Type of our request to json along with the data we are sending to see the server's response:
+
+<br />
+
 
 
