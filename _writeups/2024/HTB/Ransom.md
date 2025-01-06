@@ -100,5 +100,9 @@ But there is something we can try, which is to manually change the POST to GET a
 
 <br />
 
+![5](../../../assets/images/Ransom/5.png)
+
+<br />
+
 
 
