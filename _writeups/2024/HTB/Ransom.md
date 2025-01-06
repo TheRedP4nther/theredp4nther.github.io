@@ -126,6 +126,10 @@ This vulnerability is caused by an error when comparing the data that allows us 
 
 <br />
 
+Login Successful!! Once inside, we see two files, the user.txt and a tablet that looks quite good, so we bring it to our machine to see it more closely.
+
+<br />
+
 
 
 
