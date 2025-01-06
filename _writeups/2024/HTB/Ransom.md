@@ -335,3 +335,18 @@ Volume Index = 0
 ```
 
 <br />
+
+# Bkcrack:
+
+<br />
+
+Once we have the file ready, we need a tool called bkcrack, which has the following parameters:
+
+<br />
+
+`-> -C:` The encrypted file.
+`-> -c:` The known file of the encrypted zip.
+`-> -P:` A unencrypted file with the known file in.
+`-> -p:` The name of the file in the unencrypted zip. 
+
+<br />
