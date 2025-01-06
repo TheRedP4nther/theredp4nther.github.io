@@ -350,3 +350,84 @@ Once we have the file ready, we need a tool called bkcrack, which has the follow
 `-> -p:` The name of the file in the unencrypted zip. 
 
 <br />
+
+Create the unencrypted file with the known file in:
+
+<br />
+
+```bash
+❯ zip plaintext.zip .bash_logout
+  adding: .bash_logout (deflated 28%)
+```
+
+<br />
+
+And now that we have everything, we run bkcrack generating the private keys that we will need to extract the contents of the encrypted zip:
+
+<br />
+
+```bash
+❯ ./bkcrack -C ransom.zip -c ".bash_logout" -P plaintext.zip -p ".bash_logout"
+bkcrack 1.7.1 - 2024-12-21
+[02:22:58] Z reduction using 151 bytes of known plaintext
+100.0 % (151 / 151)
+[02:22:58] Attack on 56903 Z values at index 6
+Keys: 7b549874 ebc25ec5 7e465e18
+75.5 % (42961 / 56903)
+Found a solution. Stopping.
+You may resume the attack with the option: --continue-attack 42961
+[02:24:00] Keys
+7b549874 ebc25ec5 7e465e18
+```
+
+<br />
+
+Once we have the private keys, we have a bkcrack option, which allows us to generate a new compressed file with all the content we want but with the password we choose.
+
+To do it we are going to need to run bkcrack with the following parameters:
+
+`-> -C:` The encrypted file.
+`-> -k:` Generated private keys.
+`-> -U:` Output archive name.
+`-> password:` The password that we want.
+
+<br />
+
+We run bkcrack and successfully generate the new zip with our password and the contents of the encrypted zip:
+
+<br />
+
+```bash
+❯ ./bkcrack -C ransom.zip -k 7b549874 ebc25ec5 7e465e18 -U plaintext.zip 123123
+bkcrack 1.7.1 - 2024-12-21
+[02:28:06] Writing unlocked archive plaintext.zip with password "123123"
+100.0 % (9 / 9)
+Wrote unlocked archive.
+```
+
+<br />
+
+Now we can decrypt the file with our password "123123":
+
+<br />
+
+```bash
+❯ unzip plaintext.zip
+Archive:  plaintext.zip
+[plaintext.zip] .bash_logout password: 
+  inflating: .bash_logout            
+  inflating: .bashrc                 
+  inflating: .profile                
+   creating: .cache/
+ extracting: .cache/motd.legal-displayed  
+ extracting: .sudo_as_admin_successful  
+   creating: .ssh/
+  inflating: .ssh/id_rsa             
+  inflating: .ssh/authorized_keys    
+  inflating: .ssh/id_rsa.pub         
+  inflating: .viminfo
+```
+
+<br />
+
+
