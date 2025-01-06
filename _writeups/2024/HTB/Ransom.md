@@ -96,5 +96,9 @@ When we do so, we get a status code 405 -> "Method Not Allowed":
 
 <br />
 
+But there is something we can try, which is to manually change the POST to GET and we get the following response:
+
+<br />
+
 
 
