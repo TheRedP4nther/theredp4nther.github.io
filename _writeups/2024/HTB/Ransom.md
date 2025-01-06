@@ -134,5 +134,10 @@ Login Successful!! Once inside, we see two files, the user.txt and a compressed 
 
 <br />
 
+Once we have the file locally, we inspect it and it seems to have the contents of a typical home directory including the rsa_id of an user:
+
+<br />
+
+
 
 
