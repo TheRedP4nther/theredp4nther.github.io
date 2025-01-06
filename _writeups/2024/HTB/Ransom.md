@@ -188,4 +188,204 @@ password incorrect--reenter:
 
 <br />
 
+7zip has a parameter (-slt), with which we can see the type of encryption under which a compressed file is, so we apply it and discover the following:
+
+<br />
+
+```bash
+❯ 7z l ransom.zip -slt
+
+7-Zip [64] 16.02 : Copyright (c) 1999-2016 Igor Pavlov : 2016-05-21
+p7zip Version 16.02 (locale=es_ES.UTF-8,Utf16=on,HugeFiles=on,64 bits,128 CPUs AMD Ryzen 7 5825U with Radeon Graphics          (A50F00),ASM,AES-NI)
+
+Scanning the drive for archives:
+1 file, 7735 bytes (8 KiB)
+
+Listing archive: ransom.zip
+
+--
+Path = ransom.zip
+Type = zip
+Physical Size = 7735
+
+----------
+Path = .bash_logout
+Folder = -
+Size = 220
+Packed Size = 170
+Modified = 2020-02-25 13:03:22
+Created = 
+Accessed = 
+Attributes = _ -rw-r--r--
+Encrypted = +
+Comment = 
+CRC = 6CE3189B
+Method = ZipCrypto Deflate
+Host OS = Unix
+Version = 20
+Volume Index = 0
+
+Path = .bashrc
+Folder = -
+Size = 3771
+Packed Size = 1752
+Modified = 2020-02-25 13:03:22
+Created = 
+Accessed = 
+Attributes = _ -rw-r--r--
+Encrypted = +
+Comment = 
+CRC = AB254644
+Method = ZipCrypto Deflate
+Host OS = Unix
+Version = 20
+Volume Index = 0
+
+Path = .profile
+Folder = -
+Size = 807
+Packed Size = 404
+Modified = 2020-02-25 13:03:22
+Created = 
+Accessed = 
+Attributes = _ -rw-r--r--
+Encrypted = +
+Comment = 
+CRC = D1B22A87
+Method = ZipCrypto Deflate
+Host OS = Unix
+Version = 20
+Volume Index = 0
+
+Path = .cache
+Folder = +
+Size = 0
+Packed Size = 0
+Modified = 2021-07-02 19:58:14
+Created = 
+Accessed = 
+Attributes = D_ drwx------
+Encrypted = -
+Comment = 
+CRC = 
+Method = Store
+Host OS = Unix
+Version = 10
+Volume Index = 0
+
+Path = .cache/motd.legal-displayed
+Folder = -
+Size = 0
+Packed Size = 12
+Modified = 2021-07-02 19:58:14
+Created = 
+Accessed = 
+Attributes = _ -rw-r--r--
+Encrypted = +
+Comment = 
+CRC = 00000000
+Method = ZipCrypto Store
+Host OS = Unix
+Version = 10
+Volume Index = 0
+
+Path = .sudo_as_admin_successful
+Folder = -
+Size = 0
+Packed Size = 12
+Modified = 2021-07-02 19:58:19
+Created = 
+Accessed = 
+Attributes = _ -rw-r--r--
+Encrypted = +
+Comment = 
+CRC = 00000000
+Method = ZipCrypto Store
+Host OS = Unix
+Version = 10
+Volume Index = 0
+
+Path = .ssh
+Folder = +
+Size = 0
+Packed Size = 0
+Modified = 2022-03-07 13:32:54
+Created = 
+Accessed = 
+Attributes = D_ drwxrwxr-x
+Encrypted = -
+Comment = 
+CRC = 
+Method = Store
+Host OS = Unix
+Version = 10
+Volume Index = 0
+
+Path = .ssh/id_rsa
+Folder = -
+Size = 2610
+Packed Size = 1990
+Modified = 2022-03-07 13:32:25
+Created = 
+Accessed = 
+Attributes = _ -rw-------
+Encrypted = +
+Comment = 
+CRC = 38804579
+Method = ZipCrypto Deflate
+Host OS = Unix
+Version = 20
+Volume Index = 0
+
+Path = .ssh/authorized_keys
+Folder = -
+Size = 564
+Packed Size = 475
+Modified = 2022-03-07 13:32:46
+Created = 
+Accessed = 
+Attributes = _ -rw-------
+Encrypted = +
+Comment = 
+CRC = CB143C32
+Method = ZipCrypto Deflate
+Host OS = Unix
+Version = 20
+Volume Index = 0
+
+Path = .ssh/id_rsa.pub
+Folder = -
+Size = 564
+Packed Size = 475
+Modified = 2022-03-07 13:32:54
+Created = 
+Accessed = 
+Attributes = _ -rw-------
+Encrypted = +
+Comment = 
+CRC = CB143C32
+Method = ZipCrypto Deflate
+Host OS = Unix
+Version = 20
+Volume Index = 0
+
+Path = .viminfo
+Folder = -
+Size = 2009
+Packed Size = 581
+Modified = 2022-03-07 13:32:54
+Created = 
+Accessed = 
+Attributes = _ -rw-------
+Encrypted = +
+Comment = 
+CRC = 396B04B4
+Method = ZipCrypto Deflate
+Host OS = Unix
+Version = 20
+Volume Index = 0
+```
+
+<br />
+
 
