@@ -509,7 +509,7 @@ app        bootstrap  composer.lock  database  phpunit.xml   resources  server.p
 
 <br />
 
-Since there are many files in the path, we start recursively typing in the different directories by the keyword "Auth*" (Authorization).
+Since there are many files in the path, we start recursively greping in the different directories by the keyword "Auth*" (Authorization).
 
 Finally, in the /app path, we find, among others, the file "Authcontroller.php" which looks pretty good:
 
