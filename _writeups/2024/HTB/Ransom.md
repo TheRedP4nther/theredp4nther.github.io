@@ -122,6 +122,10 @@ This vulnerability is caused by an error when comparing the data that allows us 
 
 <br />
 
+![7](../../../assets/images/Ransom/7.png)
+
+<br />
+
 
 
 
