@@ -389,6 +389,8 @@ Once we have the private keys, we have a bkcrack option, which allows us to gene
 
 To do it we are going to need to run bkcrack with the following parameters:
 
+<br />
+
 `-> -C:` The encrypted file.
 
 `-> -k:` Generated private keys.
