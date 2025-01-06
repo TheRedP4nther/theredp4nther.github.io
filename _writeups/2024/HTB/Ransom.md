@@ -64,7 +64,7 @@ As we can see there are only two open ports:
 
 <br />
 
-When loading the website we find a login in which we only have input to put a password, so we try default credentials but nothing:
+When loading the website we find a login in which we only have `input` to put a `password`, so we try default credentials but nothing:
 
 <br />
 
@@ -72,7 +72,7 @@ When loading the website we find a login in which we only have input to put a pa
 
 <br />
 
-After trying the simplest things like default credentials or some unsuccessful sql injection, we proceed to intercept the request with Burp Suite and send it to the repeater to test more interesting things.
+After trying the simplest things like `default credentials` or some unsuccessful `sql injection`, we proceed to intercept the request with `Burp Suite` and send it to the `repeater` to test more interesting things.
 
 As we can see, it looks like laravel is behind, as we have a cookie telling us so:
 
@@ -86,9 +86,9 @@ As we can see, it looks like laravel is behind, as we have a cookie telling us s
 
 <br />
 
-The first thing we try is to change the request method by right-clicking and indicating "Change Request Method".
+The first thing we try is to `change the request` method by right-clicking and indicating "Change Request Method".
 
-When we do so, we get a status code 405 -> "Method Not Allowed":
+When we do so, we get a status code 405 -> `"Method Not Allowed"`:
 
 <br />
 
@@ -96,7 +96,7 @@ When we do so, we get a status code 405 -> "Method Not Allowed":
 
 <br />
 
-But there is something we can try, which is to manually change the POST to GET and we get the following response:
+But there is something we can try, which is to manually change the `POST to GET` and we get the following response:
 
 <br />
 
@@ -104,9 +104,9 @@ But there is something we can try, which is to manually change the POST to GET a
 
 <br />
 
-It's throwing us a 422 "Unprocessable Content" error and we see below that it's representing an error message in json.
+It's throwing us a 422 `"Unprocessable Content"` error and we see below that it's representing an error message in `json`.
 
-So when I see this, it occurs to me to change the Content-Type of our request to json along with the data we are sending to see the server's response:
+So when I see this, it occurs to me to `change the Content-Type` of our request to json along with the data we are sending to see the server's response:
 
 <br />
 
@@ -114,11 +114,11 @@ So when I see this, it occurs to me to change the Content-Type of our request to
 
 <br />
 
-As we can see, it seems that he did like this and the answer is a 200 OK.
+As we can see, it seems that he did like this and the answer is a `200 OK`.
 
-When I see this, the light bulb lights up and I remember a vulnerability that applies a lot in these cases, the famous Type Juggling Attack.
+When I see this, the light bulb lights up and I `remember a vulnerability` that applies a lot in these cases, the famous `Type Juggling Attack`.
 
-This vulnerability is caused by an error when comparing the data types that allows us to deceive the server. So we tried changing the password to true and...
+This vulnerability is caused by an `error when comparing the data types` that allows us to deceive the server. So we tried changing the `password to true` and...
 
 <br />
 
@@ -126,7 +126,7 @@ This vulnerability is caused by an error when comparing the data types that allo
 
 <br />
 
-Login Successful!! Once inside, we see two files, the user.txt and a compressed file that looks quite good, so we bring it to our machine to see it more closely.
+Login Successful!! Once inside, we see `two files`, the user.txt and a `compressed file` that looks quite good, so we bring it to our machine to see it more closely.
 
 <br />
 
@@ -134,7 +134,7 @@ Login Successful!! Once inside, we see two files, the user.txt and a compressed 
 
 <br />
 
-Once we have the file locally, we inspect it and it seems to have the contents of a typical home directory including the rsa_id of an user:
+Once we have the file locally, we inspect it and it seems to have the contents of a `typical home directory` including the rsa_id of an user:
 
 <br />
 
@@ -173,7 +173,7 @@ Physical Size = 7735
 
 <br />
 
-We unzipped it to extract the contents but SURPRISE! It is password protected:
+We unzipped it to extract the contents but SURPRISE! It is `password protected`:
 
 <br />
 
@@ -188,7 +188,7 @@ password incorrect--reenter:
 
 <br />
 
-7zip has a parameter (-slt), with which we can see the type of encryption under which a compressed file is, so we apply it and we discover that the file is under "Zipcrypto Deflate" cipher:
+`7zip` has a parameter ``(-slt)``, with which we can see the type of `encryption` under which a compressed file is, so we apply it and we discover that the file is under `"Zipcrypto Deflate"` cipher:
 
 <br />
 
@@ -265,9 +265,9 @@ Volume Index = 0
 
 <br />
 
-There is a well-known attack to decrypt files under this type of encryption "Zipcrypto Deflate".
+There is a `well-known attack` to decrypt files under this type of encryption `"Zipcrypto Deflate"`.
 
-The attack consists of obtaining a plaintext file that is identical to any of those inside the compressed file and abusing it in order to obtain the rest of the file's content.
+The attack consists of obtaining a `plaintext file` that is identical to any of those inside the compressed file and abusing it in order to `obtain the rest of the file's` content.
 
 <br />
 
@@ -275,9 +275,9 @@ The attack consists of obtaining a plaintext file that is identical to any of th
 
 <br />
 
-Of all the files inside our compressed file, there is only one that is identical in absolutely all Linux OS, which is .bash_logout.
+Of all the files inside our compressed file, there is only one that is identical in absolutely `all Linux OS`, which is `.bash_logout`.
 
-So we copy one from our system and bring it to the current path:
+So we copy one from `our system` and bring it to the current path:
 
 <br />
 
@@ -297,7 +297,7 @@ So we copy one from our system and bring it to the current path:
 
 <br />
 
-To make sure that our .bash_logout is identical to the compressed one, we list the characters in both and see that indeed, they both have 220 characters.
+To make sure that our `.bash_logout` is identical to the compressed one, we `list the characters` in both and see that indeed, they both have `220` characters.
 
 <br />
 
@@ -340,7 +340,7 @@ Volume Index = 0
 
 <br />
 
-Once we have the file ready, we need a tool called bkcrack, which has the following parameters:
+Once we have the file ready, we need a tool called `bkcrack`, which has the following parameters:
 
 <br />
 
@@ -354,7 +354,7 @@ Once we have the file ready, we need a tool called bkcrack, which has the follow
 
 <br />
 
-Create the unencrypted file with the known file in:
+Create the `unencrypted file` with the known file in:
 
 <br />
 
@@ -365,7 +365,7 @@ Create the unencrypted file with the known file in:
 
 <br />
 
-And now that we have everything, we run bkcrack generating the private keys that we will need to extract the contents of the encrypted zip:
+And now that we have everything, we run `bkcrack` generating the `private keys` that we will need to extract the contents of the `encrypted zip`:
 
 <br />
 
@@ -385,9 +385,9 @@ You may resume the attack with the option: --continue-attack 42961
 
 <br />
 
-Once we have the private keys, we have a bkcrack option, which allows us to generate a new compressed file with all the content we want but with the password we choose.
+Once we have the `private keys`, we have a `bkcrack` option, which allows us to generate a `new compressed file` with all the content we want but with the `password we choose`.
 
-To do it we are going to need to run bkcrack with the following parameters:
+To do it we are going to need to run `bkcrack` with the following parameters:
 
 <br />
 
@@ -401,7 +401,7 @@ To do it we are going to need to run bkcrack with the following parameters:
 
 <br />
 
-We run bkcrack and successfully generate the new zip with our password and the contents of the encrypted zip:
+We run `bkcrack` and successfully generate the `new zip with our password` and the contents of the encrypted zip:
 
 <br />
 
@@ -415,7 +415,7 @@ Wrote unlocked archive.
 
 <br />
 
-Now we can decrypt the file with our password "123123":
+Now we can `decrypt` the file with our password ` "123123"`:
 
 <br />
 
@@ -438,7 +438,7 @@ Archive:  plaintext.zip
 
 <br />
 
-Perfect!! Let's access the .ssh directory to see if there is any private key with which we can access the Victim Machine:
+Perfect!! Let's access the `.ssh` directory to see if there is any `private key` with which we can access the Victim Machine:
 
 <br />
 
@@ -455,7 +455,7 @@ Perfect!! Let's access the .ssh directory to see if there is any private key wit
 
 <br />
 
-When entering the.ssh directory, we see the typical files, including the authorized_keys, which helps us to verify that the owner of the id_rsa is the user "htb".
+When entering the .ssh directory, we see the `typical files`, including the `authorized_keys`, which helps us to verify that the owner of the id_rsa is the user `"htb"`.
 
 Once this is known, we proceed to connect to the Victim Machine with the id_rsa:
 
@@ -495,7 +495,7 @@ Perfect!! We have the user flag. Intrusion ready!!
 
 <br />
 
-After a long enumeration of the System, we find the Path /srv/prod where the laravel configuration files are hosted.
+After a long enumeration of the System, we find the Path `/srv/prod` where the laravel `configuration files` are hosted.
 
 <br />
 
@@ -509,9 +509,9 @@ app        bootstrap  composer.lock  database  phpunit.xml   resources  server.p
 
 <br />
 
-Since there are many files in the path, we start recursively greping in the different directories by the keyword "Auth*" (Authorization).
+Since there are many files in the path, we start recursively `greping` in the different directories by the keyword `"Auth*"` (Authorization).
 
-Finally, in the /app path, we find, among others, the file "Authcontroller.php" which looks pretty good:
+Finally, in the `/app` path, we find, among others, the file `"Authcontroller.php"` which looks pretty good:
 
 <br />
 
@@ -550,7 +550,7 @@ Http/Controllers/TasksController.php:use Illuminate\Support\Facades\Auth;
 
 <br />
 
-Apply a cat and let's go! We have a credential.
+Apply a cat and let's go! We have a `credential`.
 
 <br />
 
@@ -605,7 +605,7 @@ class AuthController extends Controller
 
 <br />
 
-Try logging in as root using the new password:
+Try logging in as `root` using the `new password`:
 
 <br />
 
