@@ -110,5 +110,10 @@ So when I see this, it occurs to me to change the Content-Type of our request to
 
 <br />
 
+![6](../../../assets/images/Ransom/6.png)
+
+<br />
+
+
 
 
