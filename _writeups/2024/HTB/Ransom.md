@@ -188,7 +188,7 @@ password incorrect--reenter:
 
 <br />
 
-7zip has a parameter (-slt), with which we can see the type of encryption under which a compressed file is, so we apply it and we discover that the file is under "Zipcrypt Deflate" cipher:
+7zip has a parameter (-slt), with which we can see the type of encryption under which a compressed file is, so we apply it and we discover that the file is under "Zipcrypto Deflate" cipher:
 
 <br />
 
@@ -265,7 +265,7 @@ Volume Index = 0
 
 <br />
 
-There is a well-known attack to decrypt files under this type of encryption "Zipcrypt Deflate".
+There is a well-known attack to decrypt files under this type of encryption "Zipcrypto Deflate".
 
 The attack consists of obtaining a plaintext file that is identical to any of those inside the compressed file and abusing it in order to obtain the rest of the file's content.
 
@@ -336,7 +336,7 @@ Volume Index = 0
 
 <br />
 
-# Bkcrack:
+## Bkcrack:
 
 <br />
 
