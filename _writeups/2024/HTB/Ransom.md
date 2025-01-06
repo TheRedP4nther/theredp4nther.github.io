@@ -269,6 +269,8 @@ There is a well-known attack to decrypt files under this type of encryption "Zip
 
 The attack consists of obtaining a plaintext file that is identical to any of those inside the compressed file and abusing it in order to obtain the rest of the file's content.
 
+<br />
+
 ## .bash_logout:
 
 <br />
