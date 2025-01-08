@@ -471,7 +471,7 @@ Perfect!! We are executing commands as the user tomcat8.
 
 <br />
 
-After verify that we are able to execute commands, try to gain access to the system with a reverse shell but in this case it was unsuccessful, so we start enumerating de system with a ls -l of the actual directory:
+After verify that we are able to execute commands, try to gain access to the system with a reverse shell but in this case it was unsuccessful, so we start enumerating the system with a ls -l of the actual directory:
 
 <br />
 
