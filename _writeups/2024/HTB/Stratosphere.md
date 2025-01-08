@@ -608,7 +608,7 @@ Database: users  Table: accounts
 
 <br />
 
-Okey!!! We have new `user and password`:
+Okey!!! We have new `user` and `password`:
 
 <br />
 
