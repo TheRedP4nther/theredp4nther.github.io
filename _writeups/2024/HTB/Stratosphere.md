@@ -212,8 +212,9 @@ ID           Response   Lines    Word       Chars       Payload
 
 -> /manager -> It is the default Apache Tomcat path with the login panel, but we dont have credentials, so we continue enumerating.
 
--> /Monitoring -> It looks very interesting so proceed to list it:
+-> /Monitoring -> It looks very interesting so proceed to list it redirect us to the next path -> /Monitoring/example/Welcome.action:
 
 <br />
+
 
 
