@@ -663,7 +663,7 @@ Intrusion and user.txt ready!! Come on with the Privilege Escalation!!
 
 <br />
 
-Once inside the system, we begin by listing as always the SUDOERS privileges for our user richard:
+Once inside the system, we begin by listing as always the `SUDOERS privileges` for our user `richard`:
 
 <br />
 
@@ -682,7 +682,7 @@ User richard may run the following commands on stratosphere:
 
 <br />
 
-We can run a Python Script as root without introduce a password, let's take a look at what it does:
+We can run a `Python Script` as `root` without introduce a password, let's take a look at what it does:
 
 <br />
 
@@ -740,7 +740,7 @@ richard@stratosphere:~$ python3 -c 'import sys; print(sys.path)'
 
 <br />
 
-So if we `create` a the `hashlib.py` module in the `current route` with malicious code, `root` is going to `execute it` when we run the `test.py`. Let's do it!!
+So if we create a the `hashlib.py` module in the `current route` with malicious code, `root` is going to `execute it` when we run the `test.py`. Let's do it!!
 
 <br />
 
