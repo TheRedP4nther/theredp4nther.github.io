@@ -173,3 +173,47 @@ Continue exploring the website and we see a path that confirms our theory:
 ![3](../../../assets/images/Stratosphere/3.png)
 
 <br />
+
+We started to further list the website using wfuzz to discover interesting paths and listed the following:
+
+<br />
+
+```bash
+❯ wfuzz -c -t 50 --hc=404 -w /usr/share/SecLists/Discovery/Web-Content/directory-list-2.3-medium.txt http://10.10.10.64/FUZZ
+ /usr/lib/python3/dist-packages/wfuzz/__init__.py:34: UserWarning:Pycurl is not compiled against Openssl. Wfuzz might not work correctly when fuzzing SSL sites. Check Wfuzz's documentation for more information.
+********************************************************
+* Wfuzz 3.1.0 - The Web Fuzzer                         *
+********************************************************
+
+Target: http://10.10.10.64/FUZZ
+Total requests: 220560
+
+=====================================================================
+ID           Response   Lines    Word       Chars       Payload                                                                                                                
+=====================================================================
+
+000000001:   200        63 L     153 W      1708 Ch     "# directory-list-2.3-medium.txt"                                                                                      
+000000003:   200        63 L     153 W      1708 Ch     "# Copyright 2007 James Fisher"                                                                                        
+000000007:   200        63 L     153 W      1708 Ch     "# license, visit http://creativecommons.org/licenses/by-sa/3.0/"                                                      
+000000014:   200        63 L     153 W      1708 Ch     "http://10.10.10.64/"                                                                                                  
+000000012:   200        63 L     153 W      1708 Ch     "# on at least 2 different hosts"                                                                                      
+000000013:   200        63 L     153 W      1708 Ch     "#"                                                                                                                    
+000000011:   200        63 L     153 W      1708 Ch     "# Priority ordered case-sensitive list, where entries were found"                                                     
+000000004:   200        63 L     153 W      1708 Ch     "#"                                                                                                                    
+000000002:   200        63 L     153 W      1708 Ch     "#"                                                                                                                    
+000000006:   200        63 L     153 W      1708 Ch     "# Attribution-Share Alike 3.0 License. To view a copy of this"                                                        
+000000005:   200        63 L     153 W      1708 Ch     "# This work is licensed under the Creative Commons"                                                                   
+000000010:   200        63 L     153 W      1708 Ch     "#"                                                                                                                    
+000000009:   200        63 L     153 W      1708 Ch     "# Suite 300, San Francisco, California, 94105, USA."                                                                  
+000000008:   200        63 L     153 W      1708 Ch     "# or send a letter to Creative Commons, 171 Second Street,"                                                           
+000004889:   302        0 L      0 W        0 Ch        "manager"                                                                                                              
+000013290:   302        0 L      0 W        0 Ch        "Monitoring"
+```
+
+-> /manager -> It is the default Apache Tomcat path with the login panel, but we dont have credentials, so we continue enumerating.
+
+-> /Monitoring -> It looks very interesting so proceed to list it:
+
+<br />
+
+
