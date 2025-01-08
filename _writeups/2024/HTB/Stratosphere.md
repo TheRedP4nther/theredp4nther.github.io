@@ -236,9 +236,11 @@ After that, we make a search about the path (welcome.action) to know what techno
 
 <br />
 
-
+![6](../../../assets/images/Stratosphere/6.png)
 
 <br />
+
+
 
 
 
