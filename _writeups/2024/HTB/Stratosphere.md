@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: mysql bash python rce remotecodeexecution pythonlibraryhijacking apache struts scripting 
+tags: mysql bash python rce remotecodeexecution pythonlibraryhijacking apache struts scripting database ssh 
 ---
 
 <br />
