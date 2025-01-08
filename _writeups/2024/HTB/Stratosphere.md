@@ -244,6 +244,8 @@ After that, we make a search about the path (welcome.action) to know what techno
 
 This web server suffered from a rather critical vulnerability back in the day (CVE-2017-5638), so we proceeded to search and found a [repository](https://github.com/mazen160/struts-pwn) with the following script in Python to exploit it:
 
+<br />
+
 ```python
 #!/usr/bin/env python3
 # coding=utf-8
