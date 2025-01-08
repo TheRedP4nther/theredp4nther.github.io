@@ -224,7 +224,7 @@ Try to log into the web or create an account but its not posible because the web
 
 <br />
 
-
+![5](../../../assets/images/Stratosphere/5.png)
 
 <br />
 
