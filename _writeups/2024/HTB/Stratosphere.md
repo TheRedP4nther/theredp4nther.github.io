@@ -758,7 +758,7 @@ os.system('/bin/bash')
 
 <br />
 
-Once created we apply execute permissions and run the test.py script to get root:
+Once created we apply execute permissions and run the `test.py` script to get `root`:
 
 <br />
 
@@ -775,6 +775,6 @@ root@stratosphere:~# cat root.txt
 
 Machine rooted!!!
 
-I learn a lot with this machine, hope that you to :D.
+I have learned a lot with this machine, hope that you to :D.
 
 Keep hacking!!❤️❤️
