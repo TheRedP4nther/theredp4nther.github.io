@@ -162,4 +162,14 @@ We proceed to list the website and it seems that it is still being developed sin
 
 <br />
 
+![2](../../../assets/images/Stratosphere/2.png)
 
+<br />
+
+Continue exploring the website and we see a path that confirms our theory:
+
+<br />
+
+
+
+<br />
