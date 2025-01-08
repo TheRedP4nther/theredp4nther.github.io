@@ -678,6 +678,10 @@ User richard may run the following commands on stratosphere:
 
 <br />
 
+## Python Library Hijacking:
+
+<br />
+
 We can run a Python Script as root without introduce a password, let's take a look at what it does:
 
 <br />
