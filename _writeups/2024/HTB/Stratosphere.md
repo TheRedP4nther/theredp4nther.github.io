@@ -775,6 +775,6 @@ root@stratosphere:~# cat root.txt
 
 Machine rooted!!!
 
-I have learned a lot with this machine, hope that you to :D.
+I have learned a lot with this machine, hope you have too.
 
 Keep hacking!!❤️❤️
