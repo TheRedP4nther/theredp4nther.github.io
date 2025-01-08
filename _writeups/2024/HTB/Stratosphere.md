@@ -170,6 +170,6 @@ Continue exploring the website and we see a path that confirms our theory:
 
 <br />
 
-
+![3](../../../assets/images/Stratosphere/3.png)
 
 <br />
