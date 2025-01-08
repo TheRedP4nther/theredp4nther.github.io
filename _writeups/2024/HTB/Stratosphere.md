@@ -232,7 +232,7 @@ Try to log into the web or create an account but its not posible because the web
 
 <br />
 
-After that, we make a search about the path to know what technology is behind the website and we discover that it is Apache Struts:
+After that, we make a search about the path (welcome.action) to know what technology is behind the website and we discover that it is Apache Struts:
 
 <br />
 
