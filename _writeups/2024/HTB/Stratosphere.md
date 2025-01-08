@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: sandbox library scripting bash hash cracking bruteforce sqlite3 sudoers reverseshell bcrypt blowfish 
+tags: mysql bash python rce remotecodeexecution pythonlibraryhijacking apache struts scripting 
 ---
 
 <br />
