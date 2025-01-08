@@ -149,8 +149,8 @@ We have two open ports:
 
 <br />
 
-- Port 22 -> ssh 
-- Port 8080 -> http 
+- `Port 22` -> ssh 
+- `Port 8080` -> http 
 
 <br />
 
@@ -214,7 +214,7 @@ ID           Response   Lines    Word       Chars       Payload
 
 -> `/manager` -> It is the default Apache Tomcat path with the login panel, but we dont have credentials, so we continue enumerating.
 
--> `/Monitoring` -> It looks very interesting so proceed to list it redirect us to the next path -> /Monitoring/example/Welcome.action:
+-> `/Monitoring` -> It looks very interesting so proceed to list it redirect us to the next path -> `/Monitoring/example/Welcome.action`:
 
 <br />
 
@@ -234,7 +234,7 @@ Try to log into the web or create an account but its not posible because the web
 
 <br />
 
-After that, we make a search about the path (welcome.action) to know what technology is behind the website and we discover that it is Apache Struts:
+After that, we make a search about the path `(welcome.action)` to know what technology is behind the website and we discover that it is `Apache Struts`:
 
 <br />
 
@@ -242,7 +242,7 @@ After that, we make a search about the path (welcome.action) to know what techno
 
 <br />
 
-This web server suffered from a rather critical vulnerability back in the day (CVE-2017-5638), so we proceeded to search and found a [repository](https://github.com/mazen160/struts-pwn) with the following script in Python to exploit it:
+This web server suffered from a rather critical vulnerability back in the day `(CVE-2017-5638)`, so we proceeded to search and found a [repository](https://github.com/mazen160/struts-pwn) with the following script in Python to exploit it:
 
 <br />
 
