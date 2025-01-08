@@ -8,7 +8,7 @@ tags: sandbox library scripting bash hash cracking bruteforce sqlite3 sudoers re
 
 <br />
 
-![Icon-Image](../../../assets/images/Codify/1.png)
+![Icon-Image](../../../assets/images/Stratosphere/1.png)
 
 <br />
 
