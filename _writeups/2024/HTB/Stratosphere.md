@@ -554,7 +554,7 @@ Note: Server Connection Closed Prematurely
 
 <br />
 
-We are going to list first the users database. It have only one column, accounts:
+We are going to list first the users database. It have only one table, accounts:
 
 <br />
 
