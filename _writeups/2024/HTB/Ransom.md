@@ -134,7 +134,7 @@ Login Successful!! Once inside, we see `two files`, the user.txt and a `compress
 
 <br />
 
-Once we have the file locally, we inspect it and it seems to have the contents of a `typical home directory` including the rsa_id of an user:
+Once we have the file locally, we inspect it and it seems to have the contents of a `typical home directory` including the id_rsa of an user:
 
 <br />
 
