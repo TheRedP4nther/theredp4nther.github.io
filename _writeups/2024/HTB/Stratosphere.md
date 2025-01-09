@@ -729,7 +729,7 @@ question()
 
 <br />
 
-The script that we can execute imports a `Python Module`, this is quite critical since as we know, the `Python Path` begins to `search` the `library` by the `current route` ('',).
+The script that we can execute imports a `Python Module`, this is quite critical since as we know, the `Python Path` begins to `search` the `library` by the `current directory` ('',).
 
 <br />
 
@@ -740,7 +740,7 @@ richard@stratosphere:~$ python3 -c 'import sys; print(sys.path)'
 
 <br />
 
-So if we create a the `hashlib.py` module in the `current route` with malicious code, `root` is going to `execute it` when we run the `test.py`. Let's do it!!
+So if we create a the `hashlib.py` module in the `current directory` with malicious code, `root` is going to `execute it` when we run the `test.py`. Let's do it!!
 
 <br />
 
