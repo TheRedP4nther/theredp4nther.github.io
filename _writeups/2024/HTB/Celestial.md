@@ -180,7 +180,7 @@ Intrusion ready. Let's go for privilege escalation!
 
 <br />
 
-# Privilege Escalation: Sun -> root
+# Privilege Escalation: sun -> root
 
 <br />
 
