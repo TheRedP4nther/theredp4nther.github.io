@@ -399,6 +399,10 @@ Now that we are inside, as we know, drupal has the ability to execute php code i
 
 <br />
 
+![5](../../../assets/images/Hawk/5.png)
+
+<br />
+
 
 
 
