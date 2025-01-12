@@ -367,4 +367,16 @@ Successfully got the `password`:
 
 <br />
 
-# 
+As we can see, we have what appears to be a password, let's continue listing to see if we can find somewhere where we can use it.
+
+<br />
+
+# Http Enumeration: -> Port 80 (Drupal):
+
+<br />
+
+Proceed to list the website and land on a Drupal with its login panel:
+
+<br />
+
+
