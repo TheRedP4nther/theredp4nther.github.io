@@ -390,7 +390,9 @@ We have a login panel, so try to log in as the admin user with the credentials o
 
 <br />
 
+![4](../../../assets/images/Hawk/4.png)
 
+<br />
 
 
 
