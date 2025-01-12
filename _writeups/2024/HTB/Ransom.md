@@ -12,6 +12,12 @@ tags: typejugglingattack cracking zip bkcrack zipcrypt leakeage idrsa privatekey
 
 <br />
 
+OS -> Linux.
+
+Difficulty -> Medium.
+
+<br />
+
 # Introduction:
 
 <br />

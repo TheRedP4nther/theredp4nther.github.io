@@ -12,6 +12,12 @@ tags: mysql bash python rce remotecodeexecution pythonlibraryhijacking apache st
 
 <br />
 
+OS -> Linux.
+
+Difficulty -> Medium.
+
+<br />
+
 # Introduction:
 
 <br />
