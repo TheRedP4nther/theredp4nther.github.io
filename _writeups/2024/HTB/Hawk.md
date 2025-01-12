@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: 
+tags: php scripting bash rce remotecodeexecution h2console ftp anonymousloginallowed reverseshell python openssl encrypt aes-256-cbc bruteforce drupal suid 
 ---
 
 <br />
@@ -400,6 +400,10 @@ Now that we are inside, as we know, drupal has the ability to execute php code i
 <br />
 
 ![5](../../../assets/images/Hawk/5.png)
+
+<br />
+
+Once activated, we leave modules, click on Content -> Add Content -> Article. Cover all the data by injecting the PHP code in the "Body" field and select the "PHP Code" option in text format.
 
 <br />
 
