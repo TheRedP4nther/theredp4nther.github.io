@@ -572,11 +572,18 @@ CALL SHELLEXEC('id')
 
 <br />
 
-Try to `execute` a command and let's go, we do it!!
+Try to `execute` the command clicking on run and let's go, we do it!!
 
 <br />
 
 ![11](../../../assets/images/Hawk/11.png)
 
 <br />
+
+Now that we can run commands, we assign SUID permission to bash:
+
+<br />
+
+
+
 
