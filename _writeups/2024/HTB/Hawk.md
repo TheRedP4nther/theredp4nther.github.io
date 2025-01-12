@@ -136,7 +136,7 @@ Open Ports:
 - `Port 80` -> http
 - `Port 5435` -> TCP Wrapper
 - `Port 8082` -> H2 Console
-- `Port 9092`
+- `Port 9092` -> Unknown
 
 # FTP Enumeration: -> Port 21 
 
