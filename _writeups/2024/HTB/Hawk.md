@@ -249,7 +249,7 @@ After doing several searches on Google, discovered the following oneliner to dec
 
 <br />
 
-To automate this process, I created the following bash script using a loop with "while read" to be able to test all the passwords in a dictionary until finding a valid one:
+To `automate` this process, I `created` the following `bash script` using a loop with `"while read"` to be able to test all the `passwords` in a `dictionary` until finding a valid one:
 
 <br />
 
@@ -279,7 +279,7 @@ done < "$dictionary"
 
 <br />
 
-Successfully got the password:
+Successfully got the `password`:
 
 <br />
 
@@ -326,7 +326,7 @@ Successfully got the password:
 
 <br />
 
-Let's take a look to the content of the decrypted file:
+Let's take a look to the `content` of the `decrypted file`:
 
 <br />
 
