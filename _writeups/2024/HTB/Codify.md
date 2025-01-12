@@ -12,6 +12,12 @@ tags: sandbox library scripting bash hash cracking bruteforce sqlite3 sudoers re
 
 <br />
 
+OS -> Linux.
+
+Difficulty -> Easy.
+
+<br />
+
 # Introduction:
 
 <br />
