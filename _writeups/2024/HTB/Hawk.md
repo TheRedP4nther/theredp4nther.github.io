@@ -221,7 +221,7 @@ Salted__kY ԓi-6�l���7Z����>{�$�p����5 �2[
 ```
 <br />
 
-## Openssl Encryption
+## Openssl Encrypt:
 
 <br />
 
@@ -236,4 +236,8 @@ drupal.enc: openssl enc'd data with salted password
 
 <br />
 
+After doing several searches on Google, discovered the following oneliner to decrypt the file:
 
+`openssl enc -d -aes-256-cbc -salt -in drupal.enc -out content.txt -pass pass:$pass`
+
+-> enc
