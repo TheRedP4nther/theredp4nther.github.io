@@ -221,7 +221,7 @@ Apply a cat to it and we see that it seems that its content is in `base64`.
 
 <br />
 
-Make a `base64 -d` and save the binary output into another file:
+Make a `base64 -d` and save the `binary` output into another file:
 
 <br />
 
