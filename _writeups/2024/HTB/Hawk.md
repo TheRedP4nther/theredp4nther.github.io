@@ -395,6 +395,11 @@ We have a `login panel`, so try to log in as the `admin` user with the `credenti
 
 <br />
 
+Now that we are inside, as we know, drupal has the ability to execute php code in its posts, but to do so we must activate the option in the "Modules" section:
+
+<br />
+
+
 
 
 
