@@ -386,6 +386,7 @@ Proceed to list the `website` and land on a `Drupal` with its `login panel`:
 We have a `login panel`, so try to log in as the `admin` user with the `credentials` of the `decrypted file` and we're in!
 
 `USER`: admin
+
 `PASSWORD`: PencilKeyboardScanner123 
 
 <br />
