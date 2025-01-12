@@ -545,7 +545,7 @@ If we click on "connect", we see the following error message:
 
 <br />
 
-But searching in Google, we discovery that if we change the /test of the JDBC URL to anything else, we are able to bypass de Login:
+But searching in Google, we discovery that if we change the /test of the JDBC URL to anything else and click on connect, we are able to bypass de Login:
 
 <br />
 
