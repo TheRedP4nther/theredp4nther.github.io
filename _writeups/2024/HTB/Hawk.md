@@ -140,6 +140,18 @@ Open Ports:
 
 <br />
 
+# H2 Console -> Port 8082
+
+<br />
+
+Started by listing this port because it particularly caught my attention, but in doing so we see that it is an `internal service` (H2 Console) in which we `cannot do much`.
+
+<br />
+
+
+
+<br />
+
 # FTP Enumeration: -> Port 21 
 
 <br />
@@ -326,7 +338,7 @@ Successfully got the `password`:
 
 <br />
 
-Let's take a look to the `content` of the `decrypted file`:
+`Content` of the `decrypted file`:
 
 <br />
 
@@ -349,3 +361,5 @@ Let's take a look to the `content` of the `decrypted file`:
 ```
 
 <br />
+
+# 
