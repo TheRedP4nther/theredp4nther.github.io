@@ -580,7 +580,7 @@ Try to `execute` the command clicking on run and let's go, we do it!!
 
 <br />
 
-Now that we can run commands, we assign SUID permission to bash:
+Now that we can `run commands`, we assign `SUID` permission to `bash`:
 
 <br />
 
@@ -588,7 +588,7 @@ Now that we can run commands, we assign SUID permission to bash:
 
 <br />
 
-We check that the command has been executed successfully and yes!! So we execute the bash with the -p parameter so that it takes into account the SUID permission and we become root!!
+Check that the `command` has been `executed successfully` and yes!! So we `execute` the `bash` with the `-p` parameter so that it takes into account the `SUID permission` and we become `root`!!
 
 <br />
 
@@ -605,4 +605,8 @@ bash-4.4# cat root.txt
 
 <br />
 
+Hawk Machine ready!!! I hope that you enjoyed it!!
 
+Keep hacking!!❤️
+
+<br />
