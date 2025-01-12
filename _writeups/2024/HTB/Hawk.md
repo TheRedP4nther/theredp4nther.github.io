@@ -131,11 +131,12 @@ Nmap done: 1 IP address (1 host up) scanned in 30.36 seconds
 
 Open Ports:
 
-- Port 21 -> ftp
-- Port 22 -> ssh 
-- Port 80 -> http
-- Port 5435 -> TCP Wrapper
-- Port 8082 -> H2 Console
+- `Port 21` -> ftp
+- `Port 22` -> ssh 
+- `Port 80` -> http
+- `Port 5435` -> TCP Wrapper
+- `Port 8082` -> H2 Console
+- `Port 9092`
 
 # FTP Enumeration: -> Port 21 
 
