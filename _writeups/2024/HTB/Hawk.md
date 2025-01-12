@@ -367,7 +367,7 @@ Successfully got the `password`:
 
 <br />
 
-As we can see, we have what appears to be a password, let's continue listing to see if we can find somewhere where we can use it.
+As we can see, we have what appears to be a `password`, let's continue listing to see if we can `find where we can use it`.
 
 <br />
 
@@ -375,7 +375,7 @@ As we can see, we have what appears to be a password, let's continue listing to 
 
 <br />
 
-Proceed to list the website and land on a Drupal with its login panel:
+Proceed to list the `website` and land on a `Drupal` with its `login panel`:
 
 <br />
 
@@ -383,7 +383,7 @@ Proceed to list the website and land on a Drupal with its login panel:
 
 <br />
 
-We have a login panel, so try to log in as the admin user with the credentials of the decrypted file and we're in!
+We have a `login panel`, so try to log in as the `admin` user with the `credentials` of the `decrypted file` and we're in!
 
 `USER`: admin
 `PASSWORD`: PencilKeyboardScanner123 
