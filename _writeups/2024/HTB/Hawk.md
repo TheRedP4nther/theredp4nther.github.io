@@ -138,6 +138,8 @@ Open Ports:
 - `Port 8082` -> H2 Console
 - `Port 9092` -> Unknown
 
+<br />
+
 # FTP Enumeration: -> Port 21 
 
 <br />
@@ -190,7 +192,7 @@ local: .drupal.txt.enc remote: .drupal.txt.enc
 
 <br />
 
-Once we have it, we apply a cat to it and we see that it seems that its content is in `base64`.
+Apply a cat to it and we see that it seems that its content is in `base64`.
 
 <br />
 
