@@ -8,7 +8,7 @@ tags:
 
 <br />
 
-![Machine-Icon](../../../assets/images/Celestial/Celestial.png)
+![Machine-Icon](../../../assets/images/Hawk/1.png)
 
 <br />
 
