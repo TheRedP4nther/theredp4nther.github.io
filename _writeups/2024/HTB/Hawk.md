@@ -411,11 +411,10 @@ Click on "preview" anddd.... YES!!!
 
 PHP Payload -> `<?php phpinfo(); ?>`
 
-<br />
-
 ![6](../../../assets/images/Hawk/6.png)
 
 <br />
+
 
 
 
