@@ -29,7 +29,7 @@ Hello hackers! Today we’ll tackle the Hawk Machine, a medium-difficulty Linux 
 
 <br />
 
-We start by running the typical nmap scan to see which ports are open:
+Run the typical nmap scan to see which ports are open:
 
 <br />
 
