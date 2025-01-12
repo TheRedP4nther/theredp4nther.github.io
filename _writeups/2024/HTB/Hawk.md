@@ -405,6 +405,16 @@ Now that we are inside, as we know, drupal has the ability to execute php code i
 
 Once activated, we leave modules, click on Content -> Add Content -> Article. Cover all the data by injecting the PHP code in the "Body" field and select the "PHP Code" option in text format.
 
+Click on "preview" anddd.... YES!!!
+
+<br />
+
+PHP Payload -> `<?php phpinfo(); ?>`
+
+<br />
+
+![6](../../../assets/images/Hawk/6.png)
+
 <br />
 
 
