@@ -252,12 +252,17 @@ After doing several searches on Google, discovered the following oneliner to dec
 
 `openssl enc -d -aes-256-cbc -salt -in drupal.enc -out content.txt -pass pass:$password`
 
--> enc -d : Decrypt Option.
--> -aes-256-cbc: Cipher type.
--> -salt: Indicate that the file contains a salt.
--> -in: File to decrypt.
--> out: Decrypted file.
--> -pass: Indicate the password that we want to use.
+-> `enc -d`: Decrypt Option.
+
+-> `-aes-256-cbc`: Cipher type.
+
+-> `-salt`: Indicate that the file contains a salt.
+
+-> `-in`: File to decrypt.
+
+-> `-out`: Decrypted file.
+
+-> `-pass`: Indicate the password that we want to use.
 
 <br />
 
