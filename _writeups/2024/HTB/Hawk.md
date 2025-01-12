@@ -278,3 +278,74 @@ done < "$dictionary"
 ```
 
 <br />
+
+Successfully got the password:
+
+<br />
+
+```bash
+❯ bash bruteforce.sh
+
+[+] Bruteforcing the file -> drupal.enc.
+
+[+] Testing the password: 123456
+[+] Testing the password: 12345
+[+] Testing the password: 123456789
+[+] Testing the password: password
+[+] Testing the password: iloveyou
+[+] Testing the password: princess
+[+] Testing the password: 1234567
+[+] Testing the password: rockyou
+[+] Testing the password: 12345678
+[+] Testing the password: abc123
+[+] Testing the password: nicole
+[+] Testing the password: daniel
+[+] Testing the password: babygirl
+[+] Testing the password: monkey
+[+] Testing the password: lovely
+[+] Testing the password: jessica
+[+] Testing the password: 654321
+[+] Testing the password: michael
+[+] Testing the password: ashley
+[+] Testing the password: qwerty
+[+] Testing the password: 111111
+[+] Testing the password: iloveu
+[+] Testing the password: 000000
+[+] Testing the password: michelle
+[+] Testing the password: tigger
+[+] Testing the password: sunshine
+[+] Testing the password: chocolate
+[+] Testing the password: password1
+[+] Testing the password: soccer
+[+] Testing the password: anthony
+[+] Testing the password: friends
+
+[+] The correct password is -> friends
+[+] Decrypted content was saved into the file -> content.txt.
+```
+
+<br />
+
+Let's take a look to the content of the decrypted file:
+
+<br />
+
+```bash
+❯ cat content.txt
+───────┬───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+       │ File: content.txt
+───────┼───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+   1   │ Daniel,
+   2   │ 
+   3   │ Following the password for the portal:
+   4   │ 
+   5   │ PencilKeyboardScanner123
+   6   │ 
+   7   │ Please let us know when the portal is ready.
+   8   │ 
+   9   │ Kind Regards,
+  10   │ 
+  11   │ IT department
+```
+
+<br />
