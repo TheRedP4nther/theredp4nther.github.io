@@ -142,7 +142,7 @@ Open Ports:
 
 <br />
 
-Anonymous Login is Allowed, so try to connect the FTP Server as anonymous to enumerate it:
+Anonymous Login is Allowed, so try to `connect` the `FTP Server` as `anonymous` to enumerate it:
 
 <br />
 
@@ -158,7 +158,7 @@ Using binary mode to transfer files.
 
 <br />
 
-Once in, we find a file ".drupal.txt.enc" tha seems interesting, so we keep it to our machine:
+Once in, we find a file `".drupal.txt.enc"` that seems interesting, so we keep it to our machine:
 
 <br />
 
@@ -190,7 +190,7 @@ local: .drupal.txt.enc remote: .drupal.txt.enc
 
 <br />
 
-Once we have it, we apply a cat to it and we see that it seems that its content is in base64.
+Once we have it, we apply a cat to it and we see that it seems that its content is in `base64`.
 
 <br />
 
@@ -207,7 +207,7 @@ Once we have it, we apply a cat to it and we see that it seems that its content 
 
 <br />
 
-Apply a base64 -d and we save the binary output into another file:
+Make a `base64 -d` and save the binary output into another file:
 
 <br />
 
@@ -219,7 +219,7 @@ Salted__kY ԓi-6�l���7Z����>{�$�p����5 �2[
 ```
 <br />
 
-We apply file to the new file to see what it is and surprise! It is under openssl encryption:
+Take a look to see what kind of file it is and surprise! It's `openssl encrypted`:
 
 <br />
 
