@@ -481,3 +481,52 @@ To verify this, we list the `/etc/passwd`:
 www-data@hawk:/var/www/html$ cat /etc/passwd | grep daniel
 daniel:x:1002:1005::/home/daniel:/usr/bin/python3
 ```
+
+<br />
+
+This is not a problem, since if we import the "os" module we can execute a bash:
+
+<br />
+
+```bash
+>>> import os
+>>> os.system("/bin/bash")
+daniel@hawk:/var/www/html/sites/default$ whoami
+daniel
+daniel@hawk:/var/www/html/sites/default$ cd
+daniel@hawk:~$ cat user.txt
+3ad495254484aea75923da18f9xxxxxx
+```
+
+<br />
+
+# Privilege Escalation: daniel -> root 
+
+<br />
+
+Enumerating we list the processes that are running on the system and we see that root is running the H2 Console that we had listed before in the Port Enumeration:
+
+<br />
+
+```bash
+root       757  0.0  0.0   4628   860 ?        Ss   11:54   0:00      \_ /bin/sh -c /usr/bin/java -jar /opt/h2/bin/h2-1.4.196.jar
+root       758  0.0  5.2 2340560 53068 ?       Sl   11:54   0:10          \_ /usr/bin/java -jar /opt/h2/bin/h2-1.4.196.jar
+```
+
+<br />
+
+Seeing this we portforward to bring the service to our localhost:8082.
+
+<br />
+
+```bash
+❯ ssh daniel@10.10.10.102 -L 8082:127.0.0.1:8082
+```
+
+<br />
+
+List the service and we have it!
+
+<br />
+
+
