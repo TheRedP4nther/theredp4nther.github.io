@@ -484,7 +484,7 @@ daniel:x:1002:1005::/home/daniel:/usr/bin/python3
 
 <br />
 
-This is not a problem, since if we import the "os" module we can execute a bash:
+This is not a problem, since if we import the `"os" module` we can `execute a bash`:
 
 <br />
 
@@ -504,7 +504,7 @@ daniel@hawk:~$ cat user.txt
 
 <br />
 
-Enumerating we list the processes that are running on the system and we see that root is running the H2 Console that we had listed before in the TCP Port 8082:
+Enumerating we list the `processes` that are running on the `system` and we see that `root` is running the `H2 Console` that we had listed before in the TCP `Port 8082`:
 
 <br />
 
@@ -515,7 +515,7 @@ root       758  0.0  5.2 2340560 53068 ?       Sl   11:54   0:10          \_ /us
 
 <br />
 
-Seeing this we portforward to bring the service to our localhost:8082.
+Seeing this we `portforward` to bring the `service` to our `localhost:8082`.
 
 <br />
 
@@ -525,7 +525,7 @@ Seeing this we portforward to bring the service to our localhost:8082.
 
 <br />
 
-List the service and we have it!
+List the `service` and we have it!
 
 <br />
 
@@ -537,7 +537,7 @@ List the service and we have it!
 
 <br />
 
-If we click on "connect", we see the following error message:
+If we click on `"connect"`, we see the following `error message`:
 
 <br />
 
@@ -545,7 +545,7 @@ If we click on "connect", we see the following error message:
 
 <br />
 
-But searching in Google, we discovery that if we change the /test of the JDBC URL to anything else and click on connect, we are able to bypass de Login:
+But searching in `Google`, we discovery that if we change the `/test` of the `JDBC URL` to anything else and click on `connect`, we are able to `bypass` de Login:
 
 <br />
 
@@ -561,7 +561,7 @@ But searching in Google, we discovery that if we change the /test of the JDBC UR
 
 <br />
 
-Continue searching in Google, discover a [website](https://mthbernardes.github.io/rce/2018/03/14/abusing-h2-database-alias.html) that explain us how to execute commands in the H2 Console using the following Payload:
+Continue searching in `Google`, discover a [website](https://mthbernardes.github.io/rce/2018/03/14/abusing-h2-database-alias.html) that explain us how to `execute commands` in the `H2 Console` using the following `Payload`:
 
 <br />
 
@@ -572,8 +572,11 @@ CALL SHELLEXEC('id')
 
 <br />
 
-Try to execute a command and let's go, we do it!!
+Try to `execute` a command and let's go, we do it!!
 
 <br />
 
+![11](../../../assets/images/Hawk/11.png)
+
+<br />
 
