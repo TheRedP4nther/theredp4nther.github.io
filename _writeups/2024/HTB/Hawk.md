@@ -21,7 +21,7 @@ Difficulty -> Medium.
 # Introduction:
 <br />
 
-
+Hello hackers! Today we’ll tackle the Hawk Machine, a medium-difficulty Linux challenge. We’ll start by retrieving an OpenSSL-encoded file from an FTP server with anonymous login enabled. After brute-forcing it using a custom Bash utility we create ourselves, we’ll obtain credentials to access a Drupal site where we can execute PHP code and gain system access. Once inside, we’ll retrieve credentials from a configuration file to pivot to another user. Finally, we’ll exploit a vulnerable internal service to escalate privileges and become root.
 
 <br />
 
