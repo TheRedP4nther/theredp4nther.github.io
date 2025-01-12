@@ -238,7 +238,7 @@ drupal.enc: openssl enc'd data with salted password
 
 After doing several searches on Google, discovered the following oneliner to decrypt the file:
 
-`openssl enc -d -aes-256-cbc -salt -in drupal.enc -out content.txt -pass pass:$pass`
+`openssl enc -d -aes-256-cbc -salt -in drupal.enc -out content.txt -pass pass:$password`
 
 -> enc -d : Decrypt Option.
 -> -aes-256-cbc: Cipher type.
@@ -246,5 +246,35 @@ After doing several searches on Google, discovered the following oneliner to dec
 -> -in: File to decrypt.
 -> out: Decrypted file.
 -> -pass: Indicate the password that we want to use.
+
+<br />
+
+To automate this process, I created the following bash script using a loop with "while read" to be able to test all the passwords in a dictionary until finding a valid one:
+
+<br />
+
+```bash
+#!/bin/bash
+
+# Author TheRedP4nther
+
+# Global Variables:
+dictionary="/usr/share/wordlists/rockyou.txt"
+file="drupal.enc"
+
+echo -e "\n[+] Bruteforcing the file -> $file.\n"
+
+while read password; do 
+  echo -e "[+] Testing the password: $password"
+  openssl enc -d -aes-256-cbc -salt -in drupal.enc -out content.txt -pass pass:$password 2>/dev/null
+  if [ "$?" -eq 0 ]; then 
+    echo -e "\n[+] The correct password is -> $password"
+    echo -e "[+] Decrypted content was saved into the file -> $file"
+    break
+  else
+    continue
+  fi
+done < "$dictionary"
+```
 
 <br />
