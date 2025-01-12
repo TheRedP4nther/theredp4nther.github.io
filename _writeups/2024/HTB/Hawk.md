@@ -283,7 +283,7 @@ echo -e "\n[+] Bruteforcing the file -> $file.\n"
 
 while read password; do 
   echo -e "[+] Testing the password: $password"
-  openssl enc -d -aes-256-cbc -salt -in drupal.enc -out content.txt -pass pass:$password 2>/dev/null
+  openssl enc -d -aes-256-cbc -salt -in "$file" -out content.txt -pass pass:"$password" 2>/dev/null
   if [ "$?" -eq 0 ]; then 
     echo -e "\n[+] The correct password is -> $password"
     echo -e "[+] Decrypted content was saved into the file -> $file"
