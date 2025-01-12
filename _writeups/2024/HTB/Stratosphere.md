@@ -22,7 +22,7 @@ Difficulty -> Medium.
 
 <br />
 
-Hello hackers! Today we’ll tackle the Stratosphere Machine, a medium-difficulty challenge. We’ll start by exploiting a vulnerable version of Apache Struts to gain system access. Once inside, we’ll perform a Python Library Hijacking to escalate privileges and take control of the system as root.
+Hello hackers! Today we’ll tackle the Stratosphere Machine, a Medium difficulty challenge. We’ll start by exploiting a vulnerable version of Apache Struts to gain system access. Once inside, we’ll perform a Python Library Hijacking to escalate privileges and take control of the system as root.
  
 <br />
 

@@ -20,7 +20,7 @@ Difficulty -> Medium.
 
 <br />
 
-Hello hackers! Today, we’ll tackle the Ambassador Machine, a medium-difficulty Linux challenge. We’ll start by exploiting an LFI in Grafana to access configuration files, allowing us to retrieve credentials for a database and gain access to the machine. Once inside, we’ll exploit an RCE in Consul to achieve root access.
+Hello hackers! Today, we’ll tackle the Ambassador Machine, a Medium difficulty Linux challenge. We’ll start by exploiting an LFI in Grafana to access configuration files, allowing us to retrieve credentials for a database and gain access to the machine. Once inside, we’ll exploit an RCE in Consul to achieve root access.
 
 <br />
 

@@ -22,7 +22,7 @@ Difficulty -> Easy.
 
 <br />
 
-Hello hackers! Today, we’ll solve the Codify machine, an easy challenge. We’ll start by exploiting a vulnerability in a sandboxing library to escape commands and execute remote code. Inside, we’ll find a hash in a SQLite3 database, crack it using brute force, and obtain a password to switch users. Finally, we’ll exploit a root-executable bash script to take full control of the machine.
+Hello hackers! Today, we’ll solve the Codify machine, an Easy difficulty Linux challenge. We’ll start by exploiting a vulnerability in a sandboxing library to escape commands and execute remote code. Inside, we’ll find a hash in a SQLite3 database, crack it using brute force, and obtain a password to switch users. Finally, we’ll exploit a root-executable bash script to take full control of the machine.
  
 <br />
 
