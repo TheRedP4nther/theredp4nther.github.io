@@ -548,3 +548,7 @@ If we click on "connect", we see the following error message:
 But searching in Google, we discovery that if we change the /test of the JDBC URL to anything else, we are able to bypass de Login:
 
 <br />
+
+![9](../../../assets/images/Hawk/9.png)
+
+<br />
