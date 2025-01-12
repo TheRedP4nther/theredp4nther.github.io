@@ -221,7 +221,11 @@ Salted__kY ԓi-6�l���7Z����>{�$�p����5 �2[
 ```
 <br />
 
-Take a look to see what kind of file it is and surprise! It's `openssl encrypted`:
+## Openssl Encryption
+
+<br />
+
+Take a look to see what `kind of file` it is and surprise! It's `openssl encrypted`:
 
 <br />
 
@@ -231,4 +235,5 @@ drupal.enc: openssl enc'd data with salted password
 ```
 
 <br />
+
 
