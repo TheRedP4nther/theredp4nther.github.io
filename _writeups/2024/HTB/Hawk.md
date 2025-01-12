@@ -541,6 +541,8 @@ If we click on "connect", we see the following error message:
 
 <br />
 
+![8](../../../assets/images/Hawk/8.png)
 
+<br />
 
 
