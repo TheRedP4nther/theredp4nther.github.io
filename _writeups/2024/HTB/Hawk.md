@@ -504,7 +504,7 @@ daniel@hawk:~$ cat user.txt
 
 <br />
 
-Enumerating we list the processes that are running on the system and we see that root is running the H2 Console that we had listed before in the Port Enumeration:
+Enumerating we list the processes that are running on the system and we see that root is running the H2 Console that we had listed before in the TCP Port 8082:
 
 <br />
 
@@ -532,3 +532,15 @@ List the service and we have it!
 ![7](../../../assets/images/Hawk/7.png)
 
 <br />
+
+## H2 Console Login Bypass:
+
+<br />
+
+If we click on "connect", we see the following error message:
+
+<br />
+
+
+
+
