@@ -395,7 +395,7 @@ We have a `login panel`, so try to log in as the `admin` user with the `credenti
 
 <br />
 
-Now that we are inside, as we know, drupal has the ability to execute php code in its posts, but to do, we need to activate the option in the "Modules" section:
+Now that we are `inside`, as we know, `drupal` has the ability to execute `php code` in its `posts`, but to do, we need to `activate` the option in the `"Modules"` section:
 
 <br />
 
@@ -403,9 +403,9 @@ Now that we are inside, as we know, drupal has the ability to execute php code i
 
 <br />
 
-Once activated, we leave modules, click on Content -> Add Content -> Article. Cover all the data by injecting the PHP code in the "Body" field and select the "PHP Code" option in text format.
+Once activated, we leave modules, click on `Content` -> `Add Conten`t -> `Article`. Cover all the data by injecting the `PHP code` in the `"Body"` field and select the `"PHP Code"` option in text format.
 
-Click on "preview" anddd.... YES!!!
+Click on `"preview"` anddd.... YES!!!
 
 PHP Payload -> `<?php phpinfo(); ?>`
 
