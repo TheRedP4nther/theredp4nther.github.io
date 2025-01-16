@@ -184,6 +184,12 @@ When listing this route we find a folder that takes us to a wordpress with a pos
 
 <br />
 
+![5](../../../assets/images/Chaos/5.png)
 
+<br />
+
+Click on the post and we see the author, human:
+
+<br / >
 
 
