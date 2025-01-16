@@ -250,5 +250,7 @@ Perfect, we have a new subdomain!! So we enter it in the /etc/hosts and proceed 
 
 <br />
 
+![8](../../../assets/images/Chaos/8.png)
 
+<br />
 
