@@ -86,7 +86,13 @@ Open Ports:
 
 - Port 80 -> http 
 
-- Ports 110,143,993 & 995 -> imapd
+- Ports 110 -> pop3 
+
+- Port 143 -> imap
+
+- Port 993 -> imap (SSL)
+
+- Port 995 -> pop3 (SSL)
 
 - Port 10000 -> webmin 
 
