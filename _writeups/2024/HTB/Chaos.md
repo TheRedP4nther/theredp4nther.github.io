@@ -204,7 +204,7 @@ Sometimes users use their own password name, so we try entering human and voila!
 
 <br />
 
-As we can see, we have obtained a user and some credentials for "webmail".
+The post contains a user and some credentials for "webmail".
 
 <br />
 
