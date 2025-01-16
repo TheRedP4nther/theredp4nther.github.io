@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: deserializationattack scripting bash python node.js cronjob reverseshell
+tags: 
 ---
 
 <br />
@@ -114,11 +114,11 @@ Proceed to add chaos.htb to our /etc/hosts pointing to the 10.10.10.120 and list
 
 <br />
 
-The page has several sections but nothing interesting to solve the machine.
+![3](../../../assets/images/Chaos/3.png)
 
 <br />
 
-![3](../../../assets/images/Chaos/3.png)
+The page has several sections but nothing relevant.
 
 <br />
 
