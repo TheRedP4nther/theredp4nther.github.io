@@ -19,6 +19,7 @@ Difficulty -> Medium.
 <br />
 
 # Introduction:
+
 <br />
 
 
@@ -102,7 +103,7 @@ Open Ports:
 
 <br />
 
-At listing the website we see the following message:
+At listing the `website` we see the following message:
 
 <br />
 
@@ -110,7 +111,7 @@ At listing the website we see the following message:
 
 <br />
 
-Proceed to add chaos.htb to our /etc/hosts pointing to the 10.10.10.120 and list again:
+Proceed to add `chaos.htb` to our `/etc/hosts` pointing to the `10.10.10.120` and list again:
 
 <br />
 
@@ -118,7 +119,7 @@ Proceed to add chaos.htb to our /etc/hosts pointing to the 10.10.10.120 and list
 
 <br />
 
-The page has several sections but nothing relevant.
+The page has several sections but nothing `relevant`.
 
 <br />
 
@@ -126,7 +127,7 @@ The page has several sections but nothing relevant.
 
 <br />
 
-As we know, there is a webmin running on the port 10000, so we list it and try defaul credentials like admin:admin, but didn't work:
+As we know, there is a `webmin` running on the `port 10000`, so we list it and try `defaul credentials` like admin:admin, but didn't work:
 
 <br />
 
@@ -138,7 +139,7 @@ As we know, there is a webmin running on the port 10000, so we list it and try d
 
 <br /> 
 
-Do some fuzzing and on the first website we list we find some interesting things:
+Do some `fuzzing` and on the first `website` we list we find some interesting things:
 
 <br />
 
@@ -180,7 +181,7 @@ ID           Response   Lines    Word       Chars       Payload
 
 <br />
 
-When listing this route we find a folder that takes us to a wordpress with a post password protected:
+When listing this path we find a `folder` that takes us to a `wordpress` with a post `password` protected:
 
 <br />
 
@@ -188,7 +189,7 @@ When listing this route we find a folder that takes us to a wordpress with a pos
 
 <br />
 
-Click on the post and we see the author, human:
+Click on the `post` and we see the author, `human`:
 
 <br />
 
@@ -196,7 +197,7 @@ Click on the post and we see the author, human:
 
 <br />
 
-Sometimes users use their own password name, so we try entering human and voila!!
+Sometimes `users` use their `own password name`, so we try entering `human` and voila!!
 
 <br />
 
@@ -204,7 +205,7 @@ Sometimes users use their own password name, so we try entering human and voila!
 
 <br />
 
-The post contains a user and some credentials for "webmail".
+The post contains a `user` and some `credentials` for `"webmail"`.
 
 <br />
 
@@ -212,7 +213,7 @@ The post contains a user and some credentials for "webmail".
 
 <br />
 
-We start fuzzing to see if we can find any subdomains where "webmail" is hosted and enumerate the following:
+We start `fuzzing` to see if we can find any `subdomains` where `"webmail"` is hosted and enumerate the following:
 
 <br />
 
@@ -246,7 +247,7 @@ webmail                 [Status: 200, Size: 5607, Words: 649, Lines: 121, Durati
 
 <br />
 
-Perfect, we have a new subdomain!! So enter it in the /etc/hosts and proceed to list the website:
+Perfect, we have a new `subdomain`!! So enter it in the `/etc/hosts` and proceed to list the `website`:
 
 <br />
 
@@ -254,9 +255,9 @@ Perfect, we have a new subdomain!! So enter it in the /etc/hosts and proceed to 
 
 <br />
 
-As we can see, is a roundcube login panel.
+As we can see, is a `roundcube` login panel.
 
-Log in with the Wordpress post credentials successfully and once in, the mailbox appears to be empty:
+Log in with the `Wordpress post credentials` successfully and once in, the `mailbox` appears to be empty:
 
 <br />
 
@@ -264,7 +265,7 @@ Log in with the Wordpress post credentials successfully and once in, the mailbox
 
 <br />
 
-But checking the drafts we find a message with 2 attachments:
+But checking the `drafts` we find a `message` with 2 attachments:
 
 <br />
 
@@ -272,7 +273,7 @@ But checking the drafts we find a message with 2 attachments:
 
 <br />
 
-Bring the files to our machine.
+Bring the `files` to our machine.
 
 <br />
 
@@ -288,7 +289,7 @@ We have two files, `en.py` & `enim_msg.txt`.
 
 <br />
 
-This file is a python script to encrypt files under AES encryption:
+This file is a `python script` to encrypt files under `AES` encryption:
 
 <br />
 
@@ -327,7 +328,7 @@ def getKey(password):
 
 <br />
 
-And this other file, is a file that seems to be encrypted with the en.py script:
+And this other file, is a file that seems to be `encrypted` with the `en.py` script:
 
 <br />
 
@@ -345,9 +346,9 @@ And this other file, is a file that seems to be encrypted with the en.py script:
 
 <br />
 
-We know that the file is encrypted with AES and the password, as they told us in the roundcube message, is sahay.
+We know that the file is encrypted with `AES` and the password, as they told us in the `roundcube message`, is `sahay`.
 
-So I make the following python script to decrypt the file:
+So I make the following python script to `decrypt` the file:
 
 <br />
 
@@ -393,7 +394,7 @@ decrypt(key, archivo_encriptado)
 
 <br />
 
-Run it and get a base64 text:
+Run it and get a `base64` text:
 
 <br />
 
@@ -408,7 +409,7 @@ Run it and get a base64 text:
 
 <br />
 
-Apply a base64 decode and store de output in another file:
+Apply a `base64 decode` and store de `output` in another file:
 
 <br />
 
@@ -418,7 +419,7 @@ Apply a base64 decode and store de output in another file:
 
 <br />
 
-Fially, we list the content:
+Fially, we list the `content`:
 
 <br />
 
