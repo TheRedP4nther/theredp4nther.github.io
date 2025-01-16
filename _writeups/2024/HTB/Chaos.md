@@ -407,3 +407,36 @@ Run it and get a base64 text:
 ```
 
 <br />
+
+Apply a base64 decode and store de output in another file:
+
+<br />
+
+```bash
+❯ cat im_msg.txt | base64 -d > content.txt
+```
+
+<br />
+
+Fially, we list the content:
+
+<br />
+
+```bash
+❯ cat content.txt
+───────┬───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+       │ File: content.txt
+───────┼───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+   1   │ Hii Sahay
+   2   │ 
+   3   │ Please check our new service which create pdf
+   4   │ 
+   5   │ p.s - As you told me to encrypt important msg, i did :)
+   6   │ 
+   7   │ http://chaos.htb/J00_w1ll_f1Nd_n07H1n9_H3r3
+   8   │ 
+   9   │ Thanks,
+  10   │ Ayush
+```
+
+<br />
