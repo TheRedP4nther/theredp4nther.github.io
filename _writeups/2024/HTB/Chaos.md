@@ -457,10 +457,18 @@ Once in the `URL`, we see a `service` in development that seems to `generate a P
 
 <br />
 
-The `service` has `different templates`, but when I click in `generate PDF`, anyone of them `doesn't work`:
+The `service` has `different templates`, but when I click in `Create PDF`, anyone of them `doesn't work`:
 
 <br />
 
 ![12](../../../assets/images/Chaos/12.png)
+
+<br />
+
+# Burp Suite 
+
+<br />
+
+Since we don't see anything, we intercept the request using the Template test3 with Burp Suite to see what's going on behind:
 
 <br />
