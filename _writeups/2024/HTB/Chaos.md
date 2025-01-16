@@ -346,7 +346,7 @@ And this other file, is a file that seems to be `encrypted` with the `en.py` scr
 
 <br />
 
-We know that the file is encrypted with `AES` and the password, as they told us in the `roundcube message`, is `sahay`.
+We know that the file is encrypted with `AES` and the password, as they told us in the roundcube `message`, is `sahay`.
 
 So I make the following python script to `decrypt` the file:
 
