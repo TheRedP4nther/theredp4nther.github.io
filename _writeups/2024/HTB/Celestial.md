@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags:  
+tags: reverseshell nodejs deserializationattack scripting python javascript iife
 ---
 
 <br />
