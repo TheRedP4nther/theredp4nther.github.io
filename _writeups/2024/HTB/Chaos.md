@@ -290,7 +290,7 @@ We have two files, `en.py` & `enim_msg.txt`.
 
 <br />
 
-This file, is a Python Script that encrypt files:
+This file is a Python Script to encrypt files:
 
 <br />
 
@@ -325,6 +325,22 @@ def getKey(password):
 
 <br />
 
+## enim_msg.txt:
 
+<br />
+
+And this other file, is a file that seems to be encrypted with the en.py script:
+
+<br />
+
+```bash
+❯ /usr/bin/cat enim_msg.txt
+0000000000000234��z�سpK8�ZC����^9�kW����&w�9ܾ����E��'q�[���9�Z��⑿3����.�C�������;��3������6���R`n⑿
+                                                                                                 퍦3�>�}3A����d��FY
+                                                                                                                   ��YDo!�R#~�[��8����a4❄��á>)K�M^�z�I���,��ݨB���qݕYqˏR���q�M�ߟ.w�ʢF�@m�9
+ �JD����(�^�7�5~�"���}��0�?�U�qX(��r�]�w���zGO
+```
+
+<br />
 
 
