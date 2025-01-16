@@ -118,6 +118,10 @@ The page has several sections but nothing interesting to solve the machine.
 
 <br />
 
+![3](../../../assets/images/Chaos/3.png)
+
+<br />
+
 # Webmin Enumeration: -> Port 10000
 
 <br />
@@ -126,4 +130,5 @@ As we know, there is a webmin running on the port 10000, so we list it and try d
 
 <br />
 
+![4](../../../assets/images/Chaos/4.png)
 
