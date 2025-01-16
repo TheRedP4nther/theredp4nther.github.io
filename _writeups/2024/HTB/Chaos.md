@@ -456,3 +456,9 @@ Once in the `URL`, we see a `service` in development that seems to `generate a P
 ![11](../../../assets/images/Chaos/11.png)
 
 <br />
+
+The service has different templates, but when i click in generate PDF, anyone of them doesn't work:
+
+<br />
+
+
