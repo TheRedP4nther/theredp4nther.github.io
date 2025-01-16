@@ -114,4 +114,16 @@ Proceed to add chaos.htb to our /etc/hosts pointing to the 10.10.10.120 and list
 
 <br />
 
+The page has several sections but nothing interesting to solve the machine.
+
+<br />
+
+# Webmin Enumeration: -> Port 10000
+
+<br />
+
+As we know, there is a webmin running on the port 10000, so we list it and try defaul credentials like admin:admin, but didn't work:
+
+<br />
+
 
