@@ -328,7 +328,7 @@ def getKey(password):
 
 <br />
 
-And this other file, is a file that seems to be `encrypted` with the `en.py` script:
+And this other file, is a binary file that seems to be `encrypted` with the `en.py` script:
 
 <br />
 
@@ -383,7 +383,6 @@ def getKey(password):
     hasher = SHA256.new(password.encode('utf-8'))
     return hasher.digest()
 
-# Ejemplo de uso
 password = "sahay"
 key = getKey(password) # Password
 
