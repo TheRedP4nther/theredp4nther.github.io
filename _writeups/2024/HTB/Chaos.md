@@ -258,11 +258,7 @@ As we can see, is a roundcube login panel.
 
 <br />
 
-Try to log with the Wordpress post credentials successfully:
-
-<br />
-
-Once inside, the inbox appears to be empty:
+Log in with the Wordpress post credentials successfully and once in, the mailbox appears to be empty:
 
 <br />
 
