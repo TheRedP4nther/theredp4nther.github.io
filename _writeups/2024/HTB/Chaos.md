@@ -274,4 +274,6 @@ But checking the drafts we find a message with 2 attachments:
 
 <br />
 
+![10](../../../assets/images/Chaos/10.png)
 
+<br />
