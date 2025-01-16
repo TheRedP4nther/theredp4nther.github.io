@@ -476,3 +476,52 @@ Since we don't see anything, we intercept the request using the Template test3 w
 ![13](../../../assets/images/Chaos/13.png)
 
 <br />
+
+As we can see, a pdf is being created, but we don't know where it is stored.
+
+To discover this, start making fuzzing to the url and we find more than one path:
+
+<br />
+
+```bash
+❯ wfuzz -c -t 50 --hc=404 -w /usr/share/SecLists/Discovery/Web-Content/directory-list-2.3-medium.txt http://chaos.htb/J00_w1ll_f1Nd_n07H1n9_H3r3/FUZZ/
+ /usr/lib/python3/dist-packages/wfuzz/__init__.py:34: UserWarning:Pycurl is not compiled against Openssl. Wfuzz might not work correctly when fuzzing SSL sites. Check Wfuzz's documentation for more information.
+********************************************************
+* Wfuzz 3.1.0 - The Web Fuzzer                         *
+********************************************************
+
+Target: http://chaos.htb/J00_w1ll_f1Nd_n07H1n9_H3r3/FUZZ/
+Total requests: 220560
+
+=====================================================================
+ID           Response   Lines    Word       Chars       Payload                                                                                                                
+=====================================================================
+
+000000001:   200        54 L     147 W      2656 Ch     "# directory-list-2.3-medium.txt"                                                                                      
+000000014:   200        54 L     147 W      2656 Ch     "http://chaos.htb/J00_w1ll_f1Nd_n07H1n9_H3r3//"                                                                        
+000000007:   200        54 L     147 W      2656 Ch     "# license, visit http://creativecommons.org/licenses/by-sa/3.0/"                                                      
+000000003:   200        54 L     147 W      2656 Ch     "# Copyright 2007 James Fisher"                                                                                        
+000000081:   200        18 L     82 W       1401 Ch     "templates"                                                                                                            
+000000013:   200        54 L     147 W      2656 Ch     "#"                                                                                                                    
+000000010:   200        54 L     147 W      2656 Ch     "#"                                                                                                                    
+000000143:   200        27 L     181 W      3837 Ch     "pdf"                                                                                                                  
+000000006:   200        54 L     147 W      2656 Ch     "# Attribution-Share Alike 3.0 License. To view a copy of this"                                                        
+000000011:   200        54 L     147 W      2656 Ch     "# Priority ordered case-sensitive list, where entries were found"                                                     
+000000009:   200        54 L     147 W      2656 Ch     "# Suite 300, San Francisco, California, 94105, USA."                                                                  
+000000012:   200        54 L     147 W      2656 Ch     "# on at least 2 different hosts"                                                                                      
+000000222:   200        16 L     60 W       1005 Ch     "doc"                                                                                                                  
+000000008:   200        54 L     147 W      2656 Ch     "# or send a letter to Creative Commons, 171 Second Street,"                                                           
+000000005:   200        54 L     147 W      2656 Ch     "# This work is licensed under the Creative Commons"                                                                   
+000000004:   200        54 L     147 W      2656 Ch     "#"                                                                                                                    
+000000002:   200        54 L     147 W      2656 Ch     "#"                                                                                                                    
+000000291:   200        17 L     71 W       1193 Ch     "assets"                                                                                                               
+000000651:   200        16 L     60 W       1011 Ch     "source"
+```
+
+<br />
+
+The pdf path looks georgeus, let's check it:
+
+<br />
+
+
