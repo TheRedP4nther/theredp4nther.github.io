@@ -469,7 +469,7 @@ The `service` has `different templates`, but when I click in `Create PDF`, anyon
 
 <br />
 
-Since we don't see anything, we intercept the request using the Template test3 with Burp Suite to see what's going on behind:
+Since we don't see anything, we `intercept` the request using the Template `test3` with `Burp Suite` to see what's going on behind:
 
 <br />
 
@@ -477,9 +477,9 @@ Since we don't see anything, we intercept the request using the Template test3 w
 
 <br />
 
-As we can see, a pdf is being created with pdfTeX, Version 3.14159265-2.6-1.40.19, but we don't know where it is stored.
+As we can see, a `pdf` is being created with `pdfTeX` Version 3.14159265-2.6-1.40.19, but we don't know where it is `stored`.
 
-To discover this, start making fuzzing to the url and we find more than one path:
+To discover this, start making `fuzzing` to the url and we find more than one path:
 
 <br />
 
@@ -520,7 +520,7 @@ ID           Response   Lines    Word       Chars       Payload
 
 <br />
 
-The /pdf path looks georgeus, let's check it:
+The `/pdf` path looks georgeus, let's check it:
 
 <br />
 
@@ -528,13 +528,13 @@ The /pdf path looks georgeus, let's check it:
 
 <br />
 
-The directory contains all the PDF's that we haved created.
+The directory contains all the `PDF's` that we haved `created`.
 
-Now that we know that PDF's are being created and where they are stored, it is time to try to exploit a Latex Injection, a very typical vulnerability in PDF generators like pdfTeX.
+Now that we know that PDF's are being `created` and where they are `stored`, it is time to try to `exploit` a `Latex Injection`, a very typical vulnerability in PDF generators like `pdfTeX`.
 
 ## RCE:
 
-There are a lot of different payloads to exploit a Latex Injection, but the first that I try is to execute a command with a Payload founded in [Payloads All The Things](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/LaTeX%20Injection)
+There are a lot of different `payloads` to exploit a `Latex Injection`, but the first that I try is to `execute a command` with a Payload founded in [Payloads All The Things](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/LaTeX%20Injection)
 
 <br />
 
