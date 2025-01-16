@@ -524,5 +524,18 @@ The /pdf path looks georgeus, let's check it:
 
 <br />
 
+![14](../../../assets/images/Chaos/14.png)
+
+<br />
+
+The directory contains all the PDF's that we haved created.
+
+Now that we know that PDF's are being created and where they are stored, it is time to try to exploit a latex injection, a very typical vulnerability in PDF generators.
+
+To do this we are going to use the famous GitHub repository -> [Payloads All The Things](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/LaTeX%20Injection)
+
+<br />
+
+
 
 
