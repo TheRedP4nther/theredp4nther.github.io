@@ -180,9 +180,10 @@ ID           Response   Lines    Word       Chars       Payload
 
 <br />
 
-When listing this route we find a folder that takes us to a wordpress:
+When listing this route we find a folder that takes us to a wordpress with a post password protected:
 
 <br />
+
 
 
 
