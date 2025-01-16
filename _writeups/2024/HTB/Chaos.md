@@ -132,3 +132,57 @@ As we know, there is a webmin running on the port 10000, so we list it and try d
 
 ![4](../../../assets/images/Chaos/4.png)
 
+<br />
+
+## Fuzzing:
+
+<br /> 
+
+Do some fuzzing and on the first website we list we find some interesting things:
+
+<br />
+
+```bash
+❯ wfuzz -c -t 50 --hc=404 -w /usr/share/SecLists/Discovery/Web-Content/directory-list-2.3-medium.txt http://10.10.10.120/FUZZ
+ /usr/lib/python3/dist-packages/wfuzz/__init__.py:34: UserWarning:Pycurl is not compiled against Openssl. Wfuzz might not work correctly when fuzzing SSL sites. Check Wfuzz's documentation for more information.
+********************************************************
+* Wfuzz 3.1.0 - The Web Fuzzer                         *
+********************************************************
+
+Target: http://10.10.10.120/FUZZ
+Total requests: 220560
+
+=====================================================================
+ID           Response   Lines    Word       Chars       Payload                                                                                                                
+=====================================================================
+
+000000001:   200        1 L      5 W        73 Ch       "# directory-list-2.3-medium.txt"                                                                                      
+000000007:   200        1 L      5 W        73 Ch       "# license, visit http://creativecommons.org/licenses/by-sa/3.0/"                                                      
+000000003:   200        1 L      5 W        73 Ch       "# Copyright 2007 James Fisher"                                                                                        
+000000009:   200        1 L      5 W        73 Ch       "# Suite 300, San Francisco, California, 94105, USA."                                                                  
+000000005:   200        1 L      5 W        73 Ch       "# This work is licensed under the Creative Commons"                                                                   
+000000002:   200        1 L      5 W        73 Ch       "#"                                                                                                                    
+000000008:   200        1 L      5 W        73 Ch       "# or send a letter to Creative Commons, 171 Second Street,"                                                           
+000000010:   200        1 L      5 W        73 Ch       "#"                                                                                                                    
+000000011:   200        1 L      5 W        73 Ch       "# Priority ordered case-sensitive list, where entries were found"                                                     
+000000012:   200        1 L      5 W        73 Ch       "# on at least 2 different hosts"                                                                                      
+000000014:   200        1 L      5 W        73 Ch       "http://10.10.10.120/"                                                                                                 
+000000013:   200        1 L      5 W        73 Ch       "#"                                                                                                                    
+000000006:   200        1 L      5 W        73 Ch       "# Attribution-Share Alike 3.0 License. To view a copy of this"                                                        
+000000004:   200        1 L      5 W        73 Ch       "#"                                                                                                                    
+000000793:   301        9 L      28 W       309 Ch      "wp"                                                                                                                   
+000001073:   301        9 L      28 W       317 Ch      "javascript"
+```
+
+<br />
+
+## /wp/wordpress:
+
+<br />
+
+When listing this route we find a folder that takes us to a wordpress:
+
+<br />
+
+
+
