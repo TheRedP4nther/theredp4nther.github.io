@@ -269,3 +269,9 @@ Once inside, the inbox appears to be empty:
 ![9](../../../assets/images/Chaos/9.png)
 
 <br />
+
+But checking the drafts we find a message with 2 attachments:
+
+<br />
+
+
