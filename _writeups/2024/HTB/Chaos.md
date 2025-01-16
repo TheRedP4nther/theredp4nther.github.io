@@ -472,3 +472,7 @@ The `service` has `different templates`, but when I click in `Create PDF`, anyon
 Since we don't see anything, we intercept the request using the Template test3 with Burp Suite to see what's going on behind:
 
 <br />
+
+![13](../../../assets/images/Chaos/13.png)
+
+<br />
