@@ -102,7 +102,7 @@ Open Ports:
 
 <br />
 
-We start listing the website and see the following message:
+At listing the website we see the following message:
 
 <br />
 
@@ -255,8 +255,6 @@ Perfect, we have a new subdomain!! So enter it in the /etc/hosts and proceed to 
 <br />
 
 As we can see, is a roundcube login panel.
-
-<br />
 
 Log in with the Wordpress post credentials successfully and once in, the mailbox appears to be empty:
 
