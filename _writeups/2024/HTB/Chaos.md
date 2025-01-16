@@ -276,7 +276,7 @@ Bring the files to our machine.
 
 <br />
 
-# File Decrypt:
+# Files Content:
 
 <br />
 
@@ -288,7 +288,7 @@ We have two files, `en.py` & `enim_msg.txt`.
 
 <br />
 
-This file is a Python Script to encrypt files:
+This file is a python script to encrypt files under AES encryption:
 
 <br />
 
@@ -337,6 +337,58 @@ And this other file, is a file that seems to be encrypted with the en.py script:
                                                                                                  퍦3�>�}3A����d��FY
                                                                                                                    ��YDo!�R#~�[��8����a4❄��á>)K�M^�z�I���,��ݨB���qݕYqˏR���q�M�ߟ.w�ʢF�@m�9
  �JD����(�^�7�5~�"���}��0�?�U�qX(��r�]�w���zGO
+```
+
+<br />
+
+## Decryption:
+
+<br />
+
+We know that the file is encrypted with AES and the password, as they told us in the roundcube message, is sahay.
+
+So I make the following python script to decrypt the file:
+
+<br />
+
+```python
+from Crypto.Cipher import AES
+from Crypto.Hash import SHA256
+from Crypto import Random
+import os
+
+def decrypt(key, filename):
+    chunksize = 64 * 1024
+    outputFile = filename[2:]
+
+    with open(filename, 'rb') as infile:
+        filesize = int(infile.read(16)) 
+        IV = infile.read(16)
+
+        decryptor = AES.new(key, AES.MODE_CBC, IV)
+
+        with open(outputFile, 'wb') as outfile:
+            while True:
+                chunk = infile.read(chunksize)
+
+                if len(chunk) == 0:
+                    break
+
+                outfile.write(decryptor.decrypt(chunk))
+
+            outfile.truncate(filesize)
+
+def getKey(password):
+    hasher = SHA256.new(password.encode('utf-8'))
+    return hasher.digest()
+
+# Ejemplo de uso
+password = "sahay"
+key = getKey(password) # Password
+
+archivo_encriptado = "en_msg.txt" # File Name
+decrypt(key, archivo_encriptado)
+
 ```
 
 <br />
