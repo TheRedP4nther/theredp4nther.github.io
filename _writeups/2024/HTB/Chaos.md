@@ -81,3 +81,23 @@ Nmap done: 1 IP address (1 host up) scanned in 61.54 seconds
 ```
 
 <br />
+
+Open Ports:
+
+- Port 80 -> http 
+
+- Ports 110,143,993 & 995 -> imapd
+
+- Port 10000 -> webmin 
+
+<br />
+
+# Http Enumeration: -> Port 80:
+
+<br />
+
+We start listing the website and see the following message:
+
+<br />
+
+
