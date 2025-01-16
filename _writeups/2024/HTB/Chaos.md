@@ -84,17 +84,17 @@ Nmap done: 1 IP address (1 host up) scanned in 61.54 seconds
 
 Open Ports:
 
-- Port 80 -> http 
+- `Port 80` -> http 
 
-- Ports 110 -> pop3 
+- `Ports 110` -> pop3 
 
-- Port 143 -> imap
+- `Port 143` -> imap
 
-- Port 993 -> imap (SSL)
+- `Port 993` -> imap (SSL)
 
-- Port 995 -> pop3 (SSL)
+- `Port 995` -> pop3 (SSL)
 
-- Port 10000 -> webmin 
+- `Port 10000` -> webmin 
 
 <br />
 
@@ -109,4 +109,9 @@ We start listing the website and see the following message:
 ![2](../../../assets/images/Chaos/2.png)
 
 <br />
+
+Proceed to add chaos.htb to our /etc/hosts pointing to the 10.10.10.120 and list again:
+
+<br />
+
 
