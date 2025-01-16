@@ -192,4 +192,6 @@ Click on the post and we see the author, human:
 
 <br / >
 
+![6](../../../assets/images/Chaos/6.png)
 
+<br />
