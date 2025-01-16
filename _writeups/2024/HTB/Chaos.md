@@ -177,7 +177,7 @@ ID           Response   Lines    Word       Chars       Payload
 
 <br />
 
-## /wp/wordpress:
+## /wp -> /wp/wordpress:
 
 <br />
 
