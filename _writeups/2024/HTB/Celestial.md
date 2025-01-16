@@ -8,7 +8,7 @@ tags: reverseshell nodejs deserializationattack scripting python javascript iife
 
 <br />
 
-![Machine-Icon](../../../assets/images/Chaos/1.png)
+![Machine-Icon](../../../assets/images/Celestial/Celestial.png)
 
 <br />
 
