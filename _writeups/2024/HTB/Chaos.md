@@ -203,3 +203,52 @@ Sometimes users use their own password name, so we try entering human and voila!
 ![7](../../../assets/images/Chaos/7.png)
 
 <br />
+
+As we can see, we have obtained a user and some credentials for "webmail".
+
+<br />
+
+# Webmail:
+
+<br />
+
+We start fuzzing to see if we can find any subdomains where "webmail" is hosted and enumerate the following:
+
+<br />
+
+```bash
+❯ ffuf -u http://chaos.htb -H "Host: FUZZ.chaos.htb" -w /usr/share/SecLists/Discovery/DNS/subdomains-top1million-5000.txt -c -t 20 -fs 73
+
+        /'___\  /'___\           /'___\       
+       /\ \__/ /\ \__/  __  __  /\ \__/       
+       \ \ ,__\\ \ ,__\/\ \/\ \ \ \ ,__\      
+        \ \ \_/ \ \ \_/\ \ \_\ \ \ \ \_/      
+         \ \_\   \ \_\  \ \____/  \ \_\       
+          \/_/    \/_/   \/___/    \/_/       
+
+       v2.1.0-dev
+________________________________________________
+
+ :: Method           : GET
+ :: URL              : http://chaos.htb
+ :: Wordlist         : FUZZ: /usr/share/SecLists/Discovery/DNS/subdomains-top1million-5000.txt
+ :: Header           : Host: FUZZ.chaos.htb
+ :: Follow redirects : false
+ :: Calibration      : false
+ :: Timeout          : 10
+ :: Threads          : 20
+ :: Matcher          : Response status: 200-299,301,302,307,401,403,405,500
+ :: Filter           : Response size: 73
+________________________________________________
+
+webmail                 [Status: 200, Size: 5607, Words: 649, Lines: 121, Duration: 67ms]
+```
+
+<br />
+
+Perfect, we have a new subdomain!! So we enter it in the /etc/hosts and proceed to list it:
+
+<br />
+
+
+
