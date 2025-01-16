@@ -408,7 +408,7 @@ Run it and get a `base64` text:
 
 <br />
 
-Apply a `base64 decode` and store de `output` in another file:
+Apply a `base64 decode` and store the `output` in another file:
 
 <br />
 
