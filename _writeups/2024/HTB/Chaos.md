@@ -190,8 +190,14 @@ When listing this route we find a folder that takes us to a wordpress with a pos
 
 Click on the post and we see the author, human:
 
-<br / >
+<br />
 
 ![6](../../../assets/images/Chaos/6.png)
 
 <br />
+
+Sometimes users use their own password name, so we try entering human and voila!!
+
+<br />
+
+
