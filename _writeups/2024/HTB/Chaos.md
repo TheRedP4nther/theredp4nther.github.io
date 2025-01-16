@@ -386,11 +386,24 @@ def getKey(password):
 password = "sahay"
 key = getKey(password) # Password
 
-archivo_encriptado = "en_msg.txt" # File Name
+archivo_encriptado = "enim_msg.txt" # File Name
 decrypt(key, archivo_encriptado)
 
 ```
 
 <br />
 
+Run it and get a base64 text:
 
+<br />
+
+```bash
+❯ cat im_msg.txt
+───────┬───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+       │ File: im_msg.txt
+───────┼───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+   1   │ SGlpIFNhaGF5CgpQbGVhc2UgY2hlY2sgb3VyIG5ldyBzZXJ2aWNlIHdoaWNoIGNyZWF0ZSBwZGYKCnAucyAtIEFzIHlvdSB0b2xkIG1lIHRvIGVuY3J5cHQgaW1wb3J0YW50IG1zZywgaSBkaWQgOikKCmh0dHA6Ly9jaGFvcy5odG
+       │ IvSjAwX3cxbGxfZjFOZF9uMDdIMW45X0gzcjMKClRoYW5rcywKQXl1c2gK
+```
+
+<br />
