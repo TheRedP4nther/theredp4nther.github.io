@@ -520,8 +520,9 @@ ID           Response   Lines    Word       Chars       Payload
 
 <br />
 
-The pdf path looks georgeus, let's check it:
+The /pdf path looks georgeus, let's check it:
 
 <br />
+
 
 
