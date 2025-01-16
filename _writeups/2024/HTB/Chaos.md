@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: 
+tags: webmin roundcube imap pop3 python3 decryptor firefox bash restrictedshell
 ---
 
 <br />
@@ -246,11 +246,24 @@ webmail                 [Status: 200, Size: 5607, Words: 649, Lines: 121, Durati
 
 <br />
 
-Perfect, we have a new subdomain!! So we enter it in the /etc/hosts and proceed to list it:
+Perfect, we have a new subdomain!! So enter it in the /etc/hosts and proceed to list the website:
 
 <br />
 
 ![8](../../../assets/images/Chaos/8.png)
 
 <br />
+
+As we can see, is a roundcube login panel.
+
+<br />
+
+Try to log with the Wordpress post credentials successfully:
+
+<br />
+
+Once inside, the inbox appears to be empty:
+
+<br />
+
 
