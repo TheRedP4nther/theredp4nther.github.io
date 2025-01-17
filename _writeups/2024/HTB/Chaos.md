@@ -542,10 +542,19 @@ There are a lot of different `payloads` to exploit a `Latex Injection`, but the 
 
 <br />
 
+Perfect!! We are executing commands as the www-data user:
+
+<br />
+
 ![15](../../../assets/images/Chaos/15.png)
 
 <br />
 
+Once we have a RCE, try to establish a Reverse Shell to gain acces to the victim machine:
+
+- Payload -> ``
+
+<br />
 
 
 
