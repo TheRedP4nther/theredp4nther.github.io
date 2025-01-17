@@ -574,4 +574,38 @@ www-data@chaos:/var/www/main/J00_w1ll_f1Nd_n07H1n9_H3r3/compile$
 
 <br />
 
+Intrusion ready!!!
 
+<br />
+
+# Privilege Escalation: www-data -> ayush 
+
+<br />
+
+Once on the system, we go to the home path and list two users:
+
+<br />
+
+```bash
+www-data@chaos:/home$ ls    
+ayush  sahay
+```
+
+<br />
+
+As we remember, before the exploitation of the pdf, we obtain the ayush credentials for the webmail in the Wordpress post, so we try to reuse them to log in via ssh in that user:
+
+<br />
+
+```bash
+www-data@chaos:/home$ su ayush
+Password: 
+ayush@chaos:/home$ ls
+rbash: /usr/lib/command-not-found: restricted: cannot specify `/' in command names
+```
+
+<br />
+
+Let's go! It worked! But there is a problem, as the ayush shell is apparently restricted.
+
+<br />
