@@ -99,6 +99,18 @@ Open Ports:
 
 <br />
 
+# Webmin Enumeration: -> Port 10000
+
+<br />
+
+As we know, there is a `webmin` running on the `port 10000`, so we list it and try `defaul credentials` like admin:admin, but didn't work:
+
+<br />
+
+![4](../../../assets/images/Chaos/4.png)
+
+<br />
+
 # Http Enumeration: -> Port 80:
 
 <br />
@@ -120,18 +132,6 @@ Proceed to add `chaos.htb` to our `/etc/hosts` pointing to the `10.10.10.120` an
 <br />
 
 The page has several sections but nothing `relevant`.
-
-<br />
-
-# Webmin Enumeration: -> Port 10000
-
-<br />
-
-As we know, there is a `webmin` running on the `port 10000`, so we list it and try `defaul credentials` like admin:admin, but didn't work:
-
-<br />
-
-![4](../../../assets/images/Chaos/4.png)
 
 <br />
 
