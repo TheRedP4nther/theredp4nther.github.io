@@ -562,7 +562,7 @@ Once we have a `RCE`, try to establish a `Reverse Shel`l to gain acces to the `v
 
 <br />
 
-We check de listener and....YES!
+We check de `listener` and... YES!
 
 <br />
 
