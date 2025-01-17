@@ -556,7 +556,7 @@ Once we have a RCE, try to establish a Reverse Shell to gain acces to the victim
 
 <br />
 
-
+![16](../../../assets/images/Chaos/16.png)
 
 <br />
 
