@@ -536,9 +536,12 @@ Now that we know that PDF's are being `created` and where they are `stored`, it 
 
 ## RCE:
 
-There are a lot of different `payloads` to exploit a `Latex Injection`, but the first that I try is to `execute a command` with a Payload founded in [Payloads All The Things](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/LaTeX%20Injection)
+There are a lot of different `payloads` to exploit a `Latex Injection`, but the first that I try is one to `execute a command` with a Payload founded in [Payloads All The Things](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/LaTeX%20Injection)
+
+- Payload: -> `\immediate\write18{id}`
 
 <br />
+
 
 
 
