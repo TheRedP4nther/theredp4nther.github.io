@@ -542,7 +542,9 @@ There are a lot of different `payloads` to exploit a `Latex Injection`, but the 
 
 <br />
 
+![15](../../../assets/images/Chaos/15.png)
 
+<br />
 
 
 
