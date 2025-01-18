@@ -704,9 +704,9 @@ Password: 'Thiv8wrej~'
 
 <br />
 
-We have a new password!!
+We have a new `password`!!
 
-Try to log into the root user with it:
+Try to log into the `root` user with it:
 
 <br />
 
@@ -717,7 +717,7 @@ root@chaos:/home/ayush# id
 uid=0(root) gid=0(root) groups=0(root)
 root@chaos:/home/ayush# cd
 root@chaos:~# cat root.txt
-2ffec600bf688ab9d4d516442abf1b7d
+2ffec600bf688ab9d4d516442axxxxxx
 ```
 
 <br />
