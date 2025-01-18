@@ -477,7 +477,7 @@ Since we don't see anything, we `intercept` the request using the Template `test
 
 <br />
 
-As we can see, a `pdf` is being created with `pdfTeX` Version 3.14159265-2.6-1.40.19, but we don't know where it is `stored`.
+As we can see, a `pdf` is being created with `pdfTeX Version 3.14159265-2.6-1.40.19`, but we don't know where it is `stored`.
 
 To discover this, start making `fuzzing` to the url and we find more than one path:
 
