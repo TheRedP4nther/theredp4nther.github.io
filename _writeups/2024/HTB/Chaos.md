@@ -411,7 +411,7 @@ a OK Fetch completed (0.003 + 0.000 + 0.002 secs).
 
 <br />
 
-And now, we can `base64 decode` the `attachments` to get their content.
+Now we can `base64 decode` the `attachments` to get their content.
 
 <br />
 
