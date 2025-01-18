@@ -534,7 +534,7 @@ Now that we know that PDF's are being `created` and where they are `stored`, it 
 
 <br />
 
-## RCE:
+## Remote Code Execution (RCE):
 
 <br />
 
@@ -663,6 +663,32 @@ Perfect!! We have the user.txt flag!!
 <br />
 
 # Privilege Escalation: ayush -> root
+
+<br />
+
+Afert a time enumerating the system, we find a .mozilla directory:
+
+<br />
+
+```bash
+$ ls -la
+total 40
+drwx------ 6 ayush ayush 4096 Jan 17 21:30 .
+drwxr-xr-x 4 root  root  4096 Jun 30  2022 ..
+drwxr-xr-x 2 root  root  4096 Jun 30  2022 .app
+lrwxrwxrwx 1 root  root     9 Jul 12  2022 .bash_history -> /dev/null
+-rw-r--r-- 1 ayush ayush  220 Oct 28  2018 .bash_logout
+-rwxr-xr-x 1 root  root    22 Oct 28  2018 .bashrc
+drwx------ 3 ayush ayush 4096 Jan 17 21:30 .gnupg
+drwx------ 3 ayush ayush 4096 Jun 30  2022 mail
+drwx------ 4 ayush ayush 4096 Jun 30  2022 .mozilla
+-rw-r--r-- 1 ayush ayush  807 Oct 28  2018 .profile
+-rw------- 1 ayush ayush   33 Jan 17 21:22 user.txt
+```
+
+<br />
+
+Let's try to extract passwords from Firefox with the [firefox_decrypt.py](https://github.com/unode/firefox_decrypt):
 
 <br />
 
