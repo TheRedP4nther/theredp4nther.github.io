@@ -281,9 +281,9 @@ Bring the `files` to our machine.
 
 <br />
 
-Another option we have to access the webmail server is to use imap.
+Another option we have to access the `webmail` server is to use `imap`.
 
-To do it, first of all, we need to connect to the server with openssl as following:
+To do it, first of all, we need to `connect` to the server with `openssl` as following:
 
 <br />
 
@@ -296,7 +296,7 @@ CONNECTED(00000003)
 
 <br />
 
-Log in with credentials:
+Log in with `ayush credentials`:
 
 <br />
 
@@ -307,7 +307,7 @@ tag OK [CAPABILITY IMAP4rev1 SASL-IR LOGIN-REFERRALS ID ENABLE IDLE SORT SORT=DI
 
 <br />
 
-List the mailboxes:
+List the `mailboxes`:
 
 <br />
 
@@ -321,7 +321,7 @@ tag OK List completed (0.001 + 0.000 secs).
 
 <br />
 
-Select a mailbox:
+Select a `mailbox`:
 
 <br />
 
@@ -338,7 +338,7 @@ tag OK [READ-WRITE] Select completed (0.001 + 0.000 secs).
 
 <br />
 
-Get the content of the unique message:
+Get the content of the `unique` message:
 
 <br />
 
@@ -411,9 +411,7 @@ a OK Fetch completed (0.003 + 0.000 + 0.002 secs).
 
 <br />
 
-```bash
-
-```
+And now, we can `base64 decode` the `attachments` to get their content.
 
 <br />
 
