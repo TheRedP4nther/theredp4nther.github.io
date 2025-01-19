@@ -887,3 +887,22 @@ We only need to `display menu`, go to `"Others"` and finally click on `"Command 
 ![19](../../../assets/images/Chaos/19.png)
 
 <br />
+
+At this point, we can run a Reverse Shell to gain a console in our machine:
+
+<br />
+
+
+
+<br />
+
+Check our listener and...
+
+<br />
+
+
+```bash
+
+```
+
+<br />
