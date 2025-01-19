@@ -754,7 +754,7 @@ Let's go! It worked! But there is a `problem`, as the ayush `shell` is apparentl
 
 <br />
 
-Click `[TAB]` to see the commands that we can run:
+Click `[TAB][TAB]` to see the commands that we can run:
 
 <br />
 
