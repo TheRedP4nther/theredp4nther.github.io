@@ -869,3 +869,7 @@ There is another `way` to get `root flag` exploiting the `webmin` hosted in the 
 To do it, first we need to log into the webmin as root with our new credentials:
 
 <br />
+
+![17](../../../assets/images/Chaos/17.png)
+
+<br />
