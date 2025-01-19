@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: webmin roundcube imap pop3 python decryptor firefox bash restrictedshell
+tags: webmin roundcube imap pop3 python decryptor firefox bash restrictedshell remotecodeexecution rce latexinjection pdftex mozilla rbash
 ---
 
 <br />
