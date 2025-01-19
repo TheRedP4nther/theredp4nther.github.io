@@ -888,11 +888,11 @@ We only need to `display menu`, go to `"Others"` and finally click on `"Command 
 
 <br />
 
-At this point, we can run a Reverse Shell to gain a console in our machine:
+At this point, we can run a `Reverse Shell` to gain a `console` in our machine:
 
 <br />
 
-
+![20](../../../assets/images/Chaos/20.png)
 
 <br />
 
@@ -900,9 +900,28 @@ Check our listener and...
 
 <br />
 
-
 ```bash
-
+❯ nc -nlvp 443
+listening on [any] 443 ...
+connect to [10.10.14.20] from (UNKNOWN) [10.10.10.120] 44764
+bash: cannot set terminal process group (1482): Inappropriate ioctl for device
+bash: no job control in this shell
+root@chaos:~# whoami
+whoami
+root
+root@chaos:~# cd
+cd
+root@chaos:~# cat root.txt
+cat root.txt
+67814b9f4b4d5ae3110880f637xxxxxx
 ```
+
+<br />
+
+And thats all!! One more machine pwned!!
+
+In my opinion, this machine is really cool to learn a lot, because you can pwn it in different ways.
+
+I hope you have put into practice the different ways of doing it and that you do not have any doubts about it. Keep hacking!!❤️❤️
 
 <br />
