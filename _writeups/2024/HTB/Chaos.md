@@ -866,10 +866,18 @@ root@chaos:~# cat root.txt
 
 There is another `way` to get `root flag` exploiting the `webmin` hosted in the `port 10000`.
 
-To do it, first we need to log into the webmin as root with our new credentials:
+To do it, first we need to `log` into the `webmin` as `root` with our new `credentials`:
 
 <br />
 
 ![17](../../../assets/images/Chaos/17.png)
 
 <br />
+
+Once into the `webmin`, is really `easy` to get a `command shell` as `root`.
+
+We only need to `display menu`, go to `"Others"` and finally click on `"Command Shell"`:
+
+<br />
+
+
