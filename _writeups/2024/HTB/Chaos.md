@@ -22,7 +22,7 @@ Difficulty -> Medium.
 
 <br />
 
-
+Hello hackers! Today we’ll tackle the Chaos Machine, a Mediumd ifficulty Linux challenge. We’ll start with thorough enumeration to discover a path leading to a WordPress site with a protected post secured by a password so weak it can be easily guessed. Accessing its contents will reveal a username and valid credentials for logging into a webmail via IMAP. Inside the webmail, we’ll find an encrypted file, decrypt it, and uncover a URL hosting a vulnerable pdftex instance. Exploiting a LaTeX injection, we’ll execute commands and gain system access. Once inside, we’ll pivot to another user by reusing credentials, escaping a restricted shell to achieve a fully interactive one. Finally, we’ll decrypt an encrypted credential in Firefox’s .mozilla directory to escalate privileges and become root.
 
 <br />
 
