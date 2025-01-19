@@ -737,7 +737,7 @@ ayush  sahay
 
 <br />
 
-As we remember, before the exploitation of `pdfTeX`, we obtain the `ayush credentials` for the webmail in the `Wordpress post`, so we try to `reuse` them to log in via `ssh` in that user:
+As we remember, before the exploitation of `pdfTeX`, we obtain the `ayush credentials` for the webmail in the `Wordpress post`, so we try to `reuse` them to log in that user:
 
 <br />
 
