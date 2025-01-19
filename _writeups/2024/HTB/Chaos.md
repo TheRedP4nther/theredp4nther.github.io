@@ -880,4 +880,10 @@ We only need to `display menu`, go to `"Others"` and finally click on `"Command 
 
 <br />
 
+![18](../../../assets/images/Chaos/18.png)
 
+<br />
+
+![19](../../../assets/images/Chaos/19.png)
+
+<br />
