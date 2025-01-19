@@ -896,7 +896,7 @@ At this point, we can run a `Reverse Shell` to gain a `console` in our machine:
 
 <br />
 
-Check our listener and...
+Check our `listener`:
 
 <br />
 
