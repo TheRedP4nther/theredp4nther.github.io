@@ -226,9 +226,9 @@ Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
 
 <br />
 
-As we know if we are able to receive a curl we can gain access to the machine with a Reverse Shell.
+As we know if we are able to receive a `curl` we can gain `access` to the machine with a `Reverse Shell`.
 
-So we proceed to create a shell.sh file with the following code:
+So we proceed to create a `shell.sh` file with the following `code`:
 
 <br />
 
@@ -285,7 +285,7 @@ bash: cd: josh: Permission denied
 
 <br />
 
-Continue enumerating the system and we found in the directory /app a interesting .jar file, so we transfer it to our machine:
+Continue enumerating the `system` and we found in the directory `/app` a interesting `.jar file`, so we `transfer` it to our machine:
 
 <br />
 
@@ -298,7 +298,9 @@ Serving HTTP on 0.0.0.0 port 8082 (http://0.0.0.0:8082/) ...
 
 <br />
 
-Run wget:
+Run `wget`:
+
+<br />
 
 ```bash
 ❯ wget http://10.10.11.230:8082/cloudhosting-0.0.1.jar
