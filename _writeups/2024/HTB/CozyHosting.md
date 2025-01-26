@@ -145,3 +145,9 @@ Requests/sec.: 149.6316
 ```
 
 <br />
+
+Of all these paths, we proceed to list first the one that seems most interesting to me, which is /actuator/sessions:
+
+<br />
+
+
