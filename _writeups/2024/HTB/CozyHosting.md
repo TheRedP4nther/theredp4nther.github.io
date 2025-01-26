@@ -78,6 +78,6 @@ Proceed to list the website and it redirects to cozyhosting.htb, so we add this 
 
 <br />
 
-The website is very static and doesn't has anything interesting:
+The website is very static and doesn't has anything interesting, only a /login, but we dont have creds:
 
 <br />
