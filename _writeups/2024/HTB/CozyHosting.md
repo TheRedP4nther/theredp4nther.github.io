@@ -206,7 +206,7 @@ It seems that the server is running `ssh` behind the scenes to `try to connect`,
 
 Yesss!! We are able to inject a command as the user `"app"`.
 
-In `Bash`, there are many ways to handle `spaces` between commands. One of the most popular is by using the `${IFS}` environment variable, which defines the `Internal Field Separator` and, by default, includes `space`, tab `(\t)` and newline `(\n)`. So we do it  with a `curl` and it works:
+In `Bash`, there are many ways to handle `spaces` between commands. One of the most popular is by using the `${IFS}` environment variable, which defines the `Internal Field Separator` and, by default, includes `space`, tab `(\t)` and newline `(\n)`. So we try to do it with a `curl`:
 
 <br />
 
@@ -214,7 +214,7 @@ In `Bash`, there are many ways to handle `spaces` between commands. One of the m
 
 <br />
 
-We see the message `"HTTP Status 400 - Bad Request"` in the response but it `works`, we have `received` the curl:
+See the message `"HTTP Status 400 - Bad Request"` in the response but it `works`, we have `received` the curl:
 
 <br />
 
