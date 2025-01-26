@@ -93,3 +93,9 @@ Try creds like admin:admin but don't work:
 ![3](../../../assets/images/CozyHosting/3.png)
 
 <br />
+
+The page of 404 error seems interesting:
+
+<br />
+
+
