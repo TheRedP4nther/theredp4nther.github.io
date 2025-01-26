@@ -166,7 +166,7 @@ Perfect!! We have access to an Administration Paneli as the user K.Anderson:
 
 <br />
 
-![8](../../,,/assets/images/CozyHosting/8.png)
+![8](../../../assets/images/CozyHosting/8.png)
 
 <br />
 
