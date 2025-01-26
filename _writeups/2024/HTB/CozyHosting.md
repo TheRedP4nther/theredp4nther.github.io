@@ -21,7 +21,7 @@ Difficulty -> Easy
 # Introduction:
 <br />
 
-
+Hello hackers! Today we’ll tackle the CozyHosting Machine, an Easy Difficulty Linux challenge. We’ll start by discovering a Spring Boot route that exposes a session token, allowing us to log into the web application. Inside the app, we’ll exploit a command injection vulnerability to gain system access. Once inside, we’ll find credentials to enumerate a PostgreSQL database, where we’ll uncover a crackable bcrypt Blowfish hash. Cracking it will provide a valid password to pivot to another user. Finally, we’ll exploit a SUDOERS permission for this user to escalate privileges and become root.
 
 <br />
 
