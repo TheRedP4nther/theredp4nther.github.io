@@ -204,4 +204,4 @@ It seems that the server is running ssh behind the scenes to try to connect, let
 
 <br />
 
-Yesss!! We are able to inject a command as the "app" user.
+Yesss!! We are able to inject a command as the user "app".
