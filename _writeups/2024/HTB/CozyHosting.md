@@ -359,7 +359,7 @@ postgres=# \l
 
 <br />
 
-Then we connect to the `cozyhosting DB` and list the `tables`:
+Then we `connect` to the `cozyhosting DB` and list the `tables`:
 
 <br />
 
