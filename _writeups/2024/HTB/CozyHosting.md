@@ -98,4 +98,6 @@ The page of 404 error seems interesting:
 
 <br />
 
+![4](../../../assets/images/CozyHosting/4.png)
 
+<br />
