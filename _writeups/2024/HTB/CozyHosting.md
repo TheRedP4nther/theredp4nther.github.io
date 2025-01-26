@@ -162,7 +162,7 @@ It seems to be a session cookie, let's try to set it and load again the /login p
 
 <br />
 
-Perfect!! We have access to an Administration Paneli as the user K.Anderson:
+Perfect!! We have access to an Administration Panel as the user K.Anderson:
 
 <br />
 
@@ -177,3 +177,9 @@ Att the bottom of the page, we see a funcionality that seems very interesting:
 ![9](../../../assets/images/CozyHosting/9.png)
 
 <br />
+
+Let's intercept the petition with Burp Suite to test different things:
+
+<br />
+
+
