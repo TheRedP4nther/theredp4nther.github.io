@@ -94,7 +94,7 @@ Try creds like admin:admin but don't work:
 
 <br />
 
-The page of 404 error seems interesting:
+The 404 error page seems interesting:
 
 <br />
 
