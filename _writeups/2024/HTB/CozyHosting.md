@@ -68,4 +68,16 @@ Open Ports:
 
 <br />
 
+Proceed to list the website and it redirects to cozyhosting.htb, so we add this domain to our /etc/hosts:
 
+<br />
+
+```bash
+❯ echo '10.10.11.230 cozyhosting.htb' >> /etc/hosts
+```
+
+<br />
+
+The website is very static and doesn't has anything interesting:
+
+<br />
