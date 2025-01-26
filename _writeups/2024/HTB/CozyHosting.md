@@ -178,8 +178,8 @@ Perfect!! We have access to an `Administration Panel` as the user `K.Anderson`:
 
 <br />
 
-Att the `bottom` of the page, we see a `funcionality` that seems very interesting:
-q
+At the `bottom` of the page, we see a `funcionality` that seems very interesting:
+
 <br />
 
 ![9](../../../assets/images/CozyHosting/9.png)
@@ -314,7 +314,7 @@ cloudhosting-0.0.1.jar                        100%[=============================
 
 <br />
 
-Once we have the file in our machine, proceed to enumerate with jd-gui and we found postgresql credentials:
+Once we have the `file` in our machine, proceed to `enumerate` with `jd-gui` and we found `postgresql credentials`:
 
 <br />
 
@@ -327,3 +327,5 @@ jd-gui cloudhosting-0.0.1.jar & disown
 ![14](../../../assets/images/CozyHosting/14.png)
 
 <br />
+
+
