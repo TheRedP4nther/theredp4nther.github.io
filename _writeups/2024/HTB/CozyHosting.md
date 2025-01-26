@@ -397,7 +397,7 @@ cozyhosting=# select * from users;
 
 <br />
 
-We put the `hashes` in a `file` and we are able to `crack` one of them running `hashcat` with the Bcrypt Blowfish `3200 mode`:
+We put the `hashes` into a `file` and we are able to `crack` one of them running `hashcat` with the Bcrypt Blowfish `3200 mode`:
 
 <br />
 
@@ -446,7 +446,9 @@ User josh may run the following commands on localhost:
 
 <br />
 
-We can `run ssh` as `root`, this is very `dangerous` because ssh has a `option` to run `commands`.
+We can `run ssh` as `root`, this is very `dangerous` because ssh has a `option` to run `commands`, the ProxyCommand option.
+
+So we `run it` trying to `attribute SUID` permission to the `/bin/bash`.
 
 <br />
 
@@ -466,6 +468,8 @@ b6515791e1cac992937d8180fbxxxxxx
 
 GG!! Machine Rooted!!
 
-I have learned a lot with this machine about new concepts like IFS that i never have touched before. Hope you too. Keep hacking!!❤️❤️
+I have learned a lot with this machine about new concepts like IFS that i never have touched before. 
+
+Hope you too!! Keep hacking!!❤️❤️
 
 <br />
