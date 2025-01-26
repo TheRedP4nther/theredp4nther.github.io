@@ -78,10 +78,15 @@ Proceed to list the website and it redirects to cozyhosting.htb, so we add this 
 
 <br />
 
-The website is very static and doesn't has anything interesting, only a /login, but we dont have creds:
+The website is very static and doesn't has anything interesting, only a /login:
 
 <br />
 
 ![2](../../../assets/images/CozyHosting/2.png)
 
 <br />
+
+Try creds like admin:admin but don't work:
+
+<br />
+
