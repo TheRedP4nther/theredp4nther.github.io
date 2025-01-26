@@ -90,3 +90,6 @@ Try creds like admin:admin but don't work:
 
 <br />
 
+![3](../../../assets/images/CozyHosting/3.png)
+
+<br />
