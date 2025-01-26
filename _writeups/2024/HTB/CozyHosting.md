@@ -110,7 +110,7 @@ Search about this error on Google and I discover that Spring Boot its being used
 
 <br />
 
-As we know, there are specific dictionaries for this type of framework, so we proceed to fuzz with wfuzz using the dictionary "spring-boot.txt" of the seclists and discover the following paths:
+As we know, there are specific dictionaries for this type of framework, so we proceed to fuzz with wfuzz using the dictionary "spring-boot.txt" from the [SecLists](https://github.com/danielmiessler/SecLists) of Daniel Miessler and discover the following paths:
 
 <br />
 
