@@ -30,7 +30,7 @@ Hello hackers! Today we’ll tackle the Stratosphere Machine, a Medium difficult
 
 <br />
 
-As always we are going to start with a nmap scan:
+As always we are going to start with a `nmap` scan:
 
 <br />
 

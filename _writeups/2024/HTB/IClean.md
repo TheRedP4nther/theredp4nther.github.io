@@ -30,7 +30,7 @@ Hello hackers! Today we’re diving into the IClean Machine, a Medium difficulty
 
 <br />
 
-As always, we'll start by launching our nmap scan:
+As always, we'll start by launching our `nmap` scan:
 
 <br />
 

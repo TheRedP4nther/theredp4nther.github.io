@@ -30,7 +30,7 @@ Hello hackers! Today we’ll tackle the Ransom Machine, a Medium difficulty chal
 
 <br />
 
-As always we start running our nmap scan to enumerate open ports and services:
+As always we start running our `nmap` scan to enumerate open ports and services:
 
 <br />
 

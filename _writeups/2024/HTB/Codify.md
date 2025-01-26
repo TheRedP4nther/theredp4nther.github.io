@@ -30,7 +30,7 @@ Hello hackers! Today, we’ll solve the Codify machine, an Easy difficulty Linux
 
 <br />
 
-As always we start with a nmap scan:
+As always we start with a `nmap` scan:
 
 <br />
 

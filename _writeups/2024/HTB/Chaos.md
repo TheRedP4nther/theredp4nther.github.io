@@ -30,7 +30,7 @@ Hello hackers! Today we’ll tackle the Chaos Machine, a Mediumd ifficulty Linux
 
 <br />
 
-We start by running the typical nmap scan to see which ports are open:
+We start by running the typical `nmap` scan to see which ports are open:
 
 <br />
 
