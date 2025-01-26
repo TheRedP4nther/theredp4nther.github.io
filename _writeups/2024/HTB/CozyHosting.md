@@ -153,3 +153,9 @@ Of all these paths, we proceed to list first the one that seems most interesting
 ![6](../../../assets/images/CozyHosting/6.png)
 
 <br />
+
+It seems to be a session cookie, let's try to set it and load again the /login page:
+
+<br />
+
+
