@@ -161,3 +161,11 @@ It seems to be a session cookie, let's try to set it and load again the /login p
 ![7](../../../assets/images/CozyHosting/7.png)
 
 <br />
+
+Perfect!! We have access to an Administration Panel:
+
+<br />
+
+![8](../../,,/assets/images/CozyHosting/8.png)
+
+<br />
