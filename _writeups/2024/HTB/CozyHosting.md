@@ -182,4 +182,6 @@ Let's intercept the petition with Burp Suite to test different things:
 
 <br />
 
+![10](../../../assets/images/CozyHosting/10.png)
 
+<br />
