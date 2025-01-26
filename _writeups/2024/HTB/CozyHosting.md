@@ -68,7 +68,7 @@ Open Ports:
 
 <br />
 
-Proceed to list the website and it redirects to cozyhosting.htb, so we add this domain to our /etc/hosts:
+Proceed to list the `website` and it redirects to `cozyhosting.htb`, so we add this domain to our `/etc/hosts`:
 
 <br />
 
@@ -78,7 +78,7 @@ Proceed to list the website and it redirects to cozyhosting.htb, so we add this 
 
 <br />
 
-The website is very static and doesn't has anything interesting, only a /login:
+The website is very `static` and doesn't has `anything interesting`, only a `/login`:
 
 <br />
 
@@ -86,7 +86,7 @@ The website is very static and doesn't has anything interesting, only a /login:
 
 <br />
 
-Try creds like admin:admin but don't work:
+Try `creds` like `admin:admin` but don't work:
 
 <br />
 
@@ -94,7 +94,7 @@ Try creds like admin:admin but don't work:
 
 <br />
 
-The 404 error page seems interesting:
+The `404 error page` seems interesting:
 
 <br />
 
@@ -102,7 +102,7 @@ The 404 error page seems interesting:
 
 <br />
 
-Search about this error on Google and I discover that Spring Boot its being used in the backend of the Server:
+Search about this error on Google and I discover that `Spring Boot` its being used in the `backend` of the `Server`:
 
 <br />
 
@@ -110,7 +110,7 @@ Search about this error on Google and I discover that Spring Boot its being used
 
 <br />
 
-As we know, there are specific dictionaries for this type of framework, so we proceed to fuzz with wfuzz using the dictionary "spring-boot.txt" from the [SecLists](https://github.com/danielmiessler/SecLists) of Daniel Miessler and discover the following paths:
+As we know, there are `specific dictionaries` for this type of `framework`, so we proceed to fuzz with `wfuzz` using the dictionary `"spring-boot.txt"` from the [SecLists](https://github.com/danielmiessler/SecLists) of Daniel Miessler and discover the following `paths`:
 
 <br />
 
@@ -150,7 +150,7 @@ Requests/sec.: 149.6316
 
 <br />
 
-Of all these paths, we proceed to list first the one that seems most interesting to me, which is /actuator/sessions:
+Of all these paths, we proceed to list `first` the one that seems `most interesting` to me, which is ``/actuator/sessions``:
 
 <br />
 
@@ -158,7 +158,7 @@ Of all these paths, we proceed to list first the one that seems most interesting
 
 <br />
 
-It seems to be a session cookie, let's try to set it and load again the /login page:
+It seems to be a `session cookie`, let's try to `set it` and load again the `/login` page:
 
 <br />
 
@@ -166,7 +166,7 @@ It seems to be a session cookie, let's try to set it and load again the /login p
 
 <br />
 
-Perfect!! We have access to an Administration Panel as the user K.Anderson:
+Perfect!! We have access to an `Administration Panel` as the user `K.Anderson`:
 
 <br />
 
@@ -178,7 +178,7 @@ Perfect!! We have access to an Administration Panel as the user K.Anderson:
 
 <br />
 
-Att the bottom of the page, we see a funcionality that seems very interesting:
+Att the `bottom` of the page, we see a `funcionality` that seems very interesting:
 q
 <br />
 
@@ -186,7 +186,7 @@ q
 
 <br />
 
-Let's intercept the petition with Burp Suite to test different things:
+Let's `intercept` the petition with `Burp Suite` to test different things:
 
 <br />
 
@@ -194,9 +194,9 @@ Let's intercept the petition with Burp Suite to test different things:
 
 <br />
 
-As we can see, there is a error in the response "Could not resolve hostname testing".
+As we can see, there is a `error` in the response `"Could not resolve hostname testing"`.
 
-It seems that the server is running ssh behind the scenes to try to connect, let's inject a command in the username field:
+It seems that the server is running `ssh` behind the scenes to `try to connect`, let's inject a `command` in the `username` field:
 
 <br />
 
@@ -204,4 +204,12 @@ It seems that the server is running ssh behind the scenes to try to connect, let
 
 <br />
 
-Yesss!! We are able to inject a command as the user "app".
+Yesss!! We are able to inject a command as the user `"app"`.
+
+In `Bash`, there are many ways to handle `spaces` between commands. One of the most popular is by using the `${IFS}` environment variable, which defines the `Internal Field Separator` and, by default, includes `space`, tab `(\t)` and newline `(\n)`. So we do it and it works:
+
+<br />
+
+
+
+
