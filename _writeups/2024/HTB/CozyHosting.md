@@ -106,4 +106,6 @@ Search about this error on Google and i discover that Spring Boot its being used
 
 <br />
 
+![5](../../../assets/images/CozyHosting/5.png)
 
+<br />
