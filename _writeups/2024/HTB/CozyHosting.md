@@ -179,7 +179,7 @@ Perfect!! We have access to an Administration Panel as the user K.Anderson:
 <br />
 
 Att the bottom of the page, we see a funcionality that seems very interesting:
-
+q
 <br />
 
 ![9](../../../assets/images/CozyHosting/9.png)
@@ -194,8 +194,14 @@ Let's intercept the petition with Burp Suite to test different things:
 
 <br />
 
-As we can see, there is a error in the response "Could not resolve hostname testing", let's try to inject a command in the username file:
+As we can see, there is a error in the response "Could not resolve hostname testing".
+
+It seems that the server is running ssh behind the scenes to try to connect, let's try to inject a command in the username field:
 
 <br />
 
+![11](../../../assets/images/CozyHosting/11.png)
 
+<br />
+
+Yesss!! We are able to inject a command as the "app" user.
