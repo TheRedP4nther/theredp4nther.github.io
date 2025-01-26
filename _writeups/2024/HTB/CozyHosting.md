@@ -206,7 +206,7 @@ It seems that the server is running `ssh` behind the scenes to `try to connect`,
 
 Yesss!! We are able to inject a command as the user `"app"`.
 
-In `Bash`, there are many ways to handle `spaces` between commands. One of the most popular is by using the `${IFS}` environment variable, which defines the `Internal Field Separator` and, by default, includes `space`, tab `(\t)` and newline `(\n)`. So we do it and it works:
+In `Bash`, there are many ways to handle `spaces` between commands. One of the most popular is by using the `${IFS}` environment variable, which defines the `Internal Field Separator` and, by default, includes `space`, tab `(\t)` and newline `(\n)`. So we do it  with a `curl` and it works:
 
 <br />
 
