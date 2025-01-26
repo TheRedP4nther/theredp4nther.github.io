@@ -210,6 +210,19 @@ In `Bash`, there are many ways to handle `spaces` between commands. One of the m
 
 <br />
 
+![12](../../../assets/images/CozyHosting/12.png)
 
+<br />
 
+We see the message `"HTTP Status 400 - Bad Request"` in the response but it `works`, we have `received` the curl:
+
+<br />
+
+```bash
+❯ python -m http.server 80
+Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
+10.10.11.230 - - [26/Jan/2025 21:11:37] "GET / HTTP/1.1" 200 -
+```
+
+<br />
 
