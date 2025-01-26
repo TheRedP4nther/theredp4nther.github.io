@@ -466,6 +466,6 @@ b6515791e1cac992937d8180fbxxxxxx
 
 GG!! Machine Rooted!!
 
-I learn a lot with this machine about new concepts like IFS that i never have touched before. Hope you too. Keep hacking!!❤️❤️
+I have learned a lot with this machine about new concepts like IFS that i never have touched before. Hope you too. Keep hacking!!❤️❤️
 
 <br />
