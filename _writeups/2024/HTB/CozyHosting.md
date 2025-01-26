@@ -324,4 +324,6 @@ jd-gui cloudhosting-0.0.1.jar & disown
 
 <br />
 
+![14](../../../assets/images/CozyHosting/14.png)
 
+<br />
