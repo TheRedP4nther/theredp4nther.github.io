@@ -267,3 +267,61 @@ uid=1001(app) gid=1001(app) groups=1001(app)
 ```
 
 <br />
+
+# Privilege Escalation: app -> josh
+
+<br />
+
+We are in as the user `app`, but when we try to visit `/home/josh` -> `"Permission denied"`:
+
+<br />
+
+```bash
+app@cozyhosting:/home$ ls
+josh
+app@cozyhosting:/home$ cd josh
+bash: cd: josh: Permission denied
+```
+
+<br />
+
+Continue enumerating the system and we found in the directory /app a interesting .jar file, so we transfer it to our machine:
+
+<br />
+
+```bash
+app@cozyhosting:/app$ ls
+cloudhosting-0.0.1.jar
+app@cozyhosting:/app$ python3 -m http.server 8082
+Serving HTTP on 0.0.0.0 port 8082 (http://0.0.0.0:8082/) ...
+```
+
+<br />
+
+Run wget:
+
+```bash
+❯ wget http://10.10.11.230:8082/cloudhosting-0.0.1.jar
+--2025-01-26 21:55:32--  http://10.10.11.230:8082/cloudhosting-0.0.1.jar
+Conectando con 10.10.11.230:8082... conectado.
+Petición HTTP enviada, esperando respuesta... 200 OK
+Longitud: 60259688 (57M) [application/java-archive]
+Grabando a: «cloudhosting-0.0.1.jar»
+
+cloudhosting-0.0.1.jar                        100%[=================================================================================================>]  57,47M   665KB/s    en 2m 35s  
+
+2025-01-26 21:58:08 (380 KB/s) - «cloudhosting-0.0.1.jar» guardado [60259688/60259688]```
+
+<br />
+
+Once we have the file in our machine, proceed to enumerate with jd-gui and we found postgresql credentials:
+
+<br />
+
+```bash
+jd-gui cloudhosting-0.0.1.jar & disown
+```
+
+<br />
+
+
