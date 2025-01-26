@@ -102,10 +102,46 @@ The 404 error page seems interesting:
 
 <br />
 
-Search about this error on Google and i discover that Spring Boot its being used in the backend of the Server:
+Search about this error on Google and I discover that Spring Boot its being used in the backend of the Server:
 
 <br />
 
 ![5](../../../assets/images/CozyHosting/5.png)
+
+<br />
+
+As we know, there are specific dictionaries for this type of framework, so we proceed to fuzz with wfuzz using the dictionary "spring-boot.txt" of the seclists and discover the following paths:
+
+<br />
+
+```bash
+❯ wfuzz -c -t 50 --hc=404 -w /usr/share/SecLists/Discovery/Web-Content/spring-boot.txt http://cozyhosting.htb/FUZZ
+ /usr/lib/python3/dist-packages/wfuzz/__init__.py:34: UserWarning:Pycurl is not compiled against Openssl. Wfuzz might not work correctly when fuzzing SSL sites. Check Wfuzz's documentation for more information.
+********************************************************
+* Wfuzz 3.1.0 - The Web Fuzzer                         *
+********************************************************
+
+Target: http://cozyhosting.htb/FUZZ
+Total requests: 112
+
+=====================================================================
+ID           Response   Lines    Word       Chars       Payload                                                                                                                
+=====================================================================
+
+000000041:   200        0 L      13 W       487 Ch      "actuator/env/lang"                                                                                                    
+000000044:   200        0 L      13 W       487 Ch      "actuator/env/path"                                                                                                    
+000000039:   200        0 L      13 W       487 Ch      "actuator/env/home"                                                                                                    
+000000029:   200        0 L      1 W        634 Ch      "actuator"                                                                                                             
+000000051:   200        0 L      1 W        15 Ch       "actuator/health"                                                                                                      
+000000072:   200        0 L      1 W        48 Ch       "actuator/sessions"                                                                                                    
+000000038:   200        0 L      120 W      4957 Ch     "actuator/env"                                                                                                         
+000000058:   200        0 L      108 W      9938 Ch     "actuator/mappings"                                                                                                    
+000000032:   200        0 L      542 W      127224 Ch   "actuator/beans"                                                                                                       
+
+Total time: 0.748504
+Processed Requests: 112
+Filtered Requests: 103
+Requests/sec.: 149.6316
+```
 
 <br />
