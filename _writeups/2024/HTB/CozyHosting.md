@@ -174,4 +174,6 @@ Att the bottom of the page, we see a funcionality that seems very interesting:
 
 <br />
 
+![9](../../../assets/images/CozyHosting/9.png)
 
+<br />
