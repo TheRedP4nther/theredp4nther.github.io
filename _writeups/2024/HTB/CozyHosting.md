@@ -196,7 +196,7 @@ Let's intercept the petition with Burp Suite to test different things:
 
 As we can see, there is a error in the response "Could not resolve hostname testing".
 
-It seems that the server is running ssh behind the scenes to try to connect, let's try to inject a command in the username field:
+It seems that the server is running ssh behind the scenes to try to connect, let's inject a command in the username field:
 
 <br />
 
