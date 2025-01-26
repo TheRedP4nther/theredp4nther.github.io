@@ -162,10 +162,16 @@ It seems to be a session cookie, let's try to set it and load again the /login p
 
 <br />
 
-Perfect!! We have access to an Administration Panel:
+Perfect!! We have access to an Administration Paneli as the user K.Anderson:
 
 <br />
 
 ![8](../../,,/assets/images/CozyHosting/8.png)
 
 <br />
+
+Att the bottom of the page, we see a funcionality that seems very interesting:
+
+<br />
+
+
