@@ -114,6 +114,10 @@ As we know, there are specific dictionaries for this type of framework, so we pr
 
 <br />
 
+# Information Leakeage:
+
+<br />
+
 ```bash
 ❯ wfuzz -c -t 50 --hc=404 -w /usr/share/SecLists/Discovery/Web-Content/spring-boot.txt http://cozyhosting.htb/FUZZ
  /usr/lib/python3/dist-packages/wfuzz/__init__.py:34: UserWarning:Pycurl is not compiled against Openssl. Wfuzz might not work correctly when fuzzing SSL sites. Check Wfuzz's documentation for more information.
@@ -143,10 +147,6 @@ Processed Requests: 112
 Filtered Requests: 103
 Requests/sec.: 149.6316
 ```
-
-<br />
-
-# Information Leakeage:
 
 <br />
 
