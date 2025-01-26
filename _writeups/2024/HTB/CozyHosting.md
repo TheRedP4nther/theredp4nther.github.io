@@ -185,3 +185,9 @@ Let's intercept the petition with Burp Suite to test different things:
 ![10](../../../assets/images/CozyHosting/10.png)
 
 <br />
+
+As we can see, there is a error in the response "Could not resolve hostname testing", let's try to change the hostname to localhost:
+
+<br />
+
+
