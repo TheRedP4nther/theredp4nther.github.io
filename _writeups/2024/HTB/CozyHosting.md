@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: 
+tags: springboot commandinjection informationleakeage remotecodeexecution reverseshell bash ${ifs} postgresql jd-gui jar ssh gtfobins sudoers
 ---
 
 <br />
@@ -110,11 +110,11 @@ Search about this error on Google and I discover that `Spring Boot` its being us
 
 <br />
 
-As we know, there are `specific dictionaries` for this type of `framework`, so we proceed to fuzz with `wfuzz` using the dictionary `"spring-boot.txt"` from the [SecLists](https://github.com/danielmiessler/SecLists) of Daniel Miessler and discover the following `paths`:
+# Information Leakeage:
 
 <br />
 
-# Information Leakeage:
+As we know, there are `specific dictionaries` for this type of `framework`, so we proceed to fuzz with `wfuzz` using the dictionary `"spring-boot.txt"` from the [SecLists](https://github.com/danielmiessler/SecLists) of Daniel Miessler and discover the following `paths`:
 
 <br />
 
