@@ -146,6 +146,10 @@ Requests/sec.: 149.6316
 
 <br />
 
+# Information Leakeage:
+
+<br />
+
 Of all these paths, we proceed to list first the one that seems most interesting to me, which is /actuator/sessions:
 
 <br />
@@ -170,6 +174,10 @@ Perfect!! We have access to an Administration Panel as the user K.Anderson:
 
 <br />
 
+# Command Injection:
+
+<br />
+
 Att the bottom of the page, we see a funcionality that seems very interesting:
 
 <br />
@@ -186,7 +194,7 @@ Let's intercept the petition with Burp Suite to test different things:
 
 <br />
 
-As we can see, there is a error in the response "Could not resolve hostname testing", let's try to change the hostname to localhost:
+As we can see, there is a error in the response "Could not resolve hostname testing", let's try to inject a command in the username file:
 
 <br />
 
