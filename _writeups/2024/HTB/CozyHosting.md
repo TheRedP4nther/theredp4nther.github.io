@@ -158,6 +158,6 @@ It seems to be a session cookie, let's try to set it and load again the /login p
 
 <br />
 
-![7](../../../assets/images/CozyHosting/7.png)
+
 
 <br />
