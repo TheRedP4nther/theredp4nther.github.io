@@ -150,4 +150,6 @@ Of all these paths, we proceed to list first the one that seems most interesting
 
 <br />
 
+![6](../../../assets/images/CozyHosting/6.png)
 
+<br />
