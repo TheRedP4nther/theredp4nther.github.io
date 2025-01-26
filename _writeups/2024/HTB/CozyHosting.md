@@ -101,3 +101,9 @@ The 404 error page seems interesting:
 ![4](../../../assets/images/CozyHosting/4.png)
 
 <br />
+
+Search about this error on Google and i discover that Spring Boot its being used in the backend of the Server:
+
+<br />
+
+
