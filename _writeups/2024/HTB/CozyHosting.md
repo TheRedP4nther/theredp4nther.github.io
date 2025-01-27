@@ -446,7 +446,7 @@ User josh may run the following commands on localhost:
 
 <br />
 
-We can `run ssh` as `root`, this is very `dangerous` because ssh has a `option` to run `commands`, the ProxyCommand option.
+We can `run ssh` as `root`, this is very `dangerous` because ssh has a `option` to run `commands`, the `ProxyCommand` option.
 
 So we `run it` trying to `attribute SUID` permission to the `/bin/bash`.
 
