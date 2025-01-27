@@ -319,7 +319,7 @@ cloudhosting-0.0.1.jar                        100%[=============================
 
 <br />
 
-Once we have the `file` in our machine, proceed to `enumerate` with `jd-gui` and we found `postgresql credentials`:
+Once we have the `file` in our machine, we `enumerate` the `.jar` file with `jd-gui` and found `postgresql credentials`:
 
 <br />
 
