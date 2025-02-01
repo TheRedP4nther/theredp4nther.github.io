@@ -340,7 +340,7 @@ To do that I `have created` the following `Python2.7` exploit:
 #!/usr/bin/env python2.7
 
 # Author TheRedP4nther
-# Script to automate the Pickle Deserialization Attack of HTB Canape machine
+# Script to automate the Pickle Deserialization Attack of HTB Canape machine.
 
 import requests
 import os
