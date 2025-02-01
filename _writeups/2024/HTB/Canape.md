@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: 
+tags: python2.7 cPickle deserializationattack couchdb sudoers pip githack .git informationleakeage
 ---
 
 <br />
@@ -293,7 +293,7 @@ if __name__ == "__main__":
 
 As we can see, our inputs `(character & quote)` are being recolected in `two variables`, char and quote respectivly.
 
-After that, the program `sums` the `values` of these `two variables` and applies an `md5` encoding to create a `file` with this name preceded by `/tmp` and ending in the `.p` extension with our `unencoded entries` as `content`.
+After that, the program `sums` the `values` of these `two variables` and applies an `md5` encoding (weak encoding, easy to guess and reproduce) to create a `file` with this name preceded by `/tmp` and ending in the `.p` extension with our `unencoded entries` as `content`.
 
 <br />
 
