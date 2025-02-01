@@ -125,7 +125,7 @@ We visit the `.git` exposed `directory` reported by `nmap`:
 
 <br />
 
-And we `dump` it on our `Machine` using the famous tool of GitHub -> [GitHack](https://github.com/lijiejie/GitHack):
+And we `dump` it on our `Machine` using the famous `tool` of GitHub -> [GitHack](https://github.com/lijiejie/GitHack):
 
 <br />
 
@@ -156,7 +156,7 @@ And we `dump` it on our `Machine` using the famous tool of GitHub -> [GitHack](h
 
 <br />
 
-`Browsing` through the `repo folders` we find a very interesting `"__init__.py"` script in which we find the code of the `different functions` in the `page`:
+`Browsing` through the `repo folders` we find a very interesting `"__init__.py"` script in which we find the `code` of the `different functions` in the `page`:
 
 <br />
 
