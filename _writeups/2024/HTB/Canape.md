@@ -257,3 +257,46 @@ if __name__ == "__main__":
 - There is a new interesting path named /check.
 
 <br />
+
+### /submit:
+
+<br />
+
+```python
+ @app.route("/submit", methods=["GET", "POST"])
+ def submit():
+     error = None
+     success = None
+ 
+     if request.method == "POST":
+         try:
+             char = request.form["character"]
+             quote = request.form["quote"]
+             if not char or not quote:
+                 error = True
+             elif not any(c.lower() in char.lower() for c in WHITELIST):
+                 error = True
+             else:
+                 # TODO - Pickle into dictionary instead, `check` is ready
+                 p_id = md5(char + quote).hexdigest()
+                 outfile = open("/tmp/" + p_id + ".p", "wb")
+         outfile.write(char + quote)
+         outfile.close()
+             success = True
+         except Exception as ex:
+             error = True
+ 
+     return render_template("submit.html", error=error, success=success)
+```
+
+<br />
+
+As we can see, our inputs (character & quote) are being recolected in two variables, char and quote respectivly.
+
+After that, the program `sums` the `values` of these `two variables` and applies an `md5` encoding using the `hashlib` library creating a `file` with this name preceded by `/tmp` and ending in the `.p` extension, and finally `adding` the `unencoded entry` as the `content` of that same `file`.
+
+<br />
+
+### /check:
+
+<br />
