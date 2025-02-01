@@ -248,4 +248,12 @@ if __name__ == "__main__":
 
 <br />
 
+Highlights of the script:
 
+- CouchDB is being used behind, which may be interesting in the future.
+
+- The Python2.7 cPickle library is used, which if poorly implemented can lead to a Deserialization Attack.
+
+- There is a new interesting path named /check.
+
+<br />
