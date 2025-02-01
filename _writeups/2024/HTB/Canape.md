@@ -81,6 +81,10 @@ When listing the website we find a fanpage of the famous series "The Simpsons":
 
 <br />
 
+![2](../../../assets/images/Canape/2.png)
+
+<br />
+
 Enumerating manually the page we found two interesting paths.
 
 <br />
