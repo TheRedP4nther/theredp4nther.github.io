@@ -97,7 +97,7 @@ Contains the most typical quotations of some characters in the series.
 
 <br />
 
-
+![3](../../../assets/images/Canape/3.png)
 
 <br />
 
@@ -109,7 +109,7 @@ It has a couple of interesting inputs to test.
 
 <br />
 
-
+![4](../../../assets/images/Canape/4.png)
 
 <br />
 
