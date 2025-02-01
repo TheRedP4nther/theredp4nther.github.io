@@ -291,7 +291,7 @@ if __name__ == "__main__":
 
 <br />
 
-As we can see, our inputs (character & quote) are being recolected in two variables, char and quote respectivly.
+As we can see, our inputs `(character & quote)` are being recolected in `two variables`, char and quote respectivly.
 
 After that, the program `sums` the `values` of these `two variables` and applies an `md5` encoding to create a `file` with this name preceded by `/tmp` and ending in the `.p` extension, and finally `adding` the `unencoded entry` as the `content` of that same `file`.
 
