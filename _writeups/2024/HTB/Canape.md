@@ -400,7 +400,7 @@ if __name__ == '__main__':
 
 <br />
 
-We execute the exploit:
+We `execute` the `exploit`:
 
 <br />
 
@@ -410,7 +410,7 @@ We execute the exploit:
 
 <br />
 
-Check the listener and... YES!!
+`Check` the `listener` and... YES!!
 
 <br />
 
