@@ -300,3 +300,32 @@ After that, the program `sums` the `values` of these `two variables` and applies
 ### /check:
 
 <br />
+
+```python
+@app.route("/check", methods=["POST"])
+def check():
+    path = "/tmp/" + request.form["id"] + ".p"
+    data = open(path, "rb").read()
+
+    if "p1" in data:
+        item = cPickle.loads(data)
+    else:
+        item = data
+
+    return "Still reviewing: " + item
+
+if __name__ == "__main__":
+    app.run()
+```
+
+<br />
+
+Apparently, this `function` consists of a `POST request` in which we will have to add an `"id"` field with the `md5 name` of the `file` that we have `previously created` with the `submit function` to be able to `list` the `content` of it.
+
+Finally, the function has a `condition` that if the `contents` of the file `contain "p1"`, `cPickle.loads()` will be used to `deserialize` its contents `without` any `validation`, fully `relying` on the `user's input`.
+
+<br />
+
+## Pickle Deserialization Attack Explotation:
+
+<br />
