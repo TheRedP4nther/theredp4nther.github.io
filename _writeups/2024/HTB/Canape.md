@@ -8,7 +8,7 @@ tags:
 
 <br />
 
-![Machine-Icon](../../../assets/images/)
+![Machine-Icon](../../../assets/images/Canape/1.png)
 
 <br />
 
