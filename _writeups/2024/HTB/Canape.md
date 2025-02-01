@@ -113,5 +113,13 @@ It has a couple of interesting inputs to test.
 
 <br />
 
+## Exposed .git:
+
+<br />
+
+We visit the .git exposed directory reported by nmap:
+
+<br />
+
 
 
