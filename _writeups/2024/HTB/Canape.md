@@ -291,7 +291,7 @@ if __name__ == "__main__":
 
 <br />
 
-As we can see, our inputs `(character & quote)` are being recolected in `two variables`, char and quote respectivly. It should `be noted` that the `input character` has a small `validation`, since for it to be `valid` it has to `contain` a `character` from the `whitelist`.
+As we can see, our inputs `(character & quote)` are being recolected in `two variables`, char and quote respectivly. It should `be noted` that the `input "character"` has a small `validation`, since for it to be `valid` it has to `contain` a `character` from the `whitelist`.
 
 After that, the program `sums` the `values` of these `two variables` and applies an `md5` encoding (weak encoding, easy to guess and reproduce) to create a `file` with this name preceded by `/tmp` and ending in the `.p` extension with our `unencoded entries` as `content`.
 
@@ -329,3 +329,13 @@ Finally, the function has a `condition` that if the `contents` of the file `cont
 ## Pickle Deserialization Attack Explotation:
 
 <br />
+
+Once we have `understood` the `logic` of each and every one of the `functions` of the website, we proceed to `exploit` the `Deserialization Attack` present in the `"cPickle.loads()"` function.
+
+To do that I `have created` the following `Python2.7` exploit:
+
+<br />
+
+```python 
+
+```
