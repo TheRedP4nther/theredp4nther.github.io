@@ -248,7 +248,7 @@ if __name__ == "__main__":
 
 <br />
 
-Highlights of the script:
+`Highlights of the script`:
 
 - CouchDB is being used behind, which may be interesting in the future.
 
