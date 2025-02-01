@@ -121,5 +121,37 @@ We visit the .git exposed directory reported by nmap:
 
 <br />
 
+![5](../../../assets/images/Canape/5.png)
 
+<br />
 
+And we dump it on our Machine using the famous tool of GitHub -> [GitHack](https://github.com/lijiejie/GitHack):
+
+<br />
+
+```bash
+❯ python3 GitHack.py http://10.10.10.70/.git
+[+] Download and parse index file ...
+[+] __init__.py
+[+] static/css/bootstrap.min.css
+[+] static/css/bootstrap.min.css.map
+[+] static/css/custom.css
+[+] static/js/bootstrap.min.js
+[+] static/js/bootstrap.min.js.map
+[+] templates/index.html
+[+] templates/layout.html
+[+] templates/quotes.html
+[+] templates/submit.html
+[OK] templates/submit.html
+[OK] templates/layout.html
+[OK] static/css/custom.css
+[OK] templates/quotes.html
+[OK] templates/index.html
+[OK] __init__.py
+[OK] static/css/bootstrap.min.css
+[OK] static/js/bootstrap.min.js
+[OK] static/js/bootstrap.min.js.map
+[OK] static/css/bootstrap.min.css.map
+```
+
+<br />
