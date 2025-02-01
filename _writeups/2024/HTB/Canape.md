@@ -89,7 +89,7 @@ Enumerating manually the page we found two interesting paths.
 
 <br />
 
-#### /quotes:
+### /quotes:
 
 <br />
 
@@ -101,7 +101,7 @@ Contains the most typical quotations of some characters in the series.
 
 <br />
 
-#### /submit:
+### /submit:
 
 <br />
 
