@@ -91,8 +91,27 @@ Enumerating manually the page we found two interesting paths.
 
 - /quotes:
 
+<br />
+
+Contains the most typical quotations of some characters in the series.
+
+<br />
+
+
+
+<br />
+
 - /submit
 
+<br />
+
+It has a couple of interesting inputs to test.
+
+<br />
+
+
+
+<br />
 
 
 
