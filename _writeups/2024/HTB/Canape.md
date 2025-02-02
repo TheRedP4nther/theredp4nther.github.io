@@ -561,7 +561,7 @@ else:
 
 <br />
 
-It seems to be a `python2.7` script that `creates` a `user` named `couchara` into `CouchDB` making a `put request` to an `endpoint`.
+It seems to be a `python2.7` script that `creates` a `privileged user` named `couchara` into `CouchDB` making a `put request` to an `endpoint`.
 
 It looks `good`, so we `take it` to the `Victim Machine` and `run` it:
 
