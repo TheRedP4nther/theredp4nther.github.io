@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: python2.7 cPickle deserializationattack couchdb sudoers pip githack .git informationleakeage
+tags: python2.7 cPickle deserializationattack couchdb sudoers pip githack .git informationleakeage remotecodeexecution database scripting
 ---
 
 <br />
@@ -651,3 +651,20 @@ GG, user.txt flag owned.
 
 <br />
 
+Once inside the `homer` user, we `list` his `sudoers permissions`:
+
+<br />
+
+```bash
+homer@canape:/tmp/Privesc$ sudo -l
+[sudo] password for homer: 
+Matching Defaults entries for homer on canape:
+    env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin
+
+User homer may run the following commands on canape:
+    (root) /usr/bin/pip install *
+```
+
+<br />
+
+As we can see, this `user` can run `pip install` as `root`.
