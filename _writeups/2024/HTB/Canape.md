@@ -561,9 +561,9 @@ else:
 
 <br />
 
-It seems to be a python2.7 script that is gonna create a user named couchara into the CouchDB of our victim machine.
+It seems to be a `python2.7` script that is gonna `create` a `user` named `couchara` into the `CouchDB`.
 
-It looks good, so we take it to the Victim Machine and run it:
+It looks `good`, so we `take it` to the `Victim Machine` and `run` it:
 
 <br />
 
