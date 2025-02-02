@@ -435,3 +435,27 @@ Intrusion ready!! Come on with the Privilege Escalation!!
 
 <br />
 
+Once in, we try to get the user.txt flag but unsuccessfully, because  when we try to enter the homer's home directory -> "Permission Denied":
+
+<br />
+
+```bash
+www-data@canape:/$ cd /home
+www-data@canape:/home$ ls
+homer
+www-data@canape:/home$ cd homer
+bash: cd: homer: Permission denied
+```
+
+<br />
+
+After a time enumerating the System we remember that we had seen CouchDB are in use when we analyze the __init_.py, so we make a curl to localhost to the default port of this database, port 5984:
+
+<br />
+
+```bash
+www-data@canape:/home$ curl localhost:5984 
+{"couchdb":"Welcome","version":"2.0.0","vendor":{"name":"The Apache Software Foundation"}}
+```
+
+<br />
