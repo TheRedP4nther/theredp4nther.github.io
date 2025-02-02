@@ -599,7 +599,7 @@ www-data@canape:/tmp/Privesc$ curl http://couchara:couchapass@127.0.0.1:5984/pas
 
 <br />
 
-The database has `documents available`, so we `list` them:
+The database has four `documents available`, so we `list` them:
 
 <br />
 
@@ -615,7 +615,7 @@ www-data@canape:/tmp/Privesc$ curl http://couchara:couchapass@127.0.0.1:5984/pas
 
 <br />
 
-Once listed, we `dump` the `conten`t of the `first document` referencing its `ID`:
+Once listed, we `dump` the `content` of the `first document` referencing its `ID`:
 
 <br />
 
@@ -644,6 +644,8 @@ bece4a9c7bf0b7de80d881ab69c307cb
 <br />
 
 GG, user.txt flag owned.
+
+<br />
 
 # Privilege Escalation: homer -> root
 
