@@ -22,7 +22,7 @@ Difficulty -> Medium.
 
 <br />
 
-Hello hackers! Today we’ll tackle the Canape Machine, a Medium difficulty Linux challenge. We’ll start by discovering an exposed .git repository, allowing us to analyze the website’s logic and identify a deserialization attack. We’ll automate the exploit using a Python 2.7 script to gain system access. Once inside, we’ll exploit a vulnerability in the database to dump its contents and retrieve valid credentials for user pivoting. Finally, we’ll take advantage of the user’s ability to run pip install as root to escalate privileges and gain full control of the system.
+Hello hackers! Today we’ll tackle the Canape Machine, a Medium difficulty Linux challenge. We’ll start by discovering an exposed .git repository, allowing us to analyze the website’s logic and identify a deserialization attack. We’ll automate the exploitation using a Python 2.7 script to gain system access. Once inside, we’ll exploit a vulnerability in the database to dump its contents and retrieve valid credentials for user pivoting. Finally, we’ll take advantage of the user’s ability to run pip install as root to escalate privileges and gain full control of the system.
 
 <br />
 
