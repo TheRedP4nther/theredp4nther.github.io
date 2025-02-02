@@ -435,7 +435,7 @@ Intrusion ready!! Come on with the Privilege Escalation!!
 
 <br />
 
-Once in, we try to get the user.txt flag but unsuccessfully, because  when we try to enter the homer's home directory -> "Permission Denied":
+Once in, we try to get the `user.txt` flag but `unsuccessfully`, because  when we try to enter the `homer's home` directory -> `"Permission Denied"`:
 
 <br />
 
@@ -449,13 +449,30 @@ bash: cd: homer: Permission denied
 
 <br />
 
-After a time enumerating the System we remember that we had seen CouchDB are in use when we analyze the __init_.py, so we make a curl to localhost to the default port of this database, port 5984:
+After a time enumerating the System we remember that we had seen `CouchDB` are in use when we analyze the `"__init_.py"`, so we make a curl to `localhost` to the `default port` of `CouchDB`, port `5984`:
 
 <br />
 
 ```bash
 www-data@canape:/home$ curl localhost:5984 
 {"couchdb":"Welcome","version":"2.0.0","vendor":{"name":"The Apache Software Foundation"}}
+```
+
+<br />
+
+At doing this, we see that the `version` in use is `2.0.0`, so we proceed to `search` for `vulnerabilities` for this version:
+
+<br />
+
+```bash
+❯ searchsploit CouchDB 2.0.0
+------------------------------------------------------------------------------------------------------------------------------------------------------ ---------------------------------
+ Exploit Title                                                                                                                                        |  Path
+------------------------------------------------------------------------------------------------------------------------------------------------------ ---------------------------------
+Apache CouchDB 1.7.0 / 2.x < 2.1.1 - Remote Privilege Escalation                                                                                      | linux/webapps/44498.py
+Apache CouchDB 2.0.0 - Local Privilege Escalation                                                                                                     | windows/local/40865.txt
+Apache CouchDB < 2.1.0 - Remote Code Execution                                                                                                        | linux/webapps/44913.py
+------------------------------------------------------------------------------------------------------------------------------------------------------ ---------------------------------
 ```
 
 <br />
