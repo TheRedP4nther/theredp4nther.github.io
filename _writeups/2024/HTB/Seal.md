@@ -310,7 +310,7 @@ Can `create` an `account`, so let's do it:
 
 <br />
 
-
+![10](../../../assets/images/Seal/10.png)
 
 <br />
 
