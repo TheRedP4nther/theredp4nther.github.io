@@ -221,3 +221,11 @@ And if we look at `Wappalyzer` we can see that this is the case:
 ![5](../../../assets/images/Seal/5.png)
 
 <br />
+
+## Reverse Proxy Bypass:
+
+<br />
+
+In the conference ![Black Hat USA 2018](https://i.blackhat.com/us-18/Wed-August-8/us-18-Orange-Tsai-Breaking-Parser-Logic-Take-Your-Path-Normalization-Off-And-Pop-0days-Out-2.pdf) | `Orange Tsai`, there was talk that this `Reverse Proxy` restrictions could by `bypassed` breaking the `parser logic` to `trick` the `webserver`.
+
+
