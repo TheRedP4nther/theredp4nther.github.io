@@ -361,7 +361,7 @@ Saved as: reverse.war
 
 <br />
 
-We select it into the deploy section:
+We `select` it into the `deploy` section:
 
 <br />
 
