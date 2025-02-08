@@ -369,10 +369,10 @@ We `select` it into the `deploy` section:
 
 <br />
 
-And finally we push it. Now we can see the file in the Applications List:
+And finally we `push` it. Now we can `see` the `file` in the `Applications List`:
 
 <br />
 
-
+![16](../../../assets/images/Seal/16.png)
 
 <br />
