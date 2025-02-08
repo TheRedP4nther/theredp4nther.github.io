@@ -282,10 +282,18 @@ Let's try it with our `target`:
 
 Perfect!! We are `able` to `bypass` the `restriction`!
 
-But when we try `default credentials` like tomcat:tomcat, tomcat:s3cret... The `don't work` , so we need to `continue enumerating`.
+But when we try `default credentials` like tomcat:tomcat, tomcat:s3cret... They `don't work` , so we need to `continue enumerating`.
 
 <br />
 
 # Http Enumeration: -> Port 8080
+
+<br />
+
+When we load the website we see a GitBucket login:
+
+<br />
+
+
 
 <br />
