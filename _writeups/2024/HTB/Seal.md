@@ -8,7 +8,7 @@ tags: tomcat apache yml yaml informationleakeage reverseproxy bypass war java an
 
 <br />
 
-![Machine-Icon](../../../assets/images/Seal/1.png)
+![Machine-Icon](../../../assets/images/Seal/Seal.png)
 
 <br />
 
