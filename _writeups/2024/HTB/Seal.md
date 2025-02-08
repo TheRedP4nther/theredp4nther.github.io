@@ -330,10 +330,10 @@ Access this `folder` and see the typical `configuration files` of any `Apache To
 
 <br />
 
-Theres is nothing interesting in those files, but clicking on "latest commit 971f3aa3f0", we find something:
+Theres is nothing `interesting` in those `files`, but clicking on `"latest commit 971f3aa3f0"`, we find something:
 
 <br />
 
-
+![13](../../../assets/images/Seal/13.png)
 
 <br />
