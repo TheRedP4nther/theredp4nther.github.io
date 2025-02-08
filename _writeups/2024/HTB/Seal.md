@@ -232,6 +232,6 @@ Some ways to do it are the following:
 
 <br />
 
-
+![6](../../../assets/images/Seal/6.png)
 
 <br />
