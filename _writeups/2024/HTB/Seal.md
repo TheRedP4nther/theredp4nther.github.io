@@ -179,7 +179,39 @@ As the page doesn't have much we start `fuzzing` to see if we discover something
 <br />
 
 ```bash
+❯ wfuzz -c -t 60 --hc=404 -w /usr/share/SecLists/Discovery/Web-Content/directory-list-2.3-medium.txt https://10.10.10.250/FUZZ
+ /usr/lib/python3/dist-packages/wfuzz/__init__.py:34: UserWarning:Pycurl is not compiled against Openssl. Wfuzz might not work correctly when fuzzing SSL sites. Check Wfuzz's documentation for more information.
+********************************************************
+* Wfuzz 3.1.0 - The Web Fuzzer                         *
+********************************************************
 
+Target: https://10.10.10.250/FUZZ
+Total requests: 220560
+
+=====================================================================
+ID           Response   Lines    Word       Chars       Payload                                                                                                                
+=====================================================================
+
+000000016:   302        0 L      0 W        0 Ch        "images"                                                                                                               
+000000001:   200        518 L    1140 W     19737 Ch    "# directory-list-2.3-medium.txt"                                                                                      
+000000003:   200        518 L    1140 W     19737 Ch    "# Copyright 2007 James Fisher"                                                                                        
+000000007:   200        518 L    1140 W     19737 Ch    "# license, visit http://creativecommons.org/licenses/by-sa/3.0/"                                                      
+000000006:   200        518 L    1140 W     19737 Ch    "# Attribution-Share Alike 3.0 License. To view a copy of this"                                                        
+000000008:   200        518 L    1140 W     19737 Ch    "# or send a letter to Creative Commons, 171 Second Street,"                                                           
+000000005:   200        518 L    1140 W     19737 Ch    "# This work is licensed under the Creative Commons"                                                                   
+000000002:   200        518 L    1140 W     19737 Ch    "#"                                                                                                                    
+000000014:   200        518 L    1140 W     19737 Ch    "https://10.10.10.250/"                                                                                                
+000000011:   200        518 L    1140 W     19737 Ch    "# Priority ordered case-sensitive list, where entries were found"                                                     
+000000009:   200        518 L    1140 W     19737 Ch    "# Suite 300, San Francisco, California, 94105, USA."                                                                  
+000000004:   200        518 L    1140 W     19737 Ch    "#"                                                                                                                    
+000000013:   200        518 L    1140 W     19737 Ch    "#"                                                                                                                    
+000000010:   200        518 L    1140 W     19737 Ch    "#"                                                                                                                    
+000000012:   200        518 L    1140 W     19737 Ch    "# on at least 2 different hosts"                                                                                      
+000000259:   302        0 L      0 W        0 Ch        "admin"                                                                                                                
+000000444:   302        0 L      0 W        0 Ch        "icon"                                                                                                                 
+000000550:   302        0 L      0 W        0 Ch        "css"                                                                                                                  
+000000953:   302        0 L      0 W        0 Ch        "js"                                                                                                                   
+000004889:   302        0 L      0 W        0 Ch        "manager"   
 ```
 
 <br />
@@ -228,10 +260,18 @@ And if we look at `Wappalyzer` we can see that this is the case:
 
 In the conference ![Black Hat USA 2018](https://i.blackhat.com/us-18/Wed-August-8/us-18-Orange-Tsai-Breaking-Parser-Logic-Take-Your-Path-Normalization-Off-And-Pop-0days-Out-2.pdf) | `Orange Tsai`, there was talk that this `Reverse Proxy` restrictions could by `bypassed` breaking the `parser logic` to `trick` the `webserver`.
 
-Some ways to do it are the following:
+Some `ways` to do it are the following:
 
 <br />
 
 ![6](../../../assets/images/Seal/6.png)
+
+<br />
+
+Let's try it with our target:
+
+<br />
+
+
 
 <br />
