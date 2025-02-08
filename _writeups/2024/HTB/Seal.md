@@ -236,6 +236,8 @@ The website is using `Apache Tomcat` version `9.0.31`.
 
 ### /manager
 
+<br />
+
 As we know, this path is a `typical` path in `Apache Tomcat`, but when we try to load it -> `Forbidden 403`:
 
 <br />
