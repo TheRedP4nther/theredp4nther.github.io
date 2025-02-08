@@ -212,9 +212,9 @@ As we know, this path is a `typical` path in `Apache Tomcat`, but when we try to
 
 <br />
 
-This may mean that a nginx reverse proxy is being employed behind the scenes to prevent users from loading certain content from the web.
+This may mean that a `nginx reverse proxy` is being employed behind the scenes to `prevent` users from `loading` certain `content` from the web.
 
-And if we look at Wappalyzer we can see that this is the case:
+And if we look at `Wappalyzer` we can see that this is the case:
 
 <br />
 
