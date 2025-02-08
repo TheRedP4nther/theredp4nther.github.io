@@ -274,6 +274,6 @@ Let's try it with our `target`:
 
 <br />
 
-
+![7](../../../assets/images/Seal/7.png)
 
 <br />
