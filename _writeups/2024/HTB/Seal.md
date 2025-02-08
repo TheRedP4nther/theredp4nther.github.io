@@ -169,3 +169,45 @@ When we list the https website, it is very static and doesn't has too much funci
 ![2](../../../assets/images/Seal/1.png)
 
 <br />
+
+## Fuzzing:
+
+<br />
+
+As the page doesn't have much we start fuzzing to see if we discover something more interesting:
+
+<br />
+
+```bash
+
+```
+
+<br />
+
+There are two interesting paths in the wfuzz results, let's take a look:
+
+<br />
+
+### /admin:
+
+<br />
+
+This path seems to be a missconfiguration but it reveals important information.
+
+The website is using Apache Tomcat version 9.0.31.
+
+<br />
+
+
+
+<br />
+
+### /manager
+
+As we know, this path is a typical path in Apache Tomat, but when we try to load it -> Forbbiden 403:
+
+<br />
+
+
+
+<br />
