@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: reverseshell nodejs deserializationattack scripting python javascript iife
+tags: tomcat apache yml yaml informationleakeage reverseproxy bypass war java ansibleplaybook sudoers scripting
 ---
 
 <br />
@@ -167,3 +167,5 @@ When we list the https website, it is very static and doesn't has too much funci
 <br />
 
 
+
+<br />
