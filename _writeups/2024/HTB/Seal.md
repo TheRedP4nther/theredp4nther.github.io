@@ -1,0 +1,169 @@
+---
+layout: writeup
+category: HTB
+date: 2024-12-29
+comments: false
+tags: reverseshell nodejs deserializationattack scripting python javascript iife
+---
+
+<br />
+
+![Machine-Icon](../../../assets/images/Celestial/Celestial.png)
+
+<br />
+
+OS -> Linux.
+
+Difficulty -> Medium.
+
+<br />
+
+# Introduction:
+<br />
+
+
+
+<br />
+
+# Enumeration:
+
+<br />
+
+We start by running the typical `nmap` scan to see which ports are open:
+
+<br />
+
+```bash
+❯ nmap -p- 10.10.10.250 --open --min-rate 5000 -sS -T5 -Pn -n -sCV
+Starting Nmap 7.94SVN ( https://nmap.org ) at 2025-02-08 14:49 CET
+Nmap scan report for 10.10.10.250
+Host is up (0.049s latency).
+Not shown: 65006 closed tcp ports (reset), 526 filtered tcp ports (no-response)
+Some closed ports may be reported as filtered due to --defeat-rst-ratelimit
+PORT     STATE SERVICE    VERSION
+22/tcp   open  ssh        OpenSSH 8.2p1 Ubuntu 4ubuntu0.2 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey: 
+|   3072 4b:89:47:39:67:3d:07:31:5e:3f:4c:27:41:1f:f9:67 (RSA)
+|   256 04:a7:4f:39:95:65:c5:b0:8d:d5:49:2e:d8:44:00:36 (ECDSA)
+|_  256 b4:5e:83:93:c5:42:49:de:71:25:92:71:23:b1:85:54 (ED25519)
+443/tcp  open  ssl/http   nginx 1.18.0 (Ubuntu)
+| tls-nextprotoneg: 
+|_  http/1.1
+|_http-title: 400 The plain HTTP request was sent to HTTPS port
+| tls-alpn: 
+|_  http/1.1
+|_ssl-date: TLS randomness does not represent time
+|_http-server-header: nginx/1.18.0 (Ubuntu)
+| ssl-cert: Subject: commonName=seal.htb/organizationName=Seal Pvt Ltd/stateOrProvinceName=London/countryName=UK
+| Not valid before: 2021-05-05T10:24:03
+|_Not valid after:  2022-05-05T10:24:03
+8080/tcp open  http-proxy
+| http-auth: 
+| HTTP/1.1 401 Unauthorized\x0D
+|_  Server returned status 401 but no WWW-Authenticate header.
+|_http-title: Site doesn't have a title (text/html;charset=utf-8).
+| fingerprint-strings: 
+|   FourOhFourRequest: 
+|     HTTP/1.1 401 Unauthorized
+|     Date: Sat, 08 Feb 2025 11:49:47 GMT
+|     Set-Cookie: JSESSIONID=node0r02wx6avb9u811u6247plh7dy2.node0; Path=/; HttpOnly
+|     Expires: Thu, 01 Jan 1970 00:00:00 GMT
+|     Content-Type: text/html;charset=utf-8
+|     Content-Length: 0
+|   GetRequest: 
+|     HTTP/1.1 401 Unauthorized
+|     Date: Sat, 08 Feb 2025 11:49:46 GMT
+|     Set-Cookie: JSESSIONID=node0kskklpglh5bm1k6cjrxjv8ytp0.node0; Path=/; HttpOnly
+|     Expires: Thu, 01 Jan 1970 00:00:00 GMT
+|     Content-Type: text/html;charset=utf-8
+|     Content-Length: 0
+|   HTTPOptions: 
+|     HTTP/1.1 200 OK
+|     Date: Sat, 08 Feb 2025 11:49:46 GMT
+|     Set-Cookie: JSESSIONID=node0372g2oaom1f6cnjgdcqkamu71.node0; Path=/; HttpOnly
+|     Expires: Thu, 01 Jan 1970 00:00:00 GMT
+|     Content-Type: text/html;charset=utf-8
+|     Allow: GET,HEAD,POST,OPTIONS
+|     Content-Length: 0
+|   RPCCheck: 
+|     HTTP/1.1 400 Illegal character OTEXT=0x80
+|     Content-Type: text/html;charset=iso-8859-1
+|     Content-Length: 71
+|     Connection: close
+|     <h1>Bad Message 400</h1><pre>reason: Illegal character OTEXT=0x80</pre>
+|   RTSPRequest: 
+|     HTTP/1.1 505 Unknown Version
+|     Content-Type: text/html;charset=iso-8859-1
+|     Content-Length: 58
+|     Connection: close
+|     <h1>Bad Message 505</h1><pre>reason: Unknown Version</pre>
+|   Socks4: 
+|     HTTP/1.1 400 Illegal character CNTL=0x4
+|     Content-Type: text/html;charset=iso-8859-1
+|     Content-Length: 69
+|     Connection: close
+|     <h1>Bad Message 400</h1><pre>reason: Illegal character CNTL=0x4</pre>
+|   Socks5: 
+|     HTTP/1.1 400 Illegal character CNTL=0x5
+|     Content-Type: text/html;charset=iso-8859-1
+|     Content-Length: 69
+|     Connection: close
+|_    <h1>Bad Message 400</h1><pre>reason: Illegal character CNTL=0x5</pre>
+1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port8080-TCP:V=7.94SVN%I=7%D=2/8%Time=67A76105%P=x86_64-pc-linux-gnu%r(
+SF:GetRequest,F4,"HTTP/1\.1\x20401\x20Unauthorized\r\nDate:\x20Sat,\x2008\
+SF:x20Feb\x202025\x2011:49:46\x20GMT\r\nSet-Cookie:\x20JSESSIONID=node0ksk
+SF:klpglh5bm1k6cjrxjv8ytp0\.node0;\x20Path=/;\x20HttpOnly\r\nExpires:\x20T
+SF:hu,\x2001\x20Jan\x201970\x2000:00:00\x20GMT\r\nContent-Type:\x20text/ht
+SF:ml;charset=utf-8\r\nContent-Length:\x200\r\n\r\n")%r(HTTPOptions,107,"H
+SF:TTP/1\.1\x20200\x20OK\r\nDate:\x20Sat,\x2008\x20Feb\x202025\x2011:49:46
+SF:\x20GMT\r\nSet-Cookie:\x20JSESSIONID=node0372g2oaom1f6cnjgdcqkamu71\.no
+SF:de0;\x20Path=/;\x20HttpOnly\r\nExpires:\x20Thu,\x2001\x20Jan\x201970\x2
+SF:000:00:00\x20GMT\r\nContent-Type:\x20text/html;charset=utf-8\r\nAllow:\
+SF:x20GET,HEAD,POST,OPTIONS\r\nContent-Length:\x200\r\n\r\n")%r(RTSPReques
+SF:t,AD,"HTTP/1\.1\x20505\x20Unknown\x20Version\r\nContent-Type:\x20text/h
+SF:tml;charset=iso-8859-1\r\nContent-Length:\x2058\r\nConnection:\x20close
+SF:\r\n\r\n<h1>Bad\x20Message\x20505</h1><pre>reason:\x20Unknown\x20Versio
+SF:n</pre>")%r(FourOhFourRequest,F4,"HTTP/1\.1\x20401\x20Unauthorized\r\nD
+SF:ate:\x20Sat,\x2008\x20Feb\x202025\x2011:49:47\x20GMT\r\nSet-Cookie:\x20
+SF:JSESSIONID=node0r02wx6avb9u811u6247plh7dy2\.node0;\x20Path=/;\x20HttpOn
+SF:ly\r\nExpires:\x20Thu,\x2001\x20Jan\x201970\x2000:00:00\x20GMT\r\nConte
+SF:nt-Type:\x20text/html;charset=utf-8\r\nContent-Length:\x200\r\n\r\n")%r
+SF:(Socks5,C3,"HTTP/1\.1\x20400\x20Illegal\x20character\x20CNTL=0x5\r\nCon
+SF:tent-Type:\x20text/html;charset=iso-8859-1\r\nContent-Length:\x2069\r\n
+SF:Connection:\x20close\r\n\r\n<h1>Bad\x20Message\x20400</h1><pre>reason:\
+SF:x20Illegal\x20character\x20CNTL=0x5</pre>")%r(Socks4,C3,"HTTP/1\.1\x204
+SF:00\x20Illegal\x20character\x20CNTL=0x4\r\nContent-Type:\x20text/html;ch
+SF:arset=iso-8859-1\r\nContent-Length:\x2069\r\nConnection:\x20close\r\n\r
+SF:\n<h1>Bad\x20Message\x20400</h1><pre>reason:\x20Illegal\x20character\x2
+SF:0CNTL=0x4</pre>")%r(RPCCheck,C7,"HTTP/1\.1\x20400\x20Illegal\x20charact
+SF:er\x20OTEXT=0x80\r\nContent-Type:\x20text/html;charset=iso-8859-1\r\nCo
+SF:ntent-Length:\x2071\r\nConnection:\x20close\r\n\r\n<h1>Bad\x20Message\x
+SF:20400</h1><pre>reason:\x20Illegal\x20character\x20OTEXT=0x80</pre>");
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 38.39 seconds
+```
+
+<br />
+
+Open Ports:
+
+- `Port 22` -> ssh
+
+- `Port 443` -> https
+
+- `Port 8080` -> http
+
+<br />
+
+# Https Enumeration: -> Port 443
+
+<br />
+
+When we list the https website, it is very static and doesn't has too much funcionalities:
+
+<br />
+
+
