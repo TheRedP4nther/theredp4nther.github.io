@@ -298,11 +298,11 @@ When we load the `website` we see a `GitBucket` login:
 
 <br />
 
-We can `create` an `account`, so let's do it:
+Can `create` an `account`, so let's do it:
 
 <br />
 
-![9](../../../assets/images/9.png)
+![9](../../../assets/images/Seal/9.png)
 
 <br />
 
