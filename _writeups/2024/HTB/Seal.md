@@ -306,15 +306,11 @@ Can `create` an `account`, so let's do it:
 
 <br />
 
-`Log` in:
+We `log` in and there are two `repositories`:
 
 <br />
 
 ![10](../../../assets/images/Seal/10.png)
-
-<br />
-
-There are two `repositories`.
 
 <br />
 
