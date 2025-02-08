@@ -302,7 +302,7 @@ We can `create` an `account`, so let's do it:
 
 <br />
 
-
+![9](../../../assets/images/9.png)
 
 <br />
 
