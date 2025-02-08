@@ -318,4 +318,10 @@ There are two `repositories`.
 
 <br />
 
+Looking deep into the seal_market one, we see a interesting tomcat folder:
 
+<br />
+
+![11](../../../assets/images/Seal/11.png)
+
+<br />
