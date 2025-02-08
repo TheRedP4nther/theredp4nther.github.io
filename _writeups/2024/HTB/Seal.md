@@ -346,7 +346,7 @@ There are `tomcat credentials`, so we try `log` with them into the `/manager/htm
 
 <br />
 
-Once into the `tomcat application`, we can deploy a war file.
+Once into the `tomcat application`, we can deploy a `war` file.
 
 So if we `create` a `Reverse Shell` with `msfvenom`, we can `deploy` it and `execute` to gain `access` to the `System`.
 
@@ -366,5 +366,13 @@ We `select` it into the `deploy` section:
 <br />
 
 ![15](../../../assets/images/Seal/15.png)
+
+<br />
+
+And finally we push it. Now we can see the file in the Applications List:
+
+<br />
+
+
 
 <br />
