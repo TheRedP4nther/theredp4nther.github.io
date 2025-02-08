@@ -174,7 +174,7 @@ When we list the https `website`, it is very `static` and doesn't has too much `
 
 <br />
 
-As the page doesn't have much we start `fuzzing` to see if we discover something more `interesting`:
+As the page doesn't have much we start `fuzzing` to see if we discover something `more`:
 
 <br />
 
@@ -260,7 +260,7 @@ And if we look at `Wappalyzer` we can see that this is the case:
 
 <br />
 
-In the conference [Black Hat USA 2018](https://i.blackhat.com/us-18/Wed-August-8/us-18-Orange-Tsai-Breaking-Parser-Logic-Take-Your-Path-Normalization-Off-And-Pop-0days-Out-2.pdf), there was talk that this `Reverse Proxy` restrictions could by `bypassed` breaking the `parser logic` to `trick` the `webserver`.
+In the conference [Black Hat USA 2018](https://i.blackhat.com/us-18/Wed-August-8/us-18-Orange-Tsai-Breaking-Parser-Logic-Take-Your-Path-Normalization-Off-And-Pop-0days-Out-2.pdf), there was talk that this `Reverse Proxy` restrictions could be `bypassed` breaking the `parser logic` to `trick` the `webserver`.
 
 Some `ways` to do it are the following:
 
@@ -330,7 +330,7 @@ Access this `folder` and see the typical `configuration files` of any `Apache To
 
 <br />
 
-Theres is nothing `interesting` in those `files`, but clicking on `"latest commit 971f3aa3f0"`, we find something:
+Theres is nothing in those `files`, but clicking on `"latest commit 971f3aa3f0"`, we find something:
 
 <br />
 
