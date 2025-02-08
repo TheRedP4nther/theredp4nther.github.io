@@ -329,3 +329,11 @@ Access this `folder` and see the typical `configuration files` of any `Apache To
 ![12](../../../assets/images/Seal/12.png)
 
 <br />
+
+Theres is nothing interesting in those files, but clicking on "latest commit 971f3aa3f0", we find something:
+
+<br />
+
+
+
+<br />
