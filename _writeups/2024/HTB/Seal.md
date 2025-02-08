@@ -297,3 +297,12 @@ When we load the `website` we see a `GitBucket` login:
 ![8](../../../assets/images/Seal/8.png)
 
 <br />
+
+We can `create` an `account`, so let's do it:
+
+<br />
+
+
+
+<br />
+
