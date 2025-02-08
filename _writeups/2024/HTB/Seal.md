@@ -322,7 +322,7 @@ Looking `deep` into the `seal_market` one, we see a interesting `tomcat folder`:
 
 <br />
 
-Access this folder and see the typical configuration files of any Apache Tomcat:
+Access this `folder` and see the typical `configuration files` of any `Apache Tomcat`:
 
 <br />
 
