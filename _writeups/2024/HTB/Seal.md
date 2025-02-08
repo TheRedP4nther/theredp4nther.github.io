@@ -361,7 +361,7 @@ Saved as: reverse.war
 
 <br />
 
-We `select` it into the `deploy` section:
+We `select` the file into the `deploy` section:
 
 <br />
 
@@ -369,7 +369,7 @@ We `select` it into the `deploy` section:
 
 <br />
 
-And finally we `push` it. We can `see` the `file` in the `Applications List`:
+And finally `push` it. We can `see` the `file` in the `applications list`:
 
 <br />
 
@@ -393,7 +393,7 @@ uid=997(tomcat) gid=997(tomcat) groups=997(tomcat)
 
 <br />
 
-Now we do the `tty sanitization` and perfect! Intrusion is ready!
+Finally do the `tty sanitization` and perfect! Intrusion is ready!
 
 <br />
 
