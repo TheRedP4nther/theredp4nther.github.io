@@ -162,7 +162,7 @@ Open Ports:
 
 <br />
 
-When we list the https website, it is very static and doesn't has too much funcionalities:
+When we list the https `website`, it is very `static` and doesn't has too much `funcionalities`:
 
 <br />
 
@@ -174,7 +174,7 @@ When we list the https website, it is very static and doesn't has too much funci
 
 <br />
 
-As the page doesn't have much we start fuzzing to see if we discover something more interesting:
+As the page doesn't have much we start `fuzzing` to see if we discover something more `interesting`:
 
 <br />
 
@@ -184,7 +184,7 @@ As the page doesn't have much we start fuzzing to see if we discover something m
 
 <br />
 
-There are two interesting paths in the wfuzz results, let's take a look:
+There are two `interesting` paths in the `wfuzz` results, let's take a look:
 
 <br />
 
@@ -192,19 +192,19 @@ There are two interesting paths in the wfuzz results, let's take a look:
 
 <br />
 
-This path seems to be a missconfiguration but it reveals important information.
+This path seems to be a `missconfiguration` but it `reveals` important `information`.
 
-The website is using Apache Tomcat version 9.0.31.
+The website is using `Apache Tomcat` version `9.0.31`.
 
 <br />
 
-
+![3](../../../assets/images/Seal/3.png)
 
 <br />
 
 ### /manager
 
-As we know, this path is a typical path in Apache Tomat, but when we try to load it -> Forbbiden 403:
+As we know, this path is a `typical` path in `Apache Tomat`, but when we try to load it -> `Forbbiden 403`:
 
 <br />
 
