@@ -218,6 +218,6 @@ And if we look at Wappalyzer we can see that this is the case:
 
 <br />
 
-
+![5](../../../assets/images/Seal/5.png)
 
 <br />
