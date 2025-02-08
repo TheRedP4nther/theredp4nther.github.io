@@ -290,10 +290,10 @@ But when we try `default credentials` like tomcat:tomcat, tomcat:s3cret... They 
 
 <br />
 
-When we load the website we see a GitBucket login:
+When we load the `website` we see a `GitBucket` login:
 
 <br />
 
-
+![8](../../../assets/images/Seal/8.png)
 
 <br />
