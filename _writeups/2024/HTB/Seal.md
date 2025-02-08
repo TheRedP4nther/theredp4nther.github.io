@@ -338,7 +338,7 @@ Theres is nothing `interesting` in those `files`, but clicking on `"latest commi
 
 <br />
 
-There are tomcat credentials, so we try log with them into the /manager/html login and yesss!!
+There are `tomcat credentials`, so we try `log` with them into the `/manager/html` login and yesss!!
 
 <br />
 
@@ -346,7 +346,7 @@ There are tomcat credentials, so we try log with them into the /manager/html log
 
 <br />
 
-Once into the tomcat application, we can create a malicious war file with msfvenom to gain acces to the System:
+Once into the `tomcat application`, we can `create` a malicious `war` file with `msfvenom` to gain `acces` to the `System`:
 
 <br />
 
