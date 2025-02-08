@@ -330,6 +330,6 @@ Access this folder and see the typical configuration files of any Apache Tomcat:
 
 <br />
 
-
+![12](../../../assets/images/Seal/12.png)
 
 <br />
