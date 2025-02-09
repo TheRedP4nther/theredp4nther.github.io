@@ -400,3 +400,50 @@ Finally do the `tty sanitization` and perfect! Intrusion is ready!
 # Privilege Escalation: www-data -> luis
 
 <br />
+
+After a time enumerating the system, we `found` something in the `/opt` directory, a `backup folder`:
+
+<br />
+
+```bash
+tomcat@seal:/opt$ ls
+backups
+tomcat@seal:/opt$ cd backups/
+tomcat@seal:/opt/backups$ ls
+archives  playbook
+```
+
+<br />
+
+The `"archives"` folder has some `.gz` files:
+
+<br />
+
+```bash
+tomcat@seal:/opt/backups$ cd archives/
+tomcat@seal:/opt/backups/archives$ ls
+backup-2025-02-09-12:10:31.gz  backup-2025-02-09-12:11:32.gz
+```
+
+<br />
+
+On the other hand, `playbook` folder has a `"run.yml"` script with the following `code`:
+
+<br />
+
+```yaml
+- hosts: localhost
+  tasks:
+  - name: Copy Files
+    synchronize: src=/var/lib/tomcat9/webapps/ROOT/admin/dashboard dest=/opt/backups/files copy_links=yes
+  - name: Server Backups
+    archive:
+      path: /opt/backups/files/
+      dest: "/opt/backups/archives/backup-{{ansible_date_time.date}}-{{ansible_date_time.time}}.gz"
+  - name: Clean
+    file:
+      state: absent
+      path: /opt/backups/files/
+```
+
+<br />
