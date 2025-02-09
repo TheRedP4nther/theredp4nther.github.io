@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: tomcat apache yml yaml informationleakeage reverseproxy bypass war java ansibleplaybook sudoers scripting pspy id_rsa compresed gz tar
+tags: tomcat apache yml yaml informationleakeage reverseproxy bypass war java ansibleplaybook sudoers scripting pspy id_rsa compresed gz tar gitbucket
 ---
 
 <br />
@@ -22,7 +22,7 @@ Difficulty -> Medium.
 
 <br />
 
-
+Hello hackers! Today we’ll tackle the Seal Machine, a Medium Difficulty Linux challenge. We’ll start by bypassing an Nginx reverse proxy to access restricted content on a Tomcat server. Next, we’ll enumerate a GitBucket repository on another port, where we’ll find credentials to log into Tomcat. Once inside the tomcat application, we’ll upload a malicious WAR file to gain system access via a reverse shell. After that, we’ll exploit a scheduled task running at intervals to pivot to another user. Finally, we’ll take advantage of a SUDOERS privilege to escalate to root.
 
 <br />
 
