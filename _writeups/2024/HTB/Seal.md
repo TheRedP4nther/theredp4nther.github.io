@@ -19,6 +19,7 @@ Difficulty -> Medium.
 <br />
 
 # Introduction:
+
 <br />
 
 
@@ -466,10 +467,10 @@ To prove our teory that the task is being executed regularly in the system we ru
 
 <br />
 
-We were right, root is running the task as user luis using Ansible Playbook:
+We were right, `root` is `running` the task as user `luis` using `Ansible-Playbook`:
 
 <br />
 
-
+![17](../../../assets/images/Seal/17.png)
 
 <br />
