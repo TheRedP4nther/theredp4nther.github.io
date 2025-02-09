@@ -477,4 +477,23 @@ We were right, `root` is `running` the task as user `luis` using `Ansible-Playbo
 
 <br />
 
+To exploit this I need to find a folder where I can write in the tomcat directory. For example, the /uploads folder:
 
+<br />
+
+```bash
+tomcat@seal:/var/lib/tomcat9/webapps/ROOT/admin/dashboard$ ls -l
+total 92
+drwxr-xr-x 5 root root  4096 Mar  7  2015 bootstrap
+drwxr-xr-x 2 root root  4096 Mar  7  2015 css
+drwxr-xr-x 4 root root  4096 Mar  7  2015 images
+-rw-r--r-- 1 root root 71744 May  6  2021 index.html
+drwxr-xr-x 4 root root  4096 Mar  7  2015 scripts
+drwxrwxrwx 2 root root  4096 May  7  2021 uploads
+```
+
+<br />
+
+Once this is done, we will proceed to create a `symbolic link` to the user luis `id_rsa` in `/uploads`, so when the `task` is `executed` and all the contents of the `tomcat` folder are `compressed`, we can `gunzip` the `compressed` and `access` the `id_rsa`:
+
+<br />
