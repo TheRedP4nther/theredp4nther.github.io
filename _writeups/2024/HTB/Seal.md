@@ -451,7 +451,7 @@ On the other hand, `playbook` folder has a `"run.yml"` script with the following
 
 As we can see, it is a `task` that seems to be `running` in the `system` at time `intervals`.
 
-What exactly this task is `doing` is `copying` all the `files` from the path `"/var/lib/tomcat9/webapps/ROOT/admin/dashboard dest=/opt/backups/files"` and `depositing` them as compressed `.gz`` in the path ` "/opt/backup/archives/"`. Finally, it proceed to `clean` the `/opt/backup/archives` directory.
+What exactly this task is `doing` is `copying` all the `files` from the path `"/var/lib/tomcat9/webapps/ROOT/admin/dashboard dest=/opt/backups/files"` and `depositing` them as compressed `.gz` in the path `"/opt/backup/archives/"`. Finally, it proceed to `clean` the `/opt/backup/archives` directory.
 
 To prove our teory that the task is being executed regularly in the system we run pspy:
 
