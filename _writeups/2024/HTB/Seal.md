@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: tomcat apache yml yaml informationleakeage reverseproxy bypass war java ansibleplaybook sudoers scripting
+tags: tomcat apache yml yaml informationleakeage reverseproxy bypass war java ansibleplaybook sudoers scripting pspy id_rsa compresed gz tar
 ---
 
 <br />
