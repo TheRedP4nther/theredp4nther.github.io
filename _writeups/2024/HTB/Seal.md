@@ -498,7 +498,7 @@ drwxrwxrwx 2 root root  4096 May  7  2021 uploads
 
 <br />
 
-Once this is done, we will proceed to create a `symbolic link` to the user luis home directory `/uploads`, so when the `task` is `executed` and all the contents of the `tomcat` folder are `compressed`, we can `gunzip` the `compressed` and `access` to `all` the files in `/home/luis`:
+Once this is done, we will proceed to create a `symbolic link` into `/uploads` to the user `luis` home directory, so when the `task` is `executed` and all the contents of the `tomcat` folder are `compressed`, we can `gunzip` the `compressed` and `access` to `all` the files in `/home/luis`:
 
 <br />
 
@@ -511,7 +511,7 @@ lrwxrwxrwx 1 tomcat tomcat 10 Feb  9 15:54 luis -> /home/luis
 
 <br />
 
-Once created, we go to the `/opt/backup/archives` directory to `locate` the backup with the `content`, the only one with a `big size` and we copy it on `/tmp`:
+Once created, we go to the `/opt/backup/archives` directory to `locate` the backup with the `content`, that is the only one with a `big size` and we copy it on `/tmp`:
 
 <br />
 
@@ -571,7 +571,7 @@ af3f361aa0efb30086c3df2c08xxxxxx
 
 <br />
 
-Looking into the user's `directory` we find a his `id_rsa`:
+Looking into the user's `directory` we find his `id_rsa`:
 
 <br />
 
@@ -582,7 +582,7 @@ authorized_keys  id_rsa  id_rsa.pub
 
 <br />
 
-So we proceed to `connect` as `luis` to `localhost`:
+So we proceed to `connect` as `luis` to `localhost` using this `private key` as identifier:
 
 <br />
 
@@ -650,11 +650,11 @@ User luis may run the following commands on seal:
 
 This user can `run` as `root` ansible-playbook to `execute` any .yml script.
 
-This is very `dangerous`, because we can `create` a `malicious .yml` file to `run` a `command`. Let's do it!
+This is very `dangerous`, because we can `create` a `malicious` .yml file to `run` a `command`. Let's do it!
 
 <br />
 
-`Malicious .yml Content`:
+### Malicious .yml Content:
 
 ```yaml
 - hosts: localhost
@@ -689,7 +689,7 @@ localhost                  : ok=2    changed=1    unreachable=0    failed=0    s
 
 <br />
 
-It seems like the `command` was executed `successful`, let's `check` it:
+It seems like the `command` was executed with `successful`, let's `check` it:
 
 <br />
 
