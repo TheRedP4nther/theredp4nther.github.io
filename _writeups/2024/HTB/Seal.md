@@ -453,7 +453,13 @@ As we can see, it is a `task` that seems to be `running` in the `system` at time
 
 What exactly this task is `doing` is `copying` all the `files` from the path `"/var/lib/tomcat9/webapps/ROOT/admin/dashboard dest=/opt/backups/files"` and `depositing` them as compressed `.gz` in the path `"/opt/backup/archives/"`. Finally, it proceed to `clean` the `/opt/backup/archives` directory.
 
-To prove our teory that the task is being executed regularly in the system we run pspy:
+<br />
+
+## Script Exploitation:
+
+<br />
+
+To prove our `teory` that the `task` is being `executed` regularly in the `system` we run `pspy`:
 
 <br />
 
@@ -463,11 +469,7 @@ To prove our teory that the task is being executed regularly in the system we ru
 
 <br /> 
 
-# Script Abusing:
-
-<br />
-
-## Ansible Playbook:
+### Ansible Playbook:
 
 <br />
 
