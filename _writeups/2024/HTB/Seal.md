@@ -448,8 +448,28 @@ On the other hand, `playbook` folder has a `"run.yml"` script with the following
 
 <br />
 
-As we can see, it is a task that seems to be running in the system at time intervals.
+As we can see, it is a `task` that seems to be `running` in the `system` at time `intervals`.
 
-What exactly this task is `doing` is `copying` all the `files` from the path `"/var/lib/tomcat9/webapps/ROOT/admin/dashboard dest=/opt/backups/files"` and `depositing` them as compressed `.gz`` in the path ` "/opt/backup/archives/"`.
+What exactly this task is `doing` is `copying` all the `files` from the path `"/var/lib/tomcat9/webapps/ROOT/admin/dashboard dest=/opt/backups/files"` and `depositing` them as compressed `.gz`` in the path ` "/opt/backup/archives/"`. Finally, it proceed to `clean` the `/opt/backup/archives` directory.
+
+To prove our teory that the task is being executed regularly in the system we run pspy:
+
+<br />
+
+```bash
+2025/02/09 12:35:31 CMD: UID=0     PID=10573  | sudo -u luis /usr/bin/ansible-playbook /opt/backups/playbook/run.yml 
+```
+
+<br /> 
+
+## Ansible Playbook:
+
+<br />
+
+We were right, root is running the task as user luis using Ansible Playbook:
+
+<br />
 
 
+
+<br />
