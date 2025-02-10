@@ -235,7 +235,7 @@ The website is using `Apache Tomcat` version `9.0.31`.
 
 <br />
 
-### /manager
+### /manager:
 
 <br />
 
@@ -339,7 +339,7 @@ Theres is nothing in those `files`, but clicking on `"latest commit 971f3aa3f0"`
 
 <br />
 
-There are `tomcat credentials`, so we try `log` with them into the `/manager/html` login and yesss!!
+There are `tomcat credentials`, so we try  to `log` with them into `/manager/html` and yesss!!
 
 <br />
 
@@ -511,7 +511,7 @@ lrwxrwxrwx 1 tomcat tomcat 10 Feb  9 15:54 luis -> /home/luis
 
 <br />
 
-Once created, we go to the `/opt/backup/archives` directory to `locate` the backup with the `content`, that is the only one with a `big size` and we copy it on `/tmp`:
+Once created, we go to the `/opt/backup/archives` directory to `locate` the backup with the `content`, which is the `largest` and we `copy` it to the `/tmp` path:
 
 <br />
 
@@ -571,7 +571,7 @@ af3f361aa0efb30086c3df2c08xxxxxx
 
 <br />
 
-Looking into the user's `directory` we find his `id_rsa`:
+Looking into the luis `directory` we find his `id_rsa`:
 
 <br />
 
@@ -582,7 +582,7 @@ authorized_keys  id_rsa  id_rsa.pub
 
 <br />
 
-So we proceed to `connect` as `luis` to `localhost` using this `private key` as identifier:
+So we proceed to `connect` as luis to `localhost` using the `private key` as identifier:
 
 <br />
 
@@ -700,7 +700,7 @@ luis@seal:/tmp/Privesc$ ls -l /bin/bash
 
 <br />
 
-YES!! We got it, can run a `bash` as `root`!!
+YES!! We got it, now we can run a `bash` as `root`!!
 
 <br />
 
