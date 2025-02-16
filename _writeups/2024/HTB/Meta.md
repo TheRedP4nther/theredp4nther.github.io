@@ -76,6 +76,8 @@ When we try to list the `website`, it `redirects` to the following `domain`:
 
 So we proceed to `add` it to our `/etc/hosts`:
 
+<br />
+
 ```bash
 echo "10.10.11.140 artcorp.htb >> /etc/hosts"
 ```
