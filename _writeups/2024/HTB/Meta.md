@@ -151,7 +151,7 @@ Click on `metaview` as it is the only `tool` available.
 
 <br />
 
-Apparently, it is a `tool` that allows us to upload `images` to `analyze` their `metadata`, let's `test` it by uploading a `random` image:
+Apparently, it is a `tool` that allows us to upload `images` and `analyze` their `metadata`, let's `test` it by uploading a `random` image:
 
 <br />
 
@@ -159,4 +159,28 @@ Apparently, it is a `tool` that allows us to upload `images` to `analyze` their 
 
 <br />
 
+## Exiftool Arbitrary Code Execution:
 
+<br />
+
+When we see the `output` of the `tool`, it looks pretty `familiar`, doesn't it? This is because the `application` is using the well-known `"exiftool"` tool every time we `upload` an image to `analyze` the `metadata`.
+
+So seeing this, we proceed to `look` for `vulnerabilities` and discover the following:
+
+<br />
+
+```bash
+❯ searchsploit exiftool
+------------------------------------------------------------------------------------------------------------------------------------------------------ ---------------------------------
+ Exploit Title                                                                                                                                        |  Path
+------------------------------------------------------------------------------------------------------------------------------------------------------ ---------------------------------
+ExifTool 12.23 - Arbitrary Code Execution                                                                                                             | linux/local/50911.py
+------------------------------------------------------------------------------------------------------------------------------------------------------ ---------------------------------
+Shellcodes: No Results
+```
+
+<br />
+
+
+
+<br />
