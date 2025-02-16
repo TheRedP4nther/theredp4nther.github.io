@@ -66,3 +66,22 @@ Open Ports:
 
 <br />
 
+When we try to list the `website`, it `redirects` to the following `domain`:
+
+- `artcorp.htb` 
+
+So we proceed to `add` it to our `/etc/hosts`:
+
+```bash
+echo "10.10.11.140 artcorp.htb >> /etc/hosts"
+```
+
+<br />
+
+Once this is done, we `reload` the `website` and we see that it is very `static`, not at all `interesting`:
+
+<br />
+
+
+
+<br />
