@@ -82,6 +82,6 @@ Once this is done, we `reload` the `website` and we see that it is very `static`
 
 <br />
 
-
+![2](../../../assets/images/Meta/2.png)
 
 <br />
