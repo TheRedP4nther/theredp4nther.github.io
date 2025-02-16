@@ -139,6 +139,15 @@ We load the new subdomain and it seems to bee a website for testing tools that a
 
 <br />
 
+![3](../../../assets/images/Meta/3.png)
+
+<br />
+
+Click on `metaview` as it is the only `tool` available.
+
+<br />
+
 
 
 <br />
+
