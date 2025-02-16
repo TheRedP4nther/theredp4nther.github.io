@@ -163,7 +163,11 @@ Apparently, it is a `tool` that allows us to upload `images` and `analyze` their
 
 When we see the `output` of the `tool`, it looks pretty `familiar`, doesn't it? This is because the `application` is using the well-known `"exiftool"` tool every time we `upload` an image to `analyze` the `metadata`.
 
+<br />
+
 ## Exiftool Arbitrary Code Execution:
+
+<br />
 
 So seeing this, we proceed to `look` for `vulnerabilities` and discover the following:
 
@@ -181,13 +185,13 @@ Shellcodes: No Results
 
 <br />
 
-`Exiftool` versions `less` than or `equal` to `12.23` are `vulnerable` to an Abitrary Code Execution.
+`Exiftool` versions from 7.44 to `12.23` are `vulnerable` to an Arbitrary Code Execution.
 
 We don't know what `version` the `exiftool` runs from the `website`, but it's the `only` vulnerability it seems to have, so let's `test` it.
 
 <br />
 
-First of all, we bring the script and analyze its code:
+First of all, we `bring` the `script` and `analyze` its code:
 
 <br />
 
@@ -336,5 +340,31 @@ if __name__ == "__main__":
 ```
 
 <br />
+
+Basically, what this exploit does is `generate` a malicious `DjVu` file with bzz and then `prepare` a `jpeg` image with this file `embedded` in its `metadata` that `contains` a malicious `command` that will be `executed` when `exiftool` analyzes the `image`.
+
+Now that we `know` more or less what it `does`, let's exploit it `manually`!
+
+1.- Create the payload:
+
+<br />
+
+```bash
+echo '(metadata "\c${system('whoami')};")' > payload.txt
+```
+
+<br />
+
+2.- `Compressed` the `file` with `bzz` to make it `compatible` with `DjVu`:
+
+<br />
+
+```bash
+bzz payload.txt payload.bzz
+```
+
+<br />
+
+
 
 
