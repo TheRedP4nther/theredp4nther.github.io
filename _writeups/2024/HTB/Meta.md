@@ -90,7 +90,7 @@ Once this is done, we `reload` the `website` and we see that it is very `static`
 
 <br />
 
-When there is nothing interesting on the main website it is advisable to fuzz to find a subdomain, so we do it and surprise:
+When there is nothing `interesting` on the main `website` it is `advisable` to `fuzz` to find a `subdomain`, so we do it and surprise:
 
 <br />
 
