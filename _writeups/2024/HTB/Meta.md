@@ -151,10 +151,12 @@ Click on `metaview` as it is the only `tool` available.
 
 <br />
 
-Apparently, it is a tool that allows us to upload images to analyze their metadata, let's test it by uploading a random image:
+Apparently, it is a `tool` that allows us to upload `images` to `analyze` their `metadata`, let's `test` it by uploading a `random` image:
+
+<br />
+
+![5](../../../assets/images/Meta/5.png)
 
 <br />
 
 
-
-<br />
