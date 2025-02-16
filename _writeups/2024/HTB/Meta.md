@@ -66,6 +66,10 @@ Open Ports:
 
 <br />
 
+# Http Enumeration: -> Port 80
+
+<br />
+
 When we try to list the `website`, it `redirects` to the following `domain`:
 
 - `artcorp.htb` 
@@ -83,5 +87,58 @@ Once this is done, we `reload` the `website` and we see that it is very `static`
 <br />
 
 ![2](../../../assets/images/Meta/2.png)
+
+<br />
+
+When there is nothing interesting on the main website it is advisable to fuzz to find a subdomain, so we do it and surprise:
+
+<br />
+
+```bash
+❯ ffuf -u http://artcorp.htb -H "Host: FUZZ.artcorp.htb" -w /usr/share/SecLists/Discovery/DNS/subdomains-top1million-5000.txt -c -t 20  -fs 0
+
+        /'___\  /'___\           /'___\       
+       /\ \__/ /\ \__/  __  __  /\ \__/       
+       \ \ ,__\\ \ ,__\/\ \/\ \ \ \ ,__\      
+        \ \ \_/ \ \ \_/\ \ \_\ \ \ \ \_/      
+         \ \_\   \ \_\  \ \____/  \ \_\       
+          \/_/    \/_/   \/___/    \/_/       
+
+       v2.1.0-dev
+________________________________________________
+
+ :: Method           : GET
+ :: URL              : http://artcorp.htb
+ :: Wordlist         : FUZZ: /usr/share/SecLists/Discovery/DNS/subdomains-top1million-5000.txt
+ :: Header           : Host: FUZZ.artcorp.htb
+ :: Follow redirects : false
+ :: Calibration      : false
+ :: Timeout          : 10
+ :: Threads          : 20
+ :: Matcher          : Response status: 200-299,301,302,307,401,403,405,500
+ :: Filter           : Response size: 0
+________________________________________________
+
+dev01                   [Status: 200, Size: 247, Words: 16, Lines: 10, Duration: 599ms]
+:: Progress: [4989/4989] :: Job [1/1] :: 507 req/sec :: Duration: [0:00:11] :: Errors: 0 ::
+```
+
+<br />
+
+We have a new `subdomain`, let's `add` it to `/etc/hosts`:
+
+<br />
+
+```bash
+10.10.11.140 artcorp.htb dev01.artcorp.htb
+```
+
+<br />
+
+We load the new subdomain and it seems to bee a website for testing tools that are in the development phase:
+
+<br />
+
+
 
 <br />
