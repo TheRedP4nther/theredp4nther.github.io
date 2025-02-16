@@ -345,7 +345,7 @@ Basically, what this exploit does is `generate` a malicious `DjVu` file with bzz
 
 Now that we `know` more or less what it `does`, let's exploit it `manually`!
 
-1.- Create the payload:
+1.- `Create` the payload:
 
 <br />
 
@@ -365,6 +365,34 @@ bzz payload.txt payload.bzz
 
 <br />
 
+3.- `Create` the `DjVu` malicious `file`:
+
+<br />
+
+```bash
+
+```
+
+<br />
+
+4.- `Inyect` the malicious `file` into the `metadata` of a random `image`:
+
+<br />
+
+```bash
+
+```
+
+<br />
+
+5.- Upload the image to the website:
+
+<br />
 
 
 
+<br />
+
+Yesss!! We're `able` to run `commands`.
+
+Now we can try to gain `access` to the `victim machine`.
