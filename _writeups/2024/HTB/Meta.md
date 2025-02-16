@@ -411,7 +411,7 @@ Command Flags:
 
 -`q` -> Mute the program's output.
 
--`O` -> Redirects the stdout.
+-`O` -> Redirects the stdout instead of downloading the content.
 
 -`| bash` -> Interprets the bash code.
 
