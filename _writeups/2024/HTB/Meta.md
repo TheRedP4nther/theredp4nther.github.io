@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: 
+tags: subdomain abusing fileupload exiftool rce remotecodeexecution imagemagick neofetch
 ---
 
 <br />
