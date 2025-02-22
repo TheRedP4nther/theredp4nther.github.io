@@ -410,7 +410,7 @@ exiftool -config configfile '-HasselbladExif<=exploit.djvu' hacker.jpg
 
 <br />
 
-
+![6](../../../assets/images/Meta/6.png)
 
 <br />
 
