@@ -458,3 +458,7 @@ uid=33(www-data) gid=33(www-data) groups=33(www-data)
 Perfect! We have a `session` as `www-data`!
 
 <br />
+
+# Privilege Escalation: www-data -> thomas
+
+<br />
