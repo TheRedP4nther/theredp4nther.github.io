@@ -358,7 +358,7 @@ Now that we `know` more or less what it `does`, let's exploit it `manually`!
 <br />
 
 ```bash
-bzz payload.txt payload.bzz
+bzz payload payload.bzz
 ```
 
 <br />
