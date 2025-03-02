@@ -576,7 +576,7 @@ The `author` explains how we can `inject` commands into a `SVG MSL Polylot File`
 
 In this 0`POC`, the `"id"` command is being `injected` at the same time that the `stdout` is `stored` in a file called `"id.txt"` in the `/dev/shm` path.
 
-Let's `copy` it to the `dev` path and `check` it what happen!
+Let's `copy` it to the `dev` images path and `check` it what happen!
 
 <br />
 
