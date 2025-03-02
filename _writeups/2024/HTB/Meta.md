@@ -574,9 +574,9 @@ The `author` explains how we can `inject` commands into a `SVG MSL Polyglot File
 
 <br />
 
-In this 0`POC`, the `"id"` command is being `injected` at the same time that the `stdout` is `stored` in a file called `"id.txt"` in the `/dev/shm` path.
+In this `POC`, the `"id"` command is being `injected` at the same time that the `stdout` is `stored` in a file called `"id.txt"` in the `/dev/shm` path.
 
-Let's `copy` it to the `dev` images path and `check` it what happen!
+Let's `'copy'` it into the `'dev01'` images `path`:
 
 <br />
 
