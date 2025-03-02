@@ -462,3 +462,58 @@ Perfect! We have a `session` as `www-data`!
 # Privilege Escalation: www-data -> thomas
 
 <br />
+
+Once in we go to the `thomas` directory but we dont have `permissions` to read the `user.txt` flag:
+
+<br />
+
+```bash
+www-data@meta:/home/thomas$ ls
+user.txt
+www-data@meta:/home/thomas$ cat user.txt 
+cat: user.txt: Permission denied
+```
+
+<br />
+
+Enumerating we found something with `pspy`, the user `thomas` is `executing` the following `task` at time `intervals` on the `system`:
+
+<br />
+
+```bash
+www-data@meta:/tmp$ ./pspy64 
+pspy - version: v1.2.1 - Commit SHA: f9e6a1590a4312b9faa093d8dc84e19567977a6d
+
+
+     ██▓███    ██████  ██▓███ ▓██   ██▓
+    ▓██░  ██▒▒██    ▒ ▓██░  ██▒▒██  ██▒
+    ▓██░ ██▓▒░ ▓██▄   ▓██░ ██▓▒ ▒██ ██░
+    ▒██▄█▓▒ ▒  ▒   ██▒▒██▄█▓▒ ▒ ░ ▐██▓░
+    ▒██▒ ░  ░▒██████▒▒▒██▒ ░  ░ ░ ██▒▓░
+    ▒▓▒░ ░  ░▒ ▒▓▒ ▒ ░▒▓▒░ ░  ░  ██▒▒▒ 
+    ░▒ ░     ░ ░▒  ░ ░░▒ ░     ▓██ ░▒░ 
+    ░░       ░  ░  ░  ░░       ▒ ▒ ░░  
+                   ░           ░ ░     
+                               ░ ░     
+
+Config: Printing events (colored=true): processes=true | file-system-events=false ||| Scanning for processes every 100ms and on inotify events ||| Watching directories: [/usr /tmp /etc /home /var /opt] (recursive) | [] (non-recursive)
+Draining file system events due to startup...
+done 
+
+2025/03/02 11:47:01 CMD: UID=1000  PID=1545   | /bin/bash /usr/local/bin/convert_images.sh
+```
+
+<br />
+
+Let's `see` what the `script` is doing:
+
+<br />
+
+```bash
+www-data@meta:/tmp$ cat /usr/local/bin/convert_images.sh
+#!/bin/bash
+cd /var/www/dev01.artcorp.htb/convert_images/ && /usr/local/bin/mogrify -format png *.* 2>/dev/null
+pkill mogrify
+```
+
+<br />
