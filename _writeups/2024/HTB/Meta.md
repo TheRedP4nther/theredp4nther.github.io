@@ -643,6 +643,17 @@ thomas@meta:/var/www/dev01.artcorp.htb/convert_images$
 
 <br />
 
+Listing `thomas` sudoers `privileges` we find something, he can run `neobin` as rooo without `password`: 
 
+<br />
+
+```bash
+thomas@meta:~$ sudo -l
+Matching Defaults entries for thomas on meta:
+    env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin, env_keep+=XDG_CONFIG_HOME
+
+User thomas may run the following commands on meta:
+    (root) NOPASSWD: /usr/bin/neofetch \"\"
+```
 
 <br />
