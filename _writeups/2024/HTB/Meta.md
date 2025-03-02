@@ -463,7 +463,7 @@ Perfect! We have a `session` as `www-data`!
 
 <br />
 
-Once in we go to the `thomas` directory but we dont have `permissions` to read the `user.txt` flag:
+Once in we go to the `thomas` directory to `catch` the `user.txt` flag, but we dont have `permissions` to do it:
 
 <br />
 
