@@ -719,7 +719,7 @@ print_info() {
 
 <br />
 
-Now we run neofetch as root and check if the command has been executed:
+Now we `run` neofetch as `root` and `check` if the `command` has been `executed`:
 
 <br />
 
