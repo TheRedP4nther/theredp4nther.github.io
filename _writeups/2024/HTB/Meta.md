@@ -463,7 +463,7 @@ Perfect! We have a `session` as `www-data`!
 
 <br />
 
-Once in we go to the `thomas` directory to `catch` the `user.txt` flag, but we dont have `permissions` to do it:
+Once in we go to the `thomas` directory to `read` the `user.txt` flag, but we dont have `permissions` to do it:
 
 <br />
 
@@ -514,6 +514,19 @@ www-data@meta:/tmp$ cat /usr/local/bin/convert_images.sh
 #!/bin/bash
 cd /var/www/dev01.artcorp.htb/convert_images/ && /usr/local/bin/mogrify -format png *.* 2>/dev/null
 pkill mogrify
+```
+
+<br />
+
+As we can see, it is `running` the binary `mogrify` into the `dev01` directory over all the `png` images.
+
+If we check this `binary` more deep, it is pointing to `imagemagick`, a tool to `manipulate` and convert `images`:
+
+<br />
+
+```bash
+www-data@meta:/tmp$ ls -l /usr/local/bin/mogrify 
+lrwxrwxrwx 1 root root 6 Aug 29  2021 /usr/local/bin/mogrify -> magick
 ```
 
 <br />
