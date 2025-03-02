@@ -643,7 +643,7 @@ thomas@meta:/var/www/dev01.artcorp.htb/convert_images$
 
 <br />
 
-Listing `thomas` sudoers `privileges` we find something, he can run `neobin` as root without `password`: 
+Listing `thomas` sudoers `privileges` we find something, he can run `neofetch` as root without `password`: 
 
 <br />
 
@@ -655,5 +655,9 @@ Matching Defaults entries for thomas on meta:
 User thomas may run the following commands on meta:
     (root) NOPASSWD: /usr/bin/neofetch \"\"
 ```
+
+<br />
+
+
 
 <br />
