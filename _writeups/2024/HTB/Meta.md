@@ -643,7 +643,7 @@ thomas@meta:/var/www/dev01.artcorp.htb/convert_images$
 
 <br />
 
-Listing `thomas` sudoers `privileges` we find something, he can run `neobin` as rooo without `password`: 
+Listing `thomas` sudoers `privileges` we find something, he can run `neobin` as root without `password`: 
 
 <br />
 
