@@ -22,7 +22,7 @@ Difficulty -> Medium.
 
 <br />
 
-
+Hello hackers! Today we’ll tackle the Meta Machine, a Medium difficulty Linux challenge. We’ll start by discovering a subdomain running a web tool that uses a vulnerable version of ExifTool, allowing us to achieve Arbitrary Code Execution and gain system access. Once inside, we’ll pivot to another user by exploiting a vulnerable version of ImageMagick susceptible to command injection. Finally, we’ll leverage a SUDOERS permission that allows us to execute Neofetch as root, enabling us to escalate privileges.
 
 <br />
 
