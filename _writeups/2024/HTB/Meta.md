@@ -763,7 +763,7 @@ export XDG_CONFIG_HOME="/home/thomas/.config/"
 
 <br />
 
-Now we change the config file again and run neofetch:
+Now we `change` the `config` file again and run `neofetch`:
 
 <br />
 
