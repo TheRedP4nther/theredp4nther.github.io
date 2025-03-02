@@ -556,7 +556,7 @@ The `version` in use is the `ImageMagick 7.0.10-36` one.
 
 Doing a `great` job of `searching` we found a [post](https://insert-script.blogspot.com/2020/11/imagemagick-shell-injection-via-pdf.html) that tells us how we can `exploit` this `version` of `ImageMagick`.
 
-The `author` explains how we can `inject` commands into a `SVG MSL Polylot File` like this:
+The `author` explains how we can `inject` commands into a `SVG MSL Polyglot File` like this:
 
 <br />
 
