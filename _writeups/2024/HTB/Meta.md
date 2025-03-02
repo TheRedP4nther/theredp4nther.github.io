@@ -586,7 +586,7 @@ cp poc.svg /var/www/dev01.artcorp.htb/convert_images/
 
 <br />
 
-After a few `seconds`, we check if the `file` has been `created` and if!! We have `injected` a `command` like user `thomas`!!
+After a few `seconds`, we check if the `file` has been `created` and yesss!! We have `injected` a `command` like user `thomas`!!
 
 <br />
 
