@@ -808,6 +808,6 @@ bash-5.0# cat root.txt
 
 Machine Meta rooted!!
 
-This machine is a bit old since HTB has launched it 2 years ago but it touches very interesting concepts, I hope you liked it!
+This machine is a bit old since HTB has launched it 2 years ago, but it touches very interesting concepts like the wget command to gain access to the machine, I hope you liked it!
 
 Keep hacking!!❤️❤️
