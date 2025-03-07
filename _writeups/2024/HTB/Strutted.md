@@ -115,7 +115,7 @@ The image has been `uploaded` withouth troubles and if we `inspect` the `source 
 
 <br />
 
-But this `isn't` important, the most `important` thing is that when we `upload` an image, the page `redirects` to an endpoint called `upload.action`:
+But that's not the `key` point, `crucial` part is that when we `upload` an `image`, the page `redirects` to an `endpoint` called `"upload.action"`:
 
 <br />
 
