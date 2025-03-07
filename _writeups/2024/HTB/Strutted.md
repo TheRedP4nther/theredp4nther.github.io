@@ -125,10 +125,29 @@ And as we `well` know, the presence of `.action` scripts `means` that `Apache St
 
 <br />
 
-If we `remember`, we have `access` to the `source code` of the `application`, so we can take a `look` and try to `find` the Apache Struts `version` in `use`:
+If we `remember`, we have `access` to the `source code` of the `application`, so we can take a `look` and try to `find` the Apache Struts `version` in `use`.
+
+After a time looking for this, we find the version `6.3.0.1` in the `"pom.xml"` file:
 
 <br />
 
+```xml
+<properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
+    <struts2.version>6.3.0.1</struts2.version>
+    <jetty-plugin.version>9.4.46.v20220331</jetty-plugin.version>
+    <maven.javadoc.skip>true</maven.javadoc.skip>
+    <jackson.version>2.14.1</jackson.version>
+    <jackson-data-bind.version>2.14.1</jackson-data-bind.version>
+</properties>
+```
 
+<br />
+
+Once we know that, we search `vulnerabilities` for this `version` and there is a very recent CVE, the `CVE-2024-53677`.
+
+The CVE `consists` in a `file upload` vulnerability that allows an `attacker` to upload a `.jps` malicious `file` like a `webshell` and `execute` remote `commands` in the `system`.
 
 <br />
