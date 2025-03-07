@@ -69,7 +69,7 @@ Open Ports:
 
 <br />
 
-When we are going to list the website it redirects to -> strutted.htb, so we proceed to add it to the /etc/hosts:
+When we are going to list the `website` it redirects to -> `strutted.htb`, so we proceed to add it to the `/etc/hosts`:
 
 <br />
 
@@ -79,10 +79,26 @@ echo "10.10.11.59 strutted.htb" >> /etc/hosts
 
 <br />
 
-Once done, we list the website again:
+Once done, we list the `website` again:
 
 <br />
 
 ![2](../../../assets/images/Strutted/2.png)
+
+<br />
+
+As we can see, it seems to be a `utility` to `upload` images, let's `test` uploading one:
+
+<br />
+
+
+
+<br />
+
+The image has been `uploaded` withouth troubles and if we `inspect` the source `code` of the `"Copy Shareable Link"` we can access to the `path` in where it is `stored`:
+
+<br />
+
+
 
 <br />
