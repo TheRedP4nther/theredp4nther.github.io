@@ -57,3 +57,22 @@ Nmap done: 1 IP address (1 host up) scanned in 21.75 seconds
 
 <br />
 
+Open Ports:
+
+`Port 22` -> ssh
+
+`Port 80` -> http 
+
+<br />
+
+# Http Enumeration: -> Port 80
+
+<br />
+
+When we are going to list the website it redirects to -> strutted.htb, so we proceed to add it to the /etc/hosts:
+
+<br />
+
+```bash
+echo "10.10.11.59 strutted.htb" >> /etc/hosts
+```
