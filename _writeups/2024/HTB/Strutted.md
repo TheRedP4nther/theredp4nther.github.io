@@ -83,6 +83,6 @@ Once done, we list the website again:
 
 <br />
 
-
+![2](../../../assets/images/Strutted/2.png)
 
 <br />
