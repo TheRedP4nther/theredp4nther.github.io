@@ -87,7 +87,7 @@ Once done, we list the `website` again:
 
 <br />
 
-Before anything, at the `bottom` of the page it says that we can `download` the `code` of the `application` in a `.zip` file. So we go to `"Download"` at the `top right` of the `page` and `download` it.
+Before anything, at the `bottom` of the page it says that we can `download` the `code` of the `application` in a `.zip` file. So we go to `"Download"` at the `top right` and we do it.
 
 <br />
 
