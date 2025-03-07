@@ -76,3 +76,13 @@ When we are going to list the website it redirects to -> strutted.htb, so we pro
 ```bash
 echo "10.10.11.59 strutted.htb" >> /etc/hosts
 ```
+
+<br />
+
+Once done, we list the website again:
+
+<br />
+
+
+
+<br />
