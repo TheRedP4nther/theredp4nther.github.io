@@ -152,12 +152,20 @@ After a time looking for this, we find the version `6.3.0.1` in the `"pom.xml"` 
 
 <br />
 
+Once we know that, we search `vulnerabilities` for this `version` and there is a very recent one, the `CVE-2024-53677`.
+
+<br />
+
 ## Apache Struts File Upload Vulnerability:
 
 <br />
 
-Once we know that, we search `vulnerabilities` for this `version` and there is a very recent one, the `CVE-2024-53677`.
+This CVE `consists` in a `file upload` vulnerability that allows an `attacker` to upload a malicious `.jsp` file as a `webshell` and consequently, achieve a `RCE` (Remote Command  Execution) on the victim system. In this [post](https://isc.sans.edu/diary/31520) you can find more information about the vulnerability.
 
-This CVE `consists` of a `file upload` vulnerability that allows an `attacker` to upload a malicious `.jsp` file as a `webshell` and consequently, achieve a `RCE` (Remote Command  Execution) on the victim system. In this [post](https://isc.sans.edu/diary/31520) you can find more information about the vulnerability.
+We are going to exploit it `manually`, so we open `Burp Suite` and `intercept` a random image `upload` request:
+
+<br />
+
+
 
 <br />
