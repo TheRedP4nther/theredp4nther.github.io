@@ -87,6 +87,14 @@ Once done, we list the `website` again:
 
 <br />
 
+Before anything, at the `bottom` of the page it says that we can `download` the `code` of the `application` in a `.zip` file. So we go to `"Download"` at the `top right` of the `page` and `download` it.
+
+<br />
+
+
+
+<br />
+
 As we can see, it seems to be a `utility` to `upload` images, let's `test` uploading one:
 
 <br />
@@ -95,9 +103,13 @@ As we can see, it seems to be a `utility` to `upload` images, let's `test` uploa
 
 <br />
 
+## Apache Struts: 
+
+<br />
+
 The image has been `uploaded` withouth troubles and if we `inspect` the source `code` of the `"Copy Shareable Link"` we can access to the `path` in where it is `stored`.
 
-But this `isn't` important, the most `important` thing is that when we `upload` an image, the page `redirects` to an endpoint called `upload.action`.
+But this `isn't` important, the most `important` thing is that when we `upload` an image, the page `redirects` to an endpoint called `upload.action`:
 
 <br />
 
@@ -110,5 +122,9 @@ And as we `well` know, the presence of `.action` scripts `means` that `Apache St
 <br />
 
 ![4](../../../assets/images/Strutted/4.png)
+
+<br />
+
+
 
 <br />
