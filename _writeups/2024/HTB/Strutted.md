@@ -97,8 +97,14 @@ As we can see, it seems to be a `utility` to `upload` images, let's `test` uploa
 
 The image has been `uploaded` withouth troubles and if we `inspect` the source `code` of the `"Copy Shareable Link"` we can access to the `path` in where it is `stored`:
 
+But this `isn't` important, the most `important` thing is that when we `upload` an image, the page `redirects` to an endpoint called `upload.action`.
+
 <br />
 
 
+
+<br />
+
+And as we `well` know, the presence of `.action` scripts `means` that `Apache Struts` is behind the `application`.
 
 <br />
