@@ -125,6 +125,10 @@ And as we `well` know, the presence of `.action` scripts `means` that `Apache St
 
 <br />
 
+If we `remember`, we have `access` to the `source code` of the `application`, so we can take a `look` and try to `find` the Apache Struts `version` in `use`:
+
+<br />
+
 
 
 <br />
