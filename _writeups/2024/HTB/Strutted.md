@@ -87,7 +87,7 @@ Once done, we list the `website` again:
 
 <br />
 
-Before anything, at the `bottom` of the page it says that we can `download` the `code` of the `application` in a `.zip` file. So we go to `"Download"` at the `top right` and we do it.
+Before anything, at the `bottom` of the page it says that we can `download` the `structure` of the `application` in a `.zip` file. So we go to `"Download"` at the `top right` and we do it.
 
 <br />
 
@@ -95,7 +95,7 @@ Before anything, at the `bottom` of the page it says that we can `download` the 
 
 <br />
 
-As we can see, it seems to be a `utility` to `upload` images, let's `test` uploading one:
+As we can see, it seems to be an `utility` to `upload` images, let's `test` uploading one:
 
 <br />
 
@@ -107,7 +107,7 @@ As we can see, it seems to be a `utility` to `upload` images, let's `test` uploa
 
 <br />
 
-The image has been `uploaded` withouth troubles and if we `inspect` the source `code` of the `"Copy Shareable Link"` we can access to the `path` in where it is `stored`.
+The image has been `uploaded` withouth troubles and if we `inspect` the `source code` of the `"Copy Shareable Link"` button, we can find the `path` in where it is `stored`.
 
 But this `isn't` important, the most `important` thing is that when we `upload` an image, the page `redirects` to an endpoint called `upload.action`:
 
