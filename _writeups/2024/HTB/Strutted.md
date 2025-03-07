@@ -160,7 +160,11 @@ Once we know that, we search `vulnerabilities` for this `version` and there is a
 
 <br />
 
-This CVE `consists` in a `file upload` vulnerability that allows an `attacker` to upload a malicious `.jsp` file as a `webshell` and consequently, achieve a `RCE` (Remote Command  Execution) on the victim system. In this [post](https://isc.sans.edu/diary/31520) you can find more information about the vulnerability.
+The CVE `consists` in a `file upload` vulnerability that allows an `attacker` to upload a malicious `.jsp` file as a `webshell` and consequently, achieve a `RCE` (Remote Command  Execution) on the victim system. 
+
+This [post](https://www.dynatrace.com/news/blog/tracing-apache-struts-cve-2024-53677/) `explains` very well the `vulnerability`. It says that `Apache Struts` has a number of  `interceptors` classes by default, including one called `"FileUploadInterceptor"`.
+
+The `FileUploadInterceptor` class is the `key` to the `exploitation` because it `allows` us to `manipulate` the `file's` storage `location` on the server `before` it is `processed`.
 
 We are going to exploit it `manually`, so we open `Burp Suite` and `intercept` a random image `upload` request:
 
