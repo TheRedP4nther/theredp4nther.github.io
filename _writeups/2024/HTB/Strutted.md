@@ -107,7 +107,13 @@ As we can see, it seems to be an `utility` to `upload` images, let's `test` uplo
 
 <br />
 
-The image has been `uploaded` withouth troubles and if we `inspect` the `source code` of the `"Copy Shareable Link"` button, we can find the `path` in where it is `stored`.
+The image has been `uploaded` withouth troubles and if we `inspect` the `source code` of the `"Copy Shareable Link"` button, we can find the `path` in where it is `stored`:
+
+<br />
+
+![6](../../../assets/images/Strutted/6.png)
+
+<br />
 
 But this `isn't` important, the most `important` thing is that when we `upload` an image, the page `redirects` to an endpoint called `upload.action`:
 
