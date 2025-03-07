@@ -91,7 +91,7 @@ As we can see, it seems to be a `utility` to `upload` images, let's `test` uploa
 
 <br />
 
-
+![3](../../../assets/images/Strutted/3.png)
 
 <br />
 
