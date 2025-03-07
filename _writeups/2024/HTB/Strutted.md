@@ -108,3 +108,7 @@ But this `isn't` important, the most `important` thing is that when we `upload` 
 And as we `well` know, the presence of `.action` scripts `means` that `Apache Struts` is behind the `application`.
 
 <br />
+
+![4](../../../assets/images/Strutted/4.png)
+
+<br />
