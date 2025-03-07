@@ -91,7 +91,7 @@ Before anything, at the `bottom` of the page it says that we can `download` the 
 
 <br />
 
-
+![5](../../../assets/images/Strutted/5.png)
 
 <br />
 
