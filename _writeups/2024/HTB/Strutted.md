@@ -233,7 +233,7 @@ def exploit(self) -> None:
 
 ### Webshell:
 
-Now, we can `repeat` the process with a `webshell` to be able to get the `RCE`:
+Now, we can `repeat` the process with the following `webshell` to be able to get the `RCE`:
 
 <br />
 
