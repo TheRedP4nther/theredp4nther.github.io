@@ -182,6 +182,6 @@ Now are going to exploit the vuln `manually` step by step:
 
 <br />
 
-
+![7](../../../assets/images/Strutted/7.png)
 
 <br />
