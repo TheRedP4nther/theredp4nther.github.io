@@ -207,7 +207,7 @@ def exploit(self) -> None:
 
 <br />
 
-2.- Now, we change `"upload"` to `"Upload"` to activate the interceptor being able to `intercept` the file `before` it is uploaded and we add a `java` oneliner to the `data`:
+2.- Now, we change `"upload"` to `"Upload"` to activate the interceptor being able to `intercept` the file `before` it is uploaded. We also add a `java oneliner` to the image `data`:
 
 <br />
 
