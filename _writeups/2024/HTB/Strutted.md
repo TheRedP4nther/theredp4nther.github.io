@@ -207,7 +207,7 @@ def exploit(self) -> None:
 
 <br />
 
-2.- Now, we `rename` the filename to `.jsp`, because we want to upload a `java webshell` and we change `"upload"` to `"Upload"`, to activate the interceptor and be able to `intercept` the file `before` it is uploaded:
+2.- Now, we change `"upload"` to `"Upload"`, to activate the interceptor and be able to `intercept` the file `before` it is uploaded and we add a java oneliner to the data:
 
 <br />
 
