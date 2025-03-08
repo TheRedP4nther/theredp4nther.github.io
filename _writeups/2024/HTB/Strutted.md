@@ -219,11 +219,11 @@ def exploit(self) -> None:
 
 <br />
 
-
+![9](../../../assets/images/Strutted/9.png)
 
 <br />
 
-4.- And finally, we visit `"/uploads/20250308_151823/../../hello.jsp"` to see the file uploaded:
+4.- And finally, if the `Path Traversal` was successfull, we can visit `"http://strutted.htb/hello.jsp"` and see the `uploaded` file:
 
 <br />
 
