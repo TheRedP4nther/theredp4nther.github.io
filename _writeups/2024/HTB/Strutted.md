@@ -272,7 +272,7 @@ Once uploaded, we try to `run` a `whoami`:
 
 <br />
 
-
+![11](../../../assets/images/Strutted/11.png)
 
 <br />
 
