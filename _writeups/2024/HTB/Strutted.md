@@ -174,11 +174,11 @@ This happens because `FileUploadInterceptor` does not properly sanitize file `pa
 
 <br />
 
-Now are going to exploit the vuln `manually` step by step.
+Now are going to exploit the vuln `manually` step by step:
 
 <br />
 
-1.- First, we open `Burp Suite` and `intercept` a random image `upload` request:
+1.- First, we open `Burp Suite` and `intercept` a random image `upload` request `removing` the `unnecessary` image data :
 
 <br />
 
