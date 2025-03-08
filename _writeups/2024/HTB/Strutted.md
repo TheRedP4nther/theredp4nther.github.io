@@ -176,6 +176,8 @@ This happens because `FileUploadInterceptor` does not properly sanitize file `pa
 
 Now are going to exploit the vuln `manually` step by step using the following [POC](https://github.com/EQSTLab/CVE-2024-53677) in where we can `found` the parameters that we need to `set`:
 
+<br />
+
 ```python
 def exploit(self) -> None:
         files = {
