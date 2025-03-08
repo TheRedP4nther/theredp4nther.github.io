@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: apachestruts struts interceptor abusingfileupload webshell sudoers
+tags: apachestruts struts interceptor fileuploadinterceptor abusingfileupload webshell sudoers
 ---
 
 <br />
@@ -162,9 +162,9 @@ Once we know that, we search `vulnerabilities` for this `version` and there is a
 
 The CVE `consists` in a `file upload` vulnerability that allows an `attacker` to upload a malicious `.jsp` file as a `webshell` and consequently, achieve a `RCE` on the victim system. 
 
-This [post](https://www.dynatrace.com/news/blog/tracing-apache-struts-cve-2024-53677/) `explains` very well the `vulnerability`. It says that `Apache Struts` has a number of  `interceptors` classes by default, including one called `"FileUploadInterceptor"`.
+This [post](https://www.dynatrace.com/news/blog/tracing-apache-struts-cve-2024-53677/) explains very well the `vulnerability`. It says that `Apache Struts` has a number of  `interceptors` classes by default, including one called `"FileUploadInterceptor"`.
 
-The `FileUploadInterceptor` class is the `key` to the `exploitation` because it `allows` us to `manipulate` the `file's` storage `location` on the server `before` it is `processed`. 
+The `FileUploadInterceptor` class is the `key` to the `exploitation` because it allows us to `manipulate` the `file's` storage location on the server `before` it is `processed`. 
 
 This happens because `FileUploadInterceptor` does not properly sanitize file `paths` when handling uploads. By `manipulating` the request parameters, we can perform a `path traversal` attack to store files `outside` the intended `directory`. If we upload a `.jsp` file to a web-accessible location, we can achieve `RCE` when the server processes it.
 
