@@ -227,6 +227,6 @@ def exploit(self) -> None:
 
 <br />
 
-
+![10](../../../assets/images/Strutted/10.png)
 
 <br />
