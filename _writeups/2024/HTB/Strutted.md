@@ -207,10 +207,18 @@ def exploit(self) -> None:
 
 <br />
 
-2.- Now, we change `"upload"` to `"Upload"`, to activate the interceptor and be able to `intercept` the file `before` it is uploaded and we add a java oneliner to the data:
+2.- Now, we change `"upload"` to `"Upload"` to activate the interceptor being able to `intercept` the file `before` it is uploaded and we add a `java` oneliner to the `data`:
 
 <br />
 
 ![8](../../../assets/images/Strutted/8.png)
+
+<br />
+
+3.- Finally, we need to `add` a second file parameter to use the `interceptor` and `rename` the file using a `Path Traversal` and `.jsp` extension:
+
+<br />
+
+
 
 <br />
