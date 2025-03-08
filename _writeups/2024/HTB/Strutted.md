@@ -215,7 +215,15 @@ def exploit(self) -> None:
 
 <br />
 
-3.- Finally, we need to `add` a second file parameter to use the `interceptor` and `rename` the file using a `Path Traversal` and `.jsp` extension:
+3.- Then, we need to `add` a second file parameter to use the `interceptor` and `rename` the file using a `Path Traversal` and `.jsp` extension:
+
+<br />
+
+
+
+<br />
+
+4.- And finally, we visit `"/uploads/20250308_151823/../../hello.jsp"` to see the file uploaded:
 
 <br />
 
