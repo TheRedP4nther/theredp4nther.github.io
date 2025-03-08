@@ -168,7 +168,17 @@ The `FileUploadInterceptor` class is the `key` to the `exploitation` because it 
 
 This happens because `FileUploadInterceptor` does not properly sanitize file `paths` when handling uploads. By `manipulating` the request parameters, we can perform a `path traversal` attack to store files `outside` the intended `directory`. If we upload a `.jsp` file to a web-accessible location, we can achieve `RCE` when the server processes it.
 
-Now are going to exploit the vuln `manually`, so we open `Burp Suite` and `intercept` a random image `upload` request:
+<br />
+
+### Manual Exploitation:
+
+<br />
+
+Now are going to exploit the vuln `manually` step by step.
+
+<br />
+
+1.- First, we open `Burp Suite` and `intercept` a random image `upload` request:
 
 <br />
 
