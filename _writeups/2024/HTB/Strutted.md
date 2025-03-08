@@ -186,10 +186,10 @@ Now are going to exploit the vuln `manually` step by step:
 
 <br />
 
-2.- Now, we rename the filename to .jsp, because we want to upload a java webshell and we change "upload" to "Upload", to activate the interceptor and be able to intercept the file before it is uploaded:
+2.- Now, we `rename` the filename to `.jsp`, because we want to upload a `java webshell` and we change `"upload"` to `"Upload"`, to activate the interceptor and be able to `intercept` the file `before` it is uploaded:
 
 <br />
 
-![8](../../../assets/images/8.png)
+![8](../../../assets/images/Strutted/8.png)
 
 <br />
