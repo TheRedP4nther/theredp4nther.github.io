@@ -178,10 +178,18 @@ Now are going to exploit the vuln `manually` step by step:
 
 <br />
 
-1.- First, we open `Burp Suite` and `intercept` a random image `upload` request `removing` the `unnecessary` image data :
+1.- First, we open `Burp Suite` and `intercept` a random image `upload` request `removing` the `unnecessary` data from the image:
 
 <br />
 
 ![7](../../../assets/images/Strutted/7.png)
+
+<br />
+
+2.- Now, we rename the filename to .jsp, because we want to upload a java webshell and we change "upload" to "Upload", to activate the interceptor and be able to intercept the file before it is uploaded:
+
+<br />
+
+
 
 <br />
