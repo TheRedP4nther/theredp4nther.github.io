@@ -276,7 +276,7 @@ Once uploaded, we `run` a `whoami`:
 
 <br />
 
-Perfect!! We can `execute` commands in the system, let's gain `access` with a `Reverse Shell`.
+Perfect!! We can `execute` commands as tomcat, let's gain `access` with a `Reverse Shell`.
 
 To do it, firt we create a `"reverse.sh"` file and put it in the `/tmp` path of the victim system with `curl`:
 
