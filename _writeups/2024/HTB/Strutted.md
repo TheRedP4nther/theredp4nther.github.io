@@ -316,6 +316,6 @@ Intrusion ready!! Let's go with the Privilege Escalation!!
 
 <br />
 
-# Privilege Escalation: tomcat -> thomas
+# Privilege Escalation: tomcat -> james
 
 <br />
