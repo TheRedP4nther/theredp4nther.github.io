@@ -190,6 +190,6 @@ Now are going to exploit the vuln `manually` step by step:
 
 <br />
 
-
+![8](../../../assets/images/8.png)
 
 <br />
