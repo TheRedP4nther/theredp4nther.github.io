@@ -166,7 +166,11 @@ This [post](https://www.dynatrace.com/news/blog/tracing-apache-struts-cve-2024-5
 
 The `FileUploadInterceptor` class is the `key` to the `exploitation` because it allows us to `manipulate` the `file's` storage location on the server `before` it is `processed`.
 
+<br />
+
 ![13](../../../assets/images/Strutted/13.png)
+
+<br />
 
 This happens because `FileUploadInterceptor` does not properly sanitize file `paths` when handling uploads. By `manipulating` the request parameters, we can perform a `path traversal` attack to store files `outside` the intended `directory`. If we upload a `.jsp` file to a web-accessible location, we can achieve `RCE` when the server processes it.
 
