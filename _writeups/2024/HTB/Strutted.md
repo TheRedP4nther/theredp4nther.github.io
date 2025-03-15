@@ -355,7 +355,7 @@ su: Authentication failure
 
 <br />
 
-But it works for SSH:
+But it works for `SSH`:
 
 <br />
 
