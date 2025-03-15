@@ -22,7 +22,7 @@ Difficulty -> Medium.
 
 <br />
 
-
+Hello hackers! Today we’ll tackle the Strutted Machine, a Medium Difficulty Linux challenge. We’ll start by exploiting an Apache Struts file upload vulnerability, allowing us to upload a malicious webshell and achieve remote code execution. Once inside, we’ll extract credentials from a Tomcat configuration file and use them to pivot to another user via SSH. Finally, we’ll exploit a tcpdump SUDOERS permission to escalate privileges and become root.
 
 <br />
 
