@@ -394,6 +394,6 @@ He can run `tcpdump` as `root`. Searching in [GTFOBins](https://gtfobins.github.
 
 <br />
 
-
+![12](../../../assets/images/Strutted/12.png)
 
 <br />
