@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: apachestruts struts interceptor fileuploadinterceptor abusingfileupload webshell sudoers
+tags: apache struts apachestruts interceptor fileuploadinterceptor abusingfileupload webshell sudoers tcpdump
 ---
 
 <br />
@@ -324,7 +324,7 @@ Intrusion ready!! Let's go with the Privilege Escalation!!
 
 <br />
 
-After a time enumerating the system we found `credentials` in the `tomcat-users.xml` file at tomcat path `/var/lib/tomcat9/conf`:
+After a time enumerating the system, we found `credentials` in the `tomcat-users.xml` file at tomcat path `/var/lib/tomcat9/conf`:
 
 <br />
 
@@ -343,7 +343,7 @@ After a time enumerating the system we found `credentials` in the `tomcat-users.
 
 <br />
 
-When we try to log with su into the user james, it doesn't work:
+When we try to `log` with `su` into the user `james`, it doesn't work:
 
 <br />
 
@@ -368,5 +368,32 @@ james@strutted:~$ cd
 james@strutted:~$ cat user.txt
 1efebff443560ba883cf8e3c22xxxxxx
 ```
+
+<br />
+
+# Privilege Escalation: james -> root 
+
+<br />
+
+User `james` has the following `sudoers` privilege:
+
+<br />
+
+```bash
+james@strutted:~$ sudo -l
+Matching Defaults entries for james on localhost:
+    env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin, use_pty
+
+User james may run the following commands on localhost:
+    (ALL) NOPASSWD: /usr/sbin/tcpdump
+```
+
+<br />
+
+He can run `tcpdump` as `root`. Searching in [GTFOBins](https://gtfobins.github.io/) for this `binary`, we find the following:
+
+<br />
+
+
 
 <br />
