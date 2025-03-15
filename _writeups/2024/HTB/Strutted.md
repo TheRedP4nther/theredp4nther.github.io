@@ -397,3 +397,35 @@ He can run `tcpdump` as `root`. Searching in [GTFOBins](https://gtfobins.github.
 ![12](../../../assets/images/Strutted/12.png)
 
 <br />
+
+Let's `analyze` the command `flags` more in deep:
+
+<br />
+
+- `-l`: Enables line-buffered mode.
+
+- `-n`: Disables hostname and port resolution.
+
+- `-i lo`: Captures traffic on the loopback interface.
+
+- `-w /dev/null`: Discards captured packets.
+
+- `-W 1`: Uses only one output file.
+
+- `-G 1`: Rotates the capture file every second.
+
+- `-z $TF`: Executes the $TF command when rotating files.
+
+- `-Z root`: Switches the effective user to root after opening the capture.
+
+<br />
+
+Once we understand this, let's try to attribute `SUID` privilege to the `/bin/bash`!
+
+<br />
+
+```bash
+
+```
+
+<br />
