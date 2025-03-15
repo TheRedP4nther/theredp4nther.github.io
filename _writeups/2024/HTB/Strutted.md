@@ -237,6 +237,10 @@ def exploit(self) -> None:
 
 <br />
 
+As we can see, the `website` has `interpreted` our `java` code without any problems.
+
+<br />
+
 ### Webshell:
 
 Now, we can `repeat` the process with the following `webshell` to be able to get the `RCE`:
