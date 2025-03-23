@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: reverseshell nodejs deserializationattack scripting python javascript iife
+tags: 
 ---
 
 <br />
@@ -94,7 +94,7 @@ Nmap done: 1 IP address (1 host up) scanned in 77.08 seconds
 
 Open Ports:
 
-It looks like we are dealing with a `Windows` host, since the open ports and services are typical of thisoperating system, such as:
+It looks like we are dealing with a `Windows` host, since the open ports and services are `typical` of this operating system, such as:
 
 - `Port 80` -> http
 
@@ -108,6 +108,6 @@ It looks like we are dealing with a `Windows` host, since the open ports and ser
 
 -  `Port 445` -> SMB 
 
-- `Port 5985` -> WINRM
+- `Port 5985` -> WinRM
 
 <br />
