@@ -132,7 +132,7 @@ It looks like a `printer` Administration Pannel, let's check the `settings` path
 
 <br />
 
-There is a interesting `functionality`. To test it, we replace the `"Server Address"` field with our IP, start a listener on port `389` with nc and click `"Update"` button:
+There is a interesting `functionality`. To test it, we replace the `"Server Address"` field with our own, start a listener on port `389` and click `"Update"` button:
 
 <br />
 
