@@ -111,3 +111,15 @@ It looks like we are dealing with a `Windows` host, since the open ports and ser
 - `Port 5985` -> WinRM
 
 <br />
+
+# Http Enumeration -> Port 80
+
+<br />
+
+We start enumerating the website:
+
+<br />
+
+
+
+<br />
