@@ -210,6 +210,8 @@ Info: Establishing connection to remote endpoint
 dd8fd6aa4466447d6d0c33307cxxxxxx
 ```
 
+<br />
+
 We did it!! User flag earned, come on with the privilege escalation!!
 
 <br />
@@ -242,5 +244,15 @@ NT AUTHORITY\This Organization             Well-known group S-1-5-15     Mandato
 NT AUTHORITY\NTLM Authentication           Well-known group S-1-5-64-10  Mandatory group, Enabled by default, Enabled group
 Mandatory Label\High Mandatory Level       Label            S-1-16-12288
 ```
+
+<br />
+
+As we can see, we are into the `"Server Operators"` group.
+
+This represents a significant oversight by the system `administrators`, because if we are in this group, we can `start` and `stop` services.
+
+<br />
+
+## Malicious Service:
 
 <br />
