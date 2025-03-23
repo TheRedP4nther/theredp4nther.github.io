@@ -124,7 +124,7 @@ We start enumerating the website:
 
 <br />
 
-It looks like a Printer Administration Pannel, let's check the `settings` path:
+It looks like a `printer` Administration Pannel, let's check the `settings` path:
 
 <br />
 
