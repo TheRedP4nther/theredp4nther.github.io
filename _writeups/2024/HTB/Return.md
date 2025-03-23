@@ -128,6 +128,6 @@ It looks like a Printer Administration Pannel, let's check the `settings` path:
 
 <br />
 
-
+![3](../../../assets/images/Return/3.png)
 
 <br />
