@@ -124,7 +124,7 @@ We start enumerating the website:
 
 <br />
 
-It looks like a `printer` Administration Pannel, let's check the `/settings.php` path:
+It looks like a `printer` Administration Panel, let's check the `/settings.php` path:
 
 <br />
 
@@ -132,7 +132,9 @@ It looks like a `printer` Administration Pannel, let's check the `/settings.php`
 
 <br />
 
-There is a interesting `functionality`. To test it, we replace the `"Server Address"` field with our own, start a listener on port `389` and click `"Update"` button:
+There is an interesting `functionality`. 
+
+To test it, we replace the `"Server Address"` field with our own, start a listener on port `389` and click `"Update"` button:
 
 <br />
 
