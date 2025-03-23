@@ -124,7 +124,7 @@ We start enumerating the website:
 
 <br />
 
-It looks like a `printer` Administration Pannel, let's check the `settings` path:
+It looks like a `printer` Administration Pannel, let's check the `/settings.php` path:
 
 <br />
 
@@ -155,6 +155,18 @@ connect to [10.10.14.28] from (UNKNOWN) [10.10.11.108] 54344
 <br />
 
 # SMB Enumeration: -> Port 445
+
+<br />
+
+Now that we have a `password` and a `user`, we can try `validating` the user with `crackmapexec`.
+
+To do it we are going to execute the following command:
+
+<br />
+
+```bash
+
+```
 
 <br />
 
