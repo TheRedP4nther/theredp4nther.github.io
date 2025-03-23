@@ -19,6 +19,7 @@ Difficulty -> Easy.
 <br />
 
 # Introduction:
+
 <br />
 
 
@@ -116,7 +117,7 @@ It looks like we are dealing with a `Windows` host, since the open ports and ser
 
 <br />
 
-We start enumerating the website:
+List the website:
 
 <br />
 
