@@ -34,36 +34,6 @@ We start by running the typical `nmap` scan to see which ports are open:
 <br />
 
 ```bash
-
-```
-
-<br />
-
-As we can see, nmap has only detected Port `3000` open, node.js default port, so we proceed to list it and find the following:
-
-<br />
-
-![1](../../../assets/images/Celestial/1.png)
-
-<br />
-
-At first glance, it doesn't seem interesting at all, but when `intercepting the request with Burp Suite` we find the following:
-
-<br />
-
-![2](../../../assets/images/Celestial/2.png)
-
-<br />
-
-# Deserialization Attack (Node.js): 
-
-<br />
-
-The `cookie` appears to be in `base64`, so let's apply a decode:
-
-<br />
-
-```bash
 ❯ nmap -p- 10.10.11.108 --open --min-rate 5000 -sS -T5 -Pn -n -sCV
 Starting Nmap 7.94SVN ( https://nmap.org ) at 2025-03-23 18:53 CET
 Nmap scan report for 10.10.11.108
