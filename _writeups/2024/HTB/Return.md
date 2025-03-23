@@ -124,7 +124,7 @@ Nmap done: 1 IP address (1 host up) scanned in 77.08 seconds
 
 Open Ports:
 
-It looks like we are dealing with a Windows host, since the open ports and services are typical of this operating system, such as:
+It looks like we are dealing with a `Windows` host, since the open ports and services are typical of thisoperating system, such as:
 
 - `Port 80` -> http
 
