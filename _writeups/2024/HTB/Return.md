@@ -96,8 +96,6 @@ Open Ports:
 
 It looks like we are dealing with a `Windows` host, since the open ports and services are `typical` of this operating system, such as:
 
-<br />
-
 - `Port 80` -> http
 
 - `Port 88` -> Kerberos
