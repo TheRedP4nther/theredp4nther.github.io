@@ -140,7 +140,7 @@ There is a interesting `functionality`. To test it, we replace the `"Server Addr
 
 <br />
 
-And when we check the `listener`, there something that seems to be a `password`:
+And when we check the `listener`, there is what appears to be a `password`:
 
 <br />
 
