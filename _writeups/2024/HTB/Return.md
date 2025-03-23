@@ -169,7 +169,7 @@ SMB         10.10.11.108    445    PRINTER          [*] Windows 10.0 Build 17763
 
 <br />
 
-Now we are going to check if the our credentials are valid to the printer username -> svc-printer:
+Now we are going to `check` if the our `credentials` are valid to the printer user -> `svc-printer`:
 
 <br />
 
