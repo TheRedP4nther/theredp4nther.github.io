@@ -194,7 +194,7 @@ SMB         10.10.11.108    445    PRINTER          SYSVOL          READ        
 
 Yes!! It works!!
 
-But let's `check` something more interesting. Can we use the same `password` to log into de `Windows` System with `evil-winrm`?
+But, ¿Can we use the same `password` to log into de `Windows` System with `evil-winrm`?
 
 <br />
 
