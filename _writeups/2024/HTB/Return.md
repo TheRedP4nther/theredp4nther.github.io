@@ -131,3 +131,21 @@ It looks like a `printer` Administration Pannel, let's check the `settings` path
 ![3](../../../assets/images/Return/3.png)
 
 <br />
+
+There is a interesting `functionality`. To test it, we replace the `"Server Address"` with our IP, start a listener on port `389` with nc and click `"Update" button:
+
+<br />
+
+
+
+<br />
+
+And when we check the `listener`, there something that seems to be a `password`:
+
+<br />
+
+```bash
+
+```
+
+<br />
