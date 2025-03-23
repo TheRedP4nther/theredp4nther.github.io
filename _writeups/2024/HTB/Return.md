@@ -123,3 +123,11 @@ We start enumerating the website:
 ![2](../../../assets/images/Return/2.png)
 
 <br />
+
+It looks like a Printer Administration Pannel, let's check the `settings` path:
+
+<br />
+
+
+
+<br />
