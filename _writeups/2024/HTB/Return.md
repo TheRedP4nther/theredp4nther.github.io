@@ -223,7 +223,7 @@ We did it!! User flag earned, come on with the privilege escalation!!
 
 <br />
 
-After spending some time enumerating the `system`, we find the following:
+After spending some time `enumerating` the `system`, we find the following:
 
 <br />
 
