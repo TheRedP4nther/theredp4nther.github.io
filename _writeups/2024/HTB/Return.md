@@ -289,7 +289,7 @@ After that, we proceed to create a `service` introducing the service name, `bina
 
 <br />
 
-Finally we start the `listener` and then, we will `stop` the service and `start` it again:
+Finally we set up the `listener` and then, we will `stop` the service and `start` it again:
 
 <br />
 
