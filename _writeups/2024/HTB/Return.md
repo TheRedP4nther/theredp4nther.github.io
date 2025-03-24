@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: printer smb serveroperators nc64.exe service evil-winrm reverseshell
+tags: printer ldap smb serveroperators nc64.exe service evil-winrm reverseshell
 ---
 
 <br />
@@ -22,7 +22,7 @@ Difficulty -> Easy.
 
 <br />
 
-Hello hackers! Today we’ll tackle the Return Machine, an Easy Difficulty Windows challenge. We’ll start by enumerating a printer admin panel and capturing credentials through a listener when testing the server address field. With those credentials, we’ll access SMB shares and then use Evil-WinRM to gain access to the system as the svc-printer user. Once inside, we’ll discover that this user is part of the Server Operators group, allowing us to create and manage services. We’ll upload a reverse shell executable, configure a malicious service, and restart it to get a shell as NT AUTHORITY\SYSTEM, fully owning the machine.
+Hello hackers! Today we’ll tackle the Return Machine, an Easy Difficulty Windows challenge. We’ll start by enumerating a printer admin panel and capturing LDAP credentials through a listener when testing the server address field. With those credentials, we’ll access SMB shares and then use Evil-WinRM to gain access to the system as the svc-printer user. Once inside, we’ll discover that this user is part of the Server Operators group, allowing us to create and manage services. We’ll upload a reverse shell executable, configure a malicious service, and restart it to get a shell as NT AUTHORITY\SYSTEM, fully owning the machine.
  
 <br />
 
@@ -143,7 +143,7 @@ To test it, we replace the `"Server Address"` field with our own, start a listen
 
 <br />
 
-And when we check the `listener`, there is what appears to be a `password`:
+And when we check the `listener`, there is what appears to be a LDAP `password`:
 
 <br />
 
