@@ -312,8 +312,6 @@ Check the listener...
 
 <br />
 
-<br />
-
 ```bash
 ❯ nc -nlvp 443
 listening on [any] 443 ...
