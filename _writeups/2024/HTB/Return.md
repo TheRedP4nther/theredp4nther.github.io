@@ -125,7 +125,7 @@ List the website:
 
 <br />
 
-It looks like a `printer` Administration Panel, let's check the `/settings.php` path:
+It seems to be a `printer` Administration Panel, let's check the `/settings.php` path:
 
 <br />
 
