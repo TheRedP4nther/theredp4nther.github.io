@@ -328,6 +328,8 @@ C:\Users\Administrator\Desktop>type root.txt
 5278c85cbf887c7ae5ddf85a06xxxxxx
 ```
 
+<br />
+
 We are nt authority\system!! Machine Return pwned!!
 
 This is a really easy Windows Machine, but with a interesting privilege escalation and really good to beginners.
