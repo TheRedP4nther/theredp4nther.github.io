@@ -853,7 +853,7 @@ whoami
 root
 root@ambassador:/# cat /root/root.txt
 cat /root/root.txt
-d676da4e5b0511f4e2ede1df9b8ec6a7
+d676da4e5b0511f4e2ede1df9bxxxxxx
 ```
 
 <br />
