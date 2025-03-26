@@ -242,3 +242,29 @@ There’s a very interesting way to turn a `SQL` Injection in PostgreSQL into an
 ![8](../../../assets/images/Jupiter/8.png)
 
 <br />
+
+To do it we only need to send three `requests`.
+
+1.- Verifying `RCE` with COPY TO PROGRAM:
+
+<br />
+
+
+
+<br />
+
+2.- Preparing the environment for `RCE`:
+
+<br />
+
+
+
+<br />
+
+3.- Executing the `Reverse Shell`:
+
+<br />
+
+
+
+<br />
