@@ -134,4 +134,29 @@ Perfect! Let's add it to `/etc/hosts`:
 
 <br />
 
+## kiosk.jupiter.htb 
+
+<br />
+
+The website has different information about `"moons"`:
+
+<br />
+
+![3](../../../assets/images/Jupiter/3.png)
+
+<br />
+
+If we pay a little attention, we can see the `Grafana` icon in the upper left corner.
+
+Clicking in the help button we see the `version` in use:
+
+<br />
+
+
+
+<br />
+
+But this `version` doesn't has any critical `vulnerability` to exploit.
+
+<br />
 
