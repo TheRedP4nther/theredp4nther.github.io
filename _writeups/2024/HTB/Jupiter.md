@@ -222,6 +222,7 @@ Knowing the `database` type and identifying the `"rawSql"` field, we can try to 
 <br />
 
 `SELECT version();`
+
 ![7](../../../assets/images/Jupiter/7.png)
 
 <br />
