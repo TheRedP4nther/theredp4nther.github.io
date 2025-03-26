@@ -87,7 +87,7 @@ Refresh the page:
 
 <br />
 
-It is a fairly `static` page without interesting `funcionalities`.
+It is a fairly `static` page without interesting `functionalities`.
 
 But when we look for `subdomains` with ffuf, find the following:
 
@@ -217,7 +217,7 @@ The `json's` body looks like this:
 
 As we can see, it is a `POST` request with a `postgresql` query.
 
-Knowing the `database` type and identifying the `"rawSql"` field, we can try to tampering it and inyect a `query`:
+Knowing the `database` type and identifying the `"rawSql"` field, we can try to tamper with it and inject a `query`:
 
 <br />
 
@@ -227,7 +227,7 @@ Knowing the `database` type and identifying the `"rawSql"` field, we can try to 
 
 <br />
 
-The `server` has no control over whether database queries can be `manipulated`.
+The `server` has no validation over whether database queries can be `manipulated`.
 
 <br />
 
@@ -281,5 +281,9 @@ connect to [10.10.14.28] from (UNKNOWN) [10.10.11.216] 35434
 $ id    
 uid=114(postgres) gid=120(postgres) groups=120(postgres),119(ssl-cert)
 ```
+
+<br />
+
+# Privilege Escalation: postgres -> juno
 
 <br />
