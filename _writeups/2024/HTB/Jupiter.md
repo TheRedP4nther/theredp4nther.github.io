@@ -269,7 +269,7 @@ To do it we only need to send three `requests`.
 
 <br />
 
-Check the `listener` and... YESSSS!!
+Check the `listener` and... yes!!
 
 <br />
 
@@ -285,5 +285,21 @@ uid=114(postgres) gid=120(postgres) groups=120(postgres),119(ssl-cert)
 <br />
 
 # Privilege Escalation: postgres -> juno
+
+<br />
+
+In `/home` there are two `user` paths, but we can't enter anyone of them:
+
+<br />
+
+```bash
+postgres@jupiter:/home$ ls
+jovian	juno
+postgres@jupiter:/home$ cd juno/
+-bash: cd: juno/: Permission denied
+postgres@jupiter:/home$ cd jovian/
+-bash: cd: jovian/: Permission denied
+postgres@jupiter:/home$
+```
 
 <br />
