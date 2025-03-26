@@ -79,7 +79,7 @@ echo "10.10.11.216 jupiter.htb" >> /etc/hosts
 
 <br />
 
-List the website:
+Refresh the page:
 
 <br />
 
@@ -148,7 +148,7 @@ The website has different information about `"moons"`:
 
 If we pay a little attention, we can see the `Grafana` icon in the upper left corner.
 
-Clicking in the help button we see the `version` in use:
+By clicking in the help button we check the `version` in use:
 
 <br />
 
@@ -160,3 +160,10 @@ But this `version` doesn't has any critical `vulnerability` to exploit.
 
 <br />
 
+## Web Crawling:
+
+<br />
+
+
+
+<br />
