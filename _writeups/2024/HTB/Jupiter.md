@@ -148,7 +148,7 @@ The website has different information about `"moons"`:
 
 If we pay a little attention, we can see the `Grafana` icon in the upper left corner.
 
-By clicking in the help button we check the `version` in use:
+And by clicking in the help button we check the `version` in use:
 
 <br />
 
@@ -173,6 +173,8 @@ As we know, `Burp Suite` automatically performs some web `crawling` when we navi
 If we analyze the `HTTP` requests History made to `Grafana`, we find one that is more interesting than the others.
 
 <br />
+
+`/api/ds/query` - POST
 
 ![6](../../../assets/images/Jupiter/6.png)
 
