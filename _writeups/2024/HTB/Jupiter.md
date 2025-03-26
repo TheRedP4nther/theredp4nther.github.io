@@ -174,7 +174,7 @@ If we analyze the `HTTP` requests History made to `Grafana`, we find one that is
 
 <br />
 
-`/api/ds/query` - POST
+POST - `/api/ds/query`
 
 ![6](../../../assets/images/Jupiter/6.png)
 
