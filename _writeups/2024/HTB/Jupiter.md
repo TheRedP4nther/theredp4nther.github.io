@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: 
+tags: grafana subdomainenumeration webcrawling crawling burpsuite postgresql sqlinjection sqli remotecodeexecution rce reverseshell
 ---
 
 <br />
@@ -227,4 +227,18 @@ Knowing the `database` type and identifying the `"rawSql"` field, we can try to 
 
 <br />
 
+The `server` has no control over whether database queries can be `manipulated`.
 
+<br />
+
+## PostgreSQL RCE:
+
+<br />
+
+There’s a very interesting way to turn a `SQL` Injection in PostgreSQL into an `RCE`. To do this, we’ll rely on the excellent repository [Payloads All The Things](https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/SQL%20Injection/PostgreSQL%20Injection.md), which has a section that talks about this.
+
+<br />
+
+
+
+<br />
