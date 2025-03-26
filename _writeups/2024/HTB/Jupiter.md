@@ -168,9 +168,9 @@ But this `version` doesn't has any critical `vulnerability` to exploit.
 
 <br />
 
-As we know, Burp Suite automatically performs some web crawling when we navigate through a website.
+As we know, `Burp Suite` automatically performs some web `crawling` when we navigate through a website.
 
-If we analyze the HTTP requests made to Grafana, we find one that is more interesting than the others.
+If we analyze the `HTTP` requests History made to `Grafana`, we find one that is more interesting than the others.
 
 <br />
 
