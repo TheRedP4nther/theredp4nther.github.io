@@ -239,6 +239,6 @@ There’s a very interesting way to turn a `SQL` Injection in PostgreSQL into an
 
 <br />
 
-
+![8](../../../assets/images/Jupiter/8.png)
 
 <br />
