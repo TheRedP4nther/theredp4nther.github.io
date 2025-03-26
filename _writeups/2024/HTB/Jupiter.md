@@ -174,6 +174,6 @@ If we analyze the HTTP requests made to Grafana, we find one that is more intere
 
 <br />
 
-
+![6](../../../assets/images/Jupiter/6.png)
 
 <br />
