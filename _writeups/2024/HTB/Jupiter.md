@@ -152,7 +152,7 @@ Clicking in the help button we see the `version` in use:
 
 <br />
 
-
+![4](../../../assets/images/Jupiter/4.png)
 
 <br />
 
