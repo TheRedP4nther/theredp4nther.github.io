@@ -249,7 +249,7 @@ To do it we only need to send three `requests`.
 
 <br />
 
-
+![9](../../../assets/images/Jupiter/9.png)
 
 <br />
 
@@ -257,7 +257,7 @@ To do it we only need to send three `requests`.
 
 <br />
 
-
+![10](../../../assets/images/Jupiter/10.png)
 
 <br />
 
@@ -265,6 +265,6 @@ To do it we only need to send three `requests`.
 
 <br />
 
-
+![11](../../../assets/images/Jupiter/11.png)
 
 <br />
