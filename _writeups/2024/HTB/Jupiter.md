@@ -124,7 +124,7 @@ kiosk                   [Status: 200, Size: 34390, Words: 2150, Lines: 212, Dura
 
 <br />
 
-Got it! Let's add it to `/etc/hosts`:
+Perfect! Let's add it to `/etc/hosts`:
 
 <br />
 
@@ -133,3 +133,5 @@ Got it! Let's add it to `/etc/hosts`:
 ```
 
 <br />
+
+
