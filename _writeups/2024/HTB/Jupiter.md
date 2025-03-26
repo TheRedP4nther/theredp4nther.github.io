@@ -83,6 +83,8 @@ List the website:
 
 <br />
 
+![2](../../../assets/images/Jupiter/2.png)
+
 <br />
 
 It is a fairly `static` page without interesting `funcionalities`.
