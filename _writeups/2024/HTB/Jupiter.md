@@ -78,3 +78,56 @@ echo "10.10.11.216 jupiter.htb" >> /etc/hosts
 ```
 
 <br />
+
+List the website:
+
+<br />
+
+<br />
+
+It is a fairly `static` page without interesting `funcionalities`.
+
+But when we look for `subdomains` with ffuf, find the following:
+
+<br />
+
+```bash
+❯ ffuf -u http://jupiter.htb -H "Host: FUZZ.jupiter.htb" -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt -c -t 20 -fs 178
+
+        /'___\  /'___\           /'___\       
+       /\ \__/ /\ \__/  __  __  /\ \__/       
+       \ \ ,__\\ \ ,__\/\ \/\ \ \ \ ,__\      
+        \ \ \_/ \ \ \_/\ \ \_\ \ \ \ \_/      
+         \ \_\   \ \_\  \ \____/  \ \_\       
+          \/_/    \/_/   \/___/    \/_/       
+
+       v2.1.0-dev
+________________________________________________
+
+ :: Method           : GET
+ :: URL              : http://jupiter.htb
+ :: Wordlist         : FUZZ: /usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt
+ :: Header           : Host: FUZZ.jupiter.htb
+ :: Follow redirects : false
+ :: Calibration      : false
+ :: Timeout          : 10
+ :: Threads          : 20
+ :: Matcher          : Response status: 200-299,301,302,307,401,403,405,500
+ :: Filter           : Response size: 178
+________________________________________________
+
+kiosk                   [Status: 200, Size: 34390, Words: 2150, Lines: 212, Duration: 72ms]
+:: Progress: [4989/4989] :: Job [1/1] :: 398 req/sec :: Duration: [0:00:13] :: Errors: 0 ::
+```
+
+<br />
+
+Got it! Let's add it to `/etc/hosts`:
+
+<br />
+
+```bash
+10.10.11.216 jupiter.htb kiosk.jupiter.htb
+```
+
+<br />
