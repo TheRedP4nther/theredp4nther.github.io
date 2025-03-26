@@ -160,10 +160,20 @@ But this `version` doesn't has any critical `vulnerability` to exploit.
 
 <br />
 
-## Web Crawling:
+## Burp Suite Web Crawling:
 
 <br />
 
 ![5](../../../assets/images/Jupiter/5.png)
+
+<br />
+
+As we know, Burp Suite automatically performs some web crawling when we navigate through a website.
+
+If we analyze the HTTP requests made to Grafana, we find one that is more interesting than the others.
+
+<br />
+
+
 
 <br />
