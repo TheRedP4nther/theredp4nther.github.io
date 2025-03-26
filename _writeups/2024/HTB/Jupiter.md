@@ -64,3 +64,17 @@ Open Ports:
 - `Port 80` -> http 
 
 <br />
+
+# Http Enumeration: Port -> 80
+
+<br />
+
+When we list the website it redirects to the following url -> `jupiter.htb`, so we proceed to introduce it in our `/etc/hosts`:
+
+<br />
+
+```bash
+echo "10.10.11.216 jupiter.htb" >> /etc/hosts 
+```
+
+<br />
