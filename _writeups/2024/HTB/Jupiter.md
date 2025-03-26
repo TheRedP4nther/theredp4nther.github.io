@@ -179,3 +179,38 @@ POST - `/api/ds/query`
 ![6](../../../assets/images/Jupiter/6.png)
 
 <br />
+
+The `json's` body looks like this:
+
+<br />
+
+```json
+{
+  "queries": [
+    {
+      "refId": "A",
+      "datasource": {
+        "type": "postgres",
+        "uid": "YItSLg-Vz"
+      },
+      "rawSql": "select \n  name as \"Name\", \n  parent as \"Parent Planet\", \n  meaning as \"Name Meaning\" \nfrom \n  moons \nwhere \n  parent = 'Saturn' \norder by \n  name desc;",
+      "format": "table",
+      "datasourceId": 1,
+      "intervalMs": 60000,
+      "maxDataPoints": 819
+    }
+  ],
+  "range": {
+    "from": "2025-03-26T11:52:56.567Z",
+    "to": "2025-03-26T17:52:56.567Z",
+    "raw": {
+      "from": "now-6h",
+      "to": "now"
+    }
+  },
+  "from": "1742989976567",
+  "to": "1743011576567"
+}
+```
+
+<br />
