@@ -303,3 +303,46 @@ postgres@jupiter:/home$
 ```
 
 <br />
+
+After some time enumerating the system, we find an interesting file in the `/dev/shm` directory:
+
+<br />
+
+```bash
+postgres@jupiter:/dev/shm$ ls
+PostgreSQL.2297639024  network-simulation.yml  shadow.data
+```
+
+<br />
+
+The file `network-simulation.yml` immediately draws attention. `YAML` files are commonly used for configuration, but in many cases they’re also part of automated scheduled tasks—for example, as input to `crontabs` or simulation jobs.
+
+To check it, we run `pspy64`:
+
+<br />
+
+```bash
+postgres@jupiter:/tmp$ ./pspy64 
+pspy - version: v1.2.1 - Commit SHA: f9e6a1590a4312b9faa093d8dc84e19567977a6d
+
+
+     ██▓███    ██████  ██▓███ ▓██   ██▓
+    ▓██░  ██▒▒██    ▒ ▓██░  ██▒▒██  ██▒
+    ▓██░ ██▓▒░ ▓██▄   ▓██░ ██▓▒ ▒██ ██░
+    ▒██▄█▓▒ ▒  ▒   ██▒▒██▄█▓▒ ▒ ░ ▐██▓░
+    ▒██▒ ░  ░▒██████▒▒▒██▒ ░  ░ ░ ██▒▓░
+    ▒▓▒░ ░  ░▒ ▒▓▒ ▒ ░▒▓▒░ ░  ░  ██▒▒▒ 
+    ░▒ ░     ░ ░▒  ░ ░░▒ ░     ▓██ ░▒░ 
+    ░░       ░  ░  ░  ░░       ▒ ▒ ░░  
+                   ░           ░ ░     
+                               ░ ░     
+
+Config: Printing events (colored=true): processes=true | file-system-events=false ||| Scanning for processes every 100ms and on inotify events ||| Watching directories: [/usr /tmp /etc /home /var /opt] (recursive) | [] (non-recursive)
+Draining file system events due to startup...
+
+2025/03/26 19:40:01 CMD: UID=1000  PID=4355   | /home/juno/.local/bin/shadow /dev/shm/network-simulation.yml
+```
+
+<br />
+
+
