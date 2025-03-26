@@ -214,3 +214,16 @@ The `json's` body looks like this:
 ```
 
 <br />
+
+As we can see, it is a `POST` request with a `postgresql` query.
+
+Knowing the `database` type and identifying the `"rawSql"` field, we can try to tampering it and inyect a `query`:
+
+<br />
+
+`SELECT version();`
+
+
+<br />
+
+
