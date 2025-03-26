@@ -164,6 +164,6 @@ But this `version` doesn't has any critical `vulnerability` to exploit.
 
 <br />
 
-
+![5](../../../assets/images/Jupiter/5.png)
 
 <br />
