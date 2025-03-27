@@ -898,6 +898,19 @@ Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
 
 <br />
 
+Check the file:
+
+<br />
+
+```bash
+jovian@jupiter:/usr/local/share/sattrack$ ls -l /tmp/poc.txt
+-rw-r--r-- 1 root root 38 Mar 27 21:41 /tmp/poc.txt
+jovian@jupiter:/usr/local/share/sattrack$ cat /tmp/poc.txt 
+Testing a way to exploit this program
+```
+
+<br />
+
 We did it! We managed to get `root` to fetch the file from our `server` and drop it into `/tmp` with the same name.
 
 Now that we’re able to make root modify any file, we’re going to inject our machine’s `authorized_keys` file in order to connect via `SSH` as root.
