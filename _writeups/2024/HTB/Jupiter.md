@@ -404,6 +404,8 @@ hosts:
 
 A simple network is simulated with a 1 `Gbit` switch, through which three `clients` access an HTTP `server` hosted with Python on port 80.
 
+<br />
+
 ## Malicious YAML file:
 
 <br />
