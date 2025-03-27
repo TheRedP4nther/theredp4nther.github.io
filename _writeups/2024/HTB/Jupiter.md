@@ -612,3 +612,13 @@ Testing all the tokens that we see before in the `logs` directory, found a valid
 
 <br />
 
+Once in the program, it's really easy to exploit it, because we can run `Python` code creating a file.
+
+To do it, we click on `"New"` and then `"Python 3 (ipykernel)"`.
+
+<br />
+
+
+
+<br />
+
