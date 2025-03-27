@@ -580,7 +580,7 @@ juno@jupiter:~$
 
 <br />
 
-What this ssh `oneliner` is simply making the `service` that is running on port 8888 of the victim machine, start running on our port 8888 `(localhost)`.
+This `SSH` oneliner forwards the service running on port 8888 of the victim machine to our `local` port 8888
 
 Now we can visit `http://localhost:8888`:
 
@@ -590,4 +590,13 @@ Now we can visit `http://localhost:8888`:
 
 <br />
 
+Application needs a `token` to log in.
+
+Testing all the tokens that we see before in the `logs` directory, found a valid one:
+
+<br />
+
+
+
+<br />
 
