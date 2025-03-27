@@ -498,3 +498,94 @@ Now we have the science group.
 # Privilege Escalation: juno -> jovian
 
 <br />
+
+We continue enumerating the system:
+
+<br />
+
+```bash
+juno@jupiter:/opt$ ls -l
+total 4
+drwxrwx--- 4 jovian science 4096 May  4  2023 solar-flares
+```
+
+<br />
+
+There is `solar-flares` directory in /opt.
+
+And we can access it because we are in the `science` group, let's take a look:
+
+<br />
+
+```bash
+juno@jupiter:/opt/solar-flares$ ls -l
+total 2596
+-rw-rw---- 1 jovian science  646164 Mar  8  2023 cflares.csv
+-rw-rw---- 1 jovian science  708058 Mar  8  2023 flares.csv
+-rw-rw---- 1 jovian science   10230 Mar  8  2023 flares.html
+-rw-r----- 1 jovian science  234001 Mar  8  2023 flares.ipynb
+drwxrwxr-t 2 jovian science    4096 Mar 27 19:23 logs
+-rw-rw---- 1 jovian science 1010424 Mar  8  2023 map.jpg
+-rw-rw---- 1 jovian science   26651 Mar  8  2023 mflares.csv
+-rwxr-xr-x 1 jovian science     147 Mar  8  2023 start.sh
+-rw-rw---- 1 jovian science    1992 Mar  8  2023 xflares.csv
+```
+
+<br />
+
+Looking deeper in this files, we found something in the logs directory.
+
+A lot of log files with tokens and the same URL -> localhost:8888
+
+<br />
+
+``` bash
+juno@jupiter:/opt/solar-flares/logs$ cat jupyter-2023-03-08-14.log 
+[W 13:14:40.718 NotebookApp] Terminals not available (error was No module named 'terminado')
+[I 13:14:40.727 NotebookApp] Serving notebooks from local directory: /opt/solar-flares
+[I 13:14:40.727 NotebookApp] Jupyter Notebook 6.5.3 is running at:
+[I 13:14:40.727 NotebookApp] http://localhost:8888/?token=b8055b937eeb17431b3f00dfc5159ba909012d86be120b60
+[I 13:14:40.727 NotebookApp]  or http://127.0.0.1:8888/?token=b8055b937eeb17431b3f00dfc5159ba909012d86be120b60
+[I 13:14:40.727 NotebookApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+...[snip]...
+```
+
+<br />
+
+So we check with `netstat` if there is any `service` running on this port:
+
+<br />
+
+```bash
+juno@jupiter:/opt/solar-flares/logs$ netstat -nat | grep 8888
+tcp        0      0 127.0.0.1:8888          0.0.0.0:*               LISTEN
+```
+
+<br />
+
+It seems that yes, but this is an `internal` service that it's running the victim machine.
+
+This means that if we want to access it in our browser, we need to do a `port forwarding`:
+
+<br />
+
+```bash
+❯ ssh -i id_rsa juno@10.10.11.216 -L 8888:127.0.0.1:8888
+Warning: Identity file id_rsa not accessible: No such file or directory.
+Welcome to Ubuntu 22.04.2 LTS (GNU/Linux 5.15.0-72-generic x86_64)
+...[snip]...
+Last login: Thu Mar 27 19:57:04 2025 from 10.10.14.31
+juno@jupiter:~$
+```
+
+<br />
+
+What this ssh `oneliner` is simply making the `service` that is running on port 8888 of the victim machine, start running on our port 8888 `(localhost)`.
+
+Now we can visit `http://localhost:8888`:
+
+<br />
+
+
+
+<br />
