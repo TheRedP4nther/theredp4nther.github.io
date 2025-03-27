@@ -533,9 +533,9 @@ drwxrwxr-t 2 jovian science    4096 Mar 27 19:23 logs
 
 <br />
 
-Looking deeper in this files, we found something in the logs directory.
+Looking deeper in this files, we found something in the `logs` directory.
 
-A lot of log files with tokens and the same URL -> localhost:8888
+A lot of log files with `tokens` and with the same URL -> `localhost:8888`
 
 <br />
 
@@ -589,3 +589,5 @@ Now we can visit `http://localhost:8888`:
 ![12](../../../assets/images/Jupiter/12.png)
 
 <br />
+
+
