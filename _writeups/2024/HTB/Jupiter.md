@@ -618,7 +618,7 @@ To do it, we click on `"New"` and then `"Python 3 (ipykernel)"`.
 
 <br />
 
-
+![15](../../../assets/images/Jupiter/15.png)
 
 <br />
 
