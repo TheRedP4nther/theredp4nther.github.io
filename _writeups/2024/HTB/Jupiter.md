@@ -622,3 +622,10 @@ To do it, we click on `"New"` and then `"Python 3 (ipykernel)"`.
 
 <br />
 
+Finally, we can validate the `command execution` writing a simply code and clicking on `"Run"`:
+
+<br />
+
+
+
+<br />
