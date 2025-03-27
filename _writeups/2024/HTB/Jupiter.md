@@ -596,7 +596,7 @@ Testing all the tokens that we see before in the `logs` directory, found a valid
 
 <br />
 
-
+![13](../../../assets/images/Jupiter/13.png)
 
 <br />
 
