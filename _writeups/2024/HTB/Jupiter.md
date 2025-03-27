@@ -363,7 +363,7 @@ User `juno` is executing the `YAML` file at time intervals on the system.
 
 This means that if we are able to `exploit` it, we can `pivote` to this user.
 
-Let's see what the script is doing:
+Let's see what is doing the script:
 
 <br />
 
