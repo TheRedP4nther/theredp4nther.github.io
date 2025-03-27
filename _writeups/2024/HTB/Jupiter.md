@@ -586,6 +586,6 @@ Now we can visit `http://localhost:8888`:
 
 <br />
 
-
+![12](../../../assets/images/Jupiter/12.png)
 
 <br />
