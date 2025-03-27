@@ -902,6 +902,8 @@ Now that we’re able to make root modify any file, we’re going to inject our 
 
 Config file manipulated:
 
+<br />
+
 ```json
 {
 	"tleroot": "/root/.ssh/",
