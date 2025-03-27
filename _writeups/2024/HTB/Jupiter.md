@@ -742,7 +742,7 @@ exit_group(1)                           = ?
 
 <br />
 
-As we can see, the program is searching on /tmp the `"config.json"` file that we see in the `sattrack` directory.
+As we can see, the program is searching on /tmp the `"config.json"` file that we have seen in the `sattrack` directory.
 
 We move this config file to `/tmp` and run the program again:
 
@@ -870,8 +870,6 @@ Config file manipulated:
 <br />
 
 Run the program and...
-
-<br />
 
 We receive a GET:
 
