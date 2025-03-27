@@ -221,7 +221,9 @@ Knowing the `database` type and identifying the `"rawSql"` field, we can try to 
 
 <br />
 
-`SELECT version();`
+```sql
+SELECT version();
+```
 
 ![7](../../../assets/images/Jupiter/7.png)
 
@@ -362,5 +364,9 @@ Draining file system events due to startup...
 ```
 
 <br />
+
+User juno is executing the YAML file at time intervals on the system.
+
+This means that if we are able to exploit it, we can pivote to this user.
 
 
