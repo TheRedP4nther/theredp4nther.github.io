@@ -590,6 +590,10 @@ Now we can visit `http://localhost:8888`:
 
 <br />
 
+## Jupyter Notebook Exploitation:
+
+<br />
+
 Application needs a `token` to log in.
 
 Testing all the tokens that we see before in the `logs` directory, found a valid one:
