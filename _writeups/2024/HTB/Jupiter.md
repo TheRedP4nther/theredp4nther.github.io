@@ -590,6 +590,10 @@ Now we can visit `http://localhost:8888`:
 
 <br />
 
+ Apparently, we are dealing with the `Jupyter Notebook` program.
+
+<br />
+
 ## Jupyter Notebook Exploitation:
 
 <br />
