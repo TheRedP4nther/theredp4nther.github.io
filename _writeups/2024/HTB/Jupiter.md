@@ -594,7 +594,11 @@ Now we can visit `http://localhost:8888`:
 
 <br />
 
-Application needs a `token` to log in.
+![14](../../../assets/images/Jupiter/14.png)
+
+<br />
+
+This application needs a `token` to log in.
 
 Testing all the tokens that we see before in the `logs` directory, found a valid one:
 
