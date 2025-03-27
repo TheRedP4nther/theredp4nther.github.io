@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: grafana subdomainenumeration webcrawling crawling burpsuite postgresql sqlinjection sqli remotecodeexecution rce reverseshell jupyternotebook python sudoers strace
+tags: grafana subdomainenumeration webcrawling crawling burpsuite postgresql sqlinjection sqli remotecodeexecution rce reverseshell jupyternotebook python sudoers strace json
 ---
 
 <br />
@@ -871,16 +871,6 @@ Config file manipulated:
 
 Run the program and...
 
-We receive a GET:
-
-<br />
-
-```bash
-❯ python3 -m http.server 80
-Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
-10.10.11.216 - - [27/Mar/2025 22:41:00] "GET /poc.txt HTTP/1.1" 200 -
-```
-
 <br />
 
 ```bash
@@ -892,6 +882,18 @@ jovian@jupiter:/usr/local/share/sattrack$ ls -l /tmp/poc.txt
 -rw-r--r-- 1 root root 38 Mar 27 21:41 /tmp/poc.txt
 jovian@jupiter:/usr/local/share/sattrack$ cat /tmp/poc.txt 
 Testing a way to exploit this program
+```
+
+<br />
+
+We receive a GET:
+
+<br />
+
+```bash
+❯ python3 -m http.server 80
+Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
+10.10.11.216 - - [27/Mar/2025 22:41:00] "GET /poc.txt HTTP/1.1" 200 -
 ```
 
 <br />
