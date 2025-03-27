@@ -477,7 +477,7 @@ e728ef41fc4b13b75da02117e6xxxxxx
 
 <br />
 
-To upgrade the shell, we copy the authorized_keys of our machine and put it in the .ssh directory of juno to connect via ssh withouth giving a password:
+To `upgrade` the shell, we copy the `authorized_keys` of our machine and put it in the `.ssh` directory of juno to connect via ssh withouth giving a password:
 
 <br />
 
@@ -488,6 +488,8 @@ Welcome to Ubuntu 22.04.2 LTS (GNU/Linux 5.15.0-72-generic x86_64)
 juno@jupiter:~$ id
 uid=1000(juno) gid=1000(juno) groups=1000(juno),1001(science)
 ```
+
+Now we have the science group.
 
 <br />
 
