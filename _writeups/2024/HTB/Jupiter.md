@@ -636,7 +636,7 @@ To do it we are going to run a `reverse shell`:
 
 <br />
 
-
+![17](../../../assets/images/Jupiter/17.png)
 
 <br />
 
