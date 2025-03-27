@@ -626,6 +626,6 @@ Finally, we can validate the `command execution` writing a simply code and click
 
 <br />
 
-
+![16](../../../assets/images/Jupiter/16.png)
 
 <br />
