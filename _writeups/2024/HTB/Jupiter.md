@@ -994,3 +994,11 @@ root@jupiter:~# cat root.txt
 ```
 
 <br />
+
+Machine Jupiter rooted!!
+
+I love this machine, it has a really cool intrusion and a privilege escalation with a lot of different exploitation techniques.
+
+I hope that you enjoyed the machine as much I did. Keep Hacking!!❤️❤️
+
+<br />
