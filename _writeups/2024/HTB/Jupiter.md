@@ -146,7 +146,7 @@ The website has different information about `"moons"`:
 
 <br />
 
-If we pay a little attention, we can see the `Grafana` icon in the upper left corner.
+If we look closely, we can see the `Grafana` icon in the upper left corner.
 
 And by clicking in the help button we check the `version` in use:
 
@@ -156,7 +156,7 @@ And by clicking in the help button we check the `version` in use:
 
 <br />
 
-But this `version` doesn't has any critical `vulnerability` to exploit.
+But this `version` doesn't have any critical `vulnerability` to exploit.
 
 <br />
 
@@ -217,7 +217,7 @@ The `json's` body looks like this:
 
 As we can see, it is a `POST` request with a `postgresql` query.
 
-Knowing the `database` type and identifying the `"rawSql"` field, we can try to tamper with it and inject a `query`:
+Knowing the `database` type and identifying the `"rawSql"` field, we can try to inject a `query`:
 
 <br />
 
@@ -318,7 +318,7 @@ postgres@jupiter:/home$
 
 <br />
 
-After some time enumerating the system, we find somes files in the `/dev/shm` directory:
+While enumerating the system, we find some files in the `/dev/shm` directory:
 
 <br />
 
@@ -451,7 +451,7 @@ hosts:
 
 <br />
 
-We wait to the task for run and go to `/tmp` to execute the malicious bash:
+We wait for the task to run and go to `/tmp` to execute the malicious bash:
 
 <br />
 
