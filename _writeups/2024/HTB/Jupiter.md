@@ -880,10 +880,6 @@ jovian@jupiter:/usr/local/share/sattrack$ sudo /usr/local/bin/sattrack
 Satellite Tracking System
 Get:0 http://10.10.14.31/poc.txt
 tlefile is not a valid file
-jovian@jupiter:/usr/local/share/sattrack$ ls -l /tmp/poc.txt
--rw-r--r-- 1 root root 38 Mar 27 21:41 /tmp/poc.txt
-jovian@jupiter:/usr/local/share/sattrack$ cat /tmp/poc.txt 
-Testing a way to exploit this program
 ```
 
 <br />
