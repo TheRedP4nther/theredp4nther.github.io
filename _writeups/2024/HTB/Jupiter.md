@@ -22,7 +22,7 @@ Difficulty -> Medium.
 
 <br />
 
-Hello hackers! Today we’ll tackle the Jupiter Machine, a Medium Difficulty Linux challenge. We’ll start by discovering a subdomain hosting Grafana, where we intercept a SQL query through Burp Suite and exploit it to gain RCE via PostgreSQL. This gives us access as the postgres user. From there, we pivot to juno by modifying a YAML file used in a scheduled task to drop a SUID bash binary. With access to juno, we explore a shared directory and find tokens exposing a Jupyter Notebook instance. After port forwarding and logging in, we execute a Python based reverse shell to pivot to jovian. Finally, we exploit a misconfigured config file in a root executable binary (sattrack) to overwrite root’s authorized_keys, allowing SSH access as root and full system compromise.
+Hello hackers! Today we’ll tackle the Jupiter Machine, a Medium Difficulty Linux challenge. We’ll start by discovering a subdomain hosting Grafana, where we intercept a SQL query through Burp Suite and exploit it to gain RCE via PostgreSQL. This gives us access as the postgres user. From there, we pivot to juno by modifying a YAML file used in a scheduled task to drop a SUID bash binary. With access to juno, we explore a project directory and find tokens exposing a Jupyter Notebook instance. After port forwarding and logging in, we execute a Python based reverse shell to pivot to jovian. Finally, we exploit a misconfigured config file in a root executable binary (sattrack) to overwrite root’s authorized_keys, allowing SSH access as root and full system compromise.
 
 <br />
 
