@@ -451,7 +451,7 @@ hosts:
 
 <br />
 
-Go to `/tmp` and execute de malicious bash:
+We wait to the task for run and go to `/tmp` to execute the malicious bash:
 
 <br />
 
