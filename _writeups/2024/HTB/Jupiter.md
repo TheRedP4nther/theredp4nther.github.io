@@ -816,6 +816,8 @@ There are two key components in this program:
 
 <br />
 
+Thinking about the `logic` of the program, it seems to be very insecure, because we can `GET` a file of any URL and place it on any path of the machine. 
+
 To test this, we are going to host a `"poc.txt"` file in a python server of our attacker machine, and and try to put into the `/tmp` path manipulating the `"config.json"` file:
 
 <br />
