@@ -318,7 +318,7 @@ postgres@jupiter:/home$
 
 <br />
 
-After some time enumerating the system, we find an interesting file in the `/dev/shm` directory:
+After some time enumerating the system, we find somes files in the `/dev/shm` directory:
 
 <br />
 
