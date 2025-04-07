@@ -77,6 +77,6 @@ When we access the website, the `IIS` default page is displayed:
 
 <br />
 
-
+![2](../../../assets/images/Devel/2.png)
 
 <br />
