@@ -316,3 +316,20 @@ Searching on google we found an interest db `exploit` to the `OS` version (6.1.7
 ![4](../../../assets/images/Devel/4.png)
 
 <br />
+
+We get it to out attacker machine using searchsploit:
+
+<br />
+
+```bash
+❯ searchsploit -m 40564
+  Exploit: Microsoft Windows (x86) - 'afd.sys' Local Privilege Escalation (MS11-046)
+      URL: https://www.exploit-db.com/exploits/40564
+     Path: /usr/share/exploitdb/exploits/windows_x86/local/40564.c
+    Codes: CVE-2011-1249, MS11-046
+ Verified: True
+File Type: C source, ASCII text
+Copied to: /home/theredp4nther/Imágenes/40564.c
+```
+
+<br />
