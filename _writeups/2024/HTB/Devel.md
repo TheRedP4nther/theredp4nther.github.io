@@ -159,7 +159,7 @@ http://10.10.10.5/testing.txt
 
 This confirms that the FTP server has `write` permissions to the web `root` directory, opening the door for uploading `malicious` payloads such as web shells.
 
-Windows servers typically execute two types of script `extensions`, asp and aspx, to test this one, we are going to use an `aspx` reverse shell created with `Msfvenom`:
+Windows servers typically execute two types of script `extensions`, asp and aspx, to test this one, we are going to use an `aspx` reverse shell created with `msfvenom`:
 
 <br />
 
@@ -304,5 +304,15 @@ Network Card(s):           1 NIC(s) Installed.
                                  [03]: dead:beef::d157:4032:3684:659c
                                  [04]: dead:beef::f439:aafb:3036:7c2c
 ```
+
+<br />
+
+The Windows version in use is quite old, and as we know, older versions are much more likely to contain kernel vulnerabilities.
+
+Searching on google we found an interest db exploit to the OS version (6.1.7600 N/A Build 7600):
+
+<br />
+
+
 
 <br />
