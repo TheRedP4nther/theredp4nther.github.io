@@ -80,3 +80,30 @@ When we access the website, the `IIS` default page is displayed:
 ![2](../../../assets/images/Devel/2.png)
 
 <br />
+
+Since this is the default `IIS` page, we can infer that the system behind the website is running `Windows`.
+
+<br />
+
+## Ftp Enumeration: -> Port 21 
+
+<br />
+
+As we see in the previous nmap scan, `anonymous` FTP login is allowed.
+
+So we proceed to log into the server:
+
+<br />
+
+```bash
+❯ ftp 10.10.10.5
+Connected to 10.10.10.5.
+220 Microsoft FTP Service
+Name (10.10.10.5:theredp4nther): anonymous 
+331 Anonymous access allowed, send identity (e-mail name) as password.
+Password: 
+230 User logged in.
+Remote system type is Windows_NT.
+```
+
+<br />
