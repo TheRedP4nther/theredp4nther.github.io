@@ -152,7 +152,7 @@ Now we can check if there is in the website too, adding "testing.txt" to the bas
 
 <br />
 
-![2](../../../assets/images/Devel/3.png)
+![3](../../../assets/images/Devel/3.png)
 
 <br />
 
