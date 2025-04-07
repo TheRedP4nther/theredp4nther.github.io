@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: 
+tags: iis ftp anonymousloginallowed reverseshell aspx 
 ---
 
 <br />
@@ -108,7 +108,7 @@ Remote system type is Windows_NT.
 
 <br />
 
-Once in, we `enumerate` the server to see if we can find something relevant:
+Once in, we `enumerate` it to see if we can find something relevant:
 
 <br />
 
@@ -145,8 +145,6 @@ local: testing.txt remote: testing.txt
 <br />
 
 The file was successfully upload.
-
-This confirms that the FTP server has `write` permissions to the web `root` directory, opening the door for uploading `malicious` payloads such as web shells.
 
 Now we can check if there is in the website too, adding "testing.txt" to the base URL:
 
