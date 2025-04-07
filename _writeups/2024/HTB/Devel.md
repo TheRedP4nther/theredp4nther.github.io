@@ -313,6 +313,6 @@ Searching on google we found an interest db exploit to the OS version (6.1.7600 
 
 <br />
 
-
+![4](../../../assets/images/Devel/4.png)
 
 <br />
