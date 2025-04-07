@@ -107,3 +107,54 @@ Remote system type is Windows_NT.
 ```
 
 <br />
+
+Once in, we `enumerate` the server to see if we can find something relevant:
+
+<br />
+
+```bash
+ftp> ls
+229 Entering Extended Passive Mode (|||49158|)
+125 Data connection already open; Transfer starting.
+03-18-17  02:06AM       <DIR>          aspnet_client
+03-17-17  05:37PM                  689 iisstart.htm
+03-17-17  05:37PM               184946 welcome.png
+226 Transfer complete.
+```
+
+<br />
+
+This appears to be the typical `IIS` structure, with its `default` files and directories.
+
+This strongly suggests the `FTP` server is directly `linked` to the web root directory.
+
+So if we try to `upload` a simple txt `file` to the server, we should be able to access it via the website:
+
+<br />
+
+```bash
+ftp> put testing.txt
+local: testing.txt remote: testing.txt
+229 Entering Extended Passive Mode (|||49160|)
+125 Data connection already open; Transfer starting.
+100% |******************************************************************************************************************************************|    47      685.05 KiB/s    --:-- ETA
+226 Transfer complete.
+47 bytes sent in 00:00 (1.12 KiB/s)
+```
+
+<br />
+
+The file was successfully upload.
+
+This confirms that the FTP server has `write` permissions to the web `root` directory, opening the door for uploading `malicious` payloads such as web shells.
+
+Now we can check if there is in the website too, adding "testing.txt" to the base URL:
+
+<br />
+
+
+
+<br />
+
+This confirms that the FTP server has `write` permissions to the web `root` directory, opening the door for uploading `malicious` payloads such as web shells.
+
