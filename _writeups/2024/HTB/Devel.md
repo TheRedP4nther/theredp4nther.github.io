@@ -307,9 +307,9 @@ Network Card(s):           1 NIC(s) Installed.
 
 <br />
 
-The Windows version in use is quite old, and as we know, older versions are much more likely to contain kernel vulnerabilities.
+The Windows version in use is quite `old`, and as we know, older versions are much more likely to contain `kernel` vulnerabilities.
 
-Searching on google we found an interest db exploit to the OS version (6.1.7600 N/A Build 7600):
+Searching on google we found an interest db `exploit` to the `OS` version (6.1.7600 N/A Build 7600):
 
 <br />
 
