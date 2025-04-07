@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: iis ftp anonymousloginallowed reverseshell aspx msfvenom kernel 
+tags: iis ftp anonymousloginallowed reverseshell aspx msfvenom exploitdb kernel afd.sys ms11-046
 ---
 
 <br />
