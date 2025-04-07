@@ -411,11 +411,11 @@ Let's take the user flags:
 
 ```bash
 C:\Users\Public\Documents>type C:\Users\babis\Desktop\user.txt
-type C:\Users\babis\Desktop\user.txt
+
 502e368532fac6d231f4e8f309xxxxxx
 
 C:\Users\Public\Documents>type C:\Users\Administrator\Desktop\root.txt
-type C:\Users\Administrator\Desktop\root.txt
+
 286f7f78192699523bbc2c170cxxxxxx
 ```
 
