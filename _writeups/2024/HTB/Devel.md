@@ -22,6 +22,7 @@ Difficulty -> Easy.
 
 <br />
 
+Hello hackers! Today we’ll tackle the Devel Machine, an Easy Difficulty Windows challenge. We’ll start by exploiting an FTP server with anonymous login that has write access to the web root directory, allowing us to upload an ASPX reverse shell and gain access to the system as the IIS virtual account. Once inside, we enumerate the system and find it’s an old Windows 7 Enterprise version vulnerable to kernel exploits. We compile and transfer a public exploit for the MS11-046 vulnerability, execute it, and successfully escalate to NT AUTHORITY\SYSTEM, fully compromising the machine.
 
 <br />
 
