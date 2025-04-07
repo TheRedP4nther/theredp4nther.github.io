@@ -150,6 +150,9 @@ Now we can check if there is in the website too, adding "testing.txt" to the bas
 
 <br />
 
+```
+http://10.10.10.5/testing.txt
+```
 ![3](../../../assets/images/Devel/3.png)
 
 <br />
