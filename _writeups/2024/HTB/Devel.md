@@ -314,7 +314,7 @@ Network Card(s):           1 NIC(s) Installed.
 
 The Windows version in use is quite `old`, and as we know, older versions are much more likely to contain `kernel` vulnerabilities.
 
-By searching on Google we found an interest `exploit` targeting this `OS` version (6.1.7600 N/A Build 7600):
+By searching on Google we found an interesting `exploit` targeting this `OS` version (6.1.7600 N/A Build 7600):
 
 <br />
 
@@ -403,7 +403,7 @@ nt authority\system
 
 <br />
 
-GG!! We are ng authority\system!!
+GG!! We are NT AUTHORITY\SYSTEM!!
 
 Let's take the user flags:
 
