@@ -8,7 +8,7 @@ disqus_forum_shortname: theredp4nther-github-io
 #Usernames and badges
 htb_badge_no: 1332776
 thm_badge_no:
-show_thm_htb_badges_in_nav: false
+show_thm_htb_badges_in_nav: true
 github_username: TheRedP4nther
 gitlab:
 medium:
