@@ -92,7 +92,7 @@ The page is completely `static` and doesn't have any function, only some hacking
 
 <br />
 
-It is an `Amazon S3 Bucket` subdomain!!
+It's an `Amazon S3 Bucket` subdomain!!
 
 The site uses a bucket to `store` the images of the articles we saw earlier and most likely the rest of its `resources` as well.
 
@@ -151,7 +151,7 @@ With the following command, we can see its content:
 
 <br />
 
-And if we add the `--recursive` flag, we can see the files into the `"images"` directory:
+And if we add the `--recursive` flag, we can see the files inside the `"images"` directory:
 
 <br />
 
@@ -164,3 +164,27 @@ And if we add the `--recursive` flag, we can see the files into the `"images"` d
 ```
 
 <br />
+
+Cool, we have access to the bucket and we can list their content.
+
+What if we try to upload something?
+
+<br />
+
+```bash
+❯ echo "This is a test to probe if we have write permissions in this bucket :D" > test.txt
+❯ aws s3 cp test.txt s3://adserver/test.txt --endpoint-url=http://s3.bucket.htb
+upload: ./test.txt to s3://adserver/test.txt
+```
+
+<br />
+
+Yes! We can upload files!
+
+<br />
+
+
+
+<br />
+
+
