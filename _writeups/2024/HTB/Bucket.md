@@ -248,7 +248,7 @@ There is a directoy named `"project"` and the user.txt flag, but we can't get it
 
 <br />
 
-If we enter this directory, we ca see some files, including a very interesting one with useful information:
+If we enter this directory, we ca see some `files`, including a very interesting one with `useful` information:
 
 <br />
 
