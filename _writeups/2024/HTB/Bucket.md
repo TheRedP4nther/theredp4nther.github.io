@@ -183,7 +183,7 @@ Yes! We can upload files!
 
 <br />
 
-
+![6](../../../assets/images/Bucket/6.png)
 
 <br />
 
