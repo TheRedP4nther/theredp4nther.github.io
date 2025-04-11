@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: python2.7 cPickle deserializationattack couchdb sudoers pip githack .git informationleakeage remotecodeexecution database scripting
+tags: python2.7 cPickle deserializationattack couchdb sudoers pip githack .git informationleakage remotecodeexecution database scripting
 ---
 
 <br />

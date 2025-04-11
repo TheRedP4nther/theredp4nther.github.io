@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: springboot commandinjection informationleakeage remotecodeexecution reverseshell bash ${ifs} postgresql jd-gui jar ssh gtfobins sudoers
+tags: springboot commandinjection informationleakage remotecodeexecution reverseshell bash ${ifs} postgresql jd-gui jar ssh gtfobins sudoers
 ---
 
 <br />
