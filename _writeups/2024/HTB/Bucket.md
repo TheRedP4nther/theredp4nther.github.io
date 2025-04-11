@@ -87,3 +87,17 @@ The page is really `static` and doesn't have any function, only some hacking art
 ![3](../../../assets/images/Bucket/3.png)
 
 <br />
+
+## Amazon S3 Bucket:
+
+<br />
+
+A subdomain that seems to be an Amazon Bucket!!
+
+<br />
+
+
+
+<br />
+
+
