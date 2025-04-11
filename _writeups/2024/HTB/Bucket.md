@@ -275,9 +275,24 @@ $dynamodb = $client->createDynamoDb();
 
 Aws is using a `DynamoDB` database!
 
+![7](../../../assets/images/Bucket/7.png)
+
 <br />
 
-![7](../../../assets/images/Bucket/7.png)
+This database is hosted on `localhost:4566`, but is in the same aws `server` as the bucket, so we can enumerate it from our machine, with `aws` and using the same endpoint.
+
+We start listing the avaialable `tables`:
+
+<br />
+
+```bash
+❯ aws dynamodb list-tables --endpoint-url=http://s3.bucket.htb --output json
+{
+    "TableNames": [
+        "users"
+    ]
+}
+```
 
 <br />
 
