@@ -76,6 +76,6 @@ Add it to the `/etc/hosts` and list again:
 
 <br />
 
-
+![2](../../../assets/images/Bucket/2.png)
 
 <br />
