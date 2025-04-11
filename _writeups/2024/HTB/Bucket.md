@@ -3,12 +3,12 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: reverseshell nodejs deserializationattack scripting python javascript iife
+tags: 
 ---
 
 <br />
 
-
+![1](../../../assets/images/Bucket/1.png)
 
 <br />
 
@@ -22,7 +22,7 @@ Difficulty -> Medium.
 
 <br />
 
-![1](../../../assets/images/Bucket/1.png)
+
 
 <br />
 
