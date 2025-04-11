@@ -474,7 +474,7 @@ else
 
 <br />
 
-A `POST` request with the alert parameter set to `"get_alerts"` is going to configure a `DynamoDB` Client for connect to localhost:4566 and make a scan of the `"alerts"` table filtering by the title `"Ransonmware"`.
+A `POST` request with the action parameter set to `"get_alerts"` will configure a `DynamoDB` client for connect to localhost:4566 and scans the `"alerts"` table filtering by the title `"Ransonmware"`.
 
 Finally it calls to `pd4ml` and creates a `PDF` with the tables content.
 
