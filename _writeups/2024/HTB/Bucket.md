@@ -79,3 +79,11 @@ Add it to the `/etc/hosts` and list again:
 ![2](../../../assets/images/Bucket/2.png)
 
 <br />
+
+The page is really `static` and doesn't have any function, but enumerating the `source code` we found something interesting:
+
+<br />
+
+
+
+<br />
