@@ -243,3 +243,42 @@ cat: user.txt: Permission denied
 There is a directoy named `"project"` and the user.txt flag, but we can't get it:
 
 <br />
+
+## DynamoDB Enumeration:
+
+<br />
+
+If we enter this directory, we ca see some files, including a very interesting one with useful information:
+
+<br />
+
+```php
+<?php
+require 'vendor/autoload.php';
+date_default_timezone_set('America/New_York');
+use Aws\DynamoDb\DynamoDbClient;
+use Aws\DynamoDb\Exception\DynamoDbException;
+
+$client = new Aws\Sdk([
+    'profile' => 'default',
+    'region'  => 'us-east-1',
+    'version' => 'latest',
+    'endpoint' => 'http://localhost:4566'
+]);
+
+$dynamodb = $client->createDynamoDb();
+
+//todo
+```
+
+<br />
+
+Aws is using a `DynamoDB` database!
+
+<br />
+
+
+
+<br />
+
+
