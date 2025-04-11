@@ -100,7 +100,7 @@ It is a Amazon S3 Bucket subdomain!!
 
 <br />
 
-When we list the base url it has the typical "status running" message:
+When we list the base URL, it shows the typical `"status: running"` message:
 
 <br />
 
