@@ -226,3 +226,20 @@ Perfect! We are in as `www-data`!
 # Privilege Escalation: www-data -> roy
 
 <br />
+
+Once in the system, we start enumerating the `/home/roy` directory:
+
+<br />
+
+```bash
+www-data@bucket:/home/roy$ ls
+project  user.txt
+www-data@bucket:/home/roy$ cat user.txt
+cat: user.txt: Permission denied
+```
+
+<br />
+
+There is a directoy named `"project"` and the user.txt flag, but we can't get it:
+
+<br />
