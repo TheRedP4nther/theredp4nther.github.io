@@ -138,3 +138,29 @@ Now we can start enumerating the available `buckets`:
 <br />
 
 There is only one bucket on this server called `"adserver"`.
+
+With the following command, we can see it's content:
+
+<br />
+
+```bash
+❯ aws s3 ls s3://adserver --endpoint-url=http://s3.bucket.htb
+                           PRE images/
+2025-04-11 20:30:04       5344 index.html
+```
+
+<br />
+
+And if we add the `--recursive` flag, we can see the files into the `"images"` directory:
+
+<br />
+
+```bash
+❯ aws s3 ls s3://adserver --endpoint-url=http://s3.bucket.htb --recursive
+2025-04-11 20:32:03      37840 images/bug.jpg
+2025-04-11 20:32:03      51485 images/cloud.png
+2025-04-11 20:32:04      16486 images/malware.png
+2025-04-11 20:32:04       5344 index.html
+```
+
+<br />
