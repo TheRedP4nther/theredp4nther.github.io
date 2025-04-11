@@ -72,7 +72,7 @@ Open Ports:
 
 When we visit the website, it returns a `302 found` status code, redirecting to `bucket.htb`.
 
-Add it to the `/etc/hosts` and list again:
+So we proceed to add it to the `/etc/hosts` and list again:
 
 <br />
 
@@ -80,7 +80,7 @@ Add it to the `/etc/hosts` and list again:
 
 <br />
 
-The page is really `static` and doesn't have any function, but enumerating the `source code` we found something interesting:
+The page is really `static` and doesn't have any function, only some hacking articles, but enumerating the `source code` we found something interesting:
 
 <br />
 
