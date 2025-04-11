@@ -275,6 +275,8 @@ $dynamodb = $client->createDynamoDb();
 
 Aws is using a `DynamoDB` database!
 
+<br />
+
 ![7](../../../assets/images/Bucket/7.png)
 
 <br />
