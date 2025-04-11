@@ -72,7 +72,7 @@ Open Ports:
 
 Visiting the website returns a `302 found` status code, redirecting to `bucket.htb`.
 
-So, we add it to the `/etc/hosts` and we can list it contents:
+So, we add it to the `/etc/hosts` and we can list its contents:
 
 <br />
 
@@ -248,7 +248,7 @@ There is a directory named `"project"` and the user.txt flag, but we can't get i
 
 <br />
 
-If we enter this directory, we ca see some `files`, including a very interesting one with `useful` information:
+If we enter this directory, we can see some `files`, including a very interesting one with `useful` information:
 
 <br />
 
@@ -360,7 +360,7 @@ roy@bucket:~$ cat user.txt
 
 <br />
 
-Continue enumerating the system, we list with `"netstat"` a interesting port, the `8000` one:
+Continuing our enumeration, we use `"netstat"` and find an interesting port, the `8000` one:
 
 <br />
 
@@ -404,7 +404,7 @@ And list it:
 
 It is a simple website under construction.
 
-But continuing enumerating, we find under `/var` the directory of this `website`, a directory called  `"bucket-app"`.
+But if we look more deeper, we find under `/var` the directory of this `website`, a directory called  `"bucket-app"`.
 
 <br />
 
@@ -417,7 +417,9 @@ drwxr-xr-x  2 root root 4096 Apr 11 23:21 html
 
 <br />
 
-User `roy` can access this directory:
+User `roy` can access this directory.
+
+This is interesting because even though the directory is owned by `root`, the permissions allow access to `roy` thanks to the extended `ACL` (+ sign), which means there may be readable or writable files useful for `privilege escalation`.
 
 <br />
 
