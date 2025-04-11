@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: 
+tags: aws bucket s3 awscli reverseshell php 
 ---
 
 <br />
