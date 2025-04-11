@@ -22,7 +22,7 @@ Difficulty -> Medium.
 
 <br />
 
-
+![1](../../../assets/images/Bucket/1.png)
 
 <br />
 
