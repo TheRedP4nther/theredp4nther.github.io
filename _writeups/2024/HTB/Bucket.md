@@ -404,7 +404,7 @@ And list it:
 
 It is a simple website under construction.
 
-But if we look more deeper, we find under `/var` the directory of this `website`, a directory called  `"bucket-app"`.
+But if we look deeper, we find under `/var` the directory of this `website`, a directory called  `"bucket-app"`.
 
 <br />
 
