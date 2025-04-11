@@ -109,3 +109,32 @@ When we access the base URL, it shows the typical `"status: running"` message:
 ![5](../../../assets/images/Bucket/5.png)
 
 <br />
+
+At this point,  we make some research on Google and discover how to enumerate a bucket with aws cli.
+
+To do it, the first thing, is to configure awsi running this:
+
+<br />
+
+```bash
+❯ aws configure
+AWS Access Key ID [None]: test
+AWS Secret Access Key [None]: test
+Default region name [None]: us-east-1
+Default output format [None]: test
+```
+
+<br />
+
+Now we can start enumerating the available `buckets`:
+
+<br />
+
+```bash
+❯ aws s3 ls s3:// --endpoint-url=http://s3.bucket.htb
+2025-04-11 20:28:03 adserver
+```
+
+<br />
+
+There is only one bucket on this server called `"adserver"`.
