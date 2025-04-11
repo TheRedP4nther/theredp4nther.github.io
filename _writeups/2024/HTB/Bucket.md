@@ -110,7 +110,7 @@ When we access the base URL, it shows the typical `"status: running"` message:
 
 <br />
 
-At this point,  we make some `research` on Google and discover how to `enumerate` a bucket with `aws cli`.
+At this point,  we do some `research` on Google and discover how to `enumerate` a bucket with `aws cli`.
 
 To do it, the first thing, is to `configure` this tool:
 
@@ -139,7 +139,7 @@ Now we can start enumerating the available `buckets`:
 
 There is only one bucket on this server called `"adserver"`.
 
-With the following command, we can see its content:
+With the following command, we can see its contents:
 
 <br />
 
@@ -165,9 +165,9 @@ And if we add the `--recursive` flag, we can see the files inside the `"images"`
 
 <br />
 
-Cool, we have access to the bucket and we can list their content.
+Cool, we have `access` to the bucket and we can `list` it contents.
 
-What if we try to upload something?
+What if we try to `upload` something?
 
 <br />
 
@@ -186,5 +186,4 @@ Yes! We can upload files!
 ![6](../../../assets/images/Bucket/6.png)
 
 <br />
-
 
