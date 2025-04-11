@@ -70,9 +70,9 @@ Open Ports:
 
 <br />
 
-When we visit the website, it returns a `302 found` status code, redirecting to `bucket.htb`.
+Visiting the website returns a `302 found` status code, redirecting to `bucket.htb`.
 
-So we proceed to add it to the `/etc/hosts` and list again:
+So, we add it to the `/etc/hosts` and list again:
 
 <br />
 
@@ -80,7 +80,7 @@ So we proceed to add it to the `/etc/hosts` and list again:
 
 <br />
 
-The page is really `static` and doesn't have any function, only some hacking articles, but enumerating the `source code` we found something:
+The page is completely `static` and doesn't have any function, only some hacking articles, but enumerating the `source code` we found something:
 
 <br />
 
@@ -92,7 +92,9 @@ The page is really `static` and doesn't have any function, only some hacking art
 
 <br />
 
-It is a Amazon S3 Bucket subdomain!!
+It is an `Amazon S3 Bucket` subdomain!!
+
+The site uses a bucket to `store` the images of the articles we saw earlier and most likely the rest of its `resources` as well.
 
 <br />
 
@@ -100,7 +102,7 @@ It is a Amazon S3 Bucket subdomain!!
 
 <br />
 
-When we list the base URL, it shows the typical `"status: running"` message:
+When we access the base URL, it shows the typical `"status: running"` message:
 
 <br />
 
