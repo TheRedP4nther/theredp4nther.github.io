@@ -110,9 +110,9 @@ When we access the base URL, it shows the typical `"status: running"` message:
 
 <br />
 
-At this point,  we make some research on Google and discover how to enumerate a bucket with aws cli.
+At this point,  we make some `research` on Google and discover how to `enumerate` a bucket with `aws cli`.
 
-To do it, the first thing, is to configure awsi running this:
+To do it, the first thing, is to `configure` this tool:
 
 <br />
 
