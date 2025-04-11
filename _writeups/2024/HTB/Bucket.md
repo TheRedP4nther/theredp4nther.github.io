@@ -360,3 +360,45 @@ roy@bucket:~$ cat user.txt
 
 <br />
 
+Continue enumerating the system, we list with "netstat" a interesting port, the 8000 one:
+
+<br />
+
+```bash
+roy@bucket:/var/www/bucket-app$ netstat -nat
+Active Internet connections (servers and established)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State      
+tcp        0      0 127.0.0.1:8000          0.0.0.0:*               LISTEN     
+tcp        0      0 127.0.0.1:39051         0.0.0.0:*               LISTEN     
+tcp        0      0 127.0.0.53:53           0.0.0.0:*               LISTEN     
+tcp        0      0 127.0.0.1:4566          0.0.0.0:*               LISTEN     
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN     
+tcp        0      0 127.0.0.1:4566          127.0.0.1:39016         TIME_WAIT  
+tcp        0      1 10.10.10.212:49992      1.0.0.1:53              SYN_SENT   
+tcp        0      0 127.0.0.1:4566          127.0.0.1:39022         TIME_WAIT  
+tcp        0    138 10.10.10.212:42778      10.10.14.15:443         ESTABLISHED
+tcp6       0      0 :::80                   :::*                    LISTEN     
+tcp6       0      0 :::22                   :::*                    LISTEN     
+tcp6       0      0 10.10.10.212:80         10.10.14.15:60726       ESTABLISHED
+```
+
+<br />
+
+We can do a `Port Forwarding`:
+
+<br />
+
+```bash
+❯ ssh roy@10.10.10.212 -L 8000:127.0.0.1:8000
+```
+
+<br />
+
+And list it:
+
+<br />
+
+
+
+<br />
+
