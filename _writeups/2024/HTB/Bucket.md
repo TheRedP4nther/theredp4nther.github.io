@@ -305,6 +305,7 @@ Using the `scan` option, we can `dump` its content:
 <br />
 
 ```bash
+❯ aws dynamodb scan --table-name users --endpoint-url=http://s3.bucket.htb --output json
 {
     "Items": [
         {
