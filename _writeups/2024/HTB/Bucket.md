@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: aws bucket s3 awscli reverseshell php 
+tags: aws bucket s3 awscli reverseshell php dynamodb 
 ---
 
 <br />
@@ -227,7 +227,7 @@ Perfect! We are in as `www-data`!
 
 <br />
 
-Once in the system, we start enumerating the `/home/roy` directory:
+Once in the system, we start enumerating the user directory -> `/home/roy`:
 
 <br />
 
@@ -240,7 +240,7 @@ cat: user.txt: Permission denied
 
 <br />
 
-There is a directoy named `"project"` and the user.txt flag, but we can't get it:
+There is a directory named `"project"` and the user.txt flag, but we can't get it:
 
 <br />
 
