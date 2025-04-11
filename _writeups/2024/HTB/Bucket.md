@@ -80,7 +80,7 @@ So we proceed to add it to the `/etc/hosts` and list again:
 
 <br />
 
-The page is really `static` and doesn't have any function, only some hacking articles, but enumerating the `source code` we found something interesting:
+The page is really `static` and doesn't have any function, only some hacking articles, but enumerating the `source code` we found something:
 
 <br />
 
@@ -97,6 +97,10 @@ It is a Amazon S3 Bucket subdomain!!
 <br />
 
 ![4](../../../assets/images/Bucket/4.png)
+
+<br />
+
+When we list the base url it has the typical "status running" message:
 
 <br />
 
