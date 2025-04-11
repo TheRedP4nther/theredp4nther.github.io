@@ -360,7 +360,7 @@ roy@bucket:~$ cat user.txt
 
 <br />
 
-Continue enumerating the system, we list with "netstat" a interesting port, the 8000 one:
+Continue enumerating the system, we list with `"netstat"` a interesting port, the `8000` one:
 
 <br />
 
@@ -402,3 +402,34 @@ And list it:
 
 <br />
 
+It is a simple website under construction.
+
+But continuing enumerating, we find under `/var` the directory of this `website`, a directory called  `"bucket-app"`.
+
+<br />
+
+```bash
+roy@bucket:/var/www$ ls -l
+total 8
+drwxr-x---+ 4 root root 4096 Feb 10  2021 bucket-app
+drwxr-xr-x  2 root root 4096 Apr 11 23:21 html
+```
+
+<br />
+
+User `roy` can access this directory:
+
+<br />
+
+```bash
+roy@bucket:/var/www/bucket-app$ ls -l
+total 848
+-rw-r-x---+  1 root root     63 Sep 23  2020 composer.json
+-rw-r-x---+  1 root root  20533 Sep 23  2020 composer.lock
+drwxr-x---+  2 root root   4096 Feb 10  2021 files
+-rwxr-x---+  1 root root  17222 Sep 23  2020 index.php
+-rwxr-x---+  1 root root 808729 Jun 10  2020 pd4ml_demo.jar
+drwxr-x---+ 10 root root   4096 Feb 10  2021 vendor
+```
+
+<br />
