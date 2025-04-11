@@ -65,3 +65,17 @@ Open Ports:
 - `Port 80` -> http
 
 <br />
+
+# Http Enumeration: -> Port 80
+
+<br />
+
+When we visit the website, it returns a `302 found` status code, redirecting to `bucket.htb`.
+
+Add it to the `/etc/hosts` and list again:
+
+<br />
+
+
+
+<br />
