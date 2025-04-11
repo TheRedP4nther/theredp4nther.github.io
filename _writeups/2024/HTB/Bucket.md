@@ -104,4 +104,6 @@ When we list the base url it has the typical "status running" message:
 
 <br />
 
+![5](../../../assets/images/Bucket/5.png)
 
+<br />
