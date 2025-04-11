@@ -28,7 +28,7 @@ Hello hackers! Today, we’ll tackle the Ambassador Machine, a Medium difficulty
 
 <br />
 
-As always we are going to start with a `nmap` scan to enumerate de open ports and services running on the victim machine:
+As always we are going to start with a `nmap` scan to enumerate the open ports and services running on the victim machine:
 
 <br />
 
