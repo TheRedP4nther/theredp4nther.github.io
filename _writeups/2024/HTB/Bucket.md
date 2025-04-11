@@ -80,7 +80,7 @@ So, we add it to the `/etc/hosts` and list again:
 
 <br />
 
-The page is completely `static` and doesn't have any function, only some hacking articles, but enumerating the `source code` we found something:
+The page is completely `static` and doesn't have any function, only some hacking articles, but inspecting the `source code` we found something:
 
 <br />
 
@@ -139,7 +139,7 @@ Now we can start enumerating the available `buckets`:
 
 There is only one bucket on this server called `"adserver"`.
 
-With the following command, we can see it's content:
+With the following command, we can see its content:
 
 <br />
 
