@@ -573,7 +573,7 @@ Yes! Let's see its content:
 
 <br />
 
-
+![9](../../../assets/images/Bucket/9.png)
 
 <br />
 
