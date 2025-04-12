@@ -368,9 +368,7 @@ To do it, we need to access DynamoDB `shell` in the website -> `http://s3.bucket
 
 <br />
 
-
-
-<br />
+![10](../../../assets/images/Bucket/10.png)
 
 <br />
 
