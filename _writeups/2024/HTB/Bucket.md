@@ -719,3 +719,11 @@ root@bucket:~# cat root.txt
 ```
 
 <br />
+
+One more Medium Machine from HackTheBox rooted!!
+
+I had never worked with the concepts we explored in this box before, so I learned a lot!!
+
+Hope you did too ☺️. Keep Hacking!!❤️❤️
+
+
