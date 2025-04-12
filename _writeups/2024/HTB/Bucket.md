@@ -438,7 +438,7 @@ drwxr-x---+ 10 root root   4096 Feb 10  2021 vendor
 
 <br />
 
-At the top of `"index.php"`, we found a interesing code:
+At the top of `"index.php"`, we found an interesing code:
 
 <br />
 
@@ -478,7 +478,7 @@ else
 
 A `POST` request with the action parameter set to `"get_alerts"` will configure a `DynamoDB` client for connect to localhost:4566 and scans the `"alerts"` table filtering by the title `"Ransonmware"`.
 
-Finally it calls to `pd4ml` and creates a `PDF` with the tables content.
+Finally it calls to `pd4ml` and creates a `PDF` with the table content.
 
 <br />
 
