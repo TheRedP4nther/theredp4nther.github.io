@@ -372,7 +372,7 @@ To do it, we need to access DynamoDB `shell` in the website -> `http://s3.bucket
 
 <br />
 
-The language of this shell is JavaScript and there are a lot of payloads that you can use to enumerate.
+The language of this shell is `JavaScript` and there are a lot of `payloads` that you can use to enumerate the available `tables` for the current database.
 
 This one works for me:
 
@@ -393,6 +393,14 @@ function displayTables(err, data) {
 
 dynamodb.listTables(config, displayTables);
 ```
+
+<br />
+
+DynamoDB output:
+
+<br />
+
+
 
 <br />
 
