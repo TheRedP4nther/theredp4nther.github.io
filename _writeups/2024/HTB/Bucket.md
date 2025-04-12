@@ -22,7 +22,7 @@ Difficulty -> Medium.
 
 <br />
 
-
+Hello hackers! Today we’ll tackle the Bucket machine, a Medium Difficulty Linux challenge. We start by enumerating an S3 bucket accessible via AWS CLI and discover that not only can we list files, but we also have write permissions. Uploading a PHP reverse shell grants us initial access as www-data. From there, we enumerate a local DynamoDB instance and dump credentials to pivot to the roy user. Further enumeration reveals a locally hosted web app, which we access through SSH port forwarding. By leveraging its integration with DynamoDB and a PDF generation function, we exploit file read capabilities in the PDF export feature to retrieve the root SSH private key and finally gain root access to the machine.
 
 <br />
 
@@ -724,6 +724,6 @@ One more Medium Machine from HackTheBox rooted!!
 
 I had never worked with the concepts we explored in this box before, so I learned a lot!!
 
-Hope you did too ☺️. Keep Hacking!!❤️❤️
+Hope you did too☺️. Keep Hacking!!❤️❤️
 
-
+<br />
