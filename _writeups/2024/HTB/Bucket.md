@@ -358,6 +358,22 @@ roy@bucket:~$ cat user.txt
 
 <br />
 
+## DynamoDB Shell:
+
+<br />
+
+There is another cool way to enum the `DynamoDB` database.
+
+To do it, we need to access DynamoDB `shell` in the website -> `http://s3.bucket.htb/shell/`:
+
+<br />
+
+
+
+<br />
+
+<br />
+
 # Privilege Escalation: roy -> root 
 
 <br />
@@ -581,7 +597,7 @@ Yes! Let's see its content:
 
 <br />
 
-While reading about the different `pdf4ml` functionalities, we found a really interesting one that allows us to `emmbed` a Linux `file` into the PDF.
+While reading about the different `pdf4ml` functionalities, we found a really interesting one that allows us to `embed` a Linux `file` into the PDF.
 
 The sintaxis to do that is this:
 
