@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: aws bucket s3 awscli reverseshell php dynamodb 
+tags: aws bucket s3 awscli reverseshell php dynamodb portforwarding 
 ---
 
 <br />
@@ -485,4 +485,6 @@ Finally it calls to `pd4ml` and creates a `PDF` with the table content.
 ## Testing Functionality:
 
 <br />
+
+
 
