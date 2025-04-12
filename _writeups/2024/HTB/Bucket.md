@@ -240,7 +240,7 @@ cat: user.txt: Permission denied
 
 <br />
 
-There is a directory named `"project"` and the user.txt flag, but we can't get it:
+There is a directory named `"project"` and the user.txt flag, but we can't get it.
 
 <br />
 
@@ -343,7 +343,7 @@ Using the `scan` option, we can `dump` its content:
 
 Nice! We found several `passwords`.
 
-Trying one by one, we finally get a good one that works to `roy` user:
+Trying them one by one, we finally find one that works for the `roy` user:
 
 <br />
 
@@ -661,7 +661,7 @@ Yes! Let's see its content:
 
 While reading about the different `pdf4ml` functionalities, we found a really interesting one that allows us to `embed` a Linux `file` into the PDF.
 
-The sintaxis to do that is this:
+The syntax to do that is this:
 
 <br />
 
@@ -671,7 +671,7 @@ The sintaxis to do that is this:
 
 <br />
 
-After include this `payload` into our oneliner we can repeat the process:
+After including this `payload` in our oneliner, we can repeat the process:
 
 <br />
 
