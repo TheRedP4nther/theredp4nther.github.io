@@ -348,6 +348,8 @@ Trying one by one, we finally get a good one that works to `roy` user:
 <br />
 
 ```bash
+❯ su roy
+Password:
 roy@bucket:~$ id
 uid=1000(roy) gid=1000(roy) groups=1000(roy),1001(sysadm)
 roy@bucket:~$ cat user.txt
