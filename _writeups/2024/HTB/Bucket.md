@@ -396,7 +396,7 @@ dynamodb.listTables(config, displayTables);
 
 <br />
 
-(Important to use a browser other than firefox, because it can prints the error `"CR32 integrity check failed"`).
+(Important to use a browser other than `firefox`, because it can prints the error `"CR32 integrity check failed"`).
 
 DynamoDB output:
 
@@ -406,7 +406,33 @@ DynamoDB output:
 
 <br />
 
+Finally, we can list `users` table contents with this other payload:
 
+<br />
+
+```javascript 
+const params = {
+    TableName: "users"
+};
+
+dynamodb.scan(params, function(error, data) {
+    if (error) {
+        console.error("Error fetching table data:");
+        ppJson(error);
+    } else {
+        console.log("Contents of 'users' table:");
+        ppJson(data);
+    }
+});
+```
+
+<br />
+
+DynamoDB output:
+
+<br />
+
+![12](../../../assets/images/Bucket/12.png)
 
 <br />
 
