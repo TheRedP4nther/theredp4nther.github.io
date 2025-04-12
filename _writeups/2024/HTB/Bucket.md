@@ -372,7 +372,7 @@ To do it, we need to access DynamoDB `shell` in the website -> `http://s3.bucket
 
 <br />
 
-The language of this shell is `JavaScript` and there are a lot of `payloads` that you can use to enumerate the available `tables` for the current database.
+The language of this shell is `JavaScript` and there are a lot of `payloads` that we can use to enumerate the available `tables` for the current database.
 
 This one works for me:
 
@@ -403,6 +403,10 @@ DynamoDB output:
 <br />
 
 ![11](../../../assets/images/Bucket/11.png)
+
+<br />
+
+
 
 <br />
 
