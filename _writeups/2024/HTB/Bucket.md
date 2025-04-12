@@ -372,6 +372,30 @@ To do it, we need to access DynamoDB `shell` in the website -> `http://s3.bucket
 
 <br />
 
+The language of this shell is JavaScript and there are a lot of payloads that you can use to enumerate.
+
+This one works for me:
+
+<br />
+
+```javascript 
+const config = {};
+
+function displayTables(err, data) {
+    if (err) {
+        console.error("Failed to list tables:");
+        ppJson(err);
+    } else {
+        console.log("Available DynamoDB tables:");
+        ppJson(data);
+    }
+}
+
+dynamodb.listTables(config, displayTables);
+```
+
+<br />
+
 # Privilege Escalation: roy -> root 
 
 <br />
