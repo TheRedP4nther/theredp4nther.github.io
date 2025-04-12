@@ -609,7 +609,7 @@ The sintaxis to do that is this:
 
 <br />
 
-After include this payload into our oneliner we can repeat the process:
+After include this `payload` into our oneliner we can repeat the process:
 
 <br />
 
@@ -619,7 +619,7 @@ aws dynamodb create-table --table-name alerts --attribute-definitions AttributeN
 
 <br />
 
-Then we list the /etc/passwd:
+Then we list the `/etc/passwd`:
 
 <br />
 
@@ -736,10 +736,10 @@ root@bucket:~# cat root.txt
 
 <br />
 
-One more Medium Machine from HackTheBox rooted!!
+Another Medium Machine from HackTheBox rooted!!
 
-I had never worked with the concepts we explored in this box before, so I learned a lot!!
+These were totally new concepts for me, and I learned a ton along the way. Hope you did too!☺️
 
-Hope you did too☺️. Keep Hacking!!❤️❤️
+Keep Hacking!!❤️❤️
 
 <br />
