@@ -396,11 +396,13 @@ dynamodb.listTables(config, displayTables);
 
 <br />
 
+(Important to use a browser other than firefox, because it can prints the error `"CR32 integrity check failed"`).
+
 DynamoDB output:
 
 <br />
 
-
+![11](../../../assets/images/Bucket/11.png)
 
 <br />
 
