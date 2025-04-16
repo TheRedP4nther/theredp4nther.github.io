@@ -335,9 +335,9 @@ Yes! We can `upload` files to the website!
 
 <br />
 
-We are able to upload files and the website executes php.
+We are able to upload `files`, and the website executes `PHP`.
 
-So, it's the moment to create a php webshell:
+So, it's time to create a PHP `webshell`:
 
 <br />
 
@@ -349,7 +349,7 @@ So, it's the moment to create a php webshell:
 
 <br />
 
-Upload it:
+We upload it:
 
 <br />
 
@@ -357,7 +357,7 @@ Upload it:
 
 <br />
 
-Execute a command:
+Then, we execute a command:
 
 <br />
 
@@ -368,7 +368,7 @@ www-data
 
 <br />
 
-Check if we are in the `main` system:
+We check if we're in the main `host` (outside Docker):
 
 <br />
 
@@ -379,7 +379,7 @@ Check if we are in the `main` system:
 
 <br />
 
-To gain access to it, we run a `reverse shell`:
+To get an interactive shell, we trigger a `reverse shell`:
 
 <br />
 
@@ -389,7 +389,7 @@ To gain access to it, we run a `reverse shell`:
 
 <br />
 
-Check the listener and...
+Check the listener and... we get a shell:
 
 <br />
 
@@ -407,10 +407,25 @@ uid=33(www-data) gid=33(www-data) groups=33(www-data)
 
 <br />
 
-We're in! Intrusion ready, come on with the privilege escalation.
+We're in! Intrusion complete.
 
 <br />
 
 # Privilege Escalation: www-data -> root
+
+<br />
+
+In the system, there's a home directory for a user named `"ubuntu"`.
+
+We are not this `user`, but we can `read` the user flag without any issues:
+
+<br />
+
+```bash
+www-data@gobox:/home/ubuntu$ ls
+user.txt
+www-data@gobox:/home/ubuntu$ cat user.txt 
+691658f1166135d1e36b3be62fxxxxxx
+```
 
 <br />
