@@ -122,12 +122,44 @@ Submitting a random email shows our `input` reflected in the `response`:
 
 <br />
 
-As we know, when we can control the output, there is a lot of vulnerabilities to test.
+As we know, when we can control the `output`, there is a lot of `vulnerabilities` to test.
 
-So we proceed to intercept the request with Burp Suite:
+So we proceed to intercept the request with `Burp Suite`:
 
 <br />
 
 ![6](../../../assets/images/Gobox/6.png)
+
+<br />
+
+Once into Burp Suite, there are two important things that we need to see.
+
+1.- X-Forwarded-Server: golang:
+
+This header revelas to us the technology behind the server. 
+
+Important to take it into account when testing vulns.
+
+<br />
+
+```bash
+HTTP/1.1 200 OK␍
+Server: nginx␍
+Date: Wed, 16 Apr 2025 16:11:59 GMT␍
+Content-Type: text/html; charset=utf-8␍
+Connection: keep-alive␍
+X-Forwarded-Server: golang␍
+Content-Length: 1513
+```
+
+<br />
+
+2.- The email validation is on the client-side:
+
+Once in Burp Suite we can bypass it sending a anything that we want like a simple word:
+
+<br />
+
+
 
 <br />
