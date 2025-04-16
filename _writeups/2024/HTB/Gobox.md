@@ -132,9 +132,9 @@ So, we intercept the request using `Burp Suite`:
 
 <br />
 
-Inside Burp Suite, there are two `key` things worth nothing.
+Inside Burp Suite, there are two `key` things worth nothing:
 
-- 1.- X-Forwarded-Server: golang:
+- 1.- `X-Forwarded-Server: golang`:
 
 This header revelas to us the `technology` stack used by the backend - In this case, `Golang`. 
 
@@ -154,12 +154,22 @@ Content-Length: 1513
 
 <br />
 
-- 2.- Email validation is on the client-side only:
+- 2.- `Email validation is on the client-side only`:
 
-Once in Burp Suite we can `bypass` it sending a anything that we want like a simple word:
+Burp Suite allows us to `bypass` the Front-End validation by sending arbitrary values - even `non email` strings:
 
 <br />
 
 ![7](../../../assets/images/Gobox/7.png)
+
+<br />
+
+At this point there is one vulnerability most `typical` than others in this type of scenery, `SSTI` (Server Side Template Injection).
+
+## SSTI - GOLANG:
+
+<br />
+
+Searching on Google we find a [POST](https://dev.to/blue_byte/server-side-template-injection-in-go-28md) that explains very well how to obtain `internal` information about Go internal `structures` exploiting an SSTI.
 
 <br />
