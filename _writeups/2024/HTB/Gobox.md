@@ -182,7 +182,7 @@ After some research, I found this [post](https://dev.to/blue_byte/server-side-te
 
 We start testing SSTI `basic` payloads such as:
 
-```
+```text
 {{ printf "TESTING" }}
 ```
 
@@ -198,7 +198,7 @@ Perfect! The `Golang` template engine is interpreting our `payload` succesfully!
 
 Next, we attempt to `extract` internal data:
 
-```
+```text
 {{ . }}
 ```
 
@@ -217,3 +217,5 @@ We can use them to `log` in to the login panel we found earlier:
 ![10](../../../assets/images/Gobox/10.png)
 
 <br />
+
+
