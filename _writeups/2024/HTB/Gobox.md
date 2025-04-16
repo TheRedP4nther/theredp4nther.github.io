@@ -218,4 +218,12 @@ We can use them to `log` in to the login panel we found earlier:
 
 <br />
 
+Inside the application, we see the source code of the go application.
 
+Analyzing it we found a interesting function:
+
+<br />
+
+
+
+<br />
