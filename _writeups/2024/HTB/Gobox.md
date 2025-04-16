@@ -292,7 +292,7 @@ The bucket seems to host the port 80 `files`:
 
 <br />
 
-
+![16](../../../assets/images/Gobox/16.png)
 
 <br />
 
