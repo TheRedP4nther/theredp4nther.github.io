@@ -172,6 +172,8 @@ At this point, a specific vulnerability becomes more likely given the context, `
 
 <br />
 
-Searching on Google we find a [POST](https://dev.to/blue_byte/server-side-template-injection-in-go-28md) that explains very well how to obtain information about `Go` internal `structures` exploiting an SSTI.
+After some research, come across a [POST](https://dev.to/blue_byte/server-side-template-injection-in-go-28md) that explains how to extract internal information data from `Golang` template engines by exploiting SSTI.
 
 <br />
+
+
