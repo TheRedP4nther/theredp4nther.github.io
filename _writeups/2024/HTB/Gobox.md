@@ -82,6 +82,24 @@ List the website on this port:
 
 <br />
 
+![2](../../../assets/images/Gobox/2.png)
+
+<br />
+
+It's a page dedicated to a `eSports` competition, but we don't see nothing `relevant`.
+
+So we keep enumerating the next website.
+
+<br />
+
+# Http Enumeration: -> Port 8080
+
+<br />
+
+The front page of the other website is a login panel:
+
+<br />
+
 
 
 <br />
