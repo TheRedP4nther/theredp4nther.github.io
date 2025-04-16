@@ -280,7 +280,7 @@ We continue `enumerating` the container and find something interesting in the `/
 
 It seems the system is using an `AWS` bucket.
 
-With the s3 `ls` command, we se only one bucket named `"website"`:
+With the `s3 ls` command, we se only one bucket named `"website"`:
 
 <br />
 
@@ -296,7 +296,7 @@ The bucket appears to host the `files` server on `port 80`:
 
 <br />
 
-To verify it, we create a `test.txt` file:
+To verify this, we create a `test.txt` file:
 
 <br />
 
@@ -308,7 +308,7 @@ To verify it, we create a `test.txt` file:
 
 <br />
 
-Then we upload it:
+Then, we `upload` the file:
 
 <br />
 
@@ -316,7 +316,7 @@ Then we upload it:
 
 <br />
 
-And finally we list it:
+And finally, we `confirm` it by listing the file:
 
 <br />
 
@@ -327,7 +327,7 @@ Testing To Upload A File
 
 <br />
 
-Yes! We can upload files to the website!
+Yes! We can `upload` files to the website!
 
 <br />
 
@@ -335,4 +335,35 @@ Yes! We can upload files to the website!
 
 <br />
 
+We are able to upload files and the website executes php.
+
+So, it's the moment to create a php webshell:
+
+<br />
+
+{% raw %}
+```go
+{{ .DebugCmd "echo '<?php system($_GET[0]) ?>' > cmd.php" }}
+```
+{% endraw %}
+
+<br />
+
+Upload it:
+
+<br />
+
+
+
+<br />
+
+Execute a command:
+
+<br />
+
+```bash
+
+```
+
+<br />
 
