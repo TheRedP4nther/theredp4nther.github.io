@@ -131,7 +131,7 @@ Serialized:
 ```
 <br />
 
-## IIFE (inmmediately Invoked Function Expression):
+## IIFE (Immediately Invoked Function Expression):
 <br />
 
 Well, we already have the Payload ready, but it's not all there yet. In order for the server to execute our command, we will have to `enter the IIFE in our payload`, otherwise, no command will be executed when the `server deserializes our serialized data`. 

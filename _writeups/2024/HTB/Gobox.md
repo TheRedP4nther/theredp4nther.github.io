@@ -558,7 +558,7 @@ server {
 
 <br />
 
-The `"command on"` directive inmmediately caught my attention.
+The `"command on"` directive immediately caught my attention.
 
 After googling it, we found a [Github repository] with some `key` information:
 
