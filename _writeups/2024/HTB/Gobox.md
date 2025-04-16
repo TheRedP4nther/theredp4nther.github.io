@@ -287,3 +287,15 @@ Using the s3 `ls` command it shows only one bucket named `"website"`:
 ![15](../../../assets/images/Gobox/15.png)
 
 <br />
+
+The bucket seems to host the port 80 `files`:
+
+<br />
+
+
+
+<br />
+
+## PHP Webshell:
+
+<br />
