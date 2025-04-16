@@ -106,9 +106,7 @@ The front page of the other website is a `login panel`:
 
 We try default `passwords` but doesn't work.
 
-<br />
-
-So we click on the "`Forgot Password`" option and see this:
+So we click on the "`Forgot Password`" option and see the following:
 
 <br />
 
@@ -116,7 +114,7 @@ So we click on the "`Forgot Password`" option and see this:
 
 <br />
 
-If we enter a random email and click on the `"Login"` button we see our `input` in the `response`:
+If we enter a random email and click on the `"Login"` button we can see our `input` in the `response`:
 
 <br />
 
