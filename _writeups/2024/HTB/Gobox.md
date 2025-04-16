@@ -308,11 +308,26 @@ To verify it, we create a `test.txt` file:
 
 <br />
 
-And we upload it:
+Then we upload it:
 
 <br />
 
 ![17](../../../assets/images/Gobox/17.png)
+
+<br />
+
+And finally we list it:
+
+<br />
+
+```bash
+❯ curl -s -X GET "http://10.10.11.113/test.txt"
+Testing To Upload A File
+```
+
+<br />
+
+Yes! We can upload files to the website!
 
 <br />
 
