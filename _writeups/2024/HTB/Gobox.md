@@ -188,6 +188,8 @@ We start testing SSTI `basic` payloads such as:
 ```
 {% endraw %}
 
+<br />
+
 With this result:
 
 <br />
@@ -222,9 +224,9 @@ We can use them to `log` in to the login panel we found earlier:
 
 <br />
 
-Inside, we see the `source code` of Golang main application.
+Inside, we can see the `source code` of the main Golang application.
 
-And by analyzing it we find an interesting `function`:
+While analyzing it, we find an interesting `function` called (DebugCmd):
 
 <br />
 
@@ -235,3 +237,16 @@ And by analyzing it we find an interesting `function`:
 ## DebugCmd - RCE:
 
 <br />
+
+We can `invoke` this `function` by writting its name preceded by a dot (.).
+
+Any `arguments` passed to this function, will be `executed` as system commands.
+
+To test it, we are going to execute a `"id"`:
+
+<br />
+
+
+
+<br />
+
