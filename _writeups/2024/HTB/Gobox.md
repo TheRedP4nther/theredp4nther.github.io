@@ -78,7 +78,7 @@ Open Ports:
 
 <br />
 
-List the website on this port:
+Browsing the website on port 80:
 
 <br />
 
@@ -86,9 +86,9 @@ List the website on this port:
 
 <br />
 
-It's a page dedicated to a `eSports` hacking competition, but we don't see nothing `relevant`.
+It's a page for an `eSports` hacking competition, but we there is nothing `useful` or interactive at first glance.
 
-So we keep enumerating the next port.
+We move on to the next HTPP port.
 
 <br />
 
@@ -96,7 +96,7 @@ So we keep enumerating the next port.
 
 <br />
 
-The front page of the other website is a `login panel`:
+The front page on port 8080 shows a `login panel`:
 
 <br />
 
@@ -104,9 +104,9 @@ The front page of the other website is a `login panel`:
 
 <br />
 
-We try default `passwords` but doesn't work.
+We try some common default `credentials` but none of them work.
 
-So we click on the "`Forgot Password`" option and see the following:
+Clicking on the "`Forgot Password`" link reveals the following form:
 
 <br />
 
@@ -114,7 +114,7 @@ So we click on the "`Forgot Password`" option and see the following:
 
 <br />
 
-If we enter a random email and click on the `"Login"` button we can see our `input` in the `response`:
+Submitting a random email shows our `input` reflected in the `response`:
 
 <br />
 
