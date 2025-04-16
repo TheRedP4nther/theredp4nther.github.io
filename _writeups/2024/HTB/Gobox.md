@@ -471,6 +471,8 @@ server {
 }
 ```
 
+<br />
+
 This server implements a hardcoded `Authorization` check.
 
 That's the reason why we saw a `"403 Forbidden"` during our initial nmap scan.
@@ -560,7 +562,7 @@ server {
 
 The `"command on"` directive immediately caught my attention.
 
-After googling it, we found a [Github repository] with some `key` information:
+After googling it, we found a [Github repository](https://github.com/limithit/NginxExecute) with some `key` information:
 
 <br />
 
