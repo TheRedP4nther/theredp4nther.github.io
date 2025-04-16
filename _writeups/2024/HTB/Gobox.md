@@ -280,10 +280,10 @@ We keep `enumerating` the container and found something interesting into the `/r
 
 It seems that the system is using a `AWS` bucket.
 
-Using the s3 ls command it shows only one bucket named website:
+Using the s3 `ls` command it shows only one bucket named `"website"`:
 
 <br />
 
-
+![15](../../../assets/images/Gobox/15.png)
 
 <br />
