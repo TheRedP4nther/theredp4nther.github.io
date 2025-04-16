@@ -250,3 +250,14 @@ To test it, we are going to execute a `"id"`:
 
 <br />
 
+The command was executed succesfully.
+
+But we are probably executing command into a docker container, because we are root.
+
+To check we run the following:
+
+<br />
+
+
+
+<br />
