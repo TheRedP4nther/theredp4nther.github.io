@@ -224,6 +224,6 @@ Analyzing it we found a interesting function:
 
 <br />
 
-
+![11](../../../assets/images/Gobox/11.png)
 
 <br />
