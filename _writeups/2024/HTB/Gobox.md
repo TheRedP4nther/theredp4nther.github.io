@@ -445,7 +445,7 @@ default
 
 <br />
 
-First is port 4566:
+First, we have the server listening on port 4566:
 
 <br />
 
@@ -471,17 +471,19 @@ server {
 }
 ```
 
-This service is doing a hardcoded `autch` check.
+This server implements a hardcoded `Authorization` check.
 
-This is the reason why we see a `"403 Forbidden"` in nmap.
+That's the reason why we saw a `"403 Forbidden"` during our initial nmap scan.
 
-If the verification is `correct`, it `forwards` to port 9000.
+If the header `matches`, the request is `forwarded` to port 9000.
+
+<br />
 
 ## Main Server:
 
 <br />
 
-The next, is the `main` server at port 80:
+Next is the `main` server on port 80:
 
 <br />
 
@@ -505,7 +507,7 @@ server {
 
 <br />
 
-
+This configuration handles `PHP` through a `socket` and points directly to `/opt/website`.
 
 <br />
 
@@ -513,7 +515,7 @@ server {
 
 <br />
 
-The third, is the `Golang` server vulnerable to `SSTI` on port 8080:
+Then we have the `Golang` server (vulnerable to `SSTI`) on port 8080:
 
 <br />
 
@@ -529,7 +531,7 @@ server {
 
 <br />
 
-The most interesting thing that we can see here, is where the `custom header` was added.
+The most interesting part here is the addition of the custom header `X-Forwarded-Server: golang`, which helped us identify the `backend` technology during enumeration.
 
 <br />
 
@@ -537,7 +539,7 @@ The most interesting thing that we can see here, is where the `custom header` wa
 
 <br />
 
-Finally, we can see an `unknown` service that is pointing to port 8000.
+Finally, we can see an `unknown` service bound to  127.0.0.1:8000.
 
 <br />
 
@@ -552,9 +554,18 @@ server {
 
 <br />
 
-The "command on" option caughts my attention.
-
-And googling for it we find a [Github Repository] with key information:
+## Nginx Backdoor:
 
 <br />
+
+The `"command on"` directive inmediately caught my attention.
+
+After googling it, we found a [Github repository] with some `key` information:
+
+<br />
+
+
+
+<br />
+
 
