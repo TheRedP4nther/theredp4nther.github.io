@@ -19,6 +19,7 @@ Difficulty -> Medium.
 <br />
 
 # Introduction:
+
 <br />
 
 Hello hackers! Today, we’ll tackle the Celestial Machine, a Medium difficulty challenge. We’ll start by exploiting a deserialization vulnerability in Node.js to gain system access. Once inside, we’ll escalate privileges by exploiting a Python script executed by root at regular intervals.

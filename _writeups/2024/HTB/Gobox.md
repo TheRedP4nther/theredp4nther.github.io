@@ -8,7 +8,7 @@ tags: reverseshell nodejs deserializationattack scripting python javascript iife
 
 <br />
 
-
+![1](../../../assets/images/Gobox/1.png)
 
 <br />
 
@@ -19,7 +19,8 @@ Difficulty -> Medium.
 <br />
 
 # Introduction:
-<br />
+
+br />
 
 
 
