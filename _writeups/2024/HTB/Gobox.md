@@ -270,7 +270,7 @@ Indeed, we are in a container.
 
 <br />
 
-We keep `enumerating` the container and found something interesting into the `/root/.bash_history` file:
+We continue `enumerating` the container and find something interesting in the `/root/.bash_history` file:
 
 <br />
 
@@ -278,9 +278,9 @@ We keep `enumerating` the container and found something interesting into the `/r
 
 <br />
 
-It seems that the system is using a `AWS` bucket.
+It seems the system is using an `AWS` bucket.
 
-Using the s3 `ls` command it shows only one bucket named `"website"`:
+With the s3 `ls` command, we se only one bucket named `"website"`:
 
 <br />
 
@@ -288,7 +288,7 @@ Using the s3 `ls` command it shows only one bucket named `"website"`:
 
 <br />
 
-The bucket seems to host the port 80 `files`:
+The bucket appears to host the `files` server on `port 80`:
 
 <br />
 
@@ -296,6 +296,28 @@ The bucket seems to host the port 80 `files`:
 
 <br />
 
+To verify it, we create a `test.txt` file:
+
+<br />
+
+{% raw %}
+```go
+{{ .DebugCmd "echo 'Testing To Upload A File' > test.txt" }}
+```
+{% endraw %}
+
+<br />
+
+And we upload it:
+
+<br />
+
+
+
+<br />
+
 ## PHP Webshell:
 
 <br />
+
+
