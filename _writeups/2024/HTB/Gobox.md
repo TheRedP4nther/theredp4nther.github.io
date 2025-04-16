@@ -22,7 +22,7 @@ Difficulty -> Medium.
 
 <br />
 
-
+We’re diving into Gobox, a Medium Linux box with some spicy Golang SSTI vibes. We start by exploiting a Golang template injection vulnerability that leaks credentials, granting access to the app’s source code. There, we uncover a debug function that gives us command execution. Inside the container, we find AWS CLI usage, and manage to upload a PHP webshell to the main host via S3 bucket sync. After getting a shell, we pivot to privilege escalation by exploring Nginx configs, where we discover a backdoored module listening on a local port to execute commands as root.
 
 <br />
 
@@ -280,7 +280,7 @@ We continue `enumerating` the container and find something interesting in the `/
 
 It seems the system is using an `AWS` bucket.
 
-With the `s3 ls` command, we se only one bucket named `"website"`:
+With the `s3 ls` command, we see only one bucket named `"website"`:
 
 <br />
 
@@ -316,7 +316,7 @@ Then, we `upload` the file:
 
 <br />
 
-And finally, we `confirm` it by listing in the website:
+And finally, we `confirm` it by listing on the website:
 
 <br />
 
@@ -596,7 +596,7 @@ www-data@gobox:/etc/nginx/sites-enabled$ ls -l /usr/lib/nginx/modules/ngx_http_e
 
 <br />
 
-Now we use strings on the binary and filtered by `"run"` to see if the server uses a different option than command.run to `invoke` the backdoor:
+Now we use `strings` on the binary and filtered for `"run"` to see if the server uses a different option than command.run to `invoke` the backdoor:
 
 <br />
 
@@ -609,7 +609,7 @@ ippsec.run
 
 Boom! The correct trigger is `ippsec.run`, not command.run.
 
-We are able to run commands as root:
+We are able to run commands as `root`:
 
 <br />
 
