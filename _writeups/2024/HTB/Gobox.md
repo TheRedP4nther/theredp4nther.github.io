@@ -441,7 +441,7 @@ default
 
 <br />
 
-## Internal Server:
+### Internal Server:
 
 <br />
 
@@ -479,7 +479,7 @@ If the header `matches`, the request is `forwarded` to port 9000.
 
 <br />
 
-## Main Server:
+### Main Server:
 
 <br />
 
@@ -511,7 +511,7 @@ This configuration handles `PHP` through a `socket` and points directly to `/opt
 
 <br />
 
-## Golang Server:
+### Golang Server:
 
 <br />
 
@@ -535,7 +535,7 @@ The most interesting part here is the addition of the custom header `X-Forwarded
 
 <br />
 
-## Strange Server:
+### Strange Server:
 
 <br />
 
