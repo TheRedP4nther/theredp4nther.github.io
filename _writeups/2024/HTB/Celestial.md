@@ -136,7 +136,8 @@ Serialized:
 
 Well, we already have the Payload ready, but it's not all there yet. In order for the server to execute our command, we will have to `enter the IIFE in our payload`, otherwise, no command will be executed when the `server deserializes our serialized data`. 
 
-For people who do not know what the IIFE is, here is a resource that will come in handy -> [https://www.geeksforgeeks.org/immediately-invoked-function-expressions-iife-in-javascript/](https://www.geeksforgeeks.org/immediately-invoked-function-expressions-iife-in-javascript/)
+For people who do not know what the IIFE is, here is a [resource](https://www.geeksforgeeks.org/immediately-invoked-function-expressions-iife-in-javascript/) that will come in handy.
+
 <br />
 
 ![4](../../../assets/images/Celestial/4.png)
