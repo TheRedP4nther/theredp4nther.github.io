@@ -312,7 +312,7 @@ And we upload it:
 
 <br />
 
-
+![17](../../../assets/images/Gobox/17.png)
 
 <br />
 
