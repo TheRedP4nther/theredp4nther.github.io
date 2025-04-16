@@ -128,6 +128,6 @@ So we proceed to intercept the request with Burp Suite:
 
 <br />
 
-
+![6](../../../assets/images/Gobox/6.png)
 
 <br />
