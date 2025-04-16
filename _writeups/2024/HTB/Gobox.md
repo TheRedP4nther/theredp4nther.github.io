@@ -216,6 +216,6 @@ We can use them to `log` into the application:
 
 <br />
 
-
+![10](../../../assets/images/Gobox/10.png)
 
 <br />
