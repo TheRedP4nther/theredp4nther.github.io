@@ -182,7 +182,7 @@ After some research, I found this [POST](https://dev.to/blue_byte/server-side-te
 
 We start testing SSTI `basic` payloads like:
 
-```golang
+```go
 {{ printf "TESTING" }}
 ```
 
@@ -200,7 +200,7 @@ Perfect! `Golang` template engine is interpreting our `payload` succesfully!
 
 Next, we attempt to `extract` internal data:
 
-```golang 
+```go 
 {{ . }}
 ```
 
