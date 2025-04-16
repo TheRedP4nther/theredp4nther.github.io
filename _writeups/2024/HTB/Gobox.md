@@ -250,11 +250,11 @@ To test it, we are going to execute a `"id"`:
 
 <br />
 
-The command was executed succesfully.
+The `command` was executed succesfully.
 
-But we are probably executing command into a docker container, because we are root.
+But we are probably into a docker `container`, because it's really strange to gain access as `root`.
 
-To check we run the following:
+To check we it `run` the following:
 
 <br />
 
