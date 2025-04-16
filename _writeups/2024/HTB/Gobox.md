@@ -71,3 +71,17 @@ Open Ports:
 - `Port 4566` -> internal service (?)
 
 - `Port 8080` -> http
+
+<br />
+
+# Http Enumeration: -> Port 80
+
+<br />
+
+List the website on this port:
+
+<br />
+
+
+
+<br />
