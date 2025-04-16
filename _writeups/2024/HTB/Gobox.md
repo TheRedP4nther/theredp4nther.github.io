@@ -134,7 +134,7 @@ So, we intercept the request using `Burp Suite`:
 
 Inside Burp Suite, there are two `key` things worth nothing.
 
--> 1.- X-Forwarded-Server: golang:
+- 1.- X-Forwarded-Server: golang:
 
 This header revelas to us the `technology` stack used by the backend - In this case, `Golang`. 
 
@@ -154,7 +154,7 @@ Content-Length: 1513
 
 <br />
 
--> 2.- Email validation is on the client-side only:
+- 2.- Email validation is on the client-side only:
 
 Once in Burp Suite we can `bypass` it sending a anything that we want like a simple word:
 
