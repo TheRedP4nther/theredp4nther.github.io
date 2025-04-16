@@ -190,7 +190,7 @@ With this result:
 
 <br />
 
-![9](../../../assets/images/Gobox/8.png)
+![8](../../../assets/images/Gobox/8.png)
 
 <br />
 
@@ -198,7 +198,7 @@ Perfect! `Golang` template engine is interpreting our `payload` succesfully!
 
 <br />
 
-Next, we attempt to extract internal data:
+Next, we attempt to `extract` internal data:
 
 ```golang 
 {{ . }}
@@ -206,6 +206,6 @@ Next, we attempt to extract internal data:
 
 <br />
 
-
+![9](../../../assets/images/Gobox/9.png)
 
 <br />
