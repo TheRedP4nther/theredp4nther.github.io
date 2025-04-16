@@ -238,11 +238,11 @@ While analyzing it, we find an interesting `function` called (DebugCmd):
 
 <br />
 
-We can `invoke` this `function` by writting its name preceded by a dot (.).
+We can `invoke` this `function` by writing its name preceded by a dot (.).
 
-Any `arguments` passed to this function, will be `executed` as system commands.
+Any `arguments` passed to this function will be `executed` as system commands.
 
-To test it, we are going to execute a `"id"`:
+To test it, we execute the `"id"` command:
 
 <br />
 
@@ -252,9 +252,9 @@ To test it, we are going to execute a `"id"`:
 
 The `command` was executed succesfully.
 
-But we are probably into a docker `container`, because it's really strange to gain access as `root`.
+However, we are probably inside a Docker `container`, since it's unusual to gain direct access as `root`.
 
-To check we it `run` the following:
+To confirm this, we run the following:
 
 <br />
 
