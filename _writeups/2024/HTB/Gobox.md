@@ -122,9 +122,9 @@ Submitting a random email shows our `input` reflected in the `response`:
 
 <br />
 
-As we know, when we can control the `output`, there is a lot of `vulnerabilities` to test.
+As we know, being able to control the `output`, open the door to several types of `vulnerabilities`.
 
-So we proceed to intercept the request with `Burp Suite`:
+So, we intercept the request using `Burp Suite`:
 
 <br />
 
@@ -132,13 +132,13 @@ So we proceed to intercept the request with `Burp Suite`:
 
 <br />
 
-Once into Burp Suite, there are two important things that we need to see.
+Inside Burp Suite, there are two `key` things worth nothing.
 
-1.- X-Forwarded-Server: golang:
+-> 1.- X-Forwarded-Server: golang:
 
-This header revelas to us the technology behind the server. 
+This header revelas to us the `technology` stack used by the backend - In this case, `Golang`. 
 
-Important to take it into account when testing vulns.
+It's useful `information` when testing for technology specific `vulnerabilities`.
 
 <br />
 
@@ -154,9 +154,9 @@ Content-Length: 1513
 
 <br />
 
-2.- The email validation is on the client-side:
+-> 2.- Email validation is on the client-side only:
 
-Once in Burp Suite we can bypass it sending a anything that we want like a simple word:
+Once in Burp Suite we can `bypass` it sending a anything that we want like a simple word:
 
 <br />
 
