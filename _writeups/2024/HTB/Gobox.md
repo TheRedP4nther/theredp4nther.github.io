@@ -86,7 +86,7 @@ List the website on this port:
 
 <br />
 
-It's a page dedicated to a `eSports` competition, but we don't see nothing `relevant`.
+It's a page dedicated to a `eSports` hacking competition, but we don't see nothing `relevant`.
 
 So we keep enumerating the next port.
 
@@ -101,5 +101,17 @@ The front page of the other website is a `login panel`:
 <br />
 
 ![3](../../../assets/images/Gobox/3.png)
+
+<br />
+
+We try default `passwords` but doesn't work.
+
+<br />
+
+So we click on the "`Forgot Password`" option and see this:
+
+<br />
+
+
 
 <br />
