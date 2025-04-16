@@ -172,7 +172,7 @@ At this point, a specific vulnerability becomes more likely given the context, `
 
 <br />
 
-After some research, I found this [POST](https://dev.to/blue_byte/server-side-template-injection-in-go-28md) that explains how to extract internal information data from `Golang` template engines by exploiting SSTI.
+After some research, I found this [post](https://dev.to/blue_byte/server-side-template-injection-in-go-28md) that explains how to extract internal data from `Golang` template engines by exploiting SSTI.
 
 <br />
 
@@ -180,9 +180,9 @@ After some research, I found this [POST](https://dev.to/blue_byte/server-side-te
 
 <br />
 
-We start testing SSTI `basic` payloads like:
+We start testing SSTI `basic` payloads such as:
 
-```go
+```
 {{ printf "TESTING" }}
 ```
 
@@ -194,13 +194,11 @@ With this result:
 
 <br />
 
-Perfect! `Golang` template engine is interpreting our `payload` succesfully!
-
-<br />
+Perfect! The `Golang` template engine is interpreting our `payload` succesfully!
 
 Next, we attempt to `extract` internal data:
 
-```go 
+```
 {{ . }}
 ```
 
@@ -210,9 +208,9 @@ Next, we attempt to `extract` internal data:
 
 <br />
 
-It works! There are some `credentials` in the output.
+It works! Some `credentials` are revealed in the output.
 
-We can use them to `log` into the application:
+We can use them to `log` in to the login panel we found earlier:
 
 <br />
 
