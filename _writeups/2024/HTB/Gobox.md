@@ -164,12 +164,14 @@ Burp Suite allows us to `bypass` the Front-End validation by sending arbitrary v
 
 <br />
 
-At this point there is one vulnerability most `typical` than others in this type of scenery, `SSTI` (Server Side Template Injection).
+At this point, a specific vulnerability becomes more likely given the context, `SSTI (Server Side Template Injection)`.
+
+<br />
 
 ## SSTI - GOLANG:
 
 <br />
 
-Searching on Google we find a [POST](https://dev.to/blue_byte/server-side-template-injection-in-go-28md) that explains very well how to obtain `internal` information about Go internal `structures` exploiting an SSTI.
+Searching on Google we find a [POST](https://dev.to/blue_byte/server-side-template-injection-in-go-28md) that explains very well how to obtain information about `Go` internal `structures` exploiting an SSTI.
 
 <br />
