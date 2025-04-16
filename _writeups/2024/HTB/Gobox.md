@@ -121,3 +121,13 @@ Submitting a random email shows our `input` reflected in the `response`:
 ![5](../../../assets/images/Gobox/5.png)
 
 <br />
+
+As we know, when we can control the output, there is a lot of vulnerabilities to test.
+
+So we proceed to intercept the request with Burp Suite:
+
+<br />
+
+
+
+<br />
