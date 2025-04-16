@@ -246,7 +246,7 @@ To test it, we are going to execute a `"id"`:
 
 <br />
 
-
+![12](../../../assets/images/Gobox/12.png)
 
 <br />
 
