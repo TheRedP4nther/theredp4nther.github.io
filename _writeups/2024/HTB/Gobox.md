@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: 
+tags: golang ssti serversidetemplateinjection burpsuite bucket s3 aws reverseshell php webshell 
 ---
 
 <br />

@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: aws bucket s3 awscli reverseshell php dynamodb portforwarding pd4ml fileread id_rsa 
+tags: aws bucket s3 aws reverseshell php dynamodb portforwarding pd4ml fileread id_rsa 
 ---
 
 <br />
