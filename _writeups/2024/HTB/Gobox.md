@@ -136,7 +136,7 @@ Inside Burp Suite, there are two `key` things worth nothing:
 
 - 1.- `X-Forwarded-Server: golang`:
 
-This header revelas to us the `technology` stack used by the backend - In this case, `Golang`. 
+This header reveals to us the `technology` stack used by the backend - In this case, `Golang`. 
 
 It's useful `information` when testing for technology specific `vulnerabilities`.
 
@@ -176,4 +176,20 @@ After some research, come across a [POST](https://dev.to/blue_byte/server-side-t
 
 <br />
 
+### SSTI Test Payloads:
 
+<br />
+
+We start testing SSTI `basic` payloads like:
+
+```golang
+{{ printf "TESTING" }}
+```
+
+With this result:
+
+<br />
+
+
+
+<br />
