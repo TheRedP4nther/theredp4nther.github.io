@@ -218,12 +218,16 @@ We can use them to `log` in to the login panel we found earlier:
 
 <br />
 
-Inside the application, we see the source code of the go application.
+Inside, we see the `source code` of Golang main application.
 
-Analyzing it we found a interesting function:
+And by analyzing it we found a interesting `function`:
 
 <br />
 
 ![11](../../../assets/images/Gobox/11.png)
+
+<br />
+
+## DebugCmd - RCE:
 
 <br />
