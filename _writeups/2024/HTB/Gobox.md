@@ -186,6 +186,7 @@ We start testing SSTI `basic` payloads such as:
 ```go
 {{ printf "TESTING" }}
 ```
+{% endraw %}
 
 With this result:
 
@@ -203,6 +204,7 @@ Next, we attempt to `extract` internal data:
 ```go
 {{ . }}
 ```
+{% endraw %}
 
 <br />
 
@@ -222,7 +224,7 @@ We can use them to `log` in to the login panel we found earlier:
 
 Inside, we see the `source code` of Golang main application.
 
-And by analyzing it we found a interesting `function`:
+And by analyzing it we find an interesting `function`:
 
 <br />
 
