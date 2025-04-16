@@ -120,6 +120,6 @@ If we enter a random email and click on the `"Login"` button we see our `input` 
 
 <br />
 
-
+![5](../../../assets/images/Gobox/5.png)
 
 <br />
