@@ -88,7 +88,7 @@ List the website on this port:
 
 It's a page dedicated to a `eSports` competition, but we don't see nothing `relevant`.
 
-So we keep enumerating the next website.
+So we keep enumerating the next port.
 
 <br />
 
@@ -96,10 +96,10 @@ So we keep enumerating the next website.
 
 <br />
 
-The front page of the other website is a login panel:
+The front page of the other website is a `login panel`:
 
 <br />
 
-
+![3](../../../assets/images/Gobox/3.png)
 
 <br />
