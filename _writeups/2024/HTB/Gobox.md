@@ -266,10 +266,24 @@ Indeed, we are in a container.
 
 <br />
 
+## AWS Bucket:
+
+<br />
+
 We keep `enumerating` the container and found something interesting into the `/root/.bash_history` file:
 
 <br />
 
 ![14](../../../assets/images/Gobox/14.png)
+
+<br />
+
+It seems that the system is using a `AWS` bucket.
+
+Let's enumerate it:
+
+<br />
+
+
 
 <br />
