@@ -182,7 +182,8 @@ After some research, I found this [post](https://dev.to/blue_byte/server-side-te
 
 We start testing SSTI `basic` payloads such as:
 
-```bash
+{% raw %}
+```go
 {{ printf "TESTING" }}
 ```
 
@@ -198,7 +199,8 @@ Perfect! The `Golang` template engine is interpreting our `payload` succesfully!
 
 Next, we attempt to `extract` internal data:
 
-```bash
+{% raw %}
+```go
 {{ . }}
 ```
 
