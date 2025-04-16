@@ -209,3 +209,13 @@ Next, we attempt to `extract` internal data:
 ![9](../../../assets/images/Gobox/9.png)
 
 <br />
+
+It works! There are some `credentials` in the output.
+
+We can use them to `log` into the application:
+
+<br />
+
+
+
+<br />
