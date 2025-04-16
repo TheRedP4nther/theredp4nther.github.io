@@ -115,3 +115,11 @@ So we click on the "`Forgot Password`" option and see this:
 ![4](../../../assets/images/Gobox/4.png)
 
 <br />
+
+If we enter a random email and click on the `"Login"` button we see our `input` in the `response`:
+
+<br />
+
+
+
+<br />
