@@ -154,7 +154,7 @@ Content-Length: 1513
 
 <br />
 
-- **2.- Email validation is on the client-side only**:
+- * 2.- Email validation is on the client-side only:
 
 Once in Burp Suite we can `bypass` it sending a anything that we want like a simple word:
 
