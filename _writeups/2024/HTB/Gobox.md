@@ -112,6 +112,6 @@ So we click on the "`Forgot Password`" option and see this:
 
 <br />
 
-
+![4](../../../assets/images/Gobox/4.png)
 
 <br />
