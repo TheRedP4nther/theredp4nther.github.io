@@ -160,6 +160,6 @@ Once in Burp Suite we can bypass it sending a anything that we want like a simpl
 
 <br />
 
-
+![7](../../../assets/images/Gobox/7.png)
 
 <br />
