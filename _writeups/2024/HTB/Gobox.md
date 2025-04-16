@@ -172,7 +172,7 @@ At this point, a specific vulnerability becomes more likely given the context, `
 
 <br />
 
-After some research, come across a [POST](https://dev.to/blue_byte/server-side-template-injection-in-go-28md) that explains how to extract internal information data from `Golang` template engines by exploiting SSTI.
+After some research, I found this [POST](https://dev.to/blue_byte/server-side-template-injection-in-go-28md) that explains how to extract internal information data from `Golang` template engines by exploiting SSTI.
 
 <br />
 
@@ -191,5 +191,21 @@ With this result:
 <br />
 
 ![9](../../../assets/images/Gobox/8.png)
+
+<br />
+
+Perfect! `Golang` template engine is interpreting our `payload` succesfully!
+
+<br />
+
+Next, we attempt to extract internal data:
+
+```golang 
+{{ . }}
+```
+
+<br />
+
+
 
 <br />
