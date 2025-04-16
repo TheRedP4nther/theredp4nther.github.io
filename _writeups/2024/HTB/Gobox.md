@@ -316,7 +316,7 @@ Then, we `upload` the file:
 
 <br />
 
-And finally, we `confirm` it by listing the file:
+And finally, we `confirm` it by listing in the website:
 
 <br />
 
@@ -389,7 +389,7 @@ To get an interactive shell, we trigger a `reverse shell`:
 
 <br />
 
-Check the listener and... we get a shell:
+Check the listener and...
 
 <br />
 
@@ -429,3 +429,132 @@ www-data@gobox:/home/ubuntu$ cat user.txt
 ```
 
 <br />
+
+To better understand the structure of the different `hosts`, we check Nginx configuration under `"/etc/nginx/sites-enabled/"`:
+
+<br />
+
+```bash
+www-data@gobox:/etc/nginx/sites-enabled$ ls
+default
+```
+
+<br />
+
+## Internal Server:
+
+<br />
+
+First is port 4566:
+
+<br />
+
+```bash
+server {
+	listen 4566 default_server;
+
+
+	root /var/www/html;
+
+	index index.html index.htm index.nginx-debian.html;
+
+	server_name _;
+
+
+        location / {
+		if ($http_authorization !~ "(.*)SXBwc2VjIFdhcyBIZXJlIC0tIFVsdGltYXRlIEhhY2tpbmcgQ2hhbXBpb25zaGlwIC0gSGFja1RoZUJveCAtIEhhY2tpbmdFc3BvcnRz(.*)") {
+		   return 403;
+		}
+                proxy_pass http://127.0.0.1:9000;
+        }
+
+}
+```
+
+This service is doing a hardcoded `autch` check.
+
+This is the reason why we see a `"403 Forbidden"` in nmap.
+
+If the verification is `correct`, it `forwards` to port 9000.
+
+## Main Server:
+
+<br />
+
+The next, is the `main` server at port 80:
+
+<br />
+
+```bash
+server {
+	listen 80;
+	root /opt/website;
+	index index.php;
+
+	location ~ [^/]\.php(/|$) {
+	   fastcgi_index index.php;
+	   fastcgi_param REQUEST_METHOD $request_method;
+	   fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+	   fastcgi_param QUERY_STRING $query_string;
+
+
+            fastcgi_pass unix:/tmp/php-fpm.sock;
+	}
+}
+```
+
+<br />
+
+
+
+<br />
+
+## Golang Server:
+
+<br />
+
+The third, is the `Golang` server vulnerable to `SSTI` on port 8080:
+
+<br />
+
+```bash
+server {
+	listen 8080;
+	add_header X-Forwarded-Server golang;
+	location / {
+		proxy_pass http://127.0.0.1:9001;
+	}
+}
+```
+
+<br />
+
+The most interesting thing that we can see here, is where the `custom header` was added.
+
+<br />
+
+## Strange Server:
+
+<br />
+
+Finally, we can see an `unknown` service that is pointing to port 8000.
+
+<br />
+
+```bash
+server {
+	listen 127.0.0.1:8000;
+	location / {
+		command on;
+	}
+}
+```
+
+<br />
+
+The "command on" option caughts my attention.
+
+And googling for it we find a [Github Repository] with key information:
+
+<br />
+
