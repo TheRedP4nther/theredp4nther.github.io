@@ -379,7 +379,9 @@ We check if we're in the main `host` (outside Docker):
 
 <br />
 
-To get an interactive `shell`, we trigger a reverse shell. It's important to `URL-encode` special characters like whitespaces (%20) and ampersands (%26) to avoid `breaking` the request.
+To get an interactive `shell`, we trigger a reverse shell. 
+
+(It's important to `URL-encode` special characters like whitespaces (%20) and ampersands (%26) to avoid `breaking` the request).
 
 <br />
 
@@ -400,7 +402,7 @@ listening on [any] 443 ...
 connect to [10.10.14.21] from (UNKNOWN) [10.10.11.113] 56828
 bash: cannot set terminal process group (796): Inappropriate ioctl for device
 bash: no job control in this shell
-www-data@gobox:/opt/website$ id        
+www-data@gobox:/opt/website$ id
 id
 uid=33(www-data) gid=33(www-data) groups=33(www-data)
 ```
@@ -598,7 +600,7 @@ www-data@gobox:/etc/nginx/sites-enabled$ ls -l /usr/lib/nginx/modules/ngx_http_e
 
 <br />
 
-Now we use `strings` on the binary and filtered for `"run"` to see if the server uses a different option than command.run to `invoke` the backdoor:
+Now we use `strings` on the binary and filtered for `"run"` to see if the server uses a different option than system.run to `invoke` the backdoor:
 
 <br />
 
@@ -609,7 +611,7 @@ ippsec.run
 
 <br />
 
-Boom! The correct trigger is `ippsec.run`, not command.run.
+Boom! The correct trigger is `ippsec.run`, not system.run.
 
 We are able to run commands as `root`:
 
