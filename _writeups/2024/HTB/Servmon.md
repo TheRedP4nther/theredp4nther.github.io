@@ -535,7 +535,7 @@ When attempting to `log` in, the connection gets `blocked`:
 
 <br />
 
-To avoid this, we can make a `port forwarding`, by this way, our port 8433 is gonna host the nsclient from the victim machine.
+To bypass this, we can set up a `port forwarding`, allowing our local port 8433 to serve the `NSClient++`.
 
 <br />
 
@@ -545,10 +545,10 @@ sshpass -p 'L1k3B1gBut7s@W0rk' ssh nadine@10.10.10.184 -L 8443:127.0.0.1:8443
 
 <br />
 
-Now we can access the admin panel without any problem:
+We can now access the `admin` panel without any issues:
 
 <br />
 
-
+![7](../../../assets/images/Servmon/7.png)
 
 <br />
