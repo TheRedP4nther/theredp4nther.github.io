@@ -280,7 +280,7 @@ We `download` both files using `wget`:
 
 <br />
 
-`Confidential.txt` may be useful later, once we access the system or find a way to retrieve internal `files`:
+`Confidential.txt` may be useful later, once we gain access to the system or find a way to retrieve internal files:
 
 <br />
 
@@ -304,10 +304,29 @@ We `download` both files using `wget`:
 
 <br />
 
-List the website:
+Browsing the website:
 
 <br />
 
+![2](../../../assets/images/Servmon/2.png)
 
+<br />
+
+It's running an application called `"NVMS-1000"`.
+
+A `Software` suite used to monitor camera systems.
+
+If we search for `vulnerabilities`, we find the following:
+
+<br />
+
+```bash
+❯ searchsploit nvms 1000
+----------------------------------------------------------------------------------------------------------------------------------------------------- ---------------------------------
+ Exploit Title                                                                                                                                       |  Path
+----------------------------------------------------------------------------------------------------------------------------------------------------- ---------------------------------
+NVMS 1000 - Directory Traversal                                                                                                                      | hardware/webapps/47774.txt
+TVT NVMS 1000 - Directory Traversal                                                                                                                  | hardware/webapps/48311.py
+```
 
 <br />
