@@ -393,7 +393,7 @@ Once understood, we open `Burp Suite` to craft the request:
 
 <br />
 
-
+![3](../../../assets/images/Servmon/3.png)
 
 <br />
 
