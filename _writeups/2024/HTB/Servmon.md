@@ -606,6 +606,6 @@ Now we fill in all the required fields for the script creation:
 
 <br />
 
-
+![8](../../../assets/images/Servmon/8.png)
 
 <br />
