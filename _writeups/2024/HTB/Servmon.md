@@ -488,3 +488,11 @@ f18f32659ac6e495aa59ee53fexxxxxx
 ```
 
 <br />
+
+Perfect! We have the user flag!
+
+<br />
+
+# Privilege Escalation: Nadine -> NT\AUTHORITY SYSTEM:
+
+<br />
