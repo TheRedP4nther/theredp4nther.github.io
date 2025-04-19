@@ -569,7 +569,7 @@ Let's do it:
 
 <br />
 
-1.- Upload nc.exe to the victim machine:
+### 1.- Upload nc.exe to the victim machine:
 
 This is the easiest step, we simply serve `nc.exe` from our attacker machine and download it using `curl`:
 
@@ -598,7 +598,7 @@ nadine@SERVMON C:\Users\Nadine\Desktop>dir
 
 <br />
 
-2.- Create the malicious external script:
+### 2.- Create the malicious external script:
 
 To do this, go to the NSClient++ panel, click on `“Settings”`, then `“External Scripts”`, followed by `“Scripts”`, and finally press `“Add new”`.
 
