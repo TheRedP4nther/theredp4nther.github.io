@@ -397,12 +397,12 @@ Once understood, we open `Burp Suite` to craft the request:
 
 <br />
 
-If we remember, the `"Confidential.txt"` file says that the user Nathan have a `"Passwords.txt"` file into his directory.
+If we remember, the `"Confidential.txt"` file, says that the user Nathan has a `"Passwords.txt"` file into his directory.
 
 What if we try to retrieve this one?
 
 <br />
 
-
+![4](../../../assets/images/Servmon/4.png)
 
 <br />
