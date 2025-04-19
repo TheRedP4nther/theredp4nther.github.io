@@ -193,7 +193,7 @@ Open Ports:
 
 <br />
 
-Ftp `anonymous` login is allowed, so we start enumerating the `FTP` Server:
+Since `anonymous` FTP access is enabled, we log in and begin exploring:
 
 <br />
 
@@ -207,9 +207,7 @@ ftp> ls
 
 <br />
 
-Once connected to the server, there is one directory called `"Users"`.
-
-So, we enter this directory:
+Inside the `Users` directory, we found two subdirectories:
 
 <br />
 
@@ -224,11 +222,9 @@ ftp> ls
 
 <br />
 
-Inside, there are another two directories.
+These `names` likely represent valid Windows `users`.
 
-Nadine and Nathan, they can be potential users of the Windows System.
-
-Let's start enumerating Nadine directory:
+Let's inspect each one:
 
 <br />
 
@@ -242,9 +238,7 @@ ftp> ls
 
 <br />
 
-It has one file.
-
-And if we enter Nathan directory, there is another interesting file:
+`Nathan's` directory contains another interesting `file`:
 
 <br />
 
@@ -258,7 +252,7 @@ ftp> ls
 
 <<br />
 
-If we run the following command, we can download those files from the server to our current directory:
+If we run the following command, we can `download` those files from the server to our current directory:
 
 <br />
 
