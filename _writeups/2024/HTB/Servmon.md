@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: 
+tags: ftp anonymousloginallowed nvms-1000 smb crackmapexec
 ---
 
 <br />
