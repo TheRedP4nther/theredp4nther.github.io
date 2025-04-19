@@ -300,6 +300,37 @@ We `download` both files using `wget`:
 
 <br />
 
+# SMB Enumeration:
+
+<br />
+
+To enumerate some information about the Windows machine, we start running the typical crackmapexec oneliner:
+
+<br />
+
+```bash
+❯ crackmapexec smb 10.10.10.184
+SMB         10.10.10.184    445    SERVMON          [*] Windows 10.0 Build 17763 x64 (name:SERVMON) (domain:ServMon) (signing:False) (SMBv1:False)
+```
+
+<br />
+
+It's a `Windows 10` system and the domain is named `"Servmon"`.
+
+Without valid credentials, we can't enumerate anything further:
+
+<br />
+
+```bash
+❯ crackmapexec smb 10.10.10.184 -u '' -p '' --shares
+SMB         10.10.10.184    445    SERVMON          [*] Windows 10.0 Build 17763 x64 (name:SERVMON) (domain:ServMon) (signing:False) (SMBv1:False)
+SMB         10.10.10.184    445    SERVMON          [-] ServMon\: STATUS_ACCESS_DENIED 
+SMB         10.10.10.184    445    SERVMON          [-] Error getting user: list index out of range
+SMB         10.10.10.184    445    SERVMON          [-] Error enumerating shares: Error occurs while reading from remote(104)
+```
+
+<br />
+
 # Http Enumeration: -> Port 80
 
 <br />
@@ -385,9 +416,9 @@ else:
 
 <br />
 
-The exploitation is straighforward, nothing tricky to exploit here.
+The exploitation is straightforward, nothing tricky to exploit here.
 
-We only need to craft a `malicious` request to the website using a `path traversal` to retrieve the desired Windows file.
+We just need to craft a `malicious` request using a `path traversal` to retrieve the desired Windows file.
 
 Once understood, we open `Burp Suite` to craft the request:
 
@@ -397,12 +428,18 @@ Once understood, we open `Burp Suite` to craft the request:
 
 <br />
 
-If we remember, the `"Confidential.txt"` file, says that the user Nathan has a `"Passwords.txt"` file into his directory.
+If we recall, the `"Confidential.txt"` file, says that Nathan has a `"Passwords.txt"` file in his directory.
 
 What if we try to retrieve this one?
 
 <br />
 
 ![4](../../../assets/images/Servmon/4.png)
+
+<br />
+
+GG!! We have found several `passwords`!!
+
+We `save` the output to a file and continue with the enumeration.
 
 <br />
