@@ -250,9 +250,9 @@ ftp> ls
 226 Transfer complete.
 ```
 
-<<br />
+<br />
 
-If we run the following command, we can `download` those files from the server to our current directory:
+We `download` both files using `wget`:
 
 <br />
 
