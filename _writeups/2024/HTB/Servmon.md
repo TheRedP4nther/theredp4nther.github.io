@@ -312,7 +312,7 @@ Browsing the website:
 
 <br />
 
-It's running an application called `"NVMS-1000"`.
+It's running an application called `NVMS-1000`.
 
 A `software` suite used to monitor camera systems.
 
