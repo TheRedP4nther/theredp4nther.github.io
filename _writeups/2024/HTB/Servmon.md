@@ -428,6 +428,8 @@ Once understood, we open `Burp Suite` to craft the request:
 
 <br />
 
+This highlights the risk of `improper` input validation on file access endpoints. An attacker could access sensitive `internal` files, such as credentials or config files.
+
 If we recall, the `"Confidential.txt"` file, says that Nathan has a `"Passwords.txt"` file in his directory.
 
 What if we try to retrieve this one?
@@ -442,7 +444,7 @@ GG!! We have found several `passwords`!!
 
 We `save` the output to a file and continue with the enumeration.
 
-We can now use `crackmapexec` to see if any of these passwords work for Nadine or Nathan:
+Based on the usernames found in the FTP server, we can now use `crackmapexec` to see if any of these passwords work for Nadine or Nathan:
 
 <br />
 
@@ -468,7 +470,7 @@ We have a valid match -> Nadine:L1k3B1gBut7s@W0rk
 
 <br />
 
-Port 22 is open, so we try to connect as Nadine with the valid password:
+Port 22 is open, so we try to connect as `Nadine` with the valid password:
 
 <br />
 
