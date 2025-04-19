@@ -261,3 +261,41 @@ We `download` both files using `wget`:
 ```
 
 <br />
+
+`Notes to do.txt` contains a list of tasks:
+
+<br />
+
+```bash
+❯ cat Notes\ to\ do.txt
+───────┬───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+       │ File: Notes to do.txt
+───────┼───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+   1   │ 1) Change the password for NVMS - Complete
+   2   │ 2) Lock down the NSClient Access - Complete
+   3   │ 3) Upload the passwords
+   4   │ 4) Remove public access to NVMS
+   5   │ 5) Place the secret files in SharePoint
+```
+
+<br />
+
+`Confidential.txt` may be useful later, once we access the system or find a way to retrieve internal `files`:
+
+<br />
+
+```bash
+❯ cat Confidential.txt
+───────┬───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+       │ File: Confidential.txt
+───────┼───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+   1   │ Nathan,
+   2   │ 
+   3   │ I left your Passwords.txt file on your Desktop.  Please remove this once you have edited it yourself and place it back into the secure folder.
+   4   │ 
+   5   │ Regards
+   6   │ 
+   7   │ Nadine
+```
+
+<br />
