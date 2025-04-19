@@ -442,8 +442,6 @@ GG!! We have found several `passwords`!!
 
 We `save` the output to a file and continue with the enumeration.
 
-<br />
-
 We can now use `crackmapexec` to see if any of these passwords work for Nadine or Nathan:
 
 <br />
