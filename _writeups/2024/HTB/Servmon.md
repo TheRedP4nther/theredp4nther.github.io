@@ -169,7 +169,7 @@ Nmap done: 1 IP address (1 host up) scanned in 146.43 seconds
 
 Open Ports:
 
--`Port 21` -> ftp
+- `Port 21` -> ftp
 
 - `Port 22` -> ssh 
 
