@@ -384,3 +384,17 @@ else:
 ```
 
 <br />
+
+The exploitation is straighforward, nothing tricky to exploit here.
+
+We only need to craft a malicious request to the website using a path traversal to retrieve the desired Windows file.
+
+Once understood, we open `Burp Suite` to craft the request:
+
+<br />
+
+
+
+<br />
+
+
