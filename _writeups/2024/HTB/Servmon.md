@@ -193,7 +193,7 @@ Open Ports:
 
 <br />
 
-Since `anonymous` FTP access is enabled, we log in and begin exploring:
+Since anonymous `FTP` access is enabled, we log in and begin exploring:
 
 <br />
 
