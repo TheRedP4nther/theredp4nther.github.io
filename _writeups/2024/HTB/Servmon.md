@@ -496,3 +496,35 @@ Perfect! We have the user flag!
 # Privilege Escalation: Nadine -> NT\AUTHORITY SYSTEM:
 
 <br />
+
+Enumerating the system we found the `NSClient++` password:
+
+<br />
+
+```bash
+nadine@SERVMON C:\Program Files\NSClient++>nscp web -- password --display
+Current password: ew2x6SsGTxjRwXOT
+```
+
+<br />
+
+And the installed version of this software `(NSCLient++ 0.5.2.35)`:
+
+<br />
+
+```bash
+nadine@SERVMON C:\Program Files\NSClient++>nscp --version
+NSClient++, Version: 0.5.2.35 2018-01-28, Platform: x64
+```
+
+<br />
+
+If we remember the nmap scan results, NSCLient was running on port 8433:
+
+<br />
+
+
+
+<br />
+
+
