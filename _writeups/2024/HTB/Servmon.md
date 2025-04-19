@@ -535,3 +535,20 @@ When attempting to `log` in, the connection gets `blocked`:
 
 <br />
 
+To avoid this, we can make a `port forwarding`, by this way, our port 8433 is gonna host the nsclient from the victim machine.
+
+<br />
+
+```bash
+sshpass -p 'L1k3B1gBut7s@W0rk' ssh nadine@10.10.10.184 -L 8443:127.0.0.1:8443
+```
+
+<br />
+
+Now we can access the admin panel without any problem:
+
+<br />
+
+
+
+<br />
