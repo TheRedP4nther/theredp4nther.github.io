@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: ftp anonymousloginallowed nvms-1000 smb crackmapexec
+tags: ftp anonymousloginallowed nvms-1000 smb crackmapexec passwordspraying nsclient++ rce remotecodeexecution nc.exe reverseshell
 ---
 
 <br />
@@ -444,7 +444,7 @@ GG!! We have found several `passwords`!!
 
 We `save` the output to a file and continue with the enumeration.
 
-Based on the usernames found in the FTP server, we can now use `crackmapexec` to see if any of these passwords work for Nadine or Nathan:
+Based on the usernames found in the FTP server, we can now use `crackmapexec` to see if any of these passwords work for Nadine or Nathan `(Password Spraying)`:
 
 <br />
 
@@ -497,7 +497,7 @@ Perfect! We have the user flag!
 
 <br />
 
-Enumerating the system we found the `NSClient++` password:
+While enumerating the system we found the `NSClient++` password:
 
 <br />
 
@@ -508,7 +508,7 @@ Current password: ew2x6SsGTxjRwXOT
 
 <br />
 
-And the installed version of this software `(NSCLient++ 0.5.2.35)`:
+We also confirmed installed version of the software: `NSClient++ 0.5.2.35`
 
 <br />
 
@@ -519,7 +519,7 @@ NSClient++, Version: 0.5.2.35 2018-01-28, Platform: x64
 
 <br />
 
-If we remember the nmap scan results, `NSCLient` was running on port 8433:
+Referring back to the nmap scan results, we see that `NSCLient` is running on port 8433:
 
 <br />
 
@@ -527,11 +527,11 @@ If we remember the nmap scan results, `NSCLient` was running on port 8433:
 
 <br />
 
-We try to log in but it block us:
+When attempting to `log` in, the connection gets `blocked`:
 
 <br />
 
-
+![6](../../../assets/images/Servmon/6.png)
 
 <br />
 
