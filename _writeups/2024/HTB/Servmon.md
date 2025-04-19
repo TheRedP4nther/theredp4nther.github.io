@@ -22,7 +22,7 @@ Difficulty -> Easy.
 
 <br />
 
-
+We’re diving into Servmon, an Easy Windows box with a mix of classic services and some misconfigurations to dig into. We kick things off by taking advantage of an open FTP server to discover usernames and internal notes, eventually leading to credentials stored in a leaked file via an LFI vulnerability in the NVMS-1000 web app. After logging in via SSH, we spot NSClient++ running and accessible through port forwarding. From there, we exploit an authenticated RCE by uploading a malicious script, triggering a reverse shell, and escalating to SYSTEM. Let’s get it!
 
 <br />
 
@@ -557,13 +557,13 @@ We can now access the `admin` panel without any issues:
 
 <br />
 
-After doing some research, we find an interesting `authenticated rce` for NSClient 0.5.2.35 on [Exploit-DB](https://www.exploit-db.com/exploits/46802).
+After doing some research, we found an interesting `authenticated rce` for NSClient 0.5.2.35 on [Exploit-DB](https://www.exploit-db.com/exploits/46802).
 
 <br />
 
-The `exploit` includes all the steps to perform the attack.
+The `exploit` provides all the steps to perform the attack.
 
-It involves enabling a `module` to execute external scripts, and then scheduling a `malicious` script to run commands on the victim system.
+It involves enabling a `module` to run external scripts, and scheduling a `malicious` one to execute commands on the victim system.
 
 Let's do it:
 
@@ -571,7 +571,7 @@ Let's do it:
 
 ### 1.- Upload nc.exe to the victim machine:
 
-This is the easiest step, we simply serve `nc.exe` from our attacker machine and download it using `curl`:
+This is the easiest step, we just serve `nc.exe` from our attacker machine and download it using `curl`:
 
 <br />
 
@@ -602,7 +602,7 @@ nadine@SERVMON C:\Users\Nadine\Desktop>dir
 
 To do this, go to the NSClient++ panel, click on `“Settings”`, then `“External Scripts”`, followed by `“Scripts”`, and finally press `“Add new”`.
 
-Now we fill in all the required fields for the script creation and click on `"Add"`:
+Fill in all the required fields for the script creation and click on `"Add"`:
 
 <br />
 
@@ -612,9 +612,9 @@ Now we fill in all the required fields for the script creation and click on `"Ad
 
 ### 3.- Run the malicious script:
 
-Once created, we click on "Changes" -> "Save configuration".
+Once the script is created, click on `"Changes"` -> `"Save configuration"`.
 
-And finally, we start the listener and reload NSClient pressing on "Control" -> "Reload".
+Finally, start a listener and reload NSClient++ by clicking `"Control"` -> `"Reload"`.
 
 <br />
 
@@ -637,10 +637,10 @@ C:\Program Files\NSClient++>type \Users\Administrator\Desktop\root.txt
 
 <br />
 
-Yes! We have a shell and the root flag.
+Yes! We've got a shell and the root flag.
 
-One more Windows machine pwned!!
+Another Windows machine pwned!!
 
-Keep hacking!!❤️❤️
+Keep hacking!❤️❤️
 
 <br />
