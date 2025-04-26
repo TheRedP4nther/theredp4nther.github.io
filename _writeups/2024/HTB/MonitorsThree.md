@@ -250,13 +250,13 @@ Yes! Our query was injected successfully!
 
 <br />
 
-## sqlmap:
+## Automated Exploitation with sqlmap:
 
 <br />
 
-Now we are going to automate the exploitation with `sqlmap`, because `error-based` injections can take a lot of time if we decised to exploit it manually.
+Now we are going to automate the exploitation with `sqlmap`, because `error-based` injections can take a lot of time if we decide to exploit them manually.
 
-To do it we will copy to a file the request with `Burp Suite`:
+To do this, we will capture and save the request to a file using `Burp Suite`:
 
 <br />
 
@@ -268,7 +268,7 @@ To do it we will copy to a file the request with `Burp Suite`:
 
 <br />
 
-At this point, we can pass the file to `sqlmap` and find the injection:
+At this point, we can feed the file to `sqlmap` to detect the injection:
 
 <br />
 
