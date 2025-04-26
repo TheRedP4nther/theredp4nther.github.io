@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: subdomainenumeration cacti mysql sqli sqlinjection error-based rce remotecodeexecution crackstation cracking blowfishbcrypt
+tags: subdomainenumeration cacti mysql sqli sqlinjection error-based rce remotecodeexecution mariadb crackstation cracking blowfishbcrypt
 ---
 
 <br />
