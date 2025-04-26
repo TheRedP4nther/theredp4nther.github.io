@@ -202,6 +202,8 @@ We attempt to log in using `default` credentials, but without success:
 
 This functionality has two types of responses.
 
+<br />
+
 - 1.- Successful:
 
 If we enter a valid username like `admin`, we will see the following message:
