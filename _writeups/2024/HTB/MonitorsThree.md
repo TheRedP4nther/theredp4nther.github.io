@@ -428,7 +428,7 @@ If we enter these hashes into  [Crackstation](https://crackstation.net/), we are
 
 <br />
 
-
+![15](../../../assets/images/MonitorsThree/15.png)
 
 <br />
 
