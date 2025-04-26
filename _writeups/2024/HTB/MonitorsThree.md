@@ -93,13 +93,15 @@ A login panel in `/login.php`:
 
 <br />
 
+![3](../../../assets/images/MonitorsThree/3.png)
+
 <br />
 
 And a the typical forgot password in `/forgot_password.php`:
 
 <br />
 
-
+![4](../../../assets/images/MonitorsThree/4.png)
 
 <br />
 
