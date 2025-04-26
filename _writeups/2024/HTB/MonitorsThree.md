@@ -79,7 +79,7 @@ To access the main website, first we need to add `monitorsthree.htb` to our `/et
 
 <br />
 
-Now we can list the page:
+Now we can visit the page:
 
 <br />
 
@@ -87,9 +87,9 @@ Now we can list the page:
 
 <br />
 
-It has two funcionalities.
+It has two functionalities available.
 
-A login panel in `/login.php`:
+A login panel at `/login.php`:
 
 <br />
 
@@ -97,7 +97,7 @@ A login panel in `/login.php`:
 
 <br />
 
-And a the typical forgot password in `/forgot_password.php`:
+And the typical "Forgot Password" page at `/forgot_password.php`:
 
 <br />
 
@@ -109,7 +109,7 @@ And a the typical forgot password in `/forgot_password.php`:
 
 <br />
 
-Before test this functionalities, we are going to apply some `fuzzing` to the main `domain`:
+Before testing these functionalities, we are going to perform some `fuzzing` on the main `domain`:
 
 <br />
 
