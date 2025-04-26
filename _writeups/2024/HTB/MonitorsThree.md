@@ -144,4 +144,28 @@ cacti                   [Status: 302, Size: 0, Words: 1, Lines: 1, Duration: 44m
 
 <br />
 
+Perfect! We have a new `subdomain`!
 
+<br />
+
+## cacti.monitorsthree.htb:
+
+<br />
+
+Let's add it to our `/etc/hosts`:
+
+<br />
+
+```bash
+10.10.11.30 monitorsthree.htb cacti.monitorsthee.htb
+```
+
+<br />
+
+Once we have added the `subdomain`, we can visit the page:
+
+<br />
+
+
+
+<br />
