@@ -304,7 +304,7 @@ back-end DBMS: MySQL >= 5.0.12 (MariaDB fork)
 
 <br />
 
-We continue enumerating the available databases:
+We continue enumerating the available `databases`:
 
 <br />
 
