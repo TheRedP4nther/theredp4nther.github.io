@@ -507,8 +507,6 @@ Then, we run the PHP `exploit` to create the file:
 
 File created successfully!
 
-<br />
-
 Now we can get back to the Cacti admin panel and go to `"Import/Export"` -> `"Import Packages"` to select the file:
 
 <br />
@@ -517,7 +515,7 @@ Now we can get back to the Cacti admin panel and go to `"Import/Export"` -> `"Im
 
 <br />
 
-And we upload it:
+And click on `"Import"` to upload it:
 
 <br />
 
