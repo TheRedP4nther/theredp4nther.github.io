@@ -210,7 +210,7 @@ If we enter a valid username like `admin`, we will see the following message:
 
 <br />
 
-![7](../../../assets/images/MonitorsThree/7.png)
+![8](../../../assets/images/MonitorsThree/8.png)
 
 <br />
 
@@ -220,7 +220,7 @@ But if the username is invalid, the application return the following `error`:
 
 <br />
 
-![8](../../../assets/images/MonitorsThree/8.png)
+![7](../../../assets/images/MonitorsThree/7.png)
 
 <br />
 
