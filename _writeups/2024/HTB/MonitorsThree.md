@@ -480,7 +480,7 @@ system("cat test.xml | gzip -9 > test.xml.gz; rm test.xml");
 
 As we can see, the `POC` is a PHP script that is going to create a `.xml.gz` file with malicious `PHP` code inside.
 
-Once the file is created, we need to `upload` it to Cacti in the "import package" section and access the upload path to `execute` the command.
+After generating the file, we `upload` it via the Cacti interface under the `"Import Package"` section, and then access the upload path to `execute` the command.
 
 Before running the script, we're going to replace the "$filedata" content with a bash reverse shell:
 
