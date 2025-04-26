@@ -498,8 +498,9 @@ Then, we run the PHP `exploit` to create the file:
 
 ```bash
 ❯ php exploit.php
-❯ ls
- exploit.php   test.xml.gz
+❯ ls -l
+.rwxr-xr-x root root 881 B  Sat Apr 26 22:58:24 2025  exploit.php
+.rw-r--r-- root root 1.2 KB Sat Apr 26 23:58:20 2025  test.xml.gz
 ```
 
 <br />
