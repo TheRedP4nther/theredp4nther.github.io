@@ -170,13 +170,23 @@ Once the `subdomain` has been added, we can visit the page:
 
 <br />
 
-Apparently this page is hosting a `cacti` with version `1.2.26`.
+Apparently, this page is hosting a `cacti` with version `1.2.26`.
 
 There is an `Authenticated RCE` for this version, but we don't have valid `credentials` at this moment, so we continue with the enumeration.
 
 <br />
 
 ## Error-Based SQL Injection (MySQL):
+
+<br />
+
+It's time to start testing the functionalities that we have seen before.
+
+### login.php:
+
+<br />
+
+We try to log in with default credentials with no results:
 
 <br />
 
