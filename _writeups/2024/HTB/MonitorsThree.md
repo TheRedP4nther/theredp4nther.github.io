@@ -216,7 +216,7 @@ If we enter a valid username like `admin`, we will see the following message:
 
 - 2.- Error:
 
-But if the username is invalid, the application return the following `error`:
+But if the username is invalid, the application returns the following `error`:
 
 <br />
 
@@ -228,7 +228,7 @@ But if the username is invalid, the application return the following `error`:
 
 <br />
 
-We can try to put a `"'"` in the input and see what happens:
+We can try inserting a single quote `"'"` into the input field and observe what happens:
 
 <br />
 
@@ -236,12 +236,14 @@ We can try to put a `"'"` in the input and see what happens:
 
 <br />
 
-This error is typical in applications vulnerable to `SQL Injection`.
+This type of error is common in applications vulnerable to `SQL Injection`.
 
-To continue testing this vuln, we are going to check if the payload `"anyusername' or 1=1-- -"` works:
+To continue testing this vulnerability, we will check if the payload `"anyusername' or 1=1-- -"` works:
 
 <br />
 
 ![10](../../../assets/images/MonitorsThree/10.png)
 
 <br />
+
+
