@@ -200,6 +200,22 @@ We attempt to log in using `default` credentials, but without success:
 
 <br />
 
+This functionalitie have two type of responses.
+
+- 1.- Succesful:
+
+If we put a `valid` username, we are going to see the following message:
+
+<br />
+
 
 
 <br />
+
+- 2.- Error:
+
+But if the username is not valid, the application handles this `error`:
+
+<br />
+
+
