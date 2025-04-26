@@ -242,6 +242,6 @@ To continue testing this vuln, we are going to check if the payload `"anyusernam
 
 <br />
 
-
+![10](../../../assets/images/MonitorsThree/10.png)
 
 <br />
