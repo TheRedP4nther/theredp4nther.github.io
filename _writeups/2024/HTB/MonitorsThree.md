@@ -69,7 +69,7 @@ Open Ports:
 
 <br />
 
-To access the main website, first we need to add `monitorsthree.htb` to out `/etc/hosts`:
+To access the main website, first we need to add `monitorsthree.htb` to our `/etc/hosts`:
 
 <br />
 
@@ -84,6 +84,61 @@ Now we can list the page:
 <br />
 
 ![2](../../../assets/images/MonitorsThree/2.png)
+
+<br />
+
+It has two funcionalities.
+
+A login panel in `/login.php`:
+
+<br />
+
+<br />
+
+And a the typical forgot password in `/forgot_password.php`:
+
+<br />
+
+
+
+<br />
+
+## Subdomain Fuzzing:
+
+<br />
+
+Before test this functionalities, we are going to apply some `fuzzing` to the main `domain`:
+
+<br />
+
+```bash
+❯ ffuf -u http://monitorsthree.htb -H "Host: FUZZ.monitorsthree.htb" -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt -c -t 20 -fs 13560
+
+        /'___\  /'___\           /'___\       
+       /\ \__/ /\ \__/  __  __  /\ \__/       
+       \ \ ,__\\ \ ,__\/\ \/\ \ \ \ ,__\      
+        \ \ \_/ \ \ \_/\ \ \_\ \ \ \ \_/      
+         \ \_\   \ \_\  \ \____/  \ \_\       
+          \/_/    \/_/   \/___/    \/_/       
+
+       v2.1.0-dev
+________________________________________________
+
+ :: Method           : GET
+ :: URL              : http://monitorsthree.htb
+ :: Wordlist         : FUZZ: /usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt
+ :: Header           : Host: FUZZ.monitorsthree.htb
+ :: Follow redirects : false
+ :: Calibration      : false
+ :: Timeout          : 10
+ :: Threads          : 20
+ :: Matcher          : Response status: 200-299,301,302,307,401,403,405,500
+ :: Filter           : Response size: 13560
+________________________________________________
+
+cacti                   [Status: 302, Size: 0, Words: 1, Lines: 1, Duration: 44ms]
+:: Progress: [4989/4989] :: Job [1/1] :: 432 req/sec :: Duration: [0:00:12] :: Errors: 0 ::
+```
 
 <br />
 
