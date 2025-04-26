@@ -176,7 +176,7 @@ There is a known `Authenticated RCE` for this version, but since we don't have v
 
 <br />
 
-## Error-Based SQL Injection (MySQL):
+## Testing functionalities:
 
 <br />
 
@@ -222,3 +222,6 @@ But if the username is invalid, the application return the following `error`:
 
 <br />
 
+## Error-Based SQL Injection (MySQL):
+
+<br />
