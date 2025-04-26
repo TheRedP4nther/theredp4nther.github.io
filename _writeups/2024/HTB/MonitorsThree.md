@@ -193,3 +193,11 @@ We try to log in with default credentials with no results:
 ![6](../../../assets/images/MonitorsThree/6.png)
 
 <br />
+
+### forgot_password.php:
+
+<br />
+
+
+
+<br />
