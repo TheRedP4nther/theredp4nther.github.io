@@ -246,4 +246,24 @@ To continue testing this vulnerability, we will check if the payload `"anyuserna
 
 <br />
 
+Yes! Our query was injected successfully!
 
+<br />
+
+## sqlmap:
+
+<br />
+
+Now we are going to automate the exploitation with `sqlmap`, because `error-based` injections can take a lot of time if we decised to exploit it manually.
+
+To do it we will save to a file the request with `Burp Suite`:
+
+<br />
+
+
+
+<br />
+
+
+
+<br />
