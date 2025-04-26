@@ -550,7 +550,7 @@ Once we access the uploaded PHP file, we successfully receive a bash reverse she
 
 Inside the system, we start enumerating the `/var/www/html/cacti` path.
 
-There are a lot of files, but inside `include path` we found one called `"config.php"` with useful data:
+There are a lot of files, but inside `include` path we found one called `"config.php"` with useful data:
 
 <br />
 
