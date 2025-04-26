@@ -555,17 +555,17 @@ There are a lot of files, but inside `include` path we found one called `"config
 <br />
 
 ```php
-#$rdatabase_type     = 'mysql';
-#$rdatabase_default  = 'cacti';
-#$rdatabase_hostname = 'localhost';
-#$rdatabase_username = 'cactiuser';
-#$rdatabase_password = 'cactiuser';
-#$rdatabase_port     = '3306';
-#$rdatabase_retries  = 5;
-#$rdatabase_ssl      = false;
-#$rdatabase_ssl_key  = '';
-#$rdatabase_ssl_cert = '';
-#$rdatabase_ssl_ca   = '';
+$rdatabase_type     = 'mysql';
+$rdatabase_default  = 'cacti';
+$rdatabase_hostname = 'localhost';
+$rdatabase_username = 'cactiuser';
+$rdatabase_password = 'cactiuser';
+$rdatabase_port     = '3306';
+$rdatabase_retries  = 5;
+$rdatabase_ssl      = false;
+$rdatabase_ssl_key  = '';
+$rdatabase_ssl_cert = '';
+$rdatabase_ssl_ca   = '';
 ```
 
 <br />
