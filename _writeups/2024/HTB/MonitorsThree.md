@@ -458,7 +458,7 @@ This password works for the Cacti login -> `admin/greencacti2001`
 
 <br />
 
-
+![11](../../../assets/images/MonitorsThree/12.png)
 
 <br />
 
