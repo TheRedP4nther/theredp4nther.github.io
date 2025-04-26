@@ -208,7 +208,7 @@ If we put a valid username like `admin`, we are going to see the following messa
 
 <br />
 
-
+![7](../../../assets/images/MonitorsThree/7.png)
 
 <br />
 
@@ -218,4 +218,7 @@ But if the username is not valid, the application throws this `error`:
 
 <br />
 
+![8](../../../assets/images/MonitorsThree/8.png)
+
+<br />
 
