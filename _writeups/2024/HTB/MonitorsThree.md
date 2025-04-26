@@ -482,7 +482,7 @@ As we can see, the `POC` is a PHP script that is going to create a `.xml.gz` fil
 
 After generating the file, we `upload` it via the Cacti interface under the `"Import Package"` section, and then access the upload path to `execute` the command.
 
-Before running the script, we're going to replace the "$filedata" content with a bash reverse shell:
+Before running the script, we're going to replace the `"$filedata"` content with a bash reverse shell:
 
 <br />
 
