@@ -83,7 +83,7 @@ Now we can list the page:
 
 <br />
 
-
+![2](../../../assets/images/MonitorsThree/2.png)
 
 <br />
 
