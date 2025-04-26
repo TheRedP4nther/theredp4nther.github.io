@@ -228,10 +228,10 @@ But if the username is invalid, the application return the following `error`:
 
 <br />
 
-We can try to put a "'" in the input and see the response:
+We can try to put a `"'"` in the input and see the response:
 
 <br />
 
-
+![9](../../../assets/images/MonitorsThree/9.png)
 
 <br />
