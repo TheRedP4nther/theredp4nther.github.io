@@ -264,6 +264,6 @@ To do it we will save to a file the request with `Burp Suite`:
 
 <br />
 
-
+![11](../../../assets/images/MonitorsThree/11.png)
 
 <br />
