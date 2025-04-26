@@ -169,3 +169,17 @@ Once the `subdomain` has been added, we can visit the page:
 ![5](../../../assets/images/MonitorsThree/5.png)
 
 <br />
+
+Apparently this page is hosting a `cacti` with version `1.2.26`.
+
+There is an `Authenticated RCE` for this version, but we don't have valid `credentials` at this moment, so we continue with the enumeration.
+
+<br />
+
+## Error-Based SQL Injection (MySQL):
+
+<br />
+
+
+
+<br />
