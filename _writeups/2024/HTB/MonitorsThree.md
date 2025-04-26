@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: subdomainenumeration cacti mysql sqli sqlinjection error-based
+tags: subdomainenumeration cacti mysql sqli sqlinjection error-based rce remotecodeexecution
 ---
 
 <br />
@@ -257,10 +257,6 @@ Yes! Our query was injected successfully!
 Now we are going to automate the exploitation with `sqlmap`, because `error-based` injections can take a lot of time if we decide to exploit them manually.
 
 To do this, we will capture and save the request to a file using `Burp Suite`:
-
-<br />
-
-
 
 <br />
 
