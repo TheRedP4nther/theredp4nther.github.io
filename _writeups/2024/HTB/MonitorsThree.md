@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: 
+tags: subdomainenumeration cacti mysql sqli sqlinjection error-based
 ---
 
 <br />
@@ -181,6 +181,8 @@ There is a known `Authenticated RCE` for this version, but since we don't have v
 <br />
 
 It's time to start testing the `functionalities` that we have seen before.
+
+<br />
 
 ### login.php:
 
