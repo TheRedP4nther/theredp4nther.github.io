@@ -227,3 +227,11 @@ But if the username is invalid, the application return the following `error`:
 ## Error-Based SQL Injection (MySQL):
 
 <br />
+
+We can try to put a "'" in the input and see the response:
+
+<br />
+
+
+
+<br />
