@@ -200,11 +200,11 @@ We attempt to log in using `default` credentials, but without success:
 
 <br />
 
-This functionalitie have two type of responses.
+This functionality has two types of responses.
 
-- 1.- Succesful:
+- 1.- Successful:
 
-If we put a valid username like `admin`, we are going to see the following message:
+If we enter a valid username like `admin`, we will see the following message:
 
 <br />
 
@@ -214,7 +214,7 @@ If we put a valid username like `admin`, we are going to see the following messa
 
 - 2.- Error:
 
-But if the username is not valid, the application throws this `error`:
+But if the username is invalid, the application return the following `error`:
 
 <br />
 
