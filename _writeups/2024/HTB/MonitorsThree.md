@@ -512,7 +512,7 @@ Now we can get back to the Cacti admin panel and go to `"Import/Export"` -> `"Im
 
 <br />
 
-
+![13](../../../assets/images/MonitorsThree/13.png)
 
 <br />
 
@@ -520,7 +520,7 @@ And we upload it:
 
 <br />
 
-
+![14](../../../assets/images/MonitorsThree/14.png)
 
 <br />
 
