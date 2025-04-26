@@ -204,7 +204,7 @@ This functionalitie have two type of responses.
 
 - 1.- Succesful:
 
-If we put a `valid` username, we are going to see the following message:
+If we put a valid username like `admin`, we are going to see the following message:
 
 <br />
 
@@ -214,7 +214,7 @@ If we put a `valid` username, we are going to see the following message:
 
 - 2.- Error:
 
-But if the username is not valid, the application handles this `error`:
+But if the username is not valid, the application throws this `error`:
 
 <br />
 
