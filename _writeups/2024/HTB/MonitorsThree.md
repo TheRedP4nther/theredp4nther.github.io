@@ -228,10 +228,20 @@ But if the username is invalid, the application return the following `error`:
 
 <br />
 
-We can try to put a `"'"` in the input and see the response:
+We can try to put a `"'"` in the input and see what happens:
 
 <br />
 
 ![9](../../../assets/images/MonitorsThree/9.png)
+
+<br />
+
+This error is typical in applications vulnerable to `SQL Injection`.
+
+To continue testing this vuln, we are going to check if the payload `"anyusername' or 1=1-- -"` works:
+
+<br />
+
+
 
 <br />
