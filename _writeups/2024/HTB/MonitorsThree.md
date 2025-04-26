@@ -166,6 +166,6 @@ Once we have added the `subdomain`, we can visit the page:
 
 <br />
 
-
+![5](../../../assets/images/MonitorsThree/5.png)
 
 <br />
