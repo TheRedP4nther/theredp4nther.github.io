@@ -69,6 +69,20 @@ Open Ports:
 
 <br />
 
+To access the main website, first we need to add `monitorsthree.htb` to out `/etc/hosts`:
+
+<br />
+
+```bash
+❯ echo '10.10.11.30 monitorsthree.htb' >> /etc/hosts
+```
+
+<br />
+
+Now we can list the page:
+
+<br />
+
 
 
 <br />
