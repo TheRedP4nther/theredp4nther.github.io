@@ -190,6 +190,6 @@ We try to log in with default credentials with no results:
 
 <br />
 
-
+![6](../../../assets/images/MonitorsThree/6.png)
 
 <br />
