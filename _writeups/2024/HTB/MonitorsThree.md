@@ -1089,7 +1089,7 @@ Then, we replace the password value with the NoncePwd crafted one and click agai
 
 <br />
 
-
+![23](../../../assets/images/MonitorsThree/23.png)
 
 <br />
 
