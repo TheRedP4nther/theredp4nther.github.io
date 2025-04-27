@@ -1026,7 +1026,7 @@ To continue understanding this, we need to intercept the login request with `Bur
 
 <br />
 
-Once intercepted, we make a right click to set `"Do intercept"` -> `"Response to this request"`.
+Once intercepted, we right click the request and select `"Do intercept"` -> `"Response to this request"`.
 
 By doing this, we will intercept the response to our login request, which is necessary to extract the `nonce` value:
 
@@ -1044,7 +1044,7 @@ Finally, we click on forward until we see the response with the `nonce`:
 
 <br />
 
-The nonce is just one of the variables needed to craft a valid `NoncePwd`.
+The nonce is just one of the variables needed to craft a valid `NoncedPwd`.
 
 Now, we need to convert the base64 `server-passphrase` value to hex.
 
@@ -1060,7 +1060,7 @@ We can do it with [CyberChef](https://cyberchef.org/):
 
 Great! We have all that we need!
 
-To craft the valid `NoncePwd` we will use this `JavaScript` payload:
+To craft the valid `NoncedPwd` we will use this `JavaScript` payload:
 
 <br />
 
@@ -1078,7 +1078,7 @@ var noncedpwd = CryptoJS.SHA256(CryptoJS.enc.Hex.parse(CryptoJS.enc.Base64.parse
 
 Once we have the payload, we only need to put it on our browser `console` and execute.
 
-If we type `noncepwd`, we will see the crafted value:
+If we type `noncedpwd`, we will see the crafted value:
 
 <br />
 
@@ -1086,7 +1086,7 @@ If we type `noncepwd`, we will see the crafted value:
 
 <br />
 
-Finally, we return to `Burp Suite` and click on Forward until see the request containing the `password` field:
+Finally, we return to `Burp Suite` and click on Forward until we see the request containing the `password` field:
 
 <br />
 
@@ -1094,7 +1094,7 @@ Finally, we return to `Burp Suite` and click on Forward until see the request co
 
 <br />
 
-Then, we replace the original password value with the crafted `NoncePwd` and click on Forward again:
+Then, we replace the original password value with the crafted `NoncedPwd` and click on Forward again:
 
 <br />
 
@@ -1134,7 +1134,7 @@ Then we put it a name and set the `Encryption` option to none:
 
 In this step we're going to select the backup `destination` -> `/dev/shm`.
 
-(The `/source` directory refers to the host (victim machine))
+(The `/source` directory is a bind mount of the host's root /, meaning we can access the victim's full filesystem from here.)
 
 <br />
 
@@ -1144,7 +1144,7 @@ In this step we're going to select the backup `destination` -> `/dev/shm`.
 
 The next step asks us for the `source data` that we want to backup.
 
-We will indicate the root directory -> `/source/root/`:
+We will indicate the root directory -> `/source/root/` and continue:
 
 <br />
 
