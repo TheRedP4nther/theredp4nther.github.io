@@ -1011,7 +1011,6 @@ This `JavaScript` code snippet is crucial to do it:
 var saltedpwd = CryptoJS.SHA256(CryptoJS.enc.Hex.parse(CryptoJS.enc.Utf8.parse($('#login-password').val()) + CryptoJS.enc.Base64.parse(data.Salt)));
 
 var noncedpwd = CryptoJS.SHA256(CryptoJS.enc.Hex.parse(CryptoJS.enc.Base64.parse(data.Nonce) + saltedpwd)).toString(CryptoJS.enc.Base64);
-
 ```
 
 <br />
@@ -1028,7 +1027,7 @@ To continue undestanding this, we need to intercept the login request with `Burp
 
 Once intercepted, we make a right click to set `"Do intercept"` -> `"Response to this request"`.
 
-By doing this, we will intercept the response to our login request, which is necessary to exctarct the `nonce` value:
+By doing this, we will intercept the response to our login request, which is necessary to extract the `nonce` value:
 
 <br />
 
@@ -1043,3 +1042,19 @@ Finally, we click on forward until we see the response with the `nonce`:
 ![20](../../../assets/images/MonitorsThree/20.png)
 
 <br />
+
+The nonce is only one of the variables that we need to craft the valid NoncePwd.
+
+Now, we need to convert the base64 server-passphrase value to hex.
+
+(Important to remark that during this process we need to mantain the Burp Suite interception, because the nonce value is dynamic for every login request)
+
+We can do it with CyberChef:
+
+<br />
+
+
+
+<br />
+
+
