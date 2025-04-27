@@ -1205,18 +1205,32 @@ Expanding the backup options, we can select `"Restore files ..."`:
 
 These are the available files in the backup.
 
-<br />
-
-![34](../../../assets/images/MonitorsThree/34.png)
-
-<br />
-
 There is no `ssh key`, so we can't gain access to the system.
 
 But we can select the `root.txt` flag and click on continue:
 
 <br />
 
+![34](../../../assets/images/MonitorsThree/34.png)
+
+<br />
+
+Then, we can indicate the path were we want to place the flag and click on `"Restore"`:
+
+<br />
+
 ![35](../../../assets/images/MonitorsThree/35.png)
 
 <br />
+
+To finally read it:
+
+<br />
+
+```bash
+marcus@monitorsthree:/dev/shm$ cat root.txt
+86ca3e837fa16ce9f93fc1eea0xxxxxx
+```
+
+<br />
+
