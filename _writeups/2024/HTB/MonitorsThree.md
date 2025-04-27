@@ -1086,7 +1086,13 @@ If we type `noncepwd`, we will see the crafted value:
 
 <br />
 
-Finally, we return to `Burp Suite` and click on Forward until see the request containing the `password` field.
+Finally, we return to `Burp Suite` and click on Forward until see the request containing the `password` field:
+
+<br />
+
+
+
+<br />
 
 Then, we replace the original password value with the crafted NoncePwd and click on Forward again:
 
