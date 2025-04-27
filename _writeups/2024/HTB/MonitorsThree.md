@@ -143,8 +143,9 @@ cacti                   [Status: 302, Size: 0, Words: 1, Lines: 1, Duration: 44m
 ```
 
 <br />
+ 
 
-Nice! We have discovered a new `subdomain`!
+A new `subdomain` was discovered: cacti.monitorsthree.htb
 
 <br />
 
