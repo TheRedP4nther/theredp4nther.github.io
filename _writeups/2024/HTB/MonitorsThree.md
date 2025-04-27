@@ -1164,6 +1164,6 @@ In the last screen we will leave the default options and click on `"Save"`:
 
 <br />
 
-
+![30](../../../assets/images/MonitorsThree/30.png)
 
 <br />
