@@ -1199,7 +1199,7 @@ Expanding the backup options, we can select "Restore files ...":
 
 <br />
 
-
+![33](../../../assets/images/MonitorsThree/33.png)
 
 <br />
 
@@ -1207,8 +1207,16 @@ These are the available files in the backup.
 
 <br />
 
-
+![34](../../../assets/images/MonitorsThree/34.png)
 
 <br />
 
+There is no `ssh key`, so we can't gain access to the system.
 
+But we can select the `root.txt` flag and click on continue:
+
+<br />
+
+![35](../../../assets/images/MonitorsThree/35.png)
+
+<br />
