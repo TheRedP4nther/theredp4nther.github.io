@@ -170,7 +170,7 @@ Once the `subdomain` has been added, we can visit the page:
 
 <br />
 
-Apparently, this page is hosting a `Cacti` instance running version `1.2.26`.
+This page hosts a `Cacti` instance running version `1.2.26`.
 
 There is a known `Authenticated RCE` for this version, but since we don't have valid `credentials` at the moment, we will continue with the enumeration.
 
