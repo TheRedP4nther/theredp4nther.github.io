@@ -1128,6 +1128,6 @@ Then we put it a name and set the Encryption to none:
 
 <br />
 
-
+![26](../../../assets/images/MonitorsThree/26.png)
 
 <br />
