@@ -1112,7 +1112,7 @@ We did it! Login Bypassed!
 
 We're into the `Duplicati` application and there is one single backup.
 
-This backup is the `cacti` one that we had seen before into the `/opt/backups/cacti` directory.
+This backup is the `Cacti` one that we had seen before into the `/opt/backups/cacti` directory.
 
 But to exploit this application we will create our own malicious backup 
 
@@ -1132,7 +1132,7 @@ Then we put it a name and set the `Encryption` option to none:
 
 <br />
 
-In this step we're going to select the backup `destination` -> `/dev/shm`.
+In this step we're going to select the backup `destination` -> `/source/dev/shm`.
 
 (The `/source` directory is a bind mount of the host's root /, meaning we can access the victim's full filesystem from here.)
 
