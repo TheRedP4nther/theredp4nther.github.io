@@ -1028,7 +1028,7 @@ To continue undestanding this, we need to intercept the login request with `Burp
 
 Once intercepted, we make a right click to set `"Do intercept"` -> `"Response to this request"`.
 
-Doing this we are going to intercept the response to our login request, which is necessary to continue:
+Doing this we are going to intercept the response to our login request, which is necessary to take the `nonce` value:
 
 <br />
 
@@ -1036,7 +1036,7 @@ Doing this we are going to intercept the response to our login request, which is
 
 <br />
 
-Finally, we click on forward until we see the response with the `password`:
+Finally, we click on forward until we see the response with the `nonce`:
 
 <br />
 
