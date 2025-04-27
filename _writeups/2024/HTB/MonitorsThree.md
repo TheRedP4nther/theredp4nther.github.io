@@ -1105,3 +1105,19 @@ Then, we replace the original password value with the crafted `NoncePwd` and cli
 We did it! Login Bypassed!
 
 <br />
+
+## Duplicati Exploitation:
+
+<br />
+
+We're into the Duplicati application and there is one single backup.
+
+This backup is the cacti one that we had seen before into the /opt/backups/cacti directory.
+
+But to exploit this application we will create our own malicious backup clicking on `"Add backup"`:
+
+<br />
+
+
+
+<br />
