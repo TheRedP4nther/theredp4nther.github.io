@@ -1079,7 +1079,7 @@ If we type noncepwd we will see the crafted value:
 
 <br />
 
-
+![22](../../../assets/images/MonitorsThree/22.png)
 
 <br />
 
