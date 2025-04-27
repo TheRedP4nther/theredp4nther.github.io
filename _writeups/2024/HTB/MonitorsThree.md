@@ -1151,3 +1151,11 @@ We will indicate the root directory -> `/source/root/` and continue:
 ![28](../../../assets/images/MonitorsThree/28.png)
 
 <br />
+
+Then we uncheck the `"Automatically run backups"` option:
+
+<br />
+
+
+
+<br />
