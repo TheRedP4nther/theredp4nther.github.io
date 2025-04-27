@@ -1017,7 +1017,7 @@ var noncedpwd = CryptoJS.SHA256(CryptoJS.enc.Hex.parse(CryptoJS.enc.Base64.parse
 
 This piece of code computes a `SHA-256` hash of the concatenation of a password, a salt and a nonce improving security through salting and `nonce-based` authentication.
 
-To continue undestanding this, we need to intercept the login request with `Burp Suite`:
+To continue understanding this, we need to intercept the login request with `Burp Suite`:
 
 <br />
 
@@ -1043,13 +1043,13 @@ Finally, we click on forward until we see the response with the `nonce`:
 
 <br />
 
-The nonce is only one of the variables that we need to craft the valid NoncePwd.
+The nonce is just one of the variables needed to craft a valid `NoncePwd`.
 
-Now, we need to convert the base64 server-passphrase value to hex.
+Now, we need to convert the base64 `server-passphrase` value to hex.
 
-(Important to remark that during this process we need to mantain the Burp Suite interception, because the nonce value is dynamic for every login request)
+(It's important to keep the Burp Suite interception active because the nonce value is dynamically generated for each login attempt.)
 
-We can do it with CyberChef:
+We can do it with [CyberChef](https://cyberchef.org/):
 
 <br />
 
