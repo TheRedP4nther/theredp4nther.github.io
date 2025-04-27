@@ -22,7 +22,7 @@ Difficulty -> Medium.
 
 <br />
 
-
+We’re diving into MonitorsThree, a Medium Linux box packed with multiple attack surfaces. We kick things off by finding a subdomain hosting a vulnerable Cacti instance, but first pivot through an error-based SQL injection on the main site to dump credentials. After cracking a password, we log into Cacti and exploit an authenticated RCE to pop a shell. Then, we grab database creds to move laterally, and finally abuse a Duplicati backup misconfiguration combined with a clever login bypass to get root access. Let’s get into it!
 
 <br />
 
