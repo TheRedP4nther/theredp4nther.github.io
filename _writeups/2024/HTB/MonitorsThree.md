@@ -1148,6 +1148,6 @@ We will indicate the root directory -> `/source/root/`:
 
 <br />
 
-
+![28](../../../assets/images/MonitorsThree/28.png)
 
 <br />
