@@ -1022,7 +1022,7 @@ To continue undestanding this, we need to intercept the login request with `Burp
 
 <br />
 
-
+![18](../../../assets/images/MonitorsThree/18.png)
 
 <br />
 
@@ -1032,13 +1032,11 @@ Doing this we are going to intercept the response to our login request, which is
 
 <br />
 
+![19](../../../assets/images/MonitorsThree/19.png)
+
+<br />
+
 Finally, we click on forward until we see the response with the `password`:
-
-<br />
-
-
-
-<br />
 
 <br />
 
