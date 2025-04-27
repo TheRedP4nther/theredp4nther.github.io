@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: subdomainenumeration cacti mysql sqli sqlinjection error-based rce remotecodeexecution mariadb crackstation cracking blowfishbcrypt
+tags: subdomainenumeration cacti mysql sqli sqlinjection error-based rce remotecodeexecution mariadb crackstation cracking blowfishbcrypt portforwarding duplicati loginbypass
 ---
 
 <br />
@@ -843,3 +843,83 @@ dc84ded82dd15067371b6fc638xxxxxx
 # Privilege Escalation: marcus -> root
 
 <br />
+
+While enumerating the system, we find the following into `/opt`:
+
+<br />
+
+```bash
+marcus@monitorsthree:/opt$ ls -l
+total 16
+drwxr-xr-x 3 root root 4096 May 20  2024 backups
+drwx--x--x 4 root root 4096 May 20  2024 containerd
+-rw-r--r-- 1 root root  318 May 26  2024 docker-compose.yml
+drwxr-xr-x 3 root root 4096 Aug 18  2024 duplicati
+```
+
+<br />
+
+### backups 
+
+<br />
+
+Apparently, this directory is being used to store cacti backups:
+
+<br />
+
+```bash
+marcus@monitorsthree:/opt$ ls -l backups/cacti/
+total 19720
+-rw-r--r-- 1 root root   172507 May 26  2024 duplicati-20240526T162923Z.dlist.zip
+-rw-r--r-- 1 root root   172088 Aug 20  2024 duplicati-20240820T113028Z.dlist.zip
+-rw-r--r-- 1 root root   172088 Apr 27 09:23 duplicati-20250427T092338Z.dlist.zip
+-rw-r--r-- 1 root root    10877 Apr 27 09:23 duplicati-b96fcec7b62044644be9f3a0fad5fb787.dblock.zip
+-rw-r--r-- 1 root root 19423816 May 26  2024 duplicati-bb19cdec32e5341b7a9b5d706407e60eb.dblock.zip
+-rw-r--r-- 1 root root    25004 Aug 20  2024 duplicati-bc2d8d70b8eb74c4ea21235385840e608.dblock.zip
+-rw-r--r-- 1 root root     2493 Aug 20  2024 duplicati-i7329b8d56a284479bade001406b5dec4.dindex.zip
+-rw-r--r-- 1 root root     1269 Apr 27 09:23 duplicati-ic42c3673721b4b52addf547d0829196c.dindex.zip
+-rw-r--r-- 1 root root   185083 May 26  2024 duplicati-ie7ca520ceb6b4ae081f78324e10b7b85.dindex.zip
+```
+
+<br />
+
+### docker-compose.yml:
+
+<br />
+
+This file has relevant information about duplicati:
+
+<br />
+
+```yml
+version: "3"
+
+services:
+  duplicati:
+    image: lscr.io/linuxserver/duplicati:latest
+    container_name: duplicati
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=Etc/UTC
+    volumes:
+      - /opt/duplicati/config:/config
+      - /:/source
+    ports:
+      - 127.0.0.1:8200:8200
+    restart: unless-stopped
+```
+
+<br />
+
+It reveals that duplicati is using port 8200 and its config directory.
+
+With this information, we can do a port forwarding connecting with ssh (-L 8200:127.0.0.1:8200) and load the website:
+
+<br />
+
+
+
+<br />
+
+
