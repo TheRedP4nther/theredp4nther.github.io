@@ -1094,7 +1094,7 @@ Finally, we return to `Burp Suite` and click on Forward until see the request co
 
 <br />
 
-Then, we replace the original password value with the crafted NoncePwd and click on Forward again:
+Then, we replace the original password value with the crafted `NoncePwd` and click on Forward again:
 
 <br />
 
