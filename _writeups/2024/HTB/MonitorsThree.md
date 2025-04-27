@@ -1195,7 +1195,7 @@ duplicati-20250427T161144Z.dlist.zip  duplicati-b633abf2b3cd7447b819f2e932bae13d
 
 <br />
 
-Expanding the backup options, we can select "Restore files ...":
+Expanding the backup options, we can select `"Restore files ..."`:
 
 <br />
 
