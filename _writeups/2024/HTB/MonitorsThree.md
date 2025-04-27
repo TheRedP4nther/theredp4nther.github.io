@@ -1110,9 +1110,9 @@ We did it! Login Bypassed!
 
 <br />
 
-We're into the Duplicati application and there is one single backup.
+We're into the `Duplicati` application and there is one single backup.
 
-This backup is the cacti one that we had seen before into the /opt/backups/cacti directory.
+This backup is the `cacti` one that we had seen before into the `/opt/backups/cacti` directory.
 
 But to exploit this application we will create our own malicious backup 
 
@@ -1124,7 +1124,7 @@ First, we click on `"Add backup"` and select `"Configure a new backup option"`:
 
 <br />
 
-Then we put it a name and set the Encryption to none:
+Then we put it a name and set the `Encryption` option to none:
 
 <br />
 
