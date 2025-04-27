@@ -859,7 +859,7 @@ drwxr-xr-x 3 root root 4096 Aug 18  2024 duplicati
 
 <br />
 
-### backups 
+### backups:
 
 <br />
 
@@ -997,6 +997,21 @@ sqlite> select * from Option;
 -2||has-asked-for-password-protection|true
 -2||disable-tray-icon-login|false
 -2||allowed-hostnames|*
+```
+
+<br />
+
+Once we have this, its important to understand one thing of Duplicati's authentication process to exploit it.
+
+This `JavaScript` code snippet is crucial to do it:
+
+<br />
+
+```javascript
+var saltedpwd = CryptoJS.SHA256(CryptoJS.enc.Hex.parse(CryptoJS.enc.Utf8.parse($('#login-password').val()) + CryptoJS.enc.Base64.parse(data.Salt)));
+
+var noncedpwd = CryptoJS.SHA256(CryptoJS.enc.Hex.parse(CryptoJS.enc.Base64.parse(data.Nonce) + saltedpwd)).toString(CryptoJS.enc.Base64);
+
 ```
 
 <br />
