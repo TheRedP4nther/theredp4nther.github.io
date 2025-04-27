@@ -930,7 +930,7 @@ And load the website:
 
 <br />
 
-![17](../../../assets/images/MonitorsThree/16.png)
+![16](../../../assets/images/MonitorsThree/16.png)
 
 <br />
 
@@ -938,6 +938,6 @@ We try to reuse marcus credentials without success:
 
 <br />
 
-
+![17](../../../assets/images/MonitorsThree/17.png)
 
 <br />
