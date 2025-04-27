@@ -1053,7 +1053,7 @@ We can do it with CyberChef:
 
 <br />
 
-
+![21](../../../assets/images/MonitorsThree/21.png)
 
 <br />
 
