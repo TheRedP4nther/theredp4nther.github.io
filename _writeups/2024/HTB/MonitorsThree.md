@@ -1090,7 +1090,7 @@ Finally, we return to `Burp Suite` and click on Forward until see the request co
 
 <br />
 
-
+![24](../../../assets/images/MonitorsThree/24.png)
 
 <br />
 
