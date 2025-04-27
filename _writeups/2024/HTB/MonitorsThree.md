@@ -1136,6 +1136,6 @@ In this step we're going to select the backup `destination`, in this caser `/dev
 
 <br />
 
-
+![27](../../../assets/images/MonitorsThree/27.png)
 
 <br />
