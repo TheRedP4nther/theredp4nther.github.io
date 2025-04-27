@@ -863,7 +863,7 @@ drwxr-xr-x 3 root root 4096 Aug 18  2024 duplicati
 
 <br />
 
-Apparently, this directory is being used to store cacti backups:
+Apparently, this directory is being used to `store` cacti backups:
 
 <br />
 
@@ -887,7 +887,7 @@ total 19720
 
 <br />
 
-This file has relevant information about duplicati:
+This file has relevant information about `duplicati`:
 
 <br />
 
@@ -912,13 +912,25 @@ services:
 
 <br />
 
-It reveals that duplicati is using port 8200 and its config directory.
+It reveals that `duplicati` is using port 8200 and its config directory.
 
-With this information, we can do a port forwarding connecting with ssh (-L 8200:127.0.0.1:8200) and load the website:
+With this information, we can do a `port forwarding` connecting with ssh:
+
+(We use `id_rsa` authentication because with marcus password does not work)
 
 <br />
 
+```bash
+ssh -i id_rsa marcus@10.10.11.30 -L 8200:127.0.0.1:8200
+```
 
+<br />
+
+And load the website:
+
+<br />
+
+![17](../../../assets/images/MonitorsThree/16.png)
 
 <br />
 
