@@ -1176,7 +1176,7 @@ If we refresh the main screen, we're going to see our new backup:
 
 <br />
 
-Now, we can make it run:
+Now, we can make it run clicking on `"Run now"`:
 
 <br />
 
@@ -1184,7 +1184,7 @@ Now, we can make it run:
 
 <br />
 
-And verify the created files in the directory /dev/shm of the system:
+And verify the created files in the directory `/dev/shm` of the system:
 
 <br />
 
@@ -1194,3 +1194,5 @@ duplicati-20250427T161144Z.dlist.zip  duplicati-b633abf2b3cd7447b819f2e932bae13d
 ```
 
 <br />
+
+
