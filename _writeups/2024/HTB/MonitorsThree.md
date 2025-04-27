@@ -1256,7 +1256,7 @@ Once saved we run it and go again to `"Restore files ..."`:
 
 <br />
 
-
+![37](../../../assets/images/MonitorsThree/37.png)
 
 <br />
 
@@ -1264,7 +1264,7 @@ Last step is to indicate `/source/root/.ssh/` to place the marcus authorized_key
 
 <br />
 
-
+![38](../../../assets/images/MonitorsThree/38.png)
 
 <br />
 
