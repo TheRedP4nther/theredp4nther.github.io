@@ -608,7 +608,7 @@ MariaDB [(none)]> show databases;
 
 <br />
 
-We select cacti and list the available tables:
+We select `cacti` and list the available tables:
 
 <br />
 
@@ -916,7 +916,7 @@ It reveals that `duplicati` is using port 8200 and its config directory.
 
 With this information, we can do a `port forwarding` connecting with ssh:
 
-(We use `id_rsa` authentication because with marcus password does not work)
+- (We use id_rsa authentication because with marcus password does not work)
 
 <br />
 
