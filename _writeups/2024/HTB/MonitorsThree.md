@@ -1131,3 +1131,11 @@ Then we put it a name and set the `Encryption` option to none:
 ![26](../../../assets/images/MonitorsThree/26.png)
 
 <br />
+
+In this step we're going to select the backup `destination`, in this caser `/dev/shm`:
+
+<br />
+
+
+
+<br />
