@@ -144,7 +144,7 @@ cacti                   [Status: 302, Size: 0, Words: 1, Lines: 1, Duration: 44m
 
 <br />
 
-Perfect! We have discovered a new `subdomain`!
+Nice! We have discovered a new `subdomain`!
 
 <br />
 
@@ -1057,7 +1057,7 @@ We can do it with [CyberChef](https://cyberchef.org/):
 
 <br />
 
-Perfect! We have all that we need!
+Great! We have all that we need!
 
 To craft the valid `NoncePwd` we will use this `JavaScript` payload:
 
