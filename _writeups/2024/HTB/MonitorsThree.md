@@ -1172,13 +1172,15 @@ If we refresh the main screen, we're going to see our new backup:
 
 <br />
 
-
+![31](../../../assets/images/MonitorsThree/31.png)
 
 <br />
 
 Now, we can make it run:
 
 <br />
+
+![32](../../../assets/images/MonitorsThree/32.png)
 
 <br />
 
