@@ -1168,7 +1168,7 @@ In the last screen we will leave the default options and click on `"Save"`:
 
 <br />
 
-If we refresh the main screen, we're going to see our new backup:
+If we `refresh` the main screen, we're going to see our new backup:
 
 <br />
 
@@ -1192,6 +1192,22 @@ And verify the created files in the directory `/dev/shm` of the system:
 marcus@monitorsthree:/dev/shm$ ls
 duplicati-20250427T161144Z.dlist.zip  duplicati-b633abf2b3cd7447b819f2e932bae13d7.dblock.zip  duplicati-i19b2f23a451a4993bb1c59f9d9bff80a.dindex.zip
 ```
+
+<br />
+
+Expanding the backup options, we can select "Restore files ...":
+
+<br />
+
+
+
+<br />
+
+These are the available files in the backup.
+
+<br />
+
+
 
 <br />
 
