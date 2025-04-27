@@ -887,7 +887,7 @@ total 19720
 
 <br />
 
-This file has relevant information about `duplicati`:
+This file has relevant information about `Duplicati`:
 
 <br />
 
@@ -912,7 +912,7 @@ services:
 
 <br />
 
-It reveals that `duplicati` is using port 8200 and its config directory.
+It reveals that `Duplicati` is using port 8200 and its config directory.
 
 With this information, we can set up a `port forwarding` connection using SSH:
 
@@ -950,7 +950,7 @@ After doing some research about this software, we find a very useful [post on Me
 
 It explains how an attacker can bypass the Duplicati login using the `server-passphrase`.
 
-In our case, we can obtain this value from the duplicati's DB into the `/opt/duplicati/config` path:
+In our case, we can obtain this value from the Duplicati's DB into the `/opt/duplicati/config` path:
 
 <br />
 
