@@ -1059,7 +1059,7 @@ We can do it with [CyberChef](https://cyberchef.org/):
 
 Perfect! We have all that we need!
 
-To craft the valid NoncePwd we will use this JavaScript payload:
+To craft the valid `NoncePwd` we will use this `JavaScript` payload:
 
 <br />
 
@@ -1067,15 +1067,15 @@ var noncedpwd = CryptoJS.SHA256(CryptoJS.enc.Hex.parse(CryptoJS.enc.Base64.parse
 
 <br />
 
-- First value is -> nonce
+- `'YcNVg20GVbMIh/xjxsGtX8bc9RyAqBCAkJ4Ll5jOtTM='` → Nonce (directly in Base64)
 
-- Second value is -> Hex server-passphrase
+- `'59be9ef39e4bdec37d2d3682bb03d7b9abadb304c841b7a498c02bec1acad87a'` → Hex Server Passphrase
 
 <br />
 
-Once we have the payload, we only need to put it on our browser console and execute.
+Once we have the payload, we only need to put it on our browser `console` and execute.
 
-If we type noncepwd we will see the crafted value:
+If we type `noncepwd`, we will see the crafted value:
 
 <br />
 
@@ -1083,9 +1083,9 @@ If we type noncepwd we will see the crafted value:
 
 <br />
 
-Finally, we get back to Burp Suite and click on Forward until see the request with password field.
+Finally, we return to `Burp Suite` and click on Forward until see the request containing the `password` field.
 
-Then, we replace the password value with the NoncePwd crafted one and click again on Forward:
+Then, we replace the original password value with the crafted NoncePwd and click on Forward again:
 
 <br />
 
