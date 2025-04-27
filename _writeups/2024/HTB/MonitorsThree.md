@@ -1159,3 +1159,11 @@ Then we uncheck the `"Automatically run backups"` option:
 ![29](../../../assets/images/MonitorsThree/29.png)
 
 <br />
+
+In the last screen we will leave the default options and click on `"Save"`:
+
+<br />
+
+
+
+<br />
