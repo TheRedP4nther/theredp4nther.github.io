@@ -1016,4 +1016,4 @@ var noncedpwd = CryptoJS.SHA256(CryptoJS.enc.Hex.parse(CryptoJS.enc.Base64.parse
 
 <br />
 
-
+This piece of code computes a `SHA-256` hash of the concatenation of a password, a salt and a nonce improving security through salting and `nonce-based` authentication.
