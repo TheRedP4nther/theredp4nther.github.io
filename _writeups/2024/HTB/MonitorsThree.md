@@ -1123,3 +1123,11 @@ First, we click on `"Add backup"` and select `"Configure a new backup option"`:
 ![25](../../../assets/images/MonitorsThree/25.png)
 
 <br />
+
+Then we put it a name and set the Encryption to none:
+
+<br />
+
+
+
+<br />
