@@ -1132,7 +1132,9 @@ Then we put it a name and set the `Encryption` option to none:
 
 <br />
 
-In this step we're going to select the backup `destination`, in this caser `/dev/shm`:
+In this step we're going to select the backup `destination` -> `/dev/shm`.
+
+(The `/source` directory refers to the host (victim machine))
 
 <br />
 
