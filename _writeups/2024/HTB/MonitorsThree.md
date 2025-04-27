@@ -1017,3 +1017,31 @@ var noncedpwd = CryptoJS.SHA256(CryptoJS.enc.Hex.parse(CryptoJS.enc.Base64.parse
 <br />
 
 This piece of code computes a `SHA-256` hash of the concatenation of a password, a salt and a nonce improving security through salting and `nonce-based` authentication.
+
+To continue undestanding this, we need to intercept the login request with `Burp Suite`:
+
+<br />
+
+
+
+<br />
+
+Once intercepted, we make a right click to set `"Do intercept"` -> `"Response to this request"`.
+
+Doing this we are going to intercept the response to our login request, which is necessary to continue:
+
+<br />
+
+Finally, we click on forward until we see the response with the `password`:
+
+<br />
+
+
+
+<br />
+
+<br />
+
+
+
+<br />
