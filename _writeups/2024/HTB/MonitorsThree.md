@@ -1114,7 +1114,7 @@ We're into the `Duplicati` application and there is one single backup.
 
 This backup is the `Cacti` one that we had seen before into the `/opt/backups/cacti` directory.
 
-But to exploit this application we will create our own malicious backup 
+To exploit this application we will create our own malicious backup 
 
 First, we click on `"Add backup"` and select `"Configure a new backup option"`:
 
@@ -1233,3 +1233,26 @@ marcus@monitorsthree:/dev/shm$ cat root.txt
 ```
 
 <br />
+
+## SSH access as root:
+
+<br />
+
+As we say before, there is no private key in `/root/.ssh`. 
+
+So, one thing that we can do to get a shell as `root`, is to replace root `authorized_keys` file with the marcus one.
+
+To do that we need to create a new backup, because the other was deleted (system clears automatically backups every 10 minutes).
+
+The only difference is that we need to set `"Source data"` to `/source/home/marcus/`:
+
+<br />
+
+
+
+<br />
+
+
+
+
+
