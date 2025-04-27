@@ -946,7 +946,7 @@ We try to reuse marcus credentials without success:
 
 <br />
 
-After doing some research about this software, we find a very useful [post on Medium](https://read.martiandefense.llc/duplicati-bypassing-login-authentication-with-server-passphrase-024d6991e9ee). 
+After doing some research on this software, we found a very useful [post on Medium](https://read.martiandefense.llc/duplicati-bypassing-login-authentication-with-server-passphrase-024d6991e9ee). 
 
 It explains how an attacker can bypass the Duplicati login using the `server-passphrase`.
 
@@ -1001,7 +1001,7 @@ sqlite> select * from Option;
 
 <br />
 
-Once we have this, its important to understand one thing of Duplicati's authentication process to exploit it.
+Once we have this, it's important to understand one key aspect of Duplicati's authentication process to exploit it.
 
 This `JavaScript` code snippet is crucial to do it:
 
@@ -1028,7 +1028,7 @@ To continue undestanding this, we need to intercept the login request with `Burp
 
 Once intercepted, we make a right click to set `"Do intercept"` -> `"Response to this request"`.
 
-Doing this we are going to intercept the response to our login request, which is necessary to take the `nonce` value:
+By doing this, we will intercept the response to our login request, which is necessary to exctarct the `nonce` value:
 
 <br />
 
