@@ -1141,3 +1141,13 @@ In this step we're going to select the backup `destination` -> `/dev/shm`.
 ![27](../../../assets/images/MonitorsThree/27.png)
 
 <br />
+
+The next step asks us for the `source data` that we want to backup.
+
+We will indicate the root directory -> `/source/root/`:
+
+<br />
+
+
+
+<br />
