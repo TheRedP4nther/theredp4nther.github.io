@@ -1252,7 +1252,41 @@ The only difference is that we need to set `"Source data"` to `/source/home/marc
 
 <br />
 
+Once saved we run it and go again to `"Restore files ..."`:
+
+<br />
 
 
 
+<br />
 
+Last step is to indicate `/source/root/.ssh/` to place the marcus authorized_keys:
+
+<br />
+
+
+
+<br />
+
+Now we can log as `root` without password:
+
+<br />
+
+```bash
+marcus@monitorsthree:/dev/shm$ ssh root@localhost
+Last login: Sun Apr 27 17:37:04 2025 from 127.0.0.1
+root@monitorsthree:~# id
+uid=0(root) gid=0(root) groups=0(root)
+```
+
+<br />
+
+Machine MonitorsThree pwned!!
+
+I really love this machine.
+
+Explain all the exploitation details was difficult but I had leaerned a lot by doing it, hope you too.
+
+Keep hacking!❤️❤️
+
+<br />
