@@ -1156,6 +1156,6 @@ Then we uncheck the `"Automatically run backups"` option:
 
 <br />
 
-
+![29](../../../assets/images/MonitorsThree/29.png)
 
 <br />
