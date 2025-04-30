@@ -203,7 +203,7 @@ To exploit this type of `SQLI`, we can use substring payloads to guess the `DB` 
 anything' or substring(database(),1,1)='u'-- -
 ```
 
-
+![10](../../../assets/images/Usage/10.png)
 
 <br />
 
