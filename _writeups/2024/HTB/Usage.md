@@ -178,3 +178,13 @@ On the other hand, if we use the email we registered with, we receive a successf
 ![8](../../../assets/images/Usage/8.png)
 
 <br />
+
+As we know, this type of functions can be vulnerable to SQL Injection.
+
+To test this one, we will use the typical MYSQL payload: `anything' or 1=1-- -`
+
+<br />
+
+
+
+<br />
