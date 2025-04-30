@@ -185,6 +185,6 @@ To test this one, we will use the typical MYSQL payload: `anything' or 1=1-- -`
 
 <br />
 
-
+![9](../../../assets/images/Usage/9.png)
 
 <br />
