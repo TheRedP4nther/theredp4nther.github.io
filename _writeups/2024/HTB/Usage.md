@@ -81,7 +81,7 @@ echo "10.10.11.18 usage.htb" >> /etc/hosts
 
 <br />
 
-Now we can load the page:
+Now we can visit the site in the browser:
 
 <br />
 
@@ -97,7 +97,7 @@ On the main page, we find a standard `login` panel. Default credentials don't wo
 
 <br />
 
-Clicking on `"Register"` (top right), takes us to the `/registration` page.
+Clicking on `"Register"` (top right) takes us to the `/registration` page.
 
 We can create an account:
 
@@ -171,7 +171,7 @@ If we enter an invalid e-mail, we get the following response:
 
 <br />
 
-On the other hand, if we use the email we registered with, we obtain a good response:
+On the other hand, if we use the email we registered with, we receive a successful response:
 
 <br />
 
