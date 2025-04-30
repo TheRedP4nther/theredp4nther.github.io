@@ -167,7 +167,7 @@ If we enter a invalid e-mail, we obtain the follawing response:
 
 <br />
 
-
+![7](../../../assets/images/Usage/7.png)
 
 <br />
 
@@ -175,6 +175,6 @@ In the other hand, if we use the email that we put in the registration, we obtai
 
 <br />
 
-
+![8](../../../assets/images/Usage/8.png)
 
 <br />
