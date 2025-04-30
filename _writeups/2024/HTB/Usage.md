@@ -69,7 +69,7 @@ Open Ports:
 
 <br />
 
-When we are going to list the website it redirects us to -> `usage.htb`
+When vising the website, it redirects us to -> `usage.htb`
 
 So we add this domain to our `/etc/hosts`:
 
@@ -89,9 +89,9 @@ Now we can load the page:
 
 <br />
 
-In the main page we can found a normal `login` panel. Default credentials doesn't work.
+On the main page, we find a standard `login` panel. Default credentials don't work.
 
-By clicking on `"Register"` (top right corner), we access to `/registration` path.
+Clicking on `"Register"` (top right), takes us to the `/registration` page.
 
 We can create an account:
 
@@ -109,7 +109,7 @@ And access it:
 
 <br />
 
-But there is nothing interesting or helpful into this application:
+But nothing interesting or helpful is available within the application.
 
 <br />
 
