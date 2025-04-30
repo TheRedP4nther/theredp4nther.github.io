@@ -137,7 +137,7 @@ So, we can add it to `/etc/hosts`:
 
 <br />
 
-If we access this subdomain, we can see an admin login panel:
+If we access this subdomain, we will see an admin login panel:
 
 <br />
 
