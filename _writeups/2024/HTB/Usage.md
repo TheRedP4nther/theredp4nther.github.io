@@ -69,7 +69,7 @@ Open Ports:
 
 <br />
 
-When vising the website, it redirects us to -> `usage.htb`
+When visiting the website, it redirects us to -> `usage.htb`
 
 So we add this domain to our `/etc/hosts`:
 
@@ -112,4 +112,29 @@ And access it:
 But nothing interesting or helpful is available within the application.
 
 <br />
+
+Another relevant thing of the main page is the top right button `"Admin"`.
+
+If we make hovering, it shows the subdomain -> `http://admin.usage.htb/`.
+
+So, we can add it to `/etc/hosts`:
+
+<br />
+
+```bash
+10.10.11.18 usage.htb admin.usage.htb
+```
+
+<br />
+
+If we access this subdomain, we can see an admin login panel:
+
+<br />
+
+
+
+<br />
+
+We test default credentials without success.
+
 
