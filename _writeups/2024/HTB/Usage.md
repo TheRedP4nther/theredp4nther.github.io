@@ -181,10 +181,46 @@ On the other hand, if we use the email we registered with, we receive a successf
 
 As we know, this type of functions can be vulnerable to SQL Injection.
 
-To test this one, we will use the typical MYSQL payload: `anything' or 1=1-- -`
+To test this, we use the classic MySQL payload: `anything' or 1=1-- -`
 
 <br />
 
 ![9](../../../assets/images/Usage/9.png)
+
+<br />
+
+Great! It seems to be vulnerable!
+
+Now that we know it's injectable, we can try different `payloads` to extract data, but none of the responses return visible content.
+
+This is happening because we're dealing with a `blind` SQL injection.
+
+To exploit this type of `SQLI`, we can use substring payloads to guess the `DB` content character by character:
+
+<br />
+
+```sql 
+anything' or substring(database(),1,1)='u'-- -
+```
+
+
+
+<br />
+
+As we can see, the response to this payload was successful.
+
+What does this mean?
+
+This basically tells us that the first character of the database name is `"u"`.
+
+At this point, we can spend a lot of time dumping all the content from the database.
+
+To avoid wasting time, I wrote the following `Python` script to automate exploitation:
+
+<br />
+
+```python3 
+
+```
 
 <br />
