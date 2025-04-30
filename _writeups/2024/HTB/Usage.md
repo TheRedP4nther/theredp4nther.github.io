@@ -85,6 +85,6 @@ Now we can load the page:
 
 <br />
 
-
+![2](../../../assets/images/Usage/2.png)
 
 <br />
