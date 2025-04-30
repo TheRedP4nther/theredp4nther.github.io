@@ -157,6 +157,6 @@ The "Reset Password" link, that takes us to `/forget-password`:
 
 <br />
 
-
+![6](../../../assets/images/Usage/6.png)
 
 <br />
