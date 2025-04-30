@@ -150,3 +150,13 @@ We test default credentials without success.
 ### /forget-password:
 
 <br />
+
+Regreting to the main page, there is one more functionallity.
+
+The "Reset Password" link, that takes us to `/forget-password`:
+
+<br />
+
+
+
+<br />
