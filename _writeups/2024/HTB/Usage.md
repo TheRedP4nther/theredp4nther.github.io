@@ -181,9 +181,13 @@ On the other hand, if we use the email we registered with, we receive a successf
 
 As we know, this type of functions can be vulnerable to SQL Injection.
 
-To test this, we use the classic MySQL payload: `anything' or 1=1-- -`
+To test this, we use the classic MySQL payload:
 
 <br />
+
+```sql 
+anything' or 1=1-- -
+```
 
 ![9](../../../assets/images/Usage/9.png)
 
