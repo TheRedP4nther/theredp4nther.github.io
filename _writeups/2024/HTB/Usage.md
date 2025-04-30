@@ -162,3 +162,19 @@ The `"Reset Password"` link, that takes us to `/forget-password`:
 ![6](../../../assets/images/Usage/6.png)
 
 <br />
+
+If we enter a invalid e-mail, we obtain the follawing response:
+
+<br />
+
+
+
+<br />
+
+In the other hand, if we use the email that we put in the registration, we obtain a good response:
+
+<br />
+
+
+
+<br />
