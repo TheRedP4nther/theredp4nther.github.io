@@ -123,7 +123,7 @@ But nothing interesting or helpful is available within the application.
 
 <br />
 
-Another relevant element on the main page is the `"Admin"` button in the top right corner.
+Another important element on the main page is the `"Admin"` button located in the top-right corner.
 
 Hovering over it reveals the subdomain -> `http://admin.usage.htb/`.
 
@@ -147,6 +147,8 @@ If we access this subdomain, we will see an admin login panel:
 
 We test default credentials without success.
 
+We’ll try to obtain valid credentials and revisit this login panel later.
+
 <br />
 
 ### /forget-password:
@@ -155,7 +157,7 @@ We test default credentials without success.
 
 Returning to the main page, there is one more functionality.
 
-The `"Reset Password"` link, that takes us to `/forget-password`:
+The `"Reset Password"` link takes us to `/forget-password`:
 
 <br />
 
@@ -198,6 +200,8 @@ Great! It seems to be vulnerable!
 Now that we know it's injectable, we can try different `payloads` to extract data, but none of the responses return visible content.
 
 This is happening because we're dealing with a `blind` SQL injection.
+
+Blind SQL injection requires inferring information based on behavioral `differences` in the application's responses.
 
 To exploit this type of `SQLi`, we can use `substring` payloads to guess the `DB` content character by character:
 
