@@ -151,9 +151,9 @@ We test default credentials without success.
 
 <br />
 
-Regreting to the main page, there is one more functionallity.
+Returning to the main page, there is one more functionality.
 
-The "Reset Password" link, that takes us to `/forget-password`:
+The `"Reset Password"` link, that takes us to `/forget-password`:
 
 <br />
 
