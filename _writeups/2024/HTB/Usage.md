@@ -69,7 +69,7 @@ Open Ports:
 
 <br />
 
-When we are going to list the website it redirects to -> `usage.htb`
+When we are going to list the website it redirects us to -> `usage.htb`
 
 So we add this domain to our `/etc/hosts`:
 
@@ -88,3 +88,24 @@ Now we can load the page:
 ![2](../../../assets/images/Usage/2.png)
 
 <br />
+
+In the main page we can found a normal `login` panel. Default credentials doesn't work.
+
+By clicking on `"Register"` (top right corner), we access to `/registration` path.
+
+We can create an account:
+
+<br />
+
+
+
+<br />
+
+And access it:
+
+<br />
+
+
+
+<br />
+
