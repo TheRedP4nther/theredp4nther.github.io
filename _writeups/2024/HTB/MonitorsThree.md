@@ -1135,7 +1135,7 @@ We're into the `Duplicati` application and there is one single backup.
 
 This backup is the `Cacti` one that we had seen before into the `/opt/backups/cacti` directory.
 
-To exploit this application we will create our own malicious backup 
+To exploit this application we will create our own malicious backup. 
 
 First, we click on `"Add backup"` and select `"Configure a new backup option"`:
 
@@ -1306,7 +1306,7 @@ Machine MonitorsThree fully pwned!
 
 I really love this machine.
 
-Explain all the exploitation details was difficult but I had learned a lot by doing it, I hope you did too.
+Explain all the exploitation details was difficult and large but I had learned a lot by doing it, I hope you did too.
 
 Keep hacking!❤️❤️
 
