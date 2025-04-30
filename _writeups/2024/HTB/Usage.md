@@ -195,7 +195,7 @@ Now that we know it's injectable, we can try different `payloads` to extract dat
 
 This is happening because we're dealing with a `blind` SQL injection.
 
-To exploit this type of `SQLI`, we can use substring payloads to guess the `DB` content character by character:
+To exploit this type of `SQLi`, we can use substring payloads to guess the `DB` content character by character:
 
 <br />
 
@@ -211,11 +211,11 @@ As we can see, the response to this payload was successful.
 
 What does this mean?
 
-This basically tells us that the first character of the database name is `"u"`.
+This tells us that the first character of the database name is `"u"`.
 
 At this point, we can spend a lot of time dumping all the content from the database.
 
-To avoid wasting time, I wrote the following `Python` script to automate exploitation:
+To save time, I wrote a `Python` script to automate exploitation:
 
 <br />
 
