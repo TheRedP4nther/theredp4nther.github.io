@@ -97,7 +97,7 @@ We can create an account:
 
 <br />
 
-
+![3](../../../assets/images/Usage/3.png)
 
 <br />
 
@@ -106,6 +106,10 @@ And access it:
 <br />
 
 
+
+<br />
+
+But there is nothing interesting or helpful into this application:
 
 <br />
 
