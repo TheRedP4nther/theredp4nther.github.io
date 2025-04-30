@@ -91,6 +91,12 @@ Now we can load the page:
 
 On the main page, we find a standard `login` panel. Default credentials don't work.
 
+<br />
+
+### /registration:
+
+<br />
+
 Clicking on `"Register"` (top right), takes us to the `/registration` page.
 
 We can create an account:
@@ -110,6 +116,10 @@ And access it:
 <br />
 
 But nothing interesting or helpful is available within the application.
+
+<br />
+
+### admin.usage.htb:
 
 <br />
 
@@ -137,4 +147,6 @@ If we access this subdomain, we can see an admin login panel:
 
 We test default credentials without success.
 
+### /forget-password:
 
+<br />
