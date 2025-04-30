@@ -195,7 +195,7 @@ Now that we know it's injectable, we can try different `payloads` to extract dat
 
 This is happening because we're dealing with a `blind` SQL injection.
 
-To exploit this type of `SQLi`, we can use substring payloads to guess the `DB` content character by character:
+To exploit this type of `SQLi`, we can use `substring` payloads to guess the `DB` content character by character:
 
 <br />
 
