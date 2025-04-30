@@ -69,4 +69,22 @@ Open Ports:
 
 <br />
 
+When we are going to list the website it redirects to -> `usage.htb`
 
+So we add this domain to our `/etc/hosts`:
+
+<br />
+
+```bash
+echo "10.10.11.18 usage.htb" >> /etc/hosts
+```
+
+<br />
+
+Now we can load the page:
+
+<br />
+
+
+
+<br />
