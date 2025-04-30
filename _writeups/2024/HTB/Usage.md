@@ -69,7 +69,7 @@ Open Ports:
 
 <br />
 
-When visiting the website, it redirects us to -> `usage.htb`
+When visiting the IP in the browser, it redirects to -> `usage.htb`
 
 So we add this domain to our `/etc/hosts`:
 
@@ -123,9 +123,9 @@ But nothing interesting or helpful is available within the application.
 
 <br />
 
-Another relevant thing of the main page is the top right button `"Admin"`.
+Another relevant element on the main page is the `"Admin"` button in the top right corner.
 
-If we make hovering, it shows the subdomain -> `http://admin.usage.htb/`.
+Hovering over it reveals the subdomain -> `http://admin.usage.htb/`.
 
 So, we can add it to `/etc/hosts`:
 
@@ -163,7 +163,7 @@ The `"Reset Password"` link, that takes us to `/forget-password`:
 
 <br />
 
-If we enter a invalid e-mail, we obtain the follawing response:
+If we enter an invalid e-mail, we get the following response:
 
 <br />
 
@@ -171,7 +171,7 @@ If we enter a invalid e-mail, we obtain the follawing response:
 
 <br />
 
-In the other hand, if we use the email that we put in the registration, we obtain a good response:
+On the other hand, if we use the email we registered with, we obtain a good response:
 
 <br />
 
