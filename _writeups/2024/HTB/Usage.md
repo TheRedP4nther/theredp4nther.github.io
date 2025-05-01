@@ -227,7 +227,7 @@ To save time, I wrote a `Python` script to automate exploitation:
 
 <br />
 
-```python3 
+```python 
 #!/usr/bin/env python3
 
 # Author: TheRedP4nther
