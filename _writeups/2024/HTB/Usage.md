@@ -657,7 +657,7 @@ uid=1001(xander) gid=1001(xander) groups=1001(xander)
 
 <br />
 
-This user can run the following `binary` as any user (including `root`) without password:
+This user is allowed to run the following `binary` as any user (including `root`) without providing a password:
 
 <br />
 
@@ -672,7 +672,7 @@ User xander may run the following commands on usage:
 
 <br />
 
-If we run it, it seems to has 3 different functions:
+If we run it, it seems to have three different functions:
 
 <br />
 
@@ -687,7 +687,7 @@ Enter your choice (1/2/3):
 
 <br />
 
-We can make a `"strings"` to the binary, but nothing relevant in the output:
+Running `"strings"` on the binary, reveals nothing particularly useful:
 
 <br />
 
@@ -794,7 +794,7 @@ _init
 
 <br />
 
-To attempt some `Reverse Engineering`, we copy this binary to our machine with `scp`:
+To perform some `Reverse Engineering`, we copy the binary to our local machine with `scp`:
 
 <br />
 
