@@ -824,7 +824,7 @@ To understand all the functions, we will analyze them one by one.
 
 <br />
 
-The reset password function is a simple print of the string `"Password has been reset"`:
+This function simply prints the string `"Password has been reset"`.
 
 <br />
 
@@ -858,7 +858,7 @@ void backupMysqlData(void)
 
 <br />
 
-But nothing interesting to do.
+However, there is nothing particularly interesting or abusable about this.
 
 <br />
 
@@ -866,9 +866,9 @@ But nothing interesting to do.
 
 <br />
 
-This is the first function of the program.
+This is the first option listed in the program's menu.
 
-It's using `7z` to create a backup at `/var/backups`.
+It's using `7z` to compress the contents at `/var/www/html` into a zip archive at `/var/backups`.
 
 <br />
 
