@@ -453,3 +453,46 @@ After a quick search, we discovered that this version of `laravel-admin` is vuln
 
 <br />
 
+Basically, this vulnerability is exploiting the admin profile image upload, because it doesn't validate correctly the uploaded file extension and we can be able to upload a malicious `PHP` file, like a webshell.
+
+<br />
+
+```php 
+<?php system($_REQUEST['cmd']); ?>
+```
+
+<br />
+
+To exploit this vulnerability we will go step by step.
+
+<br />
+
+### 1.- Go to /admin/auth/setting.
+
+The vulnerable function is the profile `image upload` at this path:
+
+<br />
+
+
+
+<br />
+
+### 2.- Intercept a valid image upload.
+
+We can download any `image` and intercept the upload request with `Burp Suite`.
+
+To do it, we will select this image on the application and click on `"Submit"`:
+
+<br />
+
+
+
+<br />
+
+Once intercepted, we send it to the repeater:
+
+<br />
+
+
+
+<br />
