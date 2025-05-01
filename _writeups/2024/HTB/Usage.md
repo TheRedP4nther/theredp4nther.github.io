@@ -405,7 +405,7 @@ We can execute and get the DB `user` and `hash`:
 
 <br />
 
-Nice! We did it!.
+Nice! We did it!
 
 Now we can crack the Blowfish Bcrypt hash with `hashcat`:
 
