@@ -794,7 +794,7 @@ _init
 
 <br />
 
-To perform some `Reverse Engineering`, we copy the binary to our local machine with `scp`:
+To perform some `Reverse Engineering`, we copy the binary to our local machine using `scp`:
 
 <br />
 
@@ -806,7 +806,9 @@ usage_management                                                                
 
 <br />
 
-Then, we open it with `Ghidra`. Viewing the `main` function, apparently we're in front of a program written in `c`:
+Then, we open it with `Ghidra`.
+
+Viewing the `main` function, apparently we're in front of a program written in `c`:
 
 <br />
 
