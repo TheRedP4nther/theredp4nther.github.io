@@ -496,3 +496,11 @@ Once intercepted, we send it to the repeater to manipulate the image data and ch
 ![15](../../../assets/images/Usage/15.png)
 
 <br />
+
+If we do it well, by clicking on "Send" and "follow redirection", we will see this text on the response:
+
+<br />
+
+
+
+<br />
