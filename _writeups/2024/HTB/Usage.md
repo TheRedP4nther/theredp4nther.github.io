@@ -421,7 +421,7 @@ $2y$10$ohq2kLpBH/ri.P5wR0P3UOmc24Ydvl9DA9H1S6ooOMgH5xVfUPrL2:whatever1
 
 <br />
 
-We have a password.
+We have new credentials: `admin:whatever1`.
 
 <br />
 
