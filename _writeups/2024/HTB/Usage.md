@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: subdomainenumeration sqli blindsqlinjection laravel laravel-admin webshell abusingfileupload remotecodeexecution reverseengineering ghidra binary sudoers symlink symboliclink ghidra c
+tags: subdomainenumeration sqli blindsqlinjection laravel-admin webshell abusingfileupload remotecodeexecution reverseengineering ghidra binary sudoers symlink symboliclink ghidra c
 ---
 
 <br />
