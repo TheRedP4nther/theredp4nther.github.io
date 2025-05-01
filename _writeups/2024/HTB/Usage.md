@@ -567,7 +567,7 @@ We've got the `user.txt` flag!
 
 <br />
 
-Once inside the system, we found not a typical file called `".monitrc"` into `/home/dash`:
+Once inside the system, we found an unusual file named `.monitrc` in `/home/dash`:
 
 <br />
 
@@ -627,9 +627,9 @@ check filesystem rootfs with path /
 
 <br />
 
-We have credentials: `admin:3nc0d3d_pa$$w0rd`
+This file reveals credentials: `admin:3nc0d3d_pa$$w0rd`
 
-Looking for other users in this machine we find `xander`:
+Looking for other users on the machine, we find a second user: `xander`:
 
 <br />
 
@@ -640,7 +640,7 @@ dash  xander
 
 <br />
 
-We can use the new `password` to log in:
+We can try using the credentials from `.monitrc` to switch to `xander`:
 
 <br />
 
