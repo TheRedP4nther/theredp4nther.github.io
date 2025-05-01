@@ -437,7 +437,7 @@ Using it we can log into the `admin.usage.htb` login panel:
 
 <br />
 
-As we can see, we are inside a `Laravel 1.8.18`.
+As we can see, we are inside a `Laravel 1.8.18` interface.
 
 What is Laravel?
 
