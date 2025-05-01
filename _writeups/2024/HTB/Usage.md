@@ -467,7 +467,7 @@ To exploit this vulnerability we will go step by step.
 
 <br />
 
-### 1.- Go to /admin/auth/setting.
+### Step 1 - Go to /admin/auth/setting.
 
 The vulnerable function is the profile `image upload` at this path:
 
@@ -477,7 +477,7 @@ The vulnerable function is the profile `image upload` at this path:
 
 <br />
 
-### 2.- Intercept a valid image upload.
+### Step 2 - Intercept a valid image upload.
 
 We can download any `image` and intercept the upload request with `Burp Suite`.
 
@@ -489,7 +489,7 @@ To do it, we'll select an image on the application and click on `"Submit"`:
 
 <br />
 
-### 3.- Change file name and content:
+### Step 3 - Change file name and content:
 
 Once intercepted, we send it to the repeater to manipulate the image data and change its name to `cmd.php`:
 
@@ -499,7 +499,7 @@ Once intercepted, we send it to the repeater to manipulate the image data and ch
 
 <br />
 
-### 4.- Send the request:
+### Step 4 - Send the request:
 
 If we do it well, by clicking on `"Send"` and `"follow redirection"`, we will find a text with the file upload `URL` in the response:
 
@@ -509,7 +509,7 @@ If we do it well, by clicking on `"Send"` and `"follow redirection"`, we will fi
 
 <br />
 
-### 5.- Access webshell:
+### Step 5 - Access webshell:
 
 Now we can browse our `webshell` and try to execute a `command`:
 
