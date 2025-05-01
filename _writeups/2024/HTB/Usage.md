@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: subdomainenumeration sqli blindsqlinjection laravel laravel-admin webshell abusingfileupload remotecodeexecution reverseengineering ghidra binary sudoers symlink symboliclink ghidra
+tags: subdomainenumeration sqli blindsqlinjection laravel laravel-admin webshell abusingfileupload remotecodeexecution reverseengineering ghidra binary sudoers symlink symboliclink ghidra c
 ---
 
 <br />
@@ -794,7 +794,7 @@ _init
 
 <br />
 
-To perform some `Reverse Engineering`, we copy the binary to our local machine using `scp`:
+To perform some `reverse engineering`, we copy the binary to our local machine using `scp`:
 
 <br />
 
@@ -806,12 +806,43 @@ usage_management                                                                
 
 <br />
 
-Then, we open it with `Ghidra`.
+Then, we open it with `Ghidra`. 
 
-Viewing the `main` function, apparently we're in front of a program written in `c`:
+Viewing the `main` function, it appears to be a program written in `C`:
 
 <br />
 
 ![18](../../../assets/images/Usage/18.png)
+
+<br />
+
+To understand all the functions, we will analyze them one by one.
+
+<br />
+
+### Project Backup:
+
+<br />
+
+This is the first function of the program:
+
+<br />
+
+```c 
+void backupWebContent(void)
+
+{
+  int iVar1;
+  
+  iVar1 = chdir("/var/www/html");
+  if (iVar1 == 0) {
+    system("/usr/bin/7za a /var/backups/project.zip -tzip -snl -mmt -- *");
+  }
+  else {
+    perror("Error changing working directory to /var/www/html");
+  }
+  return;
+}
+```
 
 <br />
