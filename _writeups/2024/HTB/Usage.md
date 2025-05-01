@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: subdomainenumeration sqli blindsqlinjection laravel laravel-admin webshell abusingfileupload remotecodeexecution reverseengineering ghidra binary sudoers symlink symboliclink
+tags: subdomainenumeration sqli blindsqlinjection laravel laravel-admin webshell abusingfileupload remotecodeexecution reverseengineering ghidra binary sudoers symlink symboliclink ghidra
 ---
 
 <br />
@@ -806,4 +806,10 @@ usage_management                                                                
 
 <br />
 
+Then, we open it with `Ghidra`. Viewing the `main` function, apparently we're in front of a program written in `c`:
 
+<br />
+
+
+
+<br />
