@@ -445,11 +445,11 @@ Laravel is a `PHP-based` web framework for building, deploying and monitoring we
 
 Exactly, in this case, we're dealing with a `laravel-admin`.
 
-Searching on Google, we found that this version of laravel-admin is vulnerable (CVE-2023-2424):
+Searching on Google, we found that this version of laravel-admin is vulnerable to a Arbitrary File Upload: `(CVE-2023-2424)`
 
 <br />
 
-
+![12](../../../assets/images/Usage/12.png)
 
 <br />
 
