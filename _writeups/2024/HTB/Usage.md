@@ -22,7 +22,7 @@ Difficulty -> Easy.
 
 <br />
 
-
+We’re tackling Usage, an Easy Linux box with a Laravel twist and a sneaky wildcard escalation at the end. We start with a blind SQL injection on the main site that leaks admin credentials. From there, we hit an authenticated file upload vulnerability in laravel-admin to drop a webshell. A reused password lets us pivot to another user, and finally we abuse a wildcard vulnerability in a custom SUID binary to exfiltrate root’s private SSH key and pop root.
 
 <br />
 
@@ -437,7 +437,7 @@ Using it we can log into the `admin.usage.htb` login panel:
 
 <br />
 
-As we can see, we are inside a `Laravel 1.8.18` interface.
+As we can see, we are inside a `laravel-admin 1.8.18` interface.
 
 What is Laravel?
 
@@ -445,7 +445,7 @@ Laravel is a `PHP-based` web framework for building, deploying and monitoring we
 
 Exactly, in this case, we're dealing with a `laravel-admin`.
 
-After a quick search, we discovered that this version of `laravel-admin` is vulnerable to an `Arbitrary File Upload` ([CVE-2023-2424](https://nvd.nist.gov/vuln/detail/CVE-2023-24249)).
+After a quick search, we discovered that this version of `laravel-admin` is vulnerable to `arbitrary file upload` ([CVE-2023-2424](https://nvd.nist.gov/vuln/detail/CVE-2023-24249)).
 
 <br />
 
@@ -481,7 +481,7 @@ The vulnerable function is the profile `image upload` at this path:
 
 We can download any `image` and intercept the upload request with `Burp Suite`.
 
-To do it, we'll select an image on the application and click on `"Submit"`:
+To do it, we'll select an image in the application and click on `"Submit"`:
 
 <br />
 
@@ -872,7 +872,7 @@ However, there is nothing particularly interesting or abusable about this.
 
 This is the first option listed in the program's menu.
 
-It's using `7z` to compress the contents at `/var/www/html` into a zip archive at `/var/backups`.
+It uses `7z` to archive the contents of `/var/www/html` into a zip archive named `"project.zip"` at `/var/backups`.
 
 <br />
 
@@ -895,8 +895,7 @@ void backupWebContent(void)
 
 <br />
 
-Using the wildcard `(*)` in a `7z` command is really dangerous, because if an attacker have `write permissions` in the backup compress path, he can include any `file` of the system.
-
+Using an unquoted wildcard `(*)` in a `7z` command is dangerous, because if an attacker has `write permissions` in the target `directory`, they can manipulate what gets included—such as via `symlinks`.
 
 This [page](https://chinnidiwakar.gitbook.io/githubimport/linux-unix/privilege-escalation/wildcards-spare-tricks) explains this concept very well.
 
@@ -952,7 +951,7 @@ Everything is Ok
 
 <br />
 
-Finally, we unzip the compressed:
+Finally, we unzip the archive:
 
 <br />
 
@@ -1006,3 +1005,10 @@ root@usage:~# cat root.txt
 
 <br />
 
+Machine pwned!
+
+Thank's for spending your time reading this writeup, I hope you learned a lot. 
+
+Keep hacking!❤️❤️
+
+<br />
