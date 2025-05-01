@@ -453,7 +453,7 @@ After a quick search, we discovered that this version of `laravel-admin` is vuln
 
 <br />
 
-Basically, this vulnerability is exploiting the admin profile image upload, because it doesn't validate correctly the uploaded file extension and we can be able to upload a malicious `PHP` file, like a webshell.
+Basically, this vulnerability is exploiting the admin profile `image upload`, because it doesn't validate correctly the uploaded file extension and we can be able to upload a malicious `PHP` file, like a webshell.
 
 <br />
 
