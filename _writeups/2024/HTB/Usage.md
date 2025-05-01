@@ -652,3 +652,22 @@ uid=1001(xander) gid=1001(xander) groups=1001(xander)
 ```
 
 <br />
+
+# Privilege Escalation: xander -> root 
+
+<br />
+
+This user can run the following `binary` as any user (including `root`) without password:
+
+<br />
+
+```bash
+xander@usage:/home$ sudo -l
+Matching Defaults entries for xander on usage:
+    env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin, use_pty
+
+User xander may run the following commands on usage:
+    (ALL : ALL) NOPASSWD: /usr/bin/usage_management
+```
+
+<br />
