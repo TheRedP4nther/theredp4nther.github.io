@@ -485,7 +485,7 @@ To do it, we will select this image on the application and click on `"Submit"`:
 
 <br />
 
-
+![13](../../../assets/images/Usage/13.png)
 
 <br />
 
@@ -493,6 +493,6 @@ Once intercepted, we send it to the repeater:
 
 <br />
 
-
+![14](../../../assets/images/Usage/14.png)
 
 <br />
