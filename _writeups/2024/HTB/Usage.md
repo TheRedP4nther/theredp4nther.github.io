@@ -489,6 +489,8 @@ To do it, we'll select an image on the application and click on `"Submit"`:
 
 <br />
 
+### 3.- Change file name and content:
+
 Once intercepted, we send it to the repeater to manipulate the image data and change its name to `cmd.php`:
 
 <br />
@@ -497,6 +499,8 @@ Once intercepted, we send it to the repeater to manipulate the image data and ch
 
 <br />
 
+### 4.- Send the request:
+
 If we do it well, by clicking on `"Send"` and `"follow redirection"`, we will find a text with the file upload `URL` in the response:
 
 <br />
@@ -504,6 +508,8 @@ If we do it well, by clicking on `"Send"` and `"follow redirection"`, we will fi
 ![16](../../../assets/images/Usage/16.png)
 
 <br />
+
+### 5.- Access webshell:
 
 Now we can browse our `webshell` and try to execute a `command`:
 
