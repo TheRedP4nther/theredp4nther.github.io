@@ -443,5 +443,13 @@ What is Laravel?
 
 Laravel is a `PHP-based` web framework for building, deploying and monitoring web applications.
 
+Exactly, in this case, we're dealing with a `laravel-admin`.
+
+Searching on Google, we found that this version of laravel-admin is vulnerable (CVE-2023-2424):
+
+<br />
+
+
+
 <br />
 
