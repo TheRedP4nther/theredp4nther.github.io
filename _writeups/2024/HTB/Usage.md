@@ -497,10 +497,10 @@ Once intercepted, we send it to the repeater to manipulate the image data and ch
 
 <br />
 
-If we do it well, by clicking on "Send" and "follow redirection", we will see this text on the response:
+If we do it well, by clicking on `"Send"` and `"follow redirection"`, we will found a text with the file upload `URL` in the response:
 
 <br />
 
-
+![16](../../../assets/images/Usage/16.png)
 
 <br />
