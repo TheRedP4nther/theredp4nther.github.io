@@ -352,7 +352,7 @@ def getColumns():
                     if content.strip() == "admin:$2y$10$ohq2kLpBH/ri.P5wR0P3UOmc24Ydvl9DA9H1S6ooOMgH5xVfUPrL2":
                         print(colored("\n[+] USER: admin", "cyan"))
                         print(colored("[+] HASH: $2y$10$ohq2kLpBH/ri.P5wR0P3UOmc24Ydvl9DA9H1S6ooOMgH5xVfUPrL2","cyan"))
-                        print(colored("\n[+] Blind SQL Injection sucessfully exploited!\n", "green"))
+                        print(colored("\n[+] Blind SQL Injection successfully exploited!\n", "green"))
                         sys.exit(1)
                     break
             except requests.exceptions.RequestException:
@@ -400,7 +400,7 @@ We can execute and get the DB `user` and `hash`:
 [+] USER: admin
 [+] HASH: $2y$10$ohq2kLpBH/ri.P5wR0P3UOmc24Ydvl9DA9H1S6ooOMgH5xVfUPrL2
 
-[+] Blind SQL Injection sucessfully exploited!
+[+] Blind SQL Injection successfully exploited!
 ```
 
 <br />
@@ -453,7 +453,7 @@ After a quick search, we discovered that this version of `laravel-admin` is vuln
 
 <br />
 
-This vulnerability arises from improper validation of the uploaded file's extension in the `admin profile image upload` function, allowing us to upload a malicious `PHP` file, such as a webshell.
+This vulnerability arises from improper validation of the uploaded file's extension in the `admin profile image upload` function, allowing the upload of a malicious `PHP` file, such as a webshell.
 
 <br />
 
@@ -551,7 +551,7 @@ cat user.txt
 
 <br />
 
-We've got the user.txt flag!
+We've got the `user.txt` flag!
 
 <br />
 
