@@ -481,7 +481,7 @@ The vulnerable function is the profile `image upload` at this path:
 
 We can download any `image` and intercept the upload request with `Burp Suite`.
 
-To do it, we will select this image on the application and click on `"Submit"`:
+To do it, we'll select an image on the application and click on `"Submit"`:
 
 <br />
 
@@ -497,7 +497,7 @@ Once intercepted, we send it to the repeater to manipulate the image data and ch
 
 <br />
 
-If we do it well, by clicking on `"Send"` and `"follow redirection"`, we will found a text with the file upload `URL` in the response:
+If we do it well, by clicking on `"Send"` and `"follow redirection"`, we will find a text with the file upload `URL` in the response:
 
 <br />
 
