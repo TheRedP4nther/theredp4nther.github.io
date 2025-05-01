@@ -899,7 +899,7 @@ Using an unquoted wildcard `(*)` in a `7z` command is dangerous, because if an a
 
 This [page](https://chinnidiwakar.gitbook.io/githubimport/linux-unix/privilege-escalation/wildcards-spare-tricks) explains this concept very well.
 
-First of all, we're going to check if we can write into /var/www/html:
+First of all, we're going to check if we can write into `/var/www/html`:
 
 <br />
 
