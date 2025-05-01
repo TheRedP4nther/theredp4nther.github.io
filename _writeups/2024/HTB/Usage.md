@@ -489,7 +489,7 @@ To do it, we will select this image on the application and click on `"Submit"`:
 
 <br />
 
-Once intercepted, we send it to the repeater:
+Once intercepted, we send it to the repeater to manipulate the image data and change its name to `cmd.php`:
 
 <br />
 
