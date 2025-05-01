@@ -989,11 +989,7 @@ To connect via `SSH` and read the `root.txt` flag:
 
 ```bash
 xander@usage:/tmp/Privesc/root/.ssh$ ssh -i id_rsa root@localhost
-The authenticity of host 'localhost (127.0.0.1)' can't be established.
-ED25519 key fingerprint is SHA256:4YfMBkXQJGnXxsf0IOhuOJ1kZ5c1fOLmoOGI70R/mws.
-This key is not known by any other names
-Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
-Warning: Permanently added 'localhost' (ED25519) to the list of known hosts.
+
 Welcome to Ubuntu 22.04.4 LTS (GNU/Linux 5.15.0-101-generic x86_64)
 ...[snip]...
 Last login: Mon Apr  8 13:17:47 2024 from 10.10.14.40
