@@ -513,9 +513,7 @@ Now we can browse our `webshell` and try to execute a `command`:
 
 <br />
 
-As we can see, we are running commands as user `dash`:
-
-<br />
+As we can see, we are running commands as user `dash`.
 
 To gain access to the system, we will use the typical bash `reverse shell`:
 
