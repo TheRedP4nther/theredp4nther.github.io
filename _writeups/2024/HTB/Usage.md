@@ -820,11 +820,55 @@ To understand all the functions, we will analyze them one by one.
 
 <br />
 
+### Reset Password:
+
+<br />
+
+The reset password function is a simple print of the string `"Password has been reset"`:
+
+<br />
+
+```c 
+void resetAdminPassword(void)
+
+{
+  puts("Password has been reset.");
+  return;
+}
+```
+
+<br />
+
+### Backup MySQL data:
+
+<br />
+
+This function is doing a `MySQL` backup using `mysqldump` to extract all the content from the file `"mysql_backup.sql"` on `/var/backups`:
+
+<br />
+
+```c 
+void backupMysqlData(void)
+
+{
+  system("/usr/bin/mysqldump -A > /var/backups/mysql_backup.sql");
+  return;
+}
+```
+
+<br />
+
+But nothing interesting to do.
+
+<br />
+
 ### Project Backup:
 
 <br />
 
-This is the first function of the program:
+This is the first function of the program.
+
+It's using `7z` to create a backup at `/var/backups`.
 
 <br />
 
@@ -846,3 +890,9 @@ void backupWebContent(void)
 ```
 
 <br />
+
+# 7Z Wilcard Vulnerability:
+
+<br />
+
+
