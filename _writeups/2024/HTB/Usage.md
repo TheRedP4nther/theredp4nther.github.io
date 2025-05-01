@@ -445,7 +445,7 @@ Laravel is a `PHP-based` web framework for building, deploying and monitoring we
 
 Exactly, in this case, we're dealing with a `laravel-admin`.
 
-After a quick search, we discovered that this version of `laravel-admin` is vulnerable to an `Arbitrary File Upload` (CVE-2023-2424).
+After a quick search, we discovered that this version of `laravel-admin` is vulnerable to an `Arbitrary File Upload` ([CVE-2023-2424](https://nvd.nist.gov/vuln/detail/CVE-2023-24249)).
 
 <br />
 
