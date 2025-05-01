@@ -523,7 +523,7 @@ As we can see, we are running commands as user `dash`.
 
 To gain access to the system, we will use the typical bash `reverse shell`:
 
-(Important to `url-encode` ampersands to avoid errors -> %26)
+(Important to `url-encode` ampersands to avoid errors -> `%26`)
 
 <br />
 
