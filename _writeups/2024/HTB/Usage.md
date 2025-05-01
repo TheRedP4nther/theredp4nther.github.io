@@ -115,7 +115,7 @@ And access it:
 
 <br />
 
-At this stage, no sensitive `functionalities` were accessible from the `user` dashboard.
+At this stage, no sensitive `features` were accessible from the `user` dashboard.
 
 <br />
 
@@ -181,7 +181,7 @@ On the other hand, if we use the email we registered with, we receive a `success
 
 <br />
 
-As we know, this type of functions can be vulnerable to `SQL Injection`.
+As we know, this kind of function can be vulnerable to `SQL Injection`.
 
 To test this, we use the classic `MySQL` payload:
 
@@ -453,7 +453,7 @@ After a quick search, we discovered that this version of `laravel-admin` is vuln
 
 <br />
 
-Basically, this vulnerability is exploiting the admin profile `image upload`, because it doesn't validate correctly the uploaded file extension and we can be able to upload a malicious `PHP` file, like a webshell.
+This vulnerability arises from improper validation of the uploaded file's extension in the `admin profile image upload` function, allowing us to upload a malicious `PHP` file, such as a webshell.
 
 <br />
 
