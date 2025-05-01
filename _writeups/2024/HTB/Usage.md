@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: subdomainenumeration sqli blindsqlinjection laravel laravel-admin webshell abusingfileupload remotecodeexecution
+tags: subdomainenumeration sqli blindsqlinjection laravel laravel-admin webshell abusingfileupload remotecodeexecution reverseengineering ghidra binary sudoers symlink symboliclink
 ---
 
 <br />
@@ -671,3 +671,139 @@ User xander may run the following commands on usage:
 ```
 
 <br />
+
+If we run it, it seems to has 3 different functions:
+
+<br />
+
+```bash
+xander@usage:/home$ sudo /usr/bin/usage_management 
+Choose an option:
+1. Project Backup
+2. Backup MySQL data
+3. Reset admin password
+Enter your choice (1/2/3):
+```
+
+<br />
+
+We can make a `"strings"` to the binary, but nothing relevant in the output:
+
+<br />
+
+```bash
+xander@usage:/home$ strings /usr/bin/usage_management 
+/lib64/ld-linux-x86-64.so.2
+chdir
+__cxa_finalize
+__libc_start_main
+puts
+system
+__isoc99_scanf
+perror
+printf
+libc.so.6
+GLIBC_2.7
+GLIBC_2.2.5
+GLIBC_2.34
+_ITM_deregisterTMCloneTable
+__gmon_start__
+_ITM_registerTMCloneTable
+PTE1
+u+UH
+/var/www/html
+/usr/bin/7za a /var/backups/project.zip -tzip -snl -mmt -- *
+Error changing working directory to /var/www/html
+/usr/bin/mysqldump -A > /var/backups/mysql_backup.sql
+Password has been reset.
+Choose an option:
+1. Project Backup
+2. Backup MySQL data
+3. Reset admin password
+Enter your choice (1/2/3): 
+Invalid choice.
+:*3$"
+GCC: (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
+Scrt1.o
+__abi_tag
+crtstuff.c
+deregister_tm_clones
+__do_global_dtors_aux
+completed.0
+__do_global_dtors_aux_fini_array_entry
+frame_dummy
+__frame_dummy_init_array_entry
+usage_management.c
+__FRAME_END__
+_DYNAMIC
+__GNU_EH_FRAME_HDR
+_GLOBAL_OFFSET_TABLE_
+backupMysqlData
+__libc_start_main@GLIBC_2.34
+_ITM_deregisterTMCloneTable
+puts@GLIBC_2.2.5
+_edata
+_fini
+chdir@GLIBC_2.2.5
+backupWebContent
+system@GLIBC_2.2.5
+printf@GLIBC_2.2.5
+__data_start
+__gmon_start__
+__dso_handle
+_IO_stdin_used
+_end
+__bss_start
+main
+resetAdminPassword
+perror@GLIBC_2.2.5
+__isoc99_scanf@GLIBC_2.7
+__TMC_END__
+_ITM_registerTMCloneTable
+__cxa_finalize@GLIBC_2.2.5
+_init
+.symtab
+.strtab
+.shstrtab
+.interp
+.note.gnu.property
+.note.gnu.build-id
+.note.ABI-tag
+.gnu.hash
+.dynsym
+.dynstr
+.gnu.version
+.gnu.version_r
+.rela.dyn
+.rela.plt
+.init
+.plt.got
+.plt.sec
+.text
+.fini
+.rodata
+.eh_frame_hdr
+.eh_frame
+.init_array
+.fini_array
+.dynamic
+.data
+.bss
+.comment
+```
+
+<br />
+
+To attempt some `Reverse Engineering`, we copy this binary to our machine with `scp`:
+
+<br />
+
+```bash
+❯ scp xander@10.10.11.18:/usr/bin/usage_management .
+xander@10.10.11.18's password: 
+usage_management                                                                                                                                     100%   16KB 126.7KB/s   00:00
+```
+
+<br />
+
+
