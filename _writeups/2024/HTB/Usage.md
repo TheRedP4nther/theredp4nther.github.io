@@ -810,6 +810,6 @@ Then, we open it with `Ghidra`. Viewing the `main` function, apparently we're in
 
 <br />
 
-
+![18](../../../assets/images/Usage/18.png)
 
 <br />
