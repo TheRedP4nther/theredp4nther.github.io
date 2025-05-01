@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: subdomainenumeration sqli blindsqlinjection webshell abusingfileupload remotecodeexecution
+tags: subdomainenumeration sqli blindsqlinjection laravel laravel-admin webshell abusingfileupload remotecodeexecution
 ---
 
 <br />
@@ -473,7 +473,7 @@ The vulnerable function is the profile `image upload` at this path:
 
 <br />
 
-
+![13](../../../assets/images/Usage/13.png)
 
 <br />
 
@@ -485,7 +485,7 @@ To do it, we will select this image on the application and click on `"Submit"`:
 
 <br />
 
-![13](../../../assets/images/Usage/13.png)
+![14](../../../assets/images/Usage/14.png)
 
 <br />
 
@@ -493,6 +493,6 @@ Once intercepted, we send it to the repeater:
 
 <br />
 
-![14](../../../assets/images/Usage/14.png)
+
 
 <br />
