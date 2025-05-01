@@ -538,12 +538,12 @@ connect to [10.10.14.22] from (UNKNOWN) [10.10.11.18] 42414
 bash: cannot set terminal process group (1242): Inappropriate ioctl for device
 bash: no job control in this shell
 dash@usage:/var/www/html/project_admin/public/uploads/images$ id
-id
+
 uid=1000(dash) gid=1000(dash) groups=1000(dash)
 dash@usage:/var/www/html/project_admin/public/uploads/images$ cd 
-cd 
+ 
 dash@usage:~$ cat user.txt
-cat user.txt
+
 06d491f47ddd1055403cd67deexxxxxx
 ```
 
