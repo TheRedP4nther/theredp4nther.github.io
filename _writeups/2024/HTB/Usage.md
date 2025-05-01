@@ -137,7 +137,7 @@ So, we can add it to `/etc/hosts`:
 
 <br />
 
-If we access this subdomain, we will see an admin login panel:
+If we access this `subdomain`, we will see an admin login panel:
 
 <br />
 
@@ -147,7 +147,7 @@ If we access this subdomain, we will see an admin login panel:
 
 We test default credentials without success.
 
-We’ll try to obtain valid credentials and revisit this login panel later.
+We’ll try to obtain valid `credentials` and revisit this login panel later.
 
 <br />
 
@@ -173,7 +173,7 @@ If we enter an invalid e-mail, we get the following response:
 
 <br />
 
-On the other hand, if we use the email we registered with, we receive a successful response:
+On the other hand, if we use the email we registered with, we receive a `successful` response:
 
 <br />
 
@@ -181,9 +181,9 @@ On the other hand, if we use the email we registered with, we receive a successf
 
 <br />
 
-As we know, this type of functions can be vulnerable to SQL Injection.
+As we know, this type of functions can be vulnerable to `SQL Injection`.
 
-To test this, we use the classic MySQL payload:
+To test this, we use the classic `MySQL` payload:
 
 <br />
 
@@ -195,7 +195,7 @@ anything' or 1=1-- -
 
 <br />
 
-Great! It seems to be vulnerable!
+The application appears to be vulnerable to `SQL Injection`.
 
 Now that we know it's injectable, we can try different `payloads` to extract data, but none of the responses return visible content.
 
