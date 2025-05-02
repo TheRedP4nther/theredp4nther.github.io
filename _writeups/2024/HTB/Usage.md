@@ -961,7 +961,7 @@ project_admin  project.zip  root  usage_blog
 
 <br />
 
-And access /root getting the `id_rsa` to connect via `SSH`:
+And access /root getting the `id_rsa`:
 
 <br />
 
