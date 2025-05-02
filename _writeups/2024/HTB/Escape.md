@@ -107,24 +107,25 @@ Nmap done: 1 IP address (1 host up) scanned in 136.36 seconds
 
 <br />
 
-Open Ports:
+Relevant Open Ports:
 
-- `Port 21` -> ftp
+- `Port 22` -> ssh
 
-- `Port 22` -> ssh 
+- `Port 53` -> dns
 
-- `Port 80` -> http 
+- `Port 88` -> kerberos
 
 - `Port 135` -> rpc
 
 - `Port 139` -> netbios 
 
+- `Port 389` -> ldap
+
 - `Port 445` -> smb 
 
-- `Ports 5666,6063,6699` -> tcpwrapped
+- `Port 1433` -> mssql
 
-- `Port 8443` -> https / nsclient++
+- `Port 5985` -> winrm
 
-- `Ports 49***` -> rpc
 
 <br />
