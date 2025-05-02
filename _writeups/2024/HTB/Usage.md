@@ -841,7 +841,8 @@ void resetAdminPassword(void)
 
 <br />
 
-This function is doing a `MySQL` backup using `mysqldump` to extract all the content from the file `"mysql_backup.sql"` on `/var/backups`:
+This function is doing a `MySQL` backup using `mysqldump` to extract the content of all MySQL DB's in the system and putting it into `"mysql_backup.sql"` at `/var/backups`:
+This function performs a `MySQL` backup using `mysqldump` to extract the contents of all MySQL databases on the system and saves them into `mysql_backup.sql` located at `/var/backups`:
 
 <br />
 
