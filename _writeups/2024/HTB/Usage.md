@@ -127,8 +127,6 @@ Another important element on the main page is the `"Admin"` button located in th
 
 Hovering over it reveals the subdomain -> `http://admin.usage.htb/`.
 
-So, we can add it to `/etc/hosts`:
-
 <br />
 
 ```bash
