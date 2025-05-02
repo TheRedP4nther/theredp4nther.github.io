@@ -109,23 +109,37 @@ Nmap done: 1 IP address (1 host up) scanned in 136.36 seconds
 
 Relevant Open Ports:
 
-- `Port 22` -> ssh
+- `Port 53`   -> dns  
 
-- `Port 53` -> dns
+- `Port 88`   -> kerberos  
 
-- `Port 88` -> kerberos
+- `Port 135`  -> rpc  
 
-- `Port 135` -> rpc
+- `Port 139`  -> netbios  
 
-- `Port 139` -> netbios 
+- `Port 389`  -> ldap  
 
-- `Port 389` -> ldap
+- `Port 445`  -> smb  
 
-- `Port 445` -> smb 
+- `Port 464`  -> kpasswd (kerberos password change)  
 
-- `Port 1433` -> mssql
+- `Port 593`  -> rpc over http  
 
-- `Port 5985` -> winrm
+- `Port 636`  -> ldaps  
 
+- `Port 1433` -> mssql  
+
+- `Port 3268` -> global catalog ldap  
+
+- `Port 3269` -> global catalog ldaps  
+
+- `Port 5985` -> winrm  
+
+- `Port 9389` -> active directory web services (mc-nmf)  
+
+- `Port 49667`+ -> high rpc dynamic ports  
+
+- `Port 49689` -> rpc over http  
 
 <br />
+
