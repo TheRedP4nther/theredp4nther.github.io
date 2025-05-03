@@ -260,6 +260,6 @@ These credentials do not grant access to any SMB shares.
 
 <br />
 
-# MSSQL Enumeration:
+# MSSQL Enumeration: Port -> 1433
 
 <br />
