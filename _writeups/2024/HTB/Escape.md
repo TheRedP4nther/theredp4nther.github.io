@@ -242,7 +242,7 @@ open "SQL Server Procedures.pdf"
 
 <br />
 
-At the end of the PDF, we have discover some potential useful `SQL` credentials: `PublicUser:GuestUserCantWrite1`
+At the end of the PDF, we have discovered some potentially useful `SQL` credentials: `PublicUser:GuestUserCantWrite1`
 
 They are mentioned in the following excerpt:
 
@@ -261,5 +261,51 @@ These credentials do not grant access to any SMB shares.
 <br />
 
 # MSSQL Enumeration: Port -> 1433
+
+<br />
+
+If we remember, the machine is hosting a `SQL Server`.
+
+With these credentials, and using the Impacket tool `mssqlclient.py`, we can log in:
+
+<br />
+
+```bash
+❯ mssqlclient.py PublicUser:GuestUserCantWrite1@10.10.11.202
+Impacket v0.12.0.dev1+20230909.154612.3beeda7 - Copyright 2023 Fortra
+
+[*] Encryption required, switching to TLS
+[*] ENVCHANGE(DATABASE): Old Value: master, New Value: master
+[*] ENVCHANGE(LANGUAGE): Old Value: , New Value: us_english
+[*] ENVCHANGE(PACKETSIZE): Old Value: 4096, New Value: 16192
+[*] INFO(DC\SQLMOCK): Line 1: Changed database context to 'master'.
+[*] INFO(DC\SQLMOCK): Line 1: Changed language setting to us_english.
+[*] ACK: Result: 1 - Microsoft SQL Server (150 7208) 
+[!] Press help for extra shell commands
+SQL (PublicUser  guest@master)> 
+```
+
+<br />
+
+We can list four databases on the server (default MSSQL databases):
+
+<br />
+
+```bash
+SQL (PublicUser  guest@master)> enum_db
+name     is_trustworthy_on   
+------   -----------------   
+master                   0   
+
+tempdb                   0   
+
+model                    0   
+
+msdb                     1
+```
+
+<br />
+
+## xp_cmdshell is disabled:
 
 <br />
