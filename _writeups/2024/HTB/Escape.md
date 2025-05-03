@@ -133,9 +133,9 @@ Relevant Open Ports:
 
 <br />
 
-The nmap script shows in LDAP service the domain name of `sequel.htb` and the TLS certificate `dc.sequel.htb`.
+The Nmap script shows that the LDAP service reveals the domain name `sequel.htb` and the TLS certificate `dc.sequel.htb`.
 
-So we add them to our `/etc/hosts`:
+So we add them to our `/etc/hosts` file:
 
 <br />
 
@@ -312,7 +312,7 @@ msdb                     1
 
 When we are inside a MSSQL server, we can try to activate the `xp_cmdshell`.
 
-A function that allow us to run commands into the system.
+A function that allows us to run commands on the system.
 
 However, in this case, we don't have the necessary permissions:
 
@@ -328,7 +328,7 @@ SQL (PublicUser  guest@master)> enable_xp_cmdshell
 
 <br />
 
-We also tried to execute a command directly using `xp_cmdshell` without success:
+We also tried to executing a command directly using `xp_cmdshell`, but without success:
 
 <br />
 
@@ -343,11 +343,11 @@ SQL (PublicUser  guest@master)> xp_cmdshell whoami
 
 <br />
 
-Another technique we can leverage on the MSSQL server is the `xp_dirtree` function.
+Another technique we can leverage on the MSSQL server is the use of the `xp_dirtree` function.
 
 This function allows us to retrieve a `directory listing` from the file system.
 
-What's particularly interesting is that, if we point it to a network path hosted by an `Impacket server` running on our machine, we might be able to capture the `NTLM` hash of the user executing the query on the target system.
+What's particularly interesting is that if we point it to a network path hosted by an `Impacket` server running on our machine, we might be able to capture the `NTLM` hash of the user executing the query on the target system.
 
 First, we host the server using `impacket-server`:
 
@@ -367,7 +367,7 @@ Impacket v0.11.0 - Copyright 2023 Fortra
 
 <br />
 
-Then, we run `xp_dirtree` targeting our server:
+Then, we run `xp_dirtree` pointing to our server:
 
 <br />
 
@@ -422,13 +422,13 @@ REGGIE1234ronnie (sql_svc)
 
 <br />
 
-We successfully cracked the hash and obtained valid credentials: `sql_svc:REGGIE1234ronnie`
+We successfully cracked the hash and retrieved valid credentials: `sql_svc:REGGIE1234ronnie`
 
 <br />
 
 ### WinRM:
 
-With that credentials we use `evil-winrm` to gain access to the system:
+With these credentials, we use `evil-winrm` to gain access to the system:
 
 <br />
 
@@ -454,7 +454,7 @@ sequel\sql_svc
 
 The `sql_svc` directory is empty.
 
-But there are many other users in the system:
+However, there is one more user profile on the system: `Ryan.Cooper`
 
 <br />
 
@@ -476,5 +476,68 @@ d-----         2/7/2023   8:10 AM                sql_svc
 <br />
 
 ### ERRORLOG.BAK:
+
+<br />
+
+While enumerating the system, we found an unusual directory on `C:\`, called `SQLServer`:
+
+<br />
+
+```bash
+*Evil-WinRM* PS C:\> dir
+
+
+    Directory: C:\
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+d-----         2/1/2023   8:15 PM                PerfLogs
+d-r---         2/6/2023  12:08 PM                Program Files
+d-----       11/19/2022   3:51 AM                Program Files (x86)
+d-----       11/19/2022   3:51 AM                Public
+d-----         2/1/2023   1:02 PM                SQLServer
+d-r---         2/1/2023   1:55 PM                Users
+d-----         2/6/2023   7:21 AM                Windows
+```
+
+<br />
+
+Inside it, there are some files and another folder named `Logs`:
+
+<br />
+
+```bash
+*Evil-WinRM* PS C:\SQLServer> dir
+
+
+    Directory: C:\SQLServer
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+d-----         2/7/2023   8:06 AM                Logs
+d-----       11/18/2022   1:37 PM                SQLEXPR_2019
+-a----       11/18/2022   1:35 PM        6379936 sqlexpress.exe
+-a----       11/18/2022   1:36 PM      268090448 SQLEXPR_x64_ENU.exe
+```
+
+<br />
+
+Inside that folder, we find an error log file: `ERRORLOG.BAK`
+
+<br />
+
+```bash
+*Evil-WinRM* PS C:\SQLServer\Logs> dir
+
+
+    Directory: C:\SQLServer\Logs
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+-a----         2/7/2023   8:06 AM          27608 ERRORLOG.BAK
+```
 
 <br />
