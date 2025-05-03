@@ -428,6 +428,8 @@ We successfully cracked the hash and retrieved valid credentials: `sql_svc:REGGI
 
 ### WinRM:
 
+<br />
+
 With these credentials, we use `evil-winrm` to gain access to the system:
 
 <br />
