@@ -306,6 +306,39 @@ msdb                     1
 
 <br />
 
-## xp_cmdshell is disabled:
+### xp_cmdshell is disabled:
+
+<br />
+
+When we are inside a MSSQL server, we can try to activate the `xp_cmdshell`.
+
+A function that allow us to run commands into the system.
+
+However, in this case, we don't have the necessary permissions:
+
+<br />
+
+```bash
+SQL (PublicUser  guest@master)> enable_xp_cmdshell
+[-] ERROR(DC\SQLMOCK): Line 105: User does not have permission to perform this action.
+[-] ERROR(DC\SQLMOCK): Line 1: You do not have permission to run the RECONFIGURE statement.
+[-] ERROR(DC\SQLMOCK): Line 62: The configuration option 'xp_cmdshell' does not exist, or it may be an advanced option.
+[-] ERROR(DC\SQLMOCK): Line 1: You do not have permission to run the RECONFIGURE statement.
+```
+
+<br />
+
+We also tried to execute a command directly using `xp_cmdshell`:
+
+<br />
+
+```bash
+SQL (PublicUser  guest@master)> xp_cmdshell whoami
+[-] ERROR(DC\SQLMOCK): Line 1: The EXECUTE permission was denied on the object 'xp_cmdshell', database 'mssqlsystemresource', schema 'sys'.
+```
+
+<br />
+
+## NTLMv2 Hash:
 
 <br />
