@@ -328,7 +328,7 @@ SQL (PublicUser  guest@master)> enable_xp_cmdshell
 
 <br />
 
-We also tried to execute a command directly using `xp_cmdshell`:
+We also tried to execute a command directly using `xp_cmdshell` without success:
 
 <br />
 
