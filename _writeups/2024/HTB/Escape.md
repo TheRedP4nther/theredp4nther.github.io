@@ -209,7 +209,7 @@ SMB         10.10.11.202    445    DC               SYSVOL                      
 
 Great! The `Public` share is not a default folder, and we have `READ` access to it.
 
-Enumerating this folder with `smbclient` we find a interesting SQL pdf:
+While enumerating this folder with `smbclient` we find an interesting SQL pdf:
 
 <br />
 
@@ -228,7 +228,7 @@ getting file \SQL Server Procedures.pdf of size 49551 as SQL Server Procedures.p
 
 <br />
 
-We `download` the file using get and open it locally for analysis:
+We `download` the file using get and open it locally for further analysis:
 
 <br />
 
@@ -242,7 +242,9 @@ open "SQL Server Procedures.pdf"
 
 <br />
 
-At the end of the PDF, we have interesting data with some `SQL` credentials: `PublicUser:GuestUserCantWrite1`
+At the end of the PDF, we have discover some potential useful `SQL` credentials: `PublicUser:GuestUserCantWrite1`
+
+They are mentioned in the following excerpt:
 
 <br />
 
@@ -252,7 +254,7 @@ user PublicUser and password GuestUserCantWrite1 .
 Refer to the previous guidelines and make sure to switch the "Windows Authentication" to "SQL Server Authentication".
 ```
 
-They don't work with `SMB`.
+These credentials do not grant access to any SMB shares.
 
 <br />
 
