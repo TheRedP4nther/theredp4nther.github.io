@@ -306,7 +306,7 @@ msdb                     1
 
 <br />
 
-### xp_cmdshell is disabled:
+### xp_cmdshell:
 
 <br />
 
