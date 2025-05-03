@@ -556,6 +556,8 @@ Upon inspecting the contents of this file, we found potential credentials: `Ryan
 2022-11-18 13:43:07.76 spid51      Using 'xpstar.dll' version '2019.150.2000' to execute extended stored procedure 'xp_sqlagent_is_starting'. This is an informational message only; no user action is required.
 ```
 
+<br />
+
 Using these credentials, we can pivot to the `Ryan.Cooper` account and retrieve the `user.txt` flag:
 
 <br />
