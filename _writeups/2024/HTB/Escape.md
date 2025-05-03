@@ -254,6 +254,8 @@ user PublicUser and password GuestUserCantWrite1 .
 Refer to the previous guidelines and make sure to switch the "Windows Authentication" to "SQL Server Authentication".
 ```
 
+<br />
+
 These credentials do not grant access to any SMB shares.
 
 <br />
@@ -261,6 +263,3 @@ These credentials do not grant access to any SMB shares.
 # MSSQL Enumeration:
 
 <br />
-
-
-
