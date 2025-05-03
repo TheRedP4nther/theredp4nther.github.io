@@ -129,17 +129,46 @@ Relevant Open Ports:
 
 - `Port 1433` -> mssql  
 
-- `Port 3268` -> global catalog ldap  
-
-- `Port 3269` -> global catalog ldaps  
-
 - `Port 5985` -> winrm  
-
-- `Port 9389` -> active directory web services (mc-nmf)  
-
-- `Port 49667`+ -> high rpc dynamic ports  
-
-- `Port 49689` -> rpc over http  
 
 <br />
 
+The nmap script shows in LDAP service the domain name of `sequel.htb` and the TLS certificate `dc.sequel.htb`.
+
+So we add them to our `/etc/hosts`:
+
+<br />
+
+```bash
+10.10.11.202 sequel.htb dc.sequel.htb
+```
+
+<br />
+
+# TLS Certificate: Port -> 3269:
+
+<br />
+
+We will check this certificate with `openssl` and see if we find something relevant:
+
+<br />
+
+```bash
+---
+Server certificate
+subject=
+issuer=DC = htb, DC = sequel, CN = sequel-DC-CA
+---
+```
+
+<br />
+
+There is only one interesting thing in the output.
+
+The CA certificate -> `sequel-DC-CA`
+
+<br />
+
+# SMB Enumeration: Port -> 445
+
+<br />
