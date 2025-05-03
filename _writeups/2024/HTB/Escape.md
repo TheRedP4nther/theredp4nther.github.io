@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: 
+tags: smb crackmapexec impacket-smbserver impacket nullsession openssl smbclient mssqlclient.py mssql sql ntlmv2 hash john  
 ---
 
 <br />
@@ -328,7 +328,7 @@ SQL (PublicUser  guest@master)> enable_xp_cmdshell
 
 <br />
 
-We also tried to executing a command directly using `xp_cmdshell`, but without success:
+We also tried to execute a command directly using `xp_cmdshell`, but without success:
 
 <br />
 
