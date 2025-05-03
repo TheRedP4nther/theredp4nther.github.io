@@ -170,3 +170,95 @@ The only noteworthy detail in the output is the `CA` certificate name: `sequel-D
 # SMB Enumeration: Port -> 445
 
 <br />
+
+To gather additional system information, we'll start with a classic `Crackmapexec` oneliner:
+
+<br />
+
+```bash
+❯ crackmapexec smb 10.10.11.202
+SMB         10.10.11.202    445    DC               [*] Windows 10.0 Build 17763 x64 (name:DC) (domain:sequel.htb) (signing:True) (SMBv1:False)
+```
+
+<br />
+
+As seen in the output, the host is running  Windows 10 (Build 17763), and we confirm the domain name: `sequel.htb`
+
+<br />
+
+Next, we attempt a `null session` (empty password) to enumerate shared resources over `SMB`:
+
+<br />
+
+```bash
+❯ crackmapexec smb 10.10.11.202 -u 'fakeuser' -p '' --shares
+SMB         10.10.11.202    445    DC               [*] Windows 10.0 Build 17763 x64 (name:DC) (domain:sequel.htb) (signing:True) (SMBv1:False)
+SMB         10.10.11.202    445    DC               [+] sequel.htb\fakeuser: 
+SMB         10.10.11.202    445    DC               [*] Enumerated shares
+SMB         10.10.11.202    445    DC               Share           Permissions     Remark
+SMB         10.10.11.202    445    DC               -----           -----------     ------
+SMB         10.10.11.202    445    DC               ADMIN$                          Remote Admin
+SMB         10.10.11.202    445    DC               C$                              Default share
+SMB         10.10.11.202    445    DC               IPC$            READ            Remote IPC
+SMB         10.10.11.202    445    DC               NETLOGON                        Logon server share 
+SMB         10.10.11.202    445    DC               Public          READ            
+SMB         10.10.11.202    445    DC               SYSVOL                          Logon server share
+```
+
+<br />
+
+Great! The `Public` share is not a default folder, and we have `READ` access to it.
+
+Enumerating this folder with `smbclient` we find a interesting SQL pdf:
+
+<br />
+
+```bash
+❯ smbclient //10.10.11.202/Public -N
+Try "help" to get a list of possible commands.
+smb: \> ls
+  .                                   D        0  Sat Nov 19 12:51:25 2022
+  ..                                  D        0  Sat Nov 19 12:51:25 2022
+  SQL Server Procedures.pdf           A    49551  Fri Nov 18 14:39:43 2022
+
+		5184255 blocks of size 4096. 1465497 blocks available
+smb: \> get "SQL Server Procedures.pdf"
+getting file \SQL Server Procedures.pdf of size 49551 as SQL Server Procedures.pdf (177,9 KiloBytes/sec) (average 177,9 KiloBytes/sec)
+```
+
+<br />
+
+We `download` the file using get and open it locally for analysis:
+
+<br />
+
+```bash
+open "SQL Server Procedures.pdf"
+```
+
+<br />
+
+
+
+<br />
+
+At the end of the PDF, we have interesting data with some `SQL` credentials: `PublicUser:GuestUserCantWrite1`
+
+<br />
+
+```bash
+For new hired and those that are still waiting their users to be created and perms assigned, can sneak a peek at the Database with
+user PublicUser and password GuestUserCantWrite1 .
+Refer to the previous guidelines and make sure to switch the "Windows Authentication" to "SQL Server Authentication".
+```
+
+They don't work with `SMB`.
+
+<br />
+
+# MSSQL Enumeration:
+
+<br />
+
+
+
