@@ -145,11 +145,11 @@ So we add them to our `/etc/hosts`:
 
 <br />
 
-# TLS Certificate: Port -> 3269:
+# TLS Certificate: Port -> 3269
 
 <br />
 
-We will check this certificate with `openssl` and see if we find something relevant:
+Let's inspect the `TLS` certificate using `openssl` to check for any relevant information:
 
 <br />
 
@@ -163,9 +163,7 @@ issuer=DC = htb, DC = sequel, CN = sequel-DC-CA
 
 <br />
 
-There is only one interesting thing in the output.
-
-The CA certificate -> `sequel-DC-CA`
+The only noteworthy detail in the output is the `CA` certificate name: `sequel-DC-CA`.
 
 <br />
 
