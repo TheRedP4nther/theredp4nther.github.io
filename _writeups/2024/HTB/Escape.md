@@ -171,7 +171,7 @@ The only noteworthy detail in the output is the `CA` certificate name: `sequel-D
 
 <br />
 
-To gather additional system information, we'll start with a classic `Crackmapexec` oneliner:
+To gather additional system information, we'll start with a classic [Crackmapexec](https://github.com/byt3bl33d3r/CrackMapExec) oneliner:
 
 <br />
 
@@ -209,7 +209,7 @@ SMB         10.10.11.202    445    DC               SYSVOL                      
 
 Great! The `Public` share is not a default folder, and we have `READ` access to it.
 
-While enumerating this folder with `smbclient` we find an interesting SQL pdf:
+While enumerating this folder with `smbclient` we found an interesting SQL pdf:
 
 <br />
 
@@ -228,7 +228,7 @@ getting file \SQL Server Procedures.pdf of size 49551 as SQL Server Procedures.p
 
 <br />
 
-We `download` the file using get and open it locally for further analysis:
+We download the file using `get` and open it locally for further analysis:
 
 <br />
 
@@ -264,9 +264,9 @@ These credentials do not grant access to any SMB shares.
 
 <br />
 
-If we remember, the machine is hosting a `SQL Server`.
+As noted earlier, the machine is hosting a `SQL Server`.
 
-With these credentials, and using the Impacket tool `mssqlclient.py`, we can log in:
+With these credentials, and using the [Impacket](https://github.com/fortra/impacket) tool `mssqlclient.py`, we can log in:
 
 <br />
 
