@@ -238,7 +238,7 @@ open "SQL Server Procedures.pdf"
 
 <br />
 
-
+![2](../../../assets/images/Escape/2.png)
 
 <br />
 
