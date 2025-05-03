@@ -287,7 +287,7 @@ SQL (PublicUser  guest@master)>
 
 <br />
 
-We can list four databases on the server (default MSSQL databases):
+We can list four `databases` on the server (default MSSQL databases):
 
 <br />
 
