@@ -422,6 +422,6 @@ REGGIE1234ronnie (sql_svc)
 
 <br />
 
-We have new credentials: `sql_svc:REGGIE1234ronnie`
+We obtained new credentials: `sql_svc:REGGIE1234ronnie`
 
 <br />
