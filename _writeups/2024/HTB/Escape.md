@@ -339,6 +339,6 @@ SQL (PublicUser  guest@master)> xp_cmdshell whoami
 
 <br />
 
-## NTLMv2 Hash:
+## Get NTLMv2 Hash:
 
 <br />
