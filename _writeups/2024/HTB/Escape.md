@@ -744,7 +744,7 @@ Pvj3Kg2e7YKZAECtDCR9N5Ji5p7sQA==
 
 After obtaining the certificate, we save everything from `-----BEGIN RSA PRIVATE KEY-----` to `-----END CERTIFICATE-----` into a `cert.pem` file locally.
 
-And run the `openssl` oneliner:
+Next, use the `openssl` oneliner to create `perm.pfx`:
 
 <br />
 
