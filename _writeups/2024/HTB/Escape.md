@@ -22,7 +22,7 @@ Difficulty -> Medium.
 
 <br />
 
-
+Hello hackers! Today we’ll tackle the Escape Machine, a Medium Difficulty Windows challenge. We’ll start by enumerating SMB shares to discover a PDF file containing SQL Server credentials. Using those, we’ll connect to MSSQL and exploit xp_dirtree to capture an NTLMv2 hash. After cracking the hash, we gain our initial shell via WinRM. Further enumeration reveals a backup log file with another set of credentials, leading us to a more privileged user. Finally, we identify and abuse a vulnerable ADCS certificate template to impersonate the administrator and escalate privileges to SYSTEM.
 
 <br />
 
