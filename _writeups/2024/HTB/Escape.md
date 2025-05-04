@@ -651,4 +651,12 @@ Perfect! We’ve identified a vulnerable template named `UserAuthentication`.
 
 ## Abusing Template
 
+<br />
+
+There are several ways to abuse this template.
+
+We're going to cover them all.
+
+<br />
+
 ### Certify/Rubeus:
