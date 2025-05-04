@@ -154,11 +154,14 @@ Let's inspect the `TLS` certificate using `openssl` to check for any relevant in
 <br />
 
 ```bash
+❯ openssl s_client -connect 10.10.11.202:3269 -showcerts
+...[snip]...
 ---
 Server certificate
 subject=
 issuer=DC = htb, DC = sequel, CN = sequel-DC-CA
 ---
+...[snip]...
 ```
 
 <br />
