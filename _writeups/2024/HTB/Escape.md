@@ -877,6 +877,7 @@ We start detecting the vulnerable certificate template, just like we did with `C
 <br />
 
 ```bash
+❯ certipy find -u 'Ryan.Cooper' -p 'NuclearMosquito3' -dc-ip 10.10.11.202 -vulnerable -stdout -text
 ...[snip]...
 Certificate Templates
   0
@@ -925,7 +926,7 @@ Certificate Templates
 
 As we can see, the results are the same: 
 
-- Vulnerable Template -> `UserAuthentication`
+- Vulnerable Template: `UserAuthentication`
 
 Next, we'll create the `.pfx` certificate with `req`:
 
@@ -962,9 +963,9 @@ Certipy v4.8.2 - by Oliver Lyak (ly4k)
 
 Ops! We have an error!
 
-As we can see, the error says that there is a big time difference between our local machine and the Windows system.
+As we can see, the error indicates a significant time difference between our local machine and the Windows system.
 
-We can sync the clock with this command:
+We can `sync` the clock with this command:
 
 <br />
 
