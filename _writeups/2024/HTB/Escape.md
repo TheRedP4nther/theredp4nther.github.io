@@ -647,8 +647,8 @@ The output reveals valuable information, including a vulnerable certificate temp
 
 Perfect! We’ve identified a vulnerable template named `UserAuthentication`.
 
-## Abusing Template
-
 <br />
+
+## Abusing Template
 
 ### Certify/Rubeus:
