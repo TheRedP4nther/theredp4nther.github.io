@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: smb crackmapexec impacket-smbserver impacket nullsession openssl smbclient mssqlclient.py mssql sql ntlmv2 hash john  
+tags: smb crackmapexec impacket-smbserver impacket nullsession openssl smbclient mssqlclient.py mssql sql ntlmv2 hash john certify.exe rubeus.exe adcs certipy evil-winrm psexec.py passthehash
 ---
 
 <br />
