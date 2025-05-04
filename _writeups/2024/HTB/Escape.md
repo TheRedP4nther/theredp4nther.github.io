@@ -592,8 +592,6 @@ d94615721bdc257a6576b20fbbxxxxxx
 
 One of the things we should always check is the presence of `ADCS` (Active Directory Certificate Services).
 
-<br />
-
 To do this, we'll upload the [Certify.exe](https://github.com/r3motecontrol/Ghostpack-CompiledBinaries) binary:
 
 <br />
@@ -745,6 +743,8 @@ Pvj3Kg2e7YKZAECtDCR9N5Ji5p7sQA==
 <br />
 
 After obtaining the certificate, we save everything from `-----BEGIN RSA PRIVATE KEY-----` to `-----END CERTIFICATE-----` into a `cert.pem` file locally.
+
+And run the `openssl` oneliner:
 
 <br />
 
