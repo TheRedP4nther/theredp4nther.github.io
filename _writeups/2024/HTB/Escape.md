@@ -741,7 +741,7 @@ Pvj3Kg2e7YKZAECtDCR9N5Ji5p7sQA==
 
 <br />
 
-Once we obtain the certificate, we save the block from `-----BEGIN RSA PRIVATE KEY-----` to `-----END CERTIFICATE-----` into a `cert.pem` file on our local machine.
+After obtaining the certificate, we save everything from `-----BEGIN RSA PRIVATE KEY-----` to `-----END CERTIFICATE-----` into a `cert.pem` file locally.
 
 <br />
 
@@ -869,7 +869,7 @@ Another way to exploit this vulnerability is by using [Certipy](https://github.c
 
 This tool is also very powerful, and the main difference compared to `Certify.exe` is that `Certipy` can be used directly from our local Linux machine.
 
-We start detecting the vulnerable certificate template, such as `Certify.exe`:
+We start detecting the vulnerable certificate template, just like we did with `Certify.exe`:
 
 <br />
 
@@ -942,7 +942,7 @@ Certipy v4.8.2 - by Oliver Lyak (ly4k)
 
 <br />
 
-Finally we only need to run the following `auth` command and get the hash:
+Finally, we only need to run the following `auth` command and get the hash:
 
 <br />
 
@@ -991,7 +991,7 @@ Certipy v4.8.2 - by Oliver Lyak (ly4k)
 
 <br />
 
-Great! We have the hash!
+Awesome! We've got hash!
 
 Using `psexec.py` we can connect to the system as `nt authority\system`:
 
