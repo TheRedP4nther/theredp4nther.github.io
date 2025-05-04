@@ -645,7 +645,7 @@ The output reveals valuable information, including a vulnerable certificate temp
 
 <br />
 
-Perfect! We’ve identified a vulnerable template named `UserAuthentication`.
+Perfect! We’ve identified a vulnerable certificate template named `UserAuthentication`.
 
 <br />
 
@@ -653,19 +653,17 @@ Perfect! We’ve identified a vulnerable template named `UserAuthentication`.
 
 <br />
 
-There are several ways to abuse this template.
-
-We're going to cover them all.
+There are several ways to abuse this template — we’ll cover the main ones.
 
 <br />
 
-### 1ST OPTION - Certify/Rubeus:
+### 1st Option - Certify/Rubeus:
 
 <br />
 
 To exploit this, we can continue reading the [README.md](https://github.com/GhostPack/Certify) of Certify, following the scenario 3 steps.
 
-The first step is to request an alternative certificate with the name of `"administrator"`, generating a `cert.pem`:
+First, we request a certificate impersonating the user `administrator`, which generates a `cert.pem` file:
 
 <br />
 
@@ -745,7 +743,7 @@ Pvj3Kg2e7YKZAECtDCR9N5Ji5p7sQA==
 
 <br />
 
-Once we have this output, we need to copy the keys into a `cert.pem` file on our local machine and use the `openssl` command to convert it to `cert.pfx`:
+Once, we obtain the certificate, we save `-----BEGIN RSA PRIVATE KEY----- ... -----END CERTIFICATE----` section into a `cert.pem` file to our local machine:
 
 <br />
 
@@ -865,6 +863,6 @@ sequel\administrator
 
 <br />
 
-## 2ND OPTION - Certipy:
+## 2nd Option - Certipy:
 
 <br />
