@@ -587,9 +587,7 @@ d94615721bdc257a6576b20fbbxxxxxx
 
 <br />
 
-Whenever we compromise a Windows machine, one thing we should always check is the presence of `ADCS` (Active Directory Certificate Services).
-
-This thing is the `ADCS` (Active Directory Certificate Services).
+One of the things we should always check is the presence of `ADCS` (Active Directory Certificate Services).
 
 <br />
 
@@ -743,7 +741,7 @@ Pvj3Kg2e7YKZAECtDCR9N5Ji5p7sQA==
 
 <br />
 
-Once, we obtain the certificate, we save `-----BEGIN RSA PRIVATE KEY----- ... -----END CERTIFICATE----` section into a `cert.pem` file to our local machine:
+Once we obtain the certificate, we save the block from `-----BEGIN RSA PRIVATE KEY-----` to `-----END CERTIFICATE-----` into a `cert.pem` file on our local machine.
 
 <br />
 
