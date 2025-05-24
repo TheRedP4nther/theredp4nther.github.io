@@ -691,7 +691,7 @@ And if we see the output...
 
 <br />
 
-
+![9](../../../assets/images/Epsilon/9.png)
 
 <br />
 
