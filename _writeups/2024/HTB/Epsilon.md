@@ -521,7 +521,7 @@ Archive:  code
 
 <br />
 
-The code is not really relevanti, there is only a secret:
+The code is not particularly relevant, it only contains a hardcoded `secret`:
 
 <br />
 
@@ -557,7 +557,7 @@ def lambda_handler(event, context):
 
 <br />
 
-If we remember, in the server.py, some functions were using a JWT constructed with this oneliner:
+If we recall, some functions in `server.py`, were using a JWT generated with the following line:
 
 <br />
 
@@ -567,11 +567,11 @@ token=jwt.encode({"username":"admin"},secret,algorithm="HS256")
 
 <br />
 
-In this line, the script is creating an admin token with a secret.
+In this line, the script is creating an `admin` token with a secret.
 
-Maybe, we can use the secret founded to create this token.
+Maybe we can use the discovered `secret` to create this `token`.
 
-To try it, I use this simply python3 script:
+To test this, I used this simple Python 3 script:
 
 <br />
 
@@ -599,7 +599,7 @@ If we run it, we will obtain the admin token:
 
 <br />
 
-Now, we can set it using the browser `DevTools` and bypass the login:
+Now, we can set the `token` using the browser's `DevTools` to bypass the login mechanism:
 
 <br />
 
@@ -607,6 +607,7 @@ Now, we can set it using the browser `DevTools` and bypass the login:
 
 <br />
 
+With the valid `JWT` token in place, we are now authenticated as the admin user and can access restricted areas of the application.
 
 
 
