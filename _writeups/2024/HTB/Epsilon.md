@@ -663,7 +663,7 @@ After clicking on the `Order` link in the navigation menu, the following form is
 
 <br />
 
-To test the function, we select another Costume, fill all the fields and click on `"order"`:
+To test the functionality, we select another Costume, fill all the fields, and click the `"order"` button:
 
 <br />
 
@@ -671,13 +671,13 @@ To test the function, we select another Costume, fill all the fields and click o
 
 <br />
 
-As we can see, the `costume` option is reflected in the output.
+As we can see, the value of the `costume` field is reflected in the output.
 
-This is promising, since the costume is reflected in the response, we can try `injecting` template expressions to confirm the `SSTI` vulnerability.
+This is promising, because if we can manipulate this field, we may be able to test for a potential `STTI`.
 
 For example, submitting `{{7*7}}` in the `Costume` field should render `49` in the confirmation message if SSTI is present.
 
-To try this, we intercept the request using Burp Suite:
+To test this, we intercept the request using Burp Suite:
 
 <br />
 
@@ -685,9 +685,9 @@ To try this, we intercept the request using Burp Suite:
 
 <br />
 
-Once we have intercepted the request, we only need to change the costume submitting the `{{7*7}}` operation.
+Once the request is intercepted, we simply modify the costume field to submit the payload `{{7*7}}`.
 
-And if we see the output...
+And if we check the output...
 
 <br />
 
@@ -695,7 +695,17 @@ And if we see the output...
 
 <br />
 
-Great! The result of the operation is reflected.
+Great! The result of the expression is reflected in the response.
 
-This means that the application is vulnerable to `SSTI`.
+This confirms that the application is vulnerable to `SSTI`.
 
+After a time teting `Jinja2` payloads, I find one in [Payloads All The Things] that allow us to run a command:
+
+<br />
+
+```python 
+{{ joiner.__init__.__globals__.os.popen('id').read() }}
+```
+
+
+<br />
