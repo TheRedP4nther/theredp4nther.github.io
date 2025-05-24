@@ -79,7 +79,7 @@ Open Ports:
 
 <br />
 
-If we list the website on the port 5000, we see a login panel:
+If we browse the website on the port 5000, we're presented with a login panel:
 
 <br />
 
@@ -87,7 +87,7 @@ If we list the website on the port 5000, we see a login panel:
 
 <br />
 
-We try default credentials like `admin:admin` without success.
+We tried default credentials such as `admin:admin`, but without success.
 
 <br />
 
@@ -104,6 +104,10 @@ There is a website running on the port 80, but attempting to access it returns a
 <br />
 
 At first glance, it seems there isn't much we can do here.
+
+## .git exposed:
+
+<br />
 
 However, upon analyzing the `nmap` output, we notice the presence of a `.git` directory on the web server.
 
@@ -132,6 +136,127 @@ drwxr-xr-x root root 146 B  Sat May 24 12:45:34 2025  .git
 
 <br />
 
-As we can see, there are some interesting python3 scripts and the typical .git directory.
+As we can see, there are some interesting Python scripts along with the usual `.git` directory.
+
+To understand better everything, we will analyze both them.
+
+<br />
+
+### server.py:
+
+<br />
+
+```python3
+#!/usr/bin/python3
+
+import jwt
+from flask import *
+
+app = Flask(__name__)
+secret = '<secret_key>'
+
+def verify_jwt(token,key):
+	try:
+		username=jwt.decode(token,key,algorithms=['HS256',])['username']
+		if username:
+			return True
+		else:
+			return False
+	except:
+		return False
+
+@app.route("/", methods=["GET","POST"])
+def index():
+	if request.method=="POST":
+		if request.form['username']=="admin" and request.form['password']=="admin":
+			res = make_response()
+			username=request.form['username']
+			token=jwt.encode({"username":"admin"},secret,algorithm="HS256")
+			res.set_cookie("auth",token)
+			res.headers['location']='/home'
+			return res,302
+		else:
+			return render_template('index.html')
+	else:
+		return render_template('index.html')
+
+@app.route("/home")
+def home():
+	if verify_jwt(request.cookies.get('auth'),secret):
+		return render_template('home.html')
+	else:
+		return redirect('/',code=302)
+
+@app.route("/track",methods=["GET","POST"])
+def track():
+	if request.method=="POST":
+		if verify_jwt(request.cookies.get('auth'),secret):
+			return render_template('track.html',message=True)
+		else:
+			return redirect('/',code=302)
+	else:
+		return render_template('track.html')
+
+@app.route('/order',methods=["GET","POST"])
+def order():
+	if verify_jwt(request.cookies.get('auth'),secret):
+		if request.method=="POST":
+			costume=request.form["costume"]
+			message = '''
+			Your order of "{}" has been placed successfully.
+			'''.format(costume)
+			tmpl=render_template_string(message,costume=costume)
+			return render_template('order.html',message=tmpl)
+		else:
+			return render_template('order.html')
+	else:
+		return redirect('/',code=302)
+app.run(debug='true')
+```
+
+<br />
+
+### track_api_CR_148.py:
+
+<br />
+
+```python3 
+import io
+import os
+from zipfile import ZipFile
+from boto3.session import Session
+
+
+session = Session(
+    aws_access_key_id='<aws_access_key_id>',
+    aws_secret_access_key='<aws_secret_access_key>',
+    region_name='us-east-1',
+    endpoint_url='http://cloud.epsilon.htb')
+aws_lambda = session.client('lambda')
+
+
+def files_to_zip(path):
+    for root, dirs, files in os.walk(path):
+        for f in files:
+            full_path = os.path.join(root, f)
+            archive_name = full_path[len(path) + len(os.sep):]
+            yield full_path, archive_name
+
+
+def make_zip_file_bytes(path):
+    buf = io.BytesIO()
+    with ZipFile(buf, 'w') as z:
+        for full_path, archive_name in files_to_zip(path=path):
+            z.write(full_path, archive_name)
+    return buf.getvalue()
+
+
+def update_lambda(lambda_name, lambda_code_path):
+    if not os.path.isdir(lambda_code_path):
+        raise ValueError('Lambda directory does not exist: {0}'.format(lambda_code_path))
+    aws_lambda.update_function_code(
+        FunctionName=lambda_name,
+        ZipFile=make_zip_file_bytes(path=lambda_code_path))
+```
 
 <br />
