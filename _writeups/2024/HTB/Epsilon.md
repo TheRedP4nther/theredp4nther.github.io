@@ -607,7 +607,7 @@ Now, we can set the `token` using the browser's `DevTools` to bypass the login m
 
 <br />
 
-With the valid `JWT` token in place, we are now authenticated as the admin user and can access restricted areas of the application.
+With the valid `JWT` token in place, we are now authenticated as the `admin` user and can access restricted areas of the application.
 
 <br />
 
