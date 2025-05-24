@@ -414,7 +414,7 @@ Default output format [test]: json
 
 <br />
 
-The first thing we try is to enumerate AWS buckets.
+The first thing we try is to enumerate `AWS` buckets.
 
 <br />
 
