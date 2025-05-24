@@ -651,15 +651,51 @@ With the valid `JWT` token in place, we can now access the `/home` path as the a
 
 <br />
 
-When we analyzed the `server.py` script, we had located a `order` function that appeared to be vulnerable to SSTI.
+When analyzing the `server.py` script, we identified the `/order` route as potentially vulnerable to Server-Side Template Injection (SSTI).
 
-For this reason, we will test this application functionality before others.
+Given its potential for exploitation, we decided to prioritize testing this functionality.
 
-So we click on `order` and this is what we see:
+After clicking on the `Order` link in the navigation menu, the following form is displayed:
+
+<br />
+
+![6](../../../assets/images/Epsilon/6.png)
+
+<br />
+
+To test the function, we select another Costume, fill all the fields and click on `"order"`:
 
 <br />
 
 
 
 <br />
+
+As we can see, the `costume` option is reflected in the output.
+
+This is promising, since the costume is reflected in the response, we can try `injecting` template expressions to confirm the `SSTI` vulnerability.
+
+For example, submitting `{{7*7}}` in the `Costume` field should render `49` in the confirmation message if SSTI is present.
+
+To try this, we intercept the request using Burp Suite:
+
+<br />
+
+
+
+<br />
+
+Once we have intercepted the request, we only need to change the costume submitting the `{{7*7}}` operation.
+
+And if we see the output...
+
+<br />
+
+
+
+<br />
+
+Great! The result of the operation is reflected in the output.
+
+This means that the application is vulnerable to `SSTI`.
 
