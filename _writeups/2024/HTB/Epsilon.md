@@ -191,6 +191,8 @@ def index():
         return render_template('index.html')
 ```
 
+<br />
+
 In this function, we can see that the `admin:admin` credentials should work, but as we saw earlier, they didn't.
 
 <br />
