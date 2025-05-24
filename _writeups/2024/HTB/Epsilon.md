@@ -75,6 +75,22 @@ Open Ports:
 
 <br />
 
+# Http Enumeration: -> Port 5000
+
+<br />
+
+If we list the website on the port 5000, we see a login panel:
+
+<br />
+
+
+
+<br />
+
+We try default credentials like `admin:admin` without success.
+
+<br />
+
 # Http Enumeration: -> Port 80
 
 <br />
@@ -91,7 +107,7 @@ At first glance, it seems there isn't much we can do here.
 
 However, upon analyzing the `nmap` output, we notice the presence of a `.git` directory on the web server.
 
-Using the popular tool [git-dumper](), we can retrieve the repository with the following oneliner:
+Using the popular tool [git-dumper](https://github.com/arthaud/git-dumper), we can retrieve the repository with the following oneliner:
 
 <br />
 
@@ -101,7 +117,7 @@ Using the popular tool [git-dumper](), we can retrieve the repository with the f
 
 <br />
 
-Now, we can explore the directory and inspect the contents of the dumper `.git` repository:
+Now, we can explore the directory and inspect the contents of the dumped `.git` repository:
 
 <br />
 
@@ -113,5 +129,11 @@ drwxr-xr-x root root 146 B  Sat May 24 12:45:34 2025  .git
 .rw-r--r-- root root 1.6 KB Sat May 24 12:44:24 2025  server.py
 .rw-r--r-- root root 1.1 KB Sat May 24 12:44:24 2025  track_api_CR_148.py
 ```
+
+<br />
+
+As we can see, there are some interesting python3 scripts and the typical .git directory.
+
+
 
 <br />
