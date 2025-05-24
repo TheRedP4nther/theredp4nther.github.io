@@ -471,3 +471,52 @@ Using `get-function` along with the `--function-name` option, we can retrieve mo
 ```
 
 <br />
+
+There is an `URL` that is the location of a source.
+
+With `wget` we can download this file:
+
+<br />
+
+```bash 
+❯ wget http://cloud.epsilon.htb/2015-03-31/functions/costume_shop_v1/code
+--2025-05-24 14:58:30--  http://cloud.epsilon.htb/2015-03-31/functions/costume_shop_v1/code
+Resolviendo cloud.epsilon.htb (cloud.epsilon.htb)... 10.10.11.134
+Conectando con cloud.epsilon.htb (cloud.epsilon.htb)[10.10.11.134]:80... conectado.
+Petición HTTP enviada, esperando respuesta... 200 
+Longitud: 478 [application/zip]
+Grabando a: «code»
+
+code                                          100%[================================================================================================>]     478  --.-KB/s    en 0s      
+
+2025-05-24 14:58:30 (44,0 MB/s) - «code» guardado [478/478]
+```
+
+<br />
+
+It is a zip file:
+
+<br />
+
+```bash
+❯ file code
+code: Zip archive data, at least v2.0 to extract, compression method=deflate
+```
+
+<br />
+
+If we unzip it, we can find a Python script inside:
+
+<br />
+
+```bash
+❯ unzip code
+Archive:  code
+  inflating: lambda_function.py
+```
+
+<br />
+
+### lambda_function.py
+
+<br />
