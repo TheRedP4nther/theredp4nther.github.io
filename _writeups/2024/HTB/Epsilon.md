@@ -677,7 +677,9 @@ As we can see, the value of the `costume` field is reflected in the output.
 
 This is promising, because if we can manipulate this field, we may be able to exploit a potential `SSTI` vulnerability.
 
+{% raw %}
 For instance, submitting `{{7*7}}` in the `Costume` field should render `49` in the confirmation message if SSTI is present.
+{% endraw %}
 
 To test this, we intercept the request using Burp Suite:
 
@@ -687,7 +689,9 @@ To test this, we intercept the request using Burp Suite:
 
 <br />
 
+{% raw %}
 Once the request is intercepted, we simply modify the `costume` field to inject the payload `{{7*7}}`.
+{% endraw %}
 
 And if we check the output...
 
