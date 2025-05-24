@@ -146,7 +146,7 @@ To better understand everything, we will analyze both of them.
 
 <br />
 
-This scripts appears to be the source code of the website running on port 5000.
+This script appears to be the source code of the website running on port 5000.
 
 There are different functionalities with their own paths.
 
@@ -257,7 +257,7 @@ def order():
 
 <br />
 
-In the other script, we can found what seems to be an `AWS` (Amazon Web Services) instance.
+In the other script, we found what seems to be an `AWS` (Amazon Web Services) instance.
 
 <br />
 
@@ -272,6 +272,108 @@ aws_lambda = session.client('lambda')
 
 <br />
 
+Most of the important information, such as the aws credentials, is removed.
 
+We can only take note of the `cloud.epsilon.htb` subdomain and add it to our `/etc/hosts` file.
 
+<br />
 
+## Analyzing Commits:
+
+<br />
+
+At this point, we can analyze the past commits of the dumped repository trying to find some information leakage.
+
+The `git log` command shows 4 differents commits:
+
+<br />
+
+```bash
+❯ git log
+commit c622771686bd74c16ece91193d29f85b5f9ffa91 (HEAD -> master)
+Author: root <root@epsilon.htb>
+Date:   Wed Nov 17 17:41:07 2021 +0000
+
+    Fixed Typo
+
+commit b10dd06d56ac760efbbb5d254ea43bf9beb56d2d
+Author: root <root@epsilon.htb>
+Date:   Wed Nov 17 10:02:59 2021 +0000
+
+    Adding Costume Site
+
+commit c51441640fd25e9fba42725147595b5918eba0f1
+Author: root <root@epsilon.htb>
+Date:   Wed Nov 17 10:00:58 2021 +0000
+
+    Updatig Tracking API
+
+commit 7cf92a7a09e523c1c667d13847c9ba22464412f3
+Author: root <root@epsilon.htb>
+Date:   Wed Nov 17 10:00:28 2021 +0000
+
+    Adding Tracking API Module
+
+```
+
+<br />
+
+Let's go with the last one:
+
+<br />
+
+```bash
+❯ git show 7cf92a7a09e523c1c667d13847c9ba22464412f3
+commit 7cf92a7a09e523c1c667d13847c9ba22464412f3
+Author: root <root@epsilon.htb>
+Date:   Wed Nov 17 10:00:28 2021 +0000
+
+    Adding Tracking API Module
+
+diff --git a/track_api_CR_148.py b/track_api_CR_148.py
+new file mode 100644
+index 0000000..fed7ab9
+--- /dev/null
++++ b/track_api_CR_148.py
+@@ -0,0 +1,36 @@
++import io
++import os
++from zipfile import ZipFile
++from boto3.session import Session
++
++
++session = Session(
++    aws_access_key_id='AQLA5M37BDN6FJP76TDC',
++    aws_secret_access_key='OsK0o/glWwcjk2U3vVEowkvq5t4EiIreB+WdFo1A',
++    region_name='us-east-1',
++    endpoint_url='http://cloud.epsilong.htb')
++aws_lambda = session.client('lambda')    
++
++
++def files_to_zip(path):
++    for root, dirs, files in os.walk(path):
++        for f in files:
++            full_path = os.path.join(root, f)
++            archive_name = full_path[len(path) + len(os.sep):]
++            yield full_path, archive_name
++
++
+```
+
+<br />
+
+Great! We discovered `AWS` credentials in the output.
+
+We can set them using the `aws configure` command to interact with `cloud.epsilon.htb` subdomain:
+
+<br />
+
+```bash 
+❯ aws configure
+AWS Access Key ID [****************test]: AQLA5M37BDN6FJP76TDC
+AWS Secret Access Key [****************test]: OsK0o/glWwcjk2U3vVEowkvq5t4EiIreB+WdFo1A
+Default region name [us-east-1]:        
+Default output format [test]: json
+```
+
+<br />
