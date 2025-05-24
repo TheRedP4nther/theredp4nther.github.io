@@ -589,7 +589,7 @@ def lambda_handler(event, context):
 
 <br />
 
-If we recall, some functions in `server.py`, were using a `JWT` generated with the following line:
+If we recall, some functions in `server.py` were using a `JWT` generated with the following line:
 
 <br />
 
@@ -599,11 +599,11 @@ token=jwt.encode({"username":"admin"},secret,algorithm="HS256")
 
 <br />
 
-In this line, the script is creating an `admin` token with a secret.
+This line creates an `admin` token using a secret key.
 
 Maybe we can use the discovered `secret` to create this `token`.
 
-To test this, I used this simple Python 3 script:
+To test this, I used the following simple Python 3 script:
 
 <br />
 
@@ -621,7 +621,7 @@ print(colored(f"\n[+] Here you have your admin token to log into the web applica
 
 <br />
 
-If we run it, we will obtain the admin token:
+Running the script generates the admin token:
 
 <br />
 
@@ -639,7 +639,7 @@ Now, we can set the `token` using the browser's `DevTools` to bypass the login m
 
 <br />
 
-With the valid `JWT` token in place, we can now access the `/home` path as admin user and access restricted areas of the application.
+With the valid `JWT` token in place, we can now access the `/home` path as the admin user and reach restricted areas of the application.
 
 <br />
 
