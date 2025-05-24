@@ -8,7 +8,7 @@ tags: lfi database mysql sqlite3 localfileinclusion consul remotecodeexecution r
 
 <br />
 
-
+![1](../../../assets/images/Epsilon/1.png)
 
 <br />
 
@@ -33,7 +33,32 @@ As always we are going to start with a `nmap` scan to enumerate the open ports a
 <br />
 
 ```bash
+❯ nmap -p- 10.10.11.134 --open --min-rate 5000 -sS -T5 -Pn -n -sCV
+Starting Nmap 7.94SVN ( https://nmap.org ) at 2025-05-24 12:29 CEST
+Nmap scan report for 10.10.11.134
+Host is up (0.049s latency).
+Not shown: 65532 closed tcp ports (reset)
+PORT     STATE SERVICE VERSION
+22/tcp   open  ssh     OpenSSH 8.2p1 Ubuntu 4ubuntu0.4 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey: 
+|   3072 48:ad:d5:b8:3a:9f:bc:be:f7:e8:20:1e:f6:bf:de:ae (RSA)
+|   256 b7:89:6c:0b:20:ed:49:b2:c1:86:7c:29:92:74:1c:1f (ECDSA)
+|_  256 18:cd:9d:08:a6:21:a8:b8:b6:f7:9f:8d:40:51:54:fb (ED25519)
+80/tcp   open  http    Apache httpd 2.4.41
+|_http-title: 403 Forbidden
+| http-git: 
+|   10.10.11.134:80/.git/
+|     Git repository found!
+|     Repository description: Unnamed repository; edit this file 'description' to name the...
+|_    Last commit message: Updating Tracking API  # Please enter the commit message for...
+|_http-server-header: Apache/2.4.41 (Ubuntu)
+5000/tcp open  http    Werkzeug httpd 2.0.2 (Python 3.8.10)
+|_http-title: Costume Shop
+|_http-server-header: Werkzeug/2.0.2 Python/3.8.10
+Service Info: Host: 127.0.1.1; OS: Linux; CPE: cpe:/o:linux:linux_kernel
 
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 21.86 seconds
 ```
 
 <br />
