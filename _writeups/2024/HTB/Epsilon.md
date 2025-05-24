@@ -647,3 +647,6 @@ With the valid `JWT` token in place, we can now access the `/home` path as admin
 
 <br />
 
+## SSTI (Server Side Template Injection):
+
+<br />
