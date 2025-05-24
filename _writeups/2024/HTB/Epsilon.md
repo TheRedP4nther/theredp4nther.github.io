@@ -517,6 +517,44 @@ Archive:  code
 
 <br />
 
-### lambda_function.py
+### lambda_function.py:
+
+<br />
+
+The code is not really relevant:
+
+<br />
+
+```python3 
+import json
+
+secret='RrXCv`mrNe!K!4+5`wYq' #apigateway authorization for CR-124
+
+'''Beta release for tracking'''
+def lambda_handler(event, context):
+    try:
+        id=event['queryStringParameters']['order_id']
+        if id:
+            return {
+               'statusCode': 200,
+               'body': json.dumps(str(resp)) #dynamodb tracking for CR-342
+            }
+        else:
+            return {
+                'statusCode': 500,
+                'body': json.dumps('Invalid Order ID')
+            }
+    except:
+        return {
+                'statusCode': 500,
+                'body': json.dumps('Invalid Order ID')
+            }
+```
+
+<br />
+
+## Costume Login Bypass:
+
+<br />
 
 <br />
