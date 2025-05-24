@@ -650,3 +650,16 @@ With the valid `JWT` token in place, we can now access the `/home` path as the a
 ## SSTI (Server Side Template Injection):
 
 <br />
+
+When we analyzed the `server.py` script, we had located a `order` function that appeared to be vulnerable to SSTI.
+
+For this reason, we will test this application functionality before others.
+
+So we click on `order` and this is what we see:
+
+<br />
+
+
+
+<br />
+
