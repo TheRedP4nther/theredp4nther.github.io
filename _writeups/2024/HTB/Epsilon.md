@@ -154,7 +154,7 @@ The first one is a function named `verify_jwt`, which is used to validate the ad
 
 <br />
 
-```python3
+```python
 secret = '<secret_key>'
 
 def verify_jwt(token,key):
@@ -172,7 +172,7 @@ After that function, we have another one named `index`:
 
 <br />
 
-```python3 
+```python
 @app.route("/", methods=["GET","POST"])
 def index():
     if request.method=="POST":
@@ -197,7 +197,7 @@ The `home` function renders the homepage after verifying the admin's `JWT` using
 
 <br />
 
-```python3 
+```python
 @app.route("/home")
 def home():
     if verify_jwt(request.cookies.get('auth'),secret):
@@ -212,7 +212,7 @@ The `/track` route only implements auth verification for the POST request, but n
 
 <br />
 
-```python3
+```python
 @app.route("/track",methods=["GET","POST"])
 def track():
     if request.method=="POST":
@@ -234,7 +234,7 @@ This likely introduces an `SSTI` (Server Side Template Injection) vulnerability.
 
 <br />
 
-```python3 
+```python
 @app.route('/order',methods=["GET","POST"])
 def order():
     if verify_jwt(request.cookies.get('auth'),secret):
@@ -261,7 +261,7 @@ In the other script, we found what seems to be an `AWS` (Amazon Web Services) in
 
 <br />
 
-```python3 
+```python
 session = Session(
     aws_access_key_id='<aws_access_key_id>',
     aws_secret_access_key='<aws_secret_access_key>',
@@ -525,7 +525,7 @@ The code is not particularly relevant, it only contains a hardcoded `secret`:
 
 <br />
 
-```python3 
+```python
 import json
 
 secret='RrXCv`mrNe!K!4+5`wYq' #apigateway authorization for CR-124
@@ -561,7 +561,7 @@ If we recall, some functions in `server.py`, were using a JWT generated with the
 
 <br />
 
-```python3 
+```python
 token=jwt.encode({"username":"admin"},secret,algorithm="HS256")
 ```
 
@@ -575,7 +575,7 @@ To test this, I used this simple Python 3 script:
 
 <br />
 
-```python3 
+```python
 #!/usr/bin/env python3
 
 from termcolor import colored
