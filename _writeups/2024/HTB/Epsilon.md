@@ -83,7 +83,7 @@ If we list the website on the port 5000, we see a login panel:
 
 <br />
 
-
+![3](../../../assets/images/Epsilon/3.png)
 
 <br />
 
@@ -133,7 +133,5 @@ drwxr-xr-x root root 146 B  Sat May 24 12:45:34 2025  .git
 <br />
 
 As we can see, there are some interesting python3 scripts and the typical .git directory.
-
-
 
 <br />
