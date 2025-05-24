@@ -667,7 +667,7 @@ To test the function, we select another Costume, fill all the fields and click o
 
 <br />
 
-
+![7](../../../assets/images/Epsilon/7.png)
 
 <br />
 
@@ -681,7 +681,7 @@ To try this, we intercept the request using Burp Suite:
 
 <br />
 
-
+![8](../../../assets/images/Epsilon/8.png)
 
 <br />
 
@@ -695,7 +695,7 @@ And if we see the output...
 
 <br />
 
-Great! The result of the operation is reflected in the output.
+Great! The result of the operation is reflected.
 
 This means that the application is vulnerable to `SSTI`.
 
