@@ -87,7 +87,7 @@ If we browse the website on the port 5000, we're presented with a login panel:
 
 <br />
 
-We tried default credentials such as `admin:admin`, but without success.
+We tried default credentials such as `admin:admin` and basic SQL Injection trying to bypass the login, but without success.
 
 <br />
 
