@@ -79,7 +79,7 @@ Open Ports:
 
 <br />
 
-There is a website in the port 80, but if we try to list it, we have a `403 forbidden` status code:
+There is a website running on the port 80, but attempting to access it returns a `403 forbidden` status code:
 
 <br />
 
@@ -87,11 +87,11 @@ There is a website in the port 80, but if we try to list it, we have a `403 forb
 
 <br />
 
-Apparently, we can't do much more.
+At first glance, it seems there isn't much we can do here.
 
-But if we analyze the `nmap` output, we can see a `/.git` directory on this website.
+However, upon analyzing the `nmap` output, we notice the presence of a `.git` directory on the web server.
 
-Using the famous GitHub called [git-dumper](), we can use the following oneliner to dump this repository on our local machine:
+Using the popular tool [git-dumper](), we can retrieve the repository with the following oneliner:
 
 <br />
 
