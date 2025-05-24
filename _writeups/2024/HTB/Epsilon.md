@@ -103,13 +103,11 @@ There is a website running on the port 80, but attempting to access it returns a
 
 <br />
 
-At first glance, it seems there isn't much we can do here.
-
-<br />
-
 ## .git exposed:
 
 <br />
+
+At first glance, it seems there isn't much we can do here.
 
 However, upon analyzing the `nmap` output, we notice the presence of a `.git` directory on the web server.
 
