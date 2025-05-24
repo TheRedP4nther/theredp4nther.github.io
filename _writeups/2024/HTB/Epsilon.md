@@ -138,7 +138,7 @@ drwxr-xr-x root root 146 B  Sat May 24 12:45:34 2025  .git
 
 As we can see, there are some interesting Python scripts along with the usual `.git` directory.
 
-To understand better everything, we will analyze both them.
+To better understand everything, we will analyze both of them.
 
 <br />
 
@@ -146,11 +146,11 @@ To understand better everything, we will analyze both them.
 
 <br />
 
-Apparently, this script seems to be the source code of the website hosted on port 5000.
+This scripts appears to be the source code of the website running on port 5000.
 
 There are different functionalities with their own paths.
 
-The first one is a function called `verify_jwt`, used to verify admin identity:
+The first one is a function named `verify_jwt`, which is used to validate the admin's identity:
 
 <br />
 
@@ -189,11 +189,11 @@ def index():
         return render_template('index.html')
 ```
 
-In this function, we can see that the username admin with password admin should work, but as we see before, it didn't.
+In this function, we can see that the `admin:admin` credentials should work, but as we saw earlier, they didn't.
 
 <br />
 
-The `home` function renders home page verifying the admin `JWT` with the verify_jwt function.
+The `home` function renders the homepage after verifying the admin's `JWT` using the `verify_jwt` function.
 
 <br />
 
@@ -228,9 +228,9 @@ def track():
 
 Finally, we have the `order` function.
 
-This function is the most interesting one, because we can see how it is using the user input without any type of sanitization and renderizing a template with it.
+This is the most interesting part, as it uses `user input` without any sanitization and renders it directly in a `template`.
 
-Basically, it seems to have a SSTI (Server Side Template Injection) vulnerability.
+This likely introduces an `SSTI` (Server Side Template Injection) vulnerability.
 
 <br />
 
