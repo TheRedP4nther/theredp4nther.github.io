@@ -504,7 +504,7 @@ Using `get-function` along with the `--function-name` option, we can retrieve mo
 
 <br />
 
-There is an `URL` that points to a source.
+At the end of the output, there is an `URL` that points to a source.
 
 We can download this file using `wget`:
 
@@ -589,7 +589,7 @@ def lambda_handler(event, context):
 
 <br />
 
-If we recall, some functions in `server.py`, were using a JWT generated with the following line:
+If we recall, some functions in `server.py`, were using a `JWT` generated with the following line:
 
 <br />
 
@@ -639,7 +639,7 @@ Now, we can set the `token` using the browser's `DevTools` to bypass the login m
 
 <br />
 
-With the valid `JWT` token in place, we are now authenticated as the `admin` user and can access restricted areas of the application.
+With the valid `JWT` token in place, we can now access the `/home` path as admin user and access restricted areas of the application.
 
 <br />
 
