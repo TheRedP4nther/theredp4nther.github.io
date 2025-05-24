@@ -611,7 +611,7 @@ With the valid `JWT` token in place, we are now authenticated as the admin user 
 
 <br />
 
-
+![5](../../../assets/images/Epsilon/5.png)
 
 <br />
 
