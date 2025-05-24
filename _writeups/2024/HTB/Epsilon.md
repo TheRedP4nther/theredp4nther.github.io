@@ -78,3 +78,11 @@ Open Ports:
 # Http Enumeration: -> Port 80
 
 <br />
+
+There is a website in the port 80, but if we try to list it, we have a `403 forbidden` status code:
+
+<br />
+
+
+
+<br />
