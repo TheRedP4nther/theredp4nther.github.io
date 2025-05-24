@@ -63,3 +63,16 @@ Nmap done: 1 IP address (1 host up) scanned in 21.86 seconds
 
 <br />
 
+Open Ports:
+
+`Port 22` -> ssh 
+
+`Port 80` -> http 
+
+`Port 5000` -> http
+
+<br />
+
+# Http Enumeration: -> Port 80
+
+<br />
