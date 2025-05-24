@@ -720,7 +720,7 @@ After some time testing `Jinja2` payloads, I find one in [Payloads All The Thing
 
 We can now execute commands on the server as the `tom` user.
 
-At this point, we can launch a `reverse shell` to gain full access to the system:
+At this point, we can launch a `reverse shell` to gain full access to the system with the following payload:
 
 <br />
 
