@@ -101,7 +101,7 @@ Using the popular tool [git-dumper](), we can retrieve the repository with the f
 
 <br />
 
-Now, we can access the directory and access the `.git` content:
+Now, we can explore the directory and inspect the contents of the dumper `.git` repository:
 
 <br />
 
