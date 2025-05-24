@@ -86,3 +86,32 @@ There is a website in the port 80, but if we try to list it, we have a `403 forb
 ![2](../../../assets/images/Epsilon/2.png)
 
 <br />
+
+Apparently, we can't do much more.
+
+But if we analyze the `nmap` output, we can see a `/.git` directory on this website.
+
+Using the famous GitHub called [git-dumper](), we can use the following oneliner to dump this repository on our local machine:
+
+<br />
+
+```bash
+❯ python3 git_dumper.py http://10.10.11.134/.git EPSILON
+```
+
+<br />
+
+Now, we can access the directory and access the `.git` content:
+
+<br />
+
+```bash
+❯ ls -la
+drwxr-xr-x root root  64 B  Sat May 24 12:44:24 2025  .
+drwxr-xr-x root root 196 B  Sat May 24 12:44:21 2025  ..
+drwxr-xr-x root root 146 B  Sat May 24 12:45:34 2025  .git
+.rw-r--r-- root root 1.6 KB Sat May 24 12:44:24 2025  server.py
+.rw-r--r-- root root 1.1 KB Sat May 24 12:44:24 2025  track_api_CR_148.py
+```
+
+<br />
