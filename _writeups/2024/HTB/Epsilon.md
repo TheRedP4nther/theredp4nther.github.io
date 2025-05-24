@@ -168,6 +168,8 @@ def verify_jwt(token,key):
         return False
 ```
 
+<br />
+
 After that function, we have another one named `index`:
 
 <br />
