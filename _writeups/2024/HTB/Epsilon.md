@@ -195,8 +195,6 @@ def index():
 
 In this function, we can see that the `admin:admin` credentials should work, but as we saw earlier, they didn't.
 
-<br />
-
 The `home` function renders the homepage after verifying the admin's `JWT` using the `verify_jwt` function.
 
 <br />
