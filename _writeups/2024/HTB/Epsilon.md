@@ -146,72 +146,109 @@ To understand better everything, we will analyze both them.
 
 <br />
 
+Apparently, this script seems to be the source code of the website hosted on port 5000.
+
+There are different functionalities with their own paths.
+
+The first one is a function called `verify_jwt`, used to verify admin identity:
+
+<br />
+
 ```python3
-#!/usr/bin/python3
-
-import jwt
-from flask import *
-
-app = Flask(__name__)
 secret = '<secret_key>'
 
 def verify_jwt(token,key):
-	try:
-		username=jwt.decode(token,key,algorithms=['HS256',])['username']
-		if username:
-			return True
-		else:
-			return False
-	except:
-		return False
+    try:
+        username=jwt.decode(token,key,algorithms=['HS256',])['username']
+        if username:
+            return True
+        else:
+            return False
+    except:
+        return False
+```
 
+After that function, we have another one named `index`:
+
+<br />
+
+```python3 
 @app.route("/", methods=["GET","POST"])
 def index():
-	if request.method=="POST":
-		if request.form['username']=="admin" and request.form['password']=="admin":
-			res = make_response()
-			username=request.form['username']
-			token=jwt.encode({"username":"admin"},secret,algorithm="HS256")
-			res.set_cookie("auth",token)
-			res.headers['location']='/home'
-			return res,302
-		else:
-			return render_template('index.html')
-	else:
-		return render_template('index.html')
+    if request.method=="POST":
+        if request.form['username']=="admin" and request.form['password']=="admin":
+            res = make_response()
+            username=request.form['username']
+            token=jwt.encode({"username":"admin"},secret,algorithm="HS256")
+            res.set_cookie("auth",token)
+            res.headers['location']='/home'
+            return res,302
+        else:
+            return render_template('index.html')
+    else:
+        return render_template('index.html')
+```
 
+In this function, we can see that the username admin with password admin should work, but as we see before, it didn't.
+
+<br />
+
+The `home` function renders home page verifying the admin `JWT` with the verify_jwt function.
+
+<br />
+
+```python3 
 @app.route("/home")
 def home():
-	if verify_jwt(request.cookies.get('auth'),secret):
-		return render_template('home.html')
-	else:
-		return redirect('/',code=302)
+    if verify_jwt(request.cookies.get('auth'),secret):
+        return render_template('home.html')
+    else:
+        return redirect('/',code=302)
+```
 
+<br />
+
+The `/track` route only implements auth verification for the POST request, but not for the GET one.
+
+<br />
+
+```python3
 @app.route("/track",methods=["GET","POST"])
 def track():
-	if request.method=="POST":
-		if verify_jwt(request.cookies.get('auth'),secret):
-			return render_template('track.html',message=True)
-		else:
-			return redirect('/',code=302)
-	else:
-		return render_template('track.html')
+    if request.method=="POST":
+        if verify_jwt(request.cookies.get('auth'),secret):
+            return render_template('track.html',message=True)
+        else:
+            return redirect('/',code=302)
+    else:
+        return render_template('track.html')
+```
 
+<br />
+
+Finally, we have the `order` function.
+
+This function is the most interesting one, because we can see how it is using the user input without any type of sanitization and renderizing a template with it.
+
+Basically, it seems to have a SSTI (Server Side Template Injection) vulnerability.
+
+<br />
+
+```python3 
 @app.route('/order',methods=["GET","POST"])
 def order():
-	if verify_jwt(request.cookies.get('auth'),secret):
-		if request.method=="POST":
-			costume=request.form["costume"]
-			message = '''
-			Your order of "{}" has been placed successfully.
-			'''.format(costume)
-			tmpl=render_template_string(message,costume=costume)
-			return render_template('order.html',message=tmpl)
-		else:
-			return render_template('order.html')
-	else:
-		return redirect('/',code=302)
-app.run(debug='true')
+    if verify_jwt(request.cookies.get('auth'),secret):
+        if request.method=="POST":
+            costume=request.form["costume"]
+            message = '''
+            Your order of "{}" has been placed successfully.
+            '''.format(costume)
+            tmpl=render_template_string(message,costume=costume)
+            return render_template('order.html',message=tmpl)
+        else:
+            return render_template('order.html')
+    else:
+        return redirect('/',code=302)
 ```
 
 <br />
