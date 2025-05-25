@@ -22,7 +22,7 @@ Difficulty -> Medium.
 
 <br />
 
-
+Hello hackers! Today we’ll tackle the Epsilon Machine, a Medium difficulty Linux challenge. We’ll begin by discovering an exposed Git repository containing source code and AWS credentials. Using them, we interact with a private Lambda endpoint to extract a secret key used for JWT authentication. This allows us to forge an admin token and access restricted functionality, where we find a Jinja2-based SSTI that grants us remote code execution. Once inside the machine, we enumerate a backup cronjob that misuses symbolic links and tar, which we exploit to access the root directory and retrieve the final flag.
 
 <br />
 
