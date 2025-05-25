@@ -977,7 +977,7 @@ drwxr-xr-x  2 tom tom 4096 Dec 20  2021 src
 
 <br />
 
-Now, we can get the root `id_rsa` and connect to localhost as superuser:
+We can get the root `id_rsa` and connect to localhost as superuser:
 
 <br />
 
