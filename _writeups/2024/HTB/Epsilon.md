@@ -915,6 +915,8 @@ tom@epsilon:/tmp/Privesc$ bash escalation.sh
 
 And if we check the `/var/backups/web_backups` directory, we can confirm that the last backup created is bigger than the others.
 
+<br />
+
 ```bash
 tom@epsilon:/var/backups/web_backups$ ls -l
 total 81392
