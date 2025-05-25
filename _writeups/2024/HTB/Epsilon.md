@@ -823,8 +823,6 @@ check_file=`date +%N`
 
 <br />
 
-- Script functionality step by step:
-
 1.- Deletes all contents from `/opt/backups`.
 
 2.- Creates a tar archive on `/opt/backups` containing the contents of `/var/www/app` directory.
