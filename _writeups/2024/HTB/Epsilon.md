@@ -705,7 +705,7 @@ Great! The result of the expression is reflected in the response.
 
 This confirms that the application is vulnerable to `SSTI`.
 
-After some time testing `Jinja2` payloads, I find one in [Payloads All The Things] that allow us to run a command:
+After some time testing `Jinja2` payloads, I find one in [Payloads All The Things](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/598d2ca3fac9e462b0cecfac114bd969b4ce61ee/Server%20Side%20Template%20Injection#jinja2---remote-code-execution) that allow us to run a command:
 
 <br />
 
