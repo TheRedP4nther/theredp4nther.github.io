@@ -768,3 +768,57 @@ fabadbf5cf23291b89cb14f093xxxxxx
 # Privilege Escalation: tom -> root
 
 <br />
+
+Once inside the system, we execute `pspy64` to monitor processes and identify any scheduled `cron jobs` running at regular intervals.
+
+<br />
+
+```bash
+tom@epsilon:/tmp/Privesc$ ./pspy64 
+pspy - version: v1.2.1 - Commit SHA: f9e6a1590a4312b9faa093d8dc84e19567977a6d
+
+
+     ██▓███    ██████  ██▓███ ▓██   ██▓
+    ▓██░  ██▒▒██    ▒ ▓██░  ██▒▒██  ██▒
+    ▓██░ ██▓▒░ ▓██▄   ▓██░ ██▓▒ ▒██ ██░
+    ▒██▄█▓▒ ▒  ▒   ██▒▒██▄█▓▒ ▒ ░ ▐██▓░
+    ▒██▒ ░  ░▒██████▒▒▒██▒ ░  ░ ░ ██▒▓░
+    ▒▓▒░ ░  ░▒ ▒▓▒ ▒ ░▒▓▒░ ░  ░  ██▒▒▒ 
+    ░▒ ░     ░ ░▒  ░ ░░▒ ░     ▓██ ░▒░ 
+    ░░       ░  ░  ░  ░░       ▒ ▒ ░░  
+                   ░           ░ ░     
+                               ░ ░     
+
+Config: Printing events (colored=true): processes=true | file-system-events=false ||| Scanning for processes every 100ms and on inotify events ||| Watching directories: [/usr /tmp /etc /home /var /opt] (recursive) | [] (non-recursive)
+Draining file system events due to startup...
+...[snip]...
+2025/05/25 11:49:01 CMD: UID=0     PID=2133   | /bin/bash /usr/bin/backup.sh
+...[snip]...
+
+```
+
+<br />
+
+### backup.sh:
+
+<br />
+
+Reviewing the `pspy64` output, we identify a bash script `/usr/bin/backup.sh` executed as `root` via a cron job.
+
+To investigate further, we examine the contents of the script:
+
+<br />
+
+```bash
+#!/bin/bash
+file=`date +%N`
+/usr/bin/rm -rf /opt/backups/*
+/usr/bin/tar -cvf "/opt/backups/$file.tar" /var/www/app/
+sha1sum "/opt/backups/$file.tar" | cut -d ' ' -f1 > /opt/backups/checksum
+sleep 5
+check_file=`date +%N`
+/usr/bin/tar -chvf "/var/backups/web_backups/${check_file}.tar" /opt/backups/checksum "/opt/backups/$file.tar"
+/usr/bin/rm -rf /opt/backups/*
+```
+
+<br />
