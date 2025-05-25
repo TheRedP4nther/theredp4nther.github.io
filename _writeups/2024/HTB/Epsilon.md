@@ -822,3 +822,19 @@ check_file=`date +%N`
 ```
 
 <br />
+
+- Script functionality step by step:
+
+1.- Deletes all contents from `/opt/backups`.
+
+2.- Creates a tar archive on `/opt/backups` containing the contents of `/var/www/app` directory.
+
+3.- Generates a file named `/opt/backups/checksum` containing the `SHA1` hash of the created tar archive.
+
+4.- Waits for 5 seconds.
+
+5.- Creates another tar archive using the `-h` flag (which follows symbolic links). It includes the `checksum` file and the previously created backup, and stores it in `/var/backups/web_backups/`.
+
+6.- Deletes all contents in `/opt/backups` again to clean up.
+
+<br />
