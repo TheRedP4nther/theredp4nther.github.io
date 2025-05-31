@@ -391,7 +391,7 @@ Interestingly, we find a plaintext password embedded in the user comment field: 
 
 <br />
 
-As michael.wrightson credentials, they work for SMB:
+As michael.wrightson credentials, they work for `SMB`:
 
 <br />
 
@@ -403,7 +403,7 @@ SMB         10.10.11.35     445    CICADA-DC        [+] cicada.htb\david.oreliou
 
 <br />
 
-But don't work for WINRM:
+But don't work for `WINRM`:
 
 <br />
 
