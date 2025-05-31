@@ -118,13 +118,13 @@ Relevant Open Ports:
 
 <br />
 
-First, we add the following domains from the nmap output to our `/etc/hosts` file:
+The domain `cicada.htb` and the hostname `CICADA-DC` appear across multiple services and ports, so I’ll add them to my `/etc/hosts` file:
 
-- `cicada.htb`
+<br />
 
-- `CICADA-DC`
-
-- `CICADA-DC.cicada.htb`
+```bash
+10.10.11.35 cicada.htb CICADA-DC
+```
 
 <br />
 
