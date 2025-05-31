@@ -326,7 +326,7 @@ SMB         10.10.11.35     445    CICADA-DC        [+] cicada.htb\michael.wrigh
 
 <br />
 
-However, they don't work for WinRM:
+However, do now work for WinRM:
 
 <br />
 
