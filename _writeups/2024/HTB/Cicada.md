@@ -118,7 +118,7 @@ Relevant Open Ports:
 
 <br />
 
-First , we add the following domains from the nmap output to our `/etc/hosts` file:
+First, we add the following domains from the nmap output to our `/etc/hosts` file:
 
 - `cicada.htb`
 
@@ -132,7 +132,7 @@ First , we add the following domains from the nmap output to our `/etc/hosts` fi
 
 <br />
 
-To start enumerating this service, we will run the most basic [Crackmapexec](https://github.com/byt3bl33d3r/CrackMapExec) oneliner to enumerate some interesting information about the Windows system that we're auditing:
+To start enumerating this service, we'll run a basic [Crackmapexec](https://github.com/byt3bl33d3r/CrackMapExec) oneliner to enumerate some interesting information about the Windows system that we're auditing:
 
 <br />
 
@@ -143,11 +143,11 @@ SMB         10.10.11.35     445    CICADA-DC        [*] Windows 10.0 Build 20348
 
 <br />
 
-As we can see, there is a Windows 10 Build 20348 and x64 bits.
+As we can see, the system is running `Windows 10 Build 20348`, 64-bit.
 
-We confirm too the Domain Controller name, that is `CICADA-DC` and the domain, `cicada.htb`.
+We also confirm the Domain Controller name, which is `CICADA-DC`, and the domain `cicada.htb`.
 
-To continue enumerating this service, we will try to list share resources using a random fake user name with a null session:
+To continue enumerating, we'll try to list shared resources using a random fake user name with a null session:
 
 <br />
 
