@@ -535,3 +535,46 @@ de493ce3050b87ade9fd7a6c82xxxxxx
 
 <br />
 
+While a time enumerating the system, we discover that `emily.oscars` is part of the `Backup Operators` group:
+
+<br />
+
+```bash
+*Evil-WinRM* PS C:\Users\emily.oscars.CICADA\Desktop> net user emily.oscars
+User name                    emily.oscars
+Full Name                    Emily Oscars
+Comment
+User's comment
+Country/region code          000 (System Default)
+Account active               Yes
+Account expires              Never
+
+Password last set            8/22/2024 2:20:17 PM
+Password expires             Never
+Password changeable          8/23/2024 2:20:17 PM
+Password required            Yes
+User may change password     Yes
+
+Workstations allowed         All
+Logon script
+User profile
+Home directory
+Last logon                   Never
+
+Logon hours allowed          All
+
+Local Group Memberships      *Backup Operators     *Remote Management Use
+Global Group memberships     *Domain Users
+The command completed successfully.
+
+```
+
+<br />
+
+This missconfiguration is quite dangerous, as users in this group are allowed to `back up` and restore any file on the system.
+
+
+
+There are many techniques to exploit this group, we're going to see 2 different ways to do it.
+
+## 
