@@ -484,7 +484,7 @@ Write-Host "Backup completed successfully. Backup file saved to: $backupFilePath
 
 <br />
 
-Analyzing it we found more credentials: `emily.oscars:Q!3@Lp#M6b*7t*Vt`.
+Upon analyzing it, we discover additional credentials: `emily.oscars:Q!3@Lp#M6b*7t*Vt`.
 
 <br />
 
@@ -492,7 +492,7 @@ Analyzing it we found more credentials: `emily.oscars:Q!3@Lp#M6b*7t*Vt`.
 
 <br />
 
-These new creds work for both smb and winrm:
+These new credentials work for both SMB and WinRM:
 
 <br />
 
@@ -508,7 +508,8 @@ HTTP        10.10.11.35     5985   CICADA-DC        [+] cicada.htb\emily.oscars:
 
 <br />
 
-As we know, at this point, we can use the famous tool `evil-winrm` to gain access to the system and list the `user.txt` flag:
+At this point, we can use the well known tool `evil-winrm` to gain a shell in the system and retrieve the `user.txt` flag:
+
 
 <br />
 
@@ -530,7 +531,7 @@ de493ce3050b87ade9fd7a6c82xxxxxx
 
 <br />
 
-# Privilage Escalation: emily.oscars -> NT  AUTHORITY\SYSTEM 
+# Privilege Escalation: emily.oscars -> NT  AUTHORITY\SYSTEM 
 
 <br />
 
