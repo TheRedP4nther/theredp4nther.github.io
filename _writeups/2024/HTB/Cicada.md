@@ -131,3 +131,40 @@ First , we add the following domains from the nmap output to our `/etc/hosts` fi
 # SMB Enumeration: -> Port 445 
 
 <br />
+
+To start enumerating this service, we will run the most basic [Crackmapexec](https://github.com/byt3bl33d3r/CrackMapExec) oneliner to enumerate some interesting information about the Windows system that we're auditing:
+
+<br />
+
+```bash
+❯ cme smb 10.10.11.35
+SMB         10.10.11.35     445    CICADA-DC        [*] Windows 10.0 Build 20348 x64 (name:CICADA-DC) (domain:cicada.htb) (signing:True) (SMBv1:False)
+```
+
+<br />
+
+As we can see, there is a Windows 10 Build 20348 and x64 bits.
+
+We confirm too the Domain Controller name, that is `CICADA-DC` and the domain, `cicada.htb`.
+
+To continue enumerating this service, we will try to list share resources using a random fake user name with a null session:
+
+<br />
+
+```bash
+❯ cme smb 10.10.11.35 -u 'RandomFakeUsername' -p '' --shares
+SMB         10.10.11.35     445    CICADA-DC        [*] Windows 10.0 Build 20348 x64 (name:CICADA-DC) (domain:cicada.htb) (signing:True) (SMBv1:False)
+SMB         10.10.11.35     445    CICADA-DC        [+] cicada.htb\RandomFakeUsername: 
+SMB         10.10.11.35     445    CICADA-DC        [*] Enumerated shares
+SMB         10.10.11.35     445    CICADA-DC        Share           Permissions     Remark
+SMB         10.10.11.35     445    CICADA-DC        -----           -----------     ------
+SMB         10.10.11.35     445    CICADA-DC        ADMIN$                          Remote Admin
+SMB         10.10.11.35     445    CICADA-DC        C$                              Default share
+SMB         10.10.11.35     445    CICADA-DC        DEV                             
+SMB         10.10.11.35     445    CICADA-DC        HR              READ            
+SMB         10.10.11.35     445    CICADA-DC        IPC$            READ            Remote IPC
+SMB         10.10.11.35     445    CICADA-DC        NETLOGON                        Logon server share 
+SMB         10.10.11.35     445    CICADA-DC        SYSVOL                          Logon server share
+```
+
+<br />
