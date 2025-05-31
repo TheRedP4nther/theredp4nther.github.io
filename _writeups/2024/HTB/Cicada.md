@@ -132,7 +132,7 @@ First, we add the following domains from the nmap output to our `/etc/hosts` fil
 
 <br />
 
-To start enumerating this service, we'll run a basic [Crackmapexec](https://github.com/byt3bl33d3r/CrackMapExec) oneliner to enumerate some interesting information about the Windows system that we're auditing:
+To start enumerating this service, we'll run a basic [CrackMapExec](https://github.com/byt3bl33d3r/CrackMapExec) oneliner to enumerate some interesting information about the Windows system that we're auditing:
 
 <br />
 
@@ -145,9 +145,9 @@ SMB         10.10.11.35     445    CICADA-DC        [*] Windows 10.0 Build 20348
 
 As we can see, the system is running `Windows 10 Build 20348`, 64-bit.
 
-We also confirm the Domain Controller name, which is `CICADA-DC`, and the domain `cicada.htb`.
+We also confirm the Domain Controller's name, which is `CICADA-DC`, and the domain `cicada.htb`.
 
-To continue enumerating, we'll try to list shared resources using a random fake user name with a null session:
+To continue enumerating, we'll try to list `shared resources` using a fake username with a `null session`:
 
 <br />
 
@@ -165,6 +165,59 @@ SMB         10.10.11.35     445    CICADA-DC        HR              READ
 SMB         10.10.11.35     445    CICADA-DC        IPC$            READ            Remote IPC
 SMB         10.10.11.35     445    CICADA-DC        NETLOGON                        Logon server share 
 SMB         10.10.11.35     445    CICADA-DC        SYSVOL                          Logon server share
+```
+
+<br />
+
+The `HR` share is unusual, and we have read permissions on it.
+
+We can view its content using `smbclient`:
+
+<br />
+
+```bash
+❯ smbclient //cicada.htb/HR -U "RandomFakeUsername"
+Password for [WORKGROUP\RandomFakeUsername]:
+Try "help" to get a list of possible commands.
+smb: \> ls
+  .                                   D        0  Thu Mar 14 13:29:09 2024
+  ..                                  D        0  Thu Mar 14 13:21:29 2024
+  Notice from HR.txt                  A     1266  Wed Aug 28 19:31:48 2024
+
+		4168447 blocks of size 4096. 481630 blocks available
+```
+
+<br />
+
+There is a file called `"Notice from HR.txt"`.
+
+We can download it to view its contents:
+
+<br />
+
+```
+Dear new hire!
+
+Welcome to Cicada Corp! We're thrilled to have you join our team. As part of our security protocols, it's essential that you change your default password to something unique and secure.
+
+Your default password is: Cicada$M6Corpb*@Lp#nZp!8
+
+To change your password:
+
+1. Log in to your Cicada Corp account** using the provided username and the default password mentioned above.
+2. Once logged in, navigate to your account settings or profile settings section.
+3. Look for the option to change your password. This will be labeled as "Change Password".
+4. Follow the prompts to create a new password**. Make sure your new password is strong, containing a mix of uppercase letters, lowercase letters, numbers, and special characters.
+5. After changing your password, make sure to save your changes.
+
+Remember, your password is a crucial aspect of keeping your account secure. Please do not share your password with anyone, and ensure you use a complex password.
+
+If you encounter any issues or need assistance with changing your password, don't hesitate to reach out to our support team at support@cicada.htb.
+
+Thank you for your attention to this matter, and once again, welcome to the Cicada Corp team!
+
+Best regards,
+Cicada Corp
 ```
 
 <br />
