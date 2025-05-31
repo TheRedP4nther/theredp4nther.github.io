@@ -30,7 +30,7 @@ Difficulty -> Easy.
 
 <br />
 
-We start by running the typical `nmap` scan to see which ports are open:
+We start by running a typical `nmap` scan to see which ports are open:
 
 <br />
 
@@ -96,17 +96,17 @@ Nmap done: 1 IP address (1 host up) scanned in 136.99 seconds
 
 Relevant Open Ports:
 
-- `Port 53`   -> dn
+- `Port 53`   -> dns
 
 - `Port 88`   -> kerberos
 
-- `Port 135`  -> rp
+- `Port 135`  -> rpc
 
-- `Port 139`  -> netbio
+- `Port 139`  -> netbios
 
-- `Port 389`  -> lda
+- `Port 389`  -> ldap
 
-- `Port 445`  -> sm
+- `Port 445`  -> smb
 
 - `Port 464`  -> kpasswd (kerberos password change)
 
@@ -118,4 +118,16 @@ Relevant Open Ports:
 
 <br />
 
-# 
+First , we add the following domains from the nmap output to our `/etc/hosts` file:
+
+- `cicada.htb`
+
+- `CICADA-DC`
+
+- `CICADA-DC.cicada.htb`
+
+<br />
+
+# SMB Enumeration: -> Port 445 
+
+<br />
