@@ -633,7 +633,7 @@ DefaultAccount:503:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c0
 
 <br />
 
-## Reg save \ Diskshadow / Robocopy / NTDS.DIT:
+## Reg Save: Dumping NTDS.DIT via Diskshadow & Robocopy
 
 <br />
 
@@ -753,7 +753,7 @@ We download this file using WinRM.
 
 <br />
 
-## Extract Hashes:
+### Extract Hashes:
 
 <br />
 
