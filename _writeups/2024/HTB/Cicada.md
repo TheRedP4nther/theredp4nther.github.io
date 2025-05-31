@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: smb winrm defaultpassword missconfiguration crackmapexec sam system ntds.dit robocopy regsave ntlm lm passthehash
+tags: smb winrm defaultpassword misconfiguration crackmapexec sam system ntds.dit robocopy regsave ntlm lm passthehash
 ---
 
 <br />
