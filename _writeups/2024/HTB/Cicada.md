@@ -22,7 +22,7 @@ Difficulty -> Easy.
 
 <br />
 
-
+Hello hackers! Today we’ll tackle the Cicada Machine, an Easy Windows challenge. We’ll begin by enumerating SMB shares to uncover a welcome note containing a default password. Using this, we authenticate as a domain user and find another user's plaintext password in an AD description field. With that access, we discover a PowerShell script revealing more credentials that allow WinRM login. For privilege escalation, we take advantage of the Backup Operators group to dump system secrets and extract the Administrator hash, which we use to perform a Pass-the-Hash attack and gain full SYSTEM access.
 
 <br />
 
@@ -809,7 +809,7 @@ cicada.htb\emily.oscars:des-cbc-md5:fd4a5497d38067cd
 
 <br />
 
-Finally, we can apply PassTheHash technique to log into nt authority\system account using `psexec.py`:
+Finally, we can apply Pass-the-Hash technique to log into nt authority\system account using `psexec.py`:
 
 <br />
 
