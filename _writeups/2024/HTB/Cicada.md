@@ -577,6 +577,8 @@ This missconfiguration is quite dangerous, as users in this group are allowed to
 
 There are many techniques to exploit this group, we're going to see 2 different ways to do it.
 
+<br />
+
 ## Reg save / SAM:
 
 <br />
