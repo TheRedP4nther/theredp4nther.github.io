@@ -314,7 +314,7 @@ We've obtained valid credentials: `michael.wrightson:Cicada$M6Corpb*@Lp#nZp!8`
 
 <br />
 
-These credentials work for `SMB`:
+These credentials work for SMB:
 
 <br />
 
@@ -326,7 +326,7 @@ SMB         10.10.11.35     445    CICADA-DC        [+] cicada.htb\michael.wrigh
 
 <br />
 
-However, they don't work for `WINRM`:
+However, they don't work for `WinRM`:
 
 <br />
 
@@ -339,7 +339,7 @@ HTTP        10.10.11.35     5985   CICADA-DC        [-] cicada.htb\michael.wrigh
 
 <br />
 
-This user doesn't has any additional permissions or access to a new share resources:
+This user doesn't have any additional permissions or access to a new share resources:
 
 <br />
 
@@ -361,7 +361,7 @@ SMB         10.10.11.35     445    CICADA-DC        SYSVOL          READ        
 
 <br />
 
-Another useful CrackMapExec flag is `--users`, which serves a similar purpose to `--rid-brute`, but with a key difference: it requires valid `SMB` credentials.
+Another useful CrackMapExec flag is `--users`, which is similar to `--rid-brute` but requires valid `SMB` credentials.
 
 <br />
 
@@ -383,7 +383,9 @@ SMB         10.10.11.35     445    CICADA-DC        cicada.htb\emily.oscars
 
 <br />
 
-Interestingly, we find a plaintext password embedded in the user comment field: `david.orelious:aRt$Lp#7t*VQ!3`. This is a common misconfiguration in real-world environments and could lead to direct access.
+Interestingly, we find a plaintext password embedded in the user comment field: `david.orelious:aRt$Lp#7t*VQ!3`. 
+
+This is a common `misconfiguration` in real world environments and could lead to direct access.
 
 <br />
 
@@ -391,7 +393,7 @@ Interestingly, we find a plaintext password embedded in the user comment field: 
 
 <br />
 
-As michael.wrightson credentials, they work for `SMB`:
+Just like `michael.wrightson’s` credentials, these work for SMB:
 
 <br />
 
@@ -403,7 +405,7 @@ SMB         10.10.11.35     445    CICADA-DC        [+] cicada.htb\david.oreliou
 
 <br />
 
-But don't work for `WINRM`:
+However, don't work for `WinRM`:
 
 <br />
 
@@ -415,3 +417,5 @@ HTTP        10.10.11.35     5985   CICADA-DC        [-] cicada.htb\david.oreliou
 ```
 
 <br />
+
+
