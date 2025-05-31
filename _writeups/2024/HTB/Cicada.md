@@ -573,7 +573,11 @@ The command completed successfully.
 
 This missconfiguration is quite dangerous, as users in this group are allowed to `back up` and restore any file on the system.
 
+<br />
+
 ![2](../../../assets/images/Cicada/2.png)
+
+<br />
 
 There are many techniques to exploit this group, we're going to see 2 different ways to do it.
 
