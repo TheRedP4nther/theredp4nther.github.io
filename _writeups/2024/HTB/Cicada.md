@@ -226,11 +226,11 @@ Cicada Corp
 
 <br />
 
-Apparently, this is a welcome note to new members in the company.
+Apparently, this is a welcome note for new employees at the company.
 
-The most relevant thing in the output, is the company default password: `Cicada$M6Corpb*@Lp#nZp!8`.
+The most relevant detail in the output, is the company default password: `Cicada$M6Corpb*@Lp#nZp!8`.
 
-With this information, we can try to enumerate some user with CrackMapExec `--rid-brute` flag and view if they still using the default password.
+With this information, we can try to enumerate users with CrackMapExec’s  `--rid-brute` flag and see if any of them are still using the default password.
 
 <br />
 
@@ -273,9 +273,9 @@ SMB         10.10.11.35     445    CICADA-DC        1601: CICADA\emily.oscars (S
 
 <br />
 
-There are a lot of users available.
+There are a lot of users listed.
 
-We select the most interesting and put them into a file called `users.txt`:
+We select the most interesting ones and put them into a file called `users.txt`:
 
 <br />
 
@@ -291,7 +291,7 @@ emily.oscars
 
 <br />
 
-Now, we can try the `default password` for every user in the file:
+Now, we can try the `default password` against each user in the file:
 
 <br />
 
@@ -306,7 +306,7 @@ SMB         10.10.11.35     445    CICADA-DC        [+] cicada.htb\michael.wrigh
 
 <br />
 
-We have valid credentials: `michael.wrightson:Cicada$M6Corpb*@Lp#nZp!8`
+We've obtained valid credentials: `michael.wrightson:Cicada$M6Corpb*@Lp#nZp!8`
 
 <br />
 
