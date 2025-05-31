@@ -228,11 +228,9 @@ Cicada Corp
 
 Apparently, this is a welcome note for new employees at the company.
 
-The most relevant detail in the output, is the company default password: `Cicada$M6Corpb*@Lp#nZp!8`.
+The most relevant detail in the output is the company default password: `Cicada$M6Corpb*@Lp#nZp!8`.
 
-With this information, we can try to enumerate users with CrackMapExec’s  `--rid-brute` flag and see if any of them are still using the default password.
-
-
+With this information, we can use CrackMapExec’s `--rid-brute` flag to enumerate users and check whether any of them are still using the default password.
 
 <br />
 
@@ -277,7 +275,7 @@ SMB         10.10.11.35     445    CICADA-DC        1601: CICADA\emily.oscars (S
 
 There are a lot of users listed.
 
-We select the most interesting ones and put them into a file called `users.txt`:
+We select the most interesting ones and save them into a file called `users.txt`:
 
 <br />
 
@@ -293,7 +291,7 @@ emily.oscars
 
 <br />
 
-Now, we can try the `default password` against each user in the file:
+Now, we can test the `default password` against each user in the file:
 
 <br />
 
@@ -314,7 +312,7 @@ We've obtained valid credentials: `michael.wrightson:Cicada$M6Corpb*@Lp#nZp!8`
 
 <br />
 
-This credentials work for SMB:
+These credentials work for `SMB`:
 
 <br />
 
@@ -326,7 +324,7 @@ SMB         10.10.11.35     445    CICADA-DC        [+] cicada.htb\michael.wrigh
 
 <br />
 
-But they didn't work for WINRM:
+However, they don't work for `WINRM`:
 
 <br />
 
