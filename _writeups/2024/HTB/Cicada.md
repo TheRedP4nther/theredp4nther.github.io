@@ -809,7 +809,7 @@ cicada.htb\emily.oscars:des-cbc-md5:fd4a5497d38067cd
 
 <br />
 
-Finally, we can apply Pass-the-Hash technique to log into nt authority\system account using `psexec.py`:
+Finally, we can apply `Pass-the-Hash` technique to log into nt authority\system account using `psexec.py`:
 
 <br />
 
