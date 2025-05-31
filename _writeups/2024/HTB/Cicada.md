@@ -169,6 +169,10 @@ SMB         10.10.11.35     445    CICADA-DC        SYSVOL                      
 
 <br />
 
+## HR
+
+<br />
+
 The `HR` share is unusual, and we have read permissions on it.
 
 We can view its content using `smbclient`:
@@ -221,3 +225,5 @@ Cicada Corp
 ```
 
 <br />
+
+
