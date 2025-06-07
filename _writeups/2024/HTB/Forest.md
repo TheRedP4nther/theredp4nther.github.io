@@ -100,7 +100,7 @@ Nmap done: 1 IP address (1 host up) scanned in 79.43 seconds
 
 <br />
 
-Relevant Open Ports:
+Relevant open ports:
 
 - `Port 53`   -> dns
 
@@ -133,3 +133,90 @@ The domain `htb.local` and the FQDN `FOREST.htb.local` appear across multiple se
 ```
 
 <br />
+
+# DNS Enumeration: -> Port 53
+
+<br />
+
+We can resolve `htb.local` to make a DNS consult with `dig`:
+
+<br />
+
+```bash
+❯ dig htb.local @10.10.10.161
+
+; <<>> DiG 9.18.33-1~deb12u2-Debian <<>> htb.local @10.10.10.161
+;; global options: +cmd
+;; Got answer:
+;; WARNING: .local is reserved for Multicast DNS
+;; You are currently testing what happens when an mDNS query is leaked to DNS
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 62451
+;; flags: qr aa rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 4000
+; COOKIE: 5b92f1f0c9eb1852 (echoed)
+;; QUESTION SECTION:
+;htb.local.			IN	A
+
+;; ANSWER SECTION:
+htb.local.		600	IN	A	10.10.10.161
+
+;; Query time: 60 msec
+;; SERVER: 10.10.10.161#53(10.10.10.161) (UDP)
+;; WHEN: Sat Jun 07 12:08:08 CEST 2025
+;; MSG SIZE  rcvd: 66
+```
+
+<br />
+
+But we can't do a complete zone transfer:
+
+<br />
+
+```bash
+❯ dig axfr htb.local @10.10.10.161
+
+; <<>> DiG 9.18.33-1~deb12u2-Debian <<>> axfr htb.local @10.10.10.161
+;; global options: +cmd
+; Transfer failed.
+```
+
+<br />
+
+# SMB Enumeration: -> Port 445
+
+<br />
+
+To start enumerating some information about the system, we will run a typical `netexec` oneliner:
+
+<br />
+
+```bash
+❯ netexec smb htb.local
+SMB         10.10.10.161    445    FOREST           [*] Windows Server 2016 Standard 14393 x64 (name:FOREST) (domain:htb.local) (signing:True) (SMBv1:True)
+```
+
+<br />
+
+With this output, we verify the domain `htb.local`, which we discovered before with nmap.
+
+We can verify that we're dealing with a `Windows Server 2016 Standard` and `14393` build version.
+
+Continuing enumeration, we use a fake user and pass to get more information without success:
+
+<br />
+
+```bash
+❯ netexec smb htb.local -u "RandomFakeUser" -p "RandomFakePass" --shares
+SMB         10.10.10.161    445    FOREST           [*] Windows Server 2016 Standard 14393 x64 (name:FOREST) (domain:htb.local) (signing:True) (SMBv1:True)
+SMB         10.10.10.161    445    FOREST           [-] htb.local\RandomFakeUser:RandomFakePass STATUS_LOGON_FAILURE 
+```
+
+<br />
+
+Trying to use a null session doesn't work either.
+
+<br />
+
+# LDAP Enumeration: -> Port 389
