@@ -597,6 +597,6 @@ Once the file is correctly uploaded and ingested, we can click on `"Explore"` ->
 
 <br />
 
-
+![5](../../../assets/images/Forest/5.png)
 
 <br />
