@@ -436,7 +436,7 @@ mkdir BloodHound; cd BloodHound
 
 <br />
 
-- 2.- Get the `BloodHound-cli` compressed file:
+- 2.- Download the `bloodhound-cli` archive:
 
 <br />
 
@@ -510,7 +510,7 @@ As shown, we need to upload a file with our Windows system target information.
 
 <br />
 
-To collect this information remotely we will use [bloodhound-python](https://github.com/dirkjanm/BloodHound.py).
+To collect this information remotely, we will use [bloodhound-python](https://github.com/dirkjanm/BloodHound.py).
 
 The only command that we need to execute is the following:
 
@@ -548,7 +548,7 @@ INFO: Compressing output into 20250607140718_bloodhound.zip
 
 There was an error in the output: `"Clock skew too great"`.
 
-This error seems that we have a big time difference between our system and the target.
+This error indicates that there's a significant time difference between our system and the target.
 
 The solution is to run `ntpdate`:
 
@@ -591,11 +591,8 @@ INFO: Compressing output into 20250607141748_bloodhound.zip
 
 <br />
 
-Now that we have the `.zip` file, we can upload it to `BloodHound` for analysis clicking on `"Start by uploading your data"` -> `"Upload File(s)"`.
+Now that we have the `.zip` file, we can upload it to `BloodHound` for analysis by clicking on `"Start by uploading your data"` -> `"Upload File(s)"`.
 
 Once the file is correctly uploaded and ingested, we can click on `"Explore"` -> `"Cypher"` and search for `"Shortest Paths to Domain Admins"`:
 
 <br />
-
-
-
