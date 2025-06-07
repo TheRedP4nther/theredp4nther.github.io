@@ -424,6 +424,8 @@ Installing this tool can be a bit tricky if it's your first time.
 
 To make this easier, follow this step by step guide:
 
+<br />
+
 - 1.- Create a directory to store all the installation resources.
 
 <br />
