@@ -318,7 +318,7 @@ group:[test] rid:[0x13ed]
 
 <br />
 
-There is a well-known vulnerability called `AS-REP Roasting Attack` that can allow us to retrieve a user's Kerberos hash and brute-force it to obtain valid credentials. This [page](https://blog.netwrix.com/2022/11/03/cracking_ad_password_with_as_rep_roasting/) explains the vulnerability very well
+There is a well-known vulnerability called `AS-REP Roasting Attack` that can allow us to retrieve a user's Kerberos hash and brute-force it to obtain valid credentials. [This page](https://blog.netwrix.com/2022/11/03/cracking_ad_password_with_as_rep_roasting/) explains the vulnerability very well
 
 However, to perform this attack, the user must have the `DONT_REQUIRE_PREAUTH` flag set in the `UserAccountControl` attribute. 
 
