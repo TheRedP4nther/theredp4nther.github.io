@@ -600,3 +600,23 @@ Once the file is correctly uploaded and ingested, we can click on `"Explore"` ->
 ![5](../../../assets/images/Forest/5.png)
 
 <br />
+
+There is two things to pass from `svc-alfresco` user to `Administrator`.
+
+<br />
+
+## Join Exchange Windows Permissions:
+
+<br />
+
+Our user `svc-alfresco`, is inside `Service Accounts` group, which is inside `Privileged IT Accounts` which, at the same time, is inside `Account Operators`.
+
+Basically, because this nested groups, `svc-alfresco` is member of `Account Operators` group. Members of this group, have the `Generic All privilege` on `Exchange Windows Permissions` group.
+
+If we righ-click on `"GenericAll"` -> `"Windows Abuse"` we will find a step by step to escalate abusing this privilege:
+
+<br />
+
+
+ 
+<br />
