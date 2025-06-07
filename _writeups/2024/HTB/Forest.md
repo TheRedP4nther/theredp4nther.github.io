@@ -411,3 +411,79 @@ Now we can retrieve the `user.txt` flag:
 # Privilege Escalation: svc-alfresco -> NT AUTHORITY\SYSTEM 
 
 <br />
+
+In this case, we're going to use [BloodHound](https://github.com/SpecterOps/BloodHound). A famous tool that gives to us a lot of useful information to elevate privilages in Windows systems.
+
+## BloodHound setup:
+
+<br />
+
+Installing this tool can be a bit tricky if it's your first time.
+
+To facilitate this proccess, you can follow up this step by step:
+
+- 1.- Create a directory to keep in all the installation resources.
+
+<br />
+
+```bash 
+mkdir BloodHound; cd BloodHound
+```
+
+<br />
+
+- 2.- Get the compressed BloudHound-cli compressed file:
+
+<br />
+
+```bash
+wget https://github.com/SpecterOps/bloodhound-cli/releases/latest/download/bloodhound-cli-linux-amd64.tar.gz
+```
+
+<br />
+
+- 3.- Extract compressed content:
+
+<br />
+
+```bash
+❯ tar -xvzf  bloodhound-cli-linux-amd64.tar.gz
+bloodhound-cli
+```
+
+<br />
+
+- 4.- Run the binary to proceed with the automaic installation:
+
+<br />
+
+```bash
+❯ ./bloodhound-cli install
+[+] Checking the status of Docker and the Compose plugin...
+[+] The `compose` plugin is not installed, so we'll try the deprecated `docker-compose` script
+[+] The `docker-compose` script is installed, so we'll use that instead
+[+] Starting BloodHound environment installation
+[+] Downloading the production YAML file from https://raw.githubusercontent.com/SpecterOps/BloodHound_CLI/refs/heads/main/docker-compose.yml...
+[+] Downloading the development YAML file from https://raw.githubusercontent.com/SpecterOps/BloodHound_CLI/refs/heads/main/docker-compose.dev.yml...
+...[snip]...
+[+] BloodHound is ready to go!
+[+] You can log in as `admin` with this password: 7DEgjx22HQxLYTmAaoGDGMv4l4qGgF5H
+[+] You can get your admin password by running: bloodhound-cli config get default_password
+[+] You can access the BloodHound UI at: http://127.0.0.1:8080/ui/login
+```
+
+5.- Access BloodHound login panel at `http://127.0.0.1:8080/ui/login`:
+
+<br />
+
+
+
+<br />
+
+- 6.- Log in with the default password and select a new one:
+
+<br />
+
+
+
+<br />
