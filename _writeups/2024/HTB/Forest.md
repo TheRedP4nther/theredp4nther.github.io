@@ -596,3 +596,7 @@ Now that we have the `.zip` file, we can upload it to `BloodHound` for analysis 
 Once the file is correctly uploaded and ingested, we can click on `"Explore"` -> `"Cypher"` and search for `"Shortest Paths to Domain Admins"`:
 
 <br />
+
+
+
+<br />
