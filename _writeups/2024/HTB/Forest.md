@@ -124,7 +124,7 @@ Relevant open ports:
 
 <br />
 
-The domain `htb.local` and the FQDN `FOREST.htb.local` appear across multiple services and ports, so I’ll add them to my `/etc/hosts` file:
+The domain `htb.local` and the FQDN `FOREST.htb.local` appear across multiple services and ports, so we add them to our `/etc/hosts` file:
 
 <br />
 
@@ -138,7 +138,7 @@ The domain `htb.local` and the FQDN `FOREST.htb.local` appear across multiple se
 
 <br />
 
-We can resolve `htb.local` to make a DNS consult with `dig`:
+We can resolve `htb.local` to perform a DNS query with `dig`:
 
 <br />
 
@@ -188,7 +188,7 @@ But we can't do a complete zone transfer:
 
 <br />
 
-To start enumerating some information about the system, we will run a typical `netexec` oneliner:
+To start enumerating information about the system, we will run a typical `netexec` oneliner:
 
 <br />
 
@@ -203,7 +203,7 @@ With this output, we verify the domain `htb.local`, which we discovered before w
 
 We can verify that we're dealing with a `Windows Server 2016 Standard` and `14393` build version.
 
-Continuing enumeration, we use a fake user and pass to get more information without success:
+Continuing enumeration, we use a fake user and password to get more information without success:
 
 <br />
 
@@ -215,8 +215,104 @@ SMB         10.10.10.161    445    FOREST           [-] htb.local\RandomFakeUser
 
 <br />
 
-Trying to use a null session doesn't work either.
+Trying to use a null session also fails.
 
 <br />
 
-# LDAP Enumeration: -> Port 389
+# RPC Enumeration: -> Port 445
+
+<br />
+
+As we know, we can get very relevant information like valid usernames with `rpcclient`.
+
+To do this, we run the following command:
+
+<br />
+
+```bash
+❯ rpcclient -U "" -N -c "enumdomusers" htb.local
+user:[Administrator] rid:[0x1f4]
+user:[Guest] rid:[0x1f5]
+user:[krbtgt] rid:[0x1f6]
+user:[DefaultAccount] rid:[0x1f7]
+user:[$331000-VK4ADACQNUCA] rid:[0x463]
+user:[SM_2c8eef0a09b545acb] rid:[0x464]
+user:[SM_ca8c2ed5bdab4dc9b] rid:[0x465]
+user:[SM_75a538d3025e4db9a] rid:[0x466]
+user:[SM_681f53d4942840e18] rid:[0x467]
+user:[SM_1b41c9286325456bb] rid:[0x468]
+user:[SM_9b69f1b9d2cc45549] rid:[0x469]
+user:[SM_7c96b981967141ebb] rid:[0x46a]
+user:[SM_c75ee099d0a64c91b] rid:[0x46b]
+user:[SM_1ffab36a2f5f479cb] rid:[0x46c]
+user:[HealthMailboxc3d7722] rid:[0x46e]
+user:[HealthMailboxfc9daad] rid:[0x46f]
+user:[HealthMailboxc0a90c9] rid:[0x470]
+user:[HealthMailbox670628e] rid:[0x471]
+user:[HealthMailbox968e74d] rid:[0x472]
+user:[HealthMailbox6ded678] rid:[0x473]
+user:[HealthMailbox83d6781] rid:[0x474]
+user:[HealthMailboxfd87238] rid:[0x475]
+user:[HealthMailboxb01ac64] rid:[0x476]
+user:[HealthMailbox7108a4e] rid:[0x477]
+user:[HealthMailbox0659cc1] rid:[0x478]
+user:[sebastien] rid:[0x479]
+user:[lucinda] rid:[0x47a]
+user:[svc-alfresco] rid:[0x47b]
+user:[andy] rid:[0x47e]
+user:[mark] rid:[0x47f]
+user:[santi] rid:[0x480]
+```
+
+<br />
+
+We can list the `groups` as well:
+
+<br />
+
+```bash
+❯ rpcclient -U "" -N -c "enumdomgroups" htb.local
+group:[Enterprise Read-only Domain Controllers] rid:[0x1f2]
+group:[Domain Admins] rid:[0x200]
+group:[Domain Users] rid:[0x201]
+group:[Domain Guests] rid:[0x202]
+group:[Domain Computers] rid:[0x203]
+group:[Domain Controllers] rid:[0x204]
+group:[Schema Admins] rid:[0x206]
+group:[Enterprise Admins] rid:[0x207]
+group:[Group Policy Creator Owners] rid:[0x208]
+group:[Read-only Domain Controllers] rid:[0x209]
+group:[Cloneable Domain Controllers] rid:[0x20a]
+group:[Protected Users] rid:[0x20d]
+group:[Key Admins] rid:[0x20e]
+group:[Enterprise Key Admins] rid:[0x20f]
+group:[DnsUpdateProxy] rid:[0x44e]
+group:[Organization Management] rid:[0x450]
+group:[Recipient Management] rid:[0x451]
+group:[View-Only Organization Management] rid:[0x452]
+group:[Public Folder Management] rid:[0x453]
+group:[UM Management] rid:[0x454]
+group:[Help Desk] rid:[0x455]
+group:[Records Management] rid:[0x456]
+group:[Discovery Management] rid:[0x457]
+group:[Server Management] rid:[0x458]
+group:[Delegated Setup] rid:[0x459]
+group:[Hygiene Management] rid:[0x45a]
+group:[Compliance Management] rid:[0x45b]
+group:[Security Reader] rid:[0x45c]
+group:[Security Administrator] rid:[0x45d]
+group:[Exchange Servers] rid:[0x45e]
+group:[Exchange Trusted Subsystem] rid:[0x45f]
+group:[Managed Availability Servers] rid:[0x460]
+group:[Exchange Windows Permissions] rid:[0x461]
+group:[ExchangeLegacyInterop] rid:[0x462]
+group:[$D31000-NSEL5BRJ63V7] rid:[0x46d]
+group:[Service Accounts] rid:[0x47c]
+group:[Privileged IT Accounts] rid:[0x47d]
+group:[test] rid:[0x13ed]
+```
+
+<br />
+
+# AS-REP Roasting Attack:
+
