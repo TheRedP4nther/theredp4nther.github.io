@@ -412,7 +412,7 @@ Now we can retrieve the `user.txt` flag:
 
 <br />
 
-In this case, we're going to use [BloodHound](https://github.com/SpecterOps/BloodHound). A famous tool that gives to us a lot of useful information to elevate privileges in Windows systems.
+Since we're already inside the target machine, we can begin gathering Active Directory information for privilege escalation. `BloodHound` is a great tool for this purpose.
 
 <br />
 
