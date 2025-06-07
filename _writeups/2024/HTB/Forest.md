@@ -22,7 +22,7 @@ Difficulty -> Easy.
 
 <br />
 
-
+Hello hackers! Today we’ll tackle the Forest Machine, an Easy Windows box. We begin by enumerating SMB and RPC services to leak domain users. One of them has pre-authentication disabled, so we perform an AS-REP Roasting attack and crack their hash to get valid credentials. Once inside, we use BloodHound to analyze privilege relationships in Active Directory and discover a path that allows us to abuse nested group memberships to assign DCSync rights to a new user. We then extract the Administrator hash and use Pass-the-Hash with PsExec to gain full SYSTEM access.
 
 <br />
 
