@@ -412,7 +412,7 @@ Now we can retrieve the `user.txt` flag:
 
 <br />
 
-In this case, we're going to use [BloodHound](https://github.com/SpecterOps/BloodHound). A famous tool that gives to us a lot of useful information to elevate privilages in Windows systems.
+In this case, we're going to use [BloodHound](https://github.com/SpecterOps/BloodHound). A famous tool that gives to us a lot of useful information to elevate privileges in Windows systems.
 
 <br />
 
@@ -422,7 +422,7 @@ In this case, we're going to use [BloodHound](https://github.com/SpecterOps/Bloo
 
 Installing this tool can be a bit tricky if it's your first time.
 
-To facilitate this proccess, you can follow up this step by step:
+To facilitate this process, you can follow up this step by step:
 
 - 1.- Create a directory to keep in all the installation resources.
 
@@ -444,7 +444,7 @@ wget https://github.com/SpecterOps/bloodhound-cli/releases/latest/download/blood
 
 <br />
 
-- 3.- Extract compressed content:
+- 3.- Extract the contents of the archive:
 
 <br />
 
@@ -455,7 +455,7 @@ bloodhound-cli
 
 <br />
 
-- 4.- Run the BloodHound `binary` to proceed with the automatic installation:
+- 4.- Run the BloodHound `binary` to start the automatic setup process:
 
 <br />
 
@@ -490,10 +490,10 @@ bloodhound-cli
 
 <br />
 
-- 7.- Once in we're going to see the following message:
+- 7.- Once inside, we'll see the following message:
 
 <br />
 
-![4](../../../assets/imageas/Forest/4.png)
+![4](../../../assets/images/Forest/4.png)
 
 <br />
