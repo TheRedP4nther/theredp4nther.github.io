@@ -375,7 +375,9 @@ Session completed.
 
 <br />
 
-If we try to use this credentials to log in with `Evil-WinRM`, it works:
+The hash was cracked successfully.
+
+If we try to use these credentials to log in with `Evil-WinRM`, it works:
 
 <br />
 
@@ -406,6 +408,6 @@ And we can retrieve the `user.txt` flag:
 
 <br />
 
-# Privilage Escalation: svc-alfresco -> NT AUTHORITY\SYSTEM 
+# Privilege Escalation: svc-alfresco -> NT AUTHORITY\SYSTEM 
 
 <br />
