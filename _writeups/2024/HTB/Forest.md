@@ -318,11 +318,11 @@ group:[test] rid:[0x13ed]
 
 <br />
 
-There is a well-knwon vulnerability called `AS-REP Roasting Attack` that can allow us to get a user kerberos hash and brute force it to get a valid credential.
+There is a well-known vulnerability called `AS-REP Roasting Attack` that can allow us to retrieve a user's Kerberos hash and brute-force it to obtain valid credentials.
 
-However, to perform this attack, the user must have the attribute `UserAccountControl` with the flag `"DONT_REQUIRE_PREAUTH"` set.
+However, to perform this attack, the user must have the `DONT_REQUIRE_PREAUTH` flag set in the `UserAccountControl` attribute. 
 
-To try this attack, we only need a list of users, and if we remember, we have a valid one earned with `rpclient`:
+To try this attack, we only need a list of users, and if we remember, we have a valid one obtained using `rpclient`:
 
 <br />
 
@@ -338,7 +338,7 @@ santi
 
 <br />
 
-To check if a user meets this condition, we will run `GetNPUsers.py` passing this list:
+To check if a user meets this condition, we'll run `GetNPUsers.py`, passing in this list:
 
 <br />
 
@@ -357,7 +357,7 @@ $krb5asrep$23$svc-alfresco@HTB.LOCAL:faad32a1b15a8b2560541e965d16592f$cbbd81cde7
 
 <br />
 
-Now that we have obtained the `AS-REP hash` of the user `svc-alfresco`, we can attempt to crack it offline using either `Hascat` or `John the Ripper`:
+Now that we've obtained the `AS-REP` hash for the user `svc-alfresco`, we can attempt to crack it offline using either `Hashcat` or `John the Ripper`:
 
 <br />
 
