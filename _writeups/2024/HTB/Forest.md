@@ -474,7 +474,7 @@ bloodhound-cli
 [+] You can access the BloodHound UI at: http://127.0.0.1:8080/ui/login
 ```
 
-5.- Access BloodHound login panel at `http://127.0.0.1:8080/ui/login`:
+- 5.- Access BloodHound login panel at `http://127.0.0.1:8080/ui/login`:
 
 <br />
 
@@ -487,5 +487,13 @@ bloodhound-cli
 <br />
 
 ![4](../../../assets/images/Forest/4.png)
+
+<br />
+
+- 7.- Once in we're going to see the following message:
+
+<br />
+
+
 
 <br />
