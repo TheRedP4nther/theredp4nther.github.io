@@ -601,7 +601,7 @@ Once the file is correctly uploaded and ingested, we can click on `"Explore"` ->
 
 <br />
 
-There are two steps to escalate from `svc-alfresco` to `Administrator`.
+There are two steps that allow us to escalate from `svc-alfresco` to `Administrator`.
 
 <br />
 
@@ -613,7 +613,7 @@ Our user `svc-alfresco` is in the `Service Accounts` group, which is nested insi
 
 Because of this nested group structure, `svc-alfresco` ends up being a member of the `Account Operators` group.
 
-If we righ-click on `"GenericAll"` -> `"Windows Abuse"`, we'll find a step by step guide to escalate by abusing this privilege:
+If we right-click on `"WriteDacl"` -> `"Windows Abuse"`, we'll find a step by step guide to escalate by abusing this privilege:
 
 <br />
 
@@ -674,7 +674,7 @@ The command completed successfully.
 
 <br />
 
-Now we're going to run the comamnds that we saw earlier in the `Windows Abuse` section to exploit the `WriteDacl` permission on the domain.
+Now we’ll run the commands seen earlier in the `Windows Abuse` section to exploit the `WriteDacl` privilege on the domain.
 
 But after run this commands, we will upload [PowerView.ps1](https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/refs/heads/dev/Recon/PowerView.ps1) to the victim machine, because some of this commands are in `PowerShell` language:
 
@@ -723,7 +723,7 @@ Add-DomainObjectAcl -Credential $Cred -TargetIdentity "DC=htb,DC=local" -Princip
 
 <br />
 
-Finally we only need to run this `secretsdump.py` oneliner to retrieve all the information:
+Finally we only need to run this `secretsdump.py` oneliner to retrieve all the information via a `DSCync Attack`:
 
 <br />
 
@@ -837,7 +837,6 @@ EXCH01$:aes256-cts-hmac-sha1-96:1a87f882a1ab851ce15a5e1f48005de99995f2da482837d4
 EXCH01$:aes128-cts-hmac-sha1-96:9ceffb340a70b055304c3cd0583edf4e
 EXCH01$:des-cbc-md5:8c45f44c16975129
 [*] Cleaning up... 
-
 ```
 
 <br />
