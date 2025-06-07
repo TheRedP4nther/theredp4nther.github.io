@@ -635,7 +635,7 @@ The command completed successfully.
 
 <br />
 
-We can check if our command was correctly executed:
+We can check if our commands were correctly executed:
 
 <br />
 
