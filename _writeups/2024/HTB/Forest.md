@@ -478,7 +478,7 @@ bloodhound-cli
 
 <br />
 
-![2](../../../assets/images/Forest/3.png)
+![2](../../../assets/images/Forest/2.png)
 
 <br />
 
@@ -486,7 +486,7 @@ bloodhound-cli
 
 <br />
 
-![3](../../../assets/images/Forest/4.png)
+![3](../../../assets/images/Forest/3.png)
 
 <br />
 
