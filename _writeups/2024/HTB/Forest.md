@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: 
+tags: smb netexec rpc rpcclient as-rep roastingattack kerberos preauthentication getnpusers.py bloodhound bloodhound-python nestedgroups exchangewindowspermissions dcsync 
 ---
 
 <br />
@@ -673,3 +673,4 @@ The command completed successfully.
 ## Grant DCSync Privileges:
 
 <br />
+
