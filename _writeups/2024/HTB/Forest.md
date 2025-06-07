@@ -605,7 +605,7 @@ There are two steps that allow us to escalate from `svc-alfresco` to `Administra
 
 <br />
 
-## Create a new user && Join Exchange Windows Permissions:
+## Create a new user && Join Exchange Windows Permissions group:
 
 <br />
 
