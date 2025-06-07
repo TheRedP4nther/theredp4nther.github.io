@@ -434,7 +434,7 @@ mkdir BloodHound; cd BloodHound
 
 <br />
 
-- 2.- Get the compressed `BloudHound-cli` compressed file:
+- 2.- Get the `BloudHound-cli` compressed file:
 
 <br />
 
