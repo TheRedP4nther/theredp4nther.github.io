@@ -841,7 +841,7 @@ EXCH01$:des-cbc-md5:8c45f44c16975129
 
 <br />
 
-At this point, we can use `psexec.py` to log in `NT AUTHORITY\SYSTEM` account via `PassTheHash` technique with the Adminstrator's hash:
+At this point, we can use `psexec.py` to log in `NT AUTHORITY\SYSTEM` account via `Pass-the-Hash` technique with the Adminstrator's hash:
 
 <br />
 
