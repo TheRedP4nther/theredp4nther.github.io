@@ -550,7 +550,7 @@ There was an error in the output: `"Clock skew too great"`.
 
 This error seems that we have a big time difference between our system and the target.
 
-The solution is to run this:
+The solution is to run `ntpdate`:
 
 <br />
 
@@ -591,8 +591,11 @@ INFO: Compressing output into 20250607141748_bloodhound.zip
 
 <br />
 
-Now that we have the `.zip` file, we can upload it to `BloodHound` for analysis clicking on `"Start by uploading your data"` and `"Upload File(s)"`.
+Now that we have the `.zip` file, we can upload it to `BloodHound` for analysis clicking on `"Start by uploading your data"` -> `"Upload File(s)"`.
+
+Once the file is correctly uploaded and ingested, we can click on `"Explore"` -> `"Cypher"` and search for `"Shortest Paths to Domain Admins"`:
 
 <br />
+
 
 
