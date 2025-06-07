@@ -414,6 +414,8 @@ Now we can retrieve the `user.txt` flag:
 
 In this case, we're going to use [BloodHound](https://github.com/SpecterOps/BloodHound). A famous tool that gives to us a lot of useful information to elevate privilages in Windows systems.
 
+<br />
+
 ## BloodHound setup:
 
 <br />
