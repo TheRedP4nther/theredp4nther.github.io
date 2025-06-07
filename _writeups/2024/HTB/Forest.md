@@ -617,6 +617,6 @@ If we righ-click on `"GenericAll"` -> `"Windows Abuse"` we will find a step by s
 
 <br />
 
-
+![6](../../../assets/images/Forest/6.png)
  
 <br />
