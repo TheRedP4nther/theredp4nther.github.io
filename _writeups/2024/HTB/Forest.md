@@ -405,3 +405,7 @@ And we can retrieve the `user.txt` flag:
 ```
 
 <br />
+
+# Privilage Escalation: svc-alfresco -> NT AUTHORITY\SYSTEM 
+
+<br />
