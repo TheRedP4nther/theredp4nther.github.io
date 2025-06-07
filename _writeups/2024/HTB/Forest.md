@@ -432,7 +432,7 @@ mkdir BloodHound; cd BloodHound
 
 <br />
 
-- 2.- Get the compressed BloudHound-cli compressed file:
+- 2.- Get the compressed `BloudHound-cli` compressed file:
 
 <br />
 
@@ -453,7 +453,7 @@ bloodhound-cli
 
 <br />
 
-- 4.- Run the binary to proceed with the automaic installation:
+- 4.- Run the BloodHound `binary` to proceed with the automatic installation:
 
 <br />
 
@@ -480,7 +480,7 @@ bloodhound-cli
 
 <br />
 
-- 6.- Log in with the default password and select a new one:
+- 6.- Log in with the `default password` given in the installation output and select a new one:
 
 <br />
 
