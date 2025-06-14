@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: smb mssql netexec zip xlsx workbook excel reverse powershell ps1 passwordsprayattack xp_cmdshell mssqlclient.py sa rlwrap evil-winrm winrm 
+tags: smb mssql netexec zip xlsx workbook excel reverse powershell ps1 passwordsprayingattack xp_cmdshell mssqlclient.py sa rlwrap evil-winrm winrm 
 ---
 
 <br />
@@ -432,7 +432,7 @@ SQL (sa  dbo@master)>
 
 <br />
 
-At this point, there is an interesting feature in `MSSQL` servers called `xp_cmdshell`.
+At this point, we can take advantage of a powerful `MSSQL` feature: `xp_cmdshell`
 
 It allows us to run commands on the system.
 
@@ -484,7 +484,7 @@ Commands run under the context of the `sql_svc` user.
 
 <br />
 
-Now that we can run commands in the system, it's time to gain an interactive shell.
+Now that we can run commands on the system, it's time to gain an interactive shell.
 
 One straightforward approach is to upload a `reverse.ps1` payload:
 
@@ -555,7 +555,7 @@ Mode                LastWriteTime         Length Name
 
 <br />
 
-And he doesn't have any interesting privilege:
+And it doesn't have any useful privileges:
 
 <br />
 
@@ -574,7 +574,7 @@ SeIncreaseWorkingSetPrivilege Increase a process working set Disabled
 
 <br />
 
-While enumerating the system, we find an uncommon folder in the root of the system, `SQL2019`:
+While enumerating the system, we find an unusual folder in the system root, `SQL2019`:
 
 <br />
 
@@ -648,7 +648,7 @@ d-----         6/8/2024   3:07 PM                x64
 
 <br />
 
-In the `sql-Configuration.INI` file, we find some credentials:
+In the `sql-Configuration.INI` file, we find hardcoded credentials:
 
 <br />
 
@@ -687,7 +687,7 @@ IAcceptSQLServerLicenseTerms=True
 
 In the `C:\Users` directory we can see another user called `ryan`.
 
-The credentials work for him:
+The credentials are valid for this user:
 
 <br />
 
@@ -727,5 +727,23 @@ And we get the `user.txt` flag:
 *Evil-WinRM* PS C:\Users\ryan\Desktop> type user.txt
 516de9ed6f058aa7a03aa22195xxxxxx
 ```
+
+<br />
+
+# Privilege Escalation: ryan -> ca_svc
+
+<br />
+
+With valid system credentials, we can use tools like `BloodHound` to explore possible privilege escalation paths to `domain compromise`.
+
+I documented the installation process in [this other writeup](https://theredp4nther.github.io/writeups/2024/HTB/Forest.html#bloodhound-setup). If you're unfamiliar with the setup, check it out and then return here.
+
+Next, we proceed to enumerate Active Directory privileges using BloodHound.
+
+We detect that `ryan` has `WriteOwner` permissions over the `ca_svc` user:
+
+<br />
+
+
 
 <br />
