@@ -319,7 +319,7 @@ accounts.xlsx:        Zip archive data, made by v2.0, extract using at least v2.
 
 <br />
 
-## Credentials Extraction:
+## Credentials Extraction from Excel File:
 
 <br />
 
@@ -375,7 +375,7 @@ SMB         10.10.11.51     445    DC01             [-] sequel.htb\sa:MSSQLP@ssw
 
 <br />
 
-There is a match for the user `oscar`, but no interesting SMB shares are available for this account.
+There is a match for the user `oscar`, but no relevant SMB shares are available for this account.
 
 We can run the same spray attack against `mssql`:
 
@@ -404,7 +404,7 @@ MSSQL       10.10.11.51     1433   DC01             [+] DC01\sa:MSSQLP@ssw0rd! (
 
 <br />
 
-We have valid credentials for the `sa` account! (system administrator)
+We have valid credentials for the `sa` account! (SQL Server Administrator)
 
 We can log into the `MSSQL` server using `mssqlclient.py`:
 
@@ -434,7 +434,7 @@ SQL (sa  dbo@master)>
 
 At this point, we can take advantage of a powerful `MSSQL` feature: `xp_cmdshell`
 
-It allows us to run commands on the system.
+It allows us to execute arbitrary system commands within `SQL Server`.
 
 However, if we try to run a command:
 
