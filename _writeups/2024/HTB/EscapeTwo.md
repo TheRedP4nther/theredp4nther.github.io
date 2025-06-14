@@ -182,8 +182,6 @@ Apparently, we're dealing with a `Windows Server 2019` and `17763` Build Version
 
 We can also confirm that the domain is `sequel.htb`.
 
-<br />
-
 Using initial credentials, we are able to authenticate to `SMB` and enumerate shared resources:
 
 <br />
