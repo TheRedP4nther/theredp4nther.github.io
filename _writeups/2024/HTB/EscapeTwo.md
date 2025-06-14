@@ -293,7 +293,7 @@ smb: \> ls
 
 <br />
 
-We proceed to `download` both files for further inspection:
+We proceed to download both files for further inspection:
 
 <br />
 
