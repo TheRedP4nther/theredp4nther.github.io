@@ -207,9 +207,15 @@ SMB         10.10.11.51     445    DC01             Users           READ
 
 <br />
 
-The `Account Department` and `Users` shares are not common, so it will be recommended to check out:
+The `Accounting Department` and `Users` shares are uncommon, so it's worth taking a closer look at them:
 
-We start with the `Users` resource:
+<br />
+
+### Users:
+
+<br />
+
+Let's start with the `Users` share:
 
 <br />
 
@@ -229,9 +235,9 @@ smb: \> ls
 
 <br />
 
-It has a `Default` folder.
+We find a default folder inside.
 
-Inside it, we can see a Windows default home directory:
+Inside, we find the typical structure of a Windows default user profile:
 
 <br />
 
@@ -264,3 +270,13 @@ smb: \Default\> ls
 ```
 
 <br />
+
+There's nothing relevant here.
+
+<br />
+
+### Accounting Department:
+
+<br />
+
+
