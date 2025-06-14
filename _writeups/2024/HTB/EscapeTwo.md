@@ -738,7 +738,7 @@ With valid system credentials, we can use tools like `BloodHound` to explore pos
 
 I documented the installation process in [this other writeup](https://theredp4nther.github.io/writeups/2024/HTB/Forest.html#bloodhound-setup). If you're unfamiliar with the setup, check it out and then return here.
 
-Next, we proceed to enumerate Active Directory privileges using BloodHound.
+Next, we proceed to enumerate Active Directory privileges using `BloodHound`.
 
 We detect that `ryan` has `WriteOwner` permissions over the `ca_svc` user:
 
