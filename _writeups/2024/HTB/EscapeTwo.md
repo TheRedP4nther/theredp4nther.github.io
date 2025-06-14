@@ -155,12 +155,10 @@ The domain `sequel.htb` and the DC `DC01.sequel.htb` appear across multiple serv
 
 <br />
 
-As in real pentests, this box gives us some credentials to start enumerating:
+As in real pentests, this box gives to us some credentials to start enumerating:
 
 <br />
 
-```bash
-
-```
+![2](../../../assets/images/EscapeTwo/2.png)
 
 <br />
