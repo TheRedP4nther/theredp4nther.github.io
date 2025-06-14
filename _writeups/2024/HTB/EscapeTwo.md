@@ -173,7 +173,6 @@ To start enumerating this protocol, we will list some system information:
 
 ```bash
 ❯ netexec smb 10.10.11.51
-shell-init: error al obtener el directorio actual: getcwd: no se puede acceder a los directorios padre: No existe el fichero o el directorio
 SMB         10.10.11.51     445    DC01             [*] Windows 10 / Server 2019 Build 17763 x64 (name:DC01) (domain:sequel.htb) (signing:True) (SMBv1:False)
 ```
 
