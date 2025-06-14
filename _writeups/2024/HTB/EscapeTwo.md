@@ -752,7 +752,7 @@ What does this mean?
 
 This means that as `ryan`, we can change the password of `ca_svc` user.
 
-To do it, we only need to run two commands with `bloodyAD` from our local machine, one to add `ryan` as a owner of the `ca_svc` user, and a second one to set the `writeAll` permission and change the password of `ca_svc` with a powershell command from the victim machine.
+To do it, we only need to run two commands with `bloodyAD` from our local machine, one to add `ryan` as a owner of the `ca_svc` user, and a second one to set the `genericAll` permission and change the password of `ca_svc` with a powershell command from the victim machine.
 
 Let's do it:
 
