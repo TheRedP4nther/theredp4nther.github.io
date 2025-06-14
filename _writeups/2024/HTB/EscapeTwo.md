@@ -155,7 +155,7 @@ The domain `sequel.htb` and the DC `DC01.sequel.htb` appear across multiple serv
 
 <br />
 
-As in real pentests, this box gives to us some credentials to start enumerating:
+As in real-world pentests, this box provides us some initial credentials to beign enumeration:
 
 <br />
 
