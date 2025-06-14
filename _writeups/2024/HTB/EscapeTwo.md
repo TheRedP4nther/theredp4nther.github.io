@@ -155,10 +155,54 @@ The domain `sequel.htb` and the DC `DC01.sequel.htb` appear across multiple serv
 
 <br />
 
-As in real-world pentests, this box provides us some initial credentials to beign enumeration:
+As in real-world pentests, this box provides us with some initial credentials to begin enumeration:
 
 <br />
 
 ![2](../../../assets/images/EscapeTwo/2.png)
+
+<br />
+
+# SMB Enumeration:
+
+<br />
+
+To start enumerating this protocol, we will list some system information:
+
+<br />
+
+```bash
+❯ netexec smb 10.10.11.51
+shell-init: error al obtener el directorio actual: getcwd: no se puede acceder a los directorios padre: No existe el fichero o el directorio
+SMB         10.10.11.51     445    DC01             [*] Windows 10 / Server 2019 Build 17763 x64 (name:DC01) (domain:sequel.htb) (signing:True) (SMBv1:False)
+```
+
+<br />
+
+Apparently, we're dealing with a `Windows Server 2019` with a `17763` Build Version.
+
+We can also confirm that the domain is `sequel.htb`.
+
+<br />
+
+Using initial credentials, we are able to authenticate to `SMB` and enumerate shared resources:
+
+<br />
+
+```bash
+❯ netexec smb 10.10.11.51 -u "rose" -p "KxEPkKe6R8su" --shares
+SMB         10.10.11.51     445    DC01             [*] Windows 10 / Server 2019 Build 17763 x64 (name:DC01) (domain:sequel.htb) (signing:True) (SMBv1:False)
+SMB         10.10.11.51     445    DC01             [+] sequel.htb\rose:KxEPkKe6R8su 
+SMB         10.10.11.51     445    DC01             [*] Enumerated shares
+SMB         10.10.11.51     445    DC01             Share           Permissions     Remark
+SMB         10.10.11.51     445    DC01             -----           -----------     ------
+SMB         10.10.11.51     445    DC01             Accounting Department READ            
+SMB         10.10.11.51     445    DC01             ADMIN$                          Remote Admin
+SMB         10.10.11.51     445    DC01             C$                              Default share
+SMB         10.10.11.51     445    DC01             IPC$            READ            Remote IPC
+SMB         10.10.11.51     445    DC01             NETLOGON        READ            Logon server share 
+SMB         10.10.11.51     445    DC01             SYSVOL          READ            Logon server share 
+SMB         10.10.11.51     445    DC01             Users           READ      
+```
 
 <br />
