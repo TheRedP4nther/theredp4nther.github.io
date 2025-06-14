@@ -744,6 +744,6 @@ We detect that `ryan` has `WriteOwner` permissions over the `ca_svc` user:
 
 <br />
 
-
+![3](../../../assets/images/EscapeTwo/3.png)
 
 <br />
