@@ -279,4 +279,47 @@ There's nothing relevant here.
 
 <br />
 
+This shared resource has two `Excel workbooks`:
 
+<br />
+
+```bash
+❯ smbclient "//sequel.htb/Accounting Department" -U rose
+Password for [WORKGROUP\rose]:
+Try "help" to get a list of possible commands.
+smb: \> ls
+  .                                   D        0  Sun Jun  9 12:52:21 2024
+  ..                                  D        0  Sun Jun  9 12:52:21 2024
+  accounting_2024.xlsx                A    10217  Sun Jun  9 12:14:49 2024
+  accounts.xlsx                       A     6780  Sun Jun  9 12:52:07 2024
+
+		6367231 blocks of size 4096. 899936 blocks available
+```
+
+<br />
+
+We download both of them for further analysis:
+
+<br />
+
+```bash
+smb: \> prompt OFF
+smb: \> recurse ON
+smb: \> mget *
+getting file \accounting_2024.xlsx of size 10217 as accounting_2024.xlsx (59,4 KiloBytes/sec) (average 59,4 KiloBytes/sec)
+getting file \accounts.xlsx of size 6780 as accounts.xlsx (40,1 KiloBytes/sec) (average 49,8 KiloBytes/sec)
+```
+
+<br />
+
+Both `.xlsx` files appears to be `Zip` archives:
+
+<br />
+
+```bash
+❯ file *
+accounting_2024.xlsx: Zip archive data, made by v4.5, extract using at least v2.0, last modified, last modified Sun, Jan 01 1980 00:00:00, uncompressed size 1284, method=deflate
+accounts.xlsx:        Zip archive data, made by v2.0, extract using at least v2.0, last modified, last modified Sun, Jun 09 2024 10:47:44, uncompressed size 681, method=deflate
+```
+
+<br />
