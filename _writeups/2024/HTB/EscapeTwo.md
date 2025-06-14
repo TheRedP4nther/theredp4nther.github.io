@@ -35,7 +35,82 @@ We start by running a typical `nmap` scan to see which ports are open:
 <br />
 
 ```bash
+❯ nmap -p- 10.10.11.51 --open --min-rate 5000 -sS -T5 -Pn -n -sCV
+Starting Nmap 7.94SVN ( https://nmap.org ) at 2025-06-14 11:40 CEST
+Nmap scan report for 10.10.11.51
+Host is up (0.041s latency).
+Not shown: 65509 filtered tcp ports (no-response)
+Some closed ports may be reported as filtered due to --defeat-rst-ratelimit
+PORT      STATE SERVICE       VERSION
+53/tcp    open  domain        Simple DNS Plus
+88/tcp    open  kerberos-sec  Microsoft Windows Kerberos (server time: 2025-06-14 09:40:16Z)
+135/tcp   open  msrpc         Microsoft Windows RPC
+139/tcp   open  netbios-ssn   Microsoft Windows netbios-ssn
+389/tcp   open  ldap          Microsoft Windows Active Directory LDAP (Domain: sequel.htb0., Site: Default-First-Site-Name)
+|_ssl-date: 2025-06-14T09:41:44+00:00; -31s from scanner time.
+| ssl-cert: Subject: commonName=DC01.sequel.htb
+| Subject Alternative Name: othername: 1.3.6.1.4.1.311.25.1::<unsupported>, DNS:DC01.sequel.htb
+| Not valid before: 2025-06-13T19:21:54
+|_Not valid after:  2026-06-13T19:21:54
+445/tcp   open  microsoft-ds?
+464/tcp   open  kpasswd5?
+593/tcp   open  ncacn_http    Microsoft Windows RPC over HTTP 1.0
+636/tcp   open  ssl/ldap      Microsoft Windows Active Directory LDAP (Domain: sequel.htb0., Site: Default-First-Site-Name)
+|_ssl-date: 2025-06-14T09:41:44+00:00; -31s from scanner time.
+| ssl-cert: Subject: commonName=DC01.sequel.htb
+| Subject Alternative Name: othername: 1.3.6.1.4.1.311.25.1::<unsupported>, DNS:DC01.sequel.htb
+| Not valid before: 2025-06-13T19:21:54
+|_Not valid after:  2026-06-13T19:21:54
+1433/tcp  open  ms-sql-s      Microsoft SQL Server 2019 15.00.2000.00; RTM
+| ssl-cert: Subject: commonName=SSL_Self_Signed_Fallback
+| Not valid before: 2025-06-13T11:32:52
+|_Not valid after:  2055-06-13T11:32:52
+|_ms-sql-ntlm-info: ERROR: Script execution failed (use -d to debug)
+|_ms-sql-info: ERROR: Script execution failed (use -d to debug)
+|_ssl-date: 2025-06-14T09:41:44+00:00; -31s from scanner time.
+3268/tcp  open  ldap          Microsoft Windows Active Directory LDAP (Domain: sequel.htb0., Site: Default-First-Site-Name)
+|_ssl-date: 2025-06-14T09:41:44+00:00; -31s from scanner time.
+| ssl-cert: Subject: commonName=DC01.sequel.htb
+| Subject Alternative Name: othername: 1.3.6.1.4.1.311.25.1::<unsupported>, DNS:DC01.sequel.htb
+| Not valid before: 2025-06-13T19:21:54
+|_Not valid after:  2026-06-13T19:21:54
+3269/tcp  open  ssl/ldap      Microsoft Windows Active Directory LDAP (Domain: sequel.htb0., Site: Default-First-Site-Name)
+|_ssl-date: 2025-06-14T09:41:44+00:00; -31s from scanner time.
+| ssl-cert: Subject: commonName=DC01.sequel.htb
+| Subject Alternative Name: othername: 1.3.6.1.4.1.311.25.1::<unsupported>, DNS:DC01.sequel.htb
+| Not valid before: 2025-06-13T19:21:54
+|_Not valid after:  2026-06-13T19:21:54
+5985/tcp  open  http          Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-title: Not Found
+|_http-server-header: Microsoft-HTTPAPI/2.0
+9389/tcp  open  mc-nmf        .NET Message Framing
+47001/tcp open  http          Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-title: Not Found
+|_http-server-header: Microsoft-HTTPAPI/2.0
+49664/tcp open  msrpc         Microsoft Windows RPC
+49665/tcp open  msrpc         Microsoft Windows RPC
+49666/tcp open  msrpc         Microsoft Windows RPC
+49667/tcp open  msrpc         Microsoft Windows RPC
+49689/tcp open  ncacn_http    Microsoft Windows RPC over HTTP 1.0
+49690/tcp open  msrpc         Microsoft Windows RPC
+49691/tcp open  msrpc         Microsoft Windows RPC
+49706/tcp open  msrpc         Microsoft Windows RPC
+49719/tcp open  msrpc         Microsoft Windows RPC
+49740/tcp open  msrpc         Microsoft Windows RPC
+49801/tcp open  msrpc         Microsoft Windows RPC
+Service Info: Host: DC01; OS: Windows; CPE: cpe:/o:microsoft:windows
 
+Host script results:
+|_clock-skew: mean: -31s, deviation: 0s, median: -31s
+| smb2-security-mode: 
+|   3:1:1: 
+|_    Message signing enabled and required
+| smb2-time: 
+|   date: 2025-06-14T09:41:05
+|_  start_date: N/A
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 122.35 seconds
 ```
 
 <br />
@@ -60,10 +135,12 @@ Relevant open ports:
 
 - `Port 636`  -> ldaps
 
+- `Port 1433` -> mssql
+
 - `Port 5985` -> winrm
 
 <br />
 
-The domain `htb.local` and the FQDN `FOREST.htb.local` appear across multiple services and ports, so we add them to our `/etc/hosts` file:
+The domain `sequel.htb` and the DC `DC01.sequel.htb` appear across multiple services and ports, so we add them to our `/etc/hosts` file:
 
 <br />
