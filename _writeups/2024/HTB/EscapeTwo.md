@@ -748,11 +748,11 @@ We detect that `ryan` has `WriteOwner` permissions over the `ca_svc` user:
 
 <br />
 
-What means this?
+What does this mean?
 
 This means that as `ryan`, we can change the password of `ca_svc` user.
 
-To do it, we only need to run two commands with `bloodyAD` from our local machine, one to add `ryan` as a owner of the `ca_svc` user, and a second one to set the `writeAll` permission and change the password of `ca_svc` with a powershell command from the victime machine.
+To do it, we only need to run two commands with `bloodyAD` from our local machine, one to add `ryan` as a owner of the `ca_svc` user, and a second one to set the `writeAll` permission and change the password of `ca_svc` with a powershell command from the victim machine.
 
 Let's do it:
 
@@ -791,7 +791,7 @@ SMB         10.10.11.51     445    DC01             [+] sequel.htb\ca_svc:Passwo
 
 <br />
 
-This user, is in the `Cert Publishers` group:
+This user is part of the `Cert Publishers` group:
 
 <br />
 
@@ -826,9 +826,9 @@ The command completed successfully.
 
 <br />
 
-So it will should be able to run `certipy`.
+So it should be able to run `certipy`.
 
-If wen run it, there is a vulnerable template:
+If we run it, there is a vulnerable template:
 
 <br />
 
@@ -916,11 +916,11 @@ Certificate Templates
 
 <br />
 
-The template is `DunderMifflinAuthentication` and its vulnerable to `ESC4`.
+The template is `DunderMifflinAuthentication` and it's vulnerable to `ESC4`.
 
-This vulnerability is really critical, because it allows an attacker to modify template configurations and make the template vulnerable to other bugs, like `ESC1`.
+This is a highly critical vulnerability, as it allows an attacker to modify template configurations and make the template vulnerable to other bugs, like `ESC1`.
 
-[This POST](https://www.hackingarticles.in/adcs-esc4-vulnerable-certificate-template-access-control/) explains very well this scenery.
+[This POST](https://www.hackingarticles.in/adcs-esc4-vulnerable-certificate-template-access-control/) explains very well this scenario.
 
 We can change the template configuration with this `certipy` one-liner:
 
@@ -937,7 +937,7 @@ Certipy v4.8.2 - by Oliver Lyak (ly4k)
 
 <br />
 
-Doing this, if we list again vulnerable templates, we should see the same template but being vunerable to `ESC1`:
+After doing this, if we list vulnerable templates again, we should see the same template, now vunerable to `ESC1`:
 
 <br />
 
