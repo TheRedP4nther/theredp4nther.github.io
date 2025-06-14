@@ -1306,7 +1306,7 @@ Machine MonitorsThree fully pwned!
 
 I really love this machine.
 
-Explain all the exploitation details was difficult and large but I had learned a lot by doing it, I hope you did too.
+Explain all the exploitation details was difficult and large but I learned a lot by doing it, I hope you did too.
 
 Keep hacking!❤️❤️
 

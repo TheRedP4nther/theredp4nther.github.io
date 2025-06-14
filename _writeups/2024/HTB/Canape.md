@@ -730,7 +730,7 @@ bash-4.4# cat root.txt
 
 Canape Machine rooted!!!
 
-I hope that you had learned and ejoyed a lot.
+I hope that you learned and ejoyed a lot.
 
 Keep hacking!!❤️❤️
 

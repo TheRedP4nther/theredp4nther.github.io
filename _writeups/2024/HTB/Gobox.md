@@ -652,7 +652,7 @@ e21005dd75d1b3323ef985d4f8xxxxxx
 
 Machine Gobox pwned!!
 
-Hope you had learned a lot and enjoyed the machine as much I did!!
+Hope you learned a lot and enjoyed the machine as much I did!!
 
 Keep hacking!!❤️❤️
 
