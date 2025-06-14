@@ -773,7 +773,7 @@ Then, we can run the powershell command:
 <br />
 
 
-```bash
+```powershell
 *Evil-WinRM* PS C:\Users\ryan\Desktop> Set-ADAccountPassword -Identity ca_svc -NewPassword (ConvertTo-SecureString "Password123!" -AsPlainText -Force) -Reset
 ```
 
