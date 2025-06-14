@@ -206,3 +206,61 @@ SMB         10.10.11.51     445    DC01             Users           READ
 ```
 
 <br />
+
+The `Account Department` and `Users` shares are not common, so it will be recommended to check out:
+
+We start with the `Users` resource:
+
+<br />
+
+```bash
+❯ smbclient //sequel.htb/Users -U rose
+Password for [WORKGROUP\rose]:
+ls
+Try "help" to get a list of possible commands.
+smb: \> ls
+  .                                  DR        0  Sun Jun  9 15:42:11 2024
+  ..                                 DR        0  Sun Jun  9 15:42:11 2024
+  Default                           DHR        0  Sun Jun  9 13:17:29 2024
+  desktop.ini                       AHS      174  Sat Sep 15 09:16:48 2018
+
+		6367231 blocks of size 4096. 899954 blocks available
+```
+
+<br />
+
+It has a `Default` folder.
+
+Inside it, we can see a Windows default home directory:
+
+<br />
+
+```bash
+smb: \> ls
+  .                                  DR        0  Sun Jun  9 15:42:11 2024
+  ..                                 DR        0  Sun Jun  9 15:42:11 2024
+  Default                           DHR        0  Sun Jun  9 13:17:29 2024
+smb: \Default\> ls
+  .                                 DHR        0  Sun Jun  9 13:17:29 2024
+  ..                                DHR        0  Sun Jun  9 13:17:29 2024
+  AppData                            DH        0  Sat Sep 15 09:19:00 2018
+  Desktop                            DR        0  Sat Sep 15 09:19:00 2018
+  Documents                          DR        0  Sun Jun  9 03:29:57 2024
+  Downloads                          DR        0  Sat Sep 15 09:19:00 2018
+  Favorites                          DR        0  Sat Sep 15 09:19:00 2018
+  Links                              DR        0  Sat Sep 15 09:19:00 2018
+  Music                              DR        0  Sat Sep 15 09:19:00 2018
+  NTUSER.DAT                          A   262144  Sun Jun  9 03:29:57 2024
+  NTUSER.DAT.LOG1                   AHS    57344  Sat Sep 15 08:09:26 2018
+  NTUSER.DAT.LOG2                   AHS        0  Sat Sep 15 08:09:26 2018
+  NTUSER.DAT{1c3790b4-b8ad-11e8-aa21-e41d2d101530}.TM.blf    AHS    65536  Sun Jun  9 03:29:57 2024
+  NTUSER.DAT{1c3790b4-b8ad-11e8-aa21-e41d2d101530}.TMContainer00000000000000000001.regtrans-ms    AHS   524288  Sun Jun  9 03:29:57 2024
+  NTUSER.DAT{1c3790b4-b8ad-11e8-aa21-e41d2d101530}.TMContainer00000000000000000002.regtrans-ms    AHS   524288  Sun Jun  9 03:29:57 2024
+  Pictures                           DR        0  Sat Sep 15 09:19:00 2018
+  Saved Games                         D        0  Sat Sep 15 09:19:00 2018
+  Videos                             DR        0  Sat Sep 15 09:19:00 2018
+
+		6367231 blocks of size 4096. 899954 blocks available
+```
+
+<br />
