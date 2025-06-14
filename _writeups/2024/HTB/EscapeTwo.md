@@ -22,7 +22,7 @@ Difficulty -> Easy.
 
 <br />
 
-
+Hello hackers! Today we’ll tackle the EscapeTwo machine, an Easy level Windows box. We begin by using provided credentials to enumerate SMB shares and extract sensitive data from an Excel file, which reveals a password for the MSSQL sa account. With this, we enable xp_cmdshell to gain command execution and drop a reverse shell. Inside, we discover installation files with hardcoded credentials that allow us to pivot to a new user. Using BloodHound, we identify WriteOwner privileges on another user and leverage bloodyAD to take control. Finally, we exploit an ESC4 vulnerability in an ADCS template, escalate it to ESC1 using Certipy, and request a domain admin certificate to become Administrator. Rooted!
 
 <br />
 
