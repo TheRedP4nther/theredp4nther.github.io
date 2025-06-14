@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: smb mssql netexec zip xlsx workbook excel reverse powershell ps1 passwordsprayattack xp_cmdshell mssqlclient.py sa rlwrap 
+tags: smb mssql netexec zip xlsx workbook excel reverse powershell ps1 passwordsprayattack xp_cmdshell mssqlclient.py sa rlwrap evil-winrm winrm 
 ---
 
 <br />
@@ -151,7 +151,7 @@ The domain `sequel.htb` and the DC `DC01.sequel.htb` appear across multiple serv
 
 <br />
 
-# Initial Credentials:
+## Initial Credentials:
 
 <br />
 
