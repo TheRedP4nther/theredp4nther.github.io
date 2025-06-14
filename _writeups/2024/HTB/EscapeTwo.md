@@ -178,7 +178,7 @@ SMB         10.10.11.51     445    DC01             [*] Windows 10 / Server 2019
 
 <br />
 
-Apparently, we're dealing with a `Windows Server 2019` with a `17763` Build Version.
+Apparently, we're dealing with a `Windows Server 2019` and `17763` Build Version.
 
 We can also confirm that the domain is `sequel.htb`.
 
