@@ -144,3 +144,23 @@ Relevant open ports:
 The domain `sequel.htb` and the DC `DC01.sequel.htb` appear across multiple services and ports, so we add them to our `/etc/hosts` file:
 
 <br />
+
+```bash
+10.10.11.51 sequel.htb dc01.sequel.htb
+```
+
+<br />
+
+# Start Credentials:
+
+<br />
+
+As in real pentests, this box gives us some credentials to start enumerating:
+
+<br />
+
+```bash
+
+```
+
+<br />
