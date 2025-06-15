@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: smb mssql netexec zip xlsx workbook excel reverse powershell ps1 passwordsprayingattack xp_cmdshell mssqlclient.py sa rlwrap evil-winrm winrm bloodhound writeowner bloodyAD certipy templates esc4
+tags: smb mssql netexec zip xlsx workbook excel reverse powershell ps1 passwordsprayingattack xp_cmdshell mssqlclient.py sa rlwrap evil-winrm winrm bloodhound writeowner genericall bloodyAD certipy templates esc4
 ---
 
 <br />
