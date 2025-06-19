@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: netexec smb nullsession gpp grouppolicypreferences cpassword gpp-decrypt
+tags: netexec smb nullsession gpp grouppolicypreferences cpassword gpp-decrypt kerberoasting GetUserSPNs.py
 ---
 
 <br />
