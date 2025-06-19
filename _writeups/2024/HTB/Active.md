@@ -30,7 +30,7 @@ Difficulty -> Easy.
 
 <br />
 
-We start by running the typical `nmap` scan to see which ports are open:
+We begin with a standard `nmap` scan to identify open ports:
 
 <br />
 
@@ -102,7 +102,7 @@ Relevant open ports:
 
 <br />
 
-The domain active.htb across multiple ldap ports, so we add them to our `/etc/hosts` file:
+The domain active.htb across multiple `LDAP` ports, so we add them to our `/etc/hosts` file:
 
 ```bash
 10.10.10.100 active.htb
@@ -114,7 +114,7 @@ The domain active.htb across multiple ldap ports, so we add them to our `/etc/ho
 
 <br />
 
-To start enumerating this service, we're going to run this simple `netexec` oneliner:
+To begin enumerating this service, we're going to run this simple `netexec` oneliner:
 
 <br />
 
@@ -124,9 +124,9 @@ SMB         10.10.10.100    445    DC               [*] Windows 7 / Server 2008 
 
 <br />
 
-In the output we can verify the `active.htb` domain and that we're dealing with a `Windows Server 2008 R2` of x64 bits with a `7601` Build version.
+In the output we can verify the `active.htb` domain and that we're dealing with a 64-bit `Windows Server 2008 R2` system (build 7601).
 
-Now, we can use a null session and see what share resources we can list:
+Next, we use a null session to see which share resources we can list:
 
 <br />
 
@@ -153,7 +153,7 @@ SMB         10.10.10.100    445    DC               Users
 
 <br />
 
-As we can see, there is an interesting and uncommon share called `Replication`.
+As we can see, there is an interesting and less commonly share named `Replication`.
 
 We have read permissions on it, so we can log in with `smbclient`:
 
@@ -176,7 +176,7 @@ smb: \> ls
 
 Inside, there is a `active.htb` directory with a lot of subdirectories and files.
 
-To enumerate further, we download all to our local machine.
+To further enumerate its contents, we download everything to our local machine.
 
 <br />
 
