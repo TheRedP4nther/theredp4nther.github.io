@@ -348,7 +348,7 @@ smb: \> ls
 
 <br />
 
-And get the `user.txt` flag from the `svc_tgs` desktop:
+And retrieve the `user.txt` flag from the `svc_tgs` desktop:
 
 <br />
 
