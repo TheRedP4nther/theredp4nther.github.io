@@ -467,7 +467,7 @@ One more Active Directory machine pwned!!
 
 This was a rather unusual case, since the WinRM port (5985) was closed and we couldn't establish a remote shell connection to the system.
 
-I hope you learned something and enjoyed the proccess.
+I hope you learned something and enjoyed the process.
 
 Keep hacking!!❤️❤️
 
