@@ -22,7 +22,7 @@ Difficulty -> Easy.
 
 <br />
 
-
+Hello hackers! Today we’ll tackle the Active machine, an Easy level Windows box focused on SMB and Active Directory misconfigurations. We begin by exploiting a null session to access the Replication share, where we discover Group Policy Preferences storing encrypted credentials. After decrypting the cpassword, we gain access as a domain user and perform a Kerberoasting attack to retrieve and crack the Administrator's TGS ticket. With those credentials, we access the final flag. No shell needed—pure enumeration and offline attacks. Let’s dig in!
 
 <br />
 
