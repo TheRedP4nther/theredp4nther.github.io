@@ -263,7 +263,7 @@ The `groups.xml` file is a typical artifact found in `GPP`. It is generated each
 
 This file contains an encrypted credential in the `cpassword` field.
 
-So, what is the problem?
+Where is the vulnerability?
 
 The issue is that the key used to encrypt the `cpassword` was publicly disclosed. Although this vulnerability was patched in `MS14-025`, it does not prevent exploitation of previously created entries.
 
