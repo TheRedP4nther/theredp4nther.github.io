@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags:
+tags: netexec smb nullsession gpp grouppolicypreferences
 ---
 
 <br />
