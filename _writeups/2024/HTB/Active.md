@@ -104,6 +104,8 @@ Relevant open ports:
 
 The domain active.htb across multiple `LDAP` ports, so we add them to our `/etc/hosts` file:
 
+<br />
+
 ```bash
 10.10.10.100 active.htb
 ```
@@ -119,6 +121,7 @@ To begin enumerating this service, we're going to run this simple `netexec` onel
 <br />
 
 ```bash
+❯ nxc smb active.htb
 SMB         10.10.10.100    445    DC               [*] Windows 7 / Server 2008 R2 Build 7601 x64 (name:DC) (domain:active.htb) (signing:True) (SMBv1:False)
 ```
 
@@ -131,7 +134,7 @@ Next, we use a null session to see which share resources we can list:
 <br />
 
 ```bash
-❯ nxc smb 10.10.10.100 -u '' -p '' --shares
+❯ nxc smb active.htb -u '' -p '' --shares
 SMB         10.10.10.100    445    DC               [*] Windows 7 / Server 2008 R2 Build 7601 x64 (name:DC) (domain:active.htb) (signing:True) (SMBv1:False)
 SMB         10.10.10.100    445    DC               [+] active.htb\: 
 SMB         10.10.10.100    445    DC               [*] Enumerated shares
@@ -144,7 +147,6 @@ SMB         10.10.10.100    445    DC               NETLOGON                    
 SMB         10.10.10.100    445    DC               Replication     READ            
 SMB         10.10.10.100    445    DC               SYSVOL                          Logon server share 
 SMB         10.10.10.100    445    DC               Users                           
-
 ```
 
 <br />
@@ -159,7 +161,7 @@ We have read permissions on it, so we can log in with `smbclient`:
 
 <br />
 
-```
+```bash
 ❯ smbclient //active.htb/Replication -U
 Password for [WORKGROUP\root]:
 Anonymous login successful
