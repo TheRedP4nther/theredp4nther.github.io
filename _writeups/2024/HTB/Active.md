@@ -300,7 +300,7 @@ SMB         10.10.10.100    445    DC               [+] active.htb\svc_tgs:GPPst
 
 <br />
 
-The credentials work! Let's enumerate the available shares for `svc_tgs`:
+The credentials are valid. Let's enumerate the available shares for `svc_tgs`:
 
 <br />
 
@@ -348,7 +348,7 @@ smb: \> ls
 
 <br />
 
-And retrieve the `user.txt` flag from the `svc_tgs` desktop:
+We then retrieve the `user.txt` flag from the `svc_tgs` desktop:
 
 <br />
 
