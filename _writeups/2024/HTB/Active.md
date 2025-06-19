@@ -113,3 +113,84 @@ The domain active.htb across multiple ldap ports, so we add them to our `/etc/ho
 # SMB Enumeration: -> Port 445
 
 <br />
+
+To start enumerating this service, we're going to run this simple `netexec` oneliner:
+
+<br />
+
+```bash
+SMB         10.10.10.100    445    DC               [*] Windows 7 / Server 2008 R2 Build 7601 x64 (name:DC) (domain:active.htb) (signing:True) (SMBv1:False)
+```
+
+<br />
+
+In the output we can verify the `active.htb` domain and that we're dealing with a `Windows Server 2008 R2` of x64 bits with a `7601` Build version.
+
+Now, we can use a null session and see what share resources we can list:
+
+<br />
+
+```bash
+❯ nxc smb 10.10.10.100 -u '' -p '' --shares
+SMB         10.10.10.100    445    DC               [*] Windows 7 / Server 2008 R2 Build 7601 x64 (name:DC) (domain:active.htb) (signing:True) (SMBv1:False)
+SMB         10.10.10.100    445    DC               [+] active.htb\: 
+SMB         10.10.10.100    445    DC               [*] Enumerated shares
+SMB         10.10.10.100    445    DC               Share           Permissions     Remark
+SMB         10.10.10.100    445    DC               -----           -----------     ------
+SMB         10.10.10.100    445    DC               ADMIN$                          Remote Admin
+SMB         10.10.10.100    445    DC               C$                              Default share
+SMB         10.10.10.100    445    DC               IPC$                            Remote IPC
+SMB         10.10.10.100    445    DC               NETLOGON                        Logon server share 
+SMB         10.10.10.100    445    DC               Replication     READ            
+SMB         10.10.10.100    445    DC               SYSVOL                          Logon server share 
+SMB         10.10.10.100    445    DC               Users                           
+
+```
+
+<br />
+
+### Replication:
+
+<br />
+
+As we can see, there is an interesting and uncommon share called `Replication`.
+
+We have read permissions on it, so we can log in with `smbclient`:
+
+<br />
+
+```
+❯ smbclient //active.htb/Replication -U
+Password for [WORKGROUP\root]:
+Anonymous login successful
+Try "help" to get a list of possible commands.
+smb: \> ls
+  .                                   D        0  Sat Jul 21 12:37:44 2018
+  ..                                  D        0  Sat Jul 21 12:37:44 2018
+  active.htb                          D        0  Sat Jul 21 12:37:44 2018
+
+		5217023 blocks of size 4096. 278072 blocks available
+```
+
+<br />
+
+Inside, there is a `active.htb` directory with a lot of subdirectories and files.
+
+To enumerate further, we download all to our local machine.
+
+<br />
+
+```bash
+smb: \> prompt OFF
+smb: \> recurse ON
+smb: \> mget *
+getting file \active.htb\Policies\{31B2F340-016D-11D2-945F-00C04FB984F9}\GPT.INI of size 23 as active.htb/Policies/{31B2F340-016D-11D2-945F-00C04FB984F9}/GPT.INI (0,1 KiloBytes/sec) (average 0,1 KiloBytes/sec)
+getting file \active.htb\Policies\{6AC1786C-016F-11D2-945F-00C04fB984F9}\GPT.INI of size 22 as active.htb/Policies/{6AC1786C-016F-11D2-945F-00C04fB984F9}/GPT.INI (0,1 KiloBytes/sec) (average 0,1 KiloBytes/sec)
+getting file \active.htb\Policies\{31B2F340-016D-11D2-945F-00C04FB984F9}\Group Policy\GPE.INI of size 119 as active.htb/Policies/{31B2F340-016D-11D2-945F-00C04FB984F9}/Group Policy/GPE.INI (0,7 KiloBytes/sec) (average 0,3 KiloBytes/sec)
+getting file \active.htb\Policies\{31B2F340-016D-11D2-945F-00C04FB984F9}\MACHINE\Registry.pol of size 2788 as active.htb/Policies/{31B2F340-016D-11D2-945F-00C04FB984F9}/MACHINE/Registry.pol (16,9 KiloBytes/sec) (average 4,5 KiloBytes/sec)
+getting file \active.htb\Policies\{31B2F340-016D-11D2-945F-00C04FB984F9}\MACHINE\Preferences\Groups\Groups.xml of size 533 as active.htb/Policies/{31B2F340-016D-11D2-945F-00C04FB984F9}/MACHINE/Preferences/Groups/Groups.xml (3,2 KiloBytes/sec) (average 4,2 KiloBytes/sec)
+getting file \active.htb\Policies\{31B2F340-016D-11D2-945F-00C04FB984F9}\MACHINE\Microsoft\Windows NT\SecEdit\GptTmpl.inf of size 1098 as active.htb/Policies/{31B2F340-016D-11D2-945F-00C04FB984F9}/MACHINE/Microsoft/Windows NT/SecEdit/GptTmpl.inf (6,6 KiloBytes/sec) (average 4,6 KiloBytes/sec)
+getting file \active.htb\Policies\{6AC1786C-016F-11D2-945F-00C04fB984F9}\MACHINE\Microsoft\Windows NT\SecEdit\GptTmpl.inf of size 3722 as active.htb/Policies/{6AC1786C-016F-11D2-945F-00C04fB984F9}/MACHINE/Microsoft/Windows NT/SecEdit/GptTmpl.inf (22,4 KiloBytes/sec) (average 7,2 KiloBytes/sec)
+```
+
+<br />
