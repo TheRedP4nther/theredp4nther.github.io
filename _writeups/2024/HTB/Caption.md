@@ -407,9 +407,13 @@ The page informs us that the service is under admin maintenance.
 
 This information can be very important, because we already know that there are `admins` visiting this endpoint. So, if we discover any vulnerability like a `XSS` (Cross-Site Scripting), we can attempt to `capture` the admin's cookies.
 
+<br />
+
 - 2.- Routers:
 
-This is a static function, no functionality.
+This is a static function without functionality.
+
+<br />
 
 - 3.- Logs:
 
