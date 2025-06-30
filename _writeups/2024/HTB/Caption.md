@@ -204,7 +204,7 @@ Open Ports:
 
 <br />
 
-When we try to load the website, it redirect to -> `http://caption.htb`.
+When we try to load the website, it redirects to -> `http://caption.htb`.
 
 So we proceed to add this domain to our `/etc/hosts`:
 
@@ -265,7 +265,7 @@ Some other interesting headers are:
 
 <br />
 
-We continue enumerating applying some path fuzzing over the domain:
+We continue enumeration by applying path fuzzing over the domain with `Wfuzz`:
 
 <br />
 
@@ -302,17 +302,17 @@ ID           Response   Lines    Word       Chars       Payload
 
 <br />
 
-The are some juicy endpoint in the output:
+There are some juicy endpoints in the output:
 
 `/home`: 302 redirect -> Typical home page path.
 
-`/firewalls`: 302 redirect ->  Strange path that can reveal some information about the website purpose (we need to be authenticated).
+`/firewalls`: 302 redirect ->  Uncommon path that might disclose information about the application's purpose.
 
 `/logout`: 302 redirect. -> Typical logout path.
 
 `/download`: 403 forbidden -> Private endpoint that can be related to file downloads.
 
-`/logs`: 403 forbidden -> Restricted interesting endpoint.
+`/logs`: 403 forbidden -> Interesting restricted endpoint.
 
 All 302 redirects (such as /firewalls) point to the login page, suggesting that authentication is required.
 
