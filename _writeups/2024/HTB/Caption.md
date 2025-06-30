@@ -439,4 +439,24 @@ It behaves the same as `/logs`, returning a 403 Forbidden.
 
 <br />
 
+## X-Forwarded-Host Injection:
 
+<br />
+
+At this point, we open `Burp Suite` to enumerate further deeper the application and intercept a petition to the `/home` endpoint:
+
+<br />
+
+
+
+<br />
+
+Analyzing the server response, we can see a interesting piece of code:
+
+<br />
+
+```bash
+<script src="http://caption.htb/static/js/lib.js?utm_source=http://internal-proxy.local"></script>
+```
+
+<br />
