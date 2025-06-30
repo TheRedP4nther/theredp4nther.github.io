@@ -297,7 +297,7 @@ ID           Response   Lines    Word       Chars       Payload
 
 <br />
 
-There are some noworthy endpoints in the output:
+There are some noteworthy endpoints in the output:
 
 - `/home`: 302 redirect -> Typical home page path.
 
@@ -365,7 +365,7 @@ There are eleven commits in the commit history:
 
 <br />
 
-The commit `"Add frontend and backend config"` caught my attention.
+The commit titled `"Add frontend and backend config"` stood out.
 
 Inside, we can see a changed file `haproxy.cfg` with something relevant:
 
@@ -778,9 +778,9 @@ document.documentElement.className=localStorage.theme||"az a z";
 
 <br />
 
-This happen because our request is going through multiple proxies and we need to URL-Encode more than one time. 
+This happens because our request is going through multiple proxies and we need to URL-Encode more than one time. 
 
-To solve this, we only need to double URL-encode the `%` symbols adding a `%25`.
+To solve this, we only need to double URL-encode the `%` symbols by replacing them with `%25`.
 
 <br />
 
@@ -845,7 +845,7 @@ _laurel:x:998:998::/var/log/laurel:/bin/false
 
 We successfully retrieved the `/etc/passwd` from the victim machine.
 
-There are two users, `margo` and `ruth`. If we are running the requests as some of them we can point to critical files like the user `authorized_keys`.
+There are two users, `margo` and `ruth`. If we are running the requests as some of them we can target critical files such as the user `authorized_keys`.
 
 Let's try it with `margo`:
 
