@@ -357,8 +357,6 @@ On the other hand, the `/config` folder has several directories:
 
 These directories contain the configurations for `HAProxy` and `Varnish`.
 
-<br />
-
 There are eleven commits in the commit history:
 
 <br />
