@@ -259,7 +259,7 @@ Some other interesting headers are:
 
 `age`: Time elapsed since the resource was last cached.
 
-`via`: Indicates that the response has been processed by a Varnish cache server
+`via`: Indicates that the response has been processed by a Varnish cache server.
 
 `x-cache: MISS`: The requested resource was not present in the cache and had to be retrieved from the backend server.
 
