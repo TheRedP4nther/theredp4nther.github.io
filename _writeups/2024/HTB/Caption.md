@@ -395,7 +395,7 @@ After logging in, we gain access to the following functionalities:
 
 <br />
 
-- 1.- Firewalls:
+### 1.- Firewalls:
 
 This feature matches the `/firewalls` path discovered during fuzzing:
 
@@ -411,13 +411,13 @@ This information can be very important, because we already know that there are a
 
 <br />
 
-- 2.- Routers:
+### 2.- Routers:
 
 This feature appears to be static and `non-functional`.
 
 <br />
 
-- 3.- Logs:
+### 3.- Logs:
 
 This function redirects to the `/logs` path with a `403 Forbidden`.
 
@@ -429,7 +429,7 @@ This suggests that the current user `(margo)` lacks sufficient privileges, possi
 
 <br />
 
-- 4.- Download:
+### 4.- Download:
 
 <br />
 
