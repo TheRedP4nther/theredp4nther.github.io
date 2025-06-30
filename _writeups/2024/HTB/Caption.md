@@ -395,8 +395,6 @@ After logging in, we gain access to the following functionalities:
 
 - 1.- Firewalls:
 
-<br />
-
 This feature matches the `/firewalls` path discovered during fuzzing:
 
 <br />
