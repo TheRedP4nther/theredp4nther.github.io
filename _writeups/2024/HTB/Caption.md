@@ -471,6 +471,6 @@ So let's try by adding the `X-Forwarded-Host: test` header to our request:
 
 <br />
 
-
+![13](../../../assets/images/Caption/13.png)
 
 <br />
