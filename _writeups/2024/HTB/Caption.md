@@ -527,7 +527,7 @@ As we had seen before, the `/firewalls` payload is under admin maintenance, so i
 
 <br />
 
-
+![15](../../../assets/images/Caption/15.png)
 
 <br />
 
