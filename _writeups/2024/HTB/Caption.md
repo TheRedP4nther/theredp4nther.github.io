@@ -583,6 +583,8 @@ We're in, but if we try to access `/logs` or `/download`, the status code contin
 
 The `/firewalls` endpoint has the same content.
 
+<br />
+
 ## Smuggling Attack:
 
 <br />
