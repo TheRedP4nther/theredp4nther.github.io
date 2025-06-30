@@ -200,3 +200,30 @@ Open Ports:
 
 <br />
 
+# Http Enumeration: -> Port 80 
+
+<br />
+
+This website shows a login page:
+
+<br />
+
+
+
+<br />
+
+We try default credentials and some SQL Injection bypass (' or 1=1-- -'), but without success.
+
+<br />
+
+# Http Enumeration: -> Port 8080
+
+<br />
+
+This other website is a GitBucket instance.
+
+<br />
+
+
+
+<br />
