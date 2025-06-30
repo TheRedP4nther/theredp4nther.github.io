@@ -30,7 +30,9 @@ Difficulty -> Hard.
 
 <br />
 
-We start by running the typical `nmap` scan to see which ports are open:
+We begin with a standard `nmap` scan to identify open ports:
+
+
 
 <br />
 
