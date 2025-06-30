@@ -261,6 +261,66 @@ Some other interesting headers are:
 
 `x-cache: MISS`: Indicates that the resource was not found in the cache and had to be retrieved directly from the server.
 
+## Fuzzing:
+
+<br />
+
+We continue enumerating applying some path fuzzing over the domain:
+
+<br />
+
+```bash
+❯ wfuzz -c -t 50 --hc=404 -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt http://caption.htb/FUZZ
+ /usr/lib/python3/dist-packages/wfuzz/__init__.py:34: UserWarning:Pycurl is not compiled against Openssl. Wfuzz might not work correctly when fuzzing SSL sites. Check Wfuzz's documentation for more information.
+********************************************************
+* Wfuzz 3.1.0 - The Web Fuzzer                         *
+********************************************************
+
+Target: http://caption.htb/FUZZ
+Total requests: 220565
+
+=====================================================================
+ID           Response   Lines    Word       Chars       Payload                                                                                                               
+=====================================================================
+
+000000001:   200        197 L    320 W      4316 Ch     "# directory-list-2.3-medium.txt"                                                                                     
+000000003:   200        197 L    320 W      4316 Ch     "# Copyright 2007 James Fisher"                                                                                       
+000000012:   200        197 L    320 W      4316 Ch     "# on at least 2 different hosts"                                                                                     
+000000011:   200        197 L    320 W      4316 Ch     "# Priority ordered case-sensitive list, where entries were found"                                                    
+000000043:   302        5 L      22 W       189 Ch      "home"                                                                                                                
+000000007:   200        197 L    320 W      4316 Ch     "# license, visit http://creativecommons.org/licenses/by-sa/3.0/"                                                     
+000000014:   200        197 L    320 W      4316 Ch     "http://caption.htb/"                                                                                                 
+000000017:   403        4 L      8 W        94 Ch       "download"                                                                                                            
+000000013:   200        197 L    320 W      4316 Ch     "#"                                                                                                                   
+000000004:   200        197 L    320 W      4316 Ch     "#"                                                                                                                   
+000000002:   200        197 L    320 W      4316 Ch     "#"                                                                                                                   
+000000006:   200        197 L    320 W      4316 Ch     "# Attribution-Share Alike 3.0 License. To view a copy of this"                                                       
+000000005:   200        197 L    320 W      4316 Ch     "# This work is licensed under the Creative Commons"                                                                  
+000000010:   200        197 L    320 W      4316 Ch     "#"                                                                                                                   
+000000009:   200        197 L    320 W      4316 Ch     "# Suite 300, San Francisco, California, 94105, USA."                                                                 
+000000008:   200        197 L    320 W      4316 Ch     "# or send a letter to Creative Commons, 171 Second Street,"                                                          
+000000852:   403        4 L      8 W        94 Ch       "Download"                                                                                                            
+000002276:   403        4 L      8 W        94 Ch       "logs"                                                                                                                
+000003795:   403        4 L      8 W        94 Ch       "%20"                                                                                                                 
+000001312:   302        5 L      22 W       189 Ch      "firewalls"                                                                                                           
+000001230:   302        5 L      22 W       189 Ch      "logout" 
+```
+
+<br />
+
+The are some juicy endpoint in the output:
+
+`/home`: 302 redirect -> Typical home page path.
+
+`/firewalls`: 302 redirect ->  Strange path that can reveal some information about the website purpose.
+
+`/logout`: 302 redirect. -> Typical logout path.
+
+`/download`: 403 forbidden -> Private endpoint that can be related to file downloads.
+
+`/logs`: 403 forbidden -> Restricted interesting endpoint.
+
+
 <br />
 
 # Http Enumeration: -> Port 8080
@@ -274,5 +334,3 @@ The service on port 8080 is a `GitBucket` instance.
 ![3](../../../assets/images/Caption/3.png)
 
 <br />
-
-
