@@ -383,7 +383,7 @@ We have credentials. `margo:vFr&cS2#0!`
 
 <br /> 
 
-Using these credentials, we successfully log in:
+Using these credentials, we successfully log into the `Caption Portal`:
 
 <br />
 
