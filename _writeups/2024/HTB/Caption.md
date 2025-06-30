@@ -220,7 +220,7 @@ We try default credentials and some SQL Injection bypass (' or 1=1-- -'), but wi
 
 <br />
 
-This other website is a GitBucket instance.
+This other website is a `GitBucket` instance.
 
 <br />
 
