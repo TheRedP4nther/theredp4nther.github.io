@@ -908,7 +908,7 @@ Zpid9tR/6oub8Y3Jh3cAAAAAAQIDBAUGBwg=
 
 <br />
 
-Now we can log into the system with `ssh` facilating this key as `margo's` identifier:
+Now we can log into the system with `ssh` facilitating this key as `margo's` identifier:
 
 <br />
 
