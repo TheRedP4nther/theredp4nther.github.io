@@ -216,6 +216,43 @@ We try default credentials and some SQL Injection bypass (' or 1=1-- -'), but wi
 
 <br />
 
+## Tech Stack:
+
+<br />
+
+In the server response we can enumerate some technology information:
+
+<br />
+
+```html
+HTTP/1.1 200 OK
+server: Werkzeug/3.0.1 Python/3.10.12
+date: Mon, 16 Sep 2024 21:31:47 GMT
+content-type: text/html; charset=utf-8
+content-length: 4412
+x-varnish: 32784
+age: 0
+via: 1.1 varnish (Varnish/6.6)
+x-cache: MISS
+accept-ranges: bytes
+```
+
+<br />
+
+As we can see, we're dealing with a `Werkzeuz 3.0.1`, so it seems that the application backend is written in Python.
+
+Some other interesting headers are:
+
+`x-varnish`:  Server added because a Varnish cache server is present (website booster).
+
+`age`: Time lapse from the last cached of the server.
+
+`via`: Indicates that the response has been processed by a Varnish cache server
+
+`x-cache: MISS`: Indicates that the resource was not found in the cache and had to be retrieved directly from the server.
+
+<br />
+
 # Http Enumeration: -> Port 8080
 
 <br />
@@ -227,3 +264,5 @@ This other website is a `GitBucket` instance.
 ![3](../../../assets/images/Caption/3.png)
 
 <br />
+
+
