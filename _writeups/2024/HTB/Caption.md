@@ -391,11 +391,11 @@ Using these credentials, we successfully log in:
 
 <br />
 
-Once inside the application, we can see different functionalities:
+After logging in, we gain access to the following functionalities:
 
 - 1.- Firewalls:
 
-This feature corresponds to the `/firewalls` path enumerated above:
+This feature matches the `/firewalls` path discovered during fuzzing:
 
 <br />
 
@@ -403,4 +403,7 @@ This feature corresponds to the `/firewalls` path enumerated above:
 
 <br />
 
+The page informs us that the service is under admin maintenance.
+
+This information can be very important, because we already know that there are `admins` visiting this endpoint. So, if we discover any vulnerability like a `XSS` (Cross-Site Scripting), we can attempt to `capture` the admin's cookies.
 
