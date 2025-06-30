@@ -249,7 +249,7 @@ accept-ranges: bytes
 
 <br />
 
-As we can see, we're dealing with a `Werkzeuz 3.0.1`, so it seems that the application backend is written in Python.
+As we can see, we're dealing with a `Werkzeug 3.0.1`, so it seems that the application backend is written in Python.
 
 Some other interesting headers are:
 
@@ -283,13 +283,7 @@ Total requests: 220565
 ID           Response   Lines    Word       Chars       Payload                                                                                                               
 =====================================================================
 
-000000001:   200        197 L    320 W      4316 Ch     "# directory-list-2.3-medium.txt"                                                                                     
-000000003:   200        197 L    320 W      4316 Ch     "# Copyright 2007 James Fisher"                                                                                       
-000000012:   200        197 L    320 W      4316 Ch     "# on at least 2 different hosts"                                                                                     
-000000011:   200        197 L    320 W      4316 Ch     "# Priority ordered case-sensitive list, where entries were found"                                                    
-000000043:   302        5 L      22 W       189 Ch      "home"                                                                                                                
-000000007:   200        197 L    320 W      4316 Ch     "# license, visit http://creativecommons.org/licenses/by-sa/3.0/"                                                     
-000000014:   200        197 L    320 W      4316 Ch     "http://caption.htb/"                                                                                                 
+...[snip]...
 000000017:   403        4 L      8 W        94 Ch       "download"                                                                                                            
 000000013:   200        197 L    320 W      4316 Ch     "#"                                                                                                                   
 000000004:   200        197 L    320 W      4316 Ch     "#"                                                                                                                   
@@ -312,7 +306,7 @@ The are some juicy endpoint in the output:
 
 `/home`: 302 redirect -> Typical home page path.
 
-`/firewalls`: 302 redirect ->  Strange path that can reveal some information about the website purpose.
+`/firewalls`: 302 redirect ->  Strange path that can reveal some information about the website purpose (we need to be authenticated).
 
 `/logout`: 302 redirect. -> Typical logout path.
 
@@ -320,6 +314,7 @@ The are some juicy endpoint in the output:
 
 `/logs`: 403 forbidden -> Restricted interesting endpoint.
 
+All 302 redirects (such as /firewalls) point to the login page, suggesting that authentication is required.
 
 <br />
 
