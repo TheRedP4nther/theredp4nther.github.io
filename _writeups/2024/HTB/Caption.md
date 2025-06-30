@@ -255,13 +255,13 @@ As we can see, we're dealing with a `Werkzeug 3.0.1`, so it seems that the appli
 
 Some other interesting headers are:
 
-`x-varnish`:  Header added because a Varnish cache server is present (website booster).
+- `x-varnish`:  Header added because a Varnish cache server is present (website booster).
 
-`age`: Time elapsed since the resource was last cached.
+- `age`: Time elapsed since the resource was last cached.
 
-`via`: Indicates that the response has been processed by a Varnish cache server.
+- `via`: Indicates that the response has been processed by a Varnish cache server.
 
-`x-cache: MISS`: The requested resource was not present in the cache and had to be retrieved from the backend server.
+- `x-cache: MISS`: The requested resource was not present in the cache and had to be retrieved from the backend server.
 
 <br />
 
