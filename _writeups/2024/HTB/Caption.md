@@ -361,7 +361,7 @@ On the other hand, the `/config` folder have several directories.
 
 <br />
 
-
+![7](../../../assets/images/Caption/7.png)
 
 <br />
 
