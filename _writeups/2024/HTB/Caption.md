@@ -567,7 +567,7 @@ To validate this session, we set it using the browser `DevTools`:
 
 <br />
 
-![17](../../../assets/images/Caption/16.png)
+![17](../../../assets/images/Caption/17.png)
 
 <br />
 
@@ -575,7 +575,7 @@ And access the `/home` page:
 
 <br />
 
-![17](../../../assets/images/Caption/17.png)
+![18](../../../assets/images/Caption/18.png)
 
 <br />
 
