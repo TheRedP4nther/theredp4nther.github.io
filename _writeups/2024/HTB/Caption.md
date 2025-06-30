@@ -208,7 +208,7 @@ This website shows a login page:
 
 <br />
 
-
+![2](../../../assets/images/Caption/2.png)
 
 <br />
 
@@ -224,6 +224,6 @@ This other website is a GitBucket instance.
 
 <br />
 
-
+![3](../../../assets/images/Caption/3.png)
 
 <br />
