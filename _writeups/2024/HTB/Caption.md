@@ -390,3 +390,17 @@ Using these credentials, we successfully log in:
 ![9](../../../assets/images/Caption/9.png)
 
 <br />
+
+Once inside the application, we can see different functionalities:
+
+- 1.- Firewalls:
+
+This feature corresponds to the `/firewalls` path enumerated above:
+
+<br />
+
+
+
+<br />
+
+
