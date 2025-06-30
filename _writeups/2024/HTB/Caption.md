@@ -515,8 +515,6 @@ Perfect! We received our requests!
 
 # Web Cache Poison.
 
-<br />
-
 ## Admin Session Hijacking.
 
 <br />
