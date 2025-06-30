@@ -563,3 +563,18 @@ Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
 
 We successfully retrieved the admin's session token.
 
+To validate this session, we proceed to set it using the browser `DevTools`:
+
+<br />
+
+
+
+<br />
+
+And access the `/home` page:
+
+<br />
+
+
+
+<br />
