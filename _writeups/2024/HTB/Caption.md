@@ -364,3 +364,15 @@ There are eleven commits in the commit history:
 ![6](../../../assets/images/Caption/6.png)
 
 <br />
+
+The commit `""Add frontend and backend config` caught my attention.
+
+Inside, we can see a changed file `haproxy.cfg` with something relevant:
+
+<br />
+
+
+
+<br />
+
+We have credentials. `margo:vFr&cS2#0!`
