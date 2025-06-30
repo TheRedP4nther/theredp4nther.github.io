@@ -575,7 +575,7 @@ And access the `/home` page:
 
 <br />
 
-
+![17](../../../assets/images/Caption/17.png)
 
 <br />
 
