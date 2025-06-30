@@ -426,3 +426,13 @@ This function redirects to the `/logs` path with a `403 Forbidden`, may be we ne
 ![11](../../../assets/images/Caption/11.png)
 
 <br />
+
+- 4.- Download:
+
+<br />
+
+This one is not linked but we discover it before with wfuzz.
+
+It happens the same as `/logs` (403 Forbidden).
+
+<br />
