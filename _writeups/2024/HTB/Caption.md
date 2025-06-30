@@ -329,7 +329,7 @@ As we can see, there are two public repositories.
 
 Apparently, the `Caption-Portal` is related to the login page.
 
-Let's take a look at it: 
+Let's analyze it: 
 
 <br />
 
@@ -379,11 +379,11 @@ We have credentials. `margo:vFr&cS2#0!`
 
 <br />
 
-## Login Successfull as Margo:
+## Login Successful as Margo:
 
 <br /> 
 
-If we try to log into the web application with these new credentials, we do it:
+Using these credentials, we successfully log in:
 
 <br />
 
