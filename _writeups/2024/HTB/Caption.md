@@ -413,13 +413,15 @@ This information can be very important, because we already know that there are `
 
 - 2.- Routers:
 
-This is a static function without functionality.
+This feature appears to be static and `non-functional`.
 
 <br />
 
 - 3.- Logs:
 
-This function redirects to the `/logs` path with a `403 Forbidden`, may be we need to be an admin to access it.
+This function redirects to the `/logs` path with a `403 Forbidden`.
+
+This suggests that the current user `(margo)` lacks sufficient privileges, possibly requiring admin access.
 
 <br />
 
@@ -433,6 +435,6 @@ This function redirects to the `/logs` path with a `403 Forbidden`, may be we ne
 
 This one is not linked but we discover it before with wfuzz.
 
-It happens the same as `/logs` (403 Forbidden).
+It behaves the same as `/logs`, returning a 403 Forbidden.
 
 <br />
