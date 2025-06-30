@@ -399,7 +399,7 @@ This feature corresponds to the `/firewalls` path enumerated above:
 
 <br />
 
-
+![10](../../../assets/images/Caption/10.png)
 
 <br />
 
