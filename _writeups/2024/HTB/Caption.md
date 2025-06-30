@@ -439,6 +439,8 @@ It behaves the same as `/logs`, returning a 403 Forbidden.
 
 <br />
 
+# XSS (Cross-Site Scripting)
+
 ## X-Forwarded-Host Injection:
 
 <br />
