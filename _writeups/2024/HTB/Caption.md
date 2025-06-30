@@ -349,10 +349,18 @@ Let's start enumerating it:
 
 The repository include two folders and the famous `README.MD` file.
 
-The `/app` folder contains the `index.html` of the login page and a `/static/css` directory:
+The `/app` folder contains the `index.html` of the login page and a `/static/css` directory, nothing interesting:
 
 <br />
 
 ![5](../../../assets/images/Caption/5.png)
+
+<br />
+
+There are eleven commits:
+
+<br />
+
+
 
 <br />
