@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: 
+tags: gitbucket codereview informationleakage apachethrift wfuzz  webcache cache varnish xss crosssitescripting sessionhijacking
 ---
 
 <br />
