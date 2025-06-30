@@ -463,11 +463,11 @@ Analyzing the server response, we can see an interesting piece of code:
 
 Apparently, the website is making a request to `http://static/js/lib.js?utm_source=http://internal-proxy.local`.
 
-Next step is to discover where the website is looking for the `utm_source` parameter vaul `(http://internal-proxy.local)`. 
+Next step is to discover where the website is looking for the `utm_source` parameter value `(http://internal-proxy.local)`. 
 
-There are a lot of possibilities, but trying to control the this vault with a header like `X-Forwarded-Host` makes more sense to me.
+There are several possibilities, but trying to control this value with a header like `X-Forwarded-Host` makes more sense to me.
 
-So let's try by adding the `X-Forwarded-Host: test` header to our request:
+So let's try to add the `X-Forwarded-Host: test` header to our request:
 
 <br />
 
