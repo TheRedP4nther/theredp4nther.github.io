@@ -519,11 +519,11 @@ Perfect! We received our requests!
 
 <br />
 
-At this point, we have a `XSS` in the website, but `/home` path is not an interesting endpoint to exploit it. We need to find another endpoint where the response is cached, so our payload can be cached by the server and served to a privileged user like admin.
+At this point, we have a `XSS` in the website, but the `/home` path is not a meaningful target for exploitation. We need to find another endpoint where the response is cached, so our payload can be cached by the server and served to a privileged user like the admin.
 
 If an admin loads the cached payload, we can `hijack` their session by executing malicious `JavaScript` code.
 
-As we had seen before, the `/firewalls` payload is under admin maintenance, so it can be a good place to exploit this:
+As we had seen before, the `/firewalls` endpoint is under admin maintenance, so it can be a good place to exploit this:
 
 <br />
 
@@ -533,7 +533,7 @@ As we had seen before, the `/firewalls` payload is under admin maintenance, so i
 
 In the response we see indicators confirming that the resource is being cached with a `max_age` of 120.
 
-This indicates the response is cached for `120 seconds` by the server
+This indicates the response is cached for `120 seconds` by the server.
 
 To exfiltrate the admin's `session` cookie, we use the following payload:
 
@@ -563,7 +563,7 @@ Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
 
 We successfully retrieved the admin's session token.
 
-To validate this session, we proceed to set it using the browser `DevTools`:
+To validate this session, we set it using the browser `DevTools`:
 
 <br />
 
@@ -579,6 +579,10 @@ And access the `/home` page:
 
 <br />
 
-We're in, but if we try to access `/logs` or `/download`, the status code continue being 403 Forbidden.
+We're in, but if we try to access `/logs` or `/download`, the status code continues to be 403 Forbidden.
 
 The `/firewalls` endpoint has the same content.
+
+## Smuggling Attack:
+
+<br />
