@@ -567,7 +567,7 @@ To validate this session, we proceed to set it using the browser `DevTools`:
 
 <br />
 
-
+![17](../../../assets/images/Caption/16.png)
 
 <br />
 
@@ -578,3 +578,7 @@ And access the `/home` page:
 
 
 <br />
+
+We're in, but if we try to access `/logs` or `/download`, the status code continue being 403 Forbidden.
+
+The `/firewalls` endpoint has the same content.
