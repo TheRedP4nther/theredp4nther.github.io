@@ -208,6 +208,8 @@ When we try to load the website, it redirects to -> `http://caption.htb`.
 
 So we proceed to add this domain to our `/etc/hosts`:
 
+<br />
+
 ```bash
 10.10.11.33 caption.htb
 ```
@@ -327,5 +329,27 @@ The service on port 8080 is a `GitBucket` instance.
 <br />
 
 ![3](../../../assets/images/Caption/3.png)
+
+<br />
+
+As we can see, there are two public repositories.
+
+Apparently, the `Caption-Portal` one seems to be related to the login page.
+
+Let's start enumerating it:
+
+<br />
+
+
+
+<br />
+
+The repository include two folders and famous `README.MD` file.
+
+The `/app` folder contains the `index.html` of the login page and a `/static/css` directory:
+
+<br />
+
+
 
 <br />
