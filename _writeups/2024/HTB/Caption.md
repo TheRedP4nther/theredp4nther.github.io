@@ -204,7 +204,7 @@ Open Ports:
 
 <br />
 
-When we try to load the website, it redirects to -> `http://caption.htb`.
+When we try to load the website, it redirects to `http://caption.htb`.
 
 So we proceed to add this domain to our `/etc/hosts`:
 
@@ -224,7 +224,7 @@ This website shows a login page:
 
 <br />
 
-We try default credentials and some SQL Injection bypass (' or 1=1-- -'), but without success.
+We try default credentials and some basic SQL Injection payloads (' or 1=1-- -'), but without success.
 
 <br />
 
@@ -261,7 +261,7 @@ Some other interesting headers are:
 
 `via`: Indicates that the response has been processed by a Varnish cache server
 
-`x-cache: MISS`: Indicates that the resource was not found in the cache and had to be retrieved directly from the server.
+`x-cache: MISS`: The requested resource was not present in the cache and had to be retrieved from the backend server.
 
 <br />
 
@@ -269,7 +269,7 @@ Some other interesting headers are:
 
 <br />
 
-We continue enumeration by applying path fuzzing over the domain with `Wfuzz`:
+We continue the enumeration by applying path fuzzing over the domain with `Wfuzz`:
 
 <br />
 
@@ -317,7 +317,7 @@ There are some juicy endpoints in the output:
 
 `/download`: 403 forbidden -> Private endpoint that can be related to file downloads.
 
-`/logs`: 403 forbidden -> Interesting restricted endpoint.
+`/logs`: 403 forbidden -> Restricted but interesting endpoint.
 
 All 302 redirects (such as /firewalls) point to the login page, suggesting that authentication is required.
 
@@ -337,7 +337,7 @@ The service on port 8080 is a `GitBucket` instance.
 
 As we can see, there are two public repositories.
 
-Apparently, the `Caption-Portal` one seems to be related to the login page.
+Apparently, the `Caption-Portal` is related to the login page.
 
 Let's start enumerating it:
 
@@ -347,9 +347,9 @@ Let's start enumerating it:
 
 <br />
 
-The repository include two folders and the famous `README.MD` file.
+The repository includes two folders and the famous `README.md` file.
 
-The `/app` folder contains the `index.html` of the login page and a `/static/css` directory, nothing interesting:
+The `/app` folder contain the `index.html` of the login page and a `/static/css` directory, nothing interesting:
 
 <br />
 
@@ -357,7 +357,7 @@ The `/app` folder contains the `index.html` of the login page and a `/static/css
 
 <br />
 
-On the other hand, the `/config` folder have several directories.
+On the other hand, the `/config` folder has several directories.
 
 <br />
 
@@ -369,7 +369,7 @@ These directories contains the configurations for `HAProxy` and `Varnish`.
 
 <br />
 
-There are eleven commits:
+There are eleven commits in the commit history:
 
 <br />
 
