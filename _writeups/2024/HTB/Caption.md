@@ -230,7 +230,7 @@ We try default credentials and some SQL Injection bypass (' or 1=1-- -'), but wi
 
 <br />
 
-In the server response we can enumerate some technology information:
+From the server response, we can gather some technology information:
 
 <br />
 
@@ -253,9 +253,9 @@ As we can see, we're dealing with a `Werkzeuz 3.0.1`, so it seems that the appli
 
 Some other interesting headers are:
 
-`x-varnish`:  Server added because a Varnish cache server is present (website booster).
+`x-varnish`:  Header added because a Varnish cache server is present (website booster).
 
-`age`: Time lapse from the last cached of the server.
+`age`: Time elapsed since the resource was last cached.
 
 `via`: Indicates that the response has been processed by a Varnish cache server
 
@@ -267,7 +267,7 @@ Some other interesting headers are:
 
 <br />
 
-This other website is a `GitBucket` instance.
+The service on port 8080 is a `GitBucket` instance.
 
 <br />
 
