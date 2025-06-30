@@ -224,7 +224,7 @@ This website shows a login page:
 
 <br />
 
-We try default credentials and some basic SQL Injection payloads (' or 1=1-- -'), but without success.
+We try default credentials and some basic SQL Injection payloads `(' or 1=1-- -')`, but without success.
 
 <br />
 
@@ -290,17 +290,7 @@ ID           Response   Lines    Word       Chars       Payload
 ...[snip]...
 000000043:   302        5 L      22 W       189 Ch      "home"
 000000017:   403        4 L      8 W        94 Ch       "download"                                                                                                            
-000000013:   200        197 L    320 W      4316 Ch     "#"                                                                                                                   
-000000004:   200        197 L    320 W      4316 Ch     "#"                                                                                                                   
-000000002:   200        197 L    320 W      4316 Ch     "#"                                                                                                                   
-000000006:   200        197 L    320 W      4316 Ch     "# Attribution-Share Alike 3.0 License. To view a copy of this"                                                       
-000000005:   200        197 L    320 W      4316 Ch     "# This work is licensed under the Creative Commons"                                                                  
-000000010:   200        197 L    320 W      4316 Ch     "#"                                                                                                                   
-000000009:   200        197 L    320 W      4316 Ch     "# Suite 300, San Francisco, California, 94105, USA."                                                                 
-000000008:   200        197 L    320 W      4316 Ch     "# or send a letter to Creative Commons, 171 Second Street,"                                                          
-000000852:   403        4 L      8 W        94 Ch       "Download"                                                                                                            
 000002276:   403        4 L      8 W        94 Ch       "logs"                                                                                                                
-000003795:   403        4 L      8 W        94 Ch       "%20"                                                                                                                 
 000001312:   302        5 L      22 W       189 Ch      "firewalls"                                                                                                           
 000001230:   302        5 L      22 W       189 Ch      "logout" 
 ```
@@ -339,7 +329,7 @@ As we can see, there are two public repositories.
 
 Apparently, the `Caption-Portal` is related to the login page.
 
-Let's start enumerating it:
+Let's take a look at it: 
 
 <br />
 
@@ -349,7 +339,7 @@ Let's start enumerating it:
 
 The repository includes two folders and the famous `README.md` file.
 
-The `/app` folder contain the `index.html` of the login page and a `/static/css` directory, nothing interesting:
+The `/app` folder contains the `index.html` of the login page and a `/static/css` directory. At first glance, no hardcoded secrets, comments, or JS references were found.
 
 <br />
 
@@ -357,7 +347,7 @@ The `/app` folder contain the `index.html` of the login page and a `/static/css`
 
 <br />
 
-On the other hand, the `/config` folder has several directories.
+On the other hand, the `/config` folder has several directories:
 
 <br />
 
@@ -365,7 +355,7 @@ On the other hand, the `/config` folder has several directories.
 
 <br />
 
-These directories contains the configurations for `HAProxy` and `Varnish`.
+These directories contain the configurations for `HAProxy` and `Varnish`.
 
 <br />
 
