@@ -589,7 +589,7 @@ The `/firewalls` endpoint has the same content.
 
 <br />
 
-Searching for ways to bypass a 403 forbidden in the context of `HAProxy`, we found one great [POC](https://bishopfox.com/tools/h2c-smuggling) written by `BigShopFox` that explains how we can bypass a forbidden using the `UPGRADE` HTTP  header.
+Searching for ways to bypass a 403 forbidden in the context of `HAProxy`, we found one great [POC](https://bishopfox.com/blog/h2c-smuggling-request) written by `BigShopFox` that explains how we can bypass a forbidden using the `UPGRADE` HTTP  header.
 
 To simplify the exploitation of this vulnerability, we will use the following [GitHub Repository](https://github.com/BishopFox/h2csmuggler).
 
@@ -875,7 +875,7 @@ ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBMY5d7Gy
 
 As we can see the cypher that is being used corresponds to `ecdsa`, is not the typical `rsa`.
 
-This is to important to know if there is going to be an `id_rsa` or `id_ecdsa` in the system.
+This is really important to know if there is going to be an `id_rsa` or `id_ecdsa` in the system.
 
 Obviously, in this case we need to target the last one mentioned:
 
