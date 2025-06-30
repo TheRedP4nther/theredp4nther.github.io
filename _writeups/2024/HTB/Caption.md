@@ -347,7 +347,7 @@ Let's start enumerating it:
 
 <br />
 
-The repository include two folders and famous `README.MD` file.
+The repository include two folders and the famous `README.MD` file.
 
 The `/app` folder contains the `index.html` of the login page and a `/static/css` directory:
 
