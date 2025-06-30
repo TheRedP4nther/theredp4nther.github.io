@@ -204,6 +204,16 @@ Open Ports:
 
 <br />
 
+When we try to load the website, it redirect to -> `http://caption.htb`.
+
+So we proceed to add this domain to our `/etc/hosts`:
+
+```bash
+10.10.11.33 caption.htb
+```
+
+<br />
+
 This website shows a login page:
 
 <br />
