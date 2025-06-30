@@ -376,3 +376,17 @@ Inside, we can see a changed file `haproxy.cfg` with something relevant:
 <br />
 
 We have credentials. `margo:vFr&cS2#0!`
+
+<br />
+
+## Login Successfull as Margo:
+
+<br /> 
+
+If we try to log into the web application with these new credentials, we do it:
+
+<br />
+
+
+
+<br />
