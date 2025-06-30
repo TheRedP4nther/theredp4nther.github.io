@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: gitbucket codereview informationleakage apachethrift wfuzz cache varnish haproxy xss crosssitescripting sessionhijacking webcachepoisoning h2csmuggling smugglingrequest copyparty lfi localfileinclusion
+tags: gitbucket codereview informationleakage apachethrift wfuzz cache varnish haproxy xss crosssitescripting sessionhijacking webcachepoisoning h2csmuggling smugglingrequest copyparty lfi localfileinclusion authorized_keys ecdsa id_ecdsa
 ---
 
 <br />
