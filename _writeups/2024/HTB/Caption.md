@@ -929,7 +929,7 @@ And get the `user.txt` flag:
 
 ```bash
 margo@caption:~$ cat user.txt 
-89688e3f257199378755ef3ffb7543b8
+89688e3f257199378755ef3ffbxxxxxx
 ```
 
 <br />
