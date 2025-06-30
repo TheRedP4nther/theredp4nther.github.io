@@ -299,15 +299,15 @@ ID           Response   Lines    Word       Chars       Payload
 
 There are some juicy endpoints in the output:
 
-`/home`: 302 redirect -> Typical home page path.
+- `/home`: 302 redirect -> Typical home page path.
 
-`/firewalls`: 302 redirect ->  Uncommon path that might disclose information about the application's purpose.
+- `/firewalls`: 302 redirect ->  Uncommon path that might disclose information about the application's purpose.
 
-`/logout`: 302 redirect. -> Typical logout path.
+- `/logout`: 302 redirect. -> Typical logout path.
 
-`/download`: 403 forbidden -> Private endpoint that can be related to file downloads.
+- `/download`: 403 forbidden -> Private endpoint that can be related to file downloads.
 
-`/logs`: 403 forbidden -> Restricted but interesting endpoint.
+- `/logs`: 403 forbidden -> Restricted but interesting endpoint.
 
 All 302 redirects (such as /firewalls) point to the login page, suggesting that authentication is required.
 
@@ -407,3 +407,16 @@ The page informs us that the service is under admin maintenance.
 
 This information can be very important, because we already know that there are `admins` visiting this endpoint. So, if we discover any vulnerability like a `XSS` (Cross-Site Scripting), we can attempt to `capture` the admin's cookies.
 
+- 2.- Routers:
+
+This is a static function, no functionality.
+
+- 3.- Logs:
+
+This function redirects to the `/logs` path with a `403 Forbidden`, may be we need to be an admin to access it.
+
+<br />
+
+
+
+<br />
