@@ -224,7 +224,7 @@ In the server response we can enumerate some technology information:
 
 <br />
 
-```html
+```bash
 HTTP/1.1 200 OK
 server: Werkzeug/3.0.1 Python/3.10.12
 date: Mon, 16 Sep 2024 21:31:47 GMT
