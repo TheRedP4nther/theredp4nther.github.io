@@ -407,7 +407,7 @@ This feature matches the `/firewalls` path discovered during fuzzing:
 
 The page informs us that the service is under admin maintenance.
 
-This information can be very important, because we already know that there are `admins` visiting this endpoint. So, if we discover any vulnerability like a `XSS` (Cross-Site Scripting), we can attempt to `capture` the admin's cookies.
+This information can be very important, because we already know that there are admins visiting this endpoint. So, if we discover any vulnerability like a `XSS` (Cross-Site Scripting), we can attempt to `capture` the admin's cookies.
 
 <br />
 
@@ -433,7 +433,7 @@ This suggests that the current user `(margo)` lacks sufficient privileges, possi
 
 <br />
 
-This one is not linked but we discover it before with wfuzz.
+This endpoint is not linked in the interface, but we had already found it during fuzzing.
 
 It behaves the same as `/logs`, returning a 403 Forbidden.
 
