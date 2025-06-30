@@ -387,6 +387,6 @@ If we try to log into the web application with these new credentials, we do it:
 
 <br />
 
-
+![9](../../../assets/images/Caption/9.png)
 
 <br />
