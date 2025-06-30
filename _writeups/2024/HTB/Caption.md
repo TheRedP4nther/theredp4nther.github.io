@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: gitbucket codereview informationleakage apachethrift wfuzz  webcache cache varnish xss crosssitescripting sessionhijacking
+tags: gitbucket codereview informationleakage apachethrift wfuzz cache varnish xss crosssitescripting sessionhijacking webcachepoisoning
 ---
 
 <br />
@@ -562,8 +562,4 @@ Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
 <br />
 
 We successfully retrieved the admin's session token.
-
-
-
-
 
