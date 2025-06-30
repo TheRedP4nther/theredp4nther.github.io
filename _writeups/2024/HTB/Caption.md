@@ -365,7 +365,7 @@ There are eleven commits in the commit history:
 
 <br />
 
-The commit `""Add frontend and backend config` caught my attention.
+The commit `"Add frontend and backend config"` caught my attention.
 
 Inside, we can see a changed file `haproxy.cfg` with something relevant:
 
