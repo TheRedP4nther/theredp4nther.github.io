@@ -371,7 +371,7 @@ Inside, we can see a changed file `haproxy.cfg` with something relevant:
 
 <br />
 
-
+![8](../../../assets/images/Caption/8.png)
 
 <br />
 
