@@ -340,7 +340,7 @@ Let's start enumerating it:
 
 <br />
 
-
+![4](../../../assets/images/Caption/4.png)]
 
 <br />
 
@@ -350,6 +350,6 @@ The `/app` folder contains the `index.html` of the login page and a `/static/css
 
 <br />
 
-
+![5](../../../assets/images/Caption/5.png)
 
 <br />
