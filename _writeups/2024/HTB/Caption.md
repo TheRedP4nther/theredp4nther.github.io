@@ -393,6 +393,8 @@ Using these credentials, we successfully log into the `Caption Portal`:
 
 After logging in, we gain access to the following functionalities:
 
+<br />
+
 - 1.- Firewalls:
 
 This feature matches the `/firewalls` path discovered during fuzzing:
@@ -436,3 +438,5 @@ This endpoint is not linked in the interface, but we had already found it during
 It behaves the same as `/logs`, returning a 403 Forbidden.
 
 <br />
+
+
