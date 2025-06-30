@@ -443,20 +443,34 @@ It behaves the same as `/logs`, returning a 403 Forbidden.
 
 <br />
 
-At this point, we open `Burp Suite` to enumerate further deeper the application and intercept a petition to the `/home` endpoint:
+At this point, we open `Burp Suite` to further analyze the application and intercept a request to the `/home` endpoint:
 
 <br />
 
-
+![12](../../../assets/images/Caption/12.png)
 
 <br />
 
-Analyzing the server response, we can see a interesting piece of code:
+Analyzing the server response, we can see an interesting piece of code:
 
 <br />
 
 ```bash
 <script src="http://caption.htb/static/js/lib.js?utm_source=http://internal-proxy.local"></script>
 ```
+
+<br />
+
+Apparently, the website is making a request to `http://static/js/lib.js?utm_source=http://internal-proxy.local`.
+
+Next step is to discover where the website is looking for the `utm_source` parameter vaul `(http://internal-proxy.local)`. 
+
+There are a lot of possibilities, but trying to control the this vault with a header like `X-Forwarded-Host` makes more sense to me.
+
+So let's try by adding the `X-Forwarded-Host: test` header to our request:
+
+<br />
+
+
 
 <br />
