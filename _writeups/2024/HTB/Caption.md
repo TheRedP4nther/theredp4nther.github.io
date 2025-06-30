@@ -263,6 +263,8 @@ Some other interesting headers are:
 
 `x-cache: MISS`: Indicates that the resource was not found in the cache and had to be retrieved directly from the server.
 
+<br />
+
 ## Fuzzing:
 
 <br />
