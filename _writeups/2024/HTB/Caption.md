@@ -18,7 +18,7 @@ Difficulty -> Hard.
 
 <br />
 
-# Introduction:
+# Introduction.
 
 <br />
 
@@ -26,7 +26,7 @@ Difficulty -> Hard.
 
 <br />
 
-# Enumeration:
+# Enumeration.
 
 <br />
 
@@ -228,7 +228,7 @@ We try default credentials and some basic SQL Injection payloads `(' or 1=1-- -'
 
 <br />
 
-## Tech Stack:
+## Tech Stack.
 
 <br />
 
@@ -265,7 +265,7 @@ Some other interesting headers are:
 
 <br />
 
-## Fuzzing:
+## Fuzzing.
 
 <br />
 
@@ -379,7 +379,7 @@ We have credentials. `margo:vFr&cS2#0!`
 
 <br />
 
-## Login Successful as Margo:
+## Login Successful as Margo.
 
 <br /> 
 
@@ -439,13 +439,13 @@ It behaves the same as `/logs`, returning a 403 Forbidden.
 
 <br />
 
-# XSS (Cross-Site Scripting)
+# XSS (Cross-Site Scripting).
 
-## X-Forwarded-Host Injection:
+## X-Forwarded-Host Injection.
 
 <br />
 
-At this point, we open `Burp Suite` to further analyze the application and intercept a request to the `/home` endpoint:
+Now, we open `Burp Suite` to further analyze the application and intercept a request to the `/home` endpoint:
 
 <br />
 
@@ -510,5 +510,25 @@ Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
 <br />
 
 Perfect! We received our requests!
+
+<br />
+
+# Web Cache Poison.
+
+<br />
+
+## Admin Session Hijacking.
+
+<br />
+
+At this point, we have a `XSS` in the website, but `/home` path is not an interesting endpoint to exploit it. We need to find another endpoint where the response is cached, so our payload can be stored in the server and delivered to an important user like an admin.
+
+If an admin loads the cached payload, we can `hijack` their session by executing malicious `JavaScript` code.
+
+As we had seen before, the `/firewalls` payload is under admin maintenance, so it can be a good place to exploit this:
+
+<br />
+
+
 
 <br />
