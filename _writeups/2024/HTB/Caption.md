@@ -987,11 +987,11 @@ tcp6       0      0 :::22                   :::*                    LISTEN
 
 <br />
 
-Ports 6061 and 6062: Used by Varnish.
+- Ports 6061 and 6062: Used by Varnish.
 
-Port 8000: It hosts the web application.
+- Port 8000: It hosts the web application.
 
-Port 9090: This port is running the `LogService` that we have seen before in the `GitBucket` instance.
+- Port 9090: This port is running the `LogService` that we have seen before in the `GitBucket` instance.
 
 This last one can be a good target to the privesc.
 
