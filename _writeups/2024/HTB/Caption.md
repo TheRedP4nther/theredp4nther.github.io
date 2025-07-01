@@ -1135,7 +1135,7 @@ Then, we can generate with `thrift` the neccessary `Python` source code to use t
 
 <br />
 
-### Client.
+### Client.py.
 
 <br />
 
