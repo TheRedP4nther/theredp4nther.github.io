@@ -987,7 +987,7 @@ tcp6       0      0 :::22                   :::*                    LISTEN
 
 <br />
 
-- Ports 6061 and 6062: Used by Varnish.
+- Ports 6081 and 6082: Used by Varnish.
 
 - Port 8000: It hosts the web application.
 
@@ -995,7 +995,7 @@ tcp6       0      0 :::22                   :::*                    LISTEN
 
 This last one can be a good target to the privesc.
 
-So we procced to perform a `Port Forwarding` using SSH and get the service from the victim machine to our local machine:
+So we procced to forward the service using `SSH` and make it accessible locally:
 
 <br />
 
@@ -1011,13 +1011,43 @@ So we procced to perform a `Port Forwarding` using SSH and get the service from 
 
 <br />
 
-Before analyze this environment, we need to know what is `Apache Thrift`.
+Before analyzing this environment, we need to understand what `Apache Thrift` is.
 
 Apache Thrift is a software framework that enables the development of efficient and scalable `cross-language` services, facilitating communication between applications written in different programming languages, such as `Python` and `Go`.
 
 <br />
 
 ![19](../../../assets/images/Caption/19.png)
+
+<br />
+
+Now that we understand this, it's time to start our analysis.
+
+<br />
+
+### log_service.thrift.
+
+<br />
+
+This file shows to us the function that the server is using, called `ReadLogFile`:
+
+<br />
+
+```bash
+    namespace go log_service
+     
+    service LogService {
+        string ReadLogFile(1: string filePath)
+    }
+```
+
+<br />
+
+The function takes a single string as an argument.
+
+<br />
+
+### server.go.
 
 <br />
 
