@@ -957,6 +957,8 @@ app.py:        elif username == 'admin' and password == 'cFgjE@0%l0':
 
 During privilege escalation, it's always good practice to look for new passwords and check if they allow lateral movement. But in this case, the credentials do not provide access to other users.
 
+<br />
+
 ## Network.
 
 <br />
