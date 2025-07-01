@@ -938,7 +938,7 @@ margo@caption:~$ cat user.txt
 
 <br />
 
-In the user directory, we found again the same web application password for margo and a new one inside the Flask application's `app.py` file:
+In the user directory, we found the web application password for `margo` again and a new one inside the Flask application's `app.py` file:
 
 <br />
 
@@ -955,7 +955,7 @@ app.py:        elif username == 'admin' and password == 'cFgjE@0%l0':
 
 <br />
 
-During privilege escalation, it's always good practice to look for new passwords and check if they allow lateral movement. But in this case, the credentials do not provide access to other users.
+During privilege escalation, it's always good practice to look for new passwords and check if they allow lateral movement. But in this case, the credentials do not allow us to pivot to other users.
 
 <br />
 
@@ -993,9 +993,9 @@ tcp6       0      0 :::22                   :::*                    LISTEN
 
 - Port 9090: This port is running the `LogService` that we have seen before in the `GitBucket` instance.
 
-This last one can be a good target to the privesc.
+This last one could be a good target for privilege escalation.
 
-So we procced to forward the service using `SSH` and make it accessible locally:
+So we proceed to forward the service using `SSH` and make it accessible locally:
 
 <br />
 
@@ -1029,7 +1029,7 @@ Now that we understand this, it's time to start our analysis.
 
 <br />
 
-This file shows to us the function that the server is using, called `ReadLogFile`:
+This file defines the function used by the server, called `ReadLogFile`:
 
 <br />
 
@@ -1050,4 +1050,47 @@ The function takes a single string as an argument.
 ### server.go.
 
 <br />
+
+The `ReadLogFile` function inside the `server.go` file defines how the log files are parsed and processed when requested over Thrift. It starts by opening the file passed as input:
+
+<br />
+
+```bash
+file, err := os.Open(filePath)
+if err != nil {
+    return "", fmt.Errorf("error opening log file: %v", err)
+}
+defer file.Close()
+```
+If the file can't be opened, an error is returned to the client. Otherwise, the contents are read line by line.
+
+<br />
+
+Before processing the lines, the code prepares two regular expressions: one for extracting IP addresses and another to capture the value of the `User-Agent` field. It also creates an output file where the extracted information will be stored:
+
+<br />
+
+```go 
+ipRegex := regexp.MustCompile(`\b(?:\d{1,3}\.){3}\d{1,3}\b`)
+userAgentRegex := regexp.MustCompile(`"user-agent":"([^"]+)"`)
+outputFile, err := os.Create("output.log")
+```
+
+<br />
+
+Each line of the input log is scanned, and if both an IP and a User-Agent string are found, the function constructs a shell command using `echo` to write the information into `output.log`. The command includes a timestamp and looks like this:
+
+<br />
+
+```go 
+logs := fmt.Sprintf("echo 'IP Address: %s, User-Agent: %s, Timestamp: %s' >> output.log", ip, userAgent, timestamp)
+exec.Command{"/bin/sh", "-c", logs}
+```
+
+<br />
+
+Here is the vulnerability. The `User-Agent` value originates from untrusted input (HTTP headers in log files) and is `not sanitized`, making it a critical `injection point`. This string is embedded inside a shell command, meaning that if an attacker includes characters like `;` or backticks, he can `inject arbitrary shell commands`.
+
+<br />
+
 
