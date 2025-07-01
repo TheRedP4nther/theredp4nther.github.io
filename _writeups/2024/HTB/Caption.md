@@ -1157,9 +1157,6 @@ from thrift.protocol import TBinaryProtocol
 from log_service import LogService
 
 def read_log_file_from_server(file_path: str):
-    """
-    Solicita al servidor que lea un archivo de log y devuelve su contenido.
-    """
     socket = TSocket.TSocket('localhost', 9090)
     buffered_transport = TTransport.TBufferedTransport(socket)
     protocol = TBinaryProtocol.TBinaryProtocol(buffered_transport)
@@ -1169,20 +1166,20 @@ def read_log_file_from_server(file_path: str):
         buffered_transport.open()
         return client.ReadLogFile(file_path)
     except Thrift.TException as e:
-        print(f"[ERROR] Comunicación Thrift fallida: {e}")
+        print(f"[ERROR] Thrift communication failed: {e}")
     finally:
         buffered_transport.close()
 
 def main():
     if len(sys.argv) != 2:
-        print("Uso: python client.py <ruta_al_archivo_log>")
+        print("Usage: python client.py <log_file_path>")
         sys.exit(1)
 
     log_path = sys.argv[1]
     result = read_log_file_from_server(log_path)
 
     if result:
-        print("Respuesta del servidor:")
+        print("Server response:")
         print(result)
 
 if __name__ == "__main__":
