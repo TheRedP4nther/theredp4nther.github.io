@@ -1003,3 +1003,15 @@ So we procced to perform a `Port Forwarding` using SSH and get the service from 
 
 <br />
 
+## Analyzing LogService.
+
+### Apache Thrift
+
+<br />
+
+Before analyze this environment, we need to know what is `Apache Thrift`.
+
+Apache Thrift is a software framework that enables the development of efficient and scalable `cross-language` services facilitating communication between applications written in different programming languages, such as `Python` and `Go`.
+
+
+
