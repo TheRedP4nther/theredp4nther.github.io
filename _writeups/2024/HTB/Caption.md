@@ -1123,8 +1123,6 @@ And `download` the LogService `.zip` file from GitBucket:
 
 - http://caption.htb:8080/root/Logservice/archive/main.zip.
 
-<br />
-
 Then, we can generate with `thrift` the neccessary `Python` source code to use the defined services in the file `log_service.thrift`:
 
 <br />
