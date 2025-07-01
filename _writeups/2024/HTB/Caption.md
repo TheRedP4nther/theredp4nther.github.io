@@ -1051,7 +1051,9 @@ The function takes a single string as an argument.
 
 <br />
 
-The `ReadLogFile` function inside the `server.go` file defines how the log files are parsed and processed when requested over Thrift. It starts by opening the file passed as input:
+The `ReadLogFile` function inside the `server.go` file defines how the log files are parsed and processed when requested over Thrift. 
+
+It starts by opening the file passed as input:
 
 <br />
 
