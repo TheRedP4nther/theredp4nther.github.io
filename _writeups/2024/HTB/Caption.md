@@ -1106,7 +1106,7 @@ Here is the vulnerability. The `User-Agent` value originates from untrusted inpu
 
 <br />
 
-To use the function of the `server.go` mentioned above, first, we need to create a client. To do it, we can use Python or Go, because as we say earlier, Apache Thrift is multi-language. 
+To use the function of the `server.go` mentioned above, first, we need to create a client. To do it, we can use Python or Go, because as we say earlier, Apache Thrift is `multi-language`. 
 
 We need to install the following dependencies:
 
@@ -1119,7 +1119,9 @@ apt install -y thrift-compiler
 
 <br />
 
-And `download` the LogService `.zip` file from GitBucket: `http://caption.htb:8080/root/Logservice/archive/main.zip`.
+And `download` the LogService `.zip` file from GitBucket: 
+
+- http://caption.htb:8080/root/Logservice/archive/main.zip.
 
 <br />
 
@@ -1200,5 +1202,11 @@ If we execute the client, we have an error:
 <br />
 
 This is because we need to create the `log` before executing the `Python` script.
+
+<br />
+
+## Command Injection.
+
+<br />
 
 
