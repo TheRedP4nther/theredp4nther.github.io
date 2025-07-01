@@ -1069,8 +1069,6 @@ defer file.Close()
 
 If the file can't be opened, an error is returned to the client. Otherwise, the contents are read line by line.
 
-<br />
-
 Before processing the lines, the code prepares two regular expressions: one for extracting IP addresses and another to capture the value of the `User-Agent` field. 
 
 It also creates an output file where the extracted information will be stored:
