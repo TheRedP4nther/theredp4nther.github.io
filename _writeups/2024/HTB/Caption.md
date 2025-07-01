@@ -609,7 +609,7 @@ The target is vulnerable.
 
 Next, we're going to read the `logs` directory via this technique:
 
-- Note: Important to include the admin cookies in our onliner.
+⚠️ Note: Important to include the admin cookies in our onliner.
 
 <br />
 
@@ -1144,7 +1144,7 @@ Next, we'll build a minimal `Python client` to interact with the Thrift service.
 
 You can use the following code:
 
-- Note: You can place `client.py` anywhere as long as Python can import the `log_service` module from the `gen-py` folder.
+⚠️ Note: You can place `client.py` anywhere as long as Python can import the `log_service` module from the `gen-py` folder.
 
 <br />
 
