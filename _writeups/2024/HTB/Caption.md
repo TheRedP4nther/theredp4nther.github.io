@@ -609,7 +609,7 @@ The target is vulnerable.
 
 Next, we're going to read the `logs` directory via this technique:
 
-⚠️ Note: Important to include the admin cookies in our onliner.
+⚠️ Note: Important to include the admin cookies in our oneliner.
 
 <br />
 
@@ -1122,7 +1122,7 @@ apt install -y thrift-compiler
 
 <br />
 
-Then, `download` the LogService `.zip` file from GitBucket: 
+Next, `download` the LogService `.zip` file from GitBucket: 
 
 - http://caption.htb:8080/root/Logservice/archive/main.zip.
 
