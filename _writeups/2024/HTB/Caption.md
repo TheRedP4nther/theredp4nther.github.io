@@ -1145,7 +1145,7 @@ You can use the following code (Important to create the `client.py` inside the `
 
 <br />
 
-```python3 
+```python 
 import sys
 from thrift import Thrift
 from thrift.transport import TSocket
