@@ -1067,9 +1067,9 @@ defer file.Close()
 
 <br />
 
-If the file can't be opened, an error is returned to the client. Otherwise, the contents are read line by line.
+If the file can't be opened, an `error` is returned to the client. Otherwise, the contents are read line by line.
 
-Before processing the lines, the code prepares two regular expressions: one for extracting IP addresses and another to capture the value of the `User-Agent` field. 
+Before processing the lines, the code prepares two regular expressions: one for extracting `IP` addresses and another to capture the value of the `User-Agent` field. 
 
 It also creates an output file where the extracted information will be stored:
 
@@ -1083,7 +1083,7 @@ outputFile, err := os.Create("output.log")
 
 <br />
 
-Each line of the input log is scanned, and if both an IP and a User-Agent string are found, the function constructs a shell command using `echo` to write the information into `output.log`. 
+Each line of the input log is scanned, and if both an `IP` and a `User-Agent` string are found, the function constructs a shell command using `echo` to write the information into `output.log`. 
 
 The command includes a timestamp and looks like this:
 
