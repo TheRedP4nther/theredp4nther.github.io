@@ -955,7 +955,7 @@ app.py:        elif username == 'admin' and password == 'cFgjE@0%l0':
 
 <br />
 
-During privilege escalation, it's always good practice to look for new passwords and check if they allow lateral movement. But in this case, the credentials do not allow us to pivot to other users.
+During privilege escalation, it's always good practice to look for new `passwords` and check if they allow `lateral movement`. But in this case, the credentials don't allow lateral movement to any other user.
 
 <br />
 
@@ -993,7 +993,7 @@ tcp6       0      0 :::22                   :::*                    LISTEN
 
 - Port 9090: This port is running the `LogService` that we have seen before in the `GitBucket` instance.
 
-This last one could be a good target for privilege escalation.
+This last one appears to be a promising target for privilege escalation.
 
 So we proceed to forward the service using `SSH` and make it accessible locally:
 
@@ -1099,5 +1099,106 @@ exec.Command{"/bin/sh", "-c", logs}
 Here is the vulnerability. The `User-Agent` value originates from untrusted input (HTTP headers in log files) and is `not sanitized`, making it a critical `injection point`. This string is embedded inside a shell command, meaning that if an attacker includes characters like `;` or backticks, he can `inject arbitrary shell commands`.
 
 <br />
+
+## Exploitation.
+
+### setup.
+
+<br />
+
+To use the function of the `server.go` mentioned above, first, we need to create a client. To do it, we can use Python or Go, because as we say earlier, Apache Thrift is multi-language. 
+
+We need to install the following dependencies:
+
+<br />
+
+```bash
+pip3 install thrift 
+apt install -y thrift-compiler
+```
+
+<br />
+
+And `download` the LogService `.zip` file from GitBucket: `http://caption.htb:8080/root/Logservice/archive/main.zip`.
+
+<br />
+
+Then, we can generate with `thrift` the neccessary `Python` source code to use the defined services in the file `log_service.thrift`:
+
+<br />
+
+```bash
+❯ thrift -r --gen py log_service.thrift
+❯ ls
+ gen-go   gen-py   log_service.thrift   README.md   server.go
+```
+
+<br />
+
+### Client.
+
+<br />
+
+Next, we'll build a minimal `Python client` to interact with the Thrift service.
+
+You can use the following code (Important to create the `client.py` inside the `/gen-py` directory):
+
+<br />
+
+```python3 
+import sys
+from thrift import Thrift
+from thrift.transport import TSocket
+from thrift.transport import TTransport
+from thrift.protocol import TBinaryProtocol
+from log_service import LogService
+
+def read_log_file_from_server(file_path: str):
+    """
+    Solicita al servidor que lea un archivo de log y devuelve su contenido.
+    """
+    socket = TSocket.TSocket('localhost', 9090)
+    buffered_transport = TTransport.TBufferedTransport(socket)
+    protocol = TBinaryProtocol.TBinaryProtocol(buffered_transport)
+    client = LogService.Client(protocol)
+
+    try:
+        buffered_transport.open()
+        return client.ReadLogFile(file_path)
+    except Thrift.TException as e:
+        print(f"[ERROR] Comunicación Thrift fallida: {e}")
+    finally:
+        buffered_transport.close()
+
+def main():
+    if len(sys.argv) != 2:
+        print("Uso: python client.py <ruta_al_archivo_log>")
+        sys.exit(1)
+
+    log_path = sys.argv[1]
+    result = read_log_file_from_server(log_path)
+
+    if result:
+        print("Respuesta del servidor:")
+        print(result)
+
+if __name__ == "__main__":
+    main()
+```
+
+<br />
+
+If we execute the client, we have an error:
+
+<br />
+
+```bash
+❯ python client.py /tmp/lois.log
+[ERROR] Comunicación Thrift fallida: Internal error processing ReadLogFile: error opening log file: open /tmp/lois.log: no such file or directory
+```
+
+<br />
+
+This is because we need to create the `log` before executing the `Python` script.
 
 
