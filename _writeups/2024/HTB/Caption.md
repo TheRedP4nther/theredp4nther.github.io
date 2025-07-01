@@ -955,7 +955,7 @@ app.py:        elif username == 'admin' and password == 'cFgjE@0%l0':
 
 <br />
 
-During privilege escalation, it's always good practice to look for new `passwords` and check if they allow `lateral movement`. But in this case, the credentials don't allow lateral movement to any other user.
+During privilege escalation, it's always good practice to look for new `passwords` and check if they allow `lateral movement`. However, in this case, the credentials do not allow us to pivot to any other user.
 
 <br />
 
@@ -1136,7 +1136,7 @@ Then, we can generate with `thrift` the necessary `Python` source code to use th
 
 <br />
 
-### Client.py.
+### Python Client.
 
 <br />
 
@@ -1213,7 +1213,7 @@ We have two possible injection points:
 
 - The `User-Agent`.
 
-We will do it in the `User-Agent`, because the regex of the `IP` field is more restrictive.
+We'll target the `User-Agent` field, as the regex used for `IP` addresses is more restrictive and doesn't allow for injection.
 
 The regex of the `User-Agent` field is going to take anything that is not between `double quotes`.
 
@@ -1268,13 +1268,17 @@ Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
 
 <br />
 
-We received successfully the curl from the victim machine.
+We successfully received the curl `request` from the victim machine.
+
+<br />
 
 ### root shell:
 
 <br />
 
 We can use the following `lois.log` to gain a console as root:
+
+⚠️ Ensure that `index.html` contains a reverse shell payload, so that it gets executed when piped to bash.
 
 <br />
 
@@ -1294,7 +1298,7 @@ We run the `client.py` again:
 
 <br />
 
-Then, if we check the listener there is the shell as `root`:
+Then, if we check our listener, we receive a shell as `root`:
 
 <br />
 
@@ -1320,5 +1324,13 @@ root@caption:~# cat root.txt
 
 2063dc64172a376b7e7ac32b39xxxxxx
 ```
+
+<br />
+
+With that, we have full root access on the box and successfully completed the challenge.
+
+Hope you had enjoyed and learned a lot!
+
+Keep hacking! ❤️❤️
 
 <br />
