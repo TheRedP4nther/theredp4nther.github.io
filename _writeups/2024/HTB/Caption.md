@@ -22,7 +22,7 @@ Difficulty -> Hard.
 
 <br />
 
-
+Hello hackers! Today, we’re diving into the Caption machine, a Hard difficulty Linux challenge with a rich blend of modern web vulnerabilities and network abuse. We begin by enumerating a login portal backed by a GitBucket instance, which leaks hardcoded credentials via exposed repository history. Using those creds, we access the portal and discover an XSS vulnerability via the X-Forwarded-Host header, which we weaponize with a web cache poisoning attack to hijack the admin's session. With elevated access, we exploit an H2C smuggling flaw in HAProxy to bypass 403 restrictions and gain internal access to a vulnerable Copyparty instance, leading to a Local File Inclusion and the exfiltration of SSH private keys. After logging in as the user, we pivot to privilege escalation through a command injection vulnerability in a custom Apache Thrift service written in Go, ultimately gaining a root shell. Box owned!
 
 <br />
 
@@ -1095,6 +1095,8 @@ exec.Command{"/bin/sh", "-c", logs}
 ```
 
 <br />
+
+Now that we understand how the log service works internally, let's look at the vulnerable function.
 
 Here is the vulnerability. The `User-Agent` value originates from untrusted input (HTTP headers in log files) and is `not sanitized`, making it a critical `injection point`. This string is embedded inside a shell command, meaning that if an attacker includes characters like `;` or backticks, he can `inject arbitrary shell commands`.
 
