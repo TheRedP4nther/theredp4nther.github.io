@@ -1,4 +1,4 @@
----
+--
 layout: writeup
 category: HTB
 date: 2024-12-29
@@ -159,3 +159,12 @@ line vty 0 4
 ```
 
 <br />
+
+Apparently, this is a `Cisco router` config.
+
+<br />
+
+## Cracking Hashes:
+
+<br />
+
