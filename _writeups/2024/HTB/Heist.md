@@ -86,4 +86,14 @@ Relevant open ports:
 
 <br />
 
+## Http Enumeration:
 
+<br />
+
+The website on the http port is a login panel:
+
+<br />
+
+
+
+<br />
