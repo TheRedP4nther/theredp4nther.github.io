@@ -18,7 +18,7 @@ Difficulty -> Easy.
 
 <br />
 
-# Introduction:
+# Introduction.
 
 <br />
 
@@ -26,7 +26,7 @@ Difficulty -> Easy.
 
 <br />
 
-# Enumeration:
+# Enumeration.
 
 <br />
 
@@ -86,7 +86,7 @@ Relevant open ports:
 
 <br />
 
-## Http Enumeration:
+## Http Enumeration.
 
 <br />
 
@@ -164,7 +164,7 @@ Apparently, this is a `Cisco router` config.
 
 <br />
 
-## Cracking Hashes:
+## Cracking Hashes.
 
 <br />
 
@@ -177,3 +177,5 @@ Inside this file, we can find several `Cisco` hashes:
 - username admin privilege 15 password 7 02375012182C1A1D751618034F36415408: Cisco type 7.
 
 <br />
+
+## Cisco Type 5.
