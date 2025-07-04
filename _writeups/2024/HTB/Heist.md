@@ -182,9 +182,9 @@ The file contains several `Cisco` password hashes:
 
 <br />
 
-We will start cracking the `type 5` one.
+We will start by cracking the `Type 5` hash.
 
-The simplest way to crack it is to use `John the Ripper`:
+The easiest way to crack it is by using `John the Ripper`:
 
 <br />
 
@@ -201,6 +201,10 @@ stealth1agent    (?)
 Use the "--show" option to display all of the cracked passwords reliably
 Session completed.
 ```
+
+<br />
+
+**Cracked password**: `stealh1agent`
 
 <br />
 
