@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: cisco router informationleakage ciscotype5 ciscotype7 guest
+tags: cisco router informationleakage ciscotype5 ciscotype7 guest procdump.exe firefox dmp ps netexec passwordsprayingattack
 ---
 
 <br />
