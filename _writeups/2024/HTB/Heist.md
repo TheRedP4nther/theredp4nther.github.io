@@ -412,6 +412,45 @@ And get the `user.txt` flag:
 
 <br />
 
-# Privilege Escalation: chase -> administrator:
+# Privilege Escalation: chase -> administrator
 
 <br />
+
+There is an additional file named `todo.txt` in the user's `Desktop` directory:
+
+
+<br />
+
+```bash
+*Evil-WinRM* PS C:\Users\Chase\Desktop> dir
+
+
+    Directory: C:\Users\Chase\Desktop
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+-a----        4/22/2019   9:08 AM            121 todo.txt
+-ar---         7/4/2025   4:25 PM             34 user.txt
+
+```
+
+<br />
+
+It contains the follwing content:
+
+<br />
+
+```bash
+*Evil-WinRM* PS C:\Users\Chase\Desktop> type todo.txt
+Stuff to-do:
+1. Keep checking the issues list.
+2. Fix the router config.
+
+Done:
+1. Restricted access for guest user.
+```
+
+<br />
+
+
