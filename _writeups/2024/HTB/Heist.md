@@ -181,3 +181,33 @@ The file contains several `Cisco` password hashes:
 ### Cisco Type 5
 
 <br />
+
+We will start cracking the `type 5` one.
+
+The simplest way to crack it is to use `John the Ripper`:
+
+<br />
+
+```bash
+❯ john --wordlist=/usr/share/wordlists/rockyou.txt hash
+Warning: detected hash type "md5crypt", but the string is also recognized as "md5crypt-long"
+Use the "--format=md5crypt-long" option to force loading these as that type instead
+Using default input encoding: UTF-8
+Loaded 1 password hash (md5crypt, crypt(3) $1$ (and variants) [MD5 256/256 AVX2 8x3])
+Will run 8 OpenMP threads
+Press 'q' or Ctrl-C to abort, almost any other key for status
+stealth1agent    (?)     
+1g 0:00:00:10 DONE (2025-07-04 14:30) 0.09225g/s 323424p/s 323424c/s 323424C/s stealthy11..stcroixamy
+Use the "--show" option to display all of the cracked passwords reliably
+Session completed.
+```
+
+<br />
+
+## Cisco Type 7 
+
+<br />
+
+
+
+<br />
