@@ -102,6 +102,6 @@ Although, we don't have any credentials, clicking on `Login as guest` grants acc
 
 <br />
 
-
+![3](../../../assets/images/Heist/3.png)
 
 <br />
