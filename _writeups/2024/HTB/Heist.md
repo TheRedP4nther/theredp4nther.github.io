@@ -204,7 +204,7 @@ Session completed.
 
 <br />
 
-**Cracked password**: `stealh1agent`
+*Cracked password*: `stealh1agent`
 
 <br />
 
