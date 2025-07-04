@@ -1,4 +1,4 @@
---
+---
 layout: writeup
 category: HTB
 date: 2024-12-29
