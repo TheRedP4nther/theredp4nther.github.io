@@ -170,11 +170,11 @@ This appears to be a configuration file from a `Cisco router`.
 
 The file contains several `Cisco` password hashes:
 
-- **enable secret 5 $1$pdQG$o8nrSzsGXeaduXrjlvKc91**: Cisco type 5.
+- enable secret 5 **$1$pdQG$o8nrSzsGXeaduXrjlvKc91**: `Cisco type 5`.
 
-- **username rout3r password 7 0242114B0E143F015F5D1E161713**: Cisco type 7.
+- username rout3r password 7 **0242114B0E143F015F5D1E161713**: `Cisco type 7`.
 
-- **username admin privilege 15 password 7 02375012182C1A1D751618034F36415408**: Cisco type 7.
+- username admin privilege 15 password 7 **02375012182C1A1D751618034F36415408**: `Cisco type 7`.
 
 <br />
 
