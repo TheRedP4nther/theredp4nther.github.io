@@ -82,7 +82,7 @@ Relevant open ports:
 
 - `Port 445` -> smb 
 
-- `POrt 5985` -> winrm
+- `Port 5985` -> winrm
 
 <br />
 
