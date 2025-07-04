@@ -437,7 +437,7 @@ Mode                LastWriteTime         Length Name
 
 <br />
 
-It contains the follwing content:
+It contains the following content:
 
 <br />
 
@@ -452,5 +452,35 @@ Done:
 ```
 
 <br />
+
+This made me consider to enumerate the running `system processes`.
+
+The most notable one is `firefox`, which may contain sensitive `data` such as credentials or session tokens.
+
+<br />
+
+```bash
+*Evil-WinRM* PS C:\Users\Chase\Desktop> ps | findstr firefox
+    356      25    16416      38928       0.06   6164   1 firefox
+   1067      71   157172     233952       3.44   6392   1 firefox
+    347      20    10248      38732       0.03   6516   1 firefox
+    401      34    36860      95752       0.45   6676   1 firefox
+    378      28    23240      60292       0.23   6916   1 firefox
+```
+
+<br />
+
+## Extract Credentials from Firefox
+
+## ProcDump.exe
+
+<br />
+
+With this scenario, we can try something like [ProcDump.exe](https://learn.microsoft.com/en-us/sysinternals/downloads/procdump).
+
+`ProcDump.exe` is a famous tool used to `dump` interesting data from active `processes`.
+
+
+
 
 
