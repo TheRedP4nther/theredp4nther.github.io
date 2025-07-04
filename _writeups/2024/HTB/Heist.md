@@ -212,7 +212,7 @@ Cracked password: `stealh1agent`
 
 <br />
 
-For this type of hash we will use a specific tool from this [GitHub repository](https://github.com/theevilbit/ciscot7).
+For this type of hash we will use a specific tool from the following [GitHub repository](https://github.com/theevilbit/ciscot7).
 
 The tools is very intuitive and easy to use:
 
@@ -224,5 +224,9 @@ Decrypted password: Q4)sJu\Y8qz*A3?d
 ❯ python3 ciscot7.py -p "0242114B0E143F015F5D1E161713" --decrypt
 Decrypted password: $uperP@ssword
 ```
+
+<br />
+
+Cracked passwords: `Q4)sJu\Y8qz*A3?d` and `$uperP@ssword`
 
 <br />
