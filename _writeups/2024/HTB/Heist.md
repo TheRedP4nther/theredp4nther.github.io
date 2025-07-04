@@ -204,7 +204,7 @@ Session completed.
 
 <br />
 
-*Cracked password*: `stealh1agent`
+Cracked password: `stealh1agent`
 
 <br />
 
@@ -212,6 +212,17 @@ Session completed.
 
 <br />
 
+For this type of hash we will use a specific tool from this [GitHub repository](https://github.com/theevilbit/ciscot7).
 
+The tools is very intuitive and easy to use:
+
+<br />
+
+```bash
+❯ python3 ciscot7.py -p "02375012182C1A1D751618034F36415408" --decrypt
+Decrypted password: Q4)sJu\Y8qz*A3?d
+❯ python3 ciscot7.py -p "0242114B0E143F015F5D1E161713" --decrypt
+Decrypted password: $uperP@ssword
+```
 
 <br />
