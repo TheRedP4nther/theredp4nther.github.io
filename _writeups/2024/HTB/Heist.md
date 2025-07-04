@@ -276,8 +276,6 @@ SMB         10.10.10.149    445    SUPPORTDESK      [-] SupportDesk\admin:$uperP
 
 Valid credentials found: `hazard:stealth1agent`
 
-<br />
-
 Let's list the `shares` available for this user:
 
 <br />
