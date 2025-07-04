@@ -18,7 +18,7 @@ Difficulty -> Hard.
 
 <br />
 
-# Introduction.
+# Introduction
 
 <br />
 
@@ -26,7 +26,7 @@ Hello hackers! Today, we’re diving into the Caption machine, a Hard difficulty
 
 <br />
 
-# Enumeration.
+# Enumeration
 
 <br />
 
@@ -200,7 +200,7 @@ Open Ports:
 
 <br />
 
-# Http Enumeration: -> Port 80 
+# Http Enumeration: -> Port 80
 
 <br />
 
@@ -228,7 +228,7 @@ We tried default credentials and some basic SQL Injection payloads `(' or 1=1-- 
 
 <br />
 
-## Tech Stack.
+## Tech Stack
 
 <br />
 
@@ -265,7 +265,7 @@ Some other interesting headers are:
 
 <br />
 
-## Fuzzing.
+## Fuzzing
 
 <br />
 
@@ -379,7 +379,7 @@ We have credentials. `margo:vFr&cS2#0!`
 
 <br />
 
-## Login Successful as Margo.
+## Login Successful as Margo
 
 <br /> 
 
@@ -439,9 +439,9 @@ It behaves the same as `/logs`, returning a 403 Forbidden.
 
 <br />
 
-# XSS (Cross-Site Scripting).
+# XSS (Cross-Site Scripting)
 
-## X-Forwarded-Host Injection.
+## X-Forwarded-Host Injection
 
 <br />
 
@@ -513,9 +513,9 @@ The payload was executed successfully, as evidenced by multiple incoming request
 
 <br />
 
-# Web Cache Poison.
+# Web Cache Poison
 
-## Admin Session Hijacking.
+## Admin Session Hijacking
 
 <br />
 
@@ -585,7 +585,7 @@ The `/firewalls` endpoint has the same content.
 
 <br />
 
-## Smuggling Attack:
+## Smuggling Attack
 
 <br />
 
@@ -665,7 +665,7 @@ The important information is at the end of the output.
 
 <br />
 
-## Copyparty 1.8.2 LFI (Local File Inclusion):
+## Copyparty 1.8.2 LFI (Local File Inclusion)
 
 <br />
 
@@ -959,7 +959,7 @@ During privilege escalation, it's always good practice to look for new `password
 
 <br />
 
-## Network.
+## Network
 
 <br />
 
@@ -1005,7 +1005,7 @@ So we proceed to forward the service using `SSH` and make it accessible locally:
 
 <br />
 
-## Analyzing LogService.
+## Analyzing LogService
 
 ### Apache Thrift
 
@@ -1025,7 +1025,7 @@ Now that we understand this, it's time to start our analysis.
 
 <br />
 
-### log_service.thrift.
+### log_service.thrift
 
 <br />
 
@@ -1047,7 +1047,7 @@ The function takes a single string as an argument.
 
 <br />
 
-### server.go.
+### server.go
 
 <br />
 
@@ -1102,9 +1102,9 @@ Here is the vulnerability. The `User-Agent` value originates from untrusted inpu
 
 <br />
 
-## Exploitation.
+## Exploitation
 
-### Setup.
+### Setup
 
 <br />
 
@@ -1116,7 +1116,7 @@ We need to install the following dependencies:
 <br />
 
 ```bash
-pip3 install thrift 
+pip3 install thrift
 apt install -y thrift-compiler
 ```
 
@@ -1138,7 +1138,7 @@ Then, we can generate with `thrift` the necessary `Python` source code to use th
 
 <br />
 
-### Python Client.
+### Python Client
 
 <br />
 
@@ -1205,7 +1205,7 @@ This error occurs because the log file does not exist yet — it must be created
 
 <br />
 
-## Command Injection.
+## Command Injection
 
 <br />
 
@@ -1227,7 +1227,7 @@ userAgentRegex := regexp.MustCompile(`"user-agent":"([^"]+)"`)
 
 <br />
 
-### lois.log.
+### lois.log
 
 <br />
 
@@ -1274,7 +1274,7 @@ We successfully received the curl `request` from the victim machine.
 
 <br />
 
-### root shell:
+### root shell
 
 <br />
 

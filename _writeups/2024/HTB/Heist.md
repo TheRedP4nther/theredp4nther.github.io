@@ -18,7 +18,7 @@ Difficulty -> Easy.
 
 <br />
 
-# Introduction.
+# Introduction
 
 <br />
 
@@ -26,7 +26,7 @@ Difficulty -> Easy.
 
 <br />
 
-# Enumeration.
+# Enumeration
 
 <br />
 
@@ -86,7 +86,7 @@ Relevant open ports:
 
 <br />
 
-## Http Enumeration.
+## Http Enumeration
 
 <br />
 
@@ -106,11 +106,11 @@ Although we don't have any credentials, clicking on `Login as guest` grants acce
 
 <br />
 
-There is a user named `Hazard` who is having a discussion with an Support Admin about a problem with a `Cisco router`.
+There is a user named `Hazard` who is having a discussion with a Support Admin about a problem with a `Cisco router`.
 
 In the user's first message, we can find a button with an `attachment`.
 
-Clicking in this button reveals an interesting `config.txt` file:
+Clicking on this button reveals an interesting `config.txt` file:
 
 <br />
 
@@ -133,7 +133,7 @@ username admin privilege 15 password 7 02375012182C1A1D751618034F36415408
 ip ssh authentication-retries 5
 ip ssh version 2
 !
-!
+!   
 router bgp 100
  synchronization
  bgp log-neighbor-changes
@@ -160,15 +160,15 @@ line vty 0 4
 
 <br />
 
-Apparently, this is a `Cisco router` config.
+This appears to be a configuration file from a `Cisco router`.
 
 <br />
 
-## Cracking Hashes.
+## Cracking Hashes
 
 <br />
 
-Inside this file, we can find several `Cisco` hashes:
+The file contains several `Cisco` password hashes:
 
 - enable secret 5 $1$pdQG$o8nrSzsGXeaduXrjlvKc91: Cisco type 5.
 
@@ -178,4 +178,4 @@ Inside this file, we can find several `Cisco` hashes:
 
 <br />
 
-### Cisco Type 5.
+### Cisco Type 5
