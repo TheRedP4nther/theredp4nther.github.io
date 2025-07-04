@@ -22,7 +22,7 @@ Difficulty -> Easy.
 
 <br />
 
-
+Hello hackers! Today, we’re diving into Heist, an Easy-difficulty Windows machine with some classic network misconfigurations and credential reuse fun. We start by analyzing a public Cisco router config file exposed through a guest-accessible web chat, where we extract multiple Cisco-type hashes and crack them to recover plaintext passwords. After that, we perform a password spraying attack over SMB and WinRM, which lets us get access as the user Chase. Privilege escalation comes by dumping the memory of a running Firefox process using ProcDump and uncovering the admin’s credentials in plain text, granting us full control of the box. Rooted!
 
 <br />
 
