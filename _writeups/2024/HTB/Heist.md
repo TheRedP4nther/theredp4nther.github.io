@@ -76,17 +76,13 @@ Nmap done: 1 IP address (1 host up) scanned in 123.29 seconds
 
 Relevant open ports:
 
-- `Port 53` -> dns 
-
-- `Port 88` -> kerberos
+- `Port 80` -> http
 
 - `Port 135` -> rpc 
 
-- `Port 139` -> netbios
-
-- `Port 389` -> ldap 
-
 - `Port 445` -> smb 
+
+- `POrt 5985` -> winrm
 
 <br />
 
