@@ -90,10 +90,18 @@ Relevant open ports:
 
 <br />
 
-The website on the http port is a login panel:
+The website hosted on port 80 displays a login panel:
 
 <br />
 
 ![2](../../../assets/images/Heist/2.png)
+
+<br />
+
+Although, we don't have any credentials, clicking on `Login as guest` grants access to the following interface:
+
+<br />
+
+
 
 <br />
