@@ -131,7 +131,7 @@ SMB         10.10.10.172    445    MONTEVERDE       [*] Windows 10 / Server 2019
 
 <br />
 
-In the output, we can confirm the domain `MEGABANK.LOCAL` and that we're dealing with a Windows 10 Build 17763.
+In the output, we confirm the domain `MEGABANK.LOCAL` and see that the host is running Windows Server 2019 (Build 17763), which shares its build number with Windows 10.
 
 We attempt a null session (anonymous access) SMB connection to enumerate shares, but `STATUS_ACCESS_DENIED`:
 
@@ -150,7 +150,7 @@ SMB         10.10.10.172    445    MONTEVERDE       [-] Error enumerating shares
 
 <br />
 
-On the other hand, null session works for `rpcclient`:
+However, anonymous access is allowed via `rpcclient`:
 
 <br />
 
@@ -182,7 +182,7 @@ user:[smorgan] rid:[0xa37]
 
 <br />
 
-Then, we put this `usernames` into a file:
+Then, we put these `usernames` into a file:
 
 <br />
 
@@ -209,7 +209,7 @@ smorgan
 
 At this point, we can attempt a Spray Attack with this usernames.
 
-It may seem silly, but it is quite typical for a company user to use their nickname as a password.
+While it may seem naive, it's not uncommon for corporate users to use their usernames as passwords.
 
 To perform this attack, we will run `netexec` using the `--continue-on-success` flag. By this way, the program will continue running including after a valid match.
 
@@ -234,9 +234,9 @@ SMB         10.10.10.172    445    MONTEVERDE       [+] MEGABANK.LOCAL\SABatchJo
 
 <br />
 
-In this case, we only have one match:
+In this case, we get a single match - valid credentials for the `SABatchJobs` user: `SABatchJobs:SABatchJobs`.
 
-But we have valid credentials: `SABatchJobs:SABatchJobs`
+<br />
 
 ## SMB Authenticated Enumeration:
 
@@ -265,7 +265,7 @@ SMB         10.10.10.172    445    MONTEVERDE       users$          READ
 
 <br />
 
-There are several relevant resources in the output, but the most interesting is the `users$` one.
+Among the available shares, the most interesting is `users$`, which likely contains user profile directories.
 
 To access it, we can use `smbcclient`:
 
@@ -288,7 +288,7 @@ smb: \> ls
 
 <br />
 
-And download its content to our local machine for further analyze:
+And download its content to our local machine for further analysis:
 
 <br >
 
