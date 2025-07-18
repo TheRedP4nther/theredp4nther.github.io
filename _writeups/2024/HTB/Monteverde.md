@@ -166,7 +166,6 @@ Inside, we can enumerate the domain users with the command `enumdomusers`:
 <br />
 
 ```bash
-❯ rpcclient -U "" MEGABANK.LOCAL -N
 rpcclient $> enumdomusers
 user:[Guest] rid:[0x1f5]
 user:[AAD_987d7f2f57d2] rid:[0x450]
