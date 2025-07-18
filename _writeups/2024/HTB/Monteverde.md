@@ -388,7 +388,7 @@ When we enumerate the shared resources, we saw some hints like the `azure_upload
 
 <br />
 
-
+![2](../../../assets/images/Monteverde/2.png)
 
 <br />
 
