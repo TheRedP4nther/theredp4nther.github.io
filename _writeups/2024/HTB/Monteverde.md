@@ -384,7 +384,7 @@ And get the `user.txt` flag:
 
 <br />
 
-When we enumerate the shared resources, we saw some hints like the `azure_uploads` directory, that make us aware of the presence of `Azure` in the system.
+We noticed hints such as the `azure_uploads` share, which suggest that Azure-related components are present on the system.
 
 <br />
 
@@ -392,7 +392,7 @@ When we enumerate the shared resources, we saw some hints like the `azure_upload
 
 <br />
 
-If we run `net user mhope`, we can confirm that this user is into the `Azure Admins` group:
+If we run net user `mhope`, we can confirm that the user is part of the `Azure Admins` group:
 
 <br />
 
