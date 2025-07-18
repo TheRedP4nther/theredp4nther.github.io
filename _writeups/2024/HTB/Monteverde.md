@@ -527,7 +527,7 @@ Domain: MEGABANK.LOCAL
 
 <br />
 
-We have credentials for the `Administrator` user.
+We have credentials for the `Administrator` user: `d0m@in4dminyeah!`
 
 Using `evil-winrm` we can connect as him to the system:
 
