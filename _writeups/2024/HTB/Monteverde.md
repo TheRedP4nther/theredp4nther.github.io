@@ -30,7 +30,7 @@ Difficulty -> Medium.
 
 <br />
 
-We begin with a standard `nmap` scan to identify open ports:
+We begin with an aggressive `nmap` full TCP port scan to identify all open ports and enumerate services.
 
 <br />
 
@@ -112,6 +112,36 @@ So we add them to our `/etc/hosts` file:
 
 ```bash
 10.10.10.172 MEGABANK.LOCAL
+```
+
+<br />
+
+# SMB Enumeration:
+
+<br />
+
+As always, we will start enumerating basic domain information with `netexec`:
+
+<br />
+
+```bash
+❯ netexec smb 10.10.10.172
+SMB         10.10.10.172    445    MONTEVERDE       [*] Windows 10 / Server 2019 Build 17763 x64 (name:MONTEVERDE) (domain:MEGABANK.LOCAL) (signing:True) (SMBv1:False)
+```
+
+<br />
+
+In the output, we can confirm the domain `MEGABANK.LOCAL` and that we're dealing with a Windows 10 Build 17763.
+
+We attempt a null session (anonymous access) SMB connection to enumerate shares, but `STATUS_ACCESS_DENIED`:
+
+<br />
+
+```bash
+❯ netexec smb MEGABANK.LOCAL -u '' -p '' --shares
+SMB         10.10.10.172    445    MONTEVERDE       [*] Windows 10.0 Build 17763 x64 (name:MONTEVERDE) (domain:MEGABANK.LOCAL) (signing:True) (SMBv1:False)
+SMB         10.10.10.172    445    MONTEVERDE       [+] MEGABANK.LOCAL\: 
+SMB         10.10.10.172    445    MONTEVERDE       [-] Error enumerating shares: STATUS_ACCESS_DENIED
 ```
 
 <br />
