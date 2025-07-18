@@ -378,55 +378,6 @@ And get the `user.txt` flag:
 
 <br />
 
-# Privilege Escalation: mhope -> Administrator
-
-## Azure
+## Privilege Escalation: mhope -> Administrator
 
 <br />
-
-When we enumerate the shared resources, we saw some hints like the `azure_uploads` directory, that make us aware of the presence of `Azure` in the system.
-
-<br />
-
-
-
-<br />
-
-If we run `net user mhope`, we can confirm that this user is into the `Azure Admins` group:
-
-<br />
-
-```bash
-*Evil-WinRM* PS C:\Users\mhope\Documents> net user mhope
-User name                    mhope
-Full Name                    Mike Hope
-Comment
-User's comment
-Country/region code          000 (System Default)
-Account active               Yes
-Account expires              Never
-
-Password last set            1/2/2020 4:40:05 PM
-Password expires             Never
-Password changeable          1/3/2020 4:40:05 PM
-Password required            Yes
-User may change password     No
-
-Workstations allowed         All
-Logon script
-User profile
-Home directory               \\monteverde\users$\mhope
-Last logon                   7/18/2025 3:37:06 AM
-
-Logon hours allowed          All
-
-Local Group Memberships      *Remote Management Use
-Global Group memberships     *Azure Admins         *Domain Users
-The command completed successfully.
-```
-
-<br />
-
-
-
-
