@@ -22,7 +22,7 @@ Difficulty -> Medium.
 
 <br />
 
-
+Hello hackers! Today we’re tackling the Monteverde Machine, a Medium difficulty Windows box. We’ll begin by enumerating SMB and RPC to extract domain users and conduct a password spraying attack, which yields valid credentials. With them, we explore user shares and discover an Azure configuration file containing another password. This grants us access via WinRM, where we find ourselves as a member of the Azure Admins group. For privilege escalation, we exploit the Azure AD Connect sync service to decrypt stored credentials, ultimately retrieving the Administrator password and fully compromising the machine.
 
 <br />
 
