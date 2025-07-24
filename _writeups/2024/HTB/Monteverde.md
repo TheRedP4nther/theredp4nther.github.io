@@ -458,7 +458,7 @@ These folders confirm that `Azure AD Connect` is installed on the system.
 
 [This post](https://vbscrub.video.blog/2020/01/14/azure-ad-connect-database-exploit-priv-esc/) details a known vulnerability in the `Azure AD Connect` database component.
 
-The `Azure AD Connect` service is responsible for synchronizing accounts and credentials between the on-premises Active Directory and Azure AD. The core idea behind the exploit is that we can extract plaintext credentials for the AD account configured within the sync service by running the exploit inside the `zip` of the following [GitHub repository](https://github.com/VbScrub/AdSyncDecrypt/releases):
+The `Azure AD Connect` service is responsible for synchronizing accounts and credentials between the on-premises Active Directory and Azure AD. The core idea behind the exploit is that we can extract plaintext credentials for the AD account configured within the sync service by running the exploit inside the `zip` of the following [GitHub repository](https://github.com/VbScrub/AdSyncDecrypt/releases).
 
 To proceed, we download the ZIP file and extract its contents:
 
