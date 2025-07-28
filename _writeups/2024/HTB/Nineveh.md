@@ -222,7 +222,19 @@ This path leads to a `phpLiteAdmin v1.9` login page:
 
 `phpLiteAdmin` is an open-source PHP tool designed to manage `SQLite` databases through a web interface.
 
-If we search for exploits for this version, we'll find an `Authenticated RCE`, but at this point we can't exploit it since we don't have valid credentials yet.
+If we search for exploits targeting this version `(v1.9)`, we find an `authenticated RCE` affecting `phpLiteAdmin <= 1.9.3`. However, we can’t exploit it at this point since we don’t have valid credentials.
+
+We confirm this with `searchsploit`:
+
+<br />
+
+```bash
+❯ searchsploit phpLiteAdmin 1.9
+----------------------------------------------------------------------------------------------------------------------------------------------------- ---------------------------------
+ Exploit Title                                                                                                                                       |  Path
+----------------------------------------------------------------------------------------------------------------------------------------------------- ---------------------------------
+PHPLiteAdmin 1.9.3 - Remote PHP Code Injection                                                                                                       | php/webapps/24044.txt
+```
 
 <br />
 
@@ -242,7 +254,8 @@ However, when accessed, it only displays an image:
 
 Sometimes, images may contain useful information in their metadata.
 
-So, we download the image and analyze it locally:
+We proceed to download the image and inspect it locally using tools like `exiftool` or `strings` to extract potential embedded data:
+
 
 <br />
 
