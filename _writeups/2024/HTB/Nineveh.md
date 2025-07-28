@@ -69,3 +69,15 @@ Open Ports:
 `Port 443` -> https 
 
 <br />
+
+# Http Enumeration:
+
+<br />
+
+In the port 80, we find a default http page:
+
+<br />
+
+
+
+<br />
