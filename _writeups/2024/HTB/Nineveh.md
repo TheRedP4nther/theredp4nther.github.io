@@ -137,10 +137,10 @@ We test default credentials without success.
 
 <br />
 
-Port 443 hosts a page with a strange image:
+Port 443 hosts a page with a simple image:
 
 <br />
 
-
+![5](../../../assets/images/Nineveh/5.png)
 
 <br />
