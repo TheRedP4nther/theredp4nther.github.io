@@ -195,7 +195,7 @@ This one is a `phpLiteAdmin v1.9` login page:
 
 <br />
 
-
+![6](../../../assets/images/Nineveh/6.png)
 
 <br />
 
@@ -209,10 +209,10 @@ This one is a `phpLiteAdmin v1.9` login page:
 
 This path seems to be really interesting.
 
-But if we access it, there is only a image:
+But if we access it, there is only an image:
 
 <br />
 
-
+![7](../../../assets/images/Nineveh/7.png)
 
 <br />
