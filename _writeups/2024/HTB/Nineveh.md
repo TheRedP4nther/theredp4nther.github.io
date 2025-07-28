@@ -328,7 +328,7 @@ To perform the attack, we use `hydra` with the following options:
 
 - `-P`: Indicates the password wordlist to use.
 
-- `https-port-form`: Specifies the HTTPS POST form module.
+- `https-post-form`: Specifies the HTTPS POST form module.
 
 - `/db/:password=^PASS^&remember=yes&login=Log+In&proc_login=true:Incorrect password.`
 
@@ -354,7 +354,7 @@ Hydra (https://github.com/vanhauser-thc/thc-hydra) finished at 2025-07-28 18:29:
 
 We have a valid match.
 
-With this new password we're able to log in:
+Using this, we can now log in successfully:
 
 <br />
 
