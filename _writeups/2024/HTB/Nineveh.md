@@ -420,6 +420,7 @@ At this point, we have our all ready to run our `cmd.php`, but we need a `LFI` t
 
 <br />
 
+![13](../../../assets/images/Nineveh/13.png)
 
-
+<br />
 
