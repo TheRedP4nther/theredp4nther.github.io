@@ -151,7 +151,7 @@ This directory contains a `login` page:
 
 <br />
 
-We tested default credentials and basic `SQL` injection payloads `' or 1=1-- -` without success.
+We tested default credentials and basic `SQL` injection payloads `(' or 1=1-- -)` without success.
 
 <br />
 
