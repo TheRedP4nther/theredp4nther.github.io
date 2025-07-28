@@ -362,11 +362,11 @@ Using this, we can now log in successfully:
 
 <br />
 
-## Remote PHP Code Injection
+## Remote PHP Code Injection via phpLiteAdmin
 
 <br />
 
-The `24044.txt` exploit that we have seen before with `searchsploit` is a poc with the neccessary steps to get a remote php code injection via `phpLiteAdmin`.
+The `24044.txt` exploit from `searchsploit` provides a proof of concept `(PoC)` for achieving remote PHP code injection through `phpLiteAdmin`.
 
 The steps are the following:
 
@@ -376,7 +376,7 @@ The steps are the following:
 
 <br />
 
-In this case, we will create one named `exploit.php`:
+In this case, we'll create a database named `exploit.php`:
 
 <br />
 
@@ -389,7 +389,7 @@ In this case, we will create one named `exploit.php`:
 
 <br />
 
-The table only need one field:
+The table only needs one field:
 
 <br />
 
@@ -397,7 +397,7 @@ The table only need one field:
 
 <br />
 
-Now we select the `"Type"` text, and enter the php code into the `"Default Value"` field:
+Set the field `"Type"` to `TEXT`, and enter the following php code into the `"Default Value"` field:
 
 <br />
 
@@ -408,7 +408,7 @@ Now we select the `"Type"` text, and enter the php code into the `"Default Value
 
 <br />
 
-⚠️ Note: Important to use double quotes `"` instead single quotes `'`.
+⚠️ Note: It’s important to use double quotes `(")` instead of single quotes `(')` inside the `system()` function, so the GET parameter is correctly interpreted.
 
 <br />
 
@@ -416,7 +416,9 @@ Now we select the `"Type"` text, and enter the php code into the `"Default Value
 
 <br />
 
-At this point, we have our all ready to run our `cmd.php`, but we need a `LFI` to access it, since its path is under `/var/tmp`:
+At this point, everything is reached to execute our payload via `cmd.php`.
+
+However, since the file is saved under `/var/tmp`, we need a `Local File Inclusion` (LFI) vulnerability to access it.
 
 <br />
 
