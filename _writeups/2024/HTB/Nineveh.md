@@ -73,7 +73,7 @@ Open Ports:
 
 <br />
 
-In the port 80, we find a default web page:
+On port 80, we find a default web page:
 
 <br />
 
@@ -94,14 +94,36 @@ To enumerate hidden directories and files, we use `gobuster`:
 <br />
 
 ```bash
-
+❯ gobuster dir -u http://10.10.10.43 -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -t 20 -x php
+===============================================================
+Gobuster v3.6
+by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url:                     http://10.10.10.43
+[+] Method:                  GET
+[+] Threads:                 20
+[+] Wordlist:                /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt
+[+] Negative Status codes:   404
+[+] User Agent:              gobuster/3.6
+[+] Extensions:              php
+[+] Timeout:                 10s
+===============================================================
+Starting gobuster in directory enumeration mode
+===============================================================
+/info.php             (Status: 200) [Size: 83681]
+/department           (Status: 301) [Size: 315] [--> http://10.10.10.43/department/]
+/server-status        (Status: 403) [Size: 299]
+Progress: 441134 / 441136 (100.00%)
+===============================================================
+Finished
+===============================================================
 ```
 
 <br />
 
 We find several interesting results in the output.
 
-Let's take a look at these paths.
+Let's examine them one by one.
 
 <br />
 
@@ -121,7 +143,7 @@ This page is the typical `phpinfo()` file:
 
 <br />
 
-In this other page, we find a `login`:
+This directory contains a `login` page:
 
 <br />
 
@@ -129,7 +151,7 @@ In this other page, we find a `login`:
 
 <br />
 
-We test default credentials without success.
+We tested default credentials and basic `SQL` injection payloads `' or 1=1-- -` without success.
 
 <br />
 
@@ -137,7 +159,7 @@ We test default credentials without success.
 
 <br />
 
-Port 443 hosts a page with a simple image:
+On port 443, we find a page displaying only a static image:
 
 <br />
 
