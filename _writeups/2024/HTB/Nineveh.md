@@ -380,6 +380,7 @@ In this case, we will create one named `exploit.php`:
 
 <br />
 
-
+![9](../../../assets/images/Nineveh/9.png)
+![10](../../../assets/images/Nineveh/10.png)
 
 <br />
