@@ -167,3 +167,52 @@ On port 443, we find a page displaying only a static image:
 
 <br />
 
+As we did with http page, we will apply some fuzzing.
+
+## Fuzzing
+
+<br />
+
+We will use `gobuster` again with the difference that now we need to use the `-k` flag (to skip the TSL certificate validation):
+
+<br />
+
+```bash
+
+```
+
+<br />
+
+We discover three new directories.
+
+<br />
+
+### /db
+
+<br />
+
+This one is a `phpLiteAdmin v1.9` login page:
+
+<br />
+
+
+
+<br />
+
+`phpLiteAdmin` is a open source tool written in PHP destineted to manage `SQLite` DBs through a web searcher.
+
+<br />
+
+### /secure_notes
+
+<br />
+
+This path seems to be really interesting.
+
+But if we access it, there is only a image:
+
+<br />
+
+
+
+<br />
