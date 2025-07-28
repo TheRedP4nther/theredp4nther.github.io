@@ -684,6 +684,8 @@ chmod 4755 /bin/bash
 
 Make the file executable:
 
+<br />
+
 ```bash
 amrois@nineveh:/tmp$ chmod +x update
 ```
