@@ -180,7 +180,7 @@ We'll use `gobuster` again, but this time with the `-k` flag to ignore `SSL` Cer
 <br />
 
 ```bash
-❯ gobuster dir -u https://10.10.10.43 -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -t 20 -k;
+❯ gobuster dir -u https://10.10.10.43 -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -t 20 -k
 ===============================================================
 Gobuster v3.6
 by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
