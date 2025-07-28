@@ -482,7 +482,22 @@ http://10.10.10.43/department/manage.php?notes=files/ninevehNotes.txt.txt
 
 After several tries, we figure out a way that allows us to include internal files from the victim machine:
 
+<br />
+
 ```bash
 http://10.10.10.43/department/manage.php?notes=/ninevehNotes/../etc/passwd
 ```
 ![17](../../../assets/images/Nineveh/17.png)
+
+<br />
+
+By this way, we can point to the `/var/tmp/exploit.php` and run a command with our cmdshell as the `www-data` user:
+
+<br />
+
+![18](../../../assets/images/Nineveh/18.png)
+
+<br />
+
+
+<br />
