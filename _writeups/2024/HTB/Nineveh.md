@@ -473,6 +473,9 @@ If we modify the URL and append an extra `.txt` (e.g., `ninevehNotes.txt.txt`), 
 
 <br />
 
+```bash
+http://10.10.10.43/department/manage.php?notes=files/ninevehNotes.txt.txt
+```
 ![16](../../../assets/images/Nineveh/16.png)
 
 <br />
