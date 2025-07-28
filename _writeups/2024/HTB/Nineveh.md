@@ -502,9 +502,9 @@ http://10.10.10.43/department/manage.php?notes=/ninevehNotes/../var/tmp/exploit.
 
 <br />
 
-With a RCE, we only need to entable a reverse shell and we will gain access to the system:
+With remote code execution confirmed, the next step is to spawn a reverse shell to gain full access to the system.
 
-⚠️ Note: Important to url-encode the `&` with `%26` to avoid encoding problems and be able to get the shell.
+⚠️ Note: Make sure to URL-encode the ampersand `(&)` as `%26` to avoid request truncation and ensure the payload executes properly.
 
 <br />
 
