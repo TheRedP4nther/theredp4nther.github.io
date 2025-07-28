@@ -443,3 +443,36 @@ We successfully log in as `admin`.
 
 As a result, we successfully bypass the login and gain access as the `admin` user.
 
+Once inside the application, we can click on the `"Notes"` button at the top-left corner and we will see the following:
+
+<br />
+
+![15](../../../assets/images/Nineveh/15.png)
+
+<br />
+
+Apparently, we're seeing some tasks to the employees of the company like fix the login bypass that we have exploited yet.
+
+If we take a look at the url, it has a parameter `notes` that can be a good place to test some vulnerabilities:
+
+<br />
+
+```bash
+http://10.10.10.43/department/manage.php?notes=files/ninevehNotes.txt
+```
+
+<br />
+
+# LFI vulnerability
+
+<br />
+
+The parameter is pointing to a file.
+
+If we add a doble `.txt` to this file, we get the following error:
+
+<br />
+
+![16](../../../assets/images/Nineveh/16.png)
+
+<br />
