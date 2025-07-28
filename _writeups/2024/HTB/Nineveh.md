@@ -127,7 +127,7 @@ Let's examine them one by one.
 
 <br />
 
-### info.php
+### /info.php
 
 <br />
 
@@ -139,7 +139,7 @@ This page is the typical `phpinfo()` file:
 
 <br />
 
-### department
+### /department
 
 <br />
 
@@ -166,3 +166,4 @@ On port 443, we find a page displaying only a static image:
 ![5](../../../assets/images/Nineveh/5.png)
 
 <br />
+
