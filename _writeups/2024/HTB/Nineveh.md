@@ -70,14 +70,51 @@ Open Ports:
 
 <br />
 
-# Http Enumeration:
+# Http Enumeration: - Port 80
 
 <br />
 
-In the port 80, we find a default http page:
+In the port 80, we find a default web page:
 
 <br />
 
 ![2](../../../assets/images/Nineveh/2.png)
 
 <br />
+
+May be if we look further making some fuzzing we can get interesting paths to look.
+
+<br />
+
+## Fuzzing 
+
+<br />
+
+For this purpose, we will use `gobuster`:
+
+<br />
+
+```bash
+
+```
+
+<br />
+
+There are several relevant matches in the output.
+
+Let's take a look at this paths.
+
+<br />
+
+### info.php
+
+<br />
+
+This page, is the typical `PHP` info file:
+
+<br />
+
+
+
+<br />
+
