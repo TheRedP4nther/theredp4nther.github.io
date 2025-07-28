@@ -260,6 +260,7 @@ We proceed to download the image and inspect it locally using tools like `exifto
 <br />
 
 ```bash
+❯ strings image.png
 ...[snip]...
 www-data
 www-data
