@@ -130,3 +130,17 @@ In this other page, we find a `login`:
 <br />
 
 We test default credentials without success.
+
+<br />
+
+# Https Enumeration - Port 443:
+
+<br />
+
+Port 443 hosts a page with a strange image:
+
+<br />
+
+
+
+<br />
