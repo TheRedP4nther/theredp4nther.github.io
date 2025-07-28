@@ -169,6 +169,8 @@ On port 443, we find a page displaying only a static image:
 
 As we did with the HTTP page, we'll apply directory fuzzing here as well.
 
+<br />
+
 ## Fuzzing
 
 <br />
@@ -429,7 +431,7 @@ However, since the file is saved under `/var/tmp`, we need a `Local File Inclusi
 
 <br />
 
-By intercepting the authentication request to the `/department` endpoint, we can attempt a common vulnerability found in PHP applications: a `Type Juggling` attack to bypass login logic. Type Juggling occurs when weak comparisons (== instead ===) are used in PHP, allowing unexpected type coercion. This can let an attacker trick the application into two different values as equal - often bypassing authentication.
+By intercepting the authentication request to the `/department` endpoint, we can attempt a common vulnerability found in PHP applications: a `Type Juggling` attack to bypass login logic. Type Juggling occurs when weak comparisons `(== instead ===)` are used in PHP, allowing unexpected type coercion. This can let an attacker trick the application into two different values as equal - often bypassing authentication.
 
 To perform the attack, we only need to change the password field from `username=admin&password=admin` to `username=admin&password[]=` and click on `"Forward"`:
 
@@ -438,8 +440,6 @@ To perform the attack, we only need to change the password field from `username=
 ![14](../../../assets/images/Nineveh/14.png)
 
 <br />
-
-We successfully log in as `admin`.
 
 As a result, we successfully bypass the login and gain access as the `admin` user.
 
@@ -585,9 +585,9 @@ amrois@nineveh:~$ whoami
 amrois
 ```
 
-We now have a shell as the `amrois` user:
-
 <br />
+
+We now have a shell as the `amrois` user:
 
 And we can get the `user.txt` flag:
 
