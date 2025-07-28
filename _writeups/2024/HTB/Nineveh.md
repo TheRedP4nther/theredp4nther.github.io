@@ -117,3 +117,16 @@ This page is the typical `phpinfo()` file:
 
 <br />
 
+### department
+
+<br />
+
+In this other page, we find a `login`:
+
+<br />
+
+
+
+<br />
+
+We test default credentials without success.
