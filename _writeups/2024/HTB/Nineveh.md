@@ -425,13 +425,11 @@ However, since the file is saved under `/var/tmp`, we need a `Local File Inclusi
 
 <br />
 
-# /Department Login Bypass:
-
-## Type Juggling Attack:
+# /department Login Bypass (Type Juggling):
 
 <br />
 
-If we intercept an authentication request over the `/department` path, we can try a common attack to bypass the login in php applications. This attack is the `Type Juggling Attack`, a vulnerability caused by an error when comparing the data types that allow us to bypass authentication.
+By intercepting the authentication request to the `/department` endpoint, we can attempt a common vulnerability found in PHP applications: a `Type Juggling` attack to bypass login logic. Type Juggling occurs when weak comparisons (== instead ===) are used in PHP, allowing unexpected type coercion. This can let an attacker trick the application into two different values as equal - often bypassing authentication.
 
 To perform the attack, we only need to change the password field from `username=admin&password=admin` to `username=admin&password[]=` and click on `"Forward"`:
 
@@ -441,7 +439,7 @@ To perform the attack, we only need to change the password field from `username=
 
 <br />
 
+We successfully log in as `admin`.
 
+As a result, we successfully bypass the login and gain access as the `admin` user.
 
-
-<br />
