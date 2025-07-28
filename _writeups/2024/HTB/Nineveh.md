@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: git gitdumper sourcecode aws flask python aws-lambda jwt ssti jinja2 serversidetemplateinjection burpsuite pspy64 crontab cronjob 
+tags: 
 ---
 
 <br />
