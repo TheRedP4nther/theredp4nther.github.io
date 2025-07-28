@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: gobuster hydra metadata phpliteadmin authenticated rce id_rsa authorized_keys knockd port-knocking lfi localfileinclusion phpinfo 
+tags: gobuster hydra metadata phpliteadmin authenticated rce id_rsa authorized_keys knockd port-knocking lfi localfileinclusion phpinfo typejugglingattack loginbypass hydra brute-force 
 ---
 
 <br />
@@ -451,9 +451,9 @@ Once inside the application, we can click on the `"Notes"` button at the top-lef
 
 <br />
 
-Apparently, we're seeing some tasks to the employees of the company like fix the login bypass that we have exploited yet.
+Apparently, we’re seeing internal notes addressed to employees, including a reminder to fix the login bypass vulnerability we’ve just exploited.
 
-If we take a look at the url, it has a parameter `notes` that can be a good place to test some vulnerabilities:
+If we inspect the URL, we notice a `notes` parameter pointing to a file path. This could be a promising candidate for testing file inclusion vulnerabilities.
 
 <br />
 
@@ -463,13 +463,13 @@ http://10.10.10.43/department/manage.php?notes=files/ninevehNotes.txt
 
 <br />
 
-# LFI vulnerability
+# Local File Inclusion (LFI)
 
 <br />
 
 The parameter is pointing to a file.
 
-If we add a doble `.txt` to this file, we get the following error:
+If we modify the URL and append an extra `.txt` (e.g., `ninevehNotes.txt.txt`), the server throws an error:
 
 <br />
 
