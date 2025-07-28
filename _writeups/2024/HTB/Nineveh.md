@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: 
+tags: gobuster hydra metadata phpliteadmin authenticated rce id_rsa authorized_keys knockd port-knocking lfi localfileinclusion phpinfo 
 ---
 
 <br />
@@ -323,8 +323,6 @@ However, since the port is closed, we'll need to continue enumerating.
 At this point, we can try brute-forcing the `/db` login page, since it only contains a single input field for the `password`.
 
 To perform the attack, we use `hydra` with the following options:
-
-<br />
 
 - `-l`: Specifies the username. Since the login form doesn't require a username, we can use any placeholder value. 
 
