@@ -30,8 +30,7 @@ Difficulty -> Medium.
 
 <br />
 
-We begin with a standard `nmap` scan to identify open ports:
-
+We begin with a standard `nmap` scan to identify open ports and running services:
 
 <br />
 
@@ -64,9 +63,9 @@ Nmap done: 1 IP address (1 host up) scanned in 45.38 seconds
 
 Open Ports:
 
-`Port 80` -> http 
+`Port 80` -> HTTP 
 
-`Port 443` -> https 
+`Port 443` -> HTTPS 
 
 <br />
 
@@ -82,7 +81,7 @@ In the port 80, we find a default web page:
 
 <br />
 
-May be if we look further making some fuzzing we can get interesting paths to look.
+Perhaps with some directory fuzzing, we can discover interesting paths to explore.
 
 <br />
 
@@ -90,7 +89,7 @@ May be if we look further making some fuzzing we can get interesting paths to lo
 
 <br />
 
-For this purpose, we will use `gobuster`:
+To enumerate hidden directories and files, we use `gobuster`:
 
 <br />
 
@@ -100,9 +99,9 @@ For this purpose, we will use `gobuster`:
 
 <br />
 
-There are several relevant matches in the output.
+We find several interesting results in the output.
 
-Let's take a look at this paths.
+Let's take a look at these paths.
 
 <br />
 
@@ -110,7 +109,7 @@ Let's take a look at this paths.
 
 <br />
 
-This page, is the typical `PHP` info file:
+This page is the typical `phpinfo()` file:
 
 <br />
 
