@@ -69,7 +69,7 @@ Open Ports:
 
 <br />
 
-# Http Enumeration: - Port 80
+# HTTP Enumeration: - Port 80
 
 <br />
 
@@ -155,7 +155,7 @@ We tested default credentials and basic `SQL` injection payloads `(' or 1=1-- -)
 
 <br />
 
-# Https Enumeration - Port 443:
+# HTTPS Enumeration - Port 443:
 
 <br />
 
@@ -167,13 +167,13 @@ On port 443, we find a page displaying only a static image:
 
 <br />
 
-As we did with http page, we will apply some fuzzing.
+As we did with the HTTP page, we'll apply directory fuzzing here as well.
 
 ## Fuzzing
 
 <br />
 
-We will use `gobuster` again with the difference that now we need to use the `-k` flag (to skip the TSL certificate validation):
+We'll use `gobuster` again, but this time with the `-k` flag to ignore `SSL` Certificate verification:
 
 <br />
 
@@ -191,7 +191,7 @@ We discover three new directories.
 
 <br />
 
-This one is a `phpLiteAdmin v1.9` login page:
+This path leads to `phpLiteAdmin v1.9` login page:
 
 <br />
 
@@ -199,7 +199,7 @@ This one is a `phpLiteAdmin v1.9` login page:
 
 <br />
 
-`phpLiteAdmin` is a open source tool written in PHP destineted to manage `SQLite` DBs through a web searcher.
+`phpLiteAdmin` is a open-source PHP tool designed to manage `SQLite` databases through a web interface.
 
 <br />
 
@@ -207,9 +207,9 @@ This one is a `phpLiteAdmin v1.9` login page:
 
 <br />
 
-This path seems to be really interesting.
+This path appears to be quite interesting.
 
-But if we access it, there is only an image:
+However, when accessed, it only displays an image:
 
 <br />
 
