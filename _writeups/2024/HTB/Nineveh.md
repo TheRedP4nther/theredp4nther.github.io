@@ -600,6 +600,6 @@ amrois@nineveh:~$ cat user.txt
 
 <br />
 
-# Privilage Escalation: amrois -> root
+# Privilege Escalation: amrois -> root
 
 <br />
