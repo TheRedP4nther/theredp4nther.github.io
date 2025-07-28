@@ -310,3 +310,39 @@ These credentials expose a private/public key pair (`id_rsa` and `authorized_key
 If `SSH` (port 22) were open, we could use this information to access the system as `amrois`.
 
 However, since the port is closed, we'll need to continue enumerating.
+
+<br />
+
+# Exploiting phpLiteAdmin
+
+## Brute Forcing
+
+<br />
+
+At this point, we can try brute-forcing the `/db` login page, since it only contains a single input field for the `password`.
+
+To perform the attack, we use `hydra` with the following options:
+
+<br />
+
+- `-l`: Specifies the username. Since the login form doesn't require a username, we can use any placeholder value. 
+
+- `-P`: Indicates the password wordlist to use.
+
+- `http-port-form`: Specifies the HTTP POST form module.
+
+- `/db/index.php:password=^PASS^:Incorrect password`
+
+This format defines the login path, the form field to fuzz, and the failure message. `^PASS^` is replaced by each password from the list, and `"Incorrect password"` is used to detect login failures.
+
+Now, we can run it:
+
+<br />
+
+```bash
+
+```
+
+<br />
+
+<br />
