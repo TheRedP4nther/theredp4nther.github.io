@@ -361,3 +361,25 @@ Using this, we can now log in successfully:
 ![8](../../../assets/images/Nineveh/8.png)
 
 <br />
+
+## Remote PHP Code Injection
+
+<br />
+
+The `24044.txt` exploit that we have seen before with `searchsploit` is a poc with the neccessary steps to get a remote php code injection via `phpLiteAdmin`.
+
+The steps are the following:
+
+<br />
+
+### 1.- Create a db.
+
+<br />
+
+In this case, we will create one named `exploit.php`:
+
+<br />
+
+
+
+<br />
