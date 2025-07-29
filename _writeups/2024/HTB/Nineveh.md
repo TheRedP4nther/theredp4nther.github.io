@@ -431,7 +431,7 @@ However, since the file is saved under `/var/tmp`, we need a `Local File Inclusi
 
 <br />
 
-By intercepting the authentication request to the `/department` endpoint, we can attempt a common vulnerability found in PHP applications: a `Type Juggling` attack to bypass login logic. Type Juggling occurs when weak comparisons `(== instead ===)` are used in PHP, allowing unexpected type coercion. This can let an attacker trick the application into two different values as equal - often bypassing authentication.
+By intercepting the authentication request to the `/department` endpoint with Burp Suite, we can attempt a common vulnerability found in PHP applications: a `Type Juggling` attack to bypass login logic. Type Juggling occurs when weak comparisons `(== instead ===)` are used in PHP, allowing unexpected type coercion. This can let an attacker trick the application into two different values as equal - often bypassing authentication.
 
 To perform the attack, we only need to change the password field from `username=admin&password=admin` to `username=admin&password[]=` and click on `"Forward"`:
 
@@ -587,7 +587,7 @@ amrois
 
 <br />
 
-We now have a shell as the `amrois` user:
+We now have a shell as the `amrois` user.
 
 And we can get the `user.txt` flag:
 
