@@ -327,3 +327,9 @@ uid=80(www) gid=80(www) groups=80(www)
 <br />
 
 We now have a shell as the `www` user.
+
+<br />
+
+# Privilege Escalation: www -> charix 
+
+<br />
