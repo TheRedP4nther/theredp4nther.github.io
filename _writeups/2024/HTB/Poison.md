@@ -192,7 +192,7 @@ uid=1001(charix) gid=1001(charix) groups=1001(charix)
 
 <br />
 
-# Exploitation 2 - LFI to RCE (Log Poisoning)
+## Exploitation 2 - LFI to RCE (Log Poisoning)
 
 <br />
 
