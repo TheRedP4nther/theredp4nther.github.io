@@ -93,3 +93,15 @@ This one, is a tool that allows us to list the following files:
 ![3](../../../assets/images/Poison/3.png)
 
 <br />
+
+There is one named `"pwdbackup.txt"` that seems to be interesting.
+
+If we enter this file in the `Scriptname` field of the main page we find something:
+
+<br />
+
+![4](../../../assets/images/Poison/4.png)
+
+<br />
+
+
