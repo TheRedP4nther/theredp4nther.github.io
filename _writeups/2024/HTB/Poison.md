@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: gobuster hydra metadata phpliteadmin authenticated rce id_rsa authorized_keys knockd port-knocking lfi localfileinclusion phpinfo typejugglingattack loginbypass hydra brute-force chkrootkit pspy64 
+tags:  
 ---
 
 <br />
@@ -70,3 +70,26 @@ Open Ports:
 
 <br />
 
+We start listing the http website:
+
+<br />
+
+![2](../../../assets/images/Poison/2.png)
+
+<br />
+
+Apparently, there is a temporal page to test `.php` tools.
+
+<br />
+
+### listfiles.php
+
+<br />
+
+This one, is a tool that allows us to list the following files:
+
+<br />
+
+![3](../../../assets/images/Poison/3.png)
+
+<br />
