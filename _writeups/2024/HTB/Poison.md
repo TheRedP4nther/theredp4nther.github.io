@@ -94,6 +94,14 @@ In the `/phpinfo.php` path we can access php configuration:
 
 <br />
 
+`Allow_url_include` flag is disabled, this means that we can't include files from remote locations, so, removing the posibility to exploit vulnerabilities like `RFI` (Remote File Inclusion).
+
+<br />
+
+![8](../../../assets/images/Poison/8.png)
+
+<br />
+
 ### listfiles.php
 
 <br />
