@@ -126,7 +126,7 @@ Entering this filename into the `Scriptname` field on the main page returns some
 
 <br />
 
-## Exploitation 1 - Base64 Password Decode
+# Exploitation 1 - Base64 Password Decode
 
 <br />
 
@@ -192,7 +192,7 @@ uid=1001(charix) gid=1001(charix) groups=1001(charix)
 
 <br />
 
-## Exploitation 2 - LFI to RCE (Log Poisoning)
+# Exploitation 2 - LFI to RCE (Log Poisoning)
 
 <br />
 
