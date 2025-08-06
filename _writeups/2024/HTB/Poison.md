@@ -303,7 +303,7 @@ As we can see, the command was successfully executed.
 
 At this point, we can trigger a reverse shell:
 
-⚠️ Note: We're using a reverse shell payload based on the mkfifo method, URL-encoded for the HTTP GET request. This one-liner was adapted from revshells.com.
+⚠️ Note: We're using a reverse shell payload based on the mkfifo method, URL-encoded for the HTTP GET request. This one-liner was adapted from [revshells.com](revshells.com).
 
 <br />
 
