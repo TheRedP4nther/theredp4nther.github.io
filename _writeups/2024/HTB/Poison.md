@@ -82,6 +82,18 @@ Apparently, there is a temporary page for testing `.php` tools.
 
 <br />
 
+### phpinfo.php 
+
+<br />
+
+In the `/phpinfo.php` path we can access php configuration:
+
+<br />
+
+![7](../../../assets/images/Poison/7.png)
+
+<br />
+
 ### listfiles.php
 
 <br />
