@@ -174,7 +174,7 @@ uid=1001(charix) gid=1001(charix) groups=1001(charix)
 
 <br />
 
-If we further analyze the URL that give us access to the base64-encoded password, there can be a good place to test a LFI.
+If we further analyze the URL that give us access to the base64-encoded password, there can be a good place to test a LFI (Local File Inclusion).
 
 <br />
 
@@ -196,3 +196,45 @@ view-source:http://10.10.10.84/browse.php?file=/etc/passwd
 ![5](../../../assets/images/Poison/5.png)
 
 <br />
+
+We successfully dump it.
+
+<br / >
+
+## Log Poisoning
+
+<br />
+
+`Log Poisoning` is a hacking technique that allows us to `convert` a simple `LFI to a RCE`. 
+
+By manipulating log files, attackers can try to run commands into the victim machine. The used language depends of the technology stack of the website, in this case we need to use PHP. To exploit this, we will do it step by step:
+
+### Locate the server's log file (apache2):
+
+<br />
+
+We're deaking with a `FreeBSD` system, so the default path of `apache2` log file is `/var/log/httpd-access.log`.
+
+We can confirm it with the LFI:
+
+<br />
+
+```bash 
+view-source:http://10.10.10.84/browse.php?file=/var/log/httpd-access.log
+```
+![6](../../../assets/images/Poison/6.png)
+
+<br />
+
+### 2 - Make a curl request including PHP code into the User-Agent header:
+
+<br />
+
+
+
+<br />
+
+### 2 - Use LFI to include the log file:
+
+<br />
+
