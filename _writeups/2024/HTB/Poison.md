@@ -130,7 +130,7 @@ Entering this filename into the `Scriptname` field on the main page returns some
 
 <br />
 
-The content is a `password` that has been `base64`-encoded multiple times, specifically, 13 times.
+The content is a `password` that has been `base64-encoded` multiple times, specifically, 13 times.
 
 We can easily decode this password using a Bash one-liner.
 
