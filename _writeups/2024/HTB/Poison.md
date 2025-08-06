@@ -86,7 +86,7 @@ Apparently, there is a temporary page for testing `.php` tools.
 
 <br />
 
-In the `/phpinfo.php` path we can access php configuration:
+At the `/phpinfo.php` path, we can view the PHP configuration:
 
 <br />
 
@@ -94,9 +94,9 @@ In the `/phpinfo.php` path we can access php configuration:
 
 <br />
 
-`Allow_url_include` flag is disabled, this means that we can't include files from remote locations.
+The `allow_url_include` directive is disabled, which means we can't include files from remote locations.
 
-This removes the posibility to exploit vulnerabilities like `RFI` (Remote File Inclusion).
+This prevents us from exploiting vulnerabilities like RFI (Remote File Inclusion).
 
 <br />
 
