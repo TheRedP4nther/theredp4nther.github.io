@@ -174,3 +174,25 @@ uid=1001(charix) gid=1001(charix) groups=1001(charix)
 
 <br />
 
+If we further analyze the URL that give us access to the base64-encoded password, there can be a good place to test a LFI.
+
+<br />
+
+```bash
+http://10.10.10.84/browse.php?file=pwdbackup.txt
+```
+
+<br />
+
+It has a `"file"` parameter where we can attempt to include another critical files.
+
+Let s try it with the `/etc/passwd`
+
+<br />
+
+```bash
+view-source:http://10.10.10.84/browse.php?file=/etc/passwd
+```
+![5](../../../assets/images/Poison/5.png)
+
+<br />
