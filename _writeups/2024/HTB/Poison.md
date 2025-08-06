@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags:  
+tags: freebsd php base64 logpoisoning remotecodeexecution localfileinclusion rce lfi 
 ---
 
 <br />
@@ -86,7 +86,7 @@ Apparently, there is a temporal page to test `.php` tools.
 
 <br />
 
-This one, is a tool that allows us to list the following files:
+If we visit the path of this tool (`/listfiles.php`), we will find a list of filenames:
 
 <br />
 
