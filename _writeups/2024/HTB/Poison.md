@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: freebsd php base64 logpoisoning remotecodeexecution localfileinclusion rce lfi 
+tags: freebsd php base64 logpoisoning remotecodeexecution localfileinclusion rce lfi apache2 httpd-access.log 
 ---
 
 <br />
