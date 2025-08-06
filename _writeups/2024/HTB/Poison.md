@@ -30,7 +30,7 @@ Difficulty -> Medium.
 
 <br />
 
-We begin with a standard `nmap` scan to identify open ports and running services:
+We start with a standard `nmap` scan to identify open ports and running services:
 
 <br />
 
@@ -70,7 +70,7 @@ Open Ports:
 
 <br />
 
-We start listing the http website:
+We begin exploring the HTTP website:
 
 <br />
 
@@ -78,7 +78,7 @@ We start listing the http website:
 
 <br />
 
-Apparently, there is a temporal page to test `.php` tools.
+Apparently, there is a temporary page for testing `.php` tools.
 
 <br />
 
@@ -86,7 +86,7 @@ Apparently, there is a temporal page to test `.php` tools.
 
 <br />
 
-If we visit the path of this tool (`/listfiles.php`), we will find a list of filenames:
+If we visit `/listfiles.php` path, we see a list of filenames:
 
 <br />
 
@@ -94,9 +94,9 @@ If we visit the path of this tool (`/listfiles.php`), we will find a list of fil
 
 <br />
 
-There is one named `"pwdbackup.txt"` that seems to be interesting.
+One of them, named `pwdbackup.txt`, seems particularly interesting.
 
-If we enter this file in the `Scriptname` field of the main page we find something:
+Entering this filename into the `Scriptname` field on the main page returns some content:
 
 <br />
 
@@ -104,15 +104,15 @@ If we enter this file in the `Scriptname` field of the main page we find somethi
 
 <br />
 
-## Shell Access 1 - Via Base64 Password Decyrpt
+## Exploitation 1 - Base64 Password Decyrpt
 
 <br />
 
-A `password` that have been `base64-encode` multiple times, concretely 13.
+The content is a `password` that has been `base64`-encoded multiple times, specifically, 13 times.
 
-We can easily decrypt this password with a bash one-liner.
+We can easily decode this password using a Bash one-liner.
 
-To do it, first, we need to put the base64 content into a file:
+First, we save the base64 content into a file:
 
 <br />
 
@@ -138,7 +138,7 @@ Ukd4RVdub3dPVU5uUFQwSwo=
 
 <br />
 
-Then, we can decode it with the following bash one-liner:
+Then, we decode it using the following Bash one-liner:
 
 <br />
 
@@ -149,9 +149,9 @@ Charix!2#4%6&8(0
 
 <br />
 
-We have a new password: `Charix!2#4%6&8(0`
+This gives us a new password: `Charix!2#4%6&8(0`
 
-Using it, we can connect via SSH to the victime machine as the user `charix`:
+Using it, we can connect via SSH to the target machine as user `charix`:
 
 <br />
 
@@ -170,4 +170,7 @@ uid=1001(charix) gid=1001(charix) groups=1001(charix)
 
 <br />
 
+# Exploitation 2 - LFI to RCE (Log Poisoning)
+
+<br />
 
