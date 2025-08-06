@@ -104,7 +104,7 @@ Entering this filename into the `Scriptname` field on the main page returns some
 
 <br />
 
-## Exploitation 1 - Base64 Password Decyrpt
+## Exploitation 1 - Base64 Password Decode
 
 <br />
 
