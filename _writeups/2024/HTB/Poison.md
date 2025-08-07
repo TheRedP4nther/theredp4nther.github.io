@@ -443,7 +443,7 @@ We can't do anything useful with it at this point, so let's continue enumerating
 
 <br />
 
-While enumerating the system, we find an interesting open port: 
+While enumerating the system, we find some unless common open ports: 
 
 <br />
 
@@ -464,5 +464,9 @@ tcp6       0      0 *.22                   *.*                    LISTEN
 tcp4       0      0 127.0.0.1.5801         *.*                    LISTEN
 tcp4       0      0 127.0.0.1.5901         *.*                    LISTEN
 ```
+
+<br />
+
+These ports are: `5801` and `5901`.
 
 <br />
