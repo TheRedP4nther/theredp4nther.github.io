@@ -96,11 +96,13 @@ At the `/phpinfo.php` path, we can view the PHP configuration:
 
 The `allow_url_include` directive is disabled, which means we can't include files from remote locations.
 
-This prevents us from exploiting vulnerabilities like RFI (Remote File Inclusion).
-
 <br />
 
 ![8](../../../assets/images/Poison/8.png)
+
+<br />
+
+This prevents us from exploiting vulnerabilities like RFI (Remote File Inclusion).
 
 <br />
 
@@ -333,5 +335,29 @@ We now have a shell as the `www` user.
 <br />
 
 # Privilege Escalation: www -> charix 
+
+<br />
+
+Once in the system, we can use the before decoded base64 password to log in as `charix`:
+
+<br />
+
+```bash
+$ su charix
+Password:Charix!2#4%6&8(0
+id
+uid=1001(charix) gid=1001(charix) groups=1001(charix)
+```
+
+<br />
+
+And get the `user.txt` flag:
+
+<br />
+
+```bash
+cat user.txt
+eaacdfb2d141b72a5892330636xxxxxx
+```
 
 <br />
