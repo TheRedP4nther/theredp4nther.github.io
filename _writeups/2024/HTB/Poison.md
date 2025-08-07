@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: freebsd php base64 logpoisoning remotecodeexecution localfileinclusion rce lfi apache2 httpd-access.log 
+tags: freebsd php base64 logpoisoning remotecodeexecution localfileinclusion rce lfi apache2 httpd-access.log nvc nvcviewer 
 ---
 
 <br />
@@ -426,6 +426,9 @@ Archive:  secret.zip
 
 ❯ file secret
 secret: Non-ISO extended-ASCII text, with no line terminators
+
+❯ /usr/bin/cat secret
+��[|Ֆz!
 ```
 
 <br />
@@ -440,3 +443,26 @@ We can't do anything useful with it at this point, so let's continue enumerating
 
 <br />
 
+While enumerating the system, we find an interesting open port: 
+
+<br />
+
+```bash
+charix@Poison:~ % netstat -an -p tcp
+Active Internet connections (including servers)
+Proto Recv-Q Send-Q Local Address          Foreign Address        (state)
+tcp4       0      0 10.10.10.84.22         10.10.14.19.49722      ESTABLISHED
+tcp4       0      0 10.10.10.84.37576      10.10.14.19.443        CLOSE_WAIT
+tcp4       0      0 10.10.10.84.80         10.10.14.19.43606      CLOSE_WAIT
+tcp4       0      0 10.10.10.84.13115      10.10.14.19.443        CLOSE_WAIT
+tcp4       0      0 10.10.10.84.80         10.10.14.19.59070      CLOSE_WAIT
+tcp4       0      0 127.0.0.1.25           *.*                    LISTEN
+tcp4       0      0 *.80                   *.*                    LISTEN
+tcp6       0      0 *.80                   *.*                    LISTEN
+tcp4       0      0 *.22                   *.*                    LISTEN
+tcp6       0      0 *.22                   *.*                    LISTEN
+tcp4       0      0 127.0.0.1.5801         *.*                    LISTEN
+tcp4       0      0 127.0.0.1.5901         *.*                    LISTEN
+```
+
+<br />
