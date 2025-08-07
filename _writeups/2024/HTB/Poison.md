@@ -235,7 +235,7 @@ By manipulating `log` files, an attacker can attempt to execute commands on the 
 
 <br />
 
-![13](../../../assets/images/Poison/13.png)
+![12](../../../assets/images/Poison/12.png)
 
 <br />
 
