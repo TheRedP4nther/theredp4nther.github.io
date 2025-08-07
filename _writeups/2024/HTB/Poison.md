@@ -233,6 +233,12 @@ We are able to successfully retrieve its contents.
 
 By manipulating `log` files, an attacker can attempt to execute commands on the target machine. The scripting language used depends on the website's tech stack. In this case it's PHP.
 
+<br />
+
+![13](../../../assets/images/Poison/13.png)
+
+<br />
+
 We will exploit this step by step:
 
 <br />
