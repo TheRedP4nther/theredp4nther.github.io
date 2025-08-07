@@ -478,3 +478,14 @@ We can define `VNC` as the following:
 ![10](../../../assets/images/Poison/10.png)
 
 <br />
+
+If we run a `ps -faux`, we can detect that `root` is running this program:
+
+<br />
+
+```bash
+charix@Poison:~ % ps -faux | grep vnc
+root   529   0.0  0.9  23620  8868 v0- I    11:51    0:00.02 Xvnc :1 -desktop X -httpd /usr/local/share/tightvnc/classes -auth /root/.Xauthority -geometry 1280x800 -depth 24 -rfbwait
+```
+
+<br />
