@@ -35,7 +35,7 @@ We start with a standard `nmap` scan to identify open ports and running services
 <br />
 
 ```bash
-❯ nmap -p- 10.10.10.84  --open --min-rate 5000 -sS -T5 -Pn -n -sCV
+❯ nmap -p- 10.10.10.84 --open --min-rate 5000 -sS -T5 -Pn -n -sCV
 Starting Nmap 7.94SVN ( https://nmap.org ) at 2025-08-06 20:29 CEST
 Nmap scan report for 10.10.10.84
 Host is up (0.042s latency).
