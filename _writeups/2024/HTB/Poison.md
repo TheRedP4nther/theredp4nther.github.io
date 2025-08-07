@@ -443,7 +443,7 @@ We can't do anything useful with it at this point, so let's continue enumerating
 
 <br />
 
-While enumerating the system, we find some unless common open ports: 
+While enumerating the system, we find some uncommon open ports: 
 
 <br />
 
@@ -467,11 +467,11 @@ tcp4       0      0 127.0.0.1.5901         *.*                    LISTEN
 
 <br />
 
-These ports are: `5801` and `5901`.
+Specifically, ports `5801` and `5901` are open.
 
-Making some research, we will discover that they are the `VNC` ports, waiting for remote connections.
+With some quick research, we find that these are `VNC` ports, listening for remote connections.
 
-We can define `VNC` as the following:
+If you're not familiar with this software, VNC (`Virtual Network Computing`) can be described as the follows:
 
 <br />
 
@@ -479,7 +479,7 @@ We can define `VNC` as the following:
 
 <br />
 
-If we run a `ps -faux`, we can detect that `root` is running this program:
+Running `ps -faux` reveals that the `root` user is running this program:
 
 <br />
 
