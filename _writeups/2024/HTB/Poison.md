@@ -489,3 +489,21 @@ root   529   0.0  0.9  23620  8868 v0- I    11:51    0:00.02 Xvnc :1 -desktop X 
 ```
 
 <br />
+
+Let's break down the flags used in the `vnc` process: 
+
+- `:1`: Specifies the display number (DISPLAY=:1).
+
+- `desktop X`: Sets the name of the remote desktop session.
+
+- `httpd /usr/local/share/tightvnc/classes`: Serves a Java VCN client over HTTP from that directory.
+
+- `auth /root/.Xauthority`: Specifies the X11 authentication file used to authorized access to the graphical session.
+
+- `geometry 1280x800`: Sets the resolution of the virtual display (width x height).
+
+- `depth 24`: Sets the color depth to 24 bits.
+
+- `rfbwait`: Sets the time (in miliseconds) that the server waits for a client connection before timing out.
+
+<br />
