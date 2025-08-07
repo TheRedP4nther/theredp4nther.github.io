@@ -447,7 +447,7 @@ We can't do anything useful with it at this point, so let's continue enumerating
 
 <br />
 
-## VNC
+## VNC (Virtual Netowork Computing)
 
 <br />
 
