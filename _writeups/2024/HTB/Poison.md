@@ -338,7 +338,7 @@ We now have a shell as the `www` user.
 
 <br />
 
-Once in the system, we can use the before decoded base64 password to log in as `charix`:
+Once inside the system, we can use the previously decoded base64 password to switch to the `charix` user:
 
 <br />
 
@@ -351,7 +351,7 @@ uid=1001(charix) gid=1001(charix) groups=1001(charix)
 
 <br />
 
-And get the `user.txt` flag:
+And retrieve the `user.txt` flag:
 
 <br />
 
@@ -368,7 +368,7 @@ eaacdfb2d141b72a5892330636xxxxxx
 
 <br />
 
-In the home directory of this user there is a `secret.zip` file:
+In the home directory of the `charix` user, there is a file named `secret.zip`:
 
 <br />
 
@@ -379,9 +379,9 @@ secret.zip	user.txt
 
 <br />
 
-To further analyze it, we're going to download it to our local machine.
+To analyze it further, we download it to our local machine.
 
-Let's start a PHP server:
+We start a simple PHP server to serve the file:
 
 <br />
 
@@ -395,7 +395,7 @@ Press Ctrl-C to quit.
 
 <br />
 
-Now, we can get the file:
+Now we can retrieve the file from our attacking machine:
 
 <br />
 
@@ -414,7 +414,7 @@ secret.zip                                    100%[=============================
 
 <br />
 
-The `zip` is encrypted, but we can extract it contents using `charix` passsword:
+The `ZIP` file is encrypted, but we can extract its contents using `charix` passsword:
 
 <br />
 
@@ -430,9 +430,9 @@ secret: Non-ISO extended-ASCII text, with no line terminators
 
 <br />
 
-The file is a binary with non readable characters.
+The extracted file appears to be a `binary` containing `non-readable` characters.
 
-We can't do nothing with it at this point, let's continue enumerating.
+We can't do anything useful with it at this point, so let's continue enumerating.
 
 <br />
 
