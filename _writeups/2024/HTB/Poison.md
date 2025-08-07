@@ -361,3 +361,82 @@ eaacdfb2d141b72a5892330636xxxxxx
 ```
 
 <br />
+
+# Privilege Escalation: charix -> root 
+
+## secret.zip
+
+<br />
+
+In the home directory of this user there is a `secret.zip` file:
+
+<br />
+
+```bash
+charix@Poison:~ % ls
+secret.zip	user.txt
+```
+
+<br />
+
+To further analyze it, we're going to download it to our local machine.
+
+Let's start a PHP server:
+
+<br />
+
+```bash
+charix@Poison:~ % php -S 0.0.0.0:8082
+PHP 5.6.32 Development Server started at Thu Aug  7 12:14:24 2025
+Listening on http://0.0.0.0:8082
+Document root is /home/charix
+Press Ctrl-C to quit.
+```
+
+<br />
+
+Now, we can get the file:
+
+<br />
+
+```bash
+❯ wget http://10.10.10.84:8082/secret.zip
+--2025-08-07 12:15:35--  http://10.10.10.84:8082/secret.zip
+Conectando con 10.10.10.84:8082... conectado.
+Petición HTTP enviada, esperando respuesta... 200 OK
+Longitud: 166 [application/x-zip-compressed]
+Grabando a: «secret.zip»
+
+secret.zip                                    100%[================================================================================================>]     166  --.-KB/s    en 0s      
+
+2025-08-07 12:15:35 (6,04 MB/s) - «secret.zip» guardado [166/166]
+```
+
+<br />
+
+The `zip` is encrypted, but we can extract it contents using `charix` passsword:
+
+<br />
+
+```bash
+❯ unzip secret.zip
+Archive:  secret.zip
+[secret.zip] secret password: 
+ extracting: secret
+
+❯ file secret
+secret: Non-ISO extended-ASCII text, with no line terminators
+```
+
+<br />
+
+The file is a binary with non readable characters.
+
+We can't do nothing with it at this point, let's continue enumerating.
+
+<br />
+
+### VNC
+
+<br />
+
