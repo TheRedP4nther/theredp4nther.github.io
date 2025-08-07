@@ -22,7 +22,7 @@ Difficulty -> Medium.
 
 <br />
 
-
+Hello hackers! Today, we’re diving into Poison, a Medium difficulty FreeBSD machine that combines classic web exploitation techniques with post-exploitation tricks in a lesser-seen operating system. We begin by enumerating a PHP-based web app that leaks a base64-encoded password through a poorly protected script. After decoding it, we gain SSH access as a low-privileged user. From there, we discover a Local File Inclusion vulnerability, which we escalate to Remote Code Execution via log poisoning, a classic yet effective vector. With a reverse shell as the web user, we pivot to the main user by reusing the decoded password. Continuing our enumeration, we uncover a VNC server running as root and extract the authentication file from a password-protected archive found in the user’s home directory. By tunneling the VNC port and authenticating with the recovered file, we access the root user’s graphical session — effectively completing the box.
 
 <br />
 
