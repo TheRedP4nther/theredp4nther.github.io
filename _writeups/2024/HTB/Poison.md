@@ -469,4 +469,12 @@ tcp4       0      0 127.0.0.1.5901         *.*                    LISTEN
 
 These ports are: `5801` and `5901`.
 
+Making some research, we will discover that they are the `VNC` ports, waiting for remote connections.
+
+We can define `VNC` as the following:
+
+<br />
+
+![10](../../../assets/images/Poison/10.png)
+
 <br />
