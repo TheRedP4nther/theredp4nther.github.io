@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags:  
+tags:  apache james pop3 smtp rce authenticatedrce remotecommandexecution defaultcredentials
 ---
 
 <br />
@@ -151,4 +151,4 @@ Apache JAMES (`Java Apache Mail Enterprise Server`) is an open-source mail serve
 
 <br />
 
-By making some research we discover that the version `2.3.2` of JAMES is vulnerable to an Authenticated RCE.
+By making some research we discover that the version `2.3.2` of JAMES is vulnerable to an `Authenticated RCE`.
