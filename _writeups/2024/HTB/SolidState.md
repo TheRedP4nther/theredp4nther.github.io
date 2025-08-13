@@ -289,9 +289,7 @@ LIST
 
 <br />
 
-There are two emails.
-
-The first one does not contain relevant information.
+There are two emails. The first one does not contain relevant information.
 
 The second email contains credentials in plaintext:
 
