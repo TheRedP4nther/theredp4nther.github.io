@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags:  apache james pop3 smtp rce authenticatedrce remotecommandexecution defaultcredentials telnet rbash restrictedshell
+tags:  apache james pop3 smtp rce authenticatedrce remotecommandexecution defaultcredentials telnet rbash restrictedshell pspy32 crontab python reverseshell
 ---
 
 <br />
