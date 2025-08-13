@@ -135,7 +135,7 @@ Several of the open ports belong to `Apache JAMES 2.3.2` services, including the
 
 <br />
 
-Apache JAMES (`Java Apache Mail Enterprise Server`) is an open-source mail server built using `Java`. It provides all the necessary services to allow email communication, including (though not all are enabled on this instance):
+Apache JAMES (`Java Apache Mail Enterprise Server`) is an open-source mail server built using `Java`. It provides all the necessary services to allow email communication, including (though IMAP is not enabled on this instance):
 
 - `SMTP` (Simple Mail Transfer Protocol).
 
@@ -153,7 +153,7 @@ Apache JAMES (`Java Apache Mail Enterprise Server`) is an open-source mail serve
 
 <br />
 
-Upon researching, we found that `Apache JAMES 2.3.2` vulnerable to an authenticated `Remote Command Execution` (RCE).
+Upon researching, we found that `Apache JAMES 2.3.2` is vulnerable to an authenticated `Remote Command Execution` (RCE).
 
 <br />
 
@@ -177,7 +177,7 @@ Before investigating this vulnerability further, let's enumerate the other servi
 
 <br />
 
-Using `telnet` we can connect to this service. Default credentials `root:root` work in this case:
+We can connect to the service via `telnet`, and the default credentials `root:root` successfully authenticate.
 
 <br />
 
@@ -275,7 +275,7 @@ PASS test123
 
 It works.
 
-Now, we can list the available mails for this user:
+We can now list the available emails for this user:
 
 <br />
 
@@ -288,11 +288,11 @@ LIST
 
 <br />
 
-There are two mails.
+There are two emails.
 
-The first one, doesn't have relevant information.
+The first one, does not contain relevant information.
 
-On the other hand, the second mail contains a plaintext password:
+The second email contains credentials in plaintext:
 
 <br />
 
@@ -330,7 +330,7 @@ James
 
 We have new credentials: `mindy:P@55W0rd1!2@`
 
-Using them, we're able to log via `SSH` as `mindy`:
+Using these credentials, we can log in via `SSH` as `mindy`:
 
 <br />
 
@@ -363,11 +363,11 @@ mindy@solidstate:~$ whoami
 
 <br /> 
 
-We're into a `restricted shell`!
+We're placed inside a restricted shell (`rbash`).
 
 <br />
 
-Despite this, we can retrieve the `user.txt` flag:
+Despite the restrictions, we can still read the `user.txt` flag:
 
 <br />
 
