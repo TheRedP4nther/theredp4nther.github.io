@@ -165,6 +165,3 @@ Apache James Server 2.3.2 - Remote Command Execution (RCE) (Authenticated) (2)  
 WheresJames Webcam Publisher Beta 2.0.0014 - Remote Buffer Overflow                                                                                  | windows/remote/944.c
 ```
 
-<br />
-
-
