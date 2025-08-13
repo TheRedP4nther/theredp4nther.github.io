@@ -22,6 +22,7 @@ Difficulty -> Medium.
 
 <br />
 
+Hello hackers! Today we’ll tackle SolidState, a Medium Difficulty Linux machine. We’ll begin by enumerating open ports and identifying multiple Apache JAMES services, including the Remote Administration Tool. Using default credentials, we’ll reset a user’s password and access their mailbox via POP3, where we discover SSH credentials. After logging in, we bypass a restricted rbash shell and explore a known authenticated RCE vulnerability in Apache JAMES, exploiting it to gain a reverse shell. Finally, privilege escalation is achieved by leveraging a writable Python script executed by root via a cron job, granting us full control over the system.
 
 <br />
 
