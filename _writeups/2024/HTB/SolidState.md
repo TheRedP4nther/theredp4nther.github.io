@@ -135,7 +135,7 @@ Several of the open ports belong to `Apache JAMES 2.3.2` services, including the
 
 <br />
 
-Apache JAMES (`Java Apache Mail Enterprise Server`) is an open-source mail server built using `Java`. It provides all the necessary services to allow email communication, including (though IMAP is not enabled on this instance):
+Apache JAMES (`Java Apache Mail Enterprise Server`) is an open-source `Java-based` mail server . It provides all the necessary services to allow email communication, including (though IMAP is not enabled on this instance):
 
 - `SMTP` (Simple Mail Transfer Protocol).
 
@@ -153,7 +153,7 @@ Apache JAMES (`Java Apache Mail Enterprise Server`) is an open-source mail serve
 
 <br />
 
-Upon researching, we found that `Apache JAMES 2.3.2` is vulnerable to an authenticated `Remote Command Execution` (RCE).
+Out research revealed that `Apache JAMES 2.3.2` is vulnerable to an authenticated `Remote Command Execution` (RCE).
 
 <br />
 
@@ -290,7 +290,7 @@ LIST
 
 There are two emails.
 
-The first one, does not contain relevant information.
+The first one does not contain relevant information.
 
 The second email contains credentials in plaintext:
 
@@ -363,7 +363,7 @@ mindy@solidstate:~$ whoami
 
 <br /> 
 
-We're placed inside a restricted shell (`rbash`).
+We're dropped into a restricted shell (`rbash`).
 
 <br />
 
@@ -398,7 +398,7 @@ ${debian_chroot:+($debian_chroot)}mindy@solidstate:~$
 
 <br />
 
-By this way, we're going to run a `bash` instead the `rbash` assigned to the user `mindy`.
+This way, we spawn a `bash` shell instead the `rbash` assigned to user `mindy`.
 
 <br />
 
