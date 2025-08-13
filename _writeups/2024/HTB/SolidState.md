@@ -123,7 +123,12 @@ If we submit a message, a `POST` request is sent to `/`. This doesn't seem to be
 
 <br />
 
-# SMTP Enumeration: -> Port 25
+# JAMES Remote Administration Tool 2.3.2
 
 <br />
 
+The rest of the ports are related to the `JAMES Remote Administration Tool` version `2.3.2`.
+
+![5](../../../assets/images/SolidState/5.png)
+
+<br />
