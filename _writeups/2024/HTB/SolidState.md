@@ -173,6 +173,53 @@ Before investigate this vulnerability further, let's enumerate the other service
 
 <br />
 
-# SMTP Enumeration: -> Port 25 
+### Login into JAMES Admin: -> Port 4555
+
+<br />
+
+Using `telnet` we can connect to this service. Default credentials `root:root` work in this case:
+
+<br />
+
+```bash
+❯ telnet 10.10.10.51 4555
+Trying 10.10.10.51...
+Connected to 10.10.10.51.
+Escape character is '^]'.
+JAMES Remote Administration Tool 2.3.2
+Please enter your login and password
+Login id:
+root
+Password:
+root
+Welcome root. HELP for a list of commands
+```
+
+<br />
+
+We can print all the commands available running `HELP`:
+
+<br />
+
+```bash
+HELP
+Currently implemented commands:
+help                                    display this help
+listusers                               display existing accounts
+countusers                              display the number of existing accounts
+adduser [username] [password]           add a new user
+verify [username]                       verify if specified user exist
+deluser [username]                      delete existing user
+setpassword [username] [password]       sets a user's password
+setalias [user] [alias]                 locally forwards all email for 'user' to 'alias'
+showalias [username]                    shows a user's current email alias
+unsetalias [user]                       unsets an alias for 'user'
+setforwarding [username] [emailaddress] forwards a user's email to another email address
+showforwarding [username]               shows a user's current email forwarding
+unsetforwarding [username]              removes a forward
+user [repositoryname]                   change to another user repository
+shutdown                                kills the current JVM (convenient when James is run as a daemon)
+quit                                    close connection
+```
 
 <br />
