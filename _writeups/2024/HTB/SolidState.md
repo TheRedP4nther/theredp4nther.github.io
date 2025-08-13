@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags:  apache james pop3 smtp rce authenticatedrce remotecommandexecution defaultcredentials
+tags:  apache james pop3 smtp rce authenticatedrce remotecommandexecution defaultcredentials telnet rbash restrictedshell
 ---
 
 <br />
@@ -149,11 +149,11 @@ Apache JAMES (`Java Apache Mail Enterprise Server`) is an open-source mail serve
 
 <br />
 
-## JAMES Authenticated RCE:
+## Apache JAMES authenticated RCE:
 
 <br />
 
-By making some research we discover that the version `2.3.2` of JAMES is vulnerable to an `Authenticated RCE`.
+Upon researching, we found that `Apache JAMES 2.3.2` vulnerable to an authenticated `Remote Command Execution` (RCE).
 
 <br />
 
@@ -169,7 +169,7 @@ WheresJames Webcam Publisher Beta 2.0.0014 - Remote Buffer Overflow             
 
 <br />
 
-Before investigate this vulnerability further, let's enumerate the other services.
+Before investigating this vulnerability further, let's enumerate the other services.
 
 <br />
 
@@ -197,7 +197,7 @@ Welcome root. HELP for a list of commands
 
 <br />
 
-We can print all the commands available running `HELP`:
+We can display all available commands by running `HELP`:
 
 <br />
 
@@ -223,3 +223,34 @@ quit                                    close connection
 ```
 
 <br />
+
+Listing users reveals five existing accounts:
+
+<br />
+
+```bash
+listusers
+Existing accounts 5
+user: james
+user: thomas
+user: john
+user: mindy
+user: mailadmin
+```
+
+<br />
+
+Another interesting command is `setpassword`. We can try to change the password of one of these accounts, like `mindy`:
+
+<br />
+
+```bash
+setpassword mindy test123
+Password for mindy reset
+```
+
+<br />
+
+The password was successfully changed.
+
+
