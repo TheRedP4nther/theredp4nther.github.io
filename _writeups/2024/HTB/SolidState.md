@@ -103,7 +103,7 @@ When we browse to the HTTP service, we see the following:
 
 <br />
 
-In the menu we can find other endpoints `about.html` and `services.html`, but nothing relevant in those pages.
+The navigation menu includes additional endpoints, `about.html` and `services.html`, but neither contains relevant information.
 
 <br />
 
@@ -111,7 +111,7 @@ In the menu we can find other endpoints `about.html` and `services.html`, but no
 
 <br />
 
-At the bottom of the page there is a form:
+At the bottom of the page, there is a contact form:
 
 <br />
 
@@ -119,7 +119,7 @@ At the bottom of the page there is a form:
 
 <br />
 
-If we submit a message, a `POST` request is sent to `/`. This doesn't seem to be an important functionality.
+Submitting a message triggers a `POST` request to the `/` endpoint. This functionality does not appear to be exploitable or otherwise relevant.
 
 <br />
 
@@ -145,4 +145,10 @@ Apache JAMES (`Java Apache Mail Enterprise Server`) is an open-source mail serve
 
 - `Remote Administration` via a dedicated port (in this case, 4555).
 
+<br />
 
+## JAMES Authenticated RCE:
+
+<br />
+
+By making some research we discover that the version `2.3.2` of JAMES is vulnerable to an Authenticated RCE.
