@@ -588,3 +588,7 @@ ${debian_chroot:+($debian_chroot)}mindy@solidstate:~$
 ```
 
 <br />
+
+# Privilege Escalation: mindy -> root 
+
+<br />
