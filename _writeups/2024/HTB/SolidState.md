@@ -127,13 +127,13 @@ If we submit a message, a `POST` request is sent to `/`. This doesn't seem to be
 
 <br />
 
-The rest of the ports are related to the `JAMES Remote Administration Tool` version `2.3.2`.
+Several of the open ports belong to `Apache JAMES 2.3.2` services, including the `Remote Administration Tool` on port `4555`.
 
 ![5](../../../assets/images/SolidState/5.png)
 
 <br />
 
-Apache James (`Java Apache Mail Enterprise Server`) is an open-source mail server built using `Java`. It provides all the neccessary services to allow email communication, including:
+Apache JAMES (`Java Apache Mail Enterprise Server`) is an open-source mail server built using `Java`. It provides all the necessary services to allow email communication, including (though not all are enabled on this instance):
 
 - `SMTP` (Simple Mail Transfer Protocol).
 
