@@ -327,3 +327,53 @@ James
 ```
 
 <br />
+
+We have new credentials: `mindy:P@55W0rd1!2@`
+
+Using them, we're able to log via `SSH` as `mindy`:
+
+<br />
+
+```bash
+❯ ssh mindy@10.10.10.51
+mindy@10.10.10.51's password: 
+Linux solidstate 4.9.0-3-686-pae #1 SMP Debian 4.9.30-2+deb9u3 (2017-08-06) i686
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Tue Aug 22 14:00:02 2017 from 192.168.11.142
+```
+
+<br />
+
+But if we try to run a command:
+
+<br />
+
+```bash
+mindy@solidstate:~$ id   
+-rbash: id: command not found
+mindy@solidstate:~$ whoami
+-rbash: whoami: command not found
+```
+
+<br /> 
+
+We're into a `restricted shell`!
+
+<br />
+
+Despite this, we can retrieve the `user.txt` flag:
+
+<br />
+
+```bash
+mindy@solidstate:~$ cat user.txt
+b130c6e67c2ba7bce64e572d73xxxxxx
+```
+
+<br />
