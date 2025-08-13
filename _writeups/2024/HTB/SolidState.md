@@ -135,7 +135,7 @@ Several of the open ports belong to `Apache JAMES 2.3.2` services, including the
 
 <br />
 
-Apache JAMES (`Java Apache Mail Enterprise Server`) is an open-source `Java-based` mail server . It provides all the necessary services to allow email communication, including (though IMAP is not enabled on this instance):
+Apache JAMES (`Java Apache Mail Enterprise Server`) is an open-source `Java-based` mail server. It provides all the necessary services to allow email communication, including (though IMAP is not enabled on this instance):
 
 - `SMTP` (Simple Mail Transfer Protocol).
 
@@ -153,7 +153,7 @@ Apache JAMES (`Java Apache Mail Enterprise Server`) is an open-source `Java-base
 
 <br />
 
-Out research revealed that `Apache JAMES 2.3.2` is vulnerable to an authenticated `Remote Command Execution` (RCE).
+Our research revealed that `Apache JAMES 2.3.2` is vulnerable to an authenticated `Remote Command Execution` (RCE).
 
 <br />
 
@@ -398,11 +398,11 @@ ${debian_chroot:+($debian_chroot)}mindy@solidstate:~$
 
 <br />
 
-This way, we spawn a `bash` shell instead the `rbash` assigned to user `mindy`.
+This way, we spawn a `bash` shell instead of the `rbash` assigned to user `mindy`.
 
 <br />
 
-# Apache JAMES Exploitaition:
+# Apache JAMES Exploitation:
 
 <br />
 
@@ -490,3 +490,16 @@ except:
 ```
 
 <br />
+
+The functionality of this exploit is straightforward.
+
+The logic can be broken down as follows:
+
+1. Authenticate to the `JAMES` Remote Administration Tool using default credentials.
+
+2. Establish socket connections to ports `4555` (admin) and `25` (SMTP).
+
+3. Send the payload via `SMTP` to write it into a startup script location.
+
+4. Wait for an `SSH` login to trigger execution of the payload.
+
