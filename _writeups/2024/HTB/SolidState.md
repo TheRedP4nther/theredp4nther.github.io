@@ -132,3 +132,17 @@ The rest of the ports are related to the `JAMES Remote Administration Tool` vers
 ![5](../../../assets/images/SolidState/5.png)
 
 <br />
+
+Apache James (`Java Apache Mail Enterprise Server`) is an open-source mail server built using `Java`. It provides all the neccessary services to allow email communication, including:
+
+- `SMTP` (Simple Mail Transfer Protocol).
+
+- `POP3` (Post Office Protocol version 3).
+
+- `IMAP` (Internet Message Access Protocol).
+
+- `NNTP` (Network News Transfer Protocol).
+
+- `Remote Administration` via a dedicated port (in this case, 4555).
+
+
