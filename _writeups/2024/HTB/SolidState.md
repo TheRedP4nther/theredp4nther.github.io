@@ -152,3 +152,19 @@ Apache JAMES (`Java Apache Mail Enterprise Server`) is an open-source mail serve
 <br />
 
 By making some research we discover that the version `2.3.2` of JAMES is vulnerable to an `Authenticated RCE`.
+
+<br />
+
+```bash
+❯ searchsploit james
+----------------------------------------------------------------------------------------------------------------------------------------------------- ---------------------------------
+ Exploit Title                                                                                                                                       |  Path
+----------------------------------------------------------------------------------------------------------------------------------------------------- ---------------------------------
+Apache James Server 2.3.2 - Remote Command Execution                                                                                                 | linux/remote/35513.py
+Apache James Server 2.3.2 - Remote Command Execution (RCE) (Authenticated) (2)                                                                       | linux/remote/50347.py
+WheresJames Webcam Publisher Beta 2.0.0014 - Remote Buffer Overflow                                                                                  | windows/remote/944.c
+```
+
+<br />
+
+
