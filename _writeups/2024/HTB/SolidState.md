@@ -92,3 +92,36 @@ Open Ports:
 # HTTP Enumeration: -> Port 80 
 
 <br />
+
+When we list the http page, we see the following:
+
+<br />
+
+![2](../../../assets/images/SolidState/2.png)
+
+<br />
+
+In the menu we can find other endpoints `about.html` and `services.html`, but nothing relevant in those pages.
+
+<br />
+
+![3](../../../assets/images/SolidState/3.png)
+
+<br />
+
+At the bottom of the page there is a form:
+
+<br />
+
+![4](../../../assets/images/SolidState/4.png)
+
+<br />
+
+If we send a message, a post request to the / of the page occurs behind the scenes. It doesn't appears to be a important functionality.
+
+<br />
+
+# SMTP Enumeration: -> Port 25
+
+<br />
+
