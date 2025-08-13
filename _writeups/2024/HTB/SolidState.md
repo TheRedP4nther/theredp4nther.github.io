@@ -365,8 +365,6 @@ mindy@solidstate:~$ whoami
 
 We're dropped into a restricted shell (`rbash`).
 
-<br />
-
 Despite the restrictions, we can still read the `user.txt` flag:
 
 <br />
@@ -502,4 +500,7 @@ The logic can be broken down as follows:
 3. Send the payload via `SMTP` to write it into a startup script location.
 
 4. Wait for an `SSH` login to trigger execution of the payload.
+
+To obtain a reverse shell, we substitue
+
 
