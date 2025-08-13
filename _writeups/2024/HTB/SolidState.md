@@ -87,7 +87,7 @@ Open Ports:
 
 `Port 119` -> NNTP
 
-`Port 4555` -> JAMES Remote Administration Tool 2.3.2
+`Port 4555` -> JAMES
 
 <br />
 
@@ -128,6 +128,8 @@ Submitting a message triggers a `POST` request to the `/` endpoint. This functio
 <br />
 
 Several of the open ports belong to `Apache JAMES 2.3.2` services, including the `Remote Administration Tool` on port `4555`.
+
+<br />
 
 ![5](../../../assets/images/SolidState/5.png)
 
