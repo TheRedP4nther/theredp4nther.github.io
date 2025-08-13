@@ -85,6 +85,8 @@ Open Ports:
 
 `Port 110` -> POP3
 
+`Port 119` -> NNTP
+
 `Port 4555` -> JAMES Remote Administration Tooll 2.3.2
 
 <br />
