@@ -87,7 +87,7 @@ Open Ports:
 
 `Port 119` -> NNTP
 
-`Port 4555` -> JAMES Remote Administration Tooll 2.3.2
+`Port 4555` -> JAMES Remote Administration Tool 2.3.2
 
 <br />
 
@@ -95,7 +95,7 @@ Open Ports:
 
 <br />
 
-When we list the http page, we see the following:
+When we browse to the HTTP service, we see the following:
 
 <br />
 
@@ -119,7 +119,7 @@ At the bottom of the page there is a form:
 
 <br />
 
-If we send a message, a post request to the / of the page occurs behind the scenes. It doesn't appears to be a important functionality.
+If we submit a message, a `POST` request is sent to `/`. This doesn't seem to be an important functionality.
 
 <br />
 
