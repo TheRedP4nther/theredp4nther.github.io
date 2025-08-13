@@ -174,7 +174,7 @@ Before investigating this vulnerability further, let's enumerate the other servi
 
 <br />
 
-### Login into JAMES Admin: -> Port 4555
+### Login into JAMES Admin
 
 <br />
 
