@@ -81,10 +81,14 @@ Open Ports:
 
 `Port 25` -> SMTP
 
+`Port 80` -> HTTP
+
 `Port 110` -> POP3
 
 `Port 4555` -> JAMES Remote Administration Tooll 2.3.2
 
 <br />
 
+# HTTP Enumeration: -> Port 80 
 
+<br />
