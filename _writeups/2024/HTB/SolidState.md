@@ -627,6 +627,10 @@ done
 
 <br />
 
+### tmp.py
+
+<br />
+
 The output shows that the superuser `root` is executing a Python script named `tmp.py` located in the `/opt` directory.
 
 <br />
@@ -641,6 +645,10 @@ except:
      sys.exit()
 
 ```
+
+<br />
+
+## Contrab exploitation
 
 <br />
 
