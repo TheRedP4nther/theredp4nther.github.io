@@ -170,7 +170,7 @@ WheresJames Webcam Publisher Beta 2.0.0014 - Remote Buffer Overflow             
 
 <br />
 
-Before investigating this vulnerability further, let's enumerate the other services.
+Since we don't have credentials yet, let's continue enumerating before investigating this vulnerability further.
 
 <br />
 
@@ -254,7 +254,7 @@ Password for mindy reset
 
 The password was successfully changed.
 
-At this point, we can try to log into `POP3` service with those credentials.
+At this point, we can log into `POP3` service with those credentials.
 
 To connect, we will use `telnet` again:
 
