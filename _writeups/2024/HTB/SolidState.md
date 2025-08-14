@@ -379,7 +379,7 @@ b130c6e67c2ba7bce64e572d73xxxxxx
 
 <br />
 
-### rbash escape:
+### Rbash Escape:
 
 <br />
 
@@ -627,10 +627,6 @@ done
 
 <br />
 
-### tmp.py
-
-<br />
-
 The output shows that the superuser `root` is executing a Python script named `tmp.py` located in the `/opt` directory.
 
 <br />
@@ -662,7 +658,7 @@ drwxr-xr-x 11 root root 4096 Apr 26  2021 james-2.3.2
 
 <br />
 
-## Contrab Exploitation
+## Crontab Exploitation
 
 <br />
 
