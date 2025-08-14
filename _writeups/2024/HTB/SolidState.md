@@ -225,6 +225,10 @@ quit                                    close connection
 
 <br />
 
+### Password change
+
+<br />
+
 Listing users reveals five existing accounts:
 
 <br />
@@ -395,7 +399,7 @@ ${debian_chroot:+($debian_chroot)}mindy@solidstate:~$
 
 <br />
 
-This way, we spawn a `bash` shell instead of the `rbash` assigned to user `mindy`.
+This way, we force it to spawn a `bash` shell instead of the `rbash` assigned to user `mindy`.
 
 <br />
 
