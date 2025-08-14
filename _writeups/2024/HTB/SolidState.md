@@ -174,7 +174,7 @@ Since we don't have credentials yet, let's continue enumerating before investiga
 
 <br />
 
-### Default credentials
+### Default Credentials
 
 <br />
 
@@ -225,7 +225,7 @@ quit                                    close connection
 
 <br />
 
-### Password change
+### Password Change
 
 <br />
 
@@ -662,7 +662,7 @@ drwxr-xr-x 11 root root 4096 Apr 26  2021 james-2.3.2
 
 <br />
 
-## Contrab exploitation
+## Contrab Exploitation
 
 <br />
 
