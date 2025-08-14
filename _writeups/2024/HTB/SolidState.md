@@ -174,7 +174,7 @@ Since we don't have credentials yet, let's continue enumerating before investiga
 
 <br />
 
-### Login into JAMES Admin
+### Default credentials
 
 <br />
 
