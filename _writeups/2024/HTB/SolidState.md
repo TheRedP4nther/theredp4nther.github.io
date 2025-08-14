@@ -648,10 +648,6 @@ except:
 
 <br />
 
-## Contrab exploitation
-
-<br />
-
 Running `ls -l` on this directory confirms that the file has `world-writable` permissions, allowing us to modify it:
 
 <br />
@@ -663,6 +659,10 @@ total 8
 drwxr-xr-x 11 root root 4096 Apr 26  2021 james-2.3.2
 -rwxrwxrwx  1 root root  105 Aug 22  2017 tmp.py
 ```
+
+<br />
+
+## Contrab exploitation
 
 <br />
 
