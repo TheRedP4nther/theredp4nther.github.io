@@ -6,9 +6,9 @@ layout: default
 
 ## About Me
 
-Hi, I’m TheRedP4nther — a passionate cybersecurity enthusiast and Pentester focused on web exploitation, privilege escalation, and Active Directory.
+Hi, I’m TheRedP4nther, a passionate cybersecurity enthusiast and pentester focused on web exploitation, privilege escalation, and Active Directory.
 
-I’m currently eJPT certified and preparing for the OSCP, with hands-on experience from solving 180+ Hack The Box machines. I enjoy building scripts in Bash and Python to automate tasks and deepen my understanding of vulnerabilities.
+I’m OSCP+ and eJPT certified, with hands-on experience from solving 180+ Hack The Box machines. I enjoy building scripts in Bash and Python to automate tasks and to better understand vulnerabilities, techniques, and how everything fits together.
 
 ## Purpose
 
