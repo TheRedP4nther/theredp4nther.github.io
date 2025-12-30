@@ -147,7 +147,7 @@ The domain `retro.vl` and the hostname `DC.retro.vl` appear across multiple serv
 
 <br />
 
-To start enumerating this service, we'll run a basic [CrackMapExec](https://github.com/byt3bl33d3r/CrackMapExec) oneliner to enumerate some interesting information about the Windows system that we're auditing:
+To start enumerating this service, we'll run a basic [NetExec](https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://github.com/Pennyw0rth/NetExec&ved=2ahUKEwju__Ct5-WRAxU0Q6QEHTkxD1cQFnoECA8QAQ&usg=AOvVaw0-GGvkQiCwAysCodSPaP0d) oneliner to enumerate some interesting information about the Windows system that we're auditing:
 
 <br />
 
