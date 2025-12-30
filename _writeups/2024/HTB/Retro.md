@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: 
+tags: windows active-directory smb ldap kerberos adcs esc1 certipy pre2k impacket winrm evil-winrm
 ---
 
 <br />
