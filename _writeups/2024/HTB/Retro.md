@@ -244,13 +244,13 @@ SMB         10.129.28.100   445    DC               Trainees        READ
 
 <br />
 
-This account has access to another interesting share: `Notes`
+This account has access to another share: `Notes`
 
-Inside this share, there are dous .txt files:
+Inside this share, there are two .txt files:
 
 - The user flag: user.txt.
 
-- A tasklis: ToDo.txt
+- A task list: ToDo.txt
 
 <br />
 
@@ -272,7 +272,7 @@ smb: \>
 
 <br />
 
-The `ToDo.txt` file contains another message:
+The `ToDo.txt` file contains the following message:
 
 <br />
 
@@ -290,16 +290,17 @@ James
 
 <br />
 
-This time, is a personal message, from James to Thomas. In that message, James is advicing Thomas about a old pre created account related to a banking software that they need to clean up.
+This time, it is a personal message from James to Thomas. In that message, James advises Thomas about an old pre-created account related to banking software that needs to be cleaned up.
 
+<br />
 
 ### Pre-Windows 2000:
 
 <br />
 
-When a new computer account is configured as "pre-Windows 2000 computer account", its password is set based on its name. This type of account can be discovered using a `NetExec` module called `pre2k`.
+When a new computer account is configured as a "pre-Windows 2000 computer account", its password is set based on its name. This type of account can be discovered using a `NetExec` module called `pre2k`.
 
-To use it we only need to run it like the following:
+To use it, we only need to run it as follows:
 
 <br />
 
@@ -315,9 +316,9 @@ PRE2K       10.129.28.100   389    DC               [+] Successfully obtained TG
 
 <br />
 
-The output confirms that there is an available pre created computer account: `BANKING$`
+The output confirms that there is a pre-created computer account: `BANKING$`.
 
-We can confirm that this computer account is using its name as password running:
+We can confirm that this computer account is using its name as password by running:
 
 <br />
 
@@ -330,4 +331,6 @@ SMB         10.129.28.100   445    DC               [-] retro.vl\BANKING$:bankin
 <br />
 
 The `STATUS_NOLOGON_WORKSTATION_TRUST_ACCOUNT` message confirms it.
+
+<br />
 
