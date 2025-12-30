@@ -22,7 +22,7 @@ Difficulty -> Easy.
 
 <br />
 
-
+This machine is a Windows Active Directory environment where an initial anonymous SMB access leads to credential reuse and further domain enumeration. By abusing a legacy pre-Windows 2000 computer account and later misconfigured Active Directory Certificate Services, we are able to escalate privileges and fully compromise the domain.
 
 <br />
 
