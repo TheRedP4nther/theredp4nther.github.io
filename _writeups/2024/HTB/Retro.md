@@ -350,7 +350,7 @@ The `STATUS_NOLOGON_WORKSTATION_TRUST_ACCOUNT` message confirms it.
 
 <br />
 
-At this point we should change the password of the pre-created account using the well-known [rpcchangepwd.py](https://raw.githubusercontent.com/api0cradle/impacket/a1d0cc99ff1bd4425eddc1b28add1f269ff230a6/examples/rpcchangepwd.py) Python script:
+At this point, we should change the password of the pre-created account using [rpcchangepwd.py](https://raw.githubusercontent.com/api0cradle/impacket/a1d0cc99ff1bd4425eddc1b28add1f269ff230a6/examples/rpcchangepwd.py):
 
 <br />
 
@@ -363,9 +363,9 @@ Impacket v0.11.0 - Copyright 2023 Fortra
 
 <br />
 
-The password was successfully changed.
+With the password changed, we can continue enumerating.
 
-However, if we try to obtain remote access to the machine via WinRM or search for another share, there is nothing.
+However, trying WinRM or enumerating additional shares does not give us anything useful yet.
 
 <br />
 
@@ -373,7 +373,7 @@ However, if we try to obtain remote access to the machine via WinRM or search fo
 
 <br />
 
-A simple `Certipy` one-liner noticed us of a vulnerable template:
+A simple `Certipy` one-liner shows a vulnerable template:
 
 <br />
 
@@ -455,17 +455,13 @@ Certificate Templates
 
 <br />
 
-The template is named "RetroClients" and it's vulnerable to `ESC1`.
+The template is named `RetroClients` and it's vulnerable to `ESC1`.
 
 <br />
 
-## ESC1 
+This vulnerability allows us to request a certificate for other accounts in the domain, including `Administrator`.
 
-<br />
-
-This vulnerability allows an attacker to request a certificate for any account in the domain, including the `Administrator` one.
-
-To exploit this, we will request a new certificate using the `UPN` -> `administrator@retro.vl`.
+To exploit this, we request a new certificate using the UPN: `administrator@retro.vl`.
 
 <br />
 
@@ -483,7 +479,7 @@ Certipy v4.8.2 - by Oliver Lyak (ly4k)
 
 <br />
 
-Now we use this certificate to authenticate as the administrator user:
+Now, we use this certificate to authenticate as administrator:
 
 <br />
 
@@ -498,11 +494,11 @@ Certipy v4.8.2 - by Oliver Lyak (ly4k)
 
 <br />
 
-There is an error: `Object SID mismatch`.
+We get an error: `Object SID mismatch`.
 
-This error means that SID of the host doesn't match with the SID of our certificate.
+This error means that SID of the host doesn't match the SID in our certificate.
 
-We can retrieve the valid SID using `lookupsid.py`:
+We can retrieve the domain SID using `lookupsid.py`:
 
 <br />
 
@@ -546,7 +542,7 @@ Impacket v0.11.0 - Copyright 2023 Fortra
 
 <br />
 
-Then, we request the certificate again indicating this SID:
+Then, we request the certificate again specifying this SID:
 
 <br />
 
@@ -564,7 +560,7 @@ Certipy v4.8.2 - by Oliver Lyak (ly4k)
 
 <br />
 
-Now, we can use it with the auth command without without any problem:
+Now, we can use it with the auth command without any problem:
 
 <br />
 
@@ -582,7 +578,7 @@ Certipy v4.8.2 - by Oliver Lyak (ly4k)
 
 <br />
 
-The retrieved hash allows us to log in as `administrator` using `evil-winrm`
+The retrieved hash allows us to log in as `administrator` using `evil-winrm`:
 
 <br />
 
@@ -615,10 +611,10 @@ The `root.txt` flag was successfully retrieved:
 
 <br />
 
-The system is already compromised.
+Box compromised.
 
-Hope you learned a lot and enjoyed this writeup.
+I hope you learned a lot and enjoyed this writeup.
 
-Keep hacking!❤️❤️
+Keep hacking! ❤️❤️
 
 <br />
