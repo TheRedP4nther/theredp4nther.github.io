@@ -151,4 +151,9 @@ To start enumerating this service, we'll run a basic [CrackMapExec](https://gith
 
 <br />
 
+```bash
+❯ netexec smb retro.vl
+SMB         10.129.28.100   445    DC               [*] Windows Server 2022 Build 20348 x64 (name:DC) (domain:retro.vl) (signing:True) (SMBv1:None) (Null Auth:True)
+```
+
 
