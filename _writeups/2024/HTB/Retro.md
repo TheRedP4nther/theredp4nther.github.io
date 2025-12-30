@@ -133,12 +133,12 @@ Relevant Open Ports:
 
 <br />
 
-The domain `cicada.htb` and the hostname `CICADA-DC` appear across multiple services and ports, so I’ll add them to my `/etc/hosts` file:
+The domain `retro.vl` and the hostname `DC.retro.vl` appear across multiple services and ports, so I’ll add them to my `/etc/hosts` file:
 
 <br />
 
 ```bash
-10.10.11.35 cicada.htb CICADA-DC
+10.129.28.100 retro.vl DC.retro.vl
 ```
 
 <br />
