@@ -147,7 +147,7 @@ The domain `retro.vl` and the hostname `DC.retro.vl` appear across multiple serv
 
 <br />
 
-To start enumerating this service, we'll run a basic [NetExec](https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://github.com/Pennyw0rth/NetExec&ved=2ahUKEwju__Ct5-WRAxU0Q6QEHTkxD1cQFnoECA8QAQ&usg=AOvVaw0-GGvkQiCwAysCodSPaP0d) oneliner to gather some information about the Windows system that we're auditing:
+To start enumerating this service, we'll run a basic [NetExec](https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://github.com/Pennyw0rth/NetExec&ved=2ahUKEwju__Ct5-WRAxU0Q6QEHTkxD1cQFnoECA8QAQ&usg=AOvVaw0-GGvkQiCwAysCodSPaP0d) oneliner to te some interesting information about the Windows system that we're auditing:
 
 <br />
 
@@ -158,7 +158,7 @@ SMB         10.129.28.100   445    DC               [*] Windows Server 2022 Buil
 
 <br />
 
-However, by using a random username we obtain a guest session:
+However, by using a random username we've got a guest session:
 
 <br />
 
@@ -180,9 +180,9 @@ SMB         10.129.28.100   445    DC               Trainees        READ
 
 <br />
 
-The `Trainees` share is uncommon in default Windows environments.
+The `Trainees` share is an uncommon one.
 
-We can connect to this share with `smbclient` and download the available .txt file:
+We can connect to this share with `smbclient` and dowload the available txt file:
 
 <br />
 
@@ -202,7 +202,7 @@ getting file \Important.txt of size 288 as Important.txt (1,7 KiloBytes/sec) (av
 
 <br />
 
-The file contains the following message:
+The file contains relevant data:
 
 <br />
 
@@ -220,9 +220,9 @@ The Admins
 
 <br />
 
-Apparently, this is an admin message addressed to all trainees in the company. It suggests that there is a shared trainee account with a weak, generic password.
+Apparently, is an admin message to all the trainees in the company. It suggests that there is a Trainee account with a weak generic password.
 
-After seeing this, one thing we should try is logging in using the weak credentials `trainee:trainee`:
+One thing that we should try after seing this is to log in using the weak credentials `trainee:trainee`
 
 ```bash
 ❯ netexec smb retro.vl -u "trainee" -p "trainee" --shares
