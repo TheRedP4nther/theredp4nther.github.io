@@ -129,6 +129,8 @@ Relevant open ports:
 
 - `Port 636`  -> ldaps
 
+- `Port 3389` -> rdp
+
 - `Port 5985` -> winrm
 
 <br />
@@ -154,6 +156,19 @@ To start enumerating this service, we'll run a basic [NetExec](https://github.co
 ```bash
 ❯ netexec smb retro.vl
 SMB         10.129.28.100   445    DC               [*] Windows Server 2022 Build 20348 x64 (name:DC) (domain:retro.vl) (signing:True) (SMBv1:None) (Null Auth:True)
+```
+
+<br />
+
+The null session didn't allowed us to enumerate shares:
+
+<br />
+
+```bash
+❯ nxc smb retro.vl -u "" -p "" --shares
+SMB         10.129.28.100   445    DC               [*] Windows Server 2022 Build 20348 x64 (name:DC) (domain:retro.vl) (signing:True) (SMBv1:None) (Null Auth:True)
+SMB         10.129.28.100   445    DC               [+] retro.vl\: 
+SMB         10.129.28.100   445    DC               [-] Error enumerating shares: STATUS_ACCESS_DENIED
 ```
 
 <br />
