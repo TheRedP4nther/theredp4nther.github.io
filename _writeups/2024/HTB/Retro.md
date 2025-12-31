@@ -160,7 +160,7 @@ SMB         10.129.28.100   445    DC               [*] Windows Server 2022 Buil
 
 <br />
 
-The null session didn't allowed us to enumerate shares:
+The null session did not allow us to enumerate shares:
 
 <br />
 
