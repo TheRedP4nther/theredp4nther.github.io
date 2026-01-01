@@ -1121,15 +1121,11 @@ This version is vulnerable to [CVE-2023-49147](https://nvd.nist.gov/vuln/detail/
 
 <br />
 
-### Exploitation
-
-<br />
-
 To exploit this we will follow step by step the awesome POC of the following [website](https://sec-consult.com/blog/detail/msi-installer-repair-to-system-a-detailed-journey/) adapted to our scenario.
 
 <br />
 
-#### Step 1 - Set a OpLock in the log file.
+### Step 1 - Set a OpLock in the log file.
 
 <br />
 
@@ -1149,7 +1145,7 @@ SetOpLock.exe "C:\Program Files\PDF24\faxPrnInst.log" r
 
 <br />
 
-#### Step 2 - Start the repair process as low-privileged user.
+### Step 2 - Start the repair process as low-privileged user.
 
 <br />
 
@@ -1171,7 +1167,7 @@ msiexec.exe /fa "C:\_install\pdf24-creator-11.15.1-x64.msi"
 
 <br />
 
-#### Step 3 - Spawn a SYSTEM cmd.exe process:
+### Step 3 - Spawn a SYSTEM cmd.exe process:
 
 <br />
 
