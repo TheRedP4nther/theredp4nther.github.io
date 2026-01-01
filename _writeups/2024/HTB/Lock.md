@@ -1214,3 +1214,22 @@ A cmd.exe with elevated privileged spawned:
 ![18](../../../assets/images/Lock/18.png)
 
 <br />
+
+The `root.txt` flag was retrieved:
+
+<br />
+
+```bash
+C:\Users\Administrator\Desktop>type root.txt
+ba0992e367ddddc7e77d442d71xxxxxx
+```
+
+<br />
+
+Machine rooted!
+
+I hope you learned a lot and enjoyed the machine.
+
+Keep hacking! ❤️❤️
+
+<br />
