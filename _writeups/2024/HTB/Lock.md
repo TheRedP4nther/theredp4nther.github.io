@@ -1121,14 +1121,52 @@ This version is vulnerable to [CVE-2023-49147](https://nvd.nist.gov/vuln/detail/
 
 <br />
 
-To exploit this we will follow step by step the awesome POC of the following [website](https://sec-consult.com/blog/detail/msi-installer-repair-to-system-a-detailed-journey/) adapted to our scenario.
-
-<br />
-
 ## Exploitation
 
 <br />
 
+To exploit this we will follow step by step the awesome POC of the following [website](https://sec-consult.com/blog/detail/msi-installer-repair-to-system-a-detailed-journey/) adapted to our scenario.
 
+<br />
 
+### Step 1 - Set a OpLock in the log file.
 
+<br />
+
+To achieve this, we will use the [SetOpLock.exe](https://github.com/p1sc3s/Symlink-Tools-Compiled/blob/master/SetOpLock.exe) binary.
+
+The execution of the tool is really straightforward:
+
+<br />
+
+```bash
+SetOpLock.exe "C:\Program Files\PDF24\faxPrnInst.log" r 
+```
+
+<br />
+
+![13](../../../assets/images/Lock/13.png)
+
+<br />
+
+### Step 2 - Start the repair process as low-privileged user.
+
+<br />
+
+In our case, we have to use the MSI installer of PDF24, that is located in a hidden directory at: `C:\_install`:
+
+<br />
+
+![12](../../../assets/images/Lock/12.png)
+
+<br />
+
+The repair process should be started with the following `msiexec.exe` one-liner:
+
+<br />
+
+```bash
+msiexec.exe /fa "C:\_install\pdf24-creator-11.15.1-x64.msi"
+```
+
+<br />
