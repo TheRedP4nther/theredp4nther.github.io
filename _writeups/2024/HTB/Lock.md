@@ -287,6 +287,69 @@ Inside this repository we can found a python script named `repos.py` and two com
 
 <br />
 
+The script functionaly is so basic. It only lists the repositories of the Gitea instance using the API.
+
+<br />
+
+```python
+import requests
+import sys
+import os
+
+def format_domain(domain):
+    if not domain.startswith(('http://', 'https://')):
+        domain = 'https://' + domain
+    return domain
+
+def get_repositories(token, domain):
+    headers = {
+        'Authorization': f'token {token}'
+    }
+    url = f'{domain}/api/v1/user/repos'
+    response = requests.get(url, headers=headers)
+
+    if response.status_code == 200:
+        return response.json()
+    else:
+        raise Exception(f'Failed to retrieve repositories: {response.status_code}')
+
+def main():
+    if len(sys.argv) < 2:
+        print("Usage: python script.py <gitea_domain>")
+        sys.exit(1)
+
+    gitea_domain = format_domain(sys.argv[1])
+
+    personal_access_token = os.getenv('GITEA_ACCESS_TOKEN')
+    if not personal_access_token:
+        print("Error: GITEA_ACCESS_TOKEN environment variable not set.")
+        sys.exit(1)
+
+    try:
+        repos = get_repositories(personal_access_token, gitea_domain)
+        print("Repositories:")
+        for repo in repos:
+            print(f"- {repo['full_name']}")
+    except Exception as e:
+        print(f"Error: {e}")
+
+if __name__ == "__main__":
+    main()
+```
+
+<br />
+
+To run it we need a valid gitea access token:
+
+<br />
+
+```bash
+❯ python3 repos.py http://10.129.29.102:3000
+Error: GITEA_ACCESS_TOKEN environment variable not set.
+```
+
+<br />
+
 
 
 
