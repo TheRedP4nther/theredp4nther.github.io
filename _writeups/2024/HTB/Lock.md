@@ -311,7 +311,7 @@ Repositories:
 
 There is another repo named "website".
 
-We can continue enumerating using curl with the access token inside a `Authorization` HTTP header.
+We can continue enumerating using curl with the access token inside an `Authorization` HTTP header.
 
 <br />
 
@@ -493,6 +493,393 @@ We can continue enumerating using curl with the access token inside a `Authoriza
     "repo_transfer": null
   }
 ]
+```
+
+<br />
+
+At this point we should list the available API functionalities by navigating to the `/api/swagger` default Gitea endpoint:
+
+<br />
+
+![6](../../../assets/images/Lock/6.png)
+
+<br />+
+
+Among other, there is a really interesting functionality to list the content of a repository:
+
+<br />
+
+![7](../../../assets/images/Lock/7.png)
+
+<br />
+
+Based on this function, we proceed to list the content of the `website` repo:
+
+<br />
+
+```bash
+❯ curl http://10.129.29.102:3000/api/v1/repos/ellen.freeman/website/contents -H "Authorization: Bearer 43ce39bb0bd6bc489284f2905f033ca467a6362f" -s | jq -r ".[].name"
+assets
+changelog.txt
+index.html
+readme.md
+```
+
+<br />
+
+If we list the content of the `index.html` file we confirm that it is the index of the website running on port 80.
+
+<br />
+
+```bash
+❯ curl -s 'http://10.129.29.102:3000/api/v1/repos/ellen.freeman/website/contents/index.html' -H "Authorization: Bearer 43ce39bb0bd6bc489284f2905f033ca467a6362f" | jq -r ".content" | base64 -d
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Lock - Index</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: Gp
+  * Updated: Nov 25 2023 with Bootstrap v5.3.2
+  * Template URL: https://bootstrapmade.com/gp-free-multipurpose-html-bootstrap-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top ">
+    <div class="container d-flex align-items-center justify-content-lg-between">
+
+      <h1 class="logo me-auto me-lg-0"><a href="index.html">Gp<span>.</span></a></h1>
+      <!-- Uncomment below if you prefer to use an image logo -->
+      <!-- <a href="index.html" class="logo me-auto me-lg-0"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+      <nav id="navbar" class="navbar order-last order-lg-0">
+        <ul>
+          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+          <li><a class="nav-link scrollto" href="#about">About</a></li>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+      <a href="#about" class="get-started-btn scrollto">Get Started</a>
+
+    </div>
+  </header><!-- End Header -->
+
+  <!-- ======= Hero Section ======= -->
+<section id="hero" class="d-flex align-items-center justify-content-center">
+  <div class="container" data-aos="fade-up">
+
+    <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="150">
+      <div class="col-xl-6 col-lg-8">
+        <h1>Powerful Document Solutions With Cutting-Edge Technology<span>.</span></h1>
+      </div>
+    </div>
+
+    <div class="row gy-4 mt-5 justify-content-center" data-aos="zoom-in" data-aos-delay="250">
+      <div class="col-xl-2 col-md-4">
+        <div class="icon-box">
+          <i class="ri-file-search-line"></i>
+          <h3><a href="">PDF OCR</a></h3>
+        </div>
+      </div>
+      <div class="col-xl-2 col-md-4">
+        <div class="icon-box">
+          <i class="ri-file-transfer-line"></i>
+          <h3><a href="">PDF to Word</a></h3>
+        </div>
+      </div>
+      <div class="col-xl-2 col-md-4">
+        <div class="icon-box">
+          <i class="ri-file-shield-2-line"></i>
+          <h3><a href="">Redact PDF</a></h3>
+        </div>
+      </div>
+      <div class="col-xl-2 col-md-4">
+        <div class="icon-box">
+          <i class="ri-water-flash-line"></i>
+          <h3><a href="">PDF Watermark</a></h3>
+        </div>      
+      </div>
+      <div class="col-xl-2 col-md-4">
+        <div class="icon-box">
+          <i class="ri-shield-keyhole-line"></i>
+          <h3><a href="">PDF Protection</a></h3>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section><!-- End Hero -->
+
+
+  <main id="main">
+
+   <!-- ======= About Section ======= -->
+<section id="about" class="about">
+  <div class="container" data-aos="fade-up">
+
+    <div class="row">
+      <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-left" data-aos-delay="100">
+        <img src="assets/img/about.jpg" class="img-fluid" alt="Team working on document management">
+      </div>
+      <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content" data-aos="fade-right" data-aos-delay="100">
+        <h3>Efficient and Secure Document Management Solutions</h3>
+        <p class="fst-italic">
+          At Lock, we specialize in providing cutting-edge PDF and document management solutions to streamline your workflow and secure your data.
+        </p>
+        <ul>
+          <li><i class="ri-check-double-line"></i> Advanced PDF editing and conversion tools to enhance productivity.</li>
+          <li><i class="ri-check-double-line"></i> Robust security features to protect sensitive information.</li>
+          <li><i class="ri-check-double-line"></i> Customizable document management systems tailored to your specific needs.</li>
+        </ul>
+        <p>
+          Our team of experts is dedicated to delivering user-friendly, innovative solutions that meet the evolving needs of businesses. From document archiving to real-time collaboration, we ensure your documents are managed efficiently and securely.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section><!-- End About Section -->
+
+
+    <!-- ======= Clients Section ======= -->
+    <section id="clients" class="clients">
+      <div class="container" data-aos="zoom-in">
+
+        <div class="clients-slider swiper">
+          <div class="swiper-wrapper align-items-center">
+            <div class="swiper-slide"><img src="assets/img/clients/client-1.png" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="assets/img/clients/client-2.png" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="assets/img/clients/client-3.png" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="assets/img/clients/client-4.png" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="assets/img/clients/client-5.png" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="assets/img/clients/client-6.png" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="assets/img/clients/client-7.png" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="assets/img/clients/client-8.png" class="img-fluid" alt=""></div>
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+
+      </div>
+    </section><!-- End Clients Section -->
+
+    <!-- ======= Features Section ======= -->
+<section id="features" class="features">
+  <div class="container" data-aos="fade-up">
+
+    <div class="row">
+      <div class="image col-lg-6" style='background-image: url("assets/img/features.jpg");' data-aos="fade-right"></div>
+      <div class="col-lg-6" data-aos="fade-left" data-aos-delay="100">
+        <div class="icon-box mt-5 mt-lg-0" data-aos="zoom-in" data-aos-delay="150">
+          <i class="bx bx-layer"></i>
+          <h4>PDF OCR</h4>
+          <p>Efficiently convert scanned documents into editable and searchable text with our advanced Optical Character Recognition technology.</p>
+        </div>
+        <div class="icon-box mt-5" data-aos="zoom-in" data-aos-delay="150">
+          <i class="bx bx-file"></i>
+          <h4>PDF to Word</h4>
+          <p>Seamlessly convert PDF documents into editable Word formats while maintaining the original layout and formatting.</p>
+        </div>
+        <div class="icon-box mt-5" data-aos="zoom-in" data-aos-delay="150">
+          <i class="bx bx-hide"></i>
+          <h4>Redact PDF</h4>
+          <p>Secure sensitive information in your PDF documents with our reliable redaction tools, ensuring privacy and confidentiality.</p>
+        </div>
+        <div class="icon-box mt-5" data-aos="zoom-in" data-aos-delay="150">
+          <i class="bx bx-water"></i>
+          <h4>PDF Watermark</h4>
+          <p>Add customized watermarks to your PDFs for branding or copyright protection, enhancing both security and professionalism.</p>
+        </div>
+        <div class="icon-box mt-5" data-aos="zoom-in" data-aos-delay="150">
+          <i class="bx bx-lock"></i>
+          <h4>PDF Protection</h4>
+          <p>Ensure the integrity of your documents with robust PDF protection features, including password encryption and access restrictions.</p>
+        </div>
+        <div class="icon-box mt-5" data-aos="zoom-in" data-aos-delay="150">
+          <i class="bx bx-pencil"></i>
+          <h4>Sign PDF</h4>
+          <p>Digitally sign PDF documents with ease, providing a secure and legal way to validate and authorize documents electronically.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section><!-- End Features Section -->
+
+
+
+    <!-- ======= Counts Section ======= -->
+<section id="counts" class="counts">
+  <div class="container" data-aos="fade-up">
+
+    <div class="row no-gutters">
+      <div class="image col-xl-5 d-flex align-items-stretch justify-content-center justify-content-lg-start" data-aos="fade-right" data-aos-delay="100"></div>
+      <div class="col-xl-7 ps-4 ps-lg-5 pe-4 pe-lg-1 d-flex align-items-stretch" data-aos="fade-left" data-aos-delay="100">
+        <div class="content d-flex flex-column justify-content-center">
+          <h3>Empowering Businesses with Efficient Document Solutions</h3>
+          <p>
+            Our commitment to excellence in PDF and document management has led to significant achievements. We take pride in our contributions to enhancing productivity and security in document handling.
+          </p>
+          <div class="row">
+            <div class="col-md-6 d-md-flex align-items-md-stretch">
+              <div class="count-box">
+                <i class="bi bi-emoji-smile"></i>
+                <span data-purecounter-start="0" data-purecounter-end="228" data-purecounter-duration="2" class="purecounter"></span>
+                <p><strong>Happy Clients</strong> who trust our solutions for their document management needs.</p>
+              </div>
+            </div>
+
+            <div class="col-md-6 d-md-flex align-items-md-stretch">
+              <div class="count-box">
+                <i class="bi bi-journal-richtext"></i>
+                <span data-purecounter-start="0" data-purecounter-end="542" data-purecounter-duration="2" class="purecounter"></span>
+                <p><strong>Projects Completed</strong> including PDF conversions, OCR, and document security enhancements.</p>
+              </div>
+            </div>
+
+            <div class="col-md-6 d-md-flex align-items-md-stretch">
+              <div class="count-box">
+                <i class="bi bi-clock"></i>
+                <span data-purecounter-start="0" data-purecounter-end="3" data-purecounter-duration="4" class="purecounter"></span>
+                <p><strong>Years of Experience</strong> in delivering top-notch document management solutions.</p>
+              </div>
+            </div>
+
+            <div class="col-md-6 d-md-flex align-items-md-stretch">
+              <div class="count-box">
+                <i class="bi bi-award"></i>
+                <span data-purecounter-start="0" data-purecounter-end="2" data-purecounter-duration="4" class="purecounter"></span>
+                <p><strong>Awards and Recognition</strong> received for innovation and excellence in document management.</p>
+              </div>
+            </div>
+          </div>
+        </div><!-- End .content-->
+      </div>
+    </div>
+
+  </div>
+</section><!-- End Counts Section -->
+
+
+    <!-- ======= Testimonials Section ======= -->
+<section id="testimonials" class="testimonials">
+  <div class="container" data-aos="zoom-in">
+
+    <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
+      <div class="swiper-wrapper">
+
+        <div class="swiper-slide">
+          <div class="testimonial-item">
+            <img src="assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
+            <h3>Saul Goodman</h3>
+            <h4>Legal Consultant</h4>
+            <p>
+              <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+              "Using Lock's PDF OCR tool transformed how we handle case files. We can now quickly convert scanned documents into searchable formats, significantly enhancing our efficiency."
+              <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+            </p>
+          </div>
+        </div><!-- End testimonial item -->
+
+        <div class="swiper-slide">
+          <div class="testimonial-item">
+            <img src="assets/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
+            <h3>Sara Wilsson</h3>
+            <h4>Academic Researcher</h4>
+            <p>
+              <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+              "I regularly use Lock's PDF to Word conversion for my research. It's a game changer in terms of accessibility and editing capabilities for large volumes of data."
+              <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+            </p>
+          </div>
+        </div><!-- End testimonial item -->
+
+        <div class="swiper-slide">
+          <div class="testimonial-item">
+            <img src="assets/img/testimonials/testimonials-5.jpg" class="testimonial-img" alt="">
+            <h3>John Larson</h3>
+            <h4>Entrepreneur</h4>
+            <p>
+              <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+              "The Redact PDF feature from Lock has been instrumental in protecting our sensitive business information. It's easy to use and incredibly reliable."
+              <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+            </p>
+          </div>
+        </div><!-- End testimonial item -->
+      </div>
+      <div class="swiper-pagination"></div>
+    </div>
+
+  </div>
+</section><!-- End Testimonials Section -->
+
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+    <div class="footer-top">
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong><span>Gp</span></strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/gp-free-multipurpose-html-bootstrap-template/ -->
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
+    </div>
+  </footer><!-- End Footer -->
+
+  <div id="preloader"></div>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>
 ```
 
 <br />
