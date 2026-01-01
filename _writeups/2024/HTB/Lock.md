@@ -1170,3 +1170,47 @@ msiexec.exe /fa "C:\_install\pdf24-creator-11.15.1-x64.msi"
 ```
 
 <br />
+
+### Step 3 - Spawn a SYSTEM cmd.exe process:
+
+<br />
+
+When a black console window pops up, we right click on the window bar and select properties.
+
+<br />
+
+![15](../../../assets/images/Lock/15.png)
+
+<br />
+
+Click on "legacy console mode" link:
+
+<br />
+
+![14](../../../assets/images/Lock/14.png)
+
+<br />
+
+Select Firefox browser.
+
+<br />
+
+![16](../../../assets/images/Lock/16.png)
+
+<br />
+
+Press Ctrl+O in Firefox, and type cmd.exe in the top bar + click ENTER.
+
+<br />
+
+![17](../../../assets/images/Lock/17.png)
+
+<br />
+
+A cmd.exe with elevated privileged spawned:
+
+<br />
+
+![18](../../../assets/images/Lock/18.png)
+
+<br />
