@@ -1195,7 +1195,7 @@ Select Firefox browser.
 
 <br />
 
-Press Ctrl+O in Firefox, and type cmd.exe in the top bar + click ENTER.
+Press Ctrl+O in Firefox, then type cmd.exe in the top bar and click ENTER.
 
 <br />
 
