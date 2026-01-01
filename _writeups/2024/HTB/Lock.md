@@ -350,16 +350,14 @@ Error: GITEA_ACCESS_TOKEN environment variable not set.
 
 <br />
 
+## Information disclosure - Gitea access token
 
+<br />
 
+In the available 2 commits we will discover the token that we need:
 
+<br />
 
+![5](../../../assets/images/Lock/5.png)
 
-
-
-
-
-
-
-
-
+<br />
