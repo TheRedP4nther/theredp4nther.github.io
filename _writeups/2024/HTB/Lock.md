@@ -1071,7 +1071,7 @@ RDP         10.129.29.102   3389   LOCK             [+] Lock\gale.dekarios:ty8wn
 
 <br />
 
-The RDP service is working so we will take advantage from it, these type of sessions are really good to increment our posibilities of find a way to elevate privileges because we can access both a graphical interface and the terminal.
+The RDP service is working so we will take advantage from it, these type of sessions are really good to increment our posibilities to find a way to elevate privileges, because we can access both a graphical interface and the terminal.
 
 To connect we will use `xfreerdp` indicating a drive for our linux machine to have the possibility of share resources if we need it 
 
