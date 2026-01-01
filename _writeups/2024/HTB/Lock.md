@@ -924,7 +924,7 @@ Then, we copy the reverse shell content base64-encoded:
 
 <br />
 
-Finally, we pasete it in the content file of our request:
+Finally, we paste it in the content file of our request:
 
 <br />
 
@@ -1075,9 +1075,9 @@ The RDP service is working so we will take advantage from it, these type of sess
 
 To connect we will use `xfreerdp` indicating a drive for our linux machine to have the possibility of share resources if we need it 
 
-⚠️ Note: (Modify the drive path to your own directory).
-
 <br />
+
+⚠️ Note: (Modify the drive path to your own directory).
 
 ```bash
 xfreerdp /v:10.129.29.102 /u:gale.dekarios /p:'ty8wnW9qCKDosXo6' /cert:ignore /drive:Shared,/home/theredp4nther
