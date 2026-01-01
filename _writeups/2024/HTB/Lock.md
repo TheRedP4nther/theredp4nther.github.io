@@ -914,7 +914,7 @@ Saved as: reverse.aspx
 
 <br />
 
-Now, we copy the reverse shell content and base64-encode it:
+Then, we copy the reverse shell content and base64-encode it:
 
 <br />
 
@@ -993,7 +993,7 @@ Finally, we insert the base64-encoded reverse shell inside the content file of o
 
 <br />
 
-Now, we can start a listener and navigate to `http://10.129.29.102/reverse-shell.aspx` and trigger the reverse shell execution:
+Now, we start a listener and navigate to `http://10.129.29.102/reverse-shell.aspx` to trigger the reverse shell:
 
 <br />
 
@@ -1015,7 +1015,7 @@ Lock
 
 <br />
 
-A reverse shell conection from the user `ellen.freeman` was sucessfully received.
+A reverse conection from the user `ellen.freeman` was sucessfully received.
 
 <br />
 
@@ -1023,7 +1023,7 @@ A reverse shell conection from the user `ellen.freeman` was sucessfully received
 
 <br />
 
-After a while enumerating the system we discovered a `config.xml` file inside the directory: `C:\Users\ellen.freeman\Documents`
+After a while enumerating the system, we discovered a `config.xml` file inside the directory: `C:\Users\ellen.freeman\Documents`
 
 <br />
 
@@ -1038,7 +1038,7 @@ type config.xml
 
 <br />
 
-This file is a `mRemoteNG` connection configuration file. In that file we can observer that there is a user and a encrypted password:
+This file is a `mRemoteNG` connection configuration file. In this file, we can find a user and a encrypted password:
 
 - `User`: gare.dekarios 
 
