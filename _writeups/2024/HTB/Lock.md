@@ -914,7 +914,7 @@ Saved as: reverse.aspx
 
 <br />
 
-Then, we copy the reverse shell content and base64-encode it:
+Then, we copy the reverse shell content base64-encoded:
 
 <br />
 
@@ -924,7 +924,7 @@ Then, we copy the reverse shell content and base64-encode it:
 
 <br />
 
-Finally, we insert the base64-encoded reverse shell inside the content file of our request:
+Finally, we pasete it in the content file of our request:
 
 <br />
 
@@ -1046,7 +1046,7 @@ This file is a `mRemoteNG` connection configuration file. In this file, we can f
 
 <br />
 
-This type of passwords are really easy to crack, this happens because they are using a weak encryption method. To decrypt it we will use the following python [script](https://raw.githubusercontent.com/kmahyyg/mremoteng-decrypt/refs/heads/master/mremoteng_decrypt.py) from a public GitHub repository:
+This type of passwords are really easy to crack, this happens because encryption method is weak. To decrypt it we will use a script from the following [GitHub repository](https://raw.githubusercontent.com/kmahyyg/mremoteng-decrypt/refs/heads/master/mremoteng_decrypt.py):
 
 <br />
 
@@ -1071,9 +1071,11 @@ RDP         10.129.29.102   3389   LOCK             [+] Lock\gale.dekarios:ty8wn
 
 <br />
 
-The RDP port is open and these type of sessions are really good because we can access both a graphical interface and the terminal.
+The RDP service is working so we will take advantage from it, these type of sessions are really good to increment our posibilities of find a way to elevate privileges because we can access both a graphical interface and the terminal.
 
-To connect we will use `xfreerdp` indicating a drive for our linux machine to have the possibility of share resources if we need it (modify the path to your own directory):
+To connect we will use `xfreerdp` indicating a drive for our linux machine to have the possibility of share resources if we need it 
+
+⚠️ Note: (Modify the drive path to your own directory).
 
 <br />
 
