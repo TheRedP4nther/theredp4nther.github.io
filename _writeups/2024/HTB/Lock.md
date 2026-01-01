@@ -220,7 +220,7 @@ Inside this repository, we can find a python script named `repos.py` and two com
 
 <br />
 
-The script functionaly is very simple. It simply lists the repositories of the Gitea instance using its API.
+The script functionality is very simple. It simply lists the repositories of the Gitea instance using its API.
 
 <br />
 
@@ -287,7 +287,7 @@ Error: GITEA_ACCESS_TOKEN environment variable not set.
 
 <br />
 
-By reviewing the two available commits, we can discover the token we need:
+By reviewing the two above commits, we can discover the token we need:
 
 <br />
 
