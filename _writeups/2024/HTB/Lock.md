@@ -1101,7 +1101,7 @@ As we can see in the screenshot above, there are `PDF24` shortcuts in the `gale.
 
 `PDF24` is software used to create PDF files. The application directory is located at: `C:\Program Files\PDF24`.
 
-If we open the PDF24 Launcher shortcut and click on the About button we can check out the version in use: `1.15.1`
+If we open the PDF24 Launcher shortcut and click on the About button, we check out the version in use: `1.15.1`
 
 <br />
 
@@ -1109,7 +1109,17 @@ If we open the PDF24 Launcher shortcut and click on the About button we can chec
 
 <br />
 
+# PDF24 - CVE-2023-49147
 
+<br />
+
+This version is vulnerable to [CVE-2023-49147](https://nvd.nist.gov/vuln/detail/CVE-2023-49147):
+
+<br />
+
+![11](../../../assets/images/Lock/11.png)
+
+<br />
 
 
 
