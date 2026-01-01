@@ -245,7 +245,7 @@ Without valid credentials, it makes no sense to continue listing this service.
 
 <br />
 
-Port 80 is hosting a static website:
+Port 80 is hosting a static Windows server website:
 
 <br />
 
@@ -279,7 +279,13 @@ By clicking on "Explore" we notice that there is one:
 
 <br />
 
+Inside this repository we can found a python script named `repos.py` and two commits:
 
+<br />
+
+![4](../../../assets/images/Lock/4.png)
+
+<br />
 
 
 
