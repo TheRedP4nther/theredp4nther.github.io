@@ -1096,3 +1096,21 @@ The `user.txt` flag was retrieved.
 # Privilege Escalation: gale.dekarios -> NT AUTHORITY\SYSTEM
 
 <br />
+
+As we can see in the screenshot above, there are `PDF24` shortcuts in the `gale.dekarios` user Desktop.
+
+`PDF24` is software used to create PDF files. The application directory is located at: `C:\Program Files\PDF24`.
+
+If we open the PDF24 Launcher shortcut and click on the About button we can check out the version in use: `1.15.1`
+
+<br />
+
+![10](../../../assets/images/Lock/10.png)
+
+<br />
+
+
+
+
+
+
