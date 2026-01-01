@@ -265,7 +265,7 @@ This port is hosting a `Gitea` instance:
 
 <br />
 
-Sometimes, business have public repositories. This case is not different, if we click on "Explore" there is a public repository:
+Sometimes, business have public repositories. This case will not be different, if we click on "Explore" there is a public repository:
 
 <br />
 
