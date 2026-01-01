@@ -263,7 +263,7 @@ This account has access to another share: `Notes`
 
 Inside this share, there are two .txt files:
 
-- The user flag: user.txt.
+- The user flag: user.txt
 
 - A task list: ToDo.txt
 
@@ -288,7 +288,7 @@ getting file \user.txt of size 32 as user.txt (0,2 KiloBytes/sec) (average 0,9 K
 
 <br />
 
-The `user.txt` contains the flag:
+The `user.txt` contains the user flag:
 
 <br />
 
@@ -471,8 +471,6 @@ Certificate Templates
 <br />
 
 The template is named `RetroClients` and it's vulnerable to `ESC1`.
-
-<br />
 
 This vulnerability allows us to request a certificate for other accounts in the domain, including `Administrator`.
 
