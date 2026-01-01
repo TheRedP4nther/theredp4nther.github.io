@@ -30,7 +30,7 @@ Difficulty -> Easy.
 
 <br />
 
-We start by running an `nmap` scan to see which ports are open:
+We start by running an `nmap` scan to identify the open ports and running services:
 
 <br />
 
@@ -211,7 +211,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 
 <br />
 
-To start enumerating this service, we'll run a basic [NetExec](https://github.com/Pennyw0rth/NetExec) oneliner to gather some information about the Windows system that we're auditing:
+To begin enumerating the SMB service, we run a basic [NetExec](https://github.com/Pennyw0rth/NetExec) oneliner to gather some information about the Windows system that we're auditing:
 
 <br />
 
@@ -224,7 +224,7 @@ SMB         10.129.29.102   445    LOCK             [*] Windows Server 2022 Buil
 
 The output confirms the name of the machine and noticed us that it is a Windows Server 2022.
 
-A null session did not allow us to enumerate shares:
+Anonymous access is not permited:
 
 <br />
 
@@ -237,11 +237,15 @@ SMB         10.129.29.102   445    LOCK             [-] Error enumerating shares
 
 <br />
 
+Without valid credentials, it makes no sense to continue listing this service.
+
+<br />
+
 # HTTP - Port 80
 
 <br />
 
-The port 80 is hosting a static website:
+Port 80 is hosting a static website:
 
 <br />
 
@@ -249,7 +253,7 @@ The port 80 is hosting a static website:
 
 <br />
 
-There is not relevant information or an interesting functionality, so we continue enumerating.
+No relevant information or an interesting functionality, so we continue enumerating.
 
 <br />
 
@@ -265,7 +269,9 @@ This port is hosting a `Gitea` instance:
 
 <br />
 
-Sometimes, business have public repositories. This case will not be different, if we click on "Explore" there is a public repository:
+In many cases, orgizations expose public repositories, this instance is no exception.
+
+By clicking on "Explore" we notice that there is one:
 
 <br />
 

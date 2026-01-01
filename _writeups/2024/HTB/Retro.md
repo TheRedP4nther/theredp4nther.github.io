@@ -35,6 +35,7 @@ We start by running an `nmap` scan to see which ports are open:
 <br />
 
 ```bash
+nmap -sCV -p53,88,135,139,389,445,464,593,636,3268,3269,3389,9389,49664,49667,49668,57240,58675,58694,62391,62399 10.129.28.100 -oN targeted
 Starting Nmap 7.94SVN ( https://nmap.org ) at 2025-12-30 17:55 CET
 Nmap scan report for 10.129.28.100
 Host is up (0.044s latency).
