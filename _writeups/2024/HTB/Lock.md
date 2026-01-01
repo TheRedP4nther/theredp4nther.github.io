@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: 
+tags: windows iis smb gitea api information-disclosure aspx foothold mremoteng rdp privilege-escalation cve-2023-49147 pdf24 
 ---
 
 <br />
@@ -22,7 +22,7 @@ Difficulty -> Easy.
 
 <br />
 
-
+Lock is an Easy Windows machine where we start by enumerating exposed services and discover a Gitea instance. A leaked token in a public repository allows us to interact with the Gitea API and gain further visibility into additional repositories, ultimately leading to a foothold on the target. From there, we pivot using credentials recovered from an mRemoteNG configuration file and leverage a vulnerable installed application to escalate privileges and obtain SYSTEM access.
 
 <br />
 
