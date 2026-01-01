@@ -1167,6 +1167,10 @@ msiexec.exe /fa "C:\_install\pdf24-creator-11.15.1-x64.msi"
 
 <br />
 
+![19](../../../assets/images/Lock/19.png)
+
+<br />
+
 ### Step 3 - Spawn a SYSTEM cmd.exe process:
 
 <br />
