@@ -311,7 +311,7 @@ Repositories:
 
 There is another repo named "website".
 
-We can continue enumerating using the access token with curl inside a `Authorization` HTTP header.
+We can continue enumerating using curl with the access token inside a `Authorization` HTTP header.
 
 <br />
 
