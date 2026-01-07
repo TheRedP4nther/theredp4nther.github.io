@@ -154,7 +154,7 @@ SMB         10.129.34.106   445    DC1              [*] Windows Server 2022 Buil
 
 The target is a Windows Server 2022, a Windows version without any active vulnerability or CVE to exploit.
 
-The null session using a random username allowed us to read some shares:
+The null session using a random username allowed us to list shares:
 
 <br />
 
