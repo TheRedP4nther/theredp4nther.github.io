@@ -250,6 +250,10 @@ LDAP        10.129.34.106   389    DC1              Compressing output into /hom
 
 <br />
 
+The data was extracted without any problem.
+
+<br />
+
 ### GenericWrite 
 
 <br />
