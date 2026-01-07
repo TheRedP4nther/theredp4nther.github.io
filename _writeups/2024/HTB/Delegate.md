@@ -192,7 +192,7 @@ getting file \users.bat of size 159 as users.bat (0,9 KiloBytes/sec) (average 0,
 
 <br />
 
-Inside the script we founded a username and a password:
+Inside the script we founded a interesting AD username and a password:
 
 <br />
 
