@@ -196,6 +196,10 @@ getting file \users.bat of size 159 as users.bat (0,9 KiloBytes/sec) (average 0,
 
 Inside the script we founded an interesting AD username and a password:
 
+User: `a.briggs`
+
+Password: `P4ssw0rd1#123`
+
 <br />
 
 ```bash
@@ -209,10 +213,6 @@ if %USERNAME%==A.Briggs net use h: \\fileserver\backups /user:Administrator P4ss
 
 <br />
 
-User: `a.briggs`
-
-Password: `P4ssw0rd1#123`
-
 Netexec confirmed that these credentials are valid for the SMB service:
 
 <br />
@@ -224,6 +224,8 @@ SMB         10.129.34.106   445    DC1              [+] delegate.vl\a.briggs:P4s
 ```
 
 <br />
+
+However, it didn't work with WinRM or RDP.
 
 This means that we can use this session to gather interesting AD data with tools such as `BloodHound`.
 
