@@ -382,6 +382,7 @@ SeIncreaseWorkingSetPrivilege Increase a process working set                    
 
 The `SeEnableDelegationPrivilege` is enabled. This privilege in Windows allows a service account to delegate credentials from a client to other services in a domain.
 
+<br />
 
 # Delegation abuse
 
