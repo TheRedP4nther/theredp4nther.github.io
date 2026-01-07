@@ -152,7 +152,9 @@ SMB         10.129.34.106   445    DC1              [*] Windows Server 2022 Buil
 
 <br />
 
-The null session using a random username was successfull:
+The target is a Windows Server 2022, a Windows version without any active well-known vulnerability or CVE to exploit.
+
+The null session using a random username allowed us to read some shares:
 
 <br />
 
@@ -172,7 +174,7 @@ SMB         10.129.34.106   445    DC1              SYSVOL          READ        
 
 <br />
 
-If we access the `NETLOGON` default share using smbclient there is a bat script called `users.bat`:
+If we access the `NETLOGON` default share with smbclient, there is a bat script called `users.bat`:
 
 <br />
 
@@ -192,7 +194,7 @@ getting file \users.bat of size 159 as users.bat (0,9 KiloBytes/sec) (average 0,
 
 <br />
 
-Inside the script we founded a interesting AD username and a password:
+Inside the script we founded an interesting AD username and a password:
 
 <br />
 
@@ -211,7 +213,7 @@ User: `a.briggs`
 
 Password: `P4ssw0rd1#123`
 
-Netexec confirmed that these credentials are valid:
+Netexec confirmed that these credentials are valid for the SMB service:
 
 <br />
 
