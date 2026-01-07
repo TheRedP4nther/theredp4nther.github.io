@@ -152,7 +152,7 @@ SMB         10.129.34.106   445    DC1              [*] Windows Server 2022 Buil
 
 <br />
 
-The target is a Windows Server 2022, a Windows version without any active vulnerability or CVE to exploit.
+The target is a Windows Server 2022, a version without any active vulnerability or CVE to exploit.
 
 The null session using a random username allowed us to list shares:
 
@@ -225,7 +225,7 @@ SMB         10.129.34.106   445    DC1              [+] delegate.vl\a.briggs:P4s
 
 <br />
 
-However, it didn't work with WinRM or RDP.
+However, these credentials did not work for WinRM or RDP.
 
 This means that we can use this session to gather interesting AD data with tools such as `BloodHound`.
 
