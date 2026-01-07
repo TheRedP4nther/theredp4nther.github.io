@@ -479,7 +479,7 @@ It worked. Finally, we set the unconstrained delegation to the host:
 The authentication will be capture with `krbrealyx` impacket tool. However, to use it, we need to obtain before the NTLM hash of the computer password:
 
 ```bash
-❯ python -c "password = 'theredp4nther'; import hashlib; print(hashlib.new('md4', password.encode('utf-16le')).hexdigest())"
+❯ python -c "password = 'Red123!'; import hashlib; print(hashlib.new('md4', password.encode('utf-16le')).hexdigest())"
 4fea147a5c9c6a101ac85f05b3d14cdb
 ```
 
