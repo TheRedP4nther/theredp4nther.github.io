@@ -224,3 +224,7 @@ SMB         10.129.34.106   445    DC1              [+] delegate.vl\a.briggs:P4s
 ```
 
 <br />
+
+This means that we can use this session to gather interesting AD data with tools such as `BloodHound`.
+
+## BloodHound
