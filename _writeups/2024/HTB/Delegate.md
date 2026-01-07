@@ -127,7 +127,7 @@ Relevant open ports:
 
 <br />
 
-The domain `delegate.vl` and the hostname `DC1.delegate.vl` appear across multiple services and ports, so I’ll add them to my `/etc/hosts` file:
+The domain `delegate.vl` and the hostname `DC1.delegate.vl` appear across multiple services and ports, so we add them to our `/etc/hosts` file:
 
 <br />
 
@@ -137,11 +137,11 @@ The domain `delegate.vl` and the hostname `DC1.delegate.vl` appear across multip
 
 <br />
 
-# SMB Enumeration: -> Port 445 
+# SMB Enumeration - Port 445 
 
 <br />
 
-To start enumerating this service, we'll run a basic [NetExec](https://github.com/Pennyw0rth/NetExec) oneliner to gather some information about the Windows system that we're auditing:
+To start enumerating this service, we'll run a basic [NetExec](https://github.com/Pennyw0rth/NetExec) one-liner to gather some information about the Windows system that we're auditing:
 
 <br />
 
@@ -152,9 +152,9 @@ SMB         10.129.34.106   445    DC1              [*] Windows Server 2022 Buil
 
 <br />
 
-The target is a Windows Server 2022, a version without any active vulnerability or CVE to exploit.
+The target is a Windows Server 2022, a version without any publicly known vulnerabilities or relevant CVEs.
 
-The null session using a random username allowed us to list shares:
+A null session using a random username allows us to list shared resources:
 
 <br />
 
@@ -174,7 +174,7 @@ SMB         10.129.34.106   445    DC1              SYSVOL          READ        
 
 <br />
 
-If we access the `NETLOGON` default share with smbclient, there is a bat script called `users.bat`:
+By accessing the `NETLOGON` share using smbclient, there is a bat script called `users.bat`:
 
 <br />
 
@@ -194,11 +194,11 @@ getting file \users.bat of size 159 as users.bat (0,9 KiloBytes/sec) (average 0,
 
 <br />
 
-Inside the script we founded an interesting AD username and a password:
+Inside the scriptm, we find an interesting Active Directory username and a password:
 
-User: `A.Briggs`
+`User`: A.Briggs
 
-Password: `P4ssw0rd1#123`
+`Password`: P4ssw0rd1#123
 
 <br />
 
@@ -235,7 +235,7 @@ This means that we can use this session to gather interesting Active Directory d
 
 <br />
 
-Normally, we use `bloodhound-pyton` to the data extraction process, instead of this tool, today we will use `Netexec`:
+Normally, we use `bloodhound-python` for the data extraction process, instead, we will use `Netexec`:
 
 <br />
 
@@ -254,7 +254,7 @@ LDAP        10.129.34.106   389    DC1              Compressing output into /hom
 
 <br />
 
-Once inside BloodHound, we marked the `A.Briggs` principal as owned and the `Shortest paths from Owned objects` query revealed a crytical missconfiguration:
+Once inside BloodHound, we marked the `A.Briggs` principal as owned and the `Shortest paths from Owned objects` query revealed a critical missconfiguration:
 
 <br />
 
@@ -265,7 +265,7 @@ Once inside BloodHound, we marked the `A.Briggs` principal as owned and the `Sho
 As we can see, the user `A.Briggs` has `GenericWrite` permissions over a user called `N.Thompson`.
 
 
-This user is member of the `Remote Management Users` group, this means that if we compromised him, we'll be able to authenticate via `WinRM` to the target machine.
+This user is a member of the `Remote Management Users` group. If we compromise this account, we will be able to authenticate via `WinRM` to the target machine.
 
 <br />
 
@@ -273,7 +273,7 @@ This user is member of the `Remote Management Users` group, this means that if w
 
 <br />
 
-This excesive permission can be exploited in several different ways.
+This excessive permission can be exploited in several different ways.
 
 <br />
 
@@ -281,7 +281,7 @@ This excesive permission can be exploited in several different ways.
 
 <br />
 
-At this point, we proceed with a targeted kerberoast attack. This attack allows us to extract the krb5 hash of the targeted account, in this case `N.Thompson`.
+At this point, we proceed with a targeted kerberoast attack. This attack allows us to extract the Kerberos TGS hash of the targeted account, in this case `N.Thompson`.
 
 It can be done using the well-known [targetedKerberoast.py](https://github.com/ShutdownRepo/targetedKerberoast) tool with the following one-liner:
 
@@ -299,7 +299,7 @@ $krb5tgs$23$*N.Thompson$DELEGATE.VL$delegate.vl/N.Thompson*$1790a75e80fb8e9a9cb7
 
 <br />
 
-The hash was really easy to crack using the JtR (John the Ripper) brute-force tool:
+The hash was trivial to crack using John the Ripper brute-force tool:
 
 <br />
 
@@ -319,7 +319,7 @@ Session completed.
 
 Plaintext password: `KALEB_2341`
 
-This password allowed us to log in via WinRM as the `N.Thompson` user:
+These credentials allow us to authenticate via WinRM as the `N.Thompson` user:
 
 <br />
 
@@ -341,7 +341,7 @@ DC1
 
 <br />
 
-The `user.txt` flag was successfully retrieved:
+We can now retrieve the `user.txt` flag:
 
 <br />
 
