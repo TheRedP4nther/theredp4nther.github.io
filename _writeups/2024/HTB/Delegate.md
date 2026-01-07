@@ -264,3 +264,13 @@ Once inside BloodHound, we marked the `A.Briggs` principal as owned and the `Sho
 
 As we can see, the user `A.Briggs` has `GenericWrite` permissions over a user called `N.Thompson`.
 
+
+This user is member of the `Remote Management Users` group, this means that if we compromised him, we will be able to authentica via `WinRM` ro the target machine.
+
+<br />
+
+![2](../../../asets/images/Delegate/2.png)
+
+<br />
+
+This excesive permission can be exploited in several different ways. 
