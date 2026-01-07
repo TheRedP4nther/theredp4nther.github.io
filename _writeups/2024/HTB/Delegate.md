@@ -225,9 +225,9 @@ SMB         10.129.34.106   445    DC1              [+] delegate.vl\a.briggs:P4s
 
 <br />
 
-However, these credentials did not work for WinRM or RDP.
+However, they did not work for WinRM or RDP.
 
-This means that we can use this session to gather interesting AD data with tools such as `BloodHound`.
+This means that we can use this session to gather interesting Active Directory data with tools such as `BloodHound`.
 
 <br />
 
@@ -235,7 +235,7 @@ This means that we can use this session to gather interesting AD data with tools
 
 <br />
 
-Normally, we use `bloodhound-pyton` to the data extraction, instead of this tool, today we will use `Netexec`:
+Normally, we use `bloodhound-pyton` to the data extraction process, instead of this tool, today we will use `Netexec`:
 
 <br />
 
@@ -254,7 +254,7 @@ LDAP        10.129.34.106   389    DC1              Compressing output into /hom
 
 <br />
 
-Once inside BloodHound, we marked the `A.Briggs` principal as owned and the `Shortest paths from Owned objects` revealed a crytical missconfiguration:
+Once inside BloodHound, we marked the `A.Briggs` principal as owned and the `Shortest paths from Owned objects` query revealed a crytical missconfiguration:
 
 <br />
 
@@ -342,6 +342,8 @@ DC1
 <br />
 
 The `user.txt` flag was successfully retrieved:
+
+<br />
 
 ```bash
 *Evil-WinRM* PS C:\Users\N.Thompson\Desktop> type user.txt
