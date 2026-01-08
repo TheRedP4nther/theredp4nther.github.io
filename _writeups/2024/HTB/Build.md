@@ -156,7 +156,7 @@ The HTTP port is hosting a `Gitea` instance:
 
 <br />
 
-In the "Explore" section we can find a public repo: `buildadm / dev`
+In the "Explore" section we can find a public repository: `buildadm / dev`
 
 <br />
 
