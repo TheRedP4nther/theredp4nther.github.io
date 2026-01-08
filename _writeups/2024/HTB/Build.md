@@ -127,8 +127,6 @@ Nmap done: 1 IP address (1 host up) scanned in 111.96 seconds
 
 ### Open ports:
 
-<br />
-
 - `Port 22` -> SSH
 
 - `Port 53` -> DNS
