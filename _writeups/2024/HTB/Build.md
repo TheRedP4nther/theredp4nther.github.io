@@ -164,7 +164,7 @@ In the "Explore" section we can find a public repository: `buildadm / dev`
 
 <br />
 
-The repository contains a `Jenkinsfile` and one commit:
+The repository contains an archive named `Jenkinsfile` and one commit:
 
 <br />
 
