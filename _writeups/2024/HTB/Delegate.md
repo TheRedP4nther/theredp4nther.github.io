@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: 
+tags: windows active-directory kerberos smb ldap bloodhound kerberoasting delegation dcsync winrm 
 ---
 
 <br />
@@ -22,7 +22,11 @@ Difficulty -> Medium.
 
 <br />
 
+Delegate is a Windows Active Directory machine where the initial foothold comes from a common misconfiguration: sensitive credentials exposed in a logon script stored in `NETLOGON`. With valid domain credentials, we enumerate the environment and use BloodHound to identify an ACL abuse path: `A.Briggs` has `GenericWrite` over `N.Thompson`, which we leverage through a targeted Kerberoast to recover `N.Thompson`'s password and gain WinRM access.
 
+<br />
+
+From there, the escalation revolves around Kerberos delegation abuse. Because `MachineAccountQuota` is set to the default value of `10`, we can create a new computer account, configure it for unconstrained delegation, and coerce the domain controller to authenticate to us. By capturing the resulting Kerberos ticket, we perform a DCSync-style dump of the domain secrets and finally authenticate as `Administrator` to obtain the `root.txt` flag.
 
 <br />
 
