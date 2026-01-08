@@ -107,27 +107,27 @@ Nmap done: 1 IP address (1 host up) scanned in 103.32 seconds
 
 Relevant open ports:
 
-- `Port 53`   -> dns
+- `Port 53`   -> DNS
 
-- `Port 88`   -> kerberos
+- `Port 88`   -> Kerberos
 
-- `Port 135`  -> rpc
+- `Port 135`  -> RPC
 
-- `Port 139`  -> netbios
+- `Port 139`  -> NetBios
 
-- `Port 389`  -> ldap
+- `Port 389`  -> LDAP
 
-- `Port 445`  -> smb
+- `Port 445`  -> SMB
 
-- `Port 464`  -> kpasswd (kerberos password change)
+- `Port 464`  -> KPasswd (kerberos password change)
 
-- `Port 593`  -> rpc over http
+- `Port 593`  -> RPC over HTTP
 
-- `Port 636`  -> ldaps
+- `Port 636`  -> LDAPs
 
-- `Port 3389` -> rdp
+- `Port 3389` -> RDP
 
-- `Port 5985` -> winrm
+- `Port 5985` -> WinRm
 
 <br />
 
@@ -239,7 +239,7 @@ This means that we can use this session to gather interesting Active Directory d
 
 <br />
 
-Normally, we use `bloodhound-python` for the data extraction process, instead, we will use `Netexec`:
+Normally, we use `bloodhound-python` for data extractioni; however,in this case we use `Netexec`:
 
 <br />
 
@@ -254,7 +254,7 @@ LDAP        10.129.234.69   389    DC1              Compressing output into /hom
 
 <br />
 
-The data was extracted without any problem.
+The data was successfully extracted.
 
 <br />
 
@@ -262,7 +262,7 @@ The data was extracted without any problem.
 
 <br />
 
-Once inside BloodHound, we marked the `A.Briggs` principal as owned and the `Shortest paths from Owned objects` query revealed a critical missconfiguration:
+Once inside BloodHound, we marked the `A.Briggs` principal as owned and the `Shortest paths from Owned objects` query revealed a critical misconfiguration:
 
 <br />
 
@@ -271,7 +271,6 @@ Once inside BloodHound, we marked the `A.Briggs` principal as owned and the `Sho
 <br />
 
 As we can see, the user `A.Briggs` has `GenericWrite` permissions over a user called `N.Thompson`.
-
 
 This user is a member of the `Remote Management Users` group. If we compromise this account, we will be able to authenticate via `WinRM` to the target machine.
 
@@ -289,7 +288,7 @@ This excessive permission can be exploited in several different ways.
 
 <br />
 
-At this point, we proceed with a targeted kerberoast attack. This attack allows us to extract the Kerberos TGS hash of the targeted account, in this case `N.Thompson`.
+At this point, we proceed with a targeted kerberoasting attack. This attack allows us to extract the Kerberos TGS hash of the targeted account, in this case `N.Thompson`.
 
 It can be done using the well-known [targetedKerberoast.py](https://github.com/ShutdownRepo/targetedKerberoast) tool with the following one-liner:
 
@@ -384,7 +383,9 @@ SeIncreaseWorkingSetPrivilege Increase a process working set                    
 
 <br />
 
-The `SeEnableDelegationPrivilege` is enabled. This privilege in Windows allows a service account to delegate credentials from a client to other services in a domain.
+The `SeEnableDelegationPrivilege` is enabled. 
+
+This privilege in Windows allows a service account to delegate credentials from a client to other services in a domain.
 
 <br />
 
@@ -392,7 +393,9 @@ The `SeEnableDelegationPrivilege` is enabled. This privilege in Windows allows a
 
 <br />
 
-The attack is divided into three phases, let's go with the first one.
+The attack is divided into three phases.
+
+We start with the first one.
 
 <br />
 
@@ -402,7 +405,7 @@ The attack is divided into three phases, let's go with the first one.
 
 Since MachineAccountQuota was set to its default value of 10, it was possible to create a new computer account and abuse delegation to continue the attack.
 
-This value can be extracted by running the Netexec `maq` module:
+This value can be retrieved by running the NetExec `maq` module:
 
 <br />
 
@@ -420,7 +423,7 @@ MAQ         10.129.234.69   389    DC1              MachineAccountQuota: 10
 
 <br />
 
-Now, we need to setup the host where we will capture the Administrator authentication.
+Now, we need to set up the host where we will capture the Administrator authentication.
 
 First, we create the DNS record (a fake host to trick the target machine):
 
@@ -450,9 +453,9 @@ Then, we add this DNS record:
 
 <br />
 
-The dns records was sucessfully added. Let's assign a SPN to this record:
+The DNS record was sucessfully added. Let's assign a SPN to this record:
 
-⚠️ Note: Important to run the command twice times, with the --aditional flag and without it.
+⚠️ Note: Important to run the command twice, with the --aditional flag and without it.
 
 <br />
 
@@ -488,7 +491,7 @@ It worked. Finally, we set the unconstrained delegation to the host:
 
 <br />
 
-The authentication will be capture with `krbrealyx` impacket tool. However, to use it, we need to obtain before the NTLM hash of the computer password:
+The authentication will be captured using `krbrelayx` impacket tool. However, to use it, we need to obtain before the NTLM hash of the computer password:
 
 ```bash
 ❯ python -c "password = 'Red123,'; import hashlib; print(hashlib.new('md4', password.encode('utf-16le')).hexdigest())"
@@ -534,7 +537,7 @@ COERCE_PLUS 10.129.234.69   445    DC1              Exploit Success, spoolss\Rpc
 
 <br />
 
-The ticket was successfully captured and save into the file: `DC1$@DELEGATE.VL_krbtgt@DELEGATE.VL.ccache`
+The ticket was successfully captured and saved to the file: `DC1$@DELEGATE.VL_krbtgt@DELEGATE.VL.ccache`
 
 <br />
 
@@ -554,7 +557,7 @@ The ticket was successfully captured and save into the file: `DC1$@DELEGATE.VL_k
 
 <br />
 
-With the TGT of this account we will be able to extract all the hashes from the `ntds` database via a DCSync attack.
+With the TGT for this accountm we are able to extract all the hashes from the `ntds` database via a DCSync attack.
 
 To do this we generate the Kerberos conf file and export the ticket:
 
