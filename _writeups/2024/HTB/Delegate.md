@@ -239,7 +239,7 @@ This means that we can use this session to gather interesting Active Directory d
 
 <br />
 
-Normally, we use `bloodhound-python` for data extractioni; however,in this case we use `Netexec`:
+Normally, we use `bloodhound-python` for data extraction; however,in this case we use `Netexec`:
 
 <br />
 
@@ -491,7 +491,11 @@ It worked. Finally, we set the unconstrained delegation to the host:
 
 <br />
 
-The authentication will be captured using `krbrelayx` impacket tool. However, to use it, we need to obtain before the NTLM hash of the computer password:
+The authentication will be captured using `krbrelayx` impacket tool. 
+
+However, to use it, we need to obtain before the NTLM hash of the computer password:
+
+<br />
 
 ```bash
 ❯ python -c "password = 'Red123,'; import hashlib; print(hashlib.new('md4', password.encode('utf-16le')).hexdigest())"
@@ -557,7 +561,7 @@ The ticket was successfully captured and saved to the file: `DC1$@DELEGATE.VL_kr
 
 <br />
 
-With the TGT for this accountm we are able to extract all the hashes from the `ntds` database via a DCSync attack.
+With the TGT for this account we are able to extract all the hashes from the `ntds` database via a `DCSync` attack.
 
 To do this we generate the Kerberos conf file and export the ticket:
 
@@ -624,7 +628,7 @@ DC1
 
 <br />
 
-With administrator access, the `root.txt` was successfully obtained:
+With administrator access, the `root.txt` file was successfully obtained:
 
 <br />
 
