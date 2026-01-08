@@ -148,5 +148,11 @@ Open Ports:
 
 <br />
 
+The HTTP port is hosting a `Gitea` instance:
 
+<br />
+
+![2](../../../assets/images/Build/2.png)
+
+<br />
 
