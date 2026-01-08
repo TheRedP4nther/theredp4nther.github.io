@@ -190,7 +190,7 @@ We tried to authenticate to the `buildadm` account using default credentials wit
 
 <br />
 
-The `rsync` server is serving a unique directory: `backups`
+The `rsync` instance is serving one directory: `backups`
 
 <br />
 
@@ -213,14 +213,19 @@ drwxr-xr-x          4.096 2024/05/02 15:26:31 .
 
 <br />
 
-We proceed to download it in the current directory running:
+We proceed to download it to our current directory running:
 
 ⚠️ Note: It can take a few minutes.
 
 <br />
 
 ```bash
+❯ rsync -av rsync://10.129.234.169/backups/jenkins.tar.gz .
+receiving incremental file list
+jenkins.tar.gz
 
+sent 43 bytes  received 376.381.250 bytes  976.345,77 bytes/sec
+total size is 376.289.280  speedup is 1,00
 ```
 
 <br />
