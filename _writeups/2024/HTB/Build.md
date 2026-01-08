@@ -307,7 +307,7 @@ jobs/build/config.xml:              <password>{AQAAABAAAAAQUNBJaKiUQNaRbPI0/VMwB
 
 <br />
 
-This seems to be an encrypted password, to further analyze we dump the content of this `config.xml` file:
+This seems to be an encrypted password, to further analyze it, we proceed to dump the content of `config.xml` file:
 
 <br />
 
@@ -448,7 +448,15 @@ Fortunately for us, these files are present under the `/secrets` folder:
 
 To decrypt the password we will use the following [GitHub repository](https://github.com/hoto/jenkins-credentials-decryptor).
 
-The program execution is really straightforward:
+Before execution, we need to have the three files in the current directory:
+
+- master.key
+
+- hudson.util.Secret 
+
+- config.xml
+
+After that, the program is straightforward to run:
 
 <br />
 
