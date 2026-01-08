@@ -489,6 +489,8 @@ With these credentials we can log into the `Gitea` instance as the user `buildad
 
 At this point, we manipulate the previously identified Jenkins pipeline in order to execute arbitrary commands on the target system.
 
+First, we start a listener:
+
 <br />
 
 ```bash
@@ -498,7 +500,7 @@ Listening on 0.0.0.0 443
 
 <br />
 
-And access the `dev` repository to replace the `Jenkinsfile` with the following code:
+Then, we access the `dev` repository to replace the `Jenkinsfile` with the following code:
 
 <br />
 
