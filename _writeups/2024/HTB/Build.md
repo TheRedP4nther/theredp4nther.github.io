@@ -522,7 +522,13 @@ pipeline {
 
 At the bottom there is the "Commit Changes" section to save our modifications.
 
-After a few seconds:
+<br />
+
+![7](../../../assets/images/Build/7.png)
+
+<br />
+
+After wait a few seconds:
 
 <br />
 
