@@ -229,3 +229,69 @@ total size is 376.289.280  speedup is 1,00
 ```
 
 <br />
+
+Once downloaded, we extract its content:
+
+<br />
+
+```bash
+tar -xf jenkins.tar.gz
+```
+
+<br />
+
+Several files were extracted inside a directory named: `jenkins_configuration`.
+
+<br />
+
+```bash
+❯ ls -l
+drwxr-xr-x root root  24 B  Wed May  1 20:02:21 2024  caches
+drwxr-xr-x root root   8 B  Thu May  2 15:25:17 2024  fingerprints
+drwxr-xr-x root root  10 B  Thu May  2 15:24:34 2024  jobs
+drwxr-xr-x root root 158 B  Thu May  2 12:02:37 2024  logs
+drwxr-xr-x root root   0 B  Wed May  1 15:46:11 2024  nodes
+drwxr-xr-x root root 6.4 KB Wed May  1 19:52:04 2024  plugins
+drwx------ root root 604 B  Thu May  2 15:25:39 2024  secrets
+drwxr-xr-x root root 222 B  Wed May  1 15:54:36 2024  updates
+drwxr-xr-x root root  20 B  Wed May  1 15:46:11 2024  userContent
+drwxr-xr-x root root  68 B  Wed May  1 15:55:41 2024  users
+drwxr-xr-x root root 258 B  Wed May  1 15:46:10 2024  war
+drwxr-xr-x root root  92 B  Thu May  2 15:25:24 2024  workspace
+.rw-r--r-- root root 273 B  Thu May  2 15:24:19 2024  com.cloudbees.hudson.plugins.folder.config.AbstractFolderConfiguration.xml
+.rw-r--r-- root root 1.7 KB Thu May  2 15:24:19 2024  config.xml
+.rw-r--r-- root root 1.8 KB Thu May  2 15:20:54 2024  copy_reference_file.log
+.rw-r--r-- root root 156 B  Thu May  2 15:21:01 2024  hudson.model.UpdateCenter.xml
+.rw-r--r-- root root 238 B  Thu May  2 15:24:19 2024  hudson.plugins.build_timeout.global.GlobalTimeOutConfiguration.xml
+.rw-r--r-- root root 250 B  Thu May  2 15:24:19 2024  hudson.plugins.build_timeout.operations.BuildStepOperation.xml
+.rw-r--r-- root root 629 B  Thu May  2 15:24:19 2024  hudson.plugins.git.GitSCM.xml
+.rw-r--r-- root root 370 B  Wed May  1 15:54:37 2024  hudson.plugins.git.GitTool.xml
+.rw-r--r-- root root 382 B  Thu May  2 15:24:19 2024  hudson.plugins.timestamper.TimestamperConfig.xml
+.rw-r--r-- root root 262 B  Thu May  2 15:24:19 2024  hudson.tasks.Mailer.xml
+.rw-r--r-- root root  76 B  Thu May  2 15:24:19 2024  hudson.tasks.Shell.xml
+.rw-r--r-- root root 216 B  Thu May  2 15:24:19 2024  hudson.triggers.SCMTrigger.xml
+.rw------- root root 1.6 KB Wed May  1 15:54:36 2024  identity.key.enc
+.rw-r--r-- root root 298 B  Thu May  2 15:24:19 2024  io.jenkins.plugins.junit.storage.JunitTestResultStorageConfiguration.xml
+.rw-r--r-- root root 277 B  Thu May  2 15:24:19 2024  jenkins.fingerprints.GlobalFingerprintConfiguration.xml
+.rw-r--r-- root root   5 B  Thu May  2 15:21:02 2024  jenkins.install.InstallUtil.lastExecVersion
+.rw-r--r-- root root   5 B  Wed May  1 15:55:49 2024  jenkins.install.UpgradeWizard.state
+.rw-r--r-- root root 159 B  Thu May  2 15:24:19 2024  jenkins.model.ArtifactManagerConfiguration.xml
+.rw-r--r-- root root 253 B  Thu May  2 15:24:19 2024  jenkins.model.GlobalBuildDiscarderConfiguration.xml
+.rw-r--r-- root root 259 B  Thu May  2 15:24:19 2024  jenkins.model.JenkinsLocationConfiguration.xml
+.rw-r--r-- root root  86 B  Thu May  2 15:24:19 2024  jenkins.security.ResourceDomainConfiguration.xml
+.rw-r--r-- root root 179 B  Thu May  2 15:24:19 2024  jenkins.tasks.filters.EnvVarsFilterGlobalConfiguration.xml
+.rw-r--r-- root root 171 B  Wed May  1 15:46:11 2024  jenkins.telemetry.Correlator.xml
+.rw-r--r-- root root 1.0 KB Thu May  2 15:21:02 2024  nodeMonitors.xml
+.rw-r--r-- root root 431 B  Thu May  2 15:24:19 2024  org.jenkinsci.plugin.gitea.servers.GiteaServers.xml
+.rw-r--r-- root root 169 B  Thu May  2 15:24:19 2024  org.jenkinsci.plugins.displayurlapi.DefaultDisplayURLProviderGlobalConfiguration.xml
+.rw-r--r-- root root  46 B  Thu May  2 15:25:25 2024  org.jenkinsci.plugins.workflow.flow.FlowExecutionList.xml
+.rw-r--r-- root root 169 B  Thu May  2 15:24:19 2024  org.jenkinsci.plugins.workflow.flow.GlobalDefaultFlowDurabilityLevel.xml
+.rw-r--r-- root root 230 B  Thu May  2 15:24:19 2024  org.jenkinsci.plugins.workflow.libs.GlobalLibraries.xml
+.rw-r--r-- root root 129 B  Wed May  1 20:03:07 2024  queue.xml.bak
+.rw-r--r-- root root  64 B  Wed May  1 15:46:11 2024  secret.key
+.rw-r--r-- root root   0 B  Wed May  1 15:46:11 2024  secret.key.not-so-secret
+```
+
+<br />
+
+The structure of the directory is the typical of a Jenkins server in Linux.
