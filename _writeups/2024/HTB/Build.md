@@ -485,7 +485,7 @@ With these credentials we can log into the `Gitea` instance as the user `buildad
 
 <br />
 
-At this point, we can manipulate the above enumerated Jenkins pipeline trying to execute a shell command on the target system. To do that, we start a listener:
+At this point, we manipulate the above enumerated Jenkins pipeline trying to execute a shell command on the target system. To do that, we start a listener:
 
 <br />
 
