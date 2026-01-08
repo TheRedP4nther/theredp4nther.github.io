@@ -146,7 +146,7 @@ Nmap done: 1 IP address (1 host up) scanned in 111.96 seconds
 
 <br />
 
-# Http Enumeration: Port -> 3000 
+# HTTP - Port 3000 
 
 <br />
 
@@ -166,4 +166,63 @@ In the "Explore" section we can find a public repository: `buildadm / dev`
 
 <br />
 
+The repository contains a `Jenkinsfile` and one commit:
 
+<br />
+
+![4](../../../assets/images/Build/4.png)
+
+<br />
+
+This file has the default structure of a `Jenkins` pipeline:
+
+<br />
+
+![5](../../../assets/images/Build/5.png)
+
+<br />
+
+In Jenkins, a pipeline is a user-defined script that models the process of Continuous Delivery (CD) for a software project. It defines the lifecycle of the build process, which typically includes compiling the application, running tests, and deploying the software to production.
+
+We tried to authenticate to the `buildadm` account using default credentials without success. Let's continue enumerating.
+
+<br />
+
+# Rsync - Port 873
+
+<br />
+
+The `rsync` server is serving a unique directory: `backups`
+
+<br />
+
+```bash
+❯ rsync --list-only rsync://10.129.234.169/
+backups
+```
+
+<br />
+
+This directory contains a tar file:
+
+<br />
+
+```bash
+❯ rsync --list-only rsync://10.129.234.169/backups
+drwxr-xr-x          4.096 2024/05/02 15:26:31 .
+-rw-r--r--    376.289.280 2024/05/02 15:26:19 jenkins.tar.gz
+```
+
+<br />
+
+We proceed to download it in the current directory running:
+
+⚠️ Note: It can take a few minutes.
+
+<br />
+
+```bash
+
+```
+
+<br />
