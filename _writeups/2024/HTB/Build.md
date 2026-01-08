@@ -30,7 +30,7 @@ Difficulty -> Medium.
 
 <br />
 
-We start by running an nmap scan to see which ports are open:
+We start by running an `nmap` scan to identify the open ports on the target:
 
 <br />
 
@@ -125,7 +125,7 @@ Nmap done: 1 IP address (1 host up) scanned in 111.96 seconds
 
 <br />
 
-### Open ports:
+### Open Ports:
 
 - `Port 22` -> SSH
 
@@ -133,7 +133,7 @@ Nmap done: 1 IP address (1 host up) scanned in 111.96 seconds
 
 - `Port 512` -> Rexec 
 
-- `Port 153` -> Rlogin 
+- `Port 513` -> Rlogin 
 
 - `Port 514` -> Rsh
 
@@ -164,7 +164,7 @@ In the "Explore" section we can find a public repository: `buildadm / dev`
 
 <br />
 
-The repository contains an archive named `Jenkinsfile` and one commit:
+The repository contains a file named `Jenkinsfile` and a single commit:
 
 <br />
 
@@ -180,9 +180,9 @@ This file has the default structure of a `Jenkins` pipeline:
 
 <br />
 
-In Jenkins, a pipeline is a user-defined script that models the process of Continuous Delivery (CD) for a software project. It defines the lifecycle of the build process, which typically includes compiling the application, running tests, and deploying the software to production.
+Jenkins pipelines define automated build steps, which can be abused to execute arbitrary commands if an attacker gains write access.
 
-We tried to authenticate to the `buildadm` account using default credentials without success. Let's continue enumerating.
+We attempted to authenticate to the `buildadm` account using common credentials, without success. Let's continue enumerating.
 
 <br />
 
@@ -296,7 +296,7 @@ drwxr-xr-x root root  92 B  Thu May  2 15:25:24 2024  workspace
 
 The structure of the directory is the typical of a Jenkins server in Linux.
 
-After a time saerching for interesting information in this directory, a recursive grep revealed relevant data:
+After spending some time searching for interesting information within this directory, we found an encrypted password:
 
 <br />
 
@@ -413,7 +413,7 @@ This seems to be an encrypted password, to further analyze it, we proceed to dum
 
 <br />
 
-As we can see, the file contains more than an encrypted password. We noticed too that this password is the authentication for the `Gitea` instance of the `buildadm` user.
+As we can see, the file contains more than just an encrypted password. We also noticed that these credentials are used to authenticate against the Gitea instance.
 
 <br />
 
@@ -431,7 +431,9 @@ As we can see, the file contains more than an encrypted password. We noticed too
 
 <br />
 
-This type of passwords can be easily decrypted. However, to do this we need to access the `master.key` and `hudson.util.Secret` Jenkins secrets.
+This is a common Jenkins misconfiguration when backup files are exposed.
+
+This type of password can be easily decrypted. However, to do this we need to access the `master.key` and `hudson.util.Secret` Jenkins secrets.
 
 Fortunately for us, these files are present under the `/secrets` folder:
 
@@ -485,7 +487,7 @@ With these credentials we can log into the `Gitea` instance as the user `buildad
 
 <br />
 
-At this point, we manipulate the above enumerated Jenkins pipeline trying to execute a shell command on the target system. To do that, we start a listener:
+At this point, we manipulate the previously identified Jenkins pipeline in order to execute arbitrary commands on the target system.
 
 <br />
 
@@ -518,8 +520,6 @@ pipeline {
 
 At the bottom there is the "Commit Changes" section to save our modifications.
 
-<br />
-
 After a few seconds:
 
 <br />
@@ -538,5 +538,5 @@ root@5ac6c7d6fb8e:/var/jenkins_home/workspace/build_dev_main#
 
 <br />
 
-We received the reverse shell connection.
+We received a reverse shell as the root user inside the Jenkins container, confirming remote code execution through the CI/CD pipeline. 
 
