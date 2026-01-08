@@ -472,3 +472,11 @@ After that, the program is straightforward to run:
 ```
 
 <br />
+
+With these credentials we can log into the `Gitea` instance as the user `buildadm`:
+
+<br /> 
+
+![6](../../../assets/images/Build/6.png)
+
+<br />
