@@ -516,6 +516,10 @@ pipeline {
 
 <br />
 
+At the bottom there is the "Commit Changes" section to save our modifications.
+
+<br />
+
 After a few seconds:
 
 <br />
