@@ -30,7 +30,7 @@ Difficulty -> Medium.
 
 <br />
 
-We start by running the typical `nmap` scan to see which ports are open:
+We start by running an nmap scan to see which ports are open:
 
 <br />
 
@@ -125,7 +125,9 @@ Nmap done: 1 IP address (1 host up) scanned in 111.96 seconds
 
 <br />
 
-Open Ports:
+### Open ports:
+
+<br />
 
 - `Port 22` -> SSH
 
