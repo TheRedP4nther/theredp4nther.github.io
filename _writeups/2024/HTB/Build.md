@@ -819,7 +819,7 @@ Session completed.
 
 <br />
 
-With these credentials we log into the `powerdns` admin pannel: `admin:winston`
+With these credentials (`admin:winston`), we log into the `powerdns` admin pannel:
 
 ⚠️ Note: The OTP field must be empty.
 
