@@ -685,10 +685,28 @@ Once the tunnel is setted, we can access all these services, for example we can 
 
 <br />
 
-The other HTTP service is hosting a server basic auth protected:
+The other HTTP service is hosting a server with basic-auth:
 
 <br />
 
 ![9](../../../assets/images/Build/9.png)
 
 <br />
+
+### MySQL 
+
+<br />
+
+We don't have credentials to log into the MySQL instance, however, in this case it is not neccesary. 
+
+We can connect as root without password:
+
+<br />
+
+```bash
+
+```
+
+<br />
+
+
