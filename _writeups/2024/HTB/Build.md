@@ -823,6 +823,6 @@ With these credentials we log into the `powerdns` admin pannel: `admin:winston`
 
 <br />
 
-![10](../../../assets/imagesV/Build/10.png)
+![10](../../../assets/images/Build/10.png)
 
 <br />
