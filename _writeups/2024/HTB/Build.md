@@ -563,7 +563,7 @@ After a further enumeration, the container doesn't have any privileged informati
 
 ### rhosts
 
-The most interesting is a `rhosts` file inside the `/root` directory. As we know, this file indicates the allowed hosts to connect via `rlogin` to the principal machine without giving a password:
+The most interesting is a `rhosts` file inside the `/root` directory.
 
 <br />
 
@@ -572,6 +572,10 @@ root@5ac6c7d6fb8e:~# cat .rhosts
 admin.build.vl +
 intern.build.vl +
 ```
+
+<br />
+
+As we know, this file indicates the allowed hosts to connect via `rlogin` to the principal machine without giving a password:
 
 <br />
 
