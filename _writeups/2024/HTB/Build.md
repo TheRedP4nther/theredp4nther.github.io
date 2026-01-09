@@ -701,6 +701,10 @@ The other HTTP service is hosting a server with basic-auth:
 
 <br />
 
+We currently do not have valid credentials.
+
+<br />
+
 ## MySQL 
 
 <br />
