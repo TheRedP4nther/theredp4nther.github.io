@@ -671,11 +671,11 @@ Nmap done: 256 IP addresses (6 hosts up) scanned in 3.33 seconds
 
 The scan reveals 6 live hosts with several services exposed. We can identify a few relevant services in the output:
 
-- MySQL - 172.18.0.4 
+- `MySQL` - 172.18.0.4 
 
-- HTTP 8081 - 172.18.0.5 
+- `HTTP 8081` - 172.18.0.5 
 
-- HTTP 80 (powerdns) - 172.18.0.6
+- `HTTP 80 (powerdns)` - 172.18.0.6
 
 <br />
 
