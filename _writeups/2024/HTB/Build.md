@@ -677,5 +677,13 @@ There are 6 opens hosts with its corresponding services running. Among others, w
 
 To enumerate these services from our attacking machine, we recommend using the pivot tool [LigoloNG](https://github.com/nicocha30/ligolo-ng). If you don't know how to use it, please refer to the following [website](https://medium.com/@redfanatic7/guide-to-pivoting-using-ligolo-ng-efd36b290f16), which explains very well how to install and setup this tool to establish a tunnel.
 
+Once the tunnel is setted, we can access all these services out of the container, for example we can navigate to the `powerdsn` admin panel: `http://172.18.0.6`
+
+<br />
+
+![8](../../../assets/images/Build/8.png)
+
+<br />
+
 
 
