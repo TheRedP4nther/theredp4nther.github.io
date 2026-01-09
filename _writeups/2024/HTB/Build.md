@@ -133,11 +133,11 @@ Nmap done: 1 IP address (1 host up) scanned in 111.96 seconds
 
 - `Port 53` -> DNS
 
-- `Port 512` -> Rexec 
+- `Port 512` -> rexec 
 
-- `Port 513` -> Rlogin 
+- `Port 513` -> rlogin 
 
-- `Port 514` -> Rsh
+- `Port 514` -> rsh
 
 - `Port 873` -> Rsync
 
