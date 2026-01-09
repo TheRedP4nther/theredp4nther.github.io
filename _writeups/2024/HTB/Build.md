@@ -821,6 +821,8 @@ Session completed.
 
 With these credentials we log into the `powerdns` admin pannel: `admin:winston`
 
+⚠️ Note: The OTP field must be empty.
+
 <br />
 
 ![10](../../../assets/images/Build/10.png)
