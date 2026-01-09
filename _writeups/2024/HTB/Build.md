@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: htb, linux, medium, gitea, jenkins, rsync, ci-cd, credentials, container, pivoting, powerdns, mysql, rlogin, rhosts, dns 
+tags: htb linux medium gitea jenkins rsync ci-cd credentials container pivoting powerdns mysql rlogin rhosts dns 
 ---
 
 <br />
