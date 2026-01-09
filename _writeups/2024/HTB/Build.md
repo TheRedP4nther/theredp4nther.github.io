@@ -661,7 +661,7 @@ Nmap done: 256 IP addresses (6 hosts up) scanned in 3.33 seconds
 
 <br />
 
-There are 6 opens hosts with its corresponding services running. Among others, we can identify a few relevant services in the output:
+There are 6 opens hosts with its corresponding services running. We can identify a few relevant services in the output:
 
 - MySQL - 172.18.0.4 
 
@@ -675,9 +675,9 @@ There are 6 opens hosts with its corresponding services running. Among others, w
 
 <br />
 
-To enumerate these services from our attacking machine, we recommend using the pivot tool [LigoloNG](https://github.com/nicocha30/ligolo-ng). If you don't know how to use it, please refer to the following [website](https://medium.com/@redfanatic7/guide-to-pivoting-using-ligolo-ng-efd36b290f16), which explains very well how to install and setup this tool to establish a tunnel.
+To enumerate these services from our attacker machine, we recommend using the pivot tool [LigoloNG](https://github.com/nicocha30/ligolo-ng). If you don't know how to use it, please refer to the following [website](https://medium.com/@redfanatic7/guide-to-pivoting-using-ligolo-ng-efd36b290f16), which explains very well how to install and setup this tool to establish a tunnel.
 
-Once the tunnel is setted, we can access all these services out of the container, for example we can navigate to the `powerdsn` admin panel: `http://172.18.0.6`
+Once the tunnel is setted, we can access all these services, for example we can navigate to the `powerdsn` admin panel: `http://172.18.0.6`
 
 <br />
 
