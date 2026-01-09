@@ -685,5 +685,10 @@ Once the tunnel is setted, we can access all these services out of the container
 
 <br />
 
+The other HTTP service is hosting a server basic auth protected:
 
+<br />
 
+![9](../../../assets/images/Build/9.png)
+
+<br />
