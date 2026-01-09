@@ -3,7 +3,7 @@ layout: writeup
 category: HTB
 date: 2024-12-29
 comments: false
-tags: 
+tags: htb, linux, medium, gitea, jenkins, rsync, ci-cd, credentials, container, pivoting, powerdns, mysql, rlogin, rhosts, dns 
 ---
 
 <br />
@@ -22,7 +22,9 @@ Difficulty -> Medium.
 
 <br />
 
+Build is a Linux medium machine focused on abusing exposed DevOps infrastructure. The attack starts by enumerating a public Gitea repository and an open rsync backup that leaks a Jenkins home directory. From that backup, we recover Jenkins secrets and decrypt stored credentials to gain access to Gitea. With write permissions on the repository, we modify a Jenkins pipeline (Jenkinsfile) to achieve remote code execution inside a Jenkins container.
 
+From there, we pivot into the internal Docker network, enumerate additional services, and compromise a PowerDNS-Admin instance by extracting and cracking credentials from its MySQL database. Finally, we abuse DNS control to hijack a trusted hostname referenced in `.rhosts`, allowing passwordless `rlogin` access as root on the host and retrieving the final flag.
 
 <br />
 
