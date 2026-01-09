@@ -156,7 +156,7 @@ The HTTP port is hosting a `Gitea` instance:
 
 <br />
 
-In the "Explore" section we can find a public repository: `buildadm / dev`
+In the "Explore" section we can find a public repository named: `buildadm / dev`
 
 <br />
 
@@ -190,7 +190,7 @@ We attempted to authenticate to the `buildadm` account using common credentials,
 
 <br />
 
-The `rsync` instance is serving one directory: `backups`
+The `rsync` service exposes a single module: `backups`
 
 <br />
 
@@ -294,7 +294,7 @@ drwxr-xr-x root root  92 B  Thu May  2 15:25:24 2024  workspace
 
 <br />
 
-The structure of the directory is the typical of a Jenkins server in Linux.
+The directory structure matches a standard Jenkins home directory on Linux.
 
 After spending some time searching for interesting information within this directory, we found an encrypted password:
 
@@ -307,7 +307,7 @@ jobs/build/config.xml:              <password>{AQAAABAAAAAQUNBJaKiUQNaRbPI0/VMwB
 
 <br />
 
-This seems to be an encrypted password, to further analyze it, we proceed to dump the content of `config.xml` file:
+This seems to be an encrypted password, to further analyze it, so we inspect the contents of `config.xml`:
 
 <br />
 
@@ -427,7 +427,7 @@ As we can see, the file contains more than just an encrypted password. We also n
 
 <br />
 
-## Password decrypt
+## Decrypting Jenkins Credentials
 
 <br />
 
@@ -528,7 +528,7 @@ At the bottom there is the "Commit Changes" section to save our modifications.
 
 <br />
 
-After wait a few seconds:
+After waiting a few seconds:
 
 <br />
 
@@ -559,9 +559,13 @@ root@5ac6c7d6fb8e:/var/jenkins_home/workspace/build_dev_main# hostname
 
 <br />
 
-After a further enumeration, the container doesn't have any privileged information such as credentials or something similar.
+After further enumeration, we did not find any useful credentials or privileged secrets inside the container.
+
+<br />
 
 ### rhosts
+
+<br />
 
 The most interesting is a `rhosts` file inside the `/root` directory.
 
@@ -575,7 +579,7 @@ intern.build.vl +
 
 <br />
 
-As we know, this file indicates the allowed hosts to connect via `rlogin` to the principal machine without giving a password.
+This file defines trusted hosts that are allowed to authenticate via `rlogin/rsh` without a password (depending on the service configuration).
 
 <br />
 
@@ -585,7 +589,9 @@ As we know, this file indicates the allowed hosts to connect via `rlogin` to the
 
 One peculiarity of this machine is that it has an internal network. In my case, I had never before seen a machine on HackTheBox that required you to enumerate an internal network, so it took me a bit by surprise when I solved the machine for the first time.
 
-To enumerate this network we will bring the following [nmap](https://github.com/andrew-d/static-binaries/blob/master/binaries/linux/x86_64/nmap) static binary and our `/etc/services` file to the container.
+To enumerate this network we will bring the following [Nmap](https://github.com/andrew-d/static-binaries/blob/master/binaries/linux/x86_64/nmap) static binary to the container. 
+
+We also copied an `/etc/services` file into the container so Nmap can resolve service names correctly.
 
 <br />
 
@@ -661,7 +667,7 @@ Nmap done: 256 IP addresses (6 hosts up) scanned in 3.33 seconds
 
 <br />
 
-There are 6 opens hosts with its corresponding services running. We can identify a few relevant services in the output:
+The scan reveals 6 live hosts with several services exposed. We can identify a few relevant services in the output:
 
 - MySQL - 172.18.0.4 
 
@@ -675,9 +681,9 @@ There are 6 opens hosts with its corresponding services running. We can identify
 
 <br />
 
-To enumerate these services from our attacker machine, we recommend using the pivot tool [LigoloNG](https://github.com/nicocha30/ligolo-ng). If you don't know how to use it, please refer to the following [website](https://medium.com/@redfanatic7/guide-to-pivoting-using-ligolo-ng-efd36b290f16), which explains very well how to install and setup this tool to establish a tunnel.
+To access these internal services from our attacker machine, we can pivot through the container using [LigoloNG](https://github.com/nicocha30/ligolo-ng). If you don't know how to use it, please refer to the following [website](https://medium.com/@redfanatic7/guide-to-pivoting-using-ligolo-ng-efd36b290f16), which explains very well how to install and setup this tool to establish a tunnel.
 
-Once the tunnel is setted, we can access all these services, for example we can navigate to the `powerdsn` admin panel: `http://172.18.0.6`
+Once the tunnel is set up, we can directly browse internal endpoints such as the PowerDNS-Admin panel at `http://172.18.0.6/`.
 
 <br />
 
@@ -697,7 +703,7 @@ The other HTTP service is hosting a server with basic-auth:
 
 <br />
 
-We don't have credentials to log into the MySQL instance, however, in this case it is not neccesary. 
+We don't have credentials to log into the MySQL instance, however, in this case it is not necessary. 
 
 We can connect as root without password:
 
@@ -819,7 +825,8 @@ Session completed.
 
 <br />
 
-With these credentials (`admin:winston`), we log into the `powerdns` admin pannel:
+
+Using these credentials (`admin:winston`), we can log into the PowerDNS-Admin panel:      
 
 ⚠️ Note: The OTP field must be empty.
 
@@ -841,7 +848,7 @@ The `build.vl` zone displays all subdomains of the internal network with their r
 
 <br />
 
-If we remember, the `rhosts` file noticed us that there are two allowed subdomains to connect via `rlogin` to the principal host. One of this subdomains was `intern.build.vl`.
+The `rhosts` file indicates that two hostnames are trusted for `rlogin`. One of these hostnames is `intern.build.vl`.
 
 This subdomain is available in the Zone records above. We can edit the record for `intern` by making it point to our IP address and next attempt to connect as root using `rlogin`.
 
@@ -896,7 +903,7 @@ uid=0(root) gid=0(root) groups=0(root)
 
 It worked.
 
-With a root session we retrieve the `root.txt` flag:
+With a root session we can retrieve the `root.txt` flag:
 
 <br />
 
@@ -909,7 +916,7 @@ b7b1e48179891ea87e77b1f83bxxxxxx
 
 Machine rooted.
 
-I hope your learned and enjoyed this writeup.
+I hope you learned something new and enjoyed this writeup.
 
 Keep Hacking! ❤️❤️
 
