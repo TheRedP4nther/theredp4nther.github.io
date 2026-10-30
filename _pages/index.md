@@ -8,7 +8,7 @@ layout: default
 
 Hi, I’m **Lois del Río Somoza**, known online as **TheRedP4nther**. I’m a cybersecurity researcher and penetration tester focused on **Web & API security, offensive security, privilege escalation, and Active Directory**.
 
-I’m **OSCP+ and eJPT certified**, with hands-on experience from solving **200+ Hack The Box machines** and researching real-world vulnerabilities. Through **Bugcrowd**, I’ve had **30+ Web/API vulnerabilities validated across public and private programs**, primarily involving access control, authentication, and sensitive data exposure.
+I’m **OSCP+ and eJPT certified**, with hands-on experience from solving **200+ Hack The Box machines** and researching real-world vulnerabilities. Through **Bugcrowd**, I’ve had **50+ Web/API vulnerabilities validated across public and private programs**, primarily involving access control, authentication, and sensitive data exposure.
 
 I also enjoy building scripts in Bash and Python to automate security workflows and to better understand vulnerabilities, techniques, and how everything fits together.
 
