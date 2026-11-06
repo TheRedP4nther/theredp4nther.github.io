@@ -10,7 +10,7 @@ Hi, I'm **Lois del Río Somoza**, known online as **TheRedP4nther**. I'm a penet
 
 I'm **OSCP+**, **eJPT** and **PT1** certified. As a verified **[Bugcrowd](https://bugcrowd.com/h/theredp4nther)** researcher, I've had **40+ vulnerabilities validated across 11 programs** (8 public, 3 private), including **Volkswagen, NASA, the U.S. Department of Commerce, the U.S. EPA and Unisys**. Most of my findings involve broken access control (IDOR/BOLA), authentication bypass, federated identity (OAuth, MSAL, Keycloak) and sensitive data exposure.
 
-I've also solved **200+ [Hack The Box](HTB_PROFILE_URL) machines** and publish writeups for many of them here.
+I've also solved **200+ [Hack The Box](https://profile.hackthebox.com/profile/019f56fb-aa41-738b-988b-3b1cf4b54f5e?utm_medium=copy_url) machines** and publish writeups for many of them here.
 
 ## Projects
 
