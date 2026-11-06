@@ -8,9 +8,9 @@ layout: default
 
 Hi, I'm **Lois del Río Somoza**, known online as **TheRedP4nther**. I'm a penetration tester and bug bounty hunter focused on **Web & API security**, especially **access control and authentication flaws**, with hands-on experience in **Active Directory** and **Windows/Linux privilege escalation**.
 
-I'm **OSCP+**, **eJPT** and **PT1** certified. As a verified **Bugcrowd** researcher, I've had **40+ vulnerabilities validated across 11 programs** (8 public, 3 private), including **Volkswagen, NASA, the U.S. Department of Commerce, the U.S. EPA and Unisys**. Most of my findings involve broken access control (IDOR/BOLA), authentication bypass, federated identity (OAuth, MSAL, Keycloak) and sensitive data exposure.
+I'm **OSCP+**, **eJPT** and **PT1** certified. As a verified **[Bugcrowd](BUGCROWD_PROFILE_URL)** researcher, I've had **30+ vulnerabilities validated across 11 programs** (8 public, 3 private), including **Volkswagen, NASA, the U.S. Department of Commerce, the U.S. EPA and Unisys**. Most of my findings involve broken access control (IDOR/BOLA), authentication bypass, federated identity (OAuth, MSAL, Keycloak) and sensitive data exposure.
 
-I've also solved **200+ Hack The Box machines** and publish writeups for many of them here.
+I've also solved **200+ [Hack The Box](HTB_PROFILE_URL) machines** and publish writeups for many of them here.
 
 ## Projects
 
@@ -25,10 +25,6 @@ More on my [GitHub](https://github.com/TheRedP4nther).
 
 - **[Writeups](/writeups/)**: Hack The Box machine walkthroughs covering web exploitation, Active Directory and privilege escalation.
 - **Research notes**: techniques and vulnerability classes I run into while hunting.
-
-## Find Me
-
-[Bugcrowd](BUGCROWD_PROFILE_URL) · [Hack The Box](HTB_PROFILE_URL) · [LinkedIn](https://linkedin.com/in/lois-del-rio-somoza) · [GitHub](https://github.com/TheRedP4nther)
 
 Thanks for stopping by. Stay curious and keep hacking!
 
