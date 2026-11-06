@@ -23,7 +23,7 @@ More on my [GitHub](https://github.com/TheRedP4nther).
 
 ## What You'll Find Here
 
-- **[Writeups](/writeups/)**: Hack The Box machine walkthroughs covering web exploitation, Active Directory and privilege escalation.
+- **Writeups**: Hack The Box machine walkthroughs covering web exploitation, Active Directory and privilege escalation.
 - **Research notes**: techniques and vulnerability classes I run into while hunting.
 
 Thanks for stopping by. Stay curious and keep hacking!
