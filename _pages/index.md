@@ -6,16 +6,30 @@ layout: default
 
 ## About Me
 
-Hi, I’m **Lois del Río Somoza**, known online as **TheRedP4nther**. I’m a cybersecurity researcher and penetration tester focused on **Web & API security, offensive security, privilege escalation, and Active Directory**.
+Hi, I'm **Lois del Río Somoza**, known online as **TheRedP4nther**. I'm a penetration tester and bug bounty hunter focused on **Web & API security**, especially **access control and authentication flaws**, with hands-on experience in **Active Directory** and **Windows/Linux privilege escalation**.
 
-I’m **OSCP+ and eJPT certified**, with hands-on experience from solving **200+ Hack The Box machines** and researching real-world vulnerabilities. Through **Bugcrowd**, I’ve had **50+ Web/API vulnerabilities validated across public and private programs**, primarily involving access control, authentication, and sensitive data exposure.
+I'm **OSCP+**, **eJPT** and **PT1** certified. As a verified **Bugcrowd** researcher, I've had **30+ vulnerabilities validated across 11 programs** (8 public, 3 private), including **Volkswagen, NASA, the U.S. Department of Commerce, the U.S. EPA and Unisys**. Most of my findings involve broken access control (IDOR/BOLA), authentication bypass, federated identity (OAuth, MSAL, Keycloak) and sensitive data exposure.
 
-I also enjoy building scripts in Bash and Python to automate security workflows and to better understand vulnerabilities, techniques, and how everything fits together.
+I've also solved **200+ Hack The Box machines** and publish writeups for many of them here.
 
-## Purpose
+## Projects
 
-This blog is my space to document security research, share detailed technical writeups, and explore offensive security techniques and vulnerabilities. I hope these resources prove useful to others learning, experimenting, and growing in the field.
+I build Bash and Python tooling to automate security workflows and to understand how vulnerabilities actually work:
 
-Thanks for stopping by — stay curious and keep hacking!
+- **[LimeSurvey 6.6.4 Authenticated RCE](https://github.com/TheRedP4nther/limesurvey-6.6.4-authenticated-rce)**: Python exploit that achieves remote code execution through a malicious plugin upload.
+- **[aiohttp LFI (CVE-2024-23334) PoC](https://github.com/TheRedP4nther/LFI-aiohttp-CVE-2024-23334-PoC)**: Bash script that automates path traversal / Local File Inclusion against aiohttp 3.9.1.
+
+More on my [GitHub](https://github.com/TheRedP4nther).
+
+## What You'll Find Here
+
+- **[Writeups](/writeups/)**: Hack The Box machine walkthroughs covering web exploitation, Active Directory and privilege escalation.
+- **Research notes**: techniques and vulnerability classes I run into while hunting.
+
+## Find Me
+
+[Bugcrowd](BUGCROWD_PROFILE_URL) · [Hack The Box](HTB_PROFILE_URL) · [LinkedIn](https://linkedin.com/in/lois-del-rio-somoza) · [GitHub](https://github.com/TheRedP4nther)
+
+Thanks for stopping by. Stay curious and keep hacking!
 
 ![banner_image](../assets/images/banner_blog.png)
